@@ -251,9 +251,15 @@ namespace TestMVC4App.Models
 
                     int totalCountErrors = 0;
                     Dictionary<SeverityLevel, int> countBySeverity = new Dictionary<SeverityLevel,int>();
-                    foreach(var entry in statsCountFailuresTypesPerTest)
+                    foreach(KeyValuePair<string,Dictionary<SeverityLevel,int>> entry in statsCountFailuresTypesPerTest)
                     {
-                       foreach(var subEntry in entry.Value)
+                        // deduce the warnings from the count of successful tests because it is easier to read on the report
+                        if (entry.Value.ContainsKey(SeverityLevel.SUCCESS) && entry.Value.ContainsKey(SeverityLevel.WARNING))
+                        {
+                            entry.Value[SeverityLevel.SUCCESS] -= entry.Value[SeverityLevel.WARNING];
+                        }
+
+                       foreach(KeyValuePair<SeverityLevel,int> subEntry in entry.Value)
                        {
                            if(!countBySeverity.ContainsKey(subEntry.Key))
                            {
@@ -265,14 +271,7 @@ namespace TestMVC4App.Models
                            {
                                totalCountErrors += subEntry.Value;
                            }
-
-
                        }
-                    }
-                    if(countBySeverity.ContainsKey(SeverityLevel.SUCCESS) 
-                        && countBySeverity.ContainsKey(SeverityLevel.WARNING))
-                    {
-                        countBySeverity[SeverityLevel.SUCCESS] -= countBySeverity[SeverityLevel.WARNING];
                     }
 
                     Dictionary<ObservationLabel, int> countByObservation = new Dictionary<ObservationLabel, int>();
