@@ -531,7 +531,7 @@ namespace TestMVC4App.Models
                     // or if they were all doublons - which ends up being a FALSE POSITIVE
                     if(oldValuesCount > newValuesCount)
                     {
-                        var differenceQueryToAvoidDoublons = newValues.Except(oldValues);
+                        var differenceQueryToAvoidDoublons = oldValues.Except(newValues);
 
                         if (differenceQueryToAvoidDoublons.Count() == 0)
                         {
@@ -549,7 +549,8 @@ namespace TestMVC4App.Models
                         }
                         else
                         {
-                            additionalObservations.Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE);
+                            // TODO: check !
+                            // additionalObservations.Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE);
                         }
                     }
 
