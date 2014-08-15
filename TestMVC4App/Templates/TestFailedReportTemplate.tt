@@ -1,0 +1,61 @@
+﻿<#@ template debug="true" language="C#"  #>
+<#@ parameter 
+	name="FailedReport" 
+	type="TestMVC4App.Templates.AssertFailedReport" #>
+<tr>
+	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+	<b><#= FailedReport.TaskDescription #></b><br/>
+	<#= FailedReport.TestName #>
+	</td>
+	<# switch (FailedReport.FailureType)
+	{
+		case SeverityLevel.FALSE_POSITIVE :
+		#>
+		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
+		<#
+		break;
+		case SeverityLevel.WARNING:
+		#>
+		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
+		<#
+		break;
+		case SeverityLevel.ERROR_WITH_EXPLANATION:
+		#>
+		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
+		<#
+		break;
+		case SeverityLevel.ERROR:
+		#>
+		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
+		<#
+		break;
+		default:
+		#>
+		<td style="padding: 10px;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
+		<#
+		break;
+	}
+	#>
+	</td>
+	<td style="width: 20%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<a href="<#= FailedReport.OldUrl #>">Profile data of UPI <#= FailedReport.UPI #></a><br/>
+		<a href="<#= FailedReport.NewUrl #>">User data of ID is <#= FailedReport.UserId #></a>
+	</td>
+	<td style="width: 60%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<#= FailedReport.Message #>
+	</td>
+	<td style="width: 30%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+	<ul>
+	<# if(FailedReport.Observations != null)
+	{
+		foreach(var observation in FailedReport.Observations)
+	{
+	#>
+		<li><#= AssertFailedReport.GetDescription(observation) #></li><br/>
+	<#
+	}
+	}
+	#>
+	</ul>
+	</td>
+</tr>
