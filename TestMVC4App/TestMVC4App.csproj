@@ -296,7 +296,9 @@
     <Content Include="ServiceProxy\YSM.PMS.Web.Service.Clients.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\filtergrid.css" />
+    <Content Include="Templates\filtergrid.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\tablefilter.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

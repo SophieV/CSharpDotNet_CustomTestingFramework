@@ -53,7 +53,7 @@
 		break;
 		default:
 		#>
-		<td style="padding: 10px;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
 		<#
 		break;
 	}
@@ -136,7 +136,7 @@
 		break;
 		default:
 		#>
-		<td style="padding: 10px;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
 		<#
 		break;
 	}
@@ -166,7 +166,9 @@
 	</tr>
 
 	<# 
-		var sortedDictionary2 =StatsReport.ByTestNameCountByObservationType[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+	if(StatsReport.ByTestNameCountByObservationType.ContainsKey(testName))
+	{
+	var sortedDictionary2 =StatsReport.ByTestNameCountByObservationType[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<ObservationLabel,int> countPerObservationType in sortedDictionary2)
 	{
 		if(countPerObservationType.Value > 0)
@@ -178,6 +180,7 @@
 	</tr>
 	<#
 		}
+	}
 	} #>
 
 	</table>

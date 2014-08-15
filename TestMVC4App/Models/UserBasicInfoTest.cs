@@ -148,7 +148,7 @@ namespace TestMVC4App.Models
         private void UserBasicInfo_NetId_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
             UserServiceTestSuite.HandleSimpleStringCompare(oldServiceData, 
-                                                                   "/Faculty/facultyMember/NetID", 
+                                                                   "/Faculty/facultyMember/netID", 
                                                                    newServiceData.NetId.ToString(), 
                                                                    newServiceData.UserId, 
                                                                    newServiceData.Upi, 

@@ -28,16 +28,16 @@ namespace TestMVC4App.Models
         ALL_VALUES_OF_OLD_SUBSET_FOUND,
         [System.ComponentModel.Description("There are more values on the side of the new service.")]
         MORE_VALUES_ON_NEW_SERVICE,
-        [System.ComponentModel.Description("[FALSE POSITIVE]There are more values on the side of the old service. They are all doublons.")]
-        MORE_DOUBLONS_VALUES_ON_OLD_SERVICE,
-        [System.ComponentModel.Description("There are doublons in the new service.")]
-        DOUBLONS_ON_NEW_SERVICE,
+        [System.ComponentModel.Description("[FALSE POSITIVE]There are more values on the side of the old service. They are all duplicates.")]
+        MORE_DUPLICATED_VALUES_ON_OLD_SERVICE,
+        [System.ComponentModel.Description("There are duplicates in the new service.")]
+        DUPLICATED_VALUES_ON_NEW_SERVICE,
         [System.ComponentModel.Description("The empty value provided by the new service contains a white space.")]
         VALUE_POPULATED_WITH_EMPTY_ON_NEW_SERVICE,
         [System.ComponentModel.Description("Mismatch between values due to trailing white spaces detected.")]
         VALUE_CONTAINS_TRAILING_WHITE_SPACES,
-        [System.ComponentModel.Description("Some value(s) are missing.")]
-        MISSING_VALUES,
+        [System.ComponentModel.Description("Some value(s) are missing on the side of the new service.")]
+        MISSING_VALUES_ON_NEW_SERVICE,
         [System.ComponentModel.Description("[ERROR ONLY] Data populated with unexpected value(s).")]
         WRONG_VALUE
     }
@@ -129,7 +129,7 @@ namespace TestMVC4App.Models
             foreach (int upi in upiList)
             {
 #if DEBUG
-                            if (statsCountProfilesProcessed > 500)
+                            if (statsCountProfilesProcessed > 30)
             {
                 break;
             }
@@ -186,7 +186,8 @@ namespace TestMVC4App.Models
         {
             try
             {
-                string filePath = System.IO.Path.Combine(@"C:\QA_LOGS\ReportMismatches_" + countForFileName + ".html");
+                string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_" + countForFileName + ".html");
+                System.Diagnostics.Debug.WriteLine(filePath);
                 streamWriter = new StreamWriter(filePath);
                 Console.SetOut(streamWriter);
 
@@ -264,7 +265,14 @@ namespace TestMVC4App.Models
                            {
                                totalCountErrors += subEntry.Value;
                            }
+
+
                        }
+                    }
+                    if(countBySeverity.ContainsKey(SeverityLevel.SUCCESS) 
+                        && countBySeverity.ContainsKey(SeverityLevel.WARNING))
+                    {
+                        countBySeverity[SeverityLevel.SUCCESS] -= countBySeverity[SeverityLevel.WARNING];
                     }
 
                     Dictionary<ObservationLabel, int> countByObservation = new Dictionary<ObservationLabel, int>();
@@ -422,7 +430,7 @@ namespace TestMVC4App.Models
                         {
                             // still inform that the new value is an empty space
                             additionalObservations.Add(ObservationLabel.VALUE_POPULATED_WITH_EMPTY_ON_NEW_SERVICE);
-                            additionalObservations.Add(ObservationLabel.MISSING_VALUES);
+                            additionalObservations.Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE);
                         }
                     }
                     else if(!string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue))
@@ -524,12 +532,12 @@ namespace TestMVC4App.Models
                     // or if they were all doublons - which ends up being a FALSE POSITIVE
                     if(oldValuesCount > newValuesCount)
                     {
-                        var differenceQueryToAvoidDoublons = oldValues.Except(newValues);
+                        var differenceQueryToAvoidDoublons = newValues.Except(oldValues);
 
                         if (differenceQueryToAvoidDoublons.Count() == 0)
                         {
                             specificScenarioIdentified = true;
-                            additionalObservations.Add(ObservationLabel.MORE_DOUBLONS_VALUES_ON_OLD_SERVICE);
+                            additionalObservations.Add(ObservationLabel.MORE_DUPLICATED_VALUES_ON_OLD_SERVICE);
 
                             TraceFailedTest(message,
                                             newUserId,
@@ -542,7 +550,7 @@ namespace TestMVC4App.Models
                         }
                         else
                         {
-                            additionalObservations.Add(ObservationLabel.MISSING_VALUES);
+                            additionalObservations.Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE);
                         }
                     }
 
@@ -550,7 +558,7 @@ namespace TestMVC4App.Models
                     var differenceQueryCheckDoublonsInNewService = newValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
                     if (differenceQueryCheckDoublonsInNewService.Count() > 0)
                     {
-                        additionalObservations.Add(ObservationLabel.DOUBLONS_ON_NEW_SERVICE);
+                        additionalObservations.Add(ObservationLabel.DUPLICATED_VALUES_ON_NEW_SERVICE);
                     }
 
                     // if there are more values on the new side
@@ -585,7 +593,7 @@ namespace TestMVC4App.Models
                         } catch (AssertFailedException)
                         {
                             specificScenarioIdentified = false;
-                            additionalObservations.Add(ObservationLabel.MISSING_VALUES);
+                            additionalObservations.Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE);
                         }
                     }
 
@@ -656,7 +664,7 @@ namespace TestMVC4App.Models
         }
 
         /// <summary>
-        /// Appends two HTML lists indicating doublons and missing/mismatched values.
+        /// Appends two HTML lists indicating duplicates and missing/mismatched values.
         /// </summary>
         /// <param name="oldValues">Values to compare returned by the old service.</param>
         /// <param name="newValues">Values to compare returned by the new service.</param>
@@ -739,6 +747,7 @@ namespace TestMVC4App.Models
         /// Keep track of test runs that did not fail for statistics purposes.
         /// </summary>
         /// <param name="memberName">Test method generated name.</param>
+        /// <remarks>Should always be called last.</remarks>
         public static void TraceSuccessTest(string memberName)
         {
             if (!statsCountFailuresTypesPerTest.ContainsKey(memberName))
@@ -827,13 +836,13 @@ namespace TestMVC4App.Models
                 // initialize all the possible combinations for the given test name
                 statsCountObservationTypesPerTest.Add(memberName, new Dictionary<ObservationLabel, int>());
                 statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.ALL_VALUES_OF_OLD_SUBSET_FOUND, 0);
-                statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.DOUBLONS_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.MORE_DOUBLONS_VALUES_ON_OLD_SERVICE, 0);
+                statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.DUPLICATED_VALUES_ON_NEW_SERVICE, 0);
+                statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.MORE_DUPLICATED_VALUES_ON_OLD_SERVICE, 0);
                 statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.MORE_VALUES_ON_NEW_SERVICE, 0);
                 statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.VALUE_CONTAINS_TRAILING_WHITE_SPACES, 0);
                 statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.VALUE_POPULATED_WITH_EMPTY_ON_NEW_SERVICE, 0);
                 statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.VALUES_NOT_POPULATED, 0);
-                statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.MISSING_VALUES, 0);
+                statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE, 0);
                 statsCountObservationTypesPerTest[memberName].Add(ObservationLabel.WRONG_VALUE, 0);
             }
 

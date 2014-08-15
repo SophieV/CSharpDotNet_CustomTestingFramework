@@ -18,7 +18,7 @@ namespace TestMVC4App.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class OverviewTestsFailedReportTemplate : OverviewTestsFailedReportTemplateBase
     {
@@ -31,35 +31,35 @@ namespace TestMVC4App.Templates
             this.Write("\t<html>\r\n\t<head></head>\r\n\t<body>\r\n\t<h1>Overview Report</h1>\r\n\t<hr/>\r\n\t<h2>Global<" +
                     "/h2>\r\n\t<p>Count of user profiles tested : ");
             
-            #line 14 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StatsReport.CountProfilesTested));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t<p>Total count of tests run : ");
             
-            #line 15 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StatsReport.CountTestsRun));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t<p>Count of tests per user profile : ");
             
-            #line 16 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StatsReport.CountTestsPerUser));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t<p>Count of user profiles free from any kind of warning : ");
             
-            #line 17 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StatsReport.CountProfilesWithoutWarnings));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t<p>Total count of errors : ");
             
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StatsReport.CountErrors));
             
             #line default
@@ -75,7 +75,7 @@ namespace TestMVC4App.Templates
 
 	");
             
-            #line 27 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  foreach (KeyValuePair<SeverityLevel,int> countPerSeverity in StatsReport.OverviewCountBySeverityLevel)
 	{
 	
@@ -84,7 +84,7 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t<tr>\r\n\r\n\t\t");
             
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  switch (countPerSeverity.Key)
 	{
 		case SeverityLevel.FALSE_POSITIVE :
@@ -95,14 +95,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 36 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 36 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 37 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		case SeverityLevel.WARNING:
@@ -113,14 +113,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 41 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 42 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 42 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		case SeverityLevel.ERROR_WITH_EXPLANATION:
@@ -131,14 +131,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;" +
                     "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 46 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 47 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 47 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		case SeverityLevel.ERROR:
@@ -149,14 +149,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bor" +
                     "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 51 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 52 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 52 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		default:
@@ -164,17 +164,17 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;color:white;border-width:2px;border-color:lightgrey;bo" +
+            this.Write("\t\t<td style=\"padding: 10px;color:black;border-width:2px;border-color:lightgrey;bo" +
                     "rder-style:solid;font-weight:bold;\">");
             
-            #line 56 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 57 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 	}
@@ -185,7 +185,7 @@ namespace TestMVC4App.Templates
             this.Write("\t</td>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-" +
                     "style:solid;\">");
             
-            #line 62 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 62 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Value));
             
             #line default
@@ -193,14 +193,14 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-s" +
                     "tyle:solid;color:darkgrey;\">");
             
-            #line 63 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AssertFailedReport.GetDescription(countPerSeverity.Key)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t</tr>\r\n\t");
             
-            #line 65 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 65 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 	} 
             
@@ -219,7 +219,7 @@ namespace TestMVC4App.Templates
 
 	");
             
-            #line 78 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  
 	var sortedDictionary = StatsReport.OverviewCountByObservationType.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<ObservationLabel,int> countPerObservationType in sortedDictionary)
@@ -231,7 +231,7 @@ namespace TestMVC4App.Templates
             this.Write("\t<tr>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-s" +
                     "tyle:solid;\">");
             
-            #line 84 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AssertFailedReport.GetDescription(countPerObservationType.Key)));
             
             #line default
@@ -239,14 +239,14 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-s" +
                     "tyle:solid;\">");
             
-            #line 85 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerObservationType.Value));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t</tr>\r\n\t");
             
-            #line 87 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 87 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 	} 
             
@@ -262,7 +262,7 @@ namespace TestMVC4App.Templates
 
 	");
             
-            #line 97 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 97 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  foreach (string testName in StatsReport.TestNames)
 	{
 	
@@ -271,7 +271,7 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t<hr/>\r\n\t\t<h2>");
             
-            #line 101 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 101 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
@@ -287,7 +287,7 @@ namespace TestMVC4App.Templates
 
 	");
             
-            #line 110 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 110 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  foreach (KeyValuePair<SeverityLevel,int> countPerSeverity in StatsReport.ByTestNameCountBySeverityLevel[testName])
 	{
 	
@@ -296,7 +296,7 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t<tr>\r\n\r\n\t\t");
             
-            #line 115 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 115 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  switch (countPerSeverity.Key)
 	{
 		case SeverityLevel.FALSE_POSITIVE :
@@ -307,14 +307,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 119 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 119 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 120 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 120 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		case SeverityLevel.WARNING:
@@ -325,14 +325,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 124 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 124 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 125 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 125 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		case SeverityLevel.ERROR_WITH_EXPLANATION:
@@ -343,14 +343,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;" +
                     "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 129 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 129 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 130 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 130 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		case SeverityLevel.ERROR:
@@ -361,14 +361,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bor" +
                     "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 134 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 134 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 135 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 135 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 		default:
@@ -376,17 +376,17 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;color:white;border-width:2px;border-color:lightgrey;bo" +
+            this.Write("\t\t<td style=\"padding: 10px;color:black;border-width:2px;border-color:lightgrey;bo" +
                     "rder-style:solid;font-weight:bold;\">");
             
-            #line 139 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 139 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 140 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 140 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
 	}
@@ -397,7 +397,7 @@ namespace TestMVC4App.Templates
             this.Write("\t</td>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-" +
                     "style:solid;\">");
             
-            #line 145 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 145 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Value));
             
             #line default
@@ -405,7 +405,7 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-s" +
                     "tyle:solid;\">\r\n\t");
             
-            #line 147 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 147 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  double frequency = (double)countPerSeverity.Value /(double) StatsReport.CountProfilesTested;
 	if (frequency > 0)
 	{
@@ -415,14 +415,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t");
             
-            #line 151 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 151 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(frequency.ToString("P")));
             
             #line default
             #line hidden
             this.Write("\r\n\t");
             
-            #line 152 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 152 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 	} 
             
@@ -430,7 +430,7 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t</td>\r\n\t</tr>\r\n\t");
             
-            #line 156 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 156 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 	} 
             
@@ -440,9 +440,11 @@ namespace TestMVC4App.Templates
                     "lapse:collapse;\">\r\n\t<tr>\r\n\t<th style=\"background-color:lightgrey;\">Observation T" +
                     "ype</th>\r\n\t<th style=\"background-color:lightgrey;\">Count</th>\r\n\t</tr>\r\n\r\n\t");
             
-            #line 168 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 168 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
  
-		var sortedDictionary2 =StatsReport.ByTestNameCountByObservationType[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+	if(StatsReport.ByTestNameCountByObservationType.ContainsKey(testName))
+	{
+	var sortedDictionary2 =StatsReport.ByTestNameCountByObservationType[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<ObservationLabel,int> countPerObservationType in sortedDictionary2)
 	{
 		if(countPerObservationType.Value > 0)
@@ -454,7 +456,7 @@ namespace TestMVC4App.Templates
             this.Write("\t<tr>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-s" +
                     "tyle:solid;\">");
             
-            #line 176 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 178 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AssertFailedReport.GetDescription(countPerObservationType.Key)));
             
             #line default
@@ -462,23 +464,24 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-s" +
                     "tyle:solid;\">");
             
-            #line 177 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 179 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerObservationType.Value));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t</tr>\r\n\t");
             
-            #line 179 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 181 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		}
+	}
 	} 
             
             #line default
             #line hidden
             this.Write("\r\n\t</table>\r\n\t");
             
-            #line 184 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+            #line 187 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 	}
 	
@@ -489,7 +492,7 @@ namespace TestMVC4App.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
+        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 private global::TestMVC4App.Templates.OverviewStatsReport _StatsReportField;
 
