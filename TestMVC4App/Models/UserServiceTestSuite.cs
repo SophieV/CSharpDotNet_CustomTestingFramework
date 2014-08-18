@@ -29,7 +29,7 @@ namespace TestMVC4App.Models
 #if DEBUG
         private const int MaxProfilesForOneFile = 5000;
 #else
-        private const int MaxProfilesForOneFile = 5000;
+        private const int MaxProfilesForOneFile = 50000;
 #endif
 
         private List<int> upiList = new List<int>();
@@ -106,6 +106,8 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserBasicInfo_NetId_Test");
             allTestNames.Add("UserBasicInfo_PageName_Test");
             allTestNames.Add("UserBasicInfo_Suffix_Test");
+            allTestNames.Add("UserBasicInfo_Gender_Test");
+            allTestNames.Add("UserBasicInfo_UPI_Test");
 
             allTestNames.Add("UserGeneralInfo_Bio_Test");
             allTestNames.Add("UserGeneralInfo_Titles_Test");
@@ -148,24 +150,56 @@ namespace TestMVC4App.Models
 
                 //Find a way to set the 'Timeout' property in Milliseconds. The old service can be slow.
                 //we also need exception handling!
-                using (var webClient = new WebClient())
+                using (var webClient = new TimeoutExtendedWebClient())
                 {
-                    oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
+                    try
+                    {
+                        oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
+                    } catch (WebException we)
+                    {
+                        System.Console.Out.WriteLine(we.StackTrace);
+
+                        System.Console.Out.WriteLine("second chance");
+                        try
+                        {
+                            oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
+                        }
+                        catch (WebException we2)
+                        {
+                            System.Console.Out.WriteLine(we2.StackTrace);
+                        }
+                    }
                 }
-                XDocument oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
 
-                //new service value is stored in Web.Config, Key : "ProfileServiceBaseAddress"
-                var usersClient = new UsersClient();
+                if (!string.IsNullOrEmpty(oldServiceXMLOutput))
+                {
+                    try
+                    {
+                        XDocument oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
 
-                // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
-                UserBasicInfoTest userBasicInfoTest = new UserBasicInfoTest();
-                userBasicInfoTest.RunAllTests(usersClient, upi, oldServiceXMLOutputDocument);
-                int userId = userBasicInfoTest.MappedUserId;
+                        //new service value is stored in Web.Config, Key : "ProfileServiceBaseAddress"
+                        var usersClient = new UsersClient();
 
-                ITestStructure classTest = new UserGeneralInfoTest();
-                classTest.RunAllTests(usersClient, upi, oldServiceXMLOutputDocument, userId);
+                        // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
+                        UserBasicInfoTest userBasicInfoTest = new UserBasicInfoTest();
+                        userBasicInfoTest.RunAllTests(usersClient, upi, oldServiceXMLOutputDocument);
+                        int userId = userBasicInfoTest.MappedUserId;
 
-                statsCountProfilesProcessed++;
+                        ITestStructure classTest = new UserGeneralInfoTest();
+                        classTest.RunAllTests(usersClient, upi, oldServiceXMLOutputDocument, userId);
+
+                        statsCountProfilesProcessed++;
+                        System.Console.Out.WriteLine(statsCountProfilesProcessed);
+                    }
+                    catch (Exception e)
+                    {
+                        System.Console.Out.WriteLine(e.StackTrace);
+                        CleanUpConsoleRedirectToFile();
+                        // create report overview
+                        SetupConsoleRedirectToFile(0);
+                        CleanUpConsoleRedirectToFile();
+                    }
+                }
             }
 
             CleanUpConsoleRedirectToFile();
@@ -829,7 +863,14 @@ namespace TestMVC4App.Models
 
             template.Initialize();
 
-            htmlWriters[memberName].WriteLine(template.TransformText());
+            if (htmlWriters.ContainsKey(memberName))
+            {
+                htmlWriters[memberName].WriteLine(template.TransformText());
+            }
+            else
+            {
+                System.Console.WriteLine(memberName);
+            }
 
             // keeping track of profiles without failures by logging any failure happening
             if (statsMapUpiTraceFailureCalledAtLeastOnce.ContainsKey(upi))

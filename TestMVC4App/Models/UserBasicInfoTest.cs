@@ -57,6 +57,7 @@ namespace TestMVC4App.Models
 
                 UserBasicInfo_LastName_Test(newUserBasicInfo, oldServiceXMLContent);
                 UserBasicInfo_Email_Test(newUserBasicInfo, oldServiceXMLContent);
+                UserBasicInfo_MiddleName_Test(newUserBasicInfo, oldServiceXMLContent);
                 UserBasicInfo_FirstName_Test(newUserBasicInfo, oldServiceXMLContent);
                 UserBasicInfo_Gender_Test(newUserBasicInfo, oldServiceXMLContent);
                 UserBasicInfo_NetId_Test(newUserBasicInfo, oldServiceXMLContent);
