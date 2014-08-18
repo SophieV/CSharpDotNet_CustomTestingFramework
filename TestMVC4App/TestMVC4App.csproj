@@ -178,6 +178,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ITestStructure.cs" />
+    <Compile Include="Models\ObservationLevel.cs" />
     <Compile Include="Models\SeverityState.cs" />
     <Compile Include="Models\UserBasicInfoTest.cs" />
     <Compile Include="Models\UserGeneralInfoTest.cs" />

@@ -18,30 +18,6 @@ using System.Reflection;
 
 namespace TestMVC4App.Models
 {
-    /// <summary>
-    /// Descriptions of data patterns observed.
-    /// </summary>
-    public enum ObservationLabel {
-        [System.ComponentModel.Description("[WARNING ONLY] Values are not populated - on neither side.")]
-        VALUES_NOT_POPULATED,
-        [System.ComponentModel.Description("The values provided by the old service were all found in the new service.")]
-        ALL_VALUES_OF_OLD_SUBSET_FOUND,
-        [System.ComponentModel.Description("There are more values on the side of the new service.")]
-        MORE_VALUES_ON_NEW_SERVICE,
-        [System.ComponentModel.Description("[FALSE POSITIVE]There are more values on the side of the old service. They are all duplicates.")]
-        MORE_DUPLICATED_VALUES_ON_OLD_SERVICE,
-        [System.ComponentModel.Description("There are duplicates in the new service.")]
-        DUPLICATED_VALUES_ON_NEW_SERVICE,
-        [System.ComponentModel.Description("The empty value provided by the new service contains a white space.")]
-        VALUE_POPULATED_WITH_EMPTY_ON_NEW_SERVICE,
-        [System.ComponentModel.Description("Mismatch between values due to trailing white spaces detected.")]
-        VALUE_CONTAINS_TRAILING_WHITE_SPACES,
-        [System.ComponentModel.Description("Some value(s) are missing on the side of the new service.")]
-        MISSING_VALUES_ON_NEW_SERVICE,
-        [System.ComponentModel.Description("[ERROR ONLY] Data populated with unexpected value(s).")]
-        WRONG_VALUE
-    }
-
     public class UserServiceTestSuite
     {
         public const String OLD_SERVICE_URL_BASE = "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=";
@@ -57,8 +33,10 @@ namespace TestMVC4App.Models
 #endif
 
         private List<int> upiList = new List<int>();
-        private StreamWriter streamWriter = null;
-        private HtmlTextWriter htmlWriter = null;
+        private static StreamWriter streamWriter;
+        private static Dictionary<string, HtmlTextWriter> htmlWriters;
+        private static HtmlTextWriter htmlWriter; 
+        private static List<string> allTestNames;
 
         private static Dictionary<string, Dictionary<SeverityState,int>> statsCountFailuresTypesPerTest;
         private static Dictionary<string, Dictionary<ObservationLabel, int>> statsCountObservationTypesPerTest;
@@ -77,7 +55,7 @@ namespace TestMVC4App.Models
         private List<int> ConnectToDataSourceAndRetriveUPIs()
         {
             conn.Open();
-            Console.WriteLine("Connection state is: " + conn.State.ToString());
+            Console.Out.WriteLine("Connection state is: " + conn.State.ToString());
 
             SqlDataReader sdr = queryCommand.ExecuteReader();
 
@@ -91,7 +69,7 @@ namespace TestMVC4App.Models
             }
             else
             {
-                Console.WriteLine("No rows found.");
+                Console.Out.WriteLine("No rows found.");
             }
 
             foreach (int upi in upiList)
@@ -116,6 +94,19 @@ namespace TestMVC4App.Models
             statsMapUpiTraceFailureCalledAtLeastOnce = new Dictionary<int, bool>();
             statsCountFailuresTypesPerTest = new Dictionary<string,Dictionary<SeverityState,int>>();
             statsCountObservationTypesPerTest = new Dictionary<string, Dictionary<ObservationLabel, int>>();
+
+            allTestNames = new List<string>();
+            allTestNames.Add("UserBasicInfo_LastName_Test");
+            allTestNames.Add("UserBasicInfo_FirstName_Test");
+            allTestNames.Add("UserBasicInfo_MiddleName_Test");
+            allTestNames.Add("UserBasicInfo_Email_Test");
+            allTestNames.Add("UserBasicInfo_NetId_Test");
+            allTestNames.Add("UserBasicInfo_PageName_Test");
+            allTestNames.Add("UserBasicInfo_Suffix_Test");
+
+            allTestNames.Add("UserGeneralInfo_Bio_Test");
+            allTestNames.Add("UserGeneralInfo_Titles_Test");
+            allTestNames.Add("UserGeneralInfo_Organizations_Test");
 
             upiList = ConnectToDataSourceAndRetriveUPIs();
 
@@ -186,59 +177,71 @@ namespace TestMVC4App.Models
         {
             try
             {
-                string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_" + countForFileName + ".html");
-                System.Diagnostics.Debug.WriteLine(filePath);
-                streamWriter = new StreamWriter(filePath);
-                Console.SetOut(streamWriter);
-
-                htmlWriter = new HtmlTextWriter(Console.Out);
+                string filePath;
 
                 if (countForFileName > 0)
                 {
+                    htmlWriters = new Dictionary<string, HtmlTextWriter>();
+
+                    foreach (string testName in allTestNames)
+                    {
+                        filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", testName + "_" + countForFileName + ".html");
+                        System.Diagnostics.Debug.WriteLine(filePath);
+                        streamWriter = new StreamWriter(filePath);
+                        htmlWriters.Add(testName, new HtmlTextWriter(streamWriter));
+
+                    }
+
                     var template = new AssertFailedReportFilterInHeader();
-#if DEBUG
+
                     // System.Diagnostics.Debug - however we use the redirection from the Console output
-                    System.Console.WriteLine(template.TransformText());
-#else
-            System.Console.WriteLine(template.TransformText());
-#endif
+                    foreach (HtmlTextWriter htmlTestWriter in htmlWriters.Values)
+                    {
+                        htmlTestWriter.WriteLine(template.TransformText());
 
-                    // styling applies to the table !
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderWidth, "2px");
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderColor, "lightgrey");
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderStyle, "solid");
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderCollapse, "collapse");
-                    htmlWriter.AddAttribute("id", "individual_test_results");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Table);
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tbody);
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
+                        // styling applies to the table !
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderWidth, "2px");
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderColor, "lightgrey");
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderStyle, "solid");
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderCollapse, "collapse");
+                        htmlTestWriter.AddAttribute("id", "individual_test_results");
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Table);
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Tbody);
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
 
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Test Name");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Result");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("User Under Test");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Details");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Explanations/Observations");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.RenderEndTag();
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+                        htmlTestWriter.Write("Test Name");
+                        htmlTestWriter.RenderEndTag();
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+                        htmlTestWriter.Write("Result");
+                        htmlTestWriter.RenderEndTag();
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+                        htmlTestWriter.Write("User Under Test");
+                        htmlTestWriter.RenderEndTag();
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+                        htmlTestWriter.Write("Details");
+                        htmlTestWriter.RenderEndTag();
+                        htmlTestWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
+                        htmlTestWriter.RenderBeginTag(HtmlTextWriterTag.Td);
+                        htmlTestWriter.Write("Explanations/Observations");
+                        htmlTestWriter.RenderEndTag();
+                        htmlTestWriter.RenderEndTag();
 
-                    htmlWriter.RenderEndTag();
+                        htmlTestWriter.RenderEndTag();
+                    }
                 }
                 else
                 {
+                    filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_" + countForFileName + ".html");
+                    System.Diagnostics.Debug.WriteLine(filePath);
+                    streamWriter = new StreamWriter(filePath);
+                    // Console.SetOut(streamWriter);
+                    htmlWriter = new HtmlTextWriter(streamWriter);
+
                     // TODO : Linq query replace ?
                     int countProfilesWithoutWarning = 0;
                     foreach(var entry in statsMapUpiTraceFailureCalledAtLeastOnce)
@@ -313,7 +316,7 @@ namespace TestMVC4App.Models
 
 #if DEBUG
                     // System.Diagnostics.Debug - however we use the redirection from the Console output
-                    System.Console.WriteLine(template.TransformText());
+                    htmlWriter.WriteLine(template.TransformText());
 #else
             System.Console.WriteLine(template.TransformText());
 #endif
@@ -329,19 +332,27 @@ namespace TestMVC4App.Models
         {
             try
             {
-                var template = new JavascriptForTable();
+                if (htmlWriter == null)
+                {
+                    var template = new JavascriptForTable();
 
-#if DEBUG
-                // System.Diagnostics.Debug - however we use the redirection from the Console output
-                System.Console.WriteLine(template.TransformText());
-#else
-            System.Console.WriteLine(template.TransformText());
-#endif
+                    foreach(HtmlTextWriter htmlTestWriter in htmlWriters.Values)
+                    {
+                        htmlTestWriter.WriteLine(template.TransformText());
 
-                htmlWriter.WriteEndTag("table");
-                htmlWriter.WriteEndTag("body");
-                htmlWriter.WriteEndTag("html");
-                streamWriter.Close();
+                        htmlTestWriter.WriteEndTag("table");
+                        htmlTestWriter.WriteEndTag("body");
+                        htmlTestWriter.WriteEndTag("html");
+                        htmlTestWriter.Close();
+                    }
+                }
+                else
+                {
+                    htmlWriter.WriteEndTag("table");
+                    htmlWriter.WriteEndTag("body");
+                    htmlWriter.WriteEndTag("html");
+                    streamWriter.Close();
+                }
             }
             catch (IOException ioe)
             {
@@ -800,12 +811,8 @@ namespace TestMVC4App.Models
 
             template.Initialize();
 
-#if DEBUG
-            // System.Diagnostics.Debug - however we use the redirection from the Console output
-            System.Console.WriteLine(template.TransformText());
-#else
-            System.Console.WriteLine(template.TransformText());
-#endif
+            htmlWriters[memberName].WriteLine(template.TransformText());
+
             // keeping track of profiles without failures by logging any failure happening
             if (statsMapUpiTraceFailureCalledAtLeastOnce.ContainsKey(upi))
             {
@@ -814,7 +821,7 @@ namespace TestMVC4App.Models
             else
             {
                 // no reason to happen !
-                System.Console.WriteLine("Missing UPI to track stats : " + upi);
+                // System.Console.WriteLine("Missing UPI to track stats : " + upi);
             }
             
             if(!statsCountFailuresTypesPerTest.ContainsKey(memberName))
