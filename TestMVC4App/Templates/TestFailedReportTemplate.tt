@@ -1,4 +1,5 @@
 ﻿<#@ template debug="true" language="C#"  #>
+<#@ import namespace="TestMVC4App.Models" #>
 <#@ parameter 
 	name="FailedReport" 
 	type="TestMVC4App.Templates.AssertFailedReport" #>
@@ -9,22 +10,22 @@
 	</td>
 	<# switch (FailedReport.FailureType)
 	{
-		case SeverityLevel.FALSE_POSITIVE :
+		case SeverityState.FALSE_POSITIVE :
 		#>
 		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
 		<#
 		break;
-		case SeverityLevel.WARNING:
+		case SeverityState.WARNING:
 		#>
 		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
 		<#
 		break;
-		case SeverityLevel.ERROR_WITH_EXPLANATION:
+		case SeverityState.ERROR_WITH_EXPLANATION:
 		#>
 		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
 		<#
 		break;
-		case SeverityLevel.ERROR:
+		case SeverityState.ERROR:
 		#>
 		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
 		<#

@@ -76,7 +76,7 @@ namespace TestMVC4App.Templates
 	");
             
             #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
- foreach (KeyValuePair<SeverityLevel,int> countPerSeverity in StatsReport.OverviewCountBySeverityLevel)
+ foreach (KeyValuePair<SeverityState,int> countPerSeverityState in StatsReport.OverviewCountBySeverityState)
 	{
 	
             
@@ -85,9 +85,9 @@ namespace TestMVC4App.Templates
             this.Write("\t<tr>\r\n\r\n\t\t");
             
             #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
- switch (countPerSeverity.Key)
+ switch (countPerSeverityState.Key)
 	{
-		case SeverityLevel.FALSE_POSITIVE :
+		case SeverityState.FALSE_POSITIVE :
 		
             
             #line default
@@ -96,7 +96,7 @@ namespace TestMVC4App.Templates
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 36 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -105,7 +105,7 @@ namespace TestMVC4App.Templates
             #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
-		case SeverityLevel.WARNING:
+		case SeverityState.WARNING:
 		
             
             #line default
@@ -114,7 +114,7 @@ namespace TestMVC4App.Templates
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -123,7 +123,7 @@ namespace TestMVC4App.Templates
             #line 42 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
-		case SeverityLevel.ERROR_WITH_EXPLANATION:
+		case SeverityState.ERROR_WITH_EXPLANATION:
 		
             
             #line default
@@ -132,7 +132,7 @@ namespace TestMVC4App.Templates
                     "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -141,7 +141,7 @@ namespace TestMVC4App.Templates
             #line 47 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
-		case SeverityLevel.ERROR:
+		case SeverityState.ERROR:
 		
             
             #line default
@@ -150,7 +150,7 @@ namespace TestMVC4App.Templates
                     "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -168,7 +168,7 @@ namespace TestMVC4App.Templates
                     "rder-style:solid;font-weight:bold;\">");
             
             #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -186,7 +186,7 @@ namespace TestMVC4App.Templates
                     "style:solid;\">");
             
             #line 62 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Value));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Value));
             
             #line default
             #line hidden
@@ -194,7 +194,7 @@ namespace TestMVC4App.Templates
                     "tyle:solid;color:darkgrey;\">");
             
             #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(AssertFailedReport.GetDescription(countPerSeverity.Key)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(AssertFailedReport.GetDescription(countPerSeverityState.Key)));
             
             #line default
             #line hidden
@@ -288,7 +288,7 @@ namespace TestMVC4App.Templates
 	");
             
             #line 110 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
- foreach (KeyValuePair<SeverityLevel,int> countPerSeverity in StatsReport.ByTestNameCountBySeverityLevel[testName])
+ foreach (KeyValuePair<SeverityState,int> countPerSeverityState in StatsReport.ByTestNameCountBySeverityState[testName])
 	{
 	
             
@@ -297,9 +297,9 @@ namespace TestMVC4App.Templates
             this.Write("\t<tr>\r\n\r\n\t\t");
             
             #line 115 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
- switch (countPerSeverity.Key)
+ switch (countPerSeverityState.Key)
 	{
-		case SeverityLevel.FALSE_POSITIVE :
+		case SeverityState.FALSE_POSITIVE :
 		
             
             #line default
@@ -308,7 +308,7 @@ namespace TestMVC4App.Templates
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 119 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -317,7 +317,7 @@ namespace TestMVC4App.Templates
             #line 120 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
-		case SeverityLevel.WARNING:
+		case SeverityState.WARNING:
 		
             
             #line default
@@ -326,7 +326,7 @@ namespace TestMVC4App.Templates
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 124 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -335,7 +335,7 @@ namespace TestMVC4App.Templates
             #line 125 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
-		case SeverityLevel.ERROR_WITH_EXPLANATION:
+		case SeverityState.ERROR_WITH_EXPLANATION:
 		
             
             #line default
@@ -344,7 +344,7 @@ namespace TestMVC4App.Templates
                     "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 129 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -353,7 +353,7 @@ namespace TestMVC4App.Templates
             #line 130 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
 
 		break;
-		case SeverityLevel.ERROR:
+		case SeverityState.ERROR:
 		
             
             #line default
@@ -362,7 +362,7 @@ namespace TestMVC4App.Templates
                     "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
             #line 134 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -380,7 +380,7 @@ namespace TestMVC4App.Templates
                     "rder-style:solid;font-weight:bold;\">");
             
             #line 139 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Key));
             
             #line default
             #line hidden
@@ -398,7 +398,7 @@ namespace TestMVC4App.Templates
                     "style:solid;\">");
             
             #line 145 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Value));
+            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverityState.Value));
             
             #line default
             #line hidden
@@ -406,7 +406,7 @@ namespace TestMVC4App.Templates
                     "tyle:solid;\">\r\n\t");
             
             #line 147 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\OverviewTestsFailedReportTemplate.tt"
- double frequency = (double)countPerSeverity.Value /(double) StatsReport.CountProfilesTested;
+ double frequency = (double)countPerSeverityState.Value /(double) StatsReport.CountProfilesTested;
 	if (frequency > 0)
 	{
 	

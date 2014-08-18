@@ -60,7 +60,7 @@ namespace TestMVC4App.Models
         private StreamWriter streamWriter = null;
         private HtmlTextWriter htmlWriter = null;
 
-        private static Dictionary<string, Dictionary<SeverityLevel,int>> statsCountFailuresTypesPerTest;
+        private static Dictionary<string, Dictionary<SeverityState,int>> statsCountFailuresTypesPerTest;
         private static Dictionary<string, Dictionary<ObservationLabel, int>> statsCountObservationTypesPerTest;
         private static Dictionary<int, bool> statsMapUpiTraceFailureCalledAtLeastOnce;
         private static int statsCountProfilesProcessed = 0;
@@ -114,7 +114,7 @@ namespace TestMVC4App.Models
             string oldServiceXMLOutput;
 
             statsMapUpiTraceFailureCalledAtLeastOnce = new Dictionary<int, bool>();
-            statsCountFailuresTypesPerTest = new Dictionary<string,Dictionary<SeverityLevel,int>>();
+            statsCountFailuresTypesPerTest = new Dictionary<string,Dictionary<SeverityState,int>>();
             statsCountObservationTypesPerTest = new Dictionary<string, Dictionary<ObservationLabel, int>>();
 
             upiList = ConnectToDataSourceAndRetriveUPIs();
@@ -250,16 +250,16 @@ namespace TestMVC4App.Models
                     }
 
                     int totalCountErrors = 0;
-                    Dictionary<SeverityLevel, int> countBySeverity = new Dictionary<SeverityLevel,int>();
-                    foreach(KeyValuePair<string,Dictionary<SeverityLevel,int>> entry in statsCountFailuresTypesPerTest)
+                    Dictionary<SeverityState, int> countBySeverity = new Dictionary<SeverityState,int>();
+                    foreach(KeyValuePair<string,Dictionary<SeverityState,int>> entry in statsCountFailuresTypesPerTest)
                     {
                         // deduce the warnings from the count of successful tests because it is easier to read on the report
-                        if (entry.Value.ContainsKey(SeverityLevel.SUCCESS) && entry.Value.ContainsKey(SeverityLevel.WARNING))
+                        if (entry.Value.ContainsKey(SeverityState.SUCCESS) && entry.Value.ContainsKey(SeverityState.WARNING))
                         {
-                            entry.Value[SeverityLevel.SUCCESS] -= entry.Value[SeverityLevel.WARNING];
+                            entry.Value[SeverityState.SUCCESS] -= entry.Value[SeverityState.WARNING];
                         }
 
-                       foreach(KeyValuePair<SeverityLevel,int> subEntry in entry.Value)
+                       foreach(KeyValuePair<SeverityState,int> subEntry in entry.Value)
                        {
                            if(!countBySeverity.ContainsKey(subEntry.Key))
                            {
@@ -267,7 +267,7 @@ namespace TestMVC4App.Models
                            }
                            countBySeverity[subEntry.Key] += subEntry.Value;
 
-                           if (subEntry.Key != SeverityLevel.FALSE_POSITIVE)
+                           if (subEntry.Key != SeverityState.FALSE_POSITIVE)
                            {
                                totalCountErrors += subEntry.Value;
                            }
@@ -294,10 +294,10 @@ namespace TestMVC4App.Models
                         CountProfilesTested = statsCountProfilesProcessed,
                         CountProfilesWithoutWarnings = countProfilesWithoutWarning,
                         CountErrors = totalCountErrors,
-                        OverviewCountBySeverityLevel = countBySeverity,
+                        OverviewCountBySeverityState = countBySeverity,
                         OverviewCountByObservationType = countByObservation.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
                         TestNames = statsCountFailuresTypesPerTest.Keys.ToList(),
-                        ByTestNameCountBySeverityLevel = statsCountFailuresTypesPerTest,
+                        ByTestNameCountBySeverityState = statsCountFailuresTypesPerTest,
                         ByTestNameCountByObservationType = statsCountObservationTypesPerTest,
                         CountTestsRun = statsCountProfilesProcessed * statsCountFailuresTypesPerTest.Keys.ToList().Count(),
                         CountTestsPerUser = statsCountFailuresTypesPerTest.Keys.ToList().Count()
@@ -419,7 +419,7 @@ namespace TestMVC4App.Models
                             TraceFailedTest(message,
                                             newUserId,
                                             oldUPI,
-                                            SeverityLevel.ERROR_WITH_EXPLANATION,
+                                            SeverityState.ERROR_WITH_EXPLANATION,
                                             newServiceUrl,
                                             memberName,
                                             descriptionTask,
@@ -445,7 +445,7 @@ namespace TestMVC4App.Models
                         TraceFailedTest(message,
                                         newUserId,
                                         oldUPI,
-                                        SeverityLevel.ERROR_WITH_EXPLANATION,
+                                        SeverityState.ERROR_WITH_EXPLANATION,
                                         newServiceUrl,
                                         memberName,
                                         descriptionTask,
@@ -458,7 +458,7 @@ namespace TestMVC4App.Models
                         TraceFailedTest(ReplaceProblematicTagsForHtml(afe.Message),
                                         newUserId,
                                         oldUPI,
-                                        SeverityLevel.ERROR,
+                                        SeverityState.ERROR,
                                         newServiceUrl,
                                         memberName,
                                         descriptionTask,
@@ -473,7 +473,7 @@ namespace TestMVC4App.Models
                 TraceFailedTest(message, 
                                 newUserId, 
                                 oldUPI, 
-                                SeverityLevel.WARNING, 
+                                SeverityState.WARNING, 
                                 newServiceUrl,
                                 memberName,
                                 descriptionTask,
@@ -541,7 +541,7 @@ namespace TestMVC4App.Models
                             TraceFailedTest(message,
                                             newUserId,
                                             oldUPI,
-                                            SeverityLevel.FALSE_POSITIVE,
+                                            SeverityState.FALSE_POSITIVE,
                                             newServiceUrl,
                                             memberName,
                                             descriptionTask,
@@ -584,7 +584,7 @@ namespace TestMVC4App.Models
                             TraceFailedTest(message,
                                             newUserId,
                                             oldUPI,
-                                            SeverityLevel.WARNING,
+                                            SeverityState.WARNING,
                                             newServiceUrl,
                                             memberName,
                                             descriptionTask,
@@ -619,7 +619,7 @@ namespace TestMVC4App.Models
                             TraceFailedTest(message,
                                             newUserId,
                                             oldUPI,
-                                            SeverityLevel.WARNING,
+                                            SeverityState.WARNING,
                                             newServiceUrl,
                                             memberName,
                                             descriptionTask,
@@ -633,7 +633,7 @@ namespace TestMVC4App.Models
                         TraceFailedTest(message,
                                         newUserId,
                                         oldUPI,
-                                        SeverityLevel.ERROR,
+                                        SeverityState.ERROR,
                                         newServiceUrl,
                                         memberName,
                                         descriptionTask,
@@ -648,7 +648,7 @@ namespace TestMVC4App.Models
                 TraceFailedTest(message, 
                                 newUserId,
                                 oldUPI, 
-                                SeverityLevel.WARNING, 
+                                SeverityState.WARNING, 
                                 newServiceUrl,
                                 memberName,
                                 descriptionTask,
@@ -753,16 +753,16 @@ namespace TestMVC4App.Models
             if (!statsCountFailuresTypesPerTest.ContainsKey(memberName))
             {
                 // initialize all the possible combinations for the given test name
-                statsCountFailuresTypesPerTest.Add(memberName, new Dictionary<SeverityLevel, int>());
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.ERROR, 0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.ERROR_WITH_EXPLANATION, 0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.FALSE_POSITIVE, 0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.WARNING, 0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.SUCCESS, 0);
+                statsCountFailuresTypesPerTest.Add(memberName, new Dictionary<SeverityState, int>());
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.ERROR, 0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.ERROR_WITH_EXPLANATION, 0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.FALSE_POSITIVE, 0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.WARNING, 0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.SUCCESS, 0);
             }
 
             // increase call counter
-            statsCountFailuresTypesPerTest[memberName][SeverityLevel.SUCCESS]++;
+            statsCountFailuresTypesPerTest[memberName][SeverityState.SUCCESS]++;
         }
         
         /// <summary>
@@ -777,7 +777,7 @@ namespace TestMVC4App.Models
         /// <param name="memberName">Test method generated name.</param>
         /// <param name="taskDescription">Human-readable description of the test.</param>
         /// <param name="optionalExplanation">Hint on what caused the issue.</param>
-        public static void TraceFailedTest(string errorMessage, int userId, int upi, SeverityLevel severity, string newServiceUrl, string memberName, string taskDescription, List<ObservationLabel> observations)
+        public static void TraceFailedTest(string errorMessage, int userId, int upi, SeverityState severity, string newServiceUrl, string memberName, string taskDescription, List<ObservationLabel> observations)
         {
             var failReport = new AssertFailedReport
             {
@@ -820,12 +820,12 @@ namespace TestMVC4App.Models
             if(!statsCountFailuresTypesPerTest.ContainsKey(memberName))
             {
                 // initialize all the possible combinations for the given test name
-                statsCountFailuresTypesPerTest.Add(memberName, new Dictionary<SeverityLevel,int>());
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.ERROR,0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.ERROR_WITH_EXPLANATION,0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.FALSE_POSITIVE,0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.WARNING,0);
-                statsCountFailuresTypesPerTest[memberName].Add(SeverityLevel.SUCCESS, 0);
+                statsCountFailuresTypesPerTest.Add(memberName, new Dictionary<SeverityState,int>());
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.ERROR,0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.ERROR_WITH_EXPLANATION,0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.FALSE_POSITIVE,0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.WARNING,0);
+                statsCountFailuresTypesPerTest[memberName].Add(SeverityState.SUCCESS, 0);
             }
 
             // increase call counter

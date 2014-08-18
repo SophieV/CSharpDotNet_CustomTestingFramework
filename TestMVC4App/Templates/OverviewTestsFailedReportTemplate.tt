@@ -24,43 +24,43 @@
 	<th style="background-color:lightgrey;">Description of the category</th>
 	</tr>
 
-	<# foreach (KeyValuePair<SeverityLevel,int> countPerSeverity in StatsReport.OverviewCountBySeverityLevel)
+	<# foreach (KeyValuePair<SeverityState,int> countPerSeverityState in StatsReport.OverviewCountBySeverityState)
 	{
 	#>
 	<tr>
 
-		<# switch (countPerSeverity.Key)
+		<# switch (countPerSeverityState.Key)
 	{
-		case SeverityLevel.FALSE_POSITIVE :
+		case SeverityState.FALSE_POSITIVE :
 		#>
-		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
-		case SeverityLevel.WARNING:
+		case SeverityState.WARNING:
 		#>
-		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
-		case SeverityLevel.ERROR_WITH_EXPLANATION:
+		case SeverityState.ERROR_WITH_EXPLANATION:
 		#>
-		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
-		case SeverityLevel.ERROR:
+		case SeverityState.ERROR:
 		#>
-		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
 		default:
 		#>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
 	}
 	#>
 	</td>
-	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverity.Value #></td>
-	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;color:darkgrey;"><#= AssertFailedReport.GetDescription(countPerSeverity.Key) #></td>
+	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverityState.Value #></td>
+	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;color:darkgrey;"><#= AssertFailedReport.GetDescription(countPerSeverityState.Key) #></td>
 	</tr>
 	<#
 	} #>
@@ -107,44 +107,44 @@
 	<th style="background-color:lightgrey;">Frequency</th>
 	</tr>
 
-	<# foreach (KeyValuePair<SeverityLevel,int> countPerSeverity in StatsReport.ByTestNameCountBySeverityLevel[testName])
+	<# foreach (KeyValuePair<SeverityState,int> countPerSeverityState in StatsReport.ByTestNameCountBySeverityState[testName])
 	{
 	#>
 	<tr>
 
-		<# switch (countPerSeverity.Key)
+		<# switch (countPerSeverityState.Key)
 	{
-		case SeverityLevel.FALSE_POSITIVE :
+		case SeverityState.FALSE_POSITIVE :
 		#>
-		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
-		case SeverityLevel.WARNING:
+		case SeverityState.WARNING:
 		#>
-		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
-		case SeverityLevel.ERROR_WITH_EXPLANATION:
+		case SeverityState.ERROR_WITH_EXPLANATION:
 		#>
-		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
-		case SeverityLevel.ERROR:
+		case SeverityState.ERROR:
 		#>
-		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
 		default:
 		#>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverityState.Key #>
 		<#
 		break;
 	}
 	#>
 	</td>
-	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverity.Value #></td>
+	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverityState.Value #></td>
 	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
-	<# double frequency = (double)countPerSeverity.Value /(double) StatsReport.CountProfilesTested;
+	<# double frequency = (double)countPerSeverityState.Value /(double) StatsReport.CountProfilesTested;
 	if (frequency > 0)
 	{
 	#>

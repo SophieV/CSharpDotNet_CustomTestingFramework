@@ -18,11 +18,11 @@ namespace TestMVC4App.Templates
 
         public int CountErrors { get; set; }
 
-        public Dictionary<SeverityLevel, int> OverviewCountBySeverityLevel { get; set; }
+        public Dictionary<SeverityState, int> OverviewCountBySeverityState { get; set; }
 
         public Dictionary<ObservationLabel, int> OverviewCountByObservationType { get; set; }
 
-        public Dictionary<string, Dictionary<SeverityLevel, int>> ByTestNameCountBySeverityLevel { get; set; }
+        public Dictionary<string, Dictionary<SeverityState, int>> ByTestNameCountBySeverityState { get; set; }
 
         public Dictionary<string, Dictionary<ObservationLabel, int>> ByTestNameCountByObservationType { get; set; }
 
