@@ -37,6 +37,7 @@ namespace TestMVC4App.Models
         private static Dictionary<string, HtmlTextWriter> htmlWriters;
         private static HtmlTextWriter htmlWriter; 
         private static List<string> allTestNames;
+        private static Dictionary<string, string> sampleDataByTestName;
 
         private static Dictionary<string, Dictionary<SeverityState,int>> statsCountFailuresTypesPerTest;
         private static Dictionary<string, Dictionary<ObservationLabel, int>> statsCountObservationTypesPerTest;
@@ -94,6 +95,8 @@ namespace TestMVC4App.Models
             statsMapUpiTraceFailureCalledAtLeastOnce = new Dictionary<int, bool>();
             statsCountFailuresTypesPerTest = new Dictionary<string,Dictionary<SeverityState,int>>();
             statsCountObservationTypesPerTest = new Dictionary<string, Dictionary<ObservationLabel, int>>();
+
+            sampleDataByTestName = new Dictionary<string, string>();
 
             allTestNames = new List<string>();
             allTestNames.Add("UserBasicInfo_LastName_Test");
@@ -261,6 +264,10 @@ namespace TestMVC4App.Models
                         {
                             entry.Value[SeverityState.SUCCESS] -= entry.Value[SeverityState.WARNING];
                         }
+                        else
+                        {
+
+                        }
 
                        foreach(KeyValuePair<SeverityState,int> subEntry in entry.Value)
                        {
@@ -303,7 +310,8 @@ namespace TestMVC4App.Models
                         ByTestNameCountBySeverityState = statsCountFailuresTypesPerTest,
                         ByTestNameCountByObservationType = statsCountObservationTypesPerTest,
                         CountTestsRun = statsCountProfilesProcessed * statsCountFailuresTypesPerTest.Keys.ToList().Count(),
-                        CountTestsPerUser = statsCountFailuresTypesPerTest.Keys.ToList().Count()
+                        CountTestsPerUser = statsCountFailuresTypesPerTest.Keys.ToList().Count(),
+                        SampleDataByTestName = sampleDataByTestName
                     };
 
                     var template = new OverviewTestsFailedReportTemplate();
@@ -408,6 +416,11 @@ namespace TestMVC4App.Models
 
             if (!string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue))
             {
+                if (!sampleDataByTestName.ContainsKey(memberName))
+                {
+                    sampleDataByTestName.Add(memberName, newValue);
+                }
+
                 try 
                 { 
                     Assert.AreEqual(oldValue, newValue, descriptionTask);
@@ -526,6 +539,11 @@ namespace TestMVC4App.Models
             // if values are populated on one side or the other
             if (oldValuesCount > 0 || newValuesCount > 0)
             {
+                if (!sampleDataByTestName.ContainsKey(memberName))
+                {
+                    sampleDataByTestName.Add(memberName, newValues.First());
+                }
+
                 try 
                 { 
                     CollectionAssert.AreEquivalent(oldValues, newValues, descriptionTask);

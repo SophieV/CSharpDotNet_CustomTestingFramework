@@ -11,11 +11,11 @@
 	<h1>Overview Report</h1>
 	<hr/>
 	<h2>Global</h2>
-	<p>Count of user profiles tested : <#= StatsReport.CountProfilesTested #></p>
-	<p>Total count of tests run : <#= StatsReport.CountTestsRun #></p>
-	<p>Count of tests per user profile : <#= StatsReport.CountTestsPerUser #></p>
-	<p>Count of user profiles free from any kind of warning : <#= StatsReport.CountProfilesWithoutWarnings #></p>
-	<p>Total count of errors : <#= StatsReport.CountErrors #></p>
+	<p>Count of user profiles tested : <#= StatsReport.CountProfilesTested #><br/>
+	Total count of tests run : <#= StatsReport.CountTestsRun #><br/>
+	Count of tests per user profile : <#= StatsReport.CountTestsPerUser #><br/>
+	Count of user profiles free from any kind of warning : <#= StatsReport.CountProfilesWithoutWarnings #><br/>
+	Total count of errors : <#= StatsReport.CountErrors #></p>
 	<br/>
 	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
 	<tr>
@@ -79,12 +79,15 @@
 	var sortedDictionary = StatsReport.OverviewCountByObservationType.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<ObservationLabel,int> countPerObservationType in sortedDictionary)
 	{
+		if(countPerObservationType.Value > 0)
+		{
 	#>
 	<tr>
 	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= AssertFailedReport.GetDescription(countPerObservationType.Key) #></td>
 	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerObservationType.Value #></td>
 	</tr>
 	<#
+		}
 	} #>
 
 	</table>
@@ -94,11 +97,56 @@
 	<br/>
 	<br/>
 
+	<hr/>
+
+	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+	<tr>
+	<th style="background-color:lightgrey;">Test Name</th>
+	<th style="background-color:lightgrey;">Success</th>
+	<th style="background-color:lightgrey;">Sample Data</th>
+	<th style="background-color:lightgrey;">More Info</th>
+	</tr>
+	<# foreach (string testName in StatsReport.TestNames)
+	{
+	#>
+		<# foreach (KeyValuePair<SeverityState,int> countPerSeverityState in StatsReport.ByTestNameCountBySeverityState[testName])
+		{
+		#>
+		<tr>
+		<#
+			if(countPerSeverityState.Key == SeverityState.SUCCESS)
+			{
+		#>
+				<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;"><#= testName #></td>
+				<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;">	
+				<# double frequency2 = (double)countPerSeverityState.Value /(double) StatsReport.CountProfilesTested; #>
+
+					<#= frequency2.ToString("P") #>
+
+
+				<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;width: 40%;">
+				<#
+								if(StatsReport.SampleDataByTestName.ContainsKey(testName))
+				{ #>
+				<#= StatsReport.SampleDataByTestName[testName] #>
+				<# } #>
+				</td> 
+
+
+				<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;">
+				<a href="#<#= testName #>">Test Overview</a><br/>
+				<a href="C:\\QA_LOGS\\<#= testName #>_1.html">Test Details</a></td>
+		<# }
+		} #>
+		</tr>
+	<# } #>
+	</table>
+
 	<# foreach (string testName in StatsReport.TestNames)
 	{
 	#>
 	<hr/>
-		<h2><#= testName #></h2>
+		<h2><a id="#<#= testName #>"><#= testName #></a></h2>
 
 	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
 	<tr>

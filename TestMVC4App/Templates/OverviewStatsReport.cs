@@ -27,5 +27,7 @@ namespace TestMVC4App.Templates
         public Dictionary<string, Dictionary<ObservationLabel, int>> ByTestNameCountByObservationType { get; set; }
 
         public List<string> TestNames { get; set; }
+
+        public Dictionary<string, string> SampleDataByTestName { get; set; }
     }
 }
