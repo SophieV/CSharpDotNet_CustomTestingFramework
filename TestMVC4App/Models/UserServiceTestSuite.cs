@@ -140,9 +140,12 @@ namespace TestMVC4App.Models
                 // modulo to avoid resetting the counter
                 if (statsCountProfilesProcessed % MaxProfilesForOneFile == 0)
                 {
-                    // change to next output file
-                    CleanUpConsoleRedirectToFile();
-                    SetupConsoleRedirectToFile((statsCountProfilesProcessed / MaxProfilesForOneFile) + 1);
+                    if (statsCountProfilesProcessed > 0)
+                    {
+                        // change to next output file
+                        CleanUpConsoleRedirectToFile();
+                        SetupConsoleRedirectToFile((statsCountProfilesProcessed / MaxProfilesForOneFile) + 1);
+                    }
                 }
 
                 //go to the old service and retrieve the data
@@ -158,8 +161,10 @@ namespace TestMVC4App.Models
                     } catch (WebException we)
                     {
                         System.Console.Out.WriteLine(we.StackTrace);
+                        System.Diagnostics.Debug.WriteLine(we.StackTrace);
 
                         System.Console.Out.WriteLine("second chance");
+                        System.Diagnostics.Debug.WriteLine("second chance");
                         try
                         {
                             oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
@@ -167,6 +172,7 @@ namespace TestMVC4App.Models
                         catch (WebException we2)
                         {
                             System.Console.Out.WriteLine(we2.StackTrace);
+                            System.Diagnostics.Debug.WriteLine(we2.StackTrace);
                         }
                     }
                 }
@@ -194,10 +200,13 @@ namespace TestMVC4App.Models
                     catch (Exception e)
                     {
                         System.Console.Out.WriteLine(e.StackTrace);
-                        CleanUpConsoleRedirectToFile();
+                        System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                        //CleanUpConsoleRedirectToFile();
                         // create report overview
                         SetupConsoleRedirectToFile(0);
                         CleanUpConsoleRedirectToFile();
+                        // reconnect writers
+                        SetupConsoleRedirectToFile(statsCountProfilesProcessed);
                     }
                 }
             }
@@ -356,17 +365,13 @@ namespace TestMVC4App.Models
 
                     template.Initialize();
 
-#if DEBUG
-                    // System.Diagnostics.Debug - however we use the redirection from the Console output
-                    htmlWriter.WriteLine(template.TransformText());
-#else
-            System.Console.WriteLine(template.TransformText());
-#endif
+            htmlWriter.WriteLine(template.TransformText());
                 }
             }
             catch (IOException ioe)
             {
                 System.Console.WriteLine(ioe.StackTrace);
+                System.Diagnostics.Debug.WriteLine(ioe.StackTrace);
             }
         }
 
@@ -393,12 +398,14 @@ namespace TestMVC4App.Models
                     htmlWriter.WriteEndTag("table");
                     htmlWriter.WriteEndTag("body");
                     htmlWriter.WriteEndTag("html");
-                    streamWriter.Close();
+                    htmlWriter.Close();
+                    htmlWriter = null;
                 }
             }
             catch (IOException ioe)
             {
                 System.Console.WriteLine(ioe.StackTrace);
+                System.Diagnostics.Debug.WriteLine(ioe.StackTrace);
             }
 
             // Recover the standard output stream so that a  
