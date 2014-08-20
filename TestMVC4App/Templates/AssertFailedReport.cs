@@ -57,6 +57,10 @@ namespace TestMVC4App.Templates
         /// </summary>
         public List<ObservationLabel> Observations { get; set; }
 
+        public List<string> OldValues { get; set; }
+
+        public List<string> NewValues { get; set; }
+
         /// <summary>
         /// Allows to display the string text associated with an enum entry.
         /// </summary>

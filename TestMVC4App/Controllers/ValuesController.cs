@@ -20,7 +20,7 @@ namespace TestMVC4App.Controllers
         public string Get()
         {
             var test = new UserServiceTestSuite();
-            test.compareServices();
+            test.RunAllTests();
             return "blah";
         }
 

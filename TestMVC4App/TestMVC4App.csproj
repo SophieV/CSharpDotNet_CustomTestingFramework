@@ -34,7 +34,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -177,9 +177,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ITestStructure.cs" />
+    <Compile Include="Models\CompareStrategy.cs" />
+    <Compile Include="Models\LogManager.cs" />
     <Compile Include="Models\ObservationLevel.cs" />
+    <Compile Include="Models\OrganizationTest.cs" />
+    <Compile Include="Models\ResultReport.cs" />
     <Compile Include="Models\SeverityState.cs" />
+    <Compile Include="Models\SimpleCollectionCompareStrategy.cs" />
+    <Compile Include="Models\SimpleStringCompareStrategy.cs" />
+    <Compile Include="Models\TestSuite.cs" />
+    <Compile Include="Models\TestUnit.cs" />
     <Compile Include="Models\TimeoutExtendedWebClient.cs">
       <SubType>Component</SubType>
     </Compile>

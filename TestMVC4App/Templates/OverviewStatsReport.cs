@@ -16,8 +16,6 @@ namespace TestMVC4App.Templates
 
         public int CountProfilesWithoutWarnings { get; set; }
 
-        public int CountErrors { get; set; }
-
         public Dictionary<SeverityState, int> OverviewCountBySeverityState { get; set; }
 
         public Dictionary<ObservationLabel, int> OverviewCountByObservationType { get; set; }

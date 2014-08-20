@@ -14,8 +14,7 @@
 	<p>Count of user profiles tested : <#= StatsReport.CountProfilesTested #><br/>
 	Total count of tests run : <#= StatsReport.CountTestsRun #><br/>
 	Count of tests per user profile : <#= StatsReport.CountTestsPerUser #><br/>
-	Count of user profiles free from any kind of warning : <#= StatsReport.CountProfilesWithoutWarnings #><br/>
-	Total count of errors : <#= StatsReport.CountErrors #></p>
+	Count of user profiles free from any kind of warning : <#= StatsReport.CountProfilesWithoutWarnings #></p>
 	<br/>
 	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
 	<tr>
@@ -141,6 +140,8 @@
 		</tr>
 	<# } #>
 	</table>
+	<br/>
+	<p>Success means no error and no warning returned.</p>
 
 	<# foreach (string testName in StatsReport.TestNames)
 	{

@@ -1,4 +1,5 @@
 ﻿<#@ template debug="true" language="C#"  #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="TestMVC4App.Models" #>
 <#@ parameter 
 	name="FailedReport" 
@@ -32,7 +33,7 @@
 		break;
 		default:
 		#>
-		<td style="padding: 10px;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= FailedReport.FailureType #>
 		<#
 		break;
 	}
@@ -44,6 +45,91 @@
 	</td>
 	<td style="width: 60%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
 		<#= FailedReport.Message #>
+		<br/><br/>
+		<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+		<tr>
+		<td style="background-color:lightgrey;">OLD SERVICE DATA <span style="color:red;">[<#=FailedReport.OldValues.Count #>]</span></td>
+		<td style="background-color:lightgrey;">NEW SERVICE DATA <span style="color:red;">[<#=FailedReport.NewValues.Count #>]</span></td>
+		</tr>
+		<tr>
+		<td>
+		<ul>
+
+		<#
+		if(FailedReport.OldValues.Count > 0)
+		{
+		var potentialDuplicates = FailedReport.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+
+        foreach (string oldValue in FailedReport.OldValues)
+        {
+		#>
+
+		<li>
+		
+		<# if(!string.IsNullOrEmpty(oldValue)) {
+		#>
+				<#= oldValue #>
+		<# if(!FailedReport.NewValues.Contains(oldValue)) 
+		{ #>
+			<span style="color:purple;">[MISSING]</span>
+		<# } #>
+
+		<# if(potentialDuplicates.Contains(oldValue)) 
+		{ #>
+			<span style="color:pink;">[DUPLICATE]</span>
+		<# } #>
+		<#
+		} else {
+		#>
+				NULL
+		<# } #>
+		</li>
+
+		<# } 
+		}
+		#>
+
+		</ul>
+		</td>
+		<td>
+		<ul>
+
+		<#
+		if(FailedReport.NewValues.Count > 0)
+		{
+		var potentialDuplicates = FailedReport.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+
+        foreach (string newValue in FailedReport.NewValues)
+        {
+		#>
+
+		<li>
+		<# if(!string.IsNullOrEmpty(newValue)) {
+		#>
+				<#= newValue #>
+		<# if(!FailedReport.OldValues.Contains(newValue)) 
+		{ #>
+			<span style="color:purple;">[MISSING]</span>
+		<# } #>
+
+		<# if(potentialDuplicates.Contains(newValue)) 
+		{ #>
+			<span style="color:pink;">[DUPLICATE]</span>
+		<# } #>
+		<#
+		} else {
+		#>
+				NULL
+		<# } #>
+		</li>
+
+		<# }
+		} #>
+
+		</ul>
+		</td>
+		</tr>
+		</table>
 	</td>
 	<td style="width: 30%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
 	<ul>

@@ -1,63 +1,93 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using TestMVC4App.Templates;
 using YSM.PMS.Service.Common.DataTransfer;
+using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
-    public class UserGeneralInfoTest : ITestStructure
+    public class UserGeneralInfoUnitTest : TestUnit
     {
-        private const string NEW_SERVICE_SUB_URL_BASE = "Users/";
-        private const string NEW_SERVICE_SUB_URL_ENDING = "/GeneralInfo";
-        private string NEW_SERVICE_URL_BASE = WebConfigurationManager.AppSettings["ProfileServiceBaseAddress"] + NEW_SERVICE_SUB_URL_BASE;
+        private UsersClient newServiceAccessor;
+        private XDocument oldServiceData;
+        private int userId;
+        private int upi;
 
-        void ITestStructure.RunAllTests(YSM.PMS.Web.Service.Clients.IUsersClient newServiceAccessor, int upi, System.Xml.Linq.XDocument oldServiceXMLContent, int userId)
+        public override string newServiceURLExtensionBeginning
+        {
+            get { return "Users/"; }
+        }
+
+        public override string newServiceURLExtensionEnding
+        {
+            get { return "/GeneralInfo"; }
+        }
+
+        public UserGeneralInfoUnitTest(TestSuite parent) : base(parent)
+        {
+
+        }
+
+        public override void RunAllTests()
         {
             var newUserGeneralInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
 
-            UserGeneralInfo_Bio_Test(newUserGeneralInfo, oldServiceXMLContent);
-            UserGeneralInfo_Titles_Test(newUserGeneralInfo, oldServiceXMLContent);
-            UserGeneralInfo_Organizations_Test(newUserGeneralInfo, oldServiceXMLContent);
+            UserGeneralInfo_Bio_Test(newUserGeneralInfo, oldServiceData);
+            UserGeneralInfo_Titles_Test(newUserGeneralInfo, oldServiceData);
+            UserGeneralInfo_Organizations_Test(newUserGeneralInfo, oldServiceData);
+
+            ComputeOverallSeverity();
+        }
+
+        public void ProvideUserData(XDocument oldData, int upi, UsersClient newDataAccessor, int userId)
+        {
+            this.newServiceAccessor = newDataAccessor;
+            this.oldServiceData = oldData;
+            this.userId = userId;
+            this.upi = upi;
         }
 
         #region Field Comparison Tests
 
-        private bool UserGeneralInfo_Bio_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_Bio_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            return UserServiceTestSuite.HandleSimpleStringCompare(oldServiceData, 
-                                                                   "/Faculty/facultyMember/biography", 
-                                                                   newServiceData.Bio, 
-                                                                   newServiceData.UserId, 
-                                                                   newServiceData.Upi, 
-                                                                   "Comparing Bio", 
-                                                                   NEW_SERVICE_URL_BASE + newServiceData.UserId);
+            var watch = new Stopwatch();
+            watch.Start();
+
+            var resultReport = new ResultReport("UserGeneralInfo_Bio_Test", "Comparing Bio");
+            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/biography");
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Bio, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(userId),
+                                              resultReport);
         }
 
-        private bool UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            List<string> oldValues = new List<string>();
+            var watch = new Stopwatch();
+            watch.Start();
+
+            List<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title");
+
             List<string> newValues = new List<string>();
-
-            try
-            {
-                var titles = oldServiceData.XPathSelectElements("/Faculty/facultyMember/title");
-
-                foreach(XElement el in titles)
-                {
-                    oldValues.Add(el.Element("titleName").Value);
-                }
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-            
             if(newServiceData.Titles.Count() > 0)
             {
                 foreach(var title in newServiceData.Titles)
@@ -66,83 +96,28 @@ namespace TestMVC4App.Models
                 }
             }
 
-            return UserServiceTestSuite.HandleComparingSimpleCollectionString(oldValues, 
-                                                                              newValues, 
-                                                                              newServiceData.UserId, 
-                                                                              newServiceData.Upi, 
-                                                                              "Comparing Titles",
-                                                                              NEW_SERVICE_URL_BASE + newServiceData.UserId + NEW_SERVICE_SUB_URL_ENDING);
+            var resultReport = new ResultReport("UserGeneralInfo_Titles_Test", "Comparing Title(s)");
+            var compareStrategy = new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+            watch.Stop();
+
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(userId),
+                                              resultReport);
         }
 
-        /// <summary>
-        /// TODO : Considering moving Org testing to a separate class
-        /// </summary>
-        /// <param name="newServiceData"></param>
-        /// <param name="oldServiceData"></param>
-        /// <returns></returns>
-        private bool UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            bool success = true;
-
-            List<string> oldOrganizationIdValues = new List<string>();
-            List<string> newOrganizationIdValues = new List<string>();
-
-            List<string> oldOrganizationNameValues = new List<string>();
-            List<string> newOrganizationNameValues = new List<string>();
-
-            try
-            {
-                var departments = oldServiceData.XPathSelectElements("/Faculty/facultyMember/department");
-
-                foreach (XElement el in departments)
-                {
-                    try
-                    {
-                        oldOrganizationIdValues.Add(el.Element("OrgID").Value);
-                    } 
-                    catch (Exception)
-                    {
-                        // no value to parse
-                    }
-
-                    try
-                    {
-                        oldOrganizationNameValues.Add(el.Element("departmentName").Value);
-                    }
-                    catch (Exception)
-                    {
-                        // no value to parse
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            if (newServiceData.Organizations.Count() > 0)
-            {
-                foreach (var organization in newServiceData.Organizations)
-                {
-                    newOrganizationIdValues.Add(organization.OrganizationId.ToString());
-                    newOrganizationNameValues.Add(organization.Name);
-                }
-            }
-
-            success &= UserServiceTestSuite.HandleComparingSimpleCollectionString(oldOrganizationIdValues, 
-                                                                                  newOrganizationIdValues, 
-                                                                                  newServiceData.UserId, 
-                                                                                  newServiceData.Upi, 
-                                                                                  "Comparing OrganizationId",
-                                                                                  NEW_SERVICE_URL_BASE + newServiceData.UserId + NEW_SERVICE_SUB_URL_ENDING);
-
-            success &= UserServiceTestSuite.HandleComparingSimpleCollectionString(oldOrganizationNameValues, 
-                                                                                  newOrganizationNameValues, 
-                                                                                  newServiceData.UserId, 
-                                                                                  newServiceData.Upi, 
-                                                                                  "Comparing OrganizationName",
-                                                                                  NEW_SERVICE_URL_BASE + newServiceData.UserId + NEW_SERVICE_SUB_URL_ENDING);
-            return success;
+            var organizationTest = new OrganizationTest(this.Master, this);
+            this.Children.Add(organizationTest);
+            organizationTest.ProvideOrganizationData(userId, upi, oldServiceData.XPathSelectElements("/Faculty/facultyMember/department"), newServiceData.Organizations);
+            organizationTest.RunAllTests();
         }
 
         #endregion

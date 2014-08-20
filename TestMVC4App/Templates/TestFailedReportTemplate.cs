@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 namespace TestMVC4App.Templates
 {
+    using System.Linq;
     using TestMVC4App.Models;
     using System;
     
@@ -29,21 +30,21 @@ namespace TestMVC4App.Templates
             this.Write("<tr>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-st" +
                     "yle:solid;\">\r\n\t<b>");
             
-            #line 8 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 9 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.TaskDescription));
             
             #line default
             #line hidden
             this.Write("</b><br/>\r\n\t");
             
-            #line 9 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.TestName));
             
             #line default
             #line hidden
             this.Write("\r\n\t</td>\r\n\t");
             
-            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 12 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
  switch (FailedReport.FailureType)
 	{
 		case SeverityState.FALSE_POSITIVE :
@@ -54,14 +55,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.FailureType));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
 
 		break;
 		case SeverityState.WARNING:
@@ -72,14 +73,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.FailureType));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 22 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
 
 		break;
 		case SeverityState.ERROR_WITH_EXPLANATION:
@@ -90,14 +91,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;" +
                     "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.FailureType));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
 
 		break;
 		case SeverityState.ERROR:
@@ -108,14 +109,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bor" +
                     "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.FailureType));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
 
 		break;
 		default:
@@ -123,17 +124,17 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;color:white;border-width:2px;border-color:lightgrey;bo" +
-                    "rder-style:solid;font-weight:bold;\">");
+            this.Write("\t\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-style:s" +
+                    "olid;font-weight:bold;\">");
             
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 36 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.FailureType));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 36 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
 
 		break;
 	}
@@ -144,28 +145,28 @@ namespace TestMVC4App.Templates
             this.Write("\t</td>\r\n\t<td style=\"width: 20%;padding: 10px;border-width:2px;border-color:lightg" +
                     "rey;border-style:solid;\">\r\n\t\t<a href=\"");
             
-            #line 42 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 43 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.OldUrl));
             
             #line default
             #line hidden
             this.Write("\">Profile data of UPI ");
             
-            #line 42 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 43 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.UPI));
             
             #line default
             #line hidden
             this.Write("</a><br/>\r\n\t\t<a href=\"");
             
-            #line 43 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 44 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.NewUrl));
             
             #line default
             #line hidden
             this.Write("\">User data of ID is ");
             
-            #line 43 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 44 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.UserId));
             
             #line default
@@ -173,15 +174,199 @@ namespace TestMVC4App.Templates
             this.Write("</a>\r\n\t</td>\r\n\t<td style=\"width: 60%;padding: 10px;border-width:2px;border-color:" +
                     "lightgrey;border-style:solid;\">\r\n\t\t");
             
-            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 47 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.Message));
             
             #line default
             #line hidden
-            this.Write("\r\n\t</td>\r\n\t<td style=\"width: 30%;padding: 10px;border-width:2px;border-color:ligh" +
-                    "tgrey;border-style:solid;\">\r\n\t<ul>\r\n\t");
+            this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table style=\"border:solid 2px lightgrey;border-collapse:collap" +
+                    "se;\">\r\n\t\t<tr>\r\n\t\t<td style=\"background-color:lightgrey;\">OLD SERVICE DATA <span " +
+                    "style=\"color:red;\">[");
             
-            #line 50 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.OldValues.Count));
+            
+            #line default
+            #line hidden
+            this.Write("]</span></td>\r\n\t\t<td style=\"background-color:lightgrey;\">NEW SERVICE DATA <span s" +
+                    "tyle=\"color:red;\">[");
+            
+            #line 52 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(FailedReport.NewValues.Count));
+            
+            #line default
+            #line hidden
+            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t<td>\r\n\t\t<ul>\r\n\r\n\t\t");
+            
+            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+
+		if(FailedReport.OldValues.Count > 0)
+		{
+		var potentialDuplicates = FailedReport.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+
+        foreach (string oldValue in FailedReport.OldValues)
+        {
+		
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t<li>\r\n\t\t\r\n\t\t");
+            
+            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ if(!string.IsNullOrEmpty(oldValue)) {
+		
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t");
+            
+            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(oldValue));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t");
+            
+            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ if(!FailedReport.NewValues.Contains(oldValue)) 
+		{ 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t<span style=\"color:purple;\">[MISSING]</span>\r\n\t\t");
+            
+            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t");
+            
+            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ if(potentialDuplicates.Contains(oldValue)) 
+		{ 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t<span style=\"color:pink;\">[DUPLICATE]</span>\r\n\t\t");
+            
+            #line 80 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 81 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+
+		} else {
+		
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tNULL\r\n\t\t");
+            
+            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t</li>\r\n\r\n\t\t");
+            
+            #line 88 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+		}
+		
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t</ul>\r\n\t\t</td>\r\n\t\t<td>\r\n\t\t<ul>\r\n\r\n\t\t");
+            
+            #line 97 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+
+		if(FailedReport.NewValues.Count > 0)
+		{
+		var potentialDuplicates = FailedReport.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+
+        foreach (string newValue in FailedReport.NewValues)
+        {
+		
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t<li>\r\n\t\t");
+            
+            #line 107 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ if(!string.IsNullOrEmpty(newValue)) {
+		
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t");
+            
+            #line 109 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(newValue));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t");
+            
+            #line 110 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ if(!FailedReport.OldValues.Contains(newValue)) 
+		{ 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t<span style=\"color:purple;\">[MISSING]</span>\r\n\t\t");
+            
+            #line 113 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t");
+            
+            #line 115 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ if(potentialDuplicates.Contains(newValue)) 
+		{ 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t<span style=\"color:pink;\">[DUPLICATE]</span>\r\n\t\t");
+            
+            #line 118 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t");
+            
+            #line 119 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+
+		} else {
+		
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\tNULL\r\n\t\t");
+            
+            #line 123 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t</li>\r\n\r\n\t\t");
+            
+            #line 126 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+ }
+		} 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t</ul>\r\n\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td style=\"width: 30%;padding: " +
+                    "10px;border-width:2px;border-color:lightgrey;border-style:solid;\">\r\n\t<ul>\r\n\t");
+            
+            #line 136 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
  if(FailedReport.Observations != null)
 	{
 		foreach(var observation in FailedReport.Observations)
@@ -192,14 +377,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<li>");
             
-            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 141 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AssertFailedReport.GetDescription(observation)));
             
             #line default
             #line hidden
             this.Write("</li><br/>\r\n\t");
             
-            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
+            #line 142 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestFailedReportTemplate.tt"
 
 	}
 	}
