@@ -1,6 +1,7 @@
 ﻿<#@ template language="C#" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Globalization" #>
 <#@ import namespace="TestMVC4App.Models" #>
 <#@ parameter 
 	name="SummaryReportDataObject" 
@@ -11,10 +12,10 @@
 	<h1>Overview Report</h1>
 	<hr/>
 	<h2>Global</h2>
-	<p>Count of user profiles tested : <#= SummaryReportDataObject.CountProfilesTested #><br/>
-	Total count of tests run : <#= SummaryReportDataObject.CountTestsRun #><br/>
-	Count of tests per user profile : <#= SummaryReportDataObject.CountTestsPerUser #><br/>
-	Count of user profiles free from any kind of warning : <#= SummaryReportDataObject.CountProfilesWithoutWarnings #></p>
+	<p>Count of user profiles tested : <#= SummaryReportDataObject.CountProfilesTested.ToString("d", CultureInfo.InvariantCulture) #><br/>
+	Total count of tests run : <#= SummaryReportDataObject.CountTestsRun.ToString("d", CultureInfo.InvariantCulture) #><br/>
+	Count of tests per user profile : <#= SummaryReportDataObject.CountTestsPerUser.ToString("d", CultureInfo.InvariantCulture) #><br/>
+	Count of user profiles free from any kind of warning : <#= SummaryReportDataObject.CountProfilesWithoutWarnings.ToString("d", CultureInfo.InvariantCulture) #></p>
 	<br/>
 	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
 		<tr>
@@ -42,7 +43,7 @@
 			<# break;
 		} #>
 		</td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverityState.Value #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverityState.Value.ToString("d", CultureInfo.InvariantCulture) #></td>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;color:darkgrey;"><#= LogManager.GetDescription(countPerSeverityState.Key) #></td>
 	</tr>
 	<# } #>
@@ -60,7 +61,7 @@
 		if(countPerObservationType.Value > 0) { #>
 	<tr>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= LogManager.GetDescription(countPerObservationType.Key) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerObservationType.Value #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerObservationType.Value.ToString("d", CultureInfo.InvariantCulture) #></td>
 	</tr>
 	<# } } #>
 	</table>
@@ -130,7 +131,7 @@
 		<# break;
 	} #>
 		</td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverityState.Value #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerSeverityState.Value.ToString("d", CultureInfo.InvariantCulture) #></td>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
 			<# double frequency = (double)countPerSeverityState.Value /(double) SummaryReportDataObject.CountProfilesTested;
 			if (frequency > 0) { #>
@@ -153,7 +154,7 @@
 		if(countPerObservationType.Value > 0) { #>
 	<tr>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= LogManager.GetDescription(countPerObservationType.Key) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerObservationType.Value #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= countPerObservationType.Value.ToString("d", CultureInfo.InvariantCulture) #></td>
 	</tr>
 	<# } } } #>
 </table>

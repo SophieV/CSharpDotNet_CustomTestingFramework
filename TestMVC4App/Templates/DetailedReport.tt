@@ -39,7 +39,7 @@
 			<td style="background-color:lightgrey;">NEW SERVICE DATA <span style="color:red;">[<#=DetailedReportDataObject.NewValues.Count #>]</span></td>
 		</tr>
 		<tr>
-			<td>
+			<td style="border-right: 1px lightgrey solid;">
 				<ul>
 					<# if(DetailedReportDataObject.OldValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
@@ -67,7 +67,7 @@
 		</table>
 	</td>
 	<td style="width: 30%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
-	<p>Duration : <#= DetailedReportDataObject.Duration #></p>
+	<p>Duration : <#= DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
 	<ul>
 	<# if(DetailedReportDataObject.Observations != null) {

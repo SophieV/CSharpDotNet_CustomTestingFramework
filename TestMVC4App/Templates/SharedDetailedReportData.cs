@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 using TestMVC4App.Models;
 
 namespace TestMVC4App.Templates

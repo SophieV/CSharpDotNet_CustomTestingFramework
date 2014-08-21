@@ -184,7 +184,8 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td>\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
+            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-right: 1px lightgrey solid;\"" +
+                    ">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
             
             #line 44 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
  if(DetailedReportDataObject.OldValues.Count > 0) {
@@ -331,7 +332,7 @@ namespace TestMVC4App.Templates
                     "n : ");
             
             #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Duration));
+            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
