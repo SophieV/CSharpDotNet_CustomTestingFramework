@@ -18,9 +18,9 @@ namespace TestMVC4App.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\AssertFailedReportFilterInHeader.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\FooterJS_DetailedReport.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class AssertFailedReportFilterInHeader : AssertFailedReportFilterInHeaderBase
+    public partial class FooterJS_DetailedReport : FooterJS_DetailedReportBase
     {
 #line hidden
         /// <summary>
@@ -28,8 +28,9 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<html>\r\n<head>\r\n<script type=\"text/css\" href=\"filtergrid.css\"></script>\r\n<script " +
-                    "type=\"text/javascript\" src=\"tablefilter.js\"></script>\r\n</head>\r\n<body>\r\n");
+            this.Write("\t<script language=\"javascript\" type=\"text/javascript\">\r\n\tvar tableFilters = {\r\n\t\t" +
+                    "btn: true,\r\n\t\tcol_0: \"none\",\r\n\t\tcol_2: \"select\",\r\n\t\tbtn_text: \"  >  \"\r\n\t}\r\n\tsetF" +
+                    "ilterGrid(\"individual_test_results\");\r\n</script>\r\n</table>\r\n</body>\r\n</html>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -41,7 +42,7 @@ namespace TestMVC4App.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class AssertFailedReportFilterInHeaderBase
+    public class FooterJS_DetailedReportBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

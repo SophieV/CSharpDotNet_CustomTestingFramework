@@ -6,7 +6,9 @@ using System.Web;
 namespace TestMVC4App.Models
 {
     using System;
+    using System.ComponentModel;
     using System.IO;
+    using System.Reflection;
     using System.Web.UI;
     using TestMVC4App.Templates;
 
@@ -87,7 +89,7 @@ namespace TestMVC4App.Models
         /// <param name="optionalExplanation">Hint on what caused the issue.</param>
         public void LogTestResult(int userId, int upi, string oldUrl,string newServiceUrl, ResultReport resultReport)
         {
-            var failReport = new AssertFailedReport
+            var failReport = new SharedDetailedReportData
             {
                 Message = resultReport.ErrorMessage,
                 TestName = resultReport.TestName,
@@ -99,13 +101,14 @@ namespace TestMVC4App.Models
                 TaskDescription = resultReport.TestDescription,
                 Observations = resultReport.Observations,
                 OldValues = resultReport.OldValues,
-                NewValues = resultReport.NewValues
+                NewValues = resultReport.NewValues,
+                Duration = resultReport.Duration
             };
 
-            var template = new TestFailedReportTemplate();
+            var template = new DetailedReport();
             template.Session = new Dictionary<string, object>()
             {
-                { "FailedReport", failReport }
+                { "DetailedReportDataObject", failReport }
             };
 
             template.Initialize();
@@ -174,28 +177,7 @@ namespace TestMVC4App.Models
             {
                 string filePath;
 
-                try
-                {
-                    if (htmlDetailedWriters.Count > 0)
-                    {
-                        // finish the HTML syntax and cleanup resource
-                        var jsTemplate = new JavascriptForTable();
-
-                        foreach (HtmlTextWriter htmlTestWriter in htmlDetailedWriters.Values)
-                        {
-                            htmlTestWriter.WriteLine(jsTemplate.TransformText());
-
-                            htmlTestWriter.WriteEndTag("table");
-                            htmlTestWriter.WriteEndTag("body");
-                            htmlTestWriter.WriteEndTag("html");
-                            htmlTestWriter.Close();
-                        }
-                    }
-                }
-                catch (IOException e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                }
+                StopWritingDetailedReports();
 
                 htmlDetailedWriters = new Dictionary<string, HtmlTextWriter>();
                 countFilesGenerated++;
@@ -208,51 +190,42 @@ namespace TestMVC4App.Models
                     htmlDetailedWriters.Add(testName, new HtmlTextWriter(streamWriter));
                 }
 
-                var headerTemplate = new AssertFailedReportFilterInHeader();
+                HeaderJS_DetailedReport headerTemplate = null;
 
                 foreach (HtmlTextWriter htmlWriter in htmlDetailedWriters.Values)
                 {
+                    // if the header template is created out of the loop, its content duplicates itself...
+                    headerTemplate = new HeaderJS_DetailedReport();
                     htmlWriter.WriteLine(headerTemplate.TransformText());
-
-                    // styling applies to the table !
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderWidth, "2px");
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderColor, "lightgrey");
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderStyle, "solid");
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BorderCollapse, "collapse");
-                    htmlWriter.AddAttribute("id", "individual_test_results");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Table);
-
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tbody);
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Tr);
-
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Test Name");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Result");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("User Under Test");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Details");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.AddStyleAttribute(HtmlTextWriterStyle.BackgroundColor, "lightgrey");
-                    htmlWriter.RenderBeginTag(HtmlTextWriterTag.Td);
-                    htmlWriter.Write("Explanations/Observations");
-                    htmlWriter.RenderEndTag();
-                    htmlWriter.RenderEndTag();
-
-                    htmlWriter.RenderEndTag();
                 }
             }
             catch (IOException ioe)
             {
                 System.Diagnostics.Debug.WriteLine(ioe.StackTrace);
+            }
+        }
+
+        public void StopWritingDetailedReports()
+        {
+            try
+            {
+                if (htmlDetailedWriters.Count > 0)
+                {
+                    // finish the HTML syntax and cleanup resource
+                    FooterJS_DetailedReport jsTemplate = null;
+
+                    foreach (HtmlTextWriter htmlTestWriter in htmlDetailedWriters.Values)
+                    {
+                        // if the template is created out of the loop, its content duplicates itself...
+                        jsTemplate = new FooterJS_DetailedReport();
+                        htmlTestWriter.WriteLine(jsTemplate.TransformText());
+                        htmlTestWriter.Close();
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
             }
         }
 
@@ -301,7 +274,7 @@ namespace TestMVC4App.Models
             }
 
             // report overview
-            var overviewReport = new OverviewStatsReport
+            var overviewReport = new SharedSummaryReportData
             {
                 CountProfilesTested = StatsCountProfilesProcessed,
                 CountProfilesWithoutWarnings = countProfilesWithoutWarning,
@@ -315,19 +288,14 @@ namespace TestMVC4App.Models
                 SampleDataByTestName = sampleDataByTestName
             };
 
-            var template = new OverviewTestsFailedReportTemplate();
+            var template = new SummaryReport();
             template.Session = new Dictionary<string, object>()
                     {
-                        { "StatsReport", overviewReport }
+                        { "SummaryReportDataObject", overviewReport }
                     };
 
             template.Initialize();
-
             htmlWriter.WriteLine(template.TransformText());
-
-            htmlWriter.WriteEndTag("table");
-            htmlWriter.WriteEndTag("body");
-            htmlWriter.WriteEndTag("html");
             htmlWriter.Close();
             htmlWriter = null;
         }
@@ -343,6 +311,24 @@ namespace TestMVC4App.Models
             }
 
             htmlDetailedWriters = null;
+        }
+
+        #endregion
+
+        #region Helpers
+
+        /// <summary>
+        /// Allows to display the string text associated with an enum entry.
+        /// </summary>
+        /// <param name="value">Enum type from which we want the description.</param>
+        /// <returns>Description text.</returns>
+        public static string GetDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            DescriptionAttribute[] attributes =
+                  (DescriptionAttribute[])fi.GetCustomAttributes(
+                  typeof(DescriptionAttribute), false);
+            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
         #endregion

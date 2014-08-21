@@ -18,9 +18,9 @@ namespace TestMVC4App.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\TestMVC4App\Templates\JavascriptForTable.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\HeaderJS_DetailedReport.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class JavascriptForTable : JavascriptForTableBase
+    public partial class HeaderJS_DetailedReport : HeaderJS_DetailedReportBase
     {
 #line hidden
         /// <summary>
@@ -28,9 +28,22 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\t<script language=\"javascript\" type=\"text/javascript\">\r\n\tvar tableFilters = {\r\n\t\t" +
-                    "btn: true,\r\n\t\tcol_0: \"none\",\r\n\t\tcol_2: \"select\",\r\n\t\tbtn_text: \"  >  \"\r\n\t}\r\n\tsetF" +
-                    "ilterGrid(\"individual_test_results\");\r\n</script>");
+            this.Write(@"<html>
+<head>
+<script type=""text/css"" href=""filtergrid.css""></script>
+<script type=""text/javascript"" src=""tablefilter.js""></script>
+</head>
+<body>
+<table id=""individual_test_results"" style=""border: 2px lightgrey solid;border-collapse: collapse;"">
+<tr>
+<td style=""background-color: lightgrey;"">Test Name</td>
+<td style=""background-color: lightgrey;"">Status</td>
+<td style=""background-color: lightgrey;"">User</td>
+<td style=""background-color: lightgrey;"">Result</td>
+<td style=""background-color: lightgrey;"">Additional Info</td>
+</tr>
+
+");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -42,7 +55,7 @@ namespace TestMVC4App.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class JavascriptForTableBase
+    public class HeaderJS_DetailedReportBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -11,7 +11,7 @@ namespace TestMVC4App.Models
     /// returned by the call to the <see cref="YSM.PMS.Service.Common.DataTransfer.IUserService.GetUserById()"/> method.
     /// </summary>
     /// <remarks>It should be called first, as it contains the UserId needed for the next tests.</remarks>
-    public class UserBasicInfoTest : TestUnit
+    public class UserBasicInfoTestUnit : TestUnit
     {
         private UsersClient newServiceAccessor;
         private XDocument oldServiceData;
@@ -32,7 +32,7 @@ namespace TestMVC4App.Models
         /// </summary>
         public int MappedUserId { get; set; }
 
-        public UserBasicInfoTest(TestSuite parent) : base(parent)
+        public UserBasicInfoTestUnit(TestSuite parent) : base(parent)
         {
 
         }

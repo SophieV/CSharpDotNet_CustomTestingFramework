@@ -8,7 +8,7 @@ using TestMVC4App.Models;
 
 namespace TestMVC4App.Templates
 {
-    public class AssertFailedReport
+    public class SharedDetailedReportData
     {
         /// <summary>
         /// Error message describing the failure of the test.
@@ -61,19 +61,6 @@ namespace TestMVC4App.Templates
 
         public List<string> NewValues { get; set; }
 
-        /// <summary>
-        /// Allows to display the string text associated with an enum entry.
-        /// </summary>
-        /// <param name="value">Enum type from which we want the description.</param>
-        /// <returns>Description text.</returns>
-        public static string GetDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            DescriptionAttribute[] attributes =
-                  (DescriptionAttribute[])fi.GetCustomAttributes(
-                  typeof(DescriptionAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
-        }
-
+        public TimeSpan Duration { get; set; }
     }
 }

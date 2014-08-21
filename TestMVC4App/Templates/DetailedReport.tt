@@ -1,0 +1,79 @@
+﻿<#@ template debug="true" language="C#"  #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="TestMVC4App.Models" #>
+<#@ parameter 
+	name="DetailedReportDataObject" 
+	type="TestMVC4App.Templates.SharedDetailedReportData" #>
+<tr>
+	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><b><#= DetailedReportDataObject.TaskDescription #></b><br/>
+		<#= DetailedReportDataObject.TestName #>
+	</td>
+	<# switch (DetailedReportDataObject.FailureType) {
+		case SeverityState.FALSE_POSITIVE : #>
+		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		<# break;
+		case SeverityState.WARNING: #>
+		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		<# break;
+		case SeverityState.ERROR_WITH_EXPLANATION: #>
+		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		<# break;
+		case SeverityState.ERROR: #>
+		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		<# break;
+		default: #>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		<# break;
+	} #>
+	</td>
+	<td style="width: 20%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<a href="<#= DetailedReportDataObject.OldUrl #>">Profile data of UPI <#= DetailedReportDataObject.UPI #></a><br/>
+		<a href="<#= DetailedReportDataObject.NewUrl #>">User data of ID is <#= DetailedReportDataObject.UserId #></a>
+	</td>
+	<td style="width: 60%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<#= DetailedReportDataObject.Message #>
+		<br/><br/>
+		<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+		<tr>
+			<td style="background-color:lightgrey;">OLD SERVICE DATA <span style="color:red;">[<#=DetailedReportDataObject.OldValues.Count #>]</span></td>
+			<td style="background-color:lightgrey;">NEW SERVICE DATA <span style="color:red;">[<#=DetailedReportDataObject.NewValues.Count #>]</span></td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<# if(DetailedReportDataObject.OldValues.Count > 0) {
+					var potentialDuplicates = DetailedReportDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+					foreach (string oldValue in DetailedReportDataObject.OldValues) { #>
+					<li><# if(!string.IsNullOrEmpty(oldValue)) { #><#= oldValue #>
+					<# if(!DetailedReportDataObject.NewValues.Contains(oldValue)) { #><span style="color:purple;">[MISSING]</span><# } #>
+					<# if(potentialDuplicates.Contains(oldValue)) { #><span style="color:pink;">[DUPLICATE]</span><# } #>
+					<# } else { #>NULL<# } #></li>
+					<# } } #>
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<# if(DetailedReportDataObject.NewValues.Count > 0) {
+					var potentialDuplicates = DetailedReportDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+					foreach (string newValue in DetailedReportDataObject.NewValues) { #>
+					<li><# if(!string.IsNullOrEmpty(newValue)) { #><#= newValue #>
+					<# if(!DetailedReportDataObject.OldValues.Contains(newValue)) { #><span style="color:purple;">[MISSING]</span><# } #>
+					<# if(potentialDuplicates.Contains(newValue)) { #><span style="color:pink;">[DUPLICATE]</span><# } #>
+					<# } else { #>NULL<# } #></li>
+					<# } } #>
+				</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td style="width: 30%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+	<p>Duration : <#= DetailedReportDataObject.Duration #></p>
+	<br/>
+	<ul>
+	<# if(DetailedReportDataObject.Observations != null) {
+		foreach(var observation in DetailedReportDataObject.Observations) { #>
+			<li><#= LogManager.GetDescription(observation) #></li><br/>
+	<# } } #>
+		</ul>
+	</td>
+</tr>

@@ -192,29 +192,29 @@
     </Compile>
     <Compile Include="Models\UserBasicInfoTest.cs" />
     <Compile Include="Models\UserGeneralInfoTest.cs" />
-    <Compile Include="Models\UserServiceTestSuite.cs" />
-    <Compile Include="Templates\AssertFailedReport.cs" />
+    <Compile Include="Models\UserTestSuite.cs" />
+    <Compile Include="Templates\SharedDetailedReportData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\AssertFailedReportFilterInHeader.cs">
+    <Compile Include="Templates\HeaderJS_DetailedReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AssertFailedReportFilterInHeader.tt</DependentUpon>
+      <DependentUpon>HeaderJS_DetailedReport.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\OverviewStatsReport.cs" />
-    <Compile Include="Templates\OverviewTestsFailedReportTemplate.cs">
+    <Compile Include="Templates\SharedSummaryReportData.cs" />
+    <Compile Include="Templates\SummaryReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OverviewTestsFailedReportTemplate.tt</DependentUpon>
+      <DependentUpon>SummaryReport.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\JavascriptForTable.cs">
+    <Compile Include="Templates\FooterJS_DetailedReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>JavascriptForTable.tt</DependentUpon>
+      <DependentUpon>FooterJS_DetailedReport.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\TestFailedReportTemplate.cs">
+    <Compile Include="Templates\DetailedReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TestFailedReportTemplate.tt</DependentUpon>
+      <DependentUpon>DetailedReport.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -344,21 +344,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Templates\TestFailedReportTemplate.tt">
+    <Content Include="Templates\DetailedReport.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TestFailedReportTemplate.cs</LastGenOutput>
+      <LastGenOutput>DetailedReport.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\OverviewTestsFailedReportTemplate.tt">
+    <Content Include="Templates\SummaryReport.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>OverviewTestsFailedReportTemplate.cs</LastGenOutput>
+      <LastGenOutput>SummaryReport.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\AssertFailedReportFilterInHeader.tt">
+    <Content Include="Templates\HeaderJS_DetailedReport.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>AssertFailedReportFilterInHeader.cs</LastGenOutput>
+      <LastGenOutput>HeaderJS_DetailedReport.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\JavascriptForTable.tt">
+    <Content Include="Templates\FooterJS_DetailedReport.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>JavascriptForTable.cs</LastGenOutput>
+      <LastGenOutput>FooterJS_DetailedReport.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

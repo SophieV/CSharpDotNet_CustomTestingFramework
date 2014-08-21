@@ -10,7 +10,7 @@ using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
 {
-    public class OrganizationTest : TestUnit
+    public class OrganizationTestUnit : TestUnit
     {
         private IEnumerable<Organization> newServiceOrganizations = new List<Organization>();
         private IEnumerable<XElement> oldServiceOrganizations;
@@ -28,7 +28,7 @@ namespace TestMVC4App.Models
             get { return Parent.newServiceURLExtensionEnding; }
         }
 
-        public OrganizationTest(TestSuite parent, TestUnit bigBrother) 
+        public OrganizationTestUnit(TestSuite parent, TestUnit bigBrother) 
             : base (parent,bigBrother)
         {
 

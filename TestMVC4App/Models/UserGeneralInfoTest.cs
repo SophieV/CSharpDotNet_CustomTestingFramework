@@ -15,7 +15,7 @@ using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
-    public class UserGeneralInfoUnitTest : TestUnit
+    public class UserGeneralInfoTestUnit : TestUnit
     {
         private UsersClient newServiceAccessor;
         private XDocument oldServiceData;
@@ -32,7 +32,7 @@ namespace TestMVC4App.Models
             get { return "/GeneralInfo"; }
         }
 
-        public UserGeneralInfoUnitTest(TestSuite parent) : base(parent)
+        public UserGeneralInfoTestUnit(TestSuite parent) : base(parent)
         {
 
         }
@@ -114,7 +114,7 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            var organizationTest = new OrganizationTest(this.Master, this);
+            var organizationTest = new OrganizationTestUnit(this.Master, this);
             this.Children.Add(organizationTest);
             organizationTest.ProvideOrganizationData(userId, upi, oldServiceData.XPathSelectElements("/Faculty/facultyMember/department"), newServiceData.Organizations);
             organizationTest.RunAllTests();

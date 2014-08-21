@@ -19,7 +19,7 @@ namespace TestMVC4App.Controllers
         // GET api/values
         public string Get()
         {
-            var test = new UserServiceTestSuite();
+            var test = new UserTestSuite();
             test.RunAllTests();
             return "blah";
         }

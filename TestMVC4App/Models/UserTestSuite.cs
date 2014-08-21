@@ -18,7 +18,7 @@ using System.Reflection;
 
 namespace TestMVC4App.Models
 {
-    public class UserServiceTestSuite : TestSuite
+    public class UserTestSuite : TestSuite
     {
         public override string newServiceURLBase
         {
@@ -86,11 +86,17 @@ namespace TestMVC4App.Models
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
-            upiList = new List<int>() { 10151776, 10290564, 11091604 };
+            // upiList = new List<int>() { 10151776, 10290564, 11091604 };
 #endif
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)
             {
+#if DEBUG
+                if(LogManager.Instance.StatsCountProfilesProcessed > 5)
+                {
+                    break;
+                }
+#endif
                 oldServiceXMLOutput = string.Empty;
 
                 System.Diagnostics.Debug.WriteLine(upi);
@@ -137,17 +143,16 @@ namespace TestMVC4App.Models
                     {
                         XDocument oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
 
-                        //new service value is stored in Web.Config, Key : "ProfileServiceBaseAddress"
                         var usersClient = new UsersClient();
 
                         // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
-                        UserBasicInfoTest userBasicInfoTest = new UserBasicInfoTest(this);
+                        UserBasicInfoTestUnit userBasicInfoTest = new UserBasicInfoTestUnit(this);
                         userBasicInfoTest.ProvideUserData(oldServiceXMLOutputDocument, usersClient, upi);
                         userBasicInfoTest.RunAllTests();
 
                         int userId = userBasicInfoTest.MappedUserId;
 
-                        UserGeneralInfoUnitTest userGeneralInfoTest = new UserGeneralInfoUnitTest(this);
+                        UserGeneralInfoTestUnit userGeneralInfoTest = new UserGeneralInfoTestUnit(this);
                         userGeneralInfoTest.ProvideUserData(oldServiceXMLOutputDocument, upi, usersClient, userId);
                         userGeneralInfoTest.RunAllTests();
                     }
@@ -161,6 +166,8 @@ namespace TestMVC4App.Models
                     System.Diagnostics.Debug.WriteLine("No data returned by old service for UPI " + upi);
                 }
             }
+
+            LogManager.Instance.StopWritingDetailedReports();
 
             LogManager.Instance.WriteSummaryReport();
 

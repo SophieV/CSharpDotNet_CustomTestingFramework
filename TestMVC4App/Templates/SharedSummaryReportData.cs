@@ -6,7 +6,7 @@ using TestMVC4App.Models;
 
 namespace TestMVC4App.Templates
 {
-    public class OverviewStatsReport
+    public class SharedSummaryReportData
     {
         public int CountProfilesTested { get; set; }
 
