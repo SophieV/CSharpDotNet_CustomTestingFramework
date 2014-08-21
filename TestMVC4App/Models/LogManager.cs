@@ -22,8 +22,8 @@ namespace TestMVC4App.Models
         private Dictionary<string, HtmlTextWriter> htmlDetailedWriters;
         private HtmlTextWriter htmlWriter;
 
-        private static Dictionary<string, Dictionary<SeverityState, int>> statsCountFailuresTypesPerTest;
-        private static Dictionary<string, Dictionary<ObservationLabel, int>> statsCountObservationTypesPerTest;
+        private static Dictionary<string, Dictionary<ResultSeverityState, int>> statsCountFailuresTypesPerTest;
+        private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> statsCountObservationTypesPerTest;
         private static Dictionary<int, bool> statsMapUpiTraceFailureCalledAtLeastOnce;
 
         private static Dictionary<string, string> sampleDataByTestName = new Dictionary<string,string>();
@@ -67,8 +67,8 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_Name_Test");
 
             statsMapUpiTraceFailureCalledAtLeastOnce = new Dictionary<int, bool>();
-            statsCountFailuresTypesPerTest = new Dictionary<string, Dictionary<SeverityState, int>>();
-            statsCountObservationTypesPerTest = new Dictionary<string, Dictionary<ObservationLabel, int>>();
+            statsCountFailuresTypesPerTest = new Dictionary<string, Dictionary<ResultSeverityState, int>>();
+            statsCountObservationTypesPerTest = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
 
             htmlDetailedWriters = new Dictionary<string, HtmlTextWriter>();
 
@@ -128,7 +128,7 @@ namespace TestMVC4App.Models
                 statsMapUpiTraceFailureCalledAtLeastOnce.Add(upi, false);
             }
 
-            if (resultReport.SeverityResult != SeverityState.SUCCESS && statsMapUpiTraceFailureCalledAtLeastOnce.ContainsKey(upi))
+            if (resultReport.SeverityResult != ResultSeverityState.SUCCESS && statsMapUpiTraceFailureCalledAtLeastOnce.ContainsKey(upi))
             {
                 statsMapUpiTraceFailureCalledAtLeastOnce[upi] = true;
             }
@@ -136,12 +136,12 @@ namespace TestMVC4App.Models
             if (!statsCountFailuresTypesPerTest.ContainsKey(resultReport.TestName))
             {
                 // initialize all the possible combinations for the given test name
-                statsCountFailuresTypesPerTest.Add(resultReport.TestName, new Dictionary<SeverityState, int>());
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(SeverityState.ERROR, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(SeverityState.ERROR_WITH_EXPLANATION, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(SeverityState.FALSE_POSITIVE, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(SeverityState.WARNING, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(SeverityState.SUCCESS, 0);
+                statsCountFailuresTypesPerTest.Add(resultReport.TestName, new Dictionary<ResultSeverityState, int>());
+                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.ERROR, 0);
+                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.ERROR_WITH_EXPLANATION, 0);
+                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.FALSE_POSITIVE, 0);
+                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.WARNING, 0);
+                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.SUCCESS, 0);
             }
 
             // increase call counter
@@ -150,20 +150,20 @@ namespace TestMVC4App.Models
             if (!statsCountObservationTypesPerTest.ContainsKey(resultReport.TestName))
             {
                 // initialize all the possible combinations for the given test name
-                statsCountObservationTypesPerTest.Add(resultReport.TestName, new Dictionary<ObservationLabel, int>());
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.ALL_VALUES_OF_OLD_SUBSET_FOUND, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.DUPLICATED_VALUES_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.MORE_DUPLICATED_VALUES_ON_OLD_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.MORE_VALUES_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.VALUE_CONTAINS_TRAILING_WHITE_SPACES, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.VALUE_POPULATED_WITH_EMPTY_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.VALUES_NOT_POPULATED, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(ObservationLabel.WRONG_VALUE, 0);
+                statsCountObservationTypesPerTest.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE, 0);
+                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.WRONG_VALUE, 0);
             }
 
             // increase call counter
-            foreach (ObservationLabel label in resultReport.Observations)
+            foreach (IdentifiedDataBehavior label in resultReport.Observations)
             {
                 statsCountObservationTypesPerTest[resultReport.TestName][label]++;
             }
@@ -246,10 +246,10 @@ namespace TestMVC4App.Models
                 }
             }
 
-            Dictionary<SeverityState, int> countBySeverity = new Dictionary<SeverityState, int>();
-            foreach (KeyValuePair<string, Dictionary<SeverityState, int>> entry in statsCountFailuresTypesPerTest)
+            Dictionary<ResultSeverityState, int> countBySeverity = new Dictionary<ResultSeverityState, int>();
+            foreach (KeyValuePair<string, Dictionary<ResultSeverityState, int>> entry in statsCountFailuresTypesPerTest)
             {
-                foreach (KeyValuePair<SeverityState, int> subEntry in entry.Value)
+                foreach (KeyValuePair<ResultSeverityState, int> subEntry in entry.Value)
                 {
                     if (!countBySeverity.ContainsKey(subEntry.Key))
                     {
@@ -259,7 +259,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            Dictionary<ObservationLabel, int> countByObservation = new Dictionary<ObservationLabel, int>();
+            Dictionary<IdentifiedDataBehavior, int> countByObservation = new Dictionary<IdentifiedDataBehavior, int>();
             foreach (var entry in statsCountObservationTypesPerTest)
             {
                 foreach (var subEntry in entry.Value)
@@ -278,14 +278,14 @@ namespace TestMVC4App.Models
             {
                 CountProfilesTested = StatsCountProfilesProcessed,
                 CountProfilesWithoutWarnings = countProfilesWithoutWarning,
-                OverviewCountBySeverityState = countBySeverity,
-                OverviewCountByObservationType = countByObservation.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
+                CountBySeverity = countBySeverity,
+                CountByIdentifiedDataBehavior = countByObservation.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
                 TestNames = statsCountFailuresTypesPerTest.Keys.ToList(),
-                ByTestNameCountBySeverityState = statsCountFailuresTypesPerTest,
-                ByTestNameCountByObservationType = statsCountObservationTypesPerTest,
+                CountBySeverity_ByTestName = statsCountFailuresTypesPerTest,
+                CountByIdentifiedDataBehavior_ByTestName = statsCountObservationTypesPerTest,
                 CountTestsRun = StatsCountProfilesProcessed * statsCountFailuresTypesPerTest.Keys.ToList().Count(),
                 CountTestsPerUser = statsCountFailuresTypesPerTest.Keys.ToList().Count(),
-                SampleDataByTestName = sampleDataByTestName
+                SampleData_ByTestName = sampleDataByTestName
             };
 
             var template = new SummaryReport();

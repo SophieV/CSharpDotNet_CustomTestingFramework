@@ -31,6 +31,9 @@ namespace TestMVC4App.Templates
             this.Write(@"<html>
 <head>
 <script type=""text/css"" href=""filtergrid.css""></script>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+</style>
 <script type=""text/javascript"" src=""tablefilter.js""></script>
 </head>
 <body>

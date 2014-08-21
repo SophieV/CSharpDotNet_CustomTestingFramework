@@ -9,10 +9,10 @@ namespace TestMVC4App.Models
     {
         public TimeSpan Duration { get; set; }
 
-        public SeverityState SeverityResult { get { return severityResult; } }
-        private SeverityState severityResult;
+        public ResultSeverityState SeverityResult { get { return severityResult; } }
+        private ResultSeverityState severityResult;
 
-        public List<ObservationLabel> Observations { get; set; }
+        public List<IdentifiedDataBehavior> Observations { get; set; }
 
         public string ErrorMessage { get; set; }
 
@@ -31,17 +31,17 @@ namespace TestMVC4App.Models
             this.testName = testName;
             this.testDescription = testDescription;
             this.ErrorMessage = string.Empty;
-            this.Observations = new List<ObservationLabel>();
+            this.Observations = new List<IdentifiedDataBehavior>();
             this.OldValues = new List<string>();
             this.NewValues = new List<string>();
-            this.severityResult = SeverityState.SUCCESS;
+            this.severityResult = ResultSeverityState.SUCCESS;
         }
 
-        public void UpdateSeverityState(SeverityState newSeverityStateReturned)
+        public void UpdateSeverityState(ResultSeverityState newSeverityStateReturned)
         {
-            if (newSeverityStateReturned == SeverityState.WARNING)
+            if (newSeverityStateReturned == ResultSeverityState.WARNING)
             {
-                if (severityResult == SeverityState.SUCCESS)
+                if (severityResult == ResultSeverityState.SUCCESS)
                 {
                     severityResult = newSeverityStateReturned;
                     System.Diagnostics.Debug.WriteLine("Severity was updated to " + newSeverityStateReturned);

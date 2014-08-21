@@ -37,12 +37,12 @@ namespace TestMVC4App.Models
             message = message.Replace("<", "<span style='color:red;'>[");
             message = message.Replace(">", "]</span>");
             // TODO : change quick fix here - because of call sequence - regex ?
-            message = message.Replace("<span style='color:red;'>[br/]</span>", "<br/>");
-            message = message.Replace("<span style='color:red;'>[/b]</span>", "</b>");
-            message = message.Replace("<span style='color:red;'>[b]</span>", "<b>");
-            message = message.Replace("[br/]", "<br/>");
-            message = message.Replace("[/b]", "</b>");
-            message = message.Replace("[b]", "<b>");
+            //message = message.Replace("<span style='color:red;'>[br/]</span>", "<br/>");
+            //message = message.Replace("<span style='color:red;'>[/b]</span>", "</b>");
+            //message = message.Replace("<span style='color:red;'>[b]</span>", "<b>");
+            //message = message.Replace("[br/]", "<br/>");
+            //message = message.Replace("[/b]", "</b>");
+            //message = message.Replace("[b]", "<b>");
             return message;
         }
 

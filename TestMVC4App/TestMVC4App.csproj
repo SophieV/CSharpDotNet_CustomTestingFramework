@@ -179,10 +179,10 @@
     </Compile>
     <Compile Include="Models\CompareStrategy.cs" />
     <Compile Include="Models\LogManager.cs" />
-    <Compile Include="Models\ObservationLevel.cs" />
-    <Compile Include="Models\OrganizationTest.cs" />
+    <Compile Include="Models\IdentifiedDataBehavior.cs" />
+    <Compile Include="Models\OrganizationTestUnit.cs" />
     <Compile Include="Models\ResultReport.cs" />
-    <Compile Include="Models\SeverityState.cs" />
+    <Compile Include="Models\ResultSeverityState.cs" />
     <Compile Include="Models\SimpleCollectionCompareStrategy.cs" />
     <Compile Include="Models\SimpleStringCompareStrategy.cs" />
     <Compile Include="Models\TestSuite.cs" />
@@ -190,8 +190,8 @@
     <Compile Include="Models\TimeoutExtendedWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Models\UserBasicInfoTest.cs" />
-    <Compile Include="Models\UserGeneralInfoTest.cs" />
+    <Compile Include="Models\UserBasicInfoTestUnit.cs" />
+    <Compile Include="Models\UserGeneralInfoTestUnit.cs" />
     <Compile Include="Models\UserTestSuite.cs" />
     <Compile Include="Templates\SharedDetailedReportData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -373,6 +373,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HtmlDiff\HtmlDiff.csproj">
+      <Project>{186b7471-867e-4ae8-9bd2-1dda8bf76bc0}</Project>
+      <Name>HtmlDiff</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,16 +13,16 @@ namespace TestMVC4App.Templates
 
         public int CountProfilesWithoutWarnings { get; set; }
 
-        public Dictionary<SeverityState, int> OverviewCountBySeverityState { get; set; }
+        public Dictionary<ResultSeverityState, int> CountBySeverity { get; set; }
 
-        public Dictionary<ObservationLabel, int> OverviewCountByObservationType { get; set; }
+        public Dictionary<IdentifiedDataBehavior, int> CountByIdentifiedDataBehavior { get; set; }
 
-        public Dictionary<string, Dictionary<SeverityState, int>> ByTestNameCountBySeverityState { get; set; }
+        public Dictionary<string, Dictionary<ResultSeverityState, int>> CountBySeverity_ByTestName { get; set; }
 
-        public Dictionary<string, Dictionary<ObservationLabel, int>> ByTestNameCountByObservationType { get; set; }
+        public Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
 
         public List<string> TestNames { get; set; }
 
-        public Dictionary<string, string> SampleDataByTestName { get; set; }
+        public Dictionary<string, string> SampleData_ByTestName { get; set; }
     }
 }

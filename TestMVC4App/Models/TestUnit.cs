@@ -21,45 +21,45 @@ namespace TestMVC4App.Models
 
         public List<ResultReport> DetailedResults { get; set; }
 
-        public SeverityState OverallSeverity { get { return overallSeverity; } }
-        private SeverityState overallSeverity;
+        public ResultSeverityState OverallSeverity { get { return overallSeverity; } }
+        private ResultSeverityState overallSeverity;
 
         public void ComputeOverallSeverity()
         {
             bool keepGoing = true;
 
-            var errors = this.DetailedResults.Where(r => r.SeverityResult == SeverityState.ERROR).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            var errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.ERROR).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
             if(keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = SeverityState.ERROR;
+                overallSeverity = ResultSeverityState.ERROR;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == SeverityState.ERROR_WITH_EXPLANATION).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.ERROR_WITH_EXPLANATION).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = SeverityState.ERROR_WITH_EXPLANATION;
+                overallSeverity = ResultSeverityState.ERROR_WITH_EXPLANATION;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == SeverityState.FALSE_POSITIVE).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.FALSE_POSITIVE).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = SeverityState.FALSE_POSITIVE;
+                overallSeverity = ResultSeverityState.FALSE_POSITIVE;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == SeverityState.WARNING).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.WARNING).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = SeverityState.WARNING;
+                overallSeverity = ResultSeverityState.WARNING;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == SeverityState.SUCCESS).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.SUCCESS).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = SeverityState.SUCCESS;
+                overallSeverity = ResultSeverityState.SUCCESS;
                 keepGoing = false;
             }
         }

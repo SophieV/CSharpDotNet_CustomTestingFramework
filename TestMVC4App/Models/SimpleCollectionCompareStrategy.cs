@@ -58,13 +58,13 @@ namespace TestMVC4App.Models
 
             if (this.resultReport.OldValues.Count <= 0 && this.resultReport.NewValues.Count <= 0)
             {
-                this.resultReport.Observations.Add(ObservationLabel.VALUES_NOT_POPULATED);
-                this.resultReport.UpdateSeverityState(SeverityState.WARNING);
+                this.resultReport.Observations.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
+                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
                 shouldContinueTesting = false;
             }
             else
             {
-                this.resultReport.UpdateSeverityState(SeverityState.SUCCESS);
+                this.resultReport.UpdateSeverityState(ResultSeverityState.SUCCESS);
             }
 
             return shouldContinueTesting;
@@ -77,12 +77,12 @@ namespace TestMVC4App.Models
             try
             {
                 CollectionAssert.AreEquivalent(this.resultReport.OldValues, this.resultReport.NewValues, this.resultReport.TestDescription);
-                this.resultReport.UpdateSeverityState(SeverityState.SUCCESS);
+                this.resultReport.UpdateSeverityState(ResultSeverityState.SUCCESS);
                 shouldContinueTesting = false;
             }
             catch (AssertFailedException e)
             {
-                this.resultReport.UpdateSeverityState(SeverityState.ERROR);
+                this.resultReport.UpdateSeverityState(ResultSeverityState.ERROR);
                 this.resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml(e.Message);
             }
             return shouldContinueTesting;
@@ -101,8 +101,8 @@ namespace TestMVC4App.Models
 
                 if (differenceQueryToAvoidDoublons.Count() == 0)
                 {
-                    this.resultReport.Observations.Add(ObservationLabel.MORE_DUPLICATED_VALUES_ON_OLD_SERVICE);
-                    this.resultReport.UpdateSeverityState(SeverityState.FALSE_POSITIVE);
+                    this.resultReport.Observations.Add(IdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
+                    this.resultReport.UpdateSeverityState(ResultSeverityState.FALSE_POSITIVE);
                 }
             }
 
@@ -117,8 +117,8 @@ namespace TestMVC4App.Models
             var differenceQueryCheckDoublonsInNewService = this.resultReport.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
             if (differenceQueryCheckDoublonsInNewService.Count() > 0)
             {
-                this.resultReport.Observations.Add(ObservationLabel.DUPLICATED_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateSeverityState(SeverityState.WARNING);
+                this.resultReport.Observations.Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
+                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
             }
 
             return shouldContinueTesting;
@@ -135,7 +135,7 @@ namespace TestMVC4App.Models
             // e.g. the old service does not always An Identifier for the Organization
             if (this.resultReport.NewValues.Count > this.resultReport.OldValues.Count)
             {
-                this.resultReport.Observations.Add(ObservationLabel.MORE_VALUES_ON_NEW_SERVICE);
+                this.resultReport.Observations.Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
 
                 try
                 {
@@ -143,13 +143,13 @@ namespace TestMVC4App.Models
                     // This is why this ERROR is ranked as WARNING.
                     CollectionAssert.IsSubsetOf(this.resultReport.OldValues, this.resultReport.NewValues, this.resultReport.TestDescription);
 
-                    this.resultReport.UpdateSeverityState(SeverityState.FALSE_POSITIVE);
-                    this.resultReport.Observations.Add(ObservationLabel.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.UpdateSeverityState(ResultSeverityState.FALSE_POSITIVE);
+                    this.resultReport.Observations.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                 }
                 catch (AssertFailedException)
                 {
-                    this.resultReport.UpdateSeverityState(SeverityState.WARNING);
-                    this.resultReport.Observations.Add(ObservationLabel.MISSING_VALUES_ON_NEW_SERVICE);
+                    this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
+                    this.resultReport.Observations.Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
                 }
             }
 
@@ -174,13 +174,13 @@ namespace TestMVC4App.Models
 
             if (leftovers.Count() != missingOldValues.Count())
             {
-                this.resultReport.Observations.Add(ObservationLabel.VALUE_CONTAINS_TRAILING_WHITE_SPACES);
-                this.resultReport.UpdateSeverityState(SeverityState.WARNING);
+                this.resultReport.Observations.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
+                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
 
                 // all of the mismatches are due to trailing spaces
                 if (leftovers.Count() == 0)
                 {
-                    this.resultReport.UpdateSeverityState(SeverityState.FALSE_POSITIVE);
+                    this.resultReport.UpdateSeverityState(ResultSeverityState.FALSE_POSITIVE);
                 }
             }
 

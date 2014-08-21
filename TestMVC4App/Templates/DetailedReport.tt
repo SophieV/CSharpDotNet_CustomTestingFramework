@@ -1,6 +1,7 @@
 ﻿<#@ template debug="true" language="C#"  #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="TestMVC4App.Models" #>
+<#@ import namespace="HtmlDiff" #>
 <#@ parameter 
 	name="DetailedReportDataObject" 
 	type="TestMVC4App.Templates.SharedDetailedReportData" #>
@@ -56,7 +57,15 @@
 					<# if(DetailedReportDataObject.NewValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (string newValue in DetailedReportDataObject.NewValues) { #>
-					<li><# if(!string.IsNullOrEmpty(newValue)) { #><#= newValue #>
+					<li><# if(!string.IsNullOrEmpty(newValue)) { #>
+					<# string newValueToDisplay = newValue;
+					if(DetailedReportDataObject.OldValues.Count <=1 && DetailedReportDataObject.NewValues.Count <= 1) {
+						string oldValue = string.Empty;
+						if(DetailedReportDataObject.OldValues.Count > 0) { oldValue = DetailedReportDataObject.OldValues.First(); }
+						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue);
+						newValueToDisplay = diffHelper.Build();
+					} #>
+					<#= newValueToDisplay #>
 					<# if(!DetailedReportDataObject.OldValues.Contains(newValue)) { #><span style="color:purple;">[MISSING]</span><# } #>
 					<# if(potentialDuplicates.Contains(newValue)) { #><span style="color:pink;">[DUPLICATE]</span><# } #>
 					<# } else { #>NULL<# } #></li>

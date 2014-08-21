@@ -46,12 +46,12 @@ namespace TestMVC4App.Templates
         /// <summary>
         /// Severity of the test result.
         /// </summary>
-        public SeverityState FailureType { get; set; }
+        public ResultSeverityState FailureType { get; set; }
 
         /// <summary>
         /// Hints provided by additional analysis.
         /// </summary>
-        public List<ObservationLabel> Observations { get; set; }
+        public List<IdentifiedDataBehavior> Observations { get; set; }
 
         public List<string> OldValues { get; set; }
 

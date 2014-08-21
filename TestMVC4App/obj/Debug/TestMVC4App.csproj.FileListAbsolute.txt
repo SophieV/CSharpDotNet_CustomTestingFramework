@@ -149,3 +149,5 @@
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Debug\TestMVC4App.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Debug\TestMVC4App.pdb
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Templates\filtergrid.css
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\HtmlDiff.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\HtmlDiff.pdb
