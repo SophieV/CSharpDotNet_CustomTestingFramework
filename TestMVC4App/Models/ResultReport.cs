@@ -9,10 +9,10 @@ namespace TestMVC4App.Models
     {
         public TimeSpan Duration { get; set; }
 
-        public ResultSeverityState SeverityResult { get { return severityResult; } }
-        private ResultSeverityState severityResult;
+        public ResultSeverityType Result { get { return result; } }
+        private ResultSeverityType result;
 
-        public List<IdentifiedDataBehavior> Observations { get; set; }
+        public List<IdentifiedDataBehavior> IdentifedDataBehaviors { get; set; }
 
         public string ErrorMessage { get; set; }
 
@@ -31,19 +31,19 @@ namespace TestMVC4App.Models
             this.testName = testName;
             this.testDescription = testDescription;
             this.ErrorMessage = string.Empty;
-            this.Observations = new List<IdentifiedDataBehavior>();
+            this.IdentifedDataBehaviors = new List<IdentifiedDataBehavior>();
             this.OldValues = new List<string>();
             this.NewValues = new List<string>();
-            this.severityResult = ResultSeverityState.SUCCESS;
+            this.result = ResultSeverityType.SUCCESS;
         }
 
-        public void UpdateSeverityState(ResultSeverityState newSeverityStateReturned)
+        public void UpdateResult(ResultSeverityType newSeverityStateReturned)
         {
-            if (newSeverityStateReturned == ResultSeverityState.WARNING)
+            if (newSeverityStateReturned == ResultSeverityType.WARNING)
             {
-                if (severityResult == ResultSeverityState.SUCCESS)
+                if (result == ResultSeverityType.SUCCESS)
                 {
-                    severityResult = newSeverityStateReturned;
+                    result = newSeverityStateReturned;
                     System.Diagnostics.Debug.WriteLine("Severity was updated to " + newSeverityStateReturned);
                 }
             }
@@ -51,7 +51,7 @@ namespace TestMVC4App.Models
             {
                 // warnings are the only severity that is weaker than the rest and can happen afterwards
                 // for all the others we assume chronological order as it investigates more specific scenarios
-                severityResult = newSeverityStateReturned;
+                result = newSeverityStateReturned;
                 System.Diagnostics.Debug.WriteLine("Severity was updated to " + newSeverityStateReturned);
             }
         }

@@ -77,13 +77,13 @@ namespace TestMVC4App.Models
 
             if(string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue))
             {
-                this.resultReport.Observations.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
-                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
                 shouldContinueTesting = false;
             }
             else
             {
-                this.resultReport.UpdateSeverityState(ResultSeverityState.SUCCESS);
+                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
             }
 
             return shouldContinueTesting;
@@ -96,13 +96,13 @@ namespace TestMVC4App.Models
             try
             {
                 Assert.AreEqual(oldValue, newValue, this.resultReport.TestDescription);
-                this.resultReport.UpdateSeverityState(ResultSeverityState.SUCCESS);
+                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
 
             }
             catch (AssertFailedException e)
             {
-                this.resultReport.UpdateSeverityState(ResultSeverityState.ERROR);
+                this.resultReport.UpdateResult(ResultSeverityType.ERROR);
                 this.resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml(e.Message);
             }
 
@@ -115,8 +115,8 @@ namespace TestMVC4App.Models
 
             if (oldValue.Trim() == newValue.Trim())
             {
-                this.resultReport.Observations.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
-                this.resultReport.UpdateSeverityState(ResultSeverityState.ERROR_WITH_EXPLANATION);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
+                this.resultReport.UpdateResult(ResultSeverityType.ERROR_WITH_EXPLANATION);
                 shouldContinueTesting = false;
             }
 
@@ -129,8 +129,8 @@ namespace TestMVC4App.Models
 
             if (newValue == " ")
             {
-                this.resultReport.Observations.Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE);
-                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -142,10 +142,10 @@ namespace TestMVC4App.Models
 
             if (!string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue))
             {
-                this.resultReport.Observations.Add(IdentifiedDataBehavior.WRONG_VALUE);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.WRONG_VALUE);
                 // it is set as warning only because it provides more explicit info on the error
                 // the error has been logged already
-                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -157,8 +157,8 @@ namespace TestMVC4App.Models
 
             if (string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue) && newValue != " ")
             {
-                this.resultReport.Observations.Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -170,8 +170,8 @@ namespace TestMVC4App.Models
 
             if (!string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue) && newValue != " ")
             {
-                this.resultReport.Observations.Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateSeverityState(ResultSeverityState.WARNING);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;

@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="TestMVC4App.Models" #>
+<#@ parameter 
+	name="ProfileHeaderReportDataObject" 
+	type="TestMVC4App.Templates.SharedHeaderProfileReportData" #>
+<html>
+<head></head>
+<body>
+<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+<tr>
+<td style="background-color:lightgrey;">UPI</td>
+<# foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { #>
+<td style="background-color:lightgrey;font-size: 1.5em;padding :10px;"><#= testName #></td>
+<# } #>
+</tr>

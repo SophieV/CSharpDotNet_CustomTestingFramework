@@ -21,46 +21,54 @@ namespace TestMVC4App.Models
 
         public List<ResultReport> DetailedResults { get; set; }
 
-        public ResultSeverityState OverallSeverity { get { return overallSeverity; } }
-        private ResultSeverityState overallSeverity;
+        public ResultSeverityType OverallSeverity { get { return overallSeverity; } }
+        private ResultSeverityType overallSeverity;
 
         public void ComputeOverallSeverity()
         {
             bool keepGoing = true;
 
-            var errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.ERROR).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            var errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.ERROR).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if(keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityState.ERROR;
+                overallSeverity = ResultSeverityType.ERROR;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.ERROR_WITH_EXPLANATION).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.ERROR_WITH_EXPLANATION).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityState.ERROR_WITH_EXPLANATION;
+                overallSeverity = ResultSeverityType.ERROR_WITH_EXPLANATION;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.FALSE_POSITIVE).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.FALSE_POSITIVE).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityState.FALSE_POSITIVE;
+                overallSeverity = ResultSeverityType.FALSE_POSITIVE;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.WARNING).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.WARNING).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityState.WARNING;
+                overallSeverity = ResultSeverityType.WARNING;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.SeverityResult == ResultSeverityState.SUCCESS).GroupBy(results => results.SeverityResult).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.SUCCESS).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityState.SUCCESS;
+                overallSeverity = ResultSeverityType.SUCCESS;
                 keepGoing = false;
+            }
+        }
+
+        public void ComputerOverallResults()
+        {
+            foreach (var child in Children)
+            {
+                this.DetailedResults.AddRange(child.DetailedResults);
             }
         }
 

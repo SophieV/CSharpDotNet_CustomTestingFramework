@@ -100,7 +100,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            if(resultReport.SeverityResult == ResultSeverityState.SUCCESS)
+            if(resultReport.Result == ResultSeverityType.SUCCESS)
             {
                 MappedUserId = newServiceData.UserId;
             }

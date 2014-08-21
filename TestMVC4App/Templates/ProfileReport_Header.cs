@@ -9,18 +9,17 @@
 // ------------------------------------------------------------------------------
 namespace TestMVC4App.Templates
 {
-    using System.Linq;
-    using System.Text;
     using System.Collections.Generic;
+    using TestMVC4App.Models;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\HeaderJS_DetailedReport.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class HeaderJS_DetailedReport : HeaderJS_DetailedReportBase
+    public partial class ProfileReport_Header : ProfileReport_HeaderBase
     {
 #line hidden
         /// <summary>
@@ -28,27 +27,78 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<html>
-<head>
-<script type=""text/css"" href=""filtergrid.css""></script>
-<style>
-.diffins, .diffmod { background-color: yellow; }
-</style>
-<script type=""text/javascript"" src=""tablefilter.js""></script>
-</head>
-<body>
-<table id=""individual_test_results"" style=""border: 2px lightgrey solid;border-collapse: collapse;"">
-<tr>
-<td style=""background-color: lightgrey;"">Test Name</td>
-<td style=""background-color: lightgrey;"">Status</td>
-<td style=""background-color: lightgrey;"">User</td>
-<td style=""background-color: lightgrey;"">Result</td>
-<td style=""background-color: lightgrey;"">Additional Info</td>
-</tr>
-
-");
+            this.Write("<html>\r\n<head></head>\r\n<body>\r\n<table style=\"border:solid 2px lightgrey;border-co" +
+                    "llapse:collapse;\">\r\n<tr>\r\n<td style=\"background-color:lightgrey;\">UPI</td>\r\n");
+            
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+ foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { 
+            
+            #line default
+            #line hidden
+            this.Write("<td style=\"background-color:lightgrey;font-size: 1.5em;padding :10px;\">");
+            
+            #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(testName));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n");
+            
+            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("</tr>");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+
+private global::TestMVC4App.Templates.SharedHeaderProfileReportData _ProfileHeaderReportDataObjectField;
+
+/// <summary>
+/// Access the ProfileHeaderReportDataObject parameter of the template.
+/// </summary>
+private global::TestMVC4App.Templates.SharedHeaderProfileReportData ProfileHeaderReportDataObject
+{
+    get
+    {
+        return this._ProfileHeaderReportDataObjectField;
+    }
+}
+
+
+/// <summary>
+/// Initialize the template
+/// </summary>
+public virtual void Initialize()
+{
+    if ((this.Errors.HasErrors == false))
+    {
+bool ProfileHeaderReportDataObjectValueAcquired = false;
+if (this.Session.ContainsKey("ProfileHeaderReportDataObject"))
+{
+    this._ProfileHeaderReportDataObjectField = ((global::TestMVC4App.Templates.SharedHeaderProfileReportData)(this.Session["ProfileHeaderReportDataObject"]));
+    ProfileHeaderReportDataObjectValueAcquired = true;
+}
+if ((ProfileHeaderReportDataObjectValueAcquired == false))
+{
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ProfileHeaderReportDataObject");
+    if ((data != null))
+    {
+        this._ProfileHeaderReportDataObjectField = ((global::TestMVC4App.Templates.SharedHeaderProfileReportData)(data));
+    }
+}
+
+
+    }
+}
+
+
+        
+        #line default
+        #line hidden
     }
     
     #line default
@@ -58,7 +108,7 @@ namespace TestMVC4App.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class HeaderJS_DetailedReportBase
+    public class ProfileReport_HeaderBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

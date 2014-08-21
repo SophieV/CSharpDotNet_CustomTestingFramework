@@ -9,7 +9,7 @@ namespace TestMVC4App.Models
     /// <summary>
     /// Result state.
     /// </summary>
-    public enum ResultSeverityState
+    public enum ResultSeverityType
     {
         /// <summary>
         /// Mismatch identified.

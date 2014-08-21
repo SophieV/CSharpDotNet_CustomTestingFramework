@@ -9,12 +9,12 @@ namespace TestMVC4App.Templates
         /// <summary>
         /// Error message describing the failure of the test.
         /// </summary>
-        public string Message { get; set; }
+        public string ErrorMessage { get; set; }
 
         /// <summary>
         /// Human-readable version of the test task description.
         /// </summary>
-        public string TaskDescription { get; set; }
+        public string TestDescription { get; set; }
 
         /// <summary>
         /// Identifier of the User in the new system.
@@ -46,12 +46,12 @@ namespace TestMVC4App.Templates
         /// <summary>
         /// Severity of the test result.
         /// </summary>
-        public ResultSeverityState FailureType { get; set; }
+        public ResultSeverityType Result { get; set; }
 
         /// <summary>
         /// Hints provided by additional analysis.
         /// </summary>
-        public List<IdentifiedDataBehavior> Observations { get; set; }
+        public List<IdentifiedDataBehavior> IdentifiedDataBehaviors { get; set; }
 
         public List<string> OldValues { get; set; }
 

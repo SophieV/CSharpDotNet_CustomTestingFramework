@@ -19,12 +19,13 @@ namespace TestMVC4App.Models
 
         private List<string> allTestNames;
         private StreamWriter streamWriter;
-        private Dictionary<string, HtmlTextWriter> htmlDetailedWriters;
-        private HtmlTextWriter htmlWriter;
+        private Dictionary<string, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
+        private HtmlTextWriter htmlWriterForSummaryReport;
+        private HtmlTextWriter htmlWriterForProfileReport;
 
-        private static Dictionary<string, Dictionary<ResultSeverityState, int>> statsCountFailuresTypesPerTest;
-        private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> statsCountObservationTypesPerTest;
-        private static Dictionary<int, bool> statsMapUpiTraceFailureCalledAtLeastOnce;
+        private static Dictionary<string, Dictionary<ResultSeverityType, int>> countSeverityTypes_ByTestName;
+        private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> countIdentifiedDataBehaviors_ByTestName;
+        private static Dictionary<int, bool> checkNoWarningNorError_ByUPI;
 
         private static Dictionary<string, string> sampleDataByTestName = new Dictionary<string,string>();
 
@@ -50,6 +51,7 @@ namespace TestMVC4App.Models
         }
 
         private LogManager() {
+            // the order here is quite important because this is implicitely the expectation of the templates
             allTestNames = new List<string>();
             allTestNames.Add("UserBasicInfo_LastName_Test");
             allTestNames.Add("UserBasicInfo_FirstName_Test");
@@ -66,11 +68,11 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_Id_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Name_Test");
 
-            statsMapUpiTraceFailureCalledAtLeastOnce = new Dictionary<int, bool>();
-            statsCountFailuresTypesPerTest = new Dictionary<string, Dictionary<ResultSeverityState, int>>();
-            statsCountObservationTypesPerTest = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
+            checkNoWarningNorError_ByUPI = new Dictionary<int, bool>();
+            countSeverityTypes_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
+            countIdentifiedDataBehaviors_ByTestName = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
 
-            htmlDetailedWriters = new Dictionary<string, HtmlTextWriter>();
+            htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
 
             StatsCountProfilesProcessed = 0;
         }
@@ -89,83 +91,107 @@ namespace TestMVC4App.Models
         /// <param name="optionalExplanation">Hint on what caused the issue.</param>
         public void LogTestResult(int userId, int upi, string oldUrl,string newServiceUrl, ResultReport resultReport)
         {
-            var failReport = new SharedDetailedReportData
+            var detailedReportData = new SharedDetailedReportData
             {
-                Message = resultReport.ErrorMessage,
+                ErrorMessage = resultReport.ErrorMessage,
                 TestName = resultReport.TestName,
                 UserId = userId,
                 UPI = upi,
-                FailureType = resultReport.SeverityResult,
+                Result = resultReport.Result,
                 OldUrl = oldUrl,
                 NewUrl = newServiceUrl,
-                TaskDescription = resultReport.TestDescription,
-                Observations = resultReport.Observations,
+                TestDescription = resultReport.TestDescription,
+                IdentifiedDataBehaviors = resultReport.IdentifedDataBehaviors,
                 OldValues = resultReport.OldValues,
                 NewValues = resultReport.NewValues,
                 Duration = resultReport.Duration
             };
 
-            var template = new DetailedReport();
+            var template = new TestNameDetailedReport();
             template.Session = new Dictionary<string, object>()
             {
-                { "DetailedReportDataObject", failReport }
+                { "DetailedReportDataObject", detailedReportData }
             };
 
             template.Initialize();
 
-            if (htmlDetailedWriters.ContainsKey(resultReport.TestName))
+            if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
             {
-                htmlDetailedWriters[resultReport.TestName].WriteLine(template.TransformText());
+                htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(template.TransformText());
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine(resultReport.TestName);
             }
 
+            UpdateStatistics(upi, resultReport);
+        }
+
+        public void LogProfileResult(int upi, List<ResultReport> allTheResults)
+        {
+            var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).ToDictionary(x => x.TestName, x => x.Result);
+            var summaryProfileData = new SharedProfileReportData() { 
+                UPI = upi, 
+                ResultSeverity_ByTestName = resultByTestName,
+                FileLinkBegin = "C:\\QA_LOGS\\",
+                FileLinkEnd = "_" + countFilesGenerated + ".html"
+            };
+            var template = new ProfileReport();
+            template.Session = new Dictionary<string, object>()
+            {
+                { "ProfileReportDataObject", summaryProfileData }
+            };
+
+            template.Initialize();
+            htmlWriterForProfileReport.WriteLine(template.TransformText());
+        }
+
+        private static void UpdateStatistics(int upi, ResultReport resultReport)
+        {
             // keeping track of profiles without failures by logging any failure happening
-            if (!statsMapUpiTraceFailureCalledAtLeastOnce.ContainsKey(upi))
+            if (!checkNoWarningNorError_ByUPI.ContainsKey(upi))
             {
-                statsMapUpiTraceFailureCalledAtLeastOnce.Add(upi, false);
+                checkNoWarningNorError_ByUPI.Add(upi, false);
             }
 
-            if (resultReport.SeverityResult != ResultSeverityState.SUCCESS && statsMapUpiTraceFailureCalledAtLeastOnce.ContainsKey(upi))
+            if (resultReport.Result != ResultSeverityType.SUCCESS)
             {
-                statsMapUpiTraceFailureCalledAtLeastOnce[upi] = true;
+                checkNoWarningNorError_ByUPI[upi] = true;
             }
 
-            if (!statsCountFailuresTypesPerTest.ContainsKey(resultReport.TestName))
+            if (!countSeverityTypes_ByTestName.ContainsKey(resultReport.TestName))
             {
                 // initialize all the possible combinations for the given test name
-                statsCountFailuresTypesPerTest.Add(resultReport.TestName, new Dictionary<ResultSeverityState, int>());
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.ERROR, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.ERROR_WITH_EXPLANATION, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.FALSE_POSITIVE, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.WARNING, 0);
-                statsCountFailuresTypesPerTest[resultReport.TestName].Add(ResultSeverityState.SUCCESS, 0);
+                countSeverityTypes_ByTestName.Add(resultReport.TestName, new Dictionary<ResultSeverityType, int>());
+                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.ERROR, 0);
+                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.ERROR_WITH_EXPLANATION, 0);
+                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.FALSE_POSITIVE, 0);
+                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.WARNING, 0);
+                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.SUCCESS, 0);
             }
 
             // increase call counter
-            statsCountFailuresTypesPerTest[resultReport.TestName][resultReport.SeverityResult]++;
+            countSeverityTypes_ByTestName[resultReport.TestName][resultReport.Result]++;
 
-            if (!statsCountObservationTypesPerTest.ContainsKey(resultReport.TestName))
+            if (!countIdentifiedDataBehaviors_ByTestName.ContainsKey(resultReport.TestName))
             {
                 // initialize all the possible combinations for the given test name
-                statsCountObservationTypesPerTest.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE, 0);
-                statsCountObservationTypesPerTest[resultReport.TestName].Add(IdentifiedDataBehavior.WRONG_VALUE, 0);
+                countIdentifiedDataBehaviors_ByTestName.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.WRONG_VALUE, 0);
             }
 
             // increase call counter
-            foreach (IdentifiedDataBehavior label in resultReport.Observations)
+            foreach (IdentifiedDataBehavior label in resultReport.IdentifedDataBehaviors)
             {
-                statsCountObservationTypesPerTest[resultReport.TestName][label]++;
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName][label]++;
             }
         }
 
@@ -179,7 +205,7 @@ namespace TestMVC4App.Models
 
                 StopWritingDetailedReports();
 
-                htmlDetailedWriters = new Dictionary<string, HtmlTextWriter>();
+                htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
                 countFilesGenerated++;
 
                 foreach (string testName in allTestNames)
@@ -187,17 +213,35 @@ namespace TestMVC4App.Models
                     filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", testName + "_" + countFilesGenerated + ".html");
                     System.Diagnostics.Debug.WriteLine(filePath);
                     streamWriter = new StreamWriter(filePath);
-                    htmlDetailedWriters.Add(testName, new HtmlTextWriter(streamWriter));
+                    htmlWritersForDetailedReports_ByTestName.Add(testName, new HtmlTextWriter(streamWriter));
                 }
 
-                HeaderJS_DetailedReport headerTemplate = null;
+                TestNameDetailedReport_Header headerTemplate = null;
 
-                foreach (HtmlTextWriter htmlWriter in htmlDetailedWriters.Values)
+                foreach (HtmlTextWriter htmlWriter in htmlWritersForDetailedReports_ByTestName.Values)
                 {
                     // if the header template is created out of the loop, its content duplicates itself...
-                    headerTemplate = new HeaderJS_DetailedReport();
+                    headerTemplate = new TestNameDetailedReport_Header();
                     htmlWriter.WriteLine(headerTemplate.TransformText());
                 }
+
+                filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_Summary_User_PerProfile.html");
+                System.Diagnostics.Debug.WriteLine(filePath);
+
+                streamWriter = new StreamWriter(filePath);
+                htmlWriterForProfileReport = new HtmlTextWriter(streamWriter);
+
+                var sharedHeaderProfileData = new SharedHeaderProfileReportData() { AllTestNames = allTestNames };
+
+                var headerProfileTemplate = new ProfileReport_Header();
+                headerProfileTemplate.Session = new Dictionary<string, object>()
+                    {
+                        { "ProfileHeaderReportDataObject", sharedHeaderProfileData }
+                    };
+
+                headerProfileTemplate.Initialize();
+                htmlWriterForProfileReport.WriteLine(headerProfileTemplate.TransformText());
+
             }
             catch (IOException ioe)
             {
@@ -209,18 +253,26 @@ namespace TestMVC4App.Models
         {
             try
             {
-                if (htmlDetailedWriters.Count > 0)
+                if (htmlWritersForDetailedReports_ByTestName.Count > 0)
                 {
                     // finish the HTML syntax and cleanup resource
-                    FooterJS_DetailedReport jsTemplate = null;
+                    TestNameDetailedReport_Footer jsTemplate = null;
 
-                    foreach (HtmlTextWriter htmlTestWriter in htmlDetailedWriters.Values)
+                    foreach (HtmlTextWriter htmlTestWriter in htmlWritersForDetailedReports_ByTestName.Values)
                     {
                         // if the template is created out of the loop, its content duplicates itself...
-                        jsTemplate = new FooterJS_DetailedReport();
+                        jsTemplate = new TestNameDetailedReport_Footer();
                         htmlTestWriter.WriteLine(jsTemplate.TransformText());
                         htmlTestWriter.Close();
                     }
+                }
+
+                if (htmlWriterForProfileReport != null)
+                {
+                    var footerTemplate = new ProfileReport_Footer();
+                    htmlWriterForProfileReport.WriteLine(footerTemplate);
+                    htmlWriterForProfileReport.Close();
+                    htmlWriterForProfileReport = null;
                 }
             }
             catch (IOException e)
@@ -229,27 +281,27 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void WriteSummaryReport()
+        public void WriteSummaryReport(TimeSpan duration)
         {
-            string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_Summary.html");
+            string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_Summary_User.html");
             System.Diagnostics.Debug.WriteLine(filePath);
             
             streamWriter = new StreamWriter(filePath);
-            htmlWriter = new HtmlTextWriter(streamWriter);
+            htmlWriterForSummaryReport = new HtmlTextWriter(streamWriter);
 
-            int countProfilesWithoutWarning = 0;
-            foreach (var entry in statsMapUpiTraceFailureCalledAtLeastOnce)
+            int countProfileNoWarningNorError = 0;
+            foreach (var entry in checkNoWarningNorError_ByUPI)
             {
                 if (entry.Value == false)
                 {
-                    countProfilesWithoutWarning++;
+                    countProfileNoWarningNorError++;
                 }
             }
 
-            Dictionary<ResultSeverityState, int> countBySeverity = new Dictionary<ResultSeverityState, int>();
-            foreach (KeyValuePair<string, Dictionary<ResultSeverityState, int>> entry in statsCountFailuresTypesPerTest)
+            var countBySeverity = new Dictionary<ResultSeverityType, int>();
+            foreach (KeyValuePair<string, Dictionary<ResultSeverityType, int>> entry in countSeverityTypes_ByTestName)
             {
-                foreach (KeyValuePair<ResultSeverityState, int> subEntry in entry.Value)
+                foreach (KeyValuePair<ResultSeverityType, int> subEntry in entry.Value)
                 {
                     if (!countBySeverity.ContainsKey(subEntry.Key))
                     {
@@ -259,58 +311,58 @@ namespace TestMVC4App.Models
                 }
             }
 
-            Dictionary<IdentifiedDataBehavior, int> countByObservation = new Dictionary<IdentifiedDataBehavior, int>();
-            foreach (var entry in statsCountObservationTypesPerTest)
+            var countByIdentifiedDataBehavior = new Dictionary<IdentifiedDataBehavior, int>();
+            foreach (var entry in countIdentifiedDataBehaviors_ByTestName)
             {
                 foreach (var subEntry in entry.Value)
                 {
-                    if (!countByObservation.ContainsKey(subEntry.Key))
+                    if (!countByIdentifiedDataBehavior.ContainsKey(subEntry.Key))
                     {
-                        countByObservation.Add(subEntry.Key, 0);
+                        countByIdentifiedDataBehavior.Add(subEntry.Key, 0);
                     }
-                    countByObservation[subEntry.Key] += subEntry.Value;
+                    countByIdentifiedDataBehavior[subEntry.Key] += subEntry.Value;
 
                 }
             }
 
-            // report overview
-            var overviewReport = new SharedSummaryReportData
+            var summaryReportData = new SharedSummaryReportData
             {
                 CountProfilesTested = StatsCountProfilesProcessed,
-                CountProfilesWithoutWarnings = countProfilesWithoutWarning,
+                CountProfilesWithoutWarnings = countProfileNoWarningNorError,
                 CountBySeverity = countBySeverity,
-                CountByIdentifiedDataBehavior = countByObservation.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
-                TestNames = statsCountFailuresTypesPerTest.Keys.ToList(),
-                CountBySeverity_ByTestName = statsCountFailuresTypesPerTest,
-                CountByIdentifiedDataBehavior_ByTestName = statsCountObservationTypesPerTest,
-                CountTestsRun = StatsCountProfilesProcessed * statsCountFailuresTypesPerTest.Keys.ToList().Count(),
-                CountTestsPerUser = statsCountFailuresTypesPerTest.Keys.ToList().Count(),
-                SampleData_ByTestName = sampleDataByTestName
+                CountByIdentifiedDataBehavior = countByIdentifiedDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
+                TestNames = countSeverityTypes_ByTestName.Keys.ToList(),
+                CountBySeverity_ByTestName = countSeverityTypes_ByTestName,
+                CountByIdentifiedDataBehavior_ByTestName = countIdentifiedDataBehaviors_ByTestName,
+                CountTestsRun = StatsCountProfilesProcessed * countSeverityTypes_ByTestName.Keys.ToList().Count(),
+                CountTestsPerUser = countSeverityTypes_ByTestName.Keys.ToList().Count(),
+                SampleData_ByTestName = sampleDataByTestName,
+                Duration = duration
             };
 
             var template = new SummaryReport();
             template.Session = new Dictionary<string, object>()
                     {
-                        { "SummaryReportDataObject", overviewReport }
+                        { "SummaryReportDataObject", summaryReportData }
                     };
 
             template.Initialize();
-            htmlWriter.WriteLine(template.TransformText());
-            htmlWriter.Close();
-            htmlWriter = null;
+            htmlWriterForSummaryReport.WriteLine(template.TransformText());
+            htmlWriterForSummaryReport.Close();
+            htmlWriterForSummaryReport = null;
         }
 
         public void CleanUpResources()
         {
-            if (htmlDetailedWriters.Count > 0)
+            if (htmlWritersForDetailedReports_ByTestName.Count > 0)
             {
-                foreach (HtmlTextWriter htmlTestWriter in htmlDetailedWriters.Values)
+                foreach (HtmlTextWriter htmlTestWriter in htmlWritersForDetailedReports_ByTestName.Values)
                 {
                     htmlTestWriter.Close();
                 }
             }
 
-            htmlDetailedWriters = null;
+            htmlWritersForDetailedReports_ByTestName = null;
         }
 
         #endregion

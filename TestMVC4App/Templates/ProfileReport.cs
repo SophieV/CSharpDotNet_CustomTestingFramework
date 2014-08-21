@@ -9,18 +9,17 @@
 // ------------------------------------------------------------------------------
 namespace TestMVC4App.Templates
 {
-    using System.Linq;
+    using System.Collections.Generic;
     using TestMVC4App.Models;
-    using HtmlDiff;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class DetailedReport : DetailedReportBase
+    public partial class ProfileReport : ProfileReportBase
     {
 #line hidden
         /// <summary>
@@ -28,367 +27,296 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<tr>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-st" +
-                    "yle:solid;\"><b>");
+            this.Write("<tr>\r\n<td style=\"border-width:2px;border-color:lightgrey;border-style:solid;\">");
             
-            #line 9 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.TaskDescription));
-            
-            #line default
-            #line hidden
-            this.Write("</b><br/>\r\n\t\t");
-            
-            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.TestName));
+            #line 8 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
-            this.Write("\r\n\t</td>\r\n\t");
+            this.Write("</td>\r\n");
             
-            #line 12 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- switch (DetailedReportDataObject.FailureType) {
-		case ResultSeverityState.FALSE_POSITIVE : 
+            #line 9 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+ foreach(KeyValuePair<string,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { 
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;b" +
+            this.Write("\t");
+            
+            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+ switch (pair.Value) {
+		case ResultSeverityType.FALSE_POSITIVE : 
+            
+            #line default
+            #line hidden
+            this.Write("\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;bo" +
+                    "rder-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            
+            #line 12 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
+            
+            #line default
+            #line hidden
+            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
+            
+            #line default
+            #line hidden
+            
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("#");
+            
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("\">Go to test for UPI ");
+            
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n\t\t");
+            
+            #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+ break;
+		case ResultSeverityType.WARNING: 
+            
+            #line default
+            #line hidden
+            this.Write("\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;bo" +
+                    "rder-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            
+            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
+            
+            #line default
+            #line hidden
+            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
+            
+            #line default
+            #line hidden
+            
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("#");
+            
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("\">Go to test for UPI ");
+            
+            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n\t\t");
+            
+            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+ break;
+		case ResultSeverityType.ERROR_WITH_EXPLANATION: 
+            
+            #line default
+            #line hidden
+            this.Write("\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;b" +
                     "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.FailureType));
+            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
             
-            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
+            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("#");
+            
+            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("\">Go to test for UPI ");
+            
+            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n\t\t");
+            
+            #line 22 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
-		case ResultSeverityState.WARNING: 
+		case ResultSeverityType.ERROR: 
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;b" +
-                    "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bord" +
+                    "er-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.FailureType));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
-            
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- break;
-		case ResultSeverityState.ERROR_WITH_EXPLANATION: 
+            #line 24 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;" +
-                    "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
             
-            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.FailureType));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
-            
-            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- break;
-		case ResultSeverityState.ERROR: 
+            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bor" +
-                    "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
             
-            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.FailureType));
+            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t");
             
-            #line 24 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
+            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("#");
+            
+            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("\">Go to test for UPI ");
+            
+            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n\t\t");
+            
+            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
 		default: 
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-style:s" +
-                    "olid;font-weight:bold;\">");
+            this.Write("\t<td style=\"padding: 10px;color:black;border-width:2px;border-color:lightgrey;bor" +
+                    "der-style:solid;font-weight:bold;\">");
             
-            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.FailureType));
+            #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
             
-            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
+            
+            #line default
+            #line hidden
+            
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("#");
+            
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("\">Go to test for UPI ");
+            
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n\t\t");
+            
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
 	} 
             
             #line default
             #line hidden
-            this.Write("\t</td>\r\n\t<td style=\"width: 20%;padding: 10px;border-width:2px;border-color:lightg" +
-                    "rey;border-style:solid;\">\r\n\t\t<a href=\"");
+            this.Write("\r\n");
             
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldUrl));
-            
-            #line default
-            #line hidden
-            this.Write("\">Profile data of UPI ");
-            
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("</a><br/>\r\n\t\t<a href=\"");
-            
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.NewUrl));
-            
-            #line default
-            #line hidden
-            this.Write("\">User data of ID is ");
-            
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.UserId));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n\t</td>\r\n\t<td style=\"width: 60%;padding: 10px;border-width:2px;border-color:" +
-                    "lightgrey;border-style:solid;\">\r\n\t\t");
-            
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Message));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table style=\"border:solid 2px lightgrey;border-collapse:collap" +
-                    "se;\">\r\n\t\t<tr>\r\n\t\t\t<td style=\"background-color:lightgrey;\">OLD SERVICE DATA <span" +
-                    " style=\"color:red;\">[");
-            
-            #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldValues.Count));
-            
-            #line default
-            #line hidden
-            this.Write("]</span></td>\r\n\t\t\t<td style=\"background-color:lightgrey;\">NEW SERVICE DATA <span " +
-                    "style=\"color:red;\">[");
-            
-            #line 40 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.NewValues.Count));
-            
-            #line default
-            #line hidden
-            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-right: 1px lightgrey solid;\"" +
-                    ">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
-            
-            #line 45 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(DetailedReportDataObject.OldValues.Count > 0) {
-					var potentialDuplicates = DetailedReportDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-					foreach (string oldValue in DetailedReportDataObject.OldValues) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t<li>");
-            
-            #line 48 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(!string.IsNullOrEmpty(oldValue)) { 
-            
-            #line default
-            #line hidden
-            
-            #line 48 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(oldValue));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t\t\t");
-            
-            #line 49 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(!DetailedReportDataObject.NewValues.Contains(oldValue)) { 
-            
-            #line default
-            #line hidden
-            this.Write("<span style=\"color:purple;\">[MISSING]</span>");
-            
-            #line 49 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
+            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t");
-            
-            #line 50 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(potentialDuplicates.Contains(oldValue)) { 
-            
-            #line default
-            #line hidden
-            this.Write("<span style=\"color:pink;\">[DUPLICATE]</span>");
-            
-            #line 50 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t");
-            
-            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("NULL");
-            
-            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("</li>\r\n\t\t\t\t\t");
-            
-            #line 52 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t\t<td>\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
-            
-            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(DetailedReportDataObject.NewValues.Count > 0) {
-					var potentialDuplicates = DetailedReportDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-					foreach (string newValue in DetailedReportDataObject.NewValues) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t<li>");
-            
-            #line 60 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(!string.IsNullOrEmpty(newValue)) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t");
-            
-            #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- string newValueToDisplay = newValue;
-					if(DetailedReportDataObject.OldValues.Count <=1 && DetailedReportDataObject.NewValues.Count <= 1) {
-						string oldValue = string.Empty;
-						if(DetailedReportDataObject.OldValues.Count > 0) { oldValue = DetailedReportDataObject.OldValues.First(); }
-						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue);
-						newValueToDisplay = diffHelper.Build();
-					} 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t");
-            
-            #line 68 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(newValueToDisplay));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t\t\t\t");
-            
-            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(!DetailedReportDataObject.OldValues.Contains(newValue)) { 
-            
-            #line default
-            #line hidden
-            this.Write("<span style=\"color:purple;\">[MISSING]</span>");
-            
-            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t");
-            
-            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(potentialDuplicates.Contains(newValue)) { 
-            
-            #line default
-            #line hidden
-            this.Write("<span style=\"color:pink;\">[DUPLICATE]</span>");
-            
-            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t");
-            
-            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("NULL");
-            
-            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("</li>\r\n\t\t\t\t\t");
-            
-            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td style=\"width: 30%;padding:" +
-                    " 10px;border-width:2px;border-color:lightgrey;border-style:solid;\">\r\n\t<p>Duratio" +
-                    "n : ");
-            
-            #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));
-            
-            #line default
-            #line hidden
-            this.Write("</p>\r\n\t<br/>\r\n\t<ul>\r\n\t");
-            
-            #line 82 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- if(DetailedReportDataObject.Observations != null) {
-		foreach(var observation in DetailedReportDataObject.Observations) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t<li>");
-            
-            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(observation)));
-            
-            #line default
-            #line hidden
-            this.Write("</li><br/>\r\n\t");
-            
-            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
- } } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t</ul>\r\n\t</td>\r\n</tr>");
+            this.Write("</tr>");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\DetailedReport.tt"
+        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
 
-private global::TestMVC4App.Templates.SharedDetailedReportData _DetailedReportDataObjectField;
+private global::TestMVC4App.Templates.SharedProfileReportData _ProfileReportDataObjectField;
 
 /// <summary>
-/// Access the DetailedReportDataObject parameter of the template.
+/// Access the ProfileReportDataObject parameter of the template.
 /// </summary>
-private global::TestMVC4App.Templates.SharedDetailedReportData DetailedReportDataObject
+private global::TestMVC4App.Templates.SharedProfileReportData ProfileReportDataObject
 {
     get
     {
-        return this._DetailedReportDataObjectField;
+        return this._ProfileReportDataObjectField;
     }
 }
 
@@ -400,18 +328,18 @@ public virtual void Initialize()
 {
     if ((this.Errors.HasErrors == false))
     {
-bool DetailedReportDataObjectValueAcquired = false;
-if (this.Session.ContainsKey("DetailedReportDataObject"))
+bool ProfileReportDataObjectValueAcquired = false;
+if (this.Session.ContainsKey("ProfileReportDataObject"))
 {
-    this._DetailedReportDataObjectField = ((global::TestMVC4App.Templates.SharedDetailedReportData)(this.Session["DetailedReportDataObject"]));
-    DetailedReportDataObjectValueAcquired = true;
+    this._ProfileReportDataObjectField = ((global::TestMVC4App.Templates.SharedProfileReportData)(this.Session["ProfileReportDataObject"]));
+    ProfileReportDataObjectValueAcquired = true;
 }
-if ((DetailedReportDataObjectValueAcquired == false))
+if ((ProfileReportDataObjectValueAcquired == false))
 {
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("DetailedReportDataObject");
+    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("ProfileReportDataObject");
     if ((data != null))
     {
-        this._DetailedReportDataObjectField = ((global::TestMVC4App.Templates.SharedDetailedReportData)(data));
+        this._ProfileReportDataObjectField = ((global::TestMVC4App.Templates.SharedProfileReportData)(data));
     }
 }
 
@@ -432,7 +360,7 @@ if ((DetailedReportDataObjectValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class DetailedReportBase
+    public class ProfileReportBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

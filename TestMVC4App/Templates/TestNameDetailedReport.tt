@@ -6,24 +6,24 @@
 	name="DetailedReportDataObject" 
 	type="TestMVC4App.Templates.SharedDetailedReportData" #>
 <tr>
-	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><b><#= DetailedReportDataObject.TaskDescription #></b><br/>
-		<#= DetailedReportDataObject.TestName #>
+	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><b><#= DetailedReportDataObject.TestDescription #></b><br/>
+		<a id="#<#= DetailedReportDataObject.UPI #>"><#= DetailedReportDataObject.TestName #></a>
 	</td>
-	<# switch (DetailedReportDataObject.FailureType) {
-		case SeverityState.FALSE_POSITIVE : #>
-		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+	<# switch (DetailedReportDataObject.Result) {
+		case ResultSeverityType.FALSE_POSITIVE : #>
+		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.Result #>
 		<# break;
-		case SeverityState.WARNING: #>
-		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		case ResultSeverityType.WARNING: #>
+		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.Result #>
 		<# break;
-		case SeverityState.ERROR_WITH_EXPLANATION: #>
-		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
+		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.Result #>
 		<# break;
-		case SeverityState.ERROR: #>
-		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		case ResultSeverityType.ERROR: #>
+		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.Result #>
 		<# break;
 		default: #>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.FailureType #>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= DetailedReportDataObject.Result #>
 		<# break;
 	} #>
 	</td>
@@ -32,7 +32,7 @@
 		<a href="<#= DetailedReportDataObject.NewUrl #>">User data of ID is <#= DetailedReportDataObject.UserId #></a>
 	</td>
 	<td style="width: 60%;padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
-		<#= DetailedReportDataObject.Message #>
+		<#= DetailedReportDataObject.ErrorMessage #>
 		<br/><br/>
 		<table style="border:solid 2px lightgrey;border-collapse:collapse;">
 		<tr>
@@ -79,8 +79,8 @@
 	<p>Duration : <#= DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
 	<ul>
-	<# if(DetailedReportDataObject.Observations != null) {
-		foreach(var observation in DetailedReportDataObject.Observations) { #>
+	<# if(DetailedReportDataObject.IdentifiedDataBehaviors != null) {
+		foreach(var observation in DetailedReportDataObject.IdentifiedDataBehaviors) { #>
 			<li><#= LogManager.GetDescription(observation) #></li><br/>
 	<# } } #>
 		</ul>

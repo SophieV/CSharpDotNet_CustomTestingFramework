@@ -15,6 +15,7 @@ using System.ComponentModel.DataAnnotations;
 using TestMVC4App.Templates;
 using YSM.PMS.Web.Service.Clients;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace TestMVC4App.Models
 {
@@ -83,6 +84,9 @@ namespace TestMVC4App.Models
 
             upiList = ConnectToDataSourceAndRetriveUPIs();
 
+            var watch = new Stopwatch();
+            watch.Start();
+
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
@@ -137,6 +141,8 @@ namespace TestMVC4App.Models
                     }
                 }
 
+                List<ResultReport> allTheResults = new List<ResultReport>();
+
                 if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                 {
                     try
@@ -155,6 +161,11 @@ namespace TestMVC4App.Models
                         UserGeneralInfoTestUnit userGeneralInfoTest = new UserGeneralInfoTestUnit(this);
                         userGeneralInfoTest.ProvideUserData(oldServiceXMLOutputDocument, upi, usersClient, userId);
                         userGeneralInfoTest.RunAllTests();
+
+                        userBasicInfoTest.ComputerOverallResults();
+                        userGeneralInfoTest.ComputerOverallResults();
+                        allTheResults.AddRange(userBasicInfoTest.DetailedResults);
+                        allTheResults.AddRange(userGeneralInfoTest.DetailedResults);
                     }
                     catch (Exception e)
                     {
@@ -165,11 +176,14 @@ namespace TestMVC4App.Models
                 {
                     System.Diagnostics.Debug.WriteLine("No data returned by old service for UPI " + upi);
                 }
+
+                LogManager.Instance.LogProfileResult(upi, allTheResults);
             }
 
             LogManager.Instance.StopWritingDetailedReports();
 
-            LogManager.Instance.WriteSummaryReport();
+            watch.Stop();
+            LogManager.Instance.WriteSummaryReport(watch.Elapsed);
 
             LogManager.Instance.CleanUpResources();
         }
