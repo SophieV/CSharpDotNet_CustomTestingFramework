@@ -68,6 +68,13 @@ namespace TestMVC4App.Models
 
             allTestNames.Add("UserGeneralInfo_Bio_Test");
             allTestNames.Add("UserGeneralInfo_Titles_Test");
+            allTestNames.Add("UserGeneralInfo_LanguageUsers_Test");
+            allTestNames.Add("UserGeneralInfo_AltFirstName_Test");
+            allTestNames.Add("UserGeneralInfo_AltMiddleName_Test");
+            allTestNames.Add("UserGeneralInfo_AltLastName_Test");
+            allTestNames.Add("UserGeneralInfo_AltSuffix_Test");
+            allTestNames.Add("UserGeneralInfo_SuffixNames_Test");
+            allTestNames.Add("UserGeneralInfo_CountCVs_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Id_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Name_Test");
 

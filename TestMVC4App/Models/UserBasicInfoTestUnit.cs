@@ -129,7 +129,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserBasicInfo_Idx_Test", "Comparing Idxi");
+            var resultReport = new ResultReport("UserBasicInfo_Idx_Test", "Comparing Idx");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Idx");
             var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Idx, resultReport);
