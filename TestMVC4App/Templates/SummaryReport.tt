@@ -12,10 +12,10 @@
 	<h1 id="top">Summary Report</h1>
 	<hr/>
 	<h2>Overview</h2>
-	<p>Count of user profiles tested : <#= String.Format("{0:D}",SummaryReportDataObject.CountProfilesTested) #><br/>
-	Total count of tests run : <#= String.Format("{0:D}",SummaryReportDataObject.CountTestsRun) #><br/>
-	Count of tests per user profile : <#= String.Format("{0:D}",SummaryReportDataObject.CountTestsPerUser) #><br/>
-	Count of user profiles free from any kind of warning : <#= String.Format("{0:D}",SummaryReportDataObject.CountProfilesWithoutWarnings) #><br/>
+	<p>Count of user profiles tested : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesTested) #><br/>
+	Total count of tests run : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsRun) #><br/>
+	Count of tests per user profile : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsPerUser) #><br/>
+	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesWithoutWarnings) #><br/>
 	Duration : <#= SummaryReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
 	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
@@ -44,7 +44,7 @@
 			<# break;
 		} #>
 		</td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:D}",countPerSeverity.Value) #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}",countPerSeverity.Value) #></td>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;color:darkgrey;"><#= LogManager.GetDescription(countPerSeverity.Key) #></td>
 	</tr>
 	<# } #>
@@ -61,7 +61,7 @@
 		if(countPerIdentifiedDataBehavior.Value > 0) { #>
 	<tr>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= LogManager.GetDescription(countPerIdentifiedDataBehavior.Key) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:D}", countPerIdentifiedDataBehavior.Value) #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
 	</tr>
 	<# } } #>
 	</table>
@@ -131,7 +131,7 @@
 		<# break;
 	} #>
 		</td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:D}", countPerSeverity.Value) #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
 			<# double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;
 			if (frequency > 0) { #>
@@ -154,7 +154,7 @@
 		if(countPerIdentifiedDataBehavior.Value > 0) { #>
 	<tr>
 		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= LogManager.GetDescription(countPerIdentifiedDataBehavior.Key) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:D}", countPerIdentifiedDataBehavior.Value) #></td>
+		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
 	</tr>
 	<# } } } #>
 </table>
