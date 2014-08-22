@@ -1,4 +1,0 @@
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\HtmlDiff\bin\Release\HtmlDiff.dll
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\HtmlDiff\bin\Release\HtmlDiff.pdb
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\HtmlDiff\obj\Release\HtmlDiff.dll
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\HtmlDiff\obj\Release\HtmlDiff.pdb

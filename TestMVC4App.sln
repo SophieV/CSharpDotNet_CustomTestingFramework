@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMVC4App", "TestMVC4App\TestMVC4App.csproj", "{F8B7C7E8-C690-44CE-B127-135BD42AF118}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlDiff", "HtmlDiff\HtmlDiff.csproj", "{186B7471-867E-4AE8-9BD2-1DDA8BF76BC0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{F8B7C7E8-C690-44CE-B127-135BD42AF118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8B7C7E8-C690-44CE-B127-135BD42AF118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8B7C7E8-C690-44CE-B127-135BD42AF118}.Release|Any CPU.Build.0 = Release|Any CPU
-		{186B7471-867E-4AE8-9BD2-1DDA8BF76BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{186B7471-867E-4AE8-9BD2-1DDA8BF76BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{186B7471-867E-4AE8-9BD2-1DDA8BF76BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{186B7471-867E-4AE8-9BD2-1DDA8BF76BC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

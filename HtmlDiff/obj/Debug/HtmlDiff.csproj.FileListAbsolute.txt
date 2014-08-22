@@ -1,4 +1,0 @@
-\\psf\Home\Desktop\htmldiff.net-master\HtmlDiff\bin\Debug\HtmlDiff.dll
-\\psf\Home\Desktop\htmldiff.net-master\HtmlDiff\bin\Debug\HtmlDiff.pdb
-\\psf\Home\Desktop\htmldiff.net-master\HtmlDiff\obj\Debug\HtmlDiff.dll
-\\psf\Home\Desktop\htmldiff.net-master\HtmlDiff\obj\Debug\HtmlDiff.pdb
