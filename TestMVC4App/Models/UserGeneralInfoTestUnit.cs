@@ -92,11 +92,20 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltLastName_Test", "Comparing AltLastName");
+            var resultReport = new ResultReport("UserGeneralInfo_AltLastName_Test", "Comparing AltLastName (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltLastName, resultReport);
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.LastName, resultReport);
             compareStrategy.Investigate();
+
+            if(resultReport.Result != ResultSeverityType.SUCCESS)
+            {
+                resultReport.ResetForReTesting();
+
+                oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
+                compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltLastName, resultReport);
+                compareStrategy.Investigate();
+            }
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
@@ -114,11 +123,20 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltFirstName_Test", "Comparing AltFirstName");
+            var resultReport = new ResultReport("UserGeneralInfo_AltFirstName_Test", "Comparing AltFirstName (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltFirstName, resultReport);
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.FirstName, resultReport);
             compareStrategy.Investigate();
+
+            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            {
+                resultReport.ResetForReTesting();
+
+                oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
+                compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltFirstName, resultReport);
+                compareStrategy.Investigate();
+            }
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
@@ -136,11 +154,20 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltSuffix_Test", "Comparing AltSuffix");
+            var resultReport = new ResultReport("UserGeneralInfo_AltSuffix_Test", "Comparing AltSuffix (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltSuffix, resultReport);
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Suffix, resultReport);
             compareStrategy.Investigate();
+
+            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            {
+                resultReport.ResetForReTesting();
+
+                oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
+                compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltSuffix, resultReport);
+                compareStrategy.Investigate();
+            }
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
@@ -158,11 +185,20 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltMiddleName_Test", "Comparing AltMiddleName");
+            var resultReport = new ResultReport("UserGeneralInfo_AltMiddleName_Test", "Comparing AltMiddleName (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltMiddleName, resultReport);
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.MiddleName, resultReport);
             compareStrategy.Investigate();
+
+            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            {
+                resultReport.ResetForReTesting();
+
+                oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
+                compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.AltMiddleName, resultReport);
+                compareStrategy.Investigate();
+            }
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
@@ -242,11 +278,25 @@ namespace TestMVC4App.Models
             string oldValuePart1 = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/degree");
             string oldValuePart2 = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/professionalSuffix");
 
-            List<string> oldValues = new List<string>() { oldValuePart1 };
+            string entry;
+            List<string> oldValues = new List<string>();
+            var valuesPart1 = oldValuePart1.Split(',');
+            foreach (string value in valuesPart1)
+            {
+                entry = value.Trim();
+                if(!string.IsNullOrEmpty(entry))
+                {
+                    oldValues.Add(entry);
+                };
+            }
             var valuesPart2 = oldValuePart2.Split(',');
             foreach(string value in valuesPart2)
             {
-                oldValues.Add(value.Trim());
+                entry = value.Trim();
+                if (!string.IsNullOrEmpty(entry))
+                {
+                   oldValues.Add(entry);
+                };
             }
 
             List<string> newValues = new List<string>();

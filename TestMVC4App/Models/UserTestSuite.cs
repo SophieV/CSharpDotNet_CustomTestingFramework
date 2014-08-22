@@ -96,10 +96,10 @@ namespace TestMVC4App.Models
             foreach (int upi in upiList)
             {
 //#if DEBUG
-//                if(LogManager.Instance.StatsCountProfilesProcessed > 100)
-//                {
-//                    break;
-//                }
+                if (LogManager.Instance.StatsCountProfilesProcessed > 100)
+                {
+                    break;
+                }
 //#endif
                 oldServiceXMLOutput = string.Empty;
 

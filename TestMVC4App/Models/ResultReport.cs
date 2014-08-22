@@ -37,6 +37,15 @@ namespace TestMVC4App.Models
             this.result = ResultSeverityType.SUCCESS;
         }
 
+        public void ResetForReTesting()
+        {
+            this.OldValues.Clear();
+            this.NewValues.Clear();
+            this.result = ResultSeverityType.SUCCESS;
+            this.ErrorMessage = string.Empty;
+            this.IdentifedDataBehaviors.Clear();
+        }
+
         public void UpdateResult(ResultSeverityType newSeverityStateReturned)
         {
             if (newSeverityStateReturned == ResultSeverityType.WARNING)
