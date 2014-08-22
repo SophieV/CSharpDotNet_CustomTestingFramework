@@ -60,6 +60,9 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserBasicInfo_NetId_Test");
             allTestNames.Add("UserBasicInfo_PageName_Test");
             allTestNames.Add("UserBasicInfo_Suffix_Test");
+            allTestNames.Add("UserBasicInfo_Idx_Test");
+            allTestNames.Add("UserBasicInfo_LicenseNumber_Test");
+            allTestNames.Add("UserBasicInfo_Npi_Test");
             allTestNames.Add("UserBasicInfo_Gender_Test");
             allTestNames.Add("UserBasicInfo_UPI_Test");
 

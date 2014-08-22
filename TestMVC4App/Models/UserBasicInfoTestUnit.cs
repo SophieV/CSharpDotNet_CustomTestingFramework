@@ -48,28 +48,23 @@ namespace TestMVC4App.Models
         public override void RunAllTests()
         {
             var newUserBasicInfo = newServiceAccessor.GetUserByUpi(upi);
+            MappedUserId = newUserBasicInfo.UserId;
 
-            // if the UPIs do not match, we are not dealing with the same entry !
-            if (UserBasicInfo_UPI_Test(newUserBasicInfo, oldServiceData))
-            {
-                MappedUserId = newUserBasicInfo.UserId;
+            UserBasicInfo_UPI_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_LastName_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_Email_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_MiddleName_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_FirstName_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_Gender_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_NetId_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_PageName_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_Suffix_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_Idx_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_LicenseNumber_Test(newUserBasicInfo, oldServiceData);
+            UserBasicInfo_Npi_Test(newUserBasicInfo, oldServiceData);
 
-                //ProfileEditor userEditor = null;
-
-                //if (newUserBasicInfo.UserEditors.Count() > 0)
-                //{
-                //    newUserBasicInfo.UserEditors.First();
-                //}
-
-                UserBasicInfo_LastName_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_Email_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_MiddleName_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_FirstName_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_Gender_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_NetId_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_PageName_Test(newUserBasicInfo, oldServiceData);
-                UserBasicInfo_Suffix_Test(newUserBasicInfo, oldServiceData);
-            }
+            // TODO : Implement User Editors
+            // UserBasicInfo_UserEditors_Test
 
             ComputeOverallSeverity();
         }
@@ -83,10 +78,8 @@ namespace TestMVC4App.Models
 
         #region Field Comparison Tests
 
-        private bool UserBasicInfo_UPI_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
+        private void UserBasicInfo_UPI_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
-            bool success = true;
-
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserBasicInfo_UPI_Test", "Comparing UPI");
@@ -100,22 +93,14 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            if(resultReport.Result == ResultSeverityType.SUCCESS)
-            {
-                MappedUserId = newServiceData.UserId;
-            }
-            else
-            {
-                success = false;
-            }
+            MappedUserId = newServiceData.UserId;
+
 
             LogManager.Instance.LogTestResult(MappedUserId, 
                                               upi, 
                                               this.Master.BuildOldServiceFullURL(upi),
                                               this.BuildNewServiceFullURL(upi),
                                               resultReport);
-
-            return success;
         }
 
         private void UserBasicInfo_Gender_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
@@ -140,16 +125,48 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserBasicInfo_Idx_Test()
+        private void UserBasicInfo_Idx_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
-            // TODO : not implemented yet
-            throw new AssertInconclusiveException();
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserBasicInfo_Idx_Test", "Comparing Idxi");
+
+            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Idx");
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Idx, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(MappedUserId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(upi),
+                                              resultReport);
         }
 
-        private void UserBasicInfo_LicenseNumber_Test()
+        private void UserBasicInfo_LicenseNumber_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
-            // TODO : not implemented yet
-            throw new AssertInconclusiveException();
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserBasicInfo_LicenseNumber_Test", "Comparing License Number");
+
+            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/LicenseNumber");
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.LicenseNumber, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(MappedUserId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(upi),
+                                              resultReport);
         }
 
         private void UserBasicInfo_LastName_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
@@ -306,9 +323,30 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserBasicInfo_Npi_Test()
+        private void UserBasicInfo_Npi_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
-            // TODO : not implemented yet
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserBasicInfo_Npi_Test", "Comparing Npi");
+
+            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Npi");
+            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Npi, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(MappedUserId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(upi),
+                                              resultReport);
+        }
+
+        public void UserBasicInfo_UserEditors_Test()
+        {
             throw new AssertInconclusiveException();
         }
 
