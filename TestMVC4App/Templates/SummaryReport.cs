@@ -33,28 +33,28 @@ namespace TestMVC4App.Templates
                     "erview</h2>\r\n\t<p>Count of user profiles tested : ");
             
             #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.CountProfilesTested.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}",SummaryReportDataObject.CountProfilesTested)));
             
             #line default
             #line hidden
             this.Write("<br/>\r\n\tTotal count of tests run : ");
             
             #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.CountTestsRun.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}",SummaryReportDataObject.CountTestsRun)));
             
             #line default
             #line hidden
             this.Write("<br/>\r\n\tCount of tests per user profile : ");
             
             #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.CountTestsPerUser.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}",SummaryReportDataObject.CountTestsPerUser)));
             
             #line default
             #line hidden
             this.Write("<br/>\r\n\tCount of user profiles free from any kind of warning : ");
             
             #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.CountProfilesWithoutWarnings.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}",SummaryReportDataObject.CountProfilesWithoutWarnings)));
             
             #line default
             #line hidden
@@ -172,7 +172,7 @@ namespace TestMVC4App.Templates
                     "r-style:solid;\">");
             
             #line 47 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Value.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}",countPerSeverity.Value)));
             
             #line default
             #line hidden
@@ -215,7 +215,7 @@ namespace TestMVC4App.Templates
                     "style:solid;\">");
             
             #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerIdentifiedDataBehavior.Value.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}", countPerIdentifiedDataBehavior.Value)));
             
             #line default
             #line hidden
@@ -450,7 +450,7 @@ namespace TestMVC4App.Templates
                     "r-style:solid;\">");
             
             #line 134 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Value.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}", countPerSeverity.Value)));
             
             #line default
             #line hidden
@@ -509,7 +509,7 @@ namespace TestMVC4App.Templates
                     "style:solid;\">");
             
             #line 157 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(countPerIdentifiedDataBehavior.Value.ToString("{0:D}", CultureInfo.InvariantCulture)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:D}", countPerIdentifiedDataBehavior.Value)));
             
             #line default
             #line hidden

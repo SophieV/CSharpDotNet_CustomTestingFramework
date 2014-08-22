@@ -96,7 +96,7 @@ namespace TestMVC4App.Models
             foreach (int upi in upiList)
             {
 //#if DEBUG
-                if (LogManager.Instance.StatsCountProfilesProcessed > 100)
+                if (LogManager.Instance.StatsCountProfilesProcessed > 1000)
                 {
                     break;
                 }
