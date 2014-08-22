@@ -7,7 +7,7 @@
 	type="TestMVC4App.Templates.SharedDetailedReportData" #>
 <tr>
 	<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><b><#= DetailedReportDataObject.TestDescription #></b><br/>
-		<a id="#<#= DetailedReportDataObject.UPI #>"><#= DetailedReportDataObject.TestName #></a>
+		<a id="<#= DetailedReportDataObject.UPI #>"><#= DetailedReportDataObject.TestName #></a>
 	</td>
 	<# switch (DetailedReportDataObject.Result) {
 		case ResultSeverityType.FALSE_POSITIVE : #>

@@ -27,5 +27,7 @@ namespace TestMVC4App.Templates
         public Dictionary<string, string> SampleData_ByTestName { get; set; }
 
         public TimeSpan Duration { get; set; }
+
+        public string FileLinkEnd { get; set; }
     }
 }

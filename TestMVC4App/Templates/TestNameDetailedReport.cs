@@ -36,7 +36,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</b><br/>\r\n\t\t<a id=\"#");
+            this.Write("</b><br/>\r\n\t\t<a id=\"");
             
             #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.UPI));

@@ -303,14 +303,20 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\">Test Overview</a><br/>\r\n\t\t\t<a href=\"C:\\\\QA_LOGS\\");
+            this.Write("\">Test Overview</a><br/>\r\n\t\t\t<a href=\"");
             
             #line 98 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
-            this.Write("_1.html\">Test Details</a>\r\n\t\t</td>\r\n\t</tr>\r\n\t");
+            
+            #line 98 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("\">Test Details</a>\r\n\t\t</td>\r\n\t</tr>\r\n\t");
             
             #line 101 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 

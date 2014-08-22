@@ -143,7 +143,6 @@ namespace TestMVC4App.Models
             var summaryProfileData = new SharedProfileReportData() { 
                 UPI = upi, 
                 ResultSeverity_ByTestName = resultByTestName,
-                FileLinkBegin = "C:\\QA_LOGS\\",
                 FileLinkEnd = "_" + countFilesGenerated + ".html"
             };
             var template = new ProfileReport();
@@ -347,7 +346,8 @@ namespace TestMVC4App.Models
                 CountTestsRun = StatsCountProfilesProcessed * countSeverityTypes_ByTestName.Keys.ToList().Count(),
                 CountTestsPerUser = countSeverityTypes_ByTestName.Keys.ToList().Count(),
                 SampleData_ByTestName = sampleDataByTestName,
-                Duration = duration
+                Duration = duration,
+                FileLinkEnd = "_" + countFilesGenerated + ".html"
             };
 
             var template = new SummaryReport();

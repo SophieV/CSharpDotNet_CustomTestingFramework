@@ -60,12 +60,6 @@ namespace TestMVC4App.Templates
             this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
             
             #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
-            
-            #line default
-            #line hidden
-            
-            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
@@ -107,12 +101,6 @@ namespace TestMVC4App.Templates
             #line default
             #line hidden
             this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
-            
-            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
-            
-            #line default
-            #line hidden
             
             #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
@@ -158,12 +146,6 @@ namespace TestMVC4App.Templates
             this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
             
             #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
-            
-            #line default
-            #line hidden
-            
-            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
@@ -207,12 +189,6 @@ namespace TestMVC4App.Templates
             this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
             
             #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
-            
-            #line default
-            #line hidden
-            
-            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
@@ -254,12 +230,6 @@ namespace TestMVC4App.Templates
             #line default
             #line hidden
             this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
-            
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkBegin));
-            
-            #line default
-            #line hidden
             
             #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
