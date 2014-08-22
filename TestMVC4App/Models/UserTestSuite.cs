@@ -95,12 +95,12 @@ namespace TestMVC4App.Models
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)
             {
-#if DEBUG
-                if(LogManager.Instance.StatsCountProfilesProcessed > 100)
-                {
-                    break;
-                }
-#endif
+//#if DEBUG
+//                if(LogManager.Instance.StatsCountProfilesProcessed > 100)
+//                {
+//                    break;
+//                }
+//#endif
                 oldServiceXMLOutput = string.Empty;
 
                 System.Diagnostics.Debug.WriteLine(upi);
