@@ -27,24 +27,44 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<html>\r\n<head></head>\r\n<body>\r\n<table style=\"border:solid 2px lightgrey;border-co" +
-                    "llapse:collapse;\">\r\n<tr>\r\n<td style=\"background-color:lightgrey;\">UPI</td>\r\n");
+            this.Write(@"<html>
+<head>
+<style>
+.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.th_main {background-color:lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
+.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.no_underline{text-decoration: none;}
+</style>
+</head>
+<body>
+<table class=""table_main"">
+<tr>
+<td class=""th_main"">UPI</td>
+");
             
-            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
  foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { 
             
             #line default
             #line hidden
-            this.Write("<td style=\"background-color:lightgrey;font-size: 1.5em;padding :10px;\">");
+            this.Write("<td class=\"th_main\" style=\"font-size: 1.5em;padding :10px;\">");
             
-            #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
             this.Write("</td>\r\n");
             
-            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
  } 
             
             #line default

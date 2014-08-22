@@ -28,8 +28,7 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<tr>\r\n\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-st" +
-                    "yle:solid;\"><b>");
+            this.Write("<tr>\r\n\t<td class=\"td_main\"><b>");
             
             #line 9 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.TestDescription));
@@ -58,8 +57,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;b" +
-                    "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t\t<td class=\"false_positive\">");
             
             #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -74,8 +72,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;b" +
-                    "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t\t<td class=\"warning\">");
             
             #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -90,8 +87,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;" +
-                    "border-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t\t<td class=\"error_with_explanation\">");
             
             #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -106,8 +102,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bor" +
-                    "der-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t\t<td class=\"error\">");
             
             #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -122,8 +117,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td style=\"padding: 10px;border-width:2px;border-color:lightgrey;border-style:s" +
-                    "olid;font-weight:bold;\">");
+            this.Write("\t\t<td class=\"success\">");
             
             #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -138,8 +132,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t</td>\r\n\t<td style=\"width: 20%;padding: 10px;border-width:2px;border-color:lightg" +
-                    "rey;border-style:solid;\">\r\n\t\t<a href=\"");
+            this.Write("\t</td>\r\n\t<td class=\"td_main\" style=\"width: 20%;\">\r\n\t\t<a href=\"");
             
             #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldUrl));
@@ -167,25 +160,23 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t</td>\r\n\t<td style=\"width: 60%;padding: 10px;border-width:2px;border-color:" +
-                    "lightgrey;border-style:solid;\">\r\n\t\t");
+            this.Write("</a>\r\n\t</td>\r\n\t<td class=\"td_main\" style=\"width: 60%;\">\r\n\t\t");
             
             #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.ErrorMessage));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table style=\"border:solid 2px lightgrey;border-collapse:collap" +
-                    "se;\">\r\n\t\t<tr>\r\n\t\t\t<td style=\"background-color:lightgrey;\">OLD SERVICE DATA <span" +
-                    " style=\"color:red;\">[");
+            this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table class=\"table_main\">\r\n\t\t<tr>\r\n\t\t\t<td class=\"th_main\">OLD " +
+                    "SERVICE DATA <span class=\"error_color\">[");
             
             #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldValues.Count));
             
             #line default
             #line hidden
-            this.Write("]</span></td>\r\n\t\t\t<td style=\"background-color:lightgrey;\">NEW SERVICE DATA <span " +
-                    "style=\"color:red;\">[");
+            this.Write("]</span></td>\r\n\t\t\t<td class=\"th_main\">NEW SERVICE DATA <span class=\"error_color\">" +
+                    "[");
             
             #line 40 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.NewValues.Count));
@@ -222,7 +213,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("<span style=\"color:purple;\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING]</span>");
             
             #line 49 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
@@ -236,7 +227,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("<span style=\"color:pink;\">[DUPLICATE]</span>");
+            this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
             #line 50 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
@@ -307,7 +298,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("<span style=\"color:purple;\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING]</span>");
             
             #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
@@ -321,7 +312,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("<span style=\"color:pink;\">[DUPLICATE]</span>");
+            this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
             #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
@@ -349,9 +340,8 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td style=\"width: 30%;padding:" +
-                    " 10px;border-width:2px;border-color:lightgrey;border-style:solid;\">\r\n\t<p>Duratio" +
-                    "n : ");
+            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\" style=\"wid" +
+                    "th: 30%;\">\r\n\t<p>Duration : ");
             
             #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));

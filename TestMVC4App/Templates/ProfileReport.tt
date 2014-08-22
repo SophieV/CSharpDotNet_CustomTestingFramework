@@ -5,28 +5,28 @@
 	name="ProfileReportDataObject" 
 	type="TestMVC4App.Templates.SharedProfileReportData" #>
 <tr>
-<td style="border-width:2px;border-color:lightgrey;border-style:solid;"><#= ProfileReportDataObject.UPI #></td>
+<td class="th_main"><#= ProfileReportDataObject.UPI #></td>
 <# foreach(KeyValuePair<string,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
 	<# switch (pair.Value) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-	<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= pair.Value #><br/>
-	<a style="text-decoration: none;" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="false_positive"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		case ResultSeverityType.WARNING: #>
-	<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= pair.Value #><br/>
-	<a style="text-decoration: none;" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="warning"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-	<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= pair.Value #><br/>
-	<a style="text-decoration: none;" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="error_with_explanation"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		case ResultSeverityType.ERROR: #>
-	<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= pair.Value #><br/>
-	<a style="text-decoration: none;" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="error"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		default: #>
-	<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= pair.Value #><br/>
-	<a style="text-decoration: none;" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="success"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
 		<# break;
 	} #>
 

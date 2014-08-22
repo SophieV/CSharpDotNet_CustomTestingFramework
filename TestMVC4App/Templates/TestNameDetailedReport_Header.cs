@@ -33,17 +33,28 @@ namespace TestMVC4App.Templates
 <script type=""text/css"" href=""filtergrid.css""></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.th_main {background-color:lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
+.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
 </style>
 <script type=""text/javascript"" src=""tablefilter.js""></script>
 </head>
 <body>
-<table id=""individual_test_results"" style=""border: 2px lightgrey solid;border-collapse: collapse;"">
+<table id=""individual_test_results"" class=""table_main"">
 <tr>
-<td style=""background-color: lightgrey;"">Test Name</td>
-<td style=""background-color: lightgrey;"">Status</td>
-<td style=""background-color: lightgrey;"">User</td>
-<td style=""background-color: lightgrey;"">Result</td>
-<td style=""background-color: lightgrey;"">Additional Info</td>
+<td class=""th_main"">Test Name</td>
+<td class=""th_main"">Status</td>
+<td class=""th_main"">User</td>
+<td class=""th_main"">Result</td>
+<td class=""th_main"">Additional Info</td>
 </tr>
 
 ");

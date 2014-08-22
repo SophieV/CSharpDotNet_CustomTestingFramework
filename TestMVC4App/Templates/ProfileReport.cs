@@ -27,7 +27,7 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<tr>\r\n<td style=\"border-width:2px;border-color:lightgrey;border-style:solid;\">");
+            this.Write("<tr>\r\n<td class=\"th_main\">");
             
             #line 8 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
@@ -49,15 +49,14 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td style=\"padding: 10px;background-color: green;color:white;border-width:2px;bo" +
-                    "rder-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t<td class=\"false_positive\">");
             
             #line 12 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
             #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
@@ -92,15 +91,14 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td style=\"padding: 10px;background-color: beige;color:black;border-width:2px;bo" +
-                    "rder-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t<td class=\"warning\">");
             
             #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
             #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
@@ -135,15 +133,14 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td style=\"padding: 10px;background-color: orange;color:white;border-width:2px;b" +
-                    "order-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t<td class=\"error_with_explanation\">");
             
             #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
             #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
@@ -178,15 +175,14 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td style=\"padding: 10px;background-color: Red;color:white;border-width:2px;bord" +
-                    "er-color:lightgrey;border-style:solid;font-weight:bold;\">");
+            this.Write("\t<td class=\"error\">");
             
             #line 24 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
             #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
@@ -221,15 +217,14 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td style=\"padding: 10px;color:black;border-width:2px;border-color:lightgrey;bor" +
-                    "der-style:solid;font-weight:bold;\">");
+            this.Write("\t<td class=\"success\">");
             
             #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
-            this.Write("<br/>\r\n\t<a style=\"text-decoration: none;\" href=\"");
+            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
             #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));

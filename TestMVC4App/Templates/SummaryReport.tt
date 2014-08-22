@@ -7,7 +7,18 @@
 	name="SummaryReportDataObject" 
 	type="TestMVC4App.Templates.SharedSummaryReportData" #>
 <html>
-<head></head>
+<head>
+<style>
+.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.th_main {background-color:lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
+.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+</style>
+</head>
 <body>
 	<h1 id="top">Summary Report</h1>
 	<hr/>
@@ -18,50 +29,50 @@
 	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesWithoutWarnings) #><br/>
 	Duration : <#= SummaryReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
-	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+	<table class="table_main">
 		<tr>
-		<th style="background-color:lightgrey;">Result</th>
-		<th style="background-color:lightgrey;">Count</th>
-		<th style="background-color:lightgrey;">Description</th>
+		<th class="th_main">Result</th>
+		<th class="th_main">Count</th>
+		<th class="th_main">Description</th>
 		</tr>
 		<# foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity) { #>
 		<tr>
 			<# switch (countPerSeverity.Key) {
 			case ResultSeverityType.FALSE_POSITIVE : #>
-		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="false_positive"><#= countPerSeverity.Key #>
 			<# break;
 			case ResultSeverityType.WARNING: #>
-		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="warning"><#= countPerSeverity.Key #>
 			<# break;
 			case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="error_with_explanation"><#= countPerSeverity.Key #>
 			<# break;
 			case ResultSeverityType.ERROR: #>
-		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="error"><#= countPerSeverity.Key #>
 			<# break;
 			default: #>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="success"><#= countPerSeverity.Key #>
 			<# break;
 		} #>
 		</td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}",countPerSeverity.Value) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;color:darkgrey;"><#= LogManager.GetDescription(countPerSeverity.Key) #></td>
+		<td class="td_main"><#= String.Format("{0:0,0}",countPerSeverity.Value) #></td>
+		<td class="td_main" style="color:darkgrey;"><#= LogManager.GetDescription(countPerSeverity.Key) #></td>
 	</tr>
 	<# } #>
 	</table>
 	<br/>
 	<br/>
-	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+	<table class="table_main">
 	<tr>
-		<th style="background-color:lightgrey;">Identified Data Behavior</th>
-		<th style="background-color:lightgrey;">Count</th>
+		<th class="th_main">Identified Data Behavior</th>
+		<th class="th_main">Count</th>
 	</tr>
 	<# var sortedDictionary = SummaryReportDataObject.CountByIdentifiedDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<IdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary) {
 		if(countPerIdentifiedDataBehavior.Value > 0) { #>
 	<tr>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= LogManager.GetDescription(countPerIdentifiedDataBehavior.Key) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
+		<td class="td_main"><#= LogManager.GetDescription(countPerIdentifiedDataBehavior.Key) #></td>
+		<td class="td_main"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
 	</tr>
 	<# } } #>
 	</table>
@@ -69,17 +80,17 @@
 	<br/>
 	<br/>
 	<hr/>
-	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+	<table class="table_main">
 	<tr>
-	<th style="background-color:lightgrey;">Test Name</th>
-	<th style="background-color:lightgrey;">Success</th>
-	<th style="background-color:lightgrey;">Sample Data</th>
-	<th style="background-color:lightgrey;">More Info</th>
+	<th class="th_main">Test Name</th>
+	<th class="th_main">Success</th>
+	<th class="th_main">Sample Data</th>
+	<th class="th_main">More Info</th>
 	</tr>
 	<# foreach (string testName in SummaryReportDataObject.TestNames) { #>
 	<tr>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;"><#= testName #></td>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<td class="td_main"><#= testName #></td>
+		<td class="td_main">
 			<# double countTotalNotErrors = 0;
 			foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) {
 				if(countPerSeverity.Key == ResultSeverityType.SUCCESS || countPerSeverity.Key == ResultSeverityType.WARNING || countPerSeverity.Key == ResultSeverityType.FALSE_POSITIVE) {
@@ -88,12 +99,12 @@
 			double frequencyNoErrors = countTotalNotErrors /(double) SummaryReportDataObject.CountProfilesTested; #>
 			<#= frequencyNoErrors.ToString("P") #>
 		</td>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;width: 40%;">
+		<td class="td_main" style="width: 40%;">
 			<# if(SummaryReportDataObject.SampleData_ByTestName.ContainsKey(testName)) { #>
 			<#= SummaryReportDataObject.SampleData_ByTestName[testName] #>
 			<# } #>
 		</td> 
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<td class="td_main">
 			<a href="#<#= testName #>">Test Overview</a><br/>
 			<a href="<#= testName #><#= SummaryReportDataObject.FileLinkEnd #>">Test Details</a>
 		</td>
@@ -105,34 +116,34 @@
 	<hr/>
 	<p><a href="#top">Back to top</a></p>
 	<h2><a id="<#= testName #>"><#= testName #></a></h2>
-	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+	<table class="table_main">
 	<tr>
-		<th style="background-color:lightgrey;">Result Severity</th>
-		<th style="background-color:lightgrey;">Count</th>
-		<th style="background-color:lightgrey;">Frequency</th>
+		<th class="th_main">Result Severity</th>
+		<th class="th_main">Count</th>
+		<th class="th_main">Frequency</th>
 	</tr>
 	<# foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { #>
 	<tr>
 	<# switch (countPerSeverity.Key) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-		<td style="padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="false_positive"><#= countPerSeverity.Key #>
 		<# break;
 		case ResultSeverityType.WARNING: #>
-		<td style="padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="warning"><#= countPerSeverity.Key #>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-		<td style="padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="error_with_explanation"><#= countPerSeverity.Key #>
 		<# break;
 		case ResultSeverityType.ERROR: #>
-		<td style="padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="error"><#= countPerSeverity.Key #>
 		<# break;
 		default: #>
-		<td style="padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;"><#= countPerSeverity.Key #>
+		<td class="success"><#= countPerSeverity.Key #>
 		<# break;
 	} #>
 		</td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;">
+		<td class="td_main"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
+		<td class="td_main">
 			<# double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;
 			if (frequency > 0) { #>
 			<#= frequency.ToString("P") #>
@@ -143,18 +154,18 @@
 	</table>
 	<br/>
 	<br/>
-	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+	<table class="table_main">
 	<tr>
-		<th style="background-color:lightgrey;">Identified Data Behavior</th>
-		<th style="background-color:lightgrey;">Count</th>
+		<th class="th_main">Identified Data Behavior</th>
+		<th class="th_main">Count</th>
 	</tr>
 	<# if(SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName.ContainsKey(testName)) {
 	var sortedDictionary2 =SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<IdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
 		if(countPerIdentifiedDataBehavior.Value > 0) { #>
 	<tr>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= LogManager.GetDescription(countPerIdentifiedDataBehavior.Key) #></td>
-		<td style="padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
+		<td class="td_main"><#= LogManager.GetDescription(countPerIdentifiedDataBehavior.Key) #></td>
+		<td class="td_main"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
 	</tr>
 	<# } } } #>
 </table>

@@ -5,12 +5,27 @@
 	name="ProfileHeaderReportDataObject" 
 	type="TestMVC4App.Templates.SharedHeaderProfileReportData" #>
 <html>
-<head></head>
+<head>
+<style>
+.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.th_main {background-color:lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
+.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.no_underline{text-decoration: none;}
+</style>
+</head>
 <body>
-<table style="border:solid 2px lightgrey;border-collapse:collapse;">
+<table class="table_main">
 <tr>
-<td style="background-color:lightgrey;">UPI</td>
+<td class="th_main">UPI</td>
 <# foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { #>
-<td style="background-color:lightgrey;font-size: 1.5em;padding :10px;"><#= testName #></td>
+<td class="th_main" style="font-size: 1.5em;padding :10px;"><#= testName #></td>
 <# } #>
 </tr>
