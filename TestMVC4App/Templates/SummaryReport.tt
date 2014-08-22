@@ -104,7 +104,7 @@
 	<# foreach (string testName in SummaryReportDataObject.TestNames) { #>
 	<hr/>
 	<p><a href="#top">Back to top</a></p>
-	<h2><a id="#<#= testName #>"><#= testName #></a></h2>
+	<h2><a id="<#= testName #>"><#= testName #></a></h2>
 	<table style="border:solid 2px lightgrey;border-collapse:collapse;">
 	<tr>
 		<th style="background-color:lightgrey;">Result Severity</th>
