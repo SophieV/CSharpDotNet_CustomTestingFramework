@@ -85,7 +85,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            List<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title");
+            List<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title", "titleName");
 
             List<string> newValues = new List<string>();
             if(newServiceData.Titles.Count() > 0)

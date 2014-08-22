@@ -113,17 +113,17 @@ namespace TestMVC4App.Models
             return oldValue;
         }
 
-        protected static List<string> ParseListSimpleOldValues(XDocument oldServiceData, string oldSimpleListValuesXMLPath)
+        protected static List<string> ParseListSimpleOldValues(XDocument oldServiceData, string listNodePath, string listEntryNodeName)
         {
             var oldValues = new List<string>();
 
             try
             {
-                var titles = oldServiceData.XPathSelectElements(oldSimpleListValuesXMLPath);
+                var titles = oldServiceData.XPathSelectElements(listNodePath);
 
                 foreach (XElement el in titles)
                 {
-                    oldValues.Add(el.Element("titleName").Value);
+                    oldValues.Add(el.Element(listEntryNodeName).Value);
                 }
             }
             catch (Exception)
