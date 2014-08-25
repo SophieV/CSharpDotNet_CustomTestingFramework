@@ -25,11 +25,15 @@ namespace TestMVC4App.Models
 
         private static Dictionary<string, Dictionary<ResultSeverityType, int>> countSeverityTypes_ByTestName;
         private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> countIdentifiedDataBehaviors_ByTestName;
+
+        private static Dictionary<string, List<TimeSpan>> duration_ByTestName;
+        private static List<TimeSpan> durationByProfile;
+
         private static Dictionary<int, bool> checkNoWarningNorError_ByUPI;
 
         private static Dictionary<string, string> sampleDataByTestName = new Dictionary<string,string>();
 
-        public int StatsCountProfilesProcessed {get;set;}
+        public int StatsCountProfilesProcessed { get;set; }
 
         private static int countFilesGenerated = 0;
 
@@ -82,6 +86,14 @@ namespace TestMVC4App.Models
             countSeverityTypes_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
             countIdentifiedDataBehaviors_ByTestName = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
 
+            duration_ByTestName = new Dictionary<string, List<TimeSpan>>();
+            foreach(var name in allTestNames)
+            {
+                duration_ByTestName.Add(name, new List<TimeSpan>());
+            }
+
+            durationByProfile = new List<TimeSpan>();
+
             htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
 
             StatsCountProfilesProcessed = 0;
@@ -101,6 +113,8 @@ namespace TestMVC4App.Models
         /// <param name="optionalExplanation">Hint on what caused the issue.</param>
         public void LogTestResult(int userId, int upi, string oldUrl,string newServiceUrl, ResultReport resultReport)
         {
+            duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
+
             var detailedReportData = new SharedDetailedReportData
             {
                 ErrorMessage = resultReport.ErrorMessage,
@@ -137,13 +151,16 @@ namespace TestMVC4App.Models
             UpdateStatistics(upi, resultReport);
         }
 
-        public void LogProfileResult(int upi, List<ResultReport> allTheResults)
+        public void LogProfileResult(int upi, List<ResultReport> allTheResults, TimeSpan duration)
         {
+            durationByProfile.Add(duration);
+
             var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).ToDictionary(x => x.TestName, x => x.Result);
             var summaryProfileData = new SharedProfileReportData() { 
                 UPI = upi, 
                 ResultSeverity_ByTestName = resultByTestName,
-                FileLinkEnd = "_" + countFilesGenerated + ".html"
+                FileLinkEnd = "_" + countFilesGenerated + ".html",
+                Duration = duration
             };
             var template = new ProfileReport();
             template.Session = new Dictionary<string, object>()
@@ -334,6 +351,19 @@ namespace TestMVC4App.Models
                 }
             }
 
+            TimeSpan averageDurationPerProfile = TimeSpan.Zero;
+            Dictionary<string, TimeSpan> averageDuration_ByTestName = new Dictionary<string, TimeSpan>();
+
+            if (StatsCountProfilesProcessed > 0)
+            {
+                TimeSpan.FromMilliseconds(durationByProfile.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed);
+
+                foreach(var testNameEntry in duration_ByTestName)
+                {
+                    averageDuration_ByTestName.Add(testNameEntry.Key,TimeSpan.FromMilliseconds(testNameEntry.Value.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed));
+                }
+            }
+
             var summaryReportData = new SharedSummaryReportData
             {
                 CountProfilesTested = StatsCountProfilesProcessed,
@@ -347,7 +377,9 @@ namespace TestMVC4App.Models
                 CountTestsPerUser = countSeverityTypes_ByTestName.Keys.ToList().Count(),
                 SampleData_ByTestName = sampleDataByTestName,
                 Duration = duration,
-                FileLinkEnd = "_" + countFilesGenerated + ".html"
+                FileLinkEnd = "_" + countFilesGenerated + ".html",
+                AverageDurationPerProfile = averageDurationPerProfile,
+                AverageDuration_ByTestName = averageDuration_ByTestName
             };
 
             var template = new SummaryReport();

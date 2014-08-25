@@ -24,6 +24,7 @@
 <body>
 <table class="table_main">
 <tr>
+<td class="th_main">Duration</td>
 <td class="th_main">UPI</td>
 <# foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { #>
 <td class="th_main" style="font-size: 1.5em;padding :10px;"><#= testName #></td>

@@ -47,24 +47,25 @@ namespace TestMVC4App.Templates
 <body>
 <table class=""table_main"">
 <tr>
+<td class=""th_main"">Duration</td>
 <td class=""th_main"">UPI</td>
 ");
             
-            #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
  foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { 
             
             #line default
             #line hidden
             this.Write("<td class=\"th_main\" style=\"font-size: 1.5em;padding :10px;\">");
             
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
             this.Write("</td>\r\n");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
  } 
             
             #line default

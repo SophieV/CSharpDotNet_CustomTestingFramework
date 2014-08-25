@@ -28,6 +28,7 @@
 	Count of tests per user profile : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsPerUser) #><br/>
 	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesWithoutWarnings) #><br/>
 	Duration : <#= SummaryReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
+	<p>Average Duration by User Profile : <#= SummaryReportDataObject.AverageDurationPerProfile.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
 	<table class="table_main">
 		<tr>
@@ -85,6 +86,7 @@
 	<th class="th_main">Test Name</th>
 	<th class="th_main">Success</th>
 	<th class="th_main">Sample Data</th>
+	<th class="th_main">Average Duration</th>
 	<th class="th_main">More Info</th>
 	</tr>
 	<# foreach (string testName in SummaryReportDataObject.TestNames) { #>
@@ -103,7 +105,12 @@
 			<# if(SummaryReportDataObject.SampleData_ByTestName.ContainsKey(testName)) { #>
 			<#= SummaryReportDataObject.SampleData_ByTestName[testName] #>
 			<# } #>
-		</td> 
+		</td>
+		<td class="td_main">
+		<# if(SummaryReportDataObject.AverageDuration_ByTestName.ContainsKey(testName)) { #>
+			<#= SummaryReportDataObject.AverageDuration_ByTestName[testName].ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #>
+			<# } #>
+		</td>
 		<td class="td_main">
 			<a href="#<#= testName #>">Test Overview</a><br/>
 			<a href="<#= testName #><#= SummaryReportDataObject.FileLinkEnd #>">Test Details</a>

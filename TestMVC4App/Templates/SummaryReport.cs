@@ -81,18 +81,25 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
+            this.Write("</p>\r\n\t<p>Average Duration by User Profile : ");
+            
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.AverageDurationPerProfile.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF")));
+            
+            #line default
+            #line hidden
             this.Write("</p>\r\n\t<br/>\r\n\t<table class=\"table_main\">\r\n\t\t<tr>\r\n\t\t<th class=\"th_main\">Result</" +
                     "th>\r\n\t\t<th class=\"th_main\">Count</th>\r\n\t\t<th class=\"th_main\">Description</th>\r\n\t" +
                     "\t</tr>\r\n\t\t");
             
-            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity) { 
             
             #line default
             #line hidden
             this.Write("\t\t<tr>\r\n\t\t\t");
             
-            #line 40 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  switch (countPerSeverity.Key) {
 			case ResultSeverityType.FALSE_POSITIVE : 
             
@@ -100,14 +107,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"false_positive\">");
             
-            #line 42 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 43 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 43 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 44 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 			case ResultSeverityType.WARNING: 
             
@@ -115,14 +122,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"warning\">");
             
-            #line 45 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 47 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 			case ResultSeverityType.ERROR_WITH_EXPLANATION: 
             
@@ -130,14 +137,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"error_with_explanation\">");
             
-            #line 48 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 49 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 49 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 50 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 			case ResultSeverityType.ERROR: 
             
@@ -145,14 +152,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"error\">");
             
-            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 52 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 52 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 53 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 			default: 
             
@@ -160,14 +167,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"success\">");
             
-            #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 		} 
             
@@ -175,21 +182,21 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t</td>\r\n\t\t<td class=\"td_main\">");
             
-            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 59 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:0,0}",countPerSeverity.Value)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t\t<td class=\"td_main\" style=\"color:darkgrey;\">");
             
-            #line 59 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 60 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(countPerSeverity.Key)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t</tr>\r\n\t");
             
-            #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 62 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 
             
             #line default
@@ -197,7 +204,7 @@ namespace TestMVC4App.Templates
             this.Write("\t</table>\r\n\t<br/>\r\n\t<br/>\r\n\t<table class=\"table_main\">\r\n\t<tr>\r\n\t\t<th class=\"th_ma" +
                     "in\">Identified Data Behavior</th>\r\n\t\t<th class=\"th_main\">Count</th>\r\n\t</tr>\r\n\t");
             
-            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  var sortedDictionary = SummaryReportDataObject.CountByIdentifiedDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<IdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary) {
 		if(countPerIdentifiedDataBehavior.Value > 0) { 
@@ -206,44 +213,55 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t<tr>\r\n\t\t<td class=\"td_main\">");
             
-            #line 74 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(countPerIdentifiedDataBehavior.Key)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t\t<td class=\"td_main\">");
             
-            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t</tr>\r\n\t");
             
-            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } } 
             
             #line default
             #line hidden
-            this.Write("\t</table>\r\n\t<br/>\r\n\t<br/>\r\n\t<br/>\r\n\t<hr/>\r\n\t<table class=\"table_main\">\r\n\t<tr>\r\n\t<" +
-                    "th class=\"th_main\">Test Name</th>\r\n\t<th class=\"th_main\">Success</th>\r\n\t<th class" +
-                    "=\"th_main\">Sample Data</th>\r\n\t<th class=\"th_main\">More Info</th>\r\n\t</tr>\r\n\t");
+            this.Write(@"	</table>
+	<br/>
+	<br/>
+	<br/>
+	<hr/>
+	<table class=""table_main"">
+	<tr>
+	<th class=""th_main"">Test Name</th>
+	<th class=""th_main"">Success</th>
+	<th class=""th_main"">Sample Data</th>
+	<th class=""th_main"">Average Duration</th>
+	<th class=""th_main"">More Info</th>
+	</tr>
+	");
             
-            #line 90 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 92 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  foreach (string testName in SummaryReportDataObject.TestNames) { 
             
             #line default
             #line hidden
             this.Write("\t<tr>\r\n\t\t<td class=\"td_main\">");
             
-            #line 92 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 94 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t\t<td class=\"td_main\">\r\n\t\t\t");
             
-            #line 94 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 96 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  double countTotalNotErrors = 0;
 			foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) {
 				if(countPerSeverity.Key == ResultSeverityType.SUCCESS || countPerSeverity.Key == ResultSeverityType.WARNING || countPerSeverity.Key == ResultSeverityType.FALSE_POSITIVE) {
@@ -255,76 +273,97 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 100 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 102 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(frequencyNoErrors.ToString("P")));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t</td>\r\n\t\t<td class=\"td_main\" style=\"width: 40%;\">\r\n\t\t\t");
             
-            #line 103 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 105 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  if(SummaryReportDataObject.SampleData_ByTestName.ContainsKey(testName)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t");
             
-            #line 104 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 106 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.SampleData_ByTestName[testName]));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 105 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 107 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t</td> \r\n\t\t<td class=\"td_main\">\r\n\t\t\t<a href=\"#");
+            this.Write("\t\t</td>\r\n\t\t<td class=\"td_main\">\r\n\t\t");
             
-            #line 108 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(testName));
-            
-            #line default
-            #line hidden
-            this.Write("\">Test Overview</a><br/>\r\n\t\t\t<a href=\"");
-            
-            #line 109 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(testName));
+            #line 110 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+ if(SummaryReportDataObject.AverageDuration_ByTestName.ContainsKey(testName)) { 
             
             #line default
             #line hidden
+            this.Write("\t\t\t");
             
-            #line 109 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.FileLinkEnd));
+            #line 111 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.AverageDuration_ByTestName[testName].ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
-            this.Write("\">Test Details</a>\r\n\t\t</td>\r\n\t</tr>\r\n\t");
+            this.Write("\r\n\t\t\t");
             
             #line 112 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t</table>\r\n\t<br/>\r\n\t");
+            this.Write("\t\t</td>\r\n\t\t<td class=\"td_main\">\r\n\t\t\t<a href=\"#");
             
             #line 115 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(testName));
+            
+            #line default
+            #line hidden
+            this.Write("\">Test Overview</a><br/>\r\n\t\t\t<a href=\"");
+            
+            #line 116 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(testName));
+            
+            #line default
+            #line hidden
+            
+            #line 116 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.FileLinkEnd));
+            
+            #line default
+            #line hidden
+            this.Write("\">Test Details</a>\r\n\t\t</td>\r\n\t</tr>\r\n\t");
+            
+            #line 119 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t</table>\r\n\t<br/>\r\n\t");
+            
+            #line 122 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  foreach (string testName in SummaryReportDataObject.TestNames) { 
             
             #line default
             #line hidden
             this.Write("\t<hr/>\r\n\t<p><a href=\"#top\">Back to top</a></p>\r\n\t<h2><a id=\"");
             
-            #line 118 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 125 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 118 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 125 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
@@ -333,14 +372,14 @@ namespace TestMVC4App.Templates
                     "ity</th>\r\n\t\t<th class=\"th_main\">Count</th>\r\n\t\t<th class=\"th_main\">Frequency</th>" +
                     "\r\n\t</tr>\r\n\t");
             
-            #line 125 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 132 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { 
             
             #line default
             #line hidden
             this.Write("\t<tr>\r\n\t");
             
-            #line 127 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 134 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  switch (countPerSeverity.Key) {
 		case ResultSeverityType.FALSE_POSITIVE : 
             
@@ -348,14 +387,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"false_positive\">");
             
-            #line 129 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 136 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 130 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 137 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 		case ResultSeverityType.WARNING: 
             
@@ -363,14 +402,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"warning\">");
             
-            #line 132 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 139 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 133 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 140 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: 
             
@@ -378,14 +417,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"error_with_explanation\">");
             
-            #line 135 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 142 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 136 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 143 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 		case ResultSeverityType.ERROR: 
             
@@ -393,14 +432,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"error\">");
             
-            #line 138 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 145 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 139 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 146 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 		default: 
             
@@ -408,14 +447,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t<td class=\"success\">");
             
-            #line 141 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 148 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 142 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 149 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  break;
 	} 
             
@@ -423,14 +462,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t</td>\r\n\t\t<td class=\"td_main\">");
             
-            #line 145 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 152 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:0,0}", countPerSeverity.Value)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t\t<td class=\"td_main\">\r\n\t\t\t");
             
-            #line 147 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 154 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;
 			if (frequency > 0) { 
             
@@ -438,21 +477,21 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t\t");
             
-            #line 149 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 156 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(frequency.ToString("P")));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 150 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 157 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t</td>\r\n\t</tr>\r\n\t");
             
-            #line 153 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 160 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 
             
             #line default
@@ -460,7 +499,7 @@ namespace TestMVC4App.Templates
             this.Write("\t</table>\r\n\t<br/>\r\n\t<br/>\r\n\t<table class=\"table_main\">\r\n\t<tr>\r\n\t\t<th class=\"th_ma" +
                     "in\">Identified Data Behavior</th>\r\n\t\t<th class=\"th_main\">Count</th>\r\n\t</tr>\r\n\t");
             
-            #line 162 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 169 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  if(SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName.ContainsKey(testName)) {
 	var sortedDictionary2 =SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 	foreach (KeyValuePair<IdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
@@ -470,28 +509,28 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t<tr>\r\n\t\t<td class=\"td_main\">");
             
-            #line 167 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 174 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(countPerIdentifiedDataBehavior.Key)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t\t<td class=\"td_main\">");
             
-            #line 168 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 175 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value)));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t</tr>\r\n\t");
             
-            #line 170 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 177 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } } } 
             
             #line default
             #line hidden
             this.Write("</table>\r\n");
             
-            #line 172 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
+            #line 179 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  } 
             
             #line default

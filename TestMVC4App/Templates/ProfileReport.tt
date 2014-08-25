@@ -5,6 +5,7 @@
 	name="ProfileReportDataObject" 
 	type="TestMVC4App.Templates.SharedProfileReportData" #>
 <tr>
+<td class="td_main"><#= ProfileReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></td>
 <td class="th_main"><#= ProfileReportDataObject.UPI #></td>
 <# foreach(KeyValuePair<string,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
 	<# switch (pair.Value) {

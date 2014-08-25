@@ -13,5 +13,7 @@ namespace TestMVC4App.Templates
         public int UPI { get; set; }
 
         public string FileLinkEnd { get; set; }
+
+        public TimeSpan Duration { get; set; }
     }
 }

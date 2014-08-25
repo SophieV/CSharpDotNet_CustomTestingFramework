@@ -84,6 +84,7 @@ namespace TestMVC4App.Models
 
             upiList = ConnectToDataSourceAndRetriveUPIs();
 
+            Stopwatch profileWatch = null;
             var watch = new Stopwatch();
             watch.Start();
 
@@ -107,6 +108,9 @@ namespace TestMVC4App.Models
 
                 LogManager.Instance.StatsCountProfilesProcessed++;
                 System.Diagnostics.Debug.WriteLine(LogManager.Instance.StatsCountProfilesProcessed);
+
+                profileWatch = new Stopwatch();
+                profileWatch.Start();
 
                 if (LogManager.Instance.StatsCountProfilesProcessed % MaxProfilesForOneFile == 0)
                 {
@@ -177,7 +181,10 @@ namespace TestMVC4App.Models
                     System.Diagnostics.Debug.WriteLine("No data returned by old service for UPI " + upi);
                 }
 
-                LogManager.Instance.LogProfileResult(upi, allTheResults);
+                profileWatch.Stop();
+
+                LogManager.Instance.LogProfileResult(upi, allTheResults, profileWatch.Elapsed);
+
             }
 
             LogManager.Instance.StopWritingDetailedReports();
