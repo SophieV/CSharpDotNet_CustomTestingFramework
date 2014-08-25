@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Reflection;
+using System.Web.UI;
+using TestMVC4App.Templates;
 
 namespace TestMVC4App.Models
 {
-    using System;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Reflection;
-    using System.Web.UI;
-    using TestMVC4App.Templates;
-
     public sealed class LogManager
     {
         private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_User_PerProfile.html";
@@ -239,7 +238,7 @@ namespace TestMVC4App.Models
 
                 foreach (string testName in allTestNames)
                 {
-                    filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", testName + "_" + countFilesGenerated + ".html");
+                    filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + ".html");
                     System.Diagnostics.Debug.WriteLine(filePath);
                     streamWriter = new StreamWriter(filePath);
                     htmlWritersForDetailedReports_ByTestName.Add(testName, new HtmlTextWriter(streamWriter));
@@ -254,7 +253,7 @@ namespace TestMVC4App.Models
                     htmlWriter.WriteLine(headerTemplate.TransformText());
                 }
 
-                filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", SUMMARY_BY_PROFILE_FILENAME);
+                filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + SUMMARY_BY_PROFILE_FILENAME);
                 System.Diagnostics.Debug.WriteLine(filePath);
 
                 streamWriter = new StreamWriter(filePath);
@@ -312,7 +311,7 @@ namespace TestMVC4App.Models
 
         public void WriteSummaryReport(TimeSpan duration, string errorHappened, string errorMessage)
         {
-            string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", SUMMARY_FILENAME);
+            string filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + SUMMARY_FILENAME);
             System.Diagnostics.Debug.WriteLine(filePath);
             
             streamWriter = new StreamWriter(filePath);
