@@ -37,7 +37,7 @@ namespace TestMVC4App.Models
 
         }
 
-        public override void RunAllTests()
+        protected override void RunAllSingleTests()
         {
             var newUserGeneralInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
 

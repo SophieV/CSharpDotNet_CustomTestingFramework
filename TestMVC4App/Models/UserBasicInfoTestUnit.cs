@@ -45,7 +45,7 @@ namespace TestMVC4App.Models
         /// <see cref="YSM.PMS.Service.Common.DataTransfer.IUserService.GetUserById()"/> method tested will be made.</param>
         /// <param name="upi">Old Identifier of the User.</param>
         /// <param name="oldServiceXMLContent">Result returned by the old service - to be parsed.</param>
-        public override void RunAllTests()
+        protected override void RunAllSingleTests()
         {
             var newUserBasicInfo = newServiceAccessor.GetUserByUpi(upi);
             MappedUserId = newUserBasicInfo.UserId;

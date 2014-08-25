@@ -82,6 +82,10 @@ namespace TestMVC4App.Models
             string oldServiceURL;
             string oldServiceXMLOutput;
 
+            bool errorHappened = false;
+            string errorType = string.Empty;
+            string errorMessage = string.Empty;
+
             upiList = ConnectToDataSourceAndRetriveUPIs();
 
             Stopwatch profileWatch = null;
@@ -145,6 +149,7 @@ namespace TestMVC4App.Models
                     }
                 }
 
+                List<TestUnit> allTheTests = new List<TestUnit>();
                 List<ResultReport> allTheResults = new List<ResultReport>();
 
                 if (!string.IsNullOrEmpty(oldServiceXMLOutput))
@@ -157,12 +162,14 @@ namespace TestMVC4App.Models
 
                         // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
                         UserBasicInfoTestUnit userBasicInfoTest = new UserBasicInfoTestUnit(this);
+                        allTheTests.Add(userBasicInfoTest);
                         userBasicInfoTest.ProvideUserData(oldServiceXMLOutputDocument, usersClient, upi);
                         userBasicInfoTest.RunAllTests();
 
                         int userId = userBasicInfoTest.MappedUserId;
 
                         UserGeneralInfoTestUnit userGeneralInfoTest = new UserGeneralInfoTestUnit(this);
+                        allTheTests.Add(userGeneralInfoTest);
                         userGeneralInfoTest.ProvideUserData(oldServiceXMLOutputDocument, upi, usersClient, userId);
                         userGeneralInfoTest.RunAllTests();
 
@@ -170,6 +177,25 @@ namespace TestMVC4App.Models
                         userGeneralInfoTest.ComputerOverallResults();
                         allTheResults.AddRange(userBasicInfoTest.DetailedResults);
                         allTheResults.AddRange(userGeneralInfoTest.DetailedResults);
+
+
+                        foreach (var test in allTheTests)
+                        {
+                            // log only first occurence of error - enough to generate the warning
+                            if((test.HttpErrorHappened || test.UnknownErrorHappened) && string.IsNullOrEmpty(errorMessage))
+                            {
+                                errorMessage = test.ErrorMessage;
+
+                                if (test.HttpErrorHappened)
+                                {
+                                    errorType = "HTTP";
+                                }
+                                else
+                                {
+                                    errorType = "UNKNOWN";
+                                }
+                            }
+                        }
                     }
                     catch (Exception e)
                     {
@@ -190,7 +216,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.StopWritingDetailedReports();
 
             watch.Stop();
-            LogManager.Instance.WriteSummaryReport(watch.Elapsed);
+            LogManager.Instance.WriteSummaryReport(watch.Elapsed, errorType, errorMessage);
 
             LogManager.Instance.CleanUpResources();
         }

@@ -14,6 +14,9 @@ namespace TestMVC4App.Models
 
     public sealed class LogManager
     {
+        private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_User_PerProfile.html";
+        private const string SUMMARY_FILENAME = "QA_Reporting_Summary_User_MAIN.html";
+
         private static volatile LogManager instance;
         private static object syncRoot = new Object();
 
@@ -251,7 +254,7 @@ namespace TestMVC4App.Models
                     htmlWriter.WriteLine(headerTemplate.TransformText());
                 }
 
-                filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_Summary_User_PerProfile.html");
+                filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", SUMMARY_BY_PROFILE_FILENAME);
                 System.Diagnostics.Debug.WriteLine(filePath);
 
                 streamWriter = new StreamWriter(filePath);
@@ -296,7 +299,7 @@ namespace TestMVC4App.Models
                 if (htmlWriterForProfileReport != null)
                 {
                     var footerTemplate = new ProfileReport_Footer();
-                    htmlWriterForProfileReport.WriteLine(footerTemplate);
+                    htmlWriterForProfileReport.WriteLine(footerTemplate.TransformText());
                     htmlWriterForProfileReport.Close();
                     htmlWriterForProfileReport = null;
                 }
@@ -307,9 +310,9 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void WriteSummaryReport(TimeSpan duration)
+        public void WriteSummaryReport(TimeSpan duration, string errorHappened, string errorMessage)
         {
-            string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", "QA_Reporting_Summary_User.html");
+            string filePath = System.IO.Path.Combine(@"C:\\QA_LOGS\\", SUMMARY_FILENAME);
             System.Diagnostics.Debug.WriteLine(filePath);
             
             streamWriter = new StreamWriter(filePath);
@@ -360,7 +363,10 @@ namespace TestMVC4App.Models
 
                 foreach(var testNameEntry in duration_ByTestName)
                 {
-                    averageDuration_ByTestName.Add(testNameEntry.Key,TimeSpan.FromMilliseconds(testNameEntry.Value.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed));
+                    if (testNameEntry.Value.Count() > 0)
+                    {
+                        averageDuration_ByTestName.Add(testNameEntry.Key, TimeSpan.FromMilliseconds(testNameEntry.Value.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed));
+                    }
                 }
             }
 
@@ -379,7 +385,10 @@ namespace TestMVC4App.Models
                 Duration = duration,
                 FileLinkEnd = "_" + countFilesGenerated + ".html",
                 AverageDurationPerProfile = averageDurationPerProfile,
-                AverageDuration_ByTestName = averageDuration_ByTestName
+                AverageDuration_ByTestName = averageDuration_ByTestName,
+                ErrorHappened = errorHappened,
+                ErrorMessage = errorMessage,
+                FileByProfileLink = SUMMARY_BY_PROFILE_FILENAME
             };
 
             var template = new SummaryReport();

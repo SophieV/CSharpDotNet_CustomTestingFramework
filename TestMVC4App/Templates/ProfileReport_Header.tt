@@ -8,7 +8,7 @@
 <head>
 <style>
 .table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
+.th_main {background-color:lightgrey;text-align: center;}
 .td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
 .warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
 .false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}

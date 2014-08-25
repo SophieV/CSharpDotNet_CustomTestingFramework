@@ -33,5 +33,11 @@ namespace TestMVC4App.Templates
         public TimeSpan AverageDurationPerProfile { get; set; }
 
         public string FileLinkEnd { get; set; }
+
+        public string FileByProfileLink { get; set; }
+
+        public string ErrorHappened { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

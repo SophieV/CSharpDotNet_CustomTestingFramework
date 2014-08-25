@@ -50,7 +50,7 @@ namespace TestMVC4App.Models
             }
         }
 
-        public override void RunAllTests()
+        protected override void RunAllSingleTests()
         {
             List<string> oldOrganizationIdValues;
             List<string> oldOrganizationNameValues;

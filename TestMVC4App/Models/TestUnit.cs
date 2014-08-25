@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -9,6 +10,12 @@ namespace TestMVC4App.Models
 {
     public abstract class TestUnit
     {
+        public bool HttpErrorHappened { get; set; }
+
+        public bool UnknownErrorHappened { get; set; }
+
+        public string ErrorMessage { get; set; }
+
         public abstract string newServiceURLExtensionBeginning { get; }
 
         public abstract string newServiceURLExtensionEnding { get; }
@@ -95,7 +102,30 @@ namespace TestMVC4App.Models
             this.DetailedResults = new List<ResultReport>();
         }
 
-        public abstract void RunAllTests();
+        protected abstract void RunAllSingleTests();
+
+        public void RunAllTests()
+        {
+            try
+            {
+                RunAllSingleTests();
+            } 
+            catch (HttpRequestException httpe)
+            {
+                System.Diagnostics.Debug.WriteLine("There were problems accessing the services.");
+                System.Diagnostics.Debug.WriteLine(httpe.StackTrace);
+
+                HttpErrorHappened = true;
+                ErrorMessage = httpe.Message;
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+
+                HttpErrorHappened = true;
+                ErrorMessage = e.Message;
+            }
+        }
 
         protected static string ParseSingleOldValue(XDocument oldServiceData,string oldValueXMLPath)
         {

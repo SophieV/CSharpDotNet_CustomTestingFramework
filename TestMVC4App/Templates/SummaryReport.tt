@@ -10,18 +10,30 @@
 <head>
 <style>
 .table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
+.title {text-align: center;}
+.th_main {background-color:lightgrey;text-align: center;}
 .td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
 .warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
 .false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
 .error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
 .success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
 .error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_data {color: white;font-weight: bold;background-color: red;font-size: 2em; text-align: center;}
 </style>
 </head>
 <body>
-	<h1 id="top">Summary Report</h1>
+	<h1 id="top" class="title">Summary Report</h1>
 	<hr/>
+
+	<# if(!string.IsNullOrEmpty(SummaryReportDataObject.ErrorHappened)) { 
+	string message = "UNKNOWN ERROR(S) MAY MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !";
+	if (SummaryReportDataObject.ErrorHappened == "HTTP") {
+		message = "PROBLEMS CONNECTING TO DATA SERVICES MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !";
+		} #>
+	 <p class="error_data"><#= message #><br/><#= SummaryReportDataObject.ErrorMessage #></p>
+	 <hr/>
+	<# } #>
+
 	<h2>Overview</h2>
 	<p>Count of user profiles tested : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesTested) #><br/>
 	Total count of tests run : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsRun) #><br/>
@@ -81,6 +93,12 @@
 	<br/>
 	<br/>
 	<hr/>
+	<h2>Overview By User Profile</h2>
+	<a href="<#= SummaryReportDataObject.FileByProfileLink #>">Go to Overview of Results by UPI</a>
+	<br/>
+	<hr/>
+	<h2>Overview By Test Name</h2>
+	<br/>
 	<table class="table_main">
 	<tr>
 	<th class="th_main">Test Name</th>
