@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
@@ -18,6 +17,9 @@ namespace TestMVC4App.Models
 
         private static volatile LogManager instance;
         private static object syncRoot = new Object();
+
+        private static object lockLogResult = new object();
+        private static object lockProfileOverview = new object();
 
         private List<string> allTestNames;
         private StreamWriter streamWriter;
@@ -83,6 +85,8 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_CountCVs_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Id_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Name_Test");
+            allTestNames.Add("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test");
+            allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
 
             checkNoWarningNorError_ByUPI = new Dictionary<int, bool>();
             countSeverityTypes_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
@@ -115,63 +119,70 @@ namespace TestMVC4App.Models
         /// <param name="optionalExplanation">Hint on what caused the issue.</param>
         public void LogTestResult(int userId, int upi, string oldUrl,string newServiceUrl, ResultReport resultReport)
         {
-            duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
-
-            var detailedReportData = new SharedDetailedReportData
+            lock (lockLogResult)
             {
-                ErrorMessage = resultReport.ErrorMessage,
-                TestName = resultReport.TestName,
-                UserId = userId,
-                UPI = upi,
-                Result = resultReport.Result,
-                OldUrl = oldUrl,
-                NewUrl = newServiceUrl,
-                TestDescription = resultReport.TestDescription,
-                IdentifiedDataBehaviors = resultReport.IdentifedDataBehaviors,
-                OldValues = resultReport.OldValues,
-                NewValues = resultReport.NewValues,
-                Duration = resultReport.Duration
-            };
+                duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
 
-            var template = new TestNameDetailedReport();
-            template.Session = new Dictionary<string, object>()
+                var detailedReportData = new SharedDetailedReportData
+                {
+                    ErrorMessage = resultReport.ErrorMessage,
+                    TestName = resultReport.TestName,
+                    UserId = userId,
+                    UPI = upi,
+                    Result = resultReport.Result,
+                    OldUrl = oldUrl,
+                    NewUrl = newServiceUrl,
+                    TestDescription = resultReport.TestDescription,
+                    IdentifiedDataBehaviors = resultReport.IdentifedDataBehaviors,
+                    OldValues = resultReport.OldValues,
+                    NewValues = resultReport.NewValues,
+                    Duration = resultReport.Duration
+                };
+
+                var template = new TestNameDetailedReport();
+                template.Session = new Dictionary<string, object>()
             {
                 { "DetailedReportDataObject", detailedReportData }
             };
 
-            template.Initialize();
+                template.Initialize();
 
-            if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
-            {
-                htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(template.TransformText());
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine(resultReport.TestName);
-            }
+                if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
+                {
+                    htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(template.TransformText());
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(resultReport.TestName);
+                }
 
-            UpdateStatistics(upi, resultReport);
+                UpdateStatistics(upi, resultReport);
+            }
         }
 
         public void LogProfileResult(int upi, List<ResultReport> allTheResults, TimeSpan duration)
         {
-            durationByProfile.Add(duration);
+            lock (lockProfileOverview)
+            {
+                durationByProfile.Add(duration);
 
-            var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).ToDictionary(x => x.TestName, x => x.Result);
-            var summaryProfileData = new SharedProfileReportData() { 
-                UPI = upi, 
-                ResultSeverity_ByTestName = resultByTestName,
-                FileLinkEnd = "_" + countFilesGenerated + ".html",
-                Duration = duration
-            };
-            var template = new ProfileReport();
-            template.Session = new Dictionary<string, object>()
+                var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).ToDictionary(x => x.TestName, x => x.Result);
+                var summaryProfileData = new SharedProfileReportData()
+                {
+                    UPI = upi,
+                    ResultSeverity_ByTestName = resultByTestName,
+                    FileLinkEnd = "_" + countFilesGenerated + ".html",
+                    Duration = duration
+                };
+                var template = new ProfileReport();
+                template.Session = new Dictionary<string, object>()
             {
                 { "ProfileReportDataObject", summaryProfileData }
             };
 
-            template.Initialize();
-            htmlWriterForProfileReport.WriteLine(template.TransformText());
+                template.Initialize();
+                htmlWriterForProfileReport.WriteLine(template.TransformText());
+            }
         }
 
         private static void UpdateStatistics(int upi, ResultReport resultReport)
@@ -214,6 +225,7 @@ namespace TestMVC4App.Models
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.WRONG_VALUE, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN, 0);
             }
 
             // increase call counter

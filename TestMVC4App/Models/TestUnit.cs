@@ -112,18 +112,24 @@ namespace TestMVC4App.Models
             } 
             catch (HttpRequestException httpe)
             {
-                System.Diagnostics.Debug.WriteLine("There were problems accessing the services.");
-                System.Diagnostics.Debug.WriteLine(httpe.StackTrace);
+                if (string.IsNullOrEmpty(ErrorMessage))
+                {
+                    System.Diagnostics.Debug.WriteLine("There were problems accessing the services.");
+                    System.Diagnostics.Debug.WriteLine(httpe.StackTrace);
 
-                HttpErrorHappened = true;
-                ErrorMessage = httpe.Message;
+                    HttpErrorHappened = true;
+                    ErrorMessage = httpe.StackTrace;
+                }
             }
             catch(Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                if (string.IsNullOrEmpty(ErrorMessage))
+                {
+                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
 
-                HttpErrorHappened = true;
-                ErrorMessage = e.Message;
+                    HttpErrorHappened = false;
+                    ErrorMessage = e.StackTrace;
+                }
             }
         }
 

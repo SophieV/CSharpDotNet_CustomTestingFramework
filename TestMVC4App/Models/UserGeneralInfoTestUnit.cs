@@ -12,6 +12,7 @@ using System.Xml.XPath;
 using TestMVC4App.Templates;
 using YSM.PMS.Service.Common.DataTransfer;
 using YSM.PMS.Web.Service.Clients;
+using System.Threading.Tasks;
 
 namespace TestMVC4App.Models
 {
@@ -44,13 +45,12 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Bio_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_Titles_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_LanguageUsers_Test(newUserGeneralInfo, oldServiceData);
+            UserGeneralInfo_AltLastName_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_AltFirstName_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_AltMiddleName_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_AltLastName_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_AltSuffix_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_SuffixNames_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_CountCVs_Test(newUserGeneralInfo, oldServiceData);
-
             UserGeneralInfo_Organizations_Test(newUserGeneralInfo, oldServiceData);
 
             ComputeOverallSeverity();
@@ -360,7 +360,11 @@ namespace TestMVC4App.Models
         {
             var organizationTest = new OrganizationTestUnit(this.Master, this);
             this.Children.Add(organizationTest);
-            organizationTest.ProvideOrganizationData(userId, upi, oldServiceData.XPathSelectElements("/Faculty/facultyMember/department"), newServiceData.Organizations);
+            organizationTest.ProvideOrganizationData(userId, 
+                                                     upi, 
+                                                     oldServiceData.XPathSelectElements("/Faculty/facultyMember/department"),
+                                                     oldServiceData.XPathSelectElements("/Faculty/facultyMember/treeDepartments"), 
+                                                     newServiceData.Organizations);
             organizationTest.RunAllTests();
         }
 
