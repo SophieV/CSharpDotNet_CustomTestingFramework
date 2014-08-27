@@ -275,9 +275,9 @@ namespace TestMVC4App.Templates
             
             #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  string newValueToDisplay = newValue;
-					if(DetailedReportDataObject.OldValues.Count <=1 && DetailedReportDataObject.NewValues.Count <= 1) {
+					if(DetailedReportDataObject.OldValues.Count <= 1 && DetailedReportDataObject.NewValues.Count <= 1) {
 						string oldValue = string.Empty;
-						if(DetailedReportDataObject.OldValues.Count > 0) { oldValue = DetailedReportDataObject.OldValues.First(); }
+						if(DetailedReportDataObject.OldValues.Count > 0) { oldValue = DetailedReportDataObject.OldValues.First(); if(oldValue == null) { oldValue = string.Empty; } }
 						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue);
 						newValueToDisplay = diffHelper.Build();
 					} 

@@ -13,16 +13,7 @@ namespace TestMVC4App.Models
         public CompareStrategy(List<string> oldValues, List<string> newValues, ResultReport resultReport)
         {
             this.resultReport = resultReport;
-
-            if (oldValues != null)
-            {
-                this.resultReport.OldValues = oldValues;
-            }
-
-            if (newValues != null)
-            {
-                this.resultReport.NewValues = newValues;
-            }
+            this.resultReport.AddDetailedValues(oldValues, newValues);
         }
 
         /// <summary>

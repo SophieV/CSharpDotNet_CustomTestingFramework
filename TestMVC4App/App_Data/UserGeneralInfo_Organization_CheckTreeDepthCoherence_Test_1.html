@@ -29,34 +29,269 @@
 
 
 <tr>
-	<td class="td_main"><b>Comparing Organization Tree Depth</b><br/>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
 		<a id="12641341">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
 		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58634/GeneralInfo">User data of ID is 58634</a>
 	</td>
 	<td class="td_main" style="width: 60%;">
-		Assert.IsTrue failed. 
+		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[2]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[16]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[14]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
 				<ul>
-										<li>NULL</li>
+										<li>[UNKNOWN] - Yale University ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MCDEPT Clinical Departments ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MNEUR Clinical ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - YMG Credentialed (110193)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[L1] - Office of Cooperative Research (114820)
+															</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L3] - Neurology (108788)
+															</li>
+										<li>[L3] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L3] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L4] - Neuropsychological Services (109802)
+															</li>
+										<li>[L4] - Epilepsy Program (109857)
+															</li>
+										<li>[L4] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L5] - Neuropsychological and Psychological Assessment Service (109854)
+															</li>
 									</ul>
 			</td>
 			<td>
 				<ul>
-										<li>										110631
+										<li>										[L0] - Yale University (110762)
 					<span class="missing">[MISSING]</span>										</li>
-										<li>										113631
+										<li>										[L1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>										[L1] - Office of Cooperative Research (114820)
+															</li>
+										<li>										[L2] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - MCDEPT Clinical Departments (113631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Yale Medical Group (109563)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Neurology (108788)
+															</li>
+										<li>										[L3] - YMG Credentialed (110193)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Neurosurgery (108855)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Epilepsy Program (109857)
+															</li>
+										<li>										[L4] - Neuropsychological Services (109802)
+															</li>
+										<li>										[L4] - MNEUR Clinical (112488)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Connecticut Mental Health Center (109448)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L5] - Neuropsychological and Psychological Assessment Service (109854)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0096905</p>
+	<br/>
+	<ul>
+				<li>The new tree contains at least as many elements as the old one.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="10151776">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="error">ERROR
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58755/GeneralInfo">User data of ID is 58755</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.IsFalse failed. Comparing at level index 1
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[36]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[35]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>[UNKNOWN] - MGEN Administration ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MFIST Howard Hughes Medical Institute ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Yale University ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Central Accounts ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MYSM School Operation ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MCDEPT Clinical Departments ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Oncogenes, Tumor Suppressor Genes, and Cell Cycle Control (109908)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Molecular/Cellular Neuroscience (109919)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Research Members (110577)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Investigator (114012)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - International Research and Programs (110721)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Genetics Faculty Site Listing R-Z (114415)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Genetics Site Department Administration Listing (114417)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L1] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L1] - Global Health Initiative (110238)
+															</li>
+										<li>[L1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[L1] - Office of Cooperative Research (114820)
+															</li>
+										<li>[L2] - Yale Combined Program in the Biological and Biomedical Sciences (BBS) (109532)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L2] - Information & Biotechnology (110256)
+															</li>
+										<li>[L2] - Stem Cell Center, Yale (109569)
+															</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L3] - Neuroscience (109537)
+															</li>
+										<li>[L3] - Molecular Cell Biology, Genetics and Development (109539)
+															</li>
+										<li>[L3] - Stem Cell Genetics (113823)
+															</li>
+										<li>[L3] - Cancer Genetics & Genomics (110442)
+															</li>
+										<li>[L3] - Animal Organogenesis (110388)
+															</li>
+										<li>[L3] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L3] - Genetics (108854)
+															</li>
+										<li>[L3] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L4] - Diabetes Research Center (109834)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L4] - Tian Xu Lab (114011)
+															</li>
+										<li>[L4] - Cancer Genetics (109355)
+															</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										[UNKNOWN] - Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L0] - Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L1] - Office of Cooperative Research (114820)
+															</li>
+										<li>										[L1] - Global Health Initiative (110238)
+															</li>
+										<li>										[L1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>										[L2] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Biological and Biomedical Sciences (BBS) (109532)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Stem Cell Center, Yale (109569)
+															</li>
+										<li>										[L2] - Information & Biotechnology (110256)
+															</li>
+										<li>										[L2] - MCDEPT Clinical Departments (113631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - MYSM School Operation (113646)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Cancer Center, Yale (109631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Developmental Biology at Yale (110734)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Academic Affairs (108748)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Stem Cell Genetics (113823)
+															</li>
+										<li>										[L3] - Research Members (110577)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Neuroscience (109537)
+															</li>
+										<li>										[L3] - Genetics (108854)
+															</li>
+										<li>										[L3] - Animal Organogenesis (110388)
+															</li>
+										<li>										[L3] - Molecular Cell Biology, Genetics and Development (109539)
+															</li>
+										<li>										[L3] - International Research and Programs (110721)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Cancer Genetics & Genomics (110442)
+															</li>
+										<li>										[L3] - Central Accounts (109084)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Cancer Center (109081)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Internal Medicine (108789)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Cancer Genetics (109355)
+															</li>
+										<li>										[L4] - Genetics Faculty Site Listing R-Z (114415)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Genetics Site Department Administration Listing (114417)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Oncogenes, Tumor Suppressor Genes, and Cell Cycle Control (109908)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - MFIST Howard Hughes Medical Institute (112788)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - MGEN Administration (112651)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Molecular/Cellular Neuroscience (109919)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Diabetes Endocrinology Research Center (109834)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Tian Xu Lab (114011)
+															</li>
+										<li>										[L5] - Investigator (114012)
 					<span class="missing">[MISSING]</span>										</li>
 									</ul>
 			</td>
@@ -64,10 +299,192 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0490144</p>
+	<p>Duration : 00mn:00s:0256084</p>
 	<br/>
 	<ul>
 				<li>The old tree has more elements than the new one.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="10290564">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="success">SUCCESS
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/60863/GeneralInfo">User data of ID is 60863</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[8]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>[UNKNOWN] - FAS ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Division of Physical Sciences ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - FASEAS Chemical and Environmental Engineering (SEAS) ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Yale University ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L1] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L3] - School of Engineering and Applied Science ()
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										[L0] - Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L1] - FAS (113589)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Division of Physical Sciences (113624)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - School of Engineering and Applied Science (108840)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - FASEAS Chemical and Environmental Engineering (SEAS) (111924)
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0025427</p>
+	<br/>
+	<ul>
+				<li>The new tree contains at least as many elements as the old one.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="11091604">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="success">SUCCESS
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58810/GeneralInfo">User data of ID is 58810</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[20]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[20]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>[UNKNOWN] - MSDEPT Basic Science Departments ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Yale University ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MCMED Administration ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MOPHTH Administration ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MCDEPT Clinical Departments ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Secondary Research Research Faculty (110199)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Photo Issues1 (110671)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Still Missing (110681)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Past Presenters (114063)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Professors (114262)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Comparative Medicine Site Faculty Listing N-Z (114408)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Research-Neurobiology (115123)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] -  ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[L1] - Office of Cooperative Research (114820)
+															</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L2] -  ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>[L3] - Comparative Medicine (108744)
+															</li>
+										<li>[L3] - Ophthalmology and Visual Science (108741)
+															</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										[UNKNOWN] - Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L0] - Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L1] - Office of Cooperative Research (114820)
+															</li>
+										<li>										[L1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>										[L2] - MCDEPT Clinical Departments (113631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - MSDEPT Basic Science Departments (113629)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Dean's Workshops (114062)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L2] - Women in Medicine (114261)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Photo Issues1 (110671)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Ophthalmology and Visual Science (108741)
+															</li>
+										<li>										[L3] - Past Presenters (114063)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L3] - Comparative Medicine (108744)
+															</li>
+										<li>										[L3] - Professors (114262)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Still Missing (110681)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Secondary Research Research Faculty (110199)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Research-Neurobiology (115123)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - MOPHTH Administration (112507)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - MCMED Administration (112235)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										[L4] - Comparative Medicine Site Faculty Listing N-Z (114408)
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0025123</p>
+	<br/>
+	<ul>
+				<li>The new tree contains at least as many elements as the old one.</li><br/>
 			</ul>
 	</td>
 </tr>
