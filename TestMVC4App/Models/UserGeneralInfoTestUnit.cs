@@ -224,7 +224,10 @@ namespace TestMVC4App.Models
             {
                 foreach(var title in newServiceData.Titles)
                 {
-                    newValues.Add(title.TitleName);
+                    if (!string.IsNullOrEmpty(title.TitleName))
+                    {
+                        newValues.Add(title.TitleName);
+                    }
                 }
             }
 

@@ -95,7 +95,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
-            upiList = new List<int>() { 12641341,10151776, 10290564, 11091604 };
+            upiList = new List<int>() { 12641341,10151776, 10290564, 11091604,11472557,12149599,13132301 };
             //List<int> upiList2 = upiList.Take(1000).ToList();
             //upiList = upiList2;
 #endif
