@@ -419,7 +419,11 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids");
-            var compareStrategy = new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
+            var compareStrategy = new IdNameCollectionCompareStrategy(
+                this.oldServiceOrganizationDescriptors.Select(z => Tuple.Create<string,string>(z.ID,z.Name)).ToList(),
+                this.newServiceOrganizationDescriptors.Select(z => Tuple.Create<string, string>(z.ID, z.Name)).ToList(),
+                resultReport); 
+            //new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();

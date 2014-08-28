@@ -181,7 +181,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdNameCollectionCompareStrategy.cs" />
     <Compile Include="Models\CompareStrategy.cs" />
+    <Compile Include="Models\IdAndNameTupleComparer.cs" />
+    <Compile Include="Models\IdOrNameTupleComparer.cs" />
+    <Compile Include="Models\IdOrTrimmedNameTupleComparer.cs" />
     <Compile Include="Models\LogManager.cs" />
     <Compile Include="Models\IdentifiedDataBehavior.cs" />
     <Compile Include="Models\OrganizationTestUnit.cs" />

@@ -33,6 +33,8 @@ namespace TestMVC4App.Models
         [System.ComponentModel.Description("The old tree does not include all the organizations returned by the old service.")]
         OLD_TREE_NON_EXHAUSTIVE,
         [System.ComponentModel.Description("The new tree contains at least as many elements as the old one.")]
-        NEW_TREE_COUNT_CONSISTENT
+        NEW_TREE_COUNT_CONSISTENT,
+        [System.ComponentModel.Description("The mismatch between some entries is due to missing Id values.")]
+        MISMATCH_DUE_TO_MISSING_IDS
     }
 }
