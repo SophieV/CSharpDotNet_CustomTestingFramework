@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class IdOrTrimmedNameTupleComparer : IEqualityComparer<Tuple<string, string>>
+    public class ComparerOrganizationIdAndTrimmedName : IEqualityComparer<OrganizationTreeDescriptor>
     {
-        bool IEqualityComparer<Tuple<string, string>>.Equals(Tuple<string, string> x, Tuple<string, string> y)
+        bool IEqualityComparer<OrganizationTreeDescriptor>.Equals(OrganizationTreeDescriptor x, OrganizationTreeDescriptor y)
         {
             bool areEqual = false;
 
             // if IDs match
-            if (x.Item1 == y.Item1)
+            if (x.ID == y.ID)
             {
                 areEqual = true;
             }
 
             // if no ID on the old side and names match
-            if (string.IsNullOrEmpty(x.Item1))
+            if (string.IsNullOrEmpty(y.ID))
             {
                 string oldString = string.Empty;
                 string newString = string.Empty;
 
                 try
                 {
-                    oldString = x.Item2.Trim();
+                    oldString = y.Name.Trim();
                 }
                 catch (Exception) { }
 
                 try
                 {
-                    newString = y.Item2.Trim();
+                    newString = x.Name.Trim();
                 }
                 catch (Exception) { }
 
@@ -44,7 +42,7 @@ namespace TestMVC4App.Models
             return areEqual;
         }
 
-        int IEqualityComparer<Tuple<string, string>>.GetHashCode(Tuple<string, string> obj)
+        int IEqualityComparer<OrganizationTreeDescriptor>.GetHashCode(OrganizationTreeDescriptor obj)
         {
             return obj.ToString().ToLower().GetHashCode();
         }

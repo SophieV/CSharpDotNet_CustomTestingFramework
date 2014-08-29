@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using TestMVC4App.Models;
 
 namespace TestMVC4App.Templates

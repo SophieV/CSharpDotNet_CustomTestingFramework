@@ -42,7 +42,28 @@
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
 				<ul>
-					<# if(DetailedReportDataObject.OldValues.Count > 0) {
+					<# if(DetailedReportDataObject.OldOrganizationValues.Count > 0) {
+					string entry = string.Empty;
+					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.OldOrganizationValues) {
+						if (element.Depth < 0) {
+							entry = "[UNKNOWN] " + element.Name + " (" + element.ID + ")"; #>
+							<li><#= entry #>
+							<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
+						</li><#
+					} }
+					var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					foreach (OrganizationTreeDescriptor element in flattenedTree) {
+						entry = string.Empty;
+						for (int i = 0; i < element.Depth; i++) { entry += "-"; }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<b>"; }
+						entry += "[L" + element.Depth + "] " + element.Name + " (" + element.ID + ")";
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "</b>"; } #>
+					<li><#= entry #>
+					<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
+					</li>
+					<# } } else if(DetailedReportDataObject.OldValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (string oldValue in DetailedReportDataObject.OldValues) { #>
 					<li><# if(!string.IsNullOrEmpty(oldValue)) { #><#= oldValue #>
@@ -54,7 +75,28 @@
 			</td>
 			<td>
 				<ul>
-					<# if(DetailedReportDataObject.NewValues.Count > 0) {
+					<# if(DetailedReportDataObject.NewOrganizationValues.Count > 0) {
+					string entry = string.Empty;
+					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.NewOrganizationValues) {
+						if (element.Depth < 0) {
+							entry = "[UNKNOWN] " + element.Name + " (" + element.ID + ")"; #>
+							<li><#= entry #>
+							<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
+							</li><#
+					} }
+					var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					foreach (OrganizationTreeDescriptor element in flattenedTree2) {
+						entry = string.Empty;
+						for (int i = 0; i < element.Depth; i++) { entry += "-"; }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<b>"; }
+						entry += "[L" + element.Depth + "] " + element.Name + " (" + element.ID + ")";
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "</b>"; } #>
+					<li><#= entry #>
+					<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
+					</li>
+					<# } } else if(DetailedReportDataObject.NewValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (string newValue in DetailedReportDataObject.NewValues) { #>
 					<li><# if(!string.IsNullOrEmpty(newValue)) { #>
@@ -71,6 +113,11 @@
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
 				</ul>
+
+
+
+
+
 			</td>
 		</tr>
 		</table>

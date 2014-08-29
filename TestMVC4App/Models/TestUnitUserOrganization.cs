@@ -3,36 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.XPath;
 using YSM.PMS.Service.Common.DataTransfer;
 using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
-    public class OrganizationTreeDescriptor
-    {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public OrganizationTreeDescriptor Parent{ get; set; }
-
-        public string ParentId { get; set; }
-        public bool IsPrimary { get; set; }
-        public List<OrganizationTreeDescriptor> Children { get; set; }
-        public int Depth { get; set; }
-
-        public OrganizationTreeDescriptor()
-        {
-            this.Children = new List<OrganizationTreeDescriptor>();
-            // default value - for orphans - should not mess up the search at level index
-            this.Depth = -1;
-        }
-    }
-
-    public class OrganizationTestUnit : TestUnit
+    public class TestUnitUserOrganization : TestUnit
     {
         # region Data Provided by Parent Test Unit
 
@@ -83,7 +60,7 @@ namespace TestMVC4App.Models
             get { return Parent.newServiceURLExtensionEnding; }
         }
 
-        public OrganizationTestUnit(TestSuite parent, TestUnit bigBrother) 
+        public TestUnitUserOrganization(TestSuite parent, TestUnit bigBrother) 
             : base (parent,bigBrother)
         {
 
@@ -116,7 +93,7 @@ namespace TestMVC4App.Models
                                                  this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID).ToList());
             UserGeneralInfo_Organization_Name_Test(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name).ToList(),
                                                    this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name).ToList());
-            UserGeneralInfo_Organization_IdAndNameTogether_Test();
+            UserGeneralInfo_Organization_IdAndNameTogether_Test(this.oldServiceOrganizationDescriptors,oldTreeRoot,this.newServiceOrganizationDescriptors,newTreeRoot);
             UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
             UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
 
@@ -415,15 +392,24 @@ namespace TestMVC4App.Models
 
         #region Single Tests
 
-        private void UserGeneralInfo_Organization_IdAndNameTogether_Test()
+        private void UserGeneralInfo_Organization_IdAndNameTogether_Test(List<OrganizationTreeDescriptor> oldServiceOrganizationDescriptor, 
+                                                                         OrganizationTreeDescriptor oldTreeRoot,
+                                                                         List<OrganizationTreeDescriptor> newServiceOrganizationDescriptor,
+                                                                         OrganizationTreeDescriptor newTreeRoot)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_IdAndNameTogether_Test", "Comparing Organization Id+Name Combinations");
-            var compareStrategy = new IdNameCollectionCompareStrategy(
-                this.oldServiceOrganizationDescriptors.Select(d => Tuple.Create<string, string>((d.ID == null?string.Empty:d.ID), d.Name)).ToList(),
-                this.newServiceOrganizationDescriptors.Select(z => Tuple.Create<string, string>((z.ID == null ? string.Empty : z.ID), z.Name)).ToList(),
+            var compareStrategy = new CompareStrategyOrganization(
+                oldServiceOrganizationDescriptors,
+                oldTreeRoot,
+                newServiceOrganizationDescriptors,
+                newTreeRoot,
                 resultReport);
+            //var compareStrategy = new CompareStrategyOrganization(
+            //    this.oldServiceOrganizationDescriptors.Select(d => Tuple.Create<string, string>((d.ID == null ? string.Empty : d.ID), d.Name)).ToList(),
+            //    this.newServiceOrganizationDescriptors.Select(z => Tuple.Create<string, string>((z.ID == null ? string.Empty : z.ID), z.Name)).ToList(),
+            //    resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -443,7 +429,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids");
-            var compareStrategy = new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -463,7 +449,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Name_Test", "Comparing Organization Names");
-            var compareStrategy = new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -517,7 +503,8 @@ namespace TestMVC4App.Models
                     resultReport.UpdateResult(ResultSeverityType.ERROR);
                     resultReport.ErrorMessage = e.Message;
                     resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN);
-                    resultReport.AddDetailedValues(PrepareTreeForViewing(oldTree, oldTreeRoot, index),PrepareTreeForViewing(newTree, newTreeRoot, index));
+                    resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
+                    resultReport.TreeComparisonIndexError = index;
 
                     if (resultReport.Result == ResultSeverityType.ERROR)
                     {
@@ -531,7 +518,7 @@ namespace TestMVC4App.Models
             if(resultReport.Result == ResultSeverityType.SUCCESS)
             {
                 resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT);
-                resultReport.AddDetailedValues(PrepareTreeForViewing(oldTree, oldTreeRoot),PrepareTreeForViewing(newTree, newTreeRoot));
+                resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
             }
 
             watch.Stop();
@@ -544,50 +531,6 @@ namespace TestMVC4App.Models
                                               this.Master.BuildOldServiceFullURL(upi),
                                               this.BuildNewServiceFullURL(userId),
                                               resultReport);
-        }
-
-        private static List<string> PrepareTreeForViewing(List<OrganizationTreeDescriptor> values, OrganizationTreeDescriptor treeRoot, int indexError = -1)
-        {
-            List<string> treeIntoCollection = new List<string>();
-
-            // collect the entries that are not part of the tree
-            treeIntoCollection.AddRange(values.Where(z => z.Depth == -1).Select(z => "[UNKNOWN]" + " - " + z.Name + " (" + z.ID + ")").ToList());
-
-            // unroll the tree
-            var myList = new List<string>();
-            PrintChildren(treeRoot, ref myList, indexError);
-            treeIntoCollection.AddRange(myList);
-
-            return treeIntoCollection;
-        }
-
-        private static void PrintChildren(OrganizationTreeDescriptor element, ref List<string> childrenPrint, int indexError)
-        {
-            string entry = string.Empty;
-
-            for (int i = 0; i < element.Depth; i++ )
-            {
-                entry += "-";
-            }
-
-            if (indexError > 0 && element.Depth == indexError)
-            {
-                entry += "<b>";
-            }
-
-            entry += "[L" + element.Depth + "]" + element.Name + " (" + element.ID + ")";
-
-            if (indexError > 0 && element.Depth == indexError)
-            {
-                entry += "</b>";
-            }
-
-            childrenPrint.Add(entry);
-
-            foreach (var child in element.Children)
-            {
-                PrintChildren(child, ref childrenPrint, indexError);
-            }
         }
 
         private void UserGeneralInfo_Organization_CheckIsPrimary_Test(List<OrganizationTreeDescriptor> oldTree, List<OrganizationTreeDescriptor> newTree)
@@ -618,7 +561,7 @@ namespace TestMVC4App.Models
             }
 
             // this comparison can work because all the primary departments have a name assigned in the old service ! NOPE because the name may change...
-            var collectionComparison = new SimpleCollectionCompareStrategy(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
+            var collectionComparison = new CompareStrategyStringCollection(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
             collectionComparison.Investigate();
 
             watch.Stop();

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
@@ -14,6 +11,14 @@ namespace TestMVC4App.Models
         {
             this.resultReport = resultReport;
             this.resultReport.AddDetailedValues(oldValues, newValues);
+        }
+
+        public CompareStrategy(List<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
+                               List<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot, 
+                               ResultReport resultReport)
+        {
+            this.resultReport = resultReport;
+            this.resultReport.AddDetailedValues(oldValues, oldTreeRoot, newValues, newTreeRoot);
         }
 
         /// <summary>

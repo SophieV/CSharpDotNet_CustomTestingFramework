@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
@@ -21,7 +19,17 @@ namespace TestMVC4App.Models
 
         public List<string> OldValues { get; private set; }
 
+        public List<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
+
+        public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
+
         public List<string> NewValues { get; private set; }
+
+        public List<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
+
+        public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
+
+        public int TreeComparisonIndexError { get; set; }
 
         public ResultReport(string testName, string testDescription)
         {
@@ -31,6 +39,11 @@ namespace TestMVC4App.Models
             this.IdentifedDataBehaviors = new List<IdentifiedDataBehavior>();
             this.OldValues = new List<string>();
             this.NewValues = new List<string>();
+            this.OldOrganizationValues = new List<OrganizationTreeDescriptor>();
+            this.NewOrganizationValues = new List<OrganizationTreeDescriptor>();
+            this.OldTreeRoot = null;
+            this.NewTreeRoot = null;
+            this.TreeComparisonIndexError = -1;
             this.Result = ResultSeverityType.SUCCESS;
         }
 
@@ -38,6 +51,11 @@ namespace TestMVC4App.Models
         {
             this.OldValues.Clear();
             this.NewValues.Clear();
+            this.OldOrganizationValues.Clear();
+            this.NewOrganizationValues.Clear();
+            this.TreeComparisonIndexError = -1;
+            this.OldTreeRoot = null;
+            this.NewTreeRoot = null;
             this.Result = ResultSeverityType.SUCCESS;
             this.ErrorMessage = string.Empty;
             this.IdentifedDataBehaviors.Clear();
@@ -53,6 +71,21 @@ namespace TestMVC4App.Models
             if (newValues != null)
             {
                 this.NewValues = newValues;
+            }
+        }
+
+        public void AddDetailedValues(List<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, List<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot)
+        {
+            if (oldValues != null)
+            {
+                this.OldOrganizationValues = oldValues;
+                this.OldTreeRoot = oldTreeRoot;
+            }
+
+            if (newValues != null)
+            {
+                this.NewOrganizationValues = newValues;
+                this.NewTreeRoot = newTreeRoot;
             }
         }
 

@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class IdNameCollectionCompareStrategy : CompareStrategy
+    public class CompareStrategyOrganization : CompareStrategy
     {
-        private List<Tuple<string, string>> oldList;
-        private List<Tuple<string, string>> newList;
+        private List<OrganizationTreeDescriptor> oldList;
+        private List<OrganizationTreeDescriptor> newList;
         private int leftOversOldCount = -1;
 
-        public IdNameCollectionCompareStrategy(List<Tuple<string,string>> listOldIdsAndNames,
-                                               List<Tuple<string, string>> listNewIdsAndNames,
-                                               ResultReport resultReport)
-            : base(listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.Item1) || !string.IsNullOrEmpty(d.Item2)).Select(d => d.Item1 + " - " + d.Item2).ToList(),
-                                                      listNewIdsAndNames.Where(x => x.Item1 != null || x.Item2 != null).Select(x => x.Item1 + " - " + x.Item2).ToList(),
-                                                      resultReport)
+        public CompareStrategyOrganization(List<OrganizationTreeDescriptor> listOldIdsAndNames, OrganizationTreeDescriptor oldTreeRoot, 
+                                           List<OrganizationTreeDescriptor> listNewIdsAndNames, OrganizationTreeDescriptor newTreeRoot, 
+                                           ResultReport resultReport)
+            : base(listOldIdsAndNames, oldTreeRoot,listNewIdsAndNames, newTreeRoot,resultReport)
         {
-            this.oldList = listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.Item1) || !string.IsNullOrEmpty(d.Item2)).ToList();
-            this.newList = listNewIdsAndNames.Where(z => !string.IsNullOrEmpty(z.Item1) || !string.IsNullOrEmpty(z.Item2)).ToList();
+            this.oldList = listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.ID) || !string.IsNullOrEmpty(d.Name)).ToList();
+            this.newList = listNewIdsAndNames.Where(z => !string.IsNullOrEmpty(z.ID) || !string.IsNullOrEmpty(z.Name)).ToList();
         }
         public override void Investigate()
         {
@@ -61,10 +56,19 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            var potentialDuplicates = newList.GroupBy(v => new { v.Item1, v.Item2 }).Where(g => g.Count() > 1);
+            var potentialDuplicates = newList.GroupBy(v => new { v.ID, v.Name }).Where(g => g.Count() > 1).Select( g => new { GroupName = g.Key, Members = g});
 
             if (potentialDuplicates.Count() > 0)
             {
+
+                foreach (var duplicateGroup in potentialDuplicates)
+                {
+                    foreach(var duplicatedMember in duplicateGroup.Members)
+                    {
+                        duplicatedMember.IsDuplicate = true;
+                    }
+                }
+
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
@@ -94,8 +98,8 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            var leftOversOld = oldList.Except(newList, new IdAndNameTupleComparer());
-            var leftOversNew = newList.Except(oldList, new IdAndNameTupleComparer());
+            var leftOversOld = oldList.Except(newList, new ComparerOrganizationIdAndName());
+            var leftOversNew = newList.Except(oldList, new ComparerOrganizationIdAndName());
 
             this.leftOversOldCount = leftOversOld.Count();
             var leftOversNewCount = leftOversNew.Count();
@@ -107,6 +111,17 @@ namespace TestMVC4App.Models
             }
             else
             {
+                foreach (OrganizationTreeDescriptor missingEntry in leftOversOld)
+                {
+                    missingEntry.IsMissing = true;
+                }
+
+                foreach (OrganizationTreeDescriptor missingEntry in leftOversNew)
+                {
+                    missingEntry.IsMissing = true;
+                }
+
+
                 this.resultReport.UpdateResult(ResultSeverityType.ERROR);
                 this.resultReport.ErrorMessage = "The list of ids and names compared are not equal";
             }
@@ -119,17 +134,39 @@ namespace TestMVC4App.Models
             bool shouldContinueTesting = true;
 
             // we care about matching entries from the old service
-            var comparer = new IdOrNameTupleComparer();
-            var leftOvers = oldList.Except(newList, new IdOrNameTupleComparer());
+            var comparer = new ComparerOrganizationIdOrName();
+            var leftOvers = oldList.Except(newList, new ComparerOrganizationIdOrName());
+
+            // but we will do other way around to maintain consistency in display
+            var leftOversNew = newList.Except(oldList, new ComparerOrganizationIdOrName());
 
             if (leftOvers.Count() < leftOversOldCount)
             {
+                // set missing entries back to not missing...
+                var listSetToMissing = oldList.Where(x => x.IsMissing == true);
+                foreach(var missingEntry in listSetToMissing)
+                {
+                    if(!leftOvers.Contains(missingEntry))
+                    {
+                        missingEntry.IsMissing = false;
+                    }
+                }
+
+                listSetToMissing = newList.Where(x => x.IsMissing == true);
+                foreach (var missingEntry in listSetToMissing)
+                {
+                    if (!leftOversNew.Contains(missingEntry))
+                    {
+                        missingEntry.IsMissing = false;
+                    }
+                }
+
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS);
 
                 if (leftOvers.Count() == 0)
                 {
-                    this.resultReport.UpdateResult(ResultSeverityType.ERROR_WITH_EXPLANATION);
+                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
                     this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }
@@ -143,16 +180,37 @@ namespace TestMVC4App.Models
             bool shouldContinueTesting = true;
 
             // we care about matching entries from the old service
-            var leftOvers = oldList.Except(newList, new IdOrTrimmedNameTupleComparer());
+            var leftOvers = oldList.Except(newList, new ComparerOrganizationIdAndTrimmedName());
+
+            var leftOversNew = newList.Except(oldList, new ComparerOrganizationIdAndTrimmedName());
 
             if (leftOvers.Count() < leftOversOldCount)
             {
+                // set missing entries back to not missing...
+                var listSetToMissing = oldList.Where(x => x.IsMissing == true);
+                foreach (var missingEntry in listSetToMissing)
+                {
+                    if (!leftOvers.Contains(missingEntry))
+                    {
+                        missingEntry.IsMissing = false;
+                    }
+                }
+
+                listSetToMissing = newList.Where(x => x.IsMissing == true);
+                foreach (var missingEntry in listSetToMissing)
+                {
+                    if (!leftOversNew.Contains(missingEntry))
+                    {
+                        missingEntry.IsMissing = false;
+                    }
+                }
+
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
 
                 if (leftOvers.Count() == 0)
                 {
-                    this.resultReport.UpdateResult(ResultSeverityType.ERROR_WITH_EXPLANATION);
+                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
                     this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }

@@ -1,15 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class SimpleCollectionCompareStrategy : CompareStrategy
+    public class CompareStrategyStringCollection : CompareStrategy
     {
-        public SimpleCollectionCompareStrategy(List<string> oldValues, List<string> newValues, ResultReport resultReport) 
+        public CompareStrategyStringCollection(List<string> oldValues, List<string> newValues, ResultReport resultReport) 
             : base(oldValues,newValues,resultReport)
         {
 

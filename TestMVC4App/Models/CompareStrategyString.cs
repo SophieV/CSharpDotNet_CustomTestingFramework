@@ -1,18 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class SimpleStringCompareStrategy : CompareStrategy
+    public class CompareStrategyString : CompareStrategy
     {
         private string oldValue = string.Empty;
         private string newValue = string.Empty;
 
-        public SimpleStringCompareStrategy(string oldValue, string newValue, ResultReport resultReport) 
+        public CompareStrategyString(string oldValue, string newValue, ResultReport resultReport) 
             : base (new List<string>() {oldValue}, new List<string>() {newValue}, resultReport)
         {
             if (!string.IsNullOrEmpty(oldValue))

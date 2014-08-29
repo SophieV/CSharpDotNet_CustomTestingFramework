@@ -1,26 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
-using System.Web;
 using System.Web.Configuration;
-using System.Web.UI;
 using System.Xml.Linq;
-using System.Xml.XPath;
-using System.ComponentModel.DataAnnotations;
-using TestMVC4App.Templates;
 using YSM.PMS.Web.Service.Clients;
-using System.Reflection;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace TestMVC4App.Models
 {
-    public class UserTestSuite : TestSuite
+    public class TestSuiteUser : TestSuite
     {
         public override string newServiceURLBase
         {
@@ -158,14 +147,14 @@ namespace TestMVC4App.Models
                             var usersClient = new UsersClient();
 
                             // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
-                            UserBasicInfoTestUnit userBasicInfoTest = new UserBasicInfoTestUnit(this);
+                            TestUnitUserBasicInfo userBasicInfoTest = new TestUnitUserBasicInfo(this);
                             allTheTests.Add(userBasicInfoTest);
                             userBasicInfoTest.ProvideUserData(oldServiceXMLOutputDocument, usersClient, upi);
                             userBasicInfoTest.RunAllTests();
 
                             int userId = userBasicInfoTest.MappedUserId;
 
-                            UserGeneralInfoTestUnit userGeneralInfoTest = new UserGeneralInfoTestUnit(this);
+                            TestUnitUserGeneralInfo userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
                             allTheTests.Add(userGeneralInfoTest);
                             userGeneralInfoTest.ProvideUserData(oldServiceXMLOutputDocument, upi, usersClient, userId);
                             userGeneralInfoTest.RunAllTests();

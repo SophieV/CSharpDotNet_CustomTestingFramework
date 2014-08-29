@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
 using YSM.PMS.Web.Service.Clients;
@@ -12,7 +11,7 @@ namespace TestMVC4App.Models
     /// returned by the call to the <see cref="YSM.PMS.Service.Common.DataTransfer.IUserService.GetUserById()"/> method.
     /// </summary>
     /// <remarks>It should be called first, as it contains the UserId needed for the next tests.</remarks>
-    public class UserBasicInfoTestUnit : TestUnit
+    public class TestUnitUserBasicInfo : TestUnit
     {
         private UsersClient newServiceAccessor;
         private XDocument oldServiceData;
@@ -33,7 +32,7 @@ namespace TestMVC4App.Models
         /// </summary>
         public int MappedUserId { get; set; }
 
-        public UserBasicInfoTestUnit(TestSuite parent) : base(parent)
+        public TestUnitUserBasicInfo(TestSuite parent) : base(parent)
         {
 
         }
@@ -86,7 +85,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_UPI_Test", "Comparing UPI");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/UPI");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Upi.ToString(), resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Upi.ToString(), resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -111,7 +110,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_Gender_Test", "Comparing Gender");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/gender");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Gender, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Gender, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -133,7 +132,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_Idx_Test", "Comparing Idx");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Idx");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Idx, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Idx, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -155,7 +154,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_LicenseNumber_Test", "Comparing License Number");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/LicenseNumber");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.LicenseNumber, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.LicenseNumber, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -177,7 +176,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_LastName_Test", "Comparing LastName");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.LastName, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.LastName, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -199,7 +198,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_FirstName_Test", "Comparing FirstName");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.FirstName, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.FirstName, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -221,7 +220,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_MiddleName_Test", "Comparing MiddleName");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.MiddleName, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -243,7 +242,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_Email_Test", "Comparing Email");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/emailAddress");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.YaleEmail, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.YaleEmail, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -265,7 +264,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_NetId_Test", "Comparing NetId");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/netID");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.NetId, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.NetId, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -287,7 +286,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_PageName_Test", "Comparing PageName");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/pageName");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.PageName, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.PageName, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -309,7 +308,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_Suffix_Test", "Comparing Suffix");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Suffix, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Suffix, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -331,7 +330,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserBasicInfo_Npi_Test", "Comparing Npi");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Npi");
-            var compareStrategy = new SimpleStringCompareStrategy(oldValue, newServiceData.Npi, resultReport);
+            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Npi, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();

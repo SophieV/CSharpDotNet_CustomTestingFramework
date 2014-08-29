@@ -124,20 +124,12 @@ namespace TestMVC4App.Models
             {
                 duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
 
-                var detailedReportData = new SharedDetailedReportData
+                var detailedReportData = new SharedDetailedReportData(resultReport)
                 {
-                    ErrorMessage = resultReport.ErrorMessage,
-                    TestName = resultReport.TestName,
                     UserId = userId,
                     UPI = upi,
-                    Result = resultReport.Result,
                     OldUrl = oldUrl,
-                    NewUrl = newServiceUrl,
-                    TestDescription = resultReport.TestDescription,
-                    IdentifiedDataBehaviors = resultReport.IdentifedDataBehaviors,
-                    OldValues = resultReport.OldValues,
-                    NewValues = resultReport.NewValues,
-                    Duration = resultReport.Duration
+                    NewUrl = newServiceUrl
                 };
 
                 var template = new TestNameDetailedReport();

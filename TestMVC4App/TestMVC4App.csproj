@@ -181,26 +181,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdNameCollectionCompareStrategy.cs" />
+    <Compile Include="Models\CompareStrategyOrganization.cs" />
     <Compile Include="Models\CompareStrategy.cs" />
-    <Compile Include="Models\IdAndNameTupleComparer.cs" />
-    <Compile Include="Models\IdOrNameTupleComparer.cs" />
-    <Compile Include="Models\IdOrTrimmedNameTupleComparer.cs" />
+    <Compile Include="Models\ComparerOrganizationIdAndName.cs" />
+    <Compile Include="Models\ComparerOrganizationIdOrName.cs" />
+    <Compile Include="Models\ComparerOrganizationIdAndTrimmedName.cs" />
+    <Compile Include="Models\LinqTreeExtension.cs" />
     <Compile Include="Models\LogManager.cs" />
     <Compile Include="Models\IdentifiedDataBehavior.cs" />
-    <Compile Include="Models\OrganizationTestUnit.cs" />
+    <Compile Include="Models\OrganizationTreeDescriptor.cs" />
+    <Compile Include="Models\TestUnitUserOrganization.cs" />
     <Compile Include="Models\ResultReport.cs" />
     <Compile Include="Models\ResultSeverityType.cs" />
-    <Compile Include="Models\SimpleCollectionCompareStrategy.cs" />
-    <Compile Include="Models\SimpleStringCompareStrategy.cs" />
+    <Compile Include="Models\CompareStrategyStringCollection.cs" />
+    <Compile Include="Models\CompareStrategyString.cs" />
     <Compile Include="Models\TestSuite.cs" />
     <Compile Include="Models\TestUnit.cs" />
     <Compile Include="Models\TimeoutExtendedWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Models\UserBasicInfoTestUnit.cs" />
-    <Compile Include="Models\UserGeneralInfoTestUnit.cs" />
-    <Compile Include="Models\UserTestSuite.cs" />
+    <Compile Include="Models\TestUnitUserBasicInfo.cs" />
+    <Compile Include="Models\TestUnitUserGeneralInfo.cs" />
+    <Compile Include="Models\TestSuiteUser.cs" />
     <Compile Include="Templates\ProfileReport_Footer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
