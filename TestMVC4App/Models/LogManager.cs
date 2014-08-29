@@ -85,6 +85,7 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_CountCVs_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Id_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Name_Test");
+            allTestNames.Add("UserGeneralInfo_Organization_IdAndNameTogether_Test");
             allTestNames.Add("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test");
             allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
 
@@ -228,6 +229,7 @@ namespace TestMVC4App.Models
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_NON_EXHAUSTIVE, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS, 0);
             }
 
             // increase call counter

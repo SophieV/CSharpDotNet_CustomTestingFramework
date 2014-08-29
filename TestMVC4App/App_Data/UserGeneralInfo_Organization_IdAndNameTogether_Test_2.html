@@ -1,0 +1,314 @@
+<html>
+<head>
+<script type="text/css" href="filtergrid.css"></script>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.th_main {background-color:lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
+.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="11472557">UserGeneralInfo_Organization_IdAndNameTogether_Test</a>
+	</td>
+			<td class="error">ERROR
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58740/GeneralInfo">User data of ID is 58740</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[27]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[30]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>109532 - Yale Combined Program in the Biological and Biomedical Sciences (BBS)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>109534 - Immunology
+															</li>
+										<li>109535 - Microbiology
+															</li>
+										<li>110429 - Biochemistry, Biophysics and Structural Biology
+															</li>
+										<li>113592 - MYSM School Of Medicine
+															</li>
+										<li>110446 - Molecular Virology
+															</li>
+										<li>110083 - Structural Biology
+															</li>
+										<li>109083 - Molecular Biophysics and Biochemistry
+					<span class="missing">[MISSING]</span>										</li>
+										<li>109384 - Structural Biology
+															</li>
+										<li>109445 - Mechanisms of Viral Pathogenesis
+															</li>
+										<li>109357 - Molecular Virology
+															</li>
+										<li>114820 - Office of Cooperative Research
+															</li>
+										<li> - MMBB F A S Admin
+					<span class="missing">[MISSING]</span>										</li>
+										<li> - MSDEPT Basic Science Departments
+					<span class="missing">[MISSING]</span>										</li>
+										<li> - Yale University
+					<span class="missing">[MISSING]</span>										</li>
+										<li>109882 - Mounting an Immune Response
+															</li>
+										<li>109886 - Infectious Disease and Host-Pathogen Interaction
+															</li>
+										<li>109887 - Structural Analysis of Immune System Receptors and Effectors
+															</li>
+										<li>109952 - Virology laboratories
+															</li>
+										<li>110460 - Protein Folding, Dynamics and Degradation
+															</li>
+										<li>110463 - Virology, Infection and Immunity
+															</li>
+										<li>110464 - crystallography, NMR, mass spectrometry, cryo-electron...faculty
+															</li>
+										<li>110577 - Research Members
+															</li>
+										<li>113857 - Primary Faculty
+															</li>
+										<li>109891 - Immunology & Host Response
+															</li>
+										<li>109889 - Viruses
+															</li>
+										<li>110631 - Office of Student Research
+															</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										110631 - Office of Student Research
+															</li>
+										<li>										110429 - Biochemistry, Biophysics and Structural Biology
+															</li>
+										<li>										113592 - MYSM School Of Medicine
+															</li>
+										<li>										113857 - Primary Faculty
+															</li>
+										<li>										114820 - Office of Cooperative Research
+															</li>
+										<li>										110083 - Structural Biology
+															</li>
+										<li>										109532 - Biological and Biomedical Sciences (BBS)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										110446 - Molecular Virology
+															</li>
+										<li>										110577 - Research Members
+															</li>
+										<li>										110463 - Virology, Infection and Immunity
+															</li>
+										<li>										109534 - Immunology
+															</li>
+										<li>										109952 - Virology laboratories
+															</li>
+										<li>										110460 - Protein Folding, Dynamics and Degradation
+															</li>
+										<li>										109891 - Immunology & Host Response
+															</li>
+										<li>										109886 - Infectious Disease and Host-Pathogen Interaction
+															</li>
+										<li>										110464 - crystallography, NMR, mass spectrometry, cryo-electron...faculty
+															</li>
+										<li>										109384 - Structural Biology
+															</li>
+										<li>										109083 - MB and B
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										109887 - Structural Analysis of Immune System Receptors and Effectors
+															</li>
+										<li>										109882 - Mounting an Immune Response
+															</li>
+										<li>										109357 - Molecular Virology
+															</li>
+										<li>										112288 - MMBB F A S Admin
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										109445 - Mechanisms of Viral Pathogenesis
+															</li>
+										<li>										109889 - Viruses
+															</li>
+										<li>										109535 - Microbiology
+															</li>
+										<li>										113629 - MSDEPT Basic Science Departments
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										110762 - Yale University
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										109631 - Cancer Center, Yale
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										109081 - Cancer Center
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										113631 - Clinical Departments
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:5223037</p>
+	<br/>
+	<ul>
+				<li>The mismatch between some entries is due to missing Id values.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="12149599">UserGeneralInfo_Organization_IdAndNameTogether_Test</a>
+	</td>
+			<td class="error">ERROR
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58861/GeneralInfo">User data of ID is 58861</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[8]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[8]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>110627 - SBIRT Training in Yale Residency Programs
+															</li>
+										<li> - Yale School of Nursing
+					<span class="missing">[MISSING]</span>										</li>
+										<li> - EDD Administration
+					<span class="missing">[MISSING]</span>										</li>
+										<li> - Yale University
+					<span class="missing">[MISSING]</span>										</li>
+										<li> - School Of Nursing
+					<span class="missing">[MISSING]</span>										</li>
+										<li> - YSNACA Operations
+					<span class="missing">[MISSING]</span>										</li>
+										<li>109564 - YMG Website
+															</li>
+										<li>109563 - Yale Medical Group
+															</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										109563 - Yale Medical Group
+															</li>
+										<li>										110627 - SBIRT Training in Yale Residency Programs
+															</li>
+										<li>										109564 - YMG Website
+															</li>
+										<li>										112990 - YSNACA Operations
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										108932 - EDD Administration
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										113597 - School Of Nursing
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										110762 - Yale University
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										113592 - Yale School of Medicine
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0179197</p>
+	<br/>
+	<ul>
+				<li>The mismatch between some entries is due to missing Id values.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="13132301">UserGeneralInfo_Organization_IdAndNameTogether_Test</a>
+	</td>
+			<td class="false_positive">FALSE_POSITIVE
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58862/GeneralInfo">User data of ID is 58862</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>113592 - MYSM School Of Medicine
+															</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										113592 - MYSM School Of Medicine
+															</li>
+										<li>										112590 - MPSY Ribicoff CNRU
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										109077 - Psychiatry
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										113631 - MCDEPT Clinical Departments
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										110762 - Yale University
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:2518966</p>
+	<br/>
+	<ul>
+				<li>All the entries of the old service are found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+	<script language="javascript" type="text/javascript">
+	var tableFilters = {
+		btn: true,
+		col_0: "none",
+		col_2: "select",
+		btn_text: "  >  "
+	}
+	setFilterGrid("individual_test_results");
+</script>
+</table>
+</body>
+</html>

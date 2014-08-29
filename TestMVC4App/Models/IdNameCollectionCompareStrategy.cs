@@ -10,17 +10,17 @@ namespace TestMVC4App.Models
     {
         private List<Tuple<string, string>> oldList;
         private List<Tuple<string, string>> newList;
-        private int countPerfectMatchIdNameLeftoversOld = 0;
+        private int leftOversOldCount = -1;
 
         public IdNameCollectionCompareStrategy(List<Tuple<string,string>> listOldIdsAndNames,
                                                List<Tuple<string, string>> listNewIdsAndNames,
-                                               ResultReport resultReport) 
-                                               : base(listOldIdsAndNames.Select(x=> x.Item1 + " - " + x.Item2).ToList(),
-                                                      listNewIdsAndNames.Select(x => x.Item1 + " - " + x.Item2).ToList(),
+                                               ResultReport resultReport)
+            : base(listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.Item1) || !string.IsNullOrEmpty(d.Item2)).Select(d => d.Item1 + " - " + d.Item2).ToList(),
+                                                      listNewIdsAndNames.Where(x => x.Item1 != null || x.Item2 != null).Select(x => x.Item1 + " - " + x.Item2).ToList(),
                                                       resultReport)
         {
-            this.oldList = listOldIdsAndNames.Where(z=> z.Item1 != null && z.Item2 != null).ToList();
-            this.newList = listNewIdsAndNames.Where(z => z.Item1 != null && z.Item2 != null).ToList();
+            this.oldList = listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.Item1) || !string.IsNullOrEmpty(d.Item2)).ToList();
+            this.newList = listNewIdsAndNames.Where(z => !string.IsNullOrEmpty(z.Item1) || !string.IsNullOrEmpty(z.Item2)).ToList();
         }
         public override void Investigate()
         {
@@ -49,6 +49,11 @@ namespace TestMVC4App.Models
             if (keepGoing)
             {
                 keepGoing = AreTheMismatchesDueToTrailingSpaces();
+            }
+
+            if (keepGoing)
+            {
+                keepGoing = AreAllTheOldValuesFoundOnTheNewSide();
             }
         }
 
@@ -92,16 +97,18 @@ namespace TestMVC4App.Models
             var leftOversOld = oldList.Except(newList, new IdAndNameTupleComparer());
             var leftOversNew = newList.Except(oldList, new IdAndNameTupleComparer());
 
-            if (leftOversOld.Count() == 0 && leftOversNew.Count() == 0)
+            this.leftOversOldCount = leftOversOld.Count();
+            var leftOversNewCount = leftOversNew.Count();
+
+            if (this.leftOversOldCount == 0 && leftOversNewCount == 0)
             {
                 this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
             }
             else
             {
-                countPerfectMatchIdNameLeftoversOld = leftOversOld.Count();
                 this.resultReport.UpdateResult(ResultSeverityType.ERROR);
-                this.resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml("The list of ids and names compared are not equal");
+                this.resultReport.ErrorMessage = "The list of ids and names compared are not equal";
             }
 
             return shouldContinueTesting;
@@ -112,9 +119,10 @@ namespace TestMVC4App.Models
             bool shouldContinueTesting = true;
 
             // we care about matching entries from the old service
-            var leftOvers = oldList.Concat(newList).Distinct(new IdOrNameTupleComparer());
+            var comparer = new IdOrNameTupleComparer();
+            var leftOvers = oldList.Except(newList, new IdOrNameTupleComparer());
 
-            if (leftOvers.Count() < countPerfectMatchIdNameLeftoversOld)
+            if (leftOvers.Count() < leftOversOldCount)
             {
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS);
@@ -137,7 +145,7 @@ namespace TestMVC4App.Models
             // we care about matching entries from the old service
             var leftOvers = oldList.Except(newList, new IdOrTrimmedNameTupleComparer());
 
-            if (leftOvers.Count() < countPerfectMatchIdNameLeftoversOld)
+            if (leftOvers.Count() < leftOversOldCount)
             {
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
@@ -148,6 +156,19 @@ namespace TestMVC4App.Models
                     this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool AreAllTheOldValuesFoundOnTheNewSide()
+        {
+            bool shouldContinueTesting = true;
+
+            if (this.leftOversOldCount > -1 && this.leftOversOldCount < 1)
+            {
+                this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
             }
 
             return shouldContinueTesting;

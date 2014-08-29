@@ -116,6 +116,7 @@ namespace TestMVC4App.Models
                                                  this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID).ToList());
             UserGeneralInfo_Organization_Name_Test(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name).ToList(),
                                                    this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name).ToList());
+            UserGeneralInfo_Organization_IdAndNameTogether_Test();
             UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
             UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
 
@@ -414,16 +415,35 @@ namespace TestMVC4App.Models
 
         #region Single Tests
 
+        private void UserGeneralInfo_Organization_IdAndNameTogether_Test()
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserGeneralInfo_Organization_IdAndNameTogether_Test", "Comparing Organization Id+Name Combinations");
+            var compareStrategy = new IdNameCollectionCompareStrategy(
+                this.oldServiceOrganizationDescriptors.Select(d => Tuple.Create<string, string>((d.ID == null?string.Empty:d.ID), d.Name)).ToList(),
+                this.newServiceOrganizationDescriptors.Select(z => Tuple.Create<string, string>((z.ID == null ? string.Empty : z.ID), z.Name)).ToList(),
+                resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(userId),
+                                              resultReport);
+        }
+
         private void UserGeneralInfo_Organization_Id_Test(List<string> oldValues, List<string> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids");
-            var compareStrategy = new IdNameCollectionCompareStrategy(
-                this.oldServiceOrganizationDescriptors.Select(z => Tuple.Create<string,string>(z.ID,z.Name)).ToList(),
-                this.newServiceOrganizationDescriptors.Select(z => Tuple.Create<string, string>(z.ID, z.Name)).ToList(),
-                resultReport); 
-            //new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
+            var compareStrategy = new SimpleCollectionCompareStrategy(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();

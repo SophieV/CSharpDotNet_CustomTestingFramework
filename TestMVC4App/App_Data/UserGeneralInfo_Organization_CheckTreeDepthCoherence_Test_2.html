@@ -1,0 +1,334 @@
+<html>
+<head>
+<script type="text/css" href="filtergrid.css"></script>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.th_main {background-color:lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
+.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="11472557">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="error">ERROR
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58740/GeneralInfo">User data of ID is 58740</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.IsFalse failed. Comparing at level index 1
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[33]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[30]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>[UNKNOWN] - MMBB F A S Admin ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - MSDEPT Basic Science Departments ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Yale University ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Mounting an Immune Response (109882)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Infectious Disease and Host-Pathogen Interaction (109886)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Structural Analysis of Immune System Receptors and Effectors (109887)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Virology laboratories (109952)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Protein Folding, Dynamics and Degradation (110460)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Virology, Infection and Immunity (110463)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - crystallography, NMR, mass spectrometry, cryo-electron...faculty (110464)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Research Members (110577)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Primary Faculty (113857)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Immunology & Host Response (109891)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Viruses (109889)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>-<b>[L1] ()</b>
+					<span class="missing">[MISSING]</span>										</li>
+										<li>--[L2]Yale Combined Program in the Biological and Biomedical Sciences (BBS) (109532)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>---[L3]Immunology (109534)
+															</li>
+										<li>---[L3]Microbiology (109535)
+															</li>
+										<li>---[L3]Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>-<b>[L1]MYSM School Of Medicine (113592)</b>
+															</li>
+										<li>--[L2] ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>---[L3]Molecular Virology (110446)
+															</li>
+										<li>--[L2]Structural Biology (110083)
+															</li>
+										<li>--[L2] ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>---[L3]Molecular Biophysics and Biochemistry (109083)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>----[L4]Structural Biology (109384)
+															</li>
+										<li>----[L4]Mechanisms of Viral Pathogenesis (109445)
+															</li>
+										<li>--[L2] ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>---[L3] ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>----[L4]Molecular Virology (109357)
+															</li>
+										<li>-<b>[L1]Office of Cooperative Research (114820)</b>
+															</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										[L0]Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										-<b>[L1]MYSM School Of Medicine (113592)</b>
+															</li>
+										<li>										--[L2]Office of Student Research (110631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]Structural Biology (110083)
+															</li>
+										<li>										--[L2]Biological and Biomedical Sciences (BBS) (109532)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>										----[L4]Virology, Infection and Immunity (110463)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Protein Folding, Dynamics and Degradation (110460)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]crystallography, NMR, mass spectrometry, cryo-electron...faculty (110464)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]Immunology (109534)
+															</li>
+										<li>										----[L4]Infectious Disease and Host-Pathogen Interaction (109886)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Structural Analysis of Immune System Receptors and Effectors (109887)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Mounting an Immune Response (109882)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]Microbiology (109535)
+															</li>
+										<li>										----[L4]Immunology & Host Response (109891)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Viruses (109889)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]MSDEPT Basic Science Departments (113629)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]MB and B (109083)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Primary Faculty (113857)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Structural Biology (109384)
+															</li>
+										<li>										----[L4]MMBB F A S Admin (112288)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Mechanisms of Viral Pathogenesis (109445)
+															</li>
+										<li>										--[L2]Cancer Center, Yale (109631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]Molecular Virology (110446)
+															</li>
+										<li>										---[L3]Research Members (110577)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]Clinical Departments (113631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]Cancer Center (109081)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]Molecular Virology (109357)
+															</li>
+										<li>										-----[L5]Virology laboratories (109952)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										-<b>[L1]Office of Cooperative Research (114820)</b>
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0290692</p>
+	<br/>
+	<ul>
+				<li>The old tree has more elements than the new one.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="12149599">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="success">SUCCESS
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58861/GeneralInfo">User data of ID is 58861</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[11]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[8]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>[UNKNOWN] - EDD Administration ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Yale University ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - School Of Nursing ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - YSNACA Operations ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - YMG Website (109564)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[UNKNOWN] - Yale Medical Group (109563)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] ()
+					<span class="missing">[MISSING]</span>										</li>
+										<li>-[L1] ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>--[L2]SBIRT Training in Yale Residency Programs (110627)
+															</li>
+										<li>-[L1] ()
+					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+										<li>--[L2]Yale School of Nursing ()
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										[L0]Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										-[L1]School Of Nursing (113597)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]EDD Administration (108932)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]YSNACA Operations (112990)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										-[L1]Yale School of Medicine (113592)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]Yale Medical Group (109563)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]YMG Website (109564)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]SBIRT Training in Yale Residency Programs (110627)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:001995</p>
+	<br/>
+	<ul>
+				<li>The new tree contains at least as many elements as the old one.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="13132301">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="success">SUCCESS
+			</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
+		<a href="http://ypms-service-a5.azurewebsites.net/service/Users/58862/GeneralInfo">User data of ID is 58862</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[2]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+		</tr>
+		<tr>
+			<td style="border-right: 1px lightgrey solid;">
+				<ul>
+										<li>[UNKNOWN] - MYSM School Of Medicine (113592)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>[L0] ()
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+			<td>
+				<ul>
+										<li>										[L0]Yale University (110762)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										-[L1]MYSM School Of Medicine (113592)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										--[L2]MCDEPT Clinical Departments (113631)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										---[L3]Psychiatry (109077)
+					<span class="missing">[MISSING]</span>										</li>
+										<li>										----[L4]MPSY Ribicoff CNRU (112590)
+					<span class="missing">[MISSING]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:1942474</p>
+	<br/>
+	<ul>
+				<li>The new tree contains at least as many elements as the old one.</li><br/>
+			</ul>
+	</td>
+</tr>
+	<script language="javascript" type="text/javascript">
+	var tableFilters = {
+		btn: true,
+		col_0: "none",
+		col_2: "select",
+		btn_text: "  >  "
+	}
+	setFilterGrid("individual_test_results");
+</script>
+</table>
+</body>
+</html>

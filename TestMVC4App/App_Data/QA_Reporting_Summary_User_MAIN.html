@@ -20,10 +20,10 @@
 	
 	<h2>Overview</h2>
 	<p>Count of user profiles tested : 07<br/>
-	Total count of tests run : 175<br/>
-	Count of tests per user profile : 25<br/>
+	Total count of tests run : 182<br/>
+	Count of tests per user profile : 26<br/>
 	Count of user profiles free from any kind of warning : 00<br/>
-	Duration : 00h: 01mn:18s:3367728</p>
+	Duration : 00h: 00mn:10s:6691804</p>
 	<p>Average Duration by User Profile : 00h: 00mn:00s:</p>
 	<br/>
 	<table class="table_main">
@@ -35,19 +35,19 @@
 				<tr>
 					<td class="error">ERROR
 					</td>
-		<td class="td_main">21</td>
+		<td class="td_main">17</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is not maintained.</td>
 	</tr>
 			<tr>
 					<td class="error_with_explanation">ERROR_WITH_EXPLANATION
 					</td>
-		<td class="td_main">10</td>
+		<td class="td_main">13</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is not maintained AND some data behaviors were identified.</td>
 	</tr>
 			<tr>
 					<td class="false_positive">FALSE_POSITIVE
 					</td>
-		<td class="td_main">08</td>
+		<td class="td_main">16</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained EVEN THOUGH the test returned an error.</td>
 	</tr>
 			<tr>
@@ -76,22 +76,26 @@
 	</tr>
 		<tr>
 		<td class="td_main">There are more entries in the new service.</td>
-		<td class="td_main">16</td>
+		<td class="td_main">23</td>
+	</tr>
+		<tr>
+		<td class="td_main">All the entries of the old service are found in the new service.</td>
+		<td class="td_main">18</td>
 	</tr>
 		<tr>
 		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
 		<td class="td_main">11</td>
 	</tr>
 		<tr>
-		<td class="td_main">All the entries of the old service are found in the new service.</td>
-		<td class="td_main">07</td>
-	</tr>
-		<tr>
 		<td class="td_main">The new service contains duplicates.</td>
-		<td class="td_main">07</td>
+		<td class="td_main">09</td>
 	</tr>
 		<tr>
 		<td class="td_main">The new tree contains at least as many elements as the old one.</td>
+		<td class="td_main">06</td>
+	</tr>
+		<tr>
+		<td class="td_main">The mismatch between some entries is due to missing Id values.</td>
 		<td class="td_main">06</td>
 	</tr>
 		<tr>
@@ -253,7 +257,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:009
+					00h: 00mn:00s:007
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_Suffix_Test">Test Overview</a><br/>
@@ -298,7 +302,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:004
+					00h: 00mn:00s:005
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_Npi_Test">Test Overview</a><br/>
@@ -313,7 +317,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:003
+					00h: 00mn:00s:004
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Bio_Test">Test Overview</a><br/>
@@ -358,7 +362,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:001
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_AltLastName_Test">Test Overview</a><br/>
@@ -443,12 +447,12 @@
 		<tr>
 		<td class="td_main">UserGeneralInfo_Organization_Id_Test</td>
 		<td class="td_main">
-						0.00 %
+						100.00 %
 		</td>
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:01s:363
+					00h: 00mn:00s:004
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Organization_Id_Test">Test Overview</a><br/>
@@ -468,6 +472,21 @@
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Organization_Name_Test">Test Overview</a><br/>
 			<a href="UserGeneralInfo_Organization_Name_Test_1.html">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserGeneralInfo_Organization_IdAndNameTogether_Test</td>
+		<td class="td_main">
+						14.29 %
+		</td>
+		<td class="td_main" style="width: 40%;">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:005
+					</td>
+		<td class="td_main">
+			<a href="#UserGeneralInfo_Organization_IdAndNameTogether_Test">Test Overview</a><br/>
+			<a href="UserGeneralInfo_Organization_IdAndNameTogether_Test_1.html">Test Details</a>
 		</td>
 	</tr>
 		<tr>
@@ -1724,9 +1743,8 @@
 		<tr>
 			<td class="error">ERROR
 				</td>
-		<td class="td_main">07</td>
+		<td class="td_main">00</td>
 		<td class="td_main">
-						100.00 %
 					</td>
 	</tr>
 		<tr>
@@ -1739,8 +1757,9 @@
 		<tr>
 			<td class="false_positive">FALSE_POSITIVE
 				</td>
-		<td class="td_main">00</td>
+		<td class="td_main">07</td>
 		<td class="td_main">
+						100.00 %
 					</td>
 	</tr>
 		<tr>
@@ -1764,6 +1783,14 @@
 	<tr>
 		<th class="th_main">Identified Data Behavior</th>
 		<th class="th_main">Count</th>
+	</tr>
+		<tr>
+		<td class="td_main">All the entries of the old service are found in the new service.</td>
+		<td class="td_main">07</td>
+	</tr>
+		<tr>
+		<td class="td_main">There are more entries in the new service.</td>
+		<td class="td_main">07</td>
 	</tr>
 		<tr>
 		<td class="td_main">The new service contains duplicates.</td>
@@ -1839,6 +1866,74 @@
 	</tr>
 		<tr>
 		<td class="td_main">Some entries of the old service are not found in the new service.</td>
+		<td class="td_main">02</td>
+	</tr>
+	</table>
+	<hr/>
+	<p><a href="#top">Back to top</a></p>
+	<h2><a id="UserGeneralInfo_Organization_IdAndNameTogether_Test">UserGeneralInfo_Organization_IdAndNameTogether_Test</a></h2>
+	<table class="table_main">
+	<tr>
+		<th class="th_main">Result Severity</th>
+		<th class="th_main">Count</th>
+		<th class="th_main">Frequency</th>
+	</tr>
+		<tr>
+			<td class="error">ERROR
+				</td>
+		<td class="td_main">03</td>
+		<td class="td_main">
+						42.86 %
+					</td>
+	</tr>
+		<tr>
+			<td class="error_with_explanation">ERROR_WITH_EXPLANATION
+				</td>
+		<td class="td_main">03</td>
+		<td class="td_main">
+						42.86 %
+					</td>
+	</tr>
+		<tr>
+			<td class="false_positive">FALSE_POSITIVE
+				</td>
+		<td class="td_main">01</td>
+		<td class="td_main">
+						14.29 %
+					</td>
+	</tr>
+		<tr>
+			<td class="warning">WARNING
+				</td>
+		<td class="td_main">00</td>
+		<td class="td_main">
+					</td>
+	</tr>
+		<tr>
+			<td class="success">SUCCESS
+				</td>
+		<td class="td_main">00</td>
+		<td class="td_main">
+					</td>
+	</tr>
+		</table>
+	<br/>
+	<br/>
+	<table class="table_main">
+	<tr>
+		<th class="th_main">Identified Data Behavior</th>
+		<th class="th_main">Count</th>
+	</tr>
+		<tr>
+		<td class="td_main">The mismatch between some entries is due to missing Id values.</td>
+		<td class="td_main">06</td>
+	</tr>
+		<tr>
+		<td class="td_main">All the entries of the old service are found in the new service.</td>
+		<td class="td_main">04</td>
+	</tr>
+		<tr>
+		<td class="td_main">The new service contains duplicates.</td>
 		<td class="td_main">02</td>
 	</tr>
 	</table>
