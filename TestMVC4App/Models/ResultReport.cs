@@ -93,7 +93,8 @@ namespace TestMVC4App.Models
         {
             if (newSeverityStateReturned == ResultSeverityType.WARNING)
             {
-                if (this.Result == ResultSeverityType.SUCCESS)
+                if (this.Result == ResultSeverityType.SUCCESS 
+                    || (this.IdentifedDataBehaviors.Contains(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE) && this.IdentifedDataBehaviors.Contains(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND)))
                 {
                     this.Result = newSeverityStateReturned;
                     System.Diagnostics.Debug.WriteLine("Severity was updated to " + newSeverityStateReturned);

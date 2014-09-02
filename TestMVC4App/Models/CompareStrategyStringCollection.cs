@@ -157,27 +157,32 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
+            // updating to the latest version of the service, it happens that the values retrieved from the new service are null
+            if (this.resultReport.OldValues.Where(z => z != null).Count() > 0 && this.resultReport.NewValues.Where(z => z != null).Count() > 0)
+            {
+
             // check if some of the inconsistencies are due to trailing spaces in the single string values
             var missingOldValues = this.resultReport.OldValues.Except(this.resultReport.NewValues);
             var missingNewValues = this.resultReport.NewValues.Except(this.resultReport.OldValues);
 
-            IEnumerable<string> trimmedMissingOldValues = missingOldValues.Select(s => s.Trim());
-            IEnumerable<string> trimmedMissingNewValues = missingNewValues.Select(s => s.Trim());
+                IEnumerable<string> trimmedMissingOldValues = missingOldValues.Select(s => s.Trim());
+                IEnumerable<string> trimmedMissingNewValues = missingNewValues.Select(s => s.Trim());
 
-            var leftovers = trimmedMissingOldValues.Except(trimmedMissingNewValues);
+                var leftovers = trimmedMissingOldValues.Except(trimmedMissingNewValues);
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(leftovers.Count());
+                System.Diagnostics.Debug.WriteLine(leftovers.Count());
 #endif
 
-            if (leftovers.Count() != missingOldValues.Count())
-            {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
-
-                // all of the mismatches are due to trailing spaces
-                if (leftovers.Count() == 0)
+                if (leftovers.Count() != missingOldValues.Count())
                 {
-                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
+                    this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+
+                    // all of the mismatches are due to trailing spaces
+                    if (leftovers.Count() == 0)
+                    {
+                        this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                    }
                 }
             }
 

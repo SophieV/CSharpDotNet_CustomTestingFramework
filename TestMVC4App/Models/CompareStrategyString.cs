@@ -154,6 +154,7 @@ namespace TestMVC4App.Models
             if (string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue) && newValue != " ")
             {
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
