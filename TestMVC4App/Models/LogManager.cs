@@ -21,7 +21,7 @@ namespace TestMVC4App.Models
         private static object lockLogResult = new object();
         private static object lockProfileOverview = new object();
 
-        private List<string> allTestNames;
+        private SortedSet<string> allTestNames;
         private StreamWriter streamWriter;
         private Dictionary<string, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
         private HtmlTextWriter htmlWriterForSummaryReport;
@@ -60,7 +60,7 @@ namespace TestMVC4App.Models
 
         private LogManager() {
             // the order here is quite important because this is implicitely the expectation of the templates
-            allTestNames = new List<string>();
+            allTestNames = new SortedSet<string>();
             allTestNames.Add("UserBasicInfo_LastName_Test");
             allTestNames.Add("UserBasicInfo_FirstName_Test");
             allTestNames.Add("UserBasicInfo_MiddleName_Test");
@@ -159,7 +159,7 @@ namespace TestMVC4App.Models
             {
                 durationByProfile.Add(duration);
 
-                var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).ToDictionary(x => x.TestName, x => x.Result);
+                var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).OrderBy(z => z.TestName).ToDictionary(x => x.TestName, x => x.Result);
                 var summaryProfileData = new SharedProfileReportData()
                 {
                     UPI = upi,
@@ -199,6 +199,7 @@ namespace TestMVC4App.Models
                 countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.ERROR_WITH_EXPLANATION, 0);
                 countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.FALSE_POSITIVE, 0);
                 countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.WARNING, 0);
+                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.WARNING_NO_DATA, 0);
                 countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.SUCCESS, 0);
             }
 

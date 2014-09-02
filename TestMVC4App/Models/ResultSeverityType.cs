@@ -23,6 +23,12 @@ namespace TestMVC4App.Models
         [System.ComponentModel.Description("The data consistency between the services is maintained AND some data behaviors were identified.")]
         WARNING,
         /// <summary>
+        /// No data.
+        /// </summary>
+        /// <remarks>A warning means that NO data was returned by either service.</remarks>
+        [System.ComponentModel.Description("None of the service has returned any data.")]
+        WARNING_NO_DATA,
+        /// <summary>
         /// Mismatch identified and pattern analysis revealed that there is no data inconsistency (e.g. doublons in the old service).
         /// </summary>
         /// <remarks>A false positive means that ALL the data of the old service was found in the new service.</remarks>

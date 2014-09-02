@@ -83,7 +83,7 @@ namespace TestMVC4App.Models
             if (this.oldList.Count() <= 0 && this.newList.Count <= 0)
             {
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
             else

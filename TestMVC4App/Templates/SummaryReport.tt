@@ -54,7 +54,8 @@
 			case ResultSeverityType.FALSE_POSITIVE : #>
 		<td class="false_positive td_main"><#= countPerSeverity.Key #>
 			<# break;
-			case ResultSeverityType.WARNING: #>
+			case ResultSeverityType.WARNING:
+			case ResultSeverityType.WARNING_NO_DATA: #>
 		<td class="warning td_main"><#= countPerSeverity.Key #>
 			<# break;
 			case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
@@ -93,7 +94,7 @@
 	<br/>
 	<br/>
 	<hr/>
-	<h2>Overview By User Profile</h2>
+	<h2>Overview By Test Name Per User Profile</h2>
 	<a href="<#= SummaryReportDataObject.FileByProfileLink #>">Go to Overview of Results by UPI</a>
 	<br/>
 	<hr/>
@@ -153,7 +154,8 @@
 		case ResultSeverityType.FALSE_POSITIVE : #>
 		<td class="false_positive td_main"><#= countPerSeverity.Key #>
 		<# break;
-		case ResultSeverityType.WARNING: #>
+		case ResultSeverityType.WARNING:
+		case ResultSeverityType.WARNING_NO_DATA: #>
 		<td class="warning td_main"><#= countPerSeverity.Key #>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>

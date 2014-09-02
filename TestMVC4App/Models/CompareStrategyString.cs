@@ -74,7 +74,7 @@ namespace TestMVC4App.Models
             if(string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue))
             {
                 this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
             else
