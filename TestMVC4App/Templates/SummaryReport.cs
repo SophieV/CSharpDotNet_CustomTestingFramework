@@ -32,15 +32,15 @@ namespace TestMVC4App.Templates
             this.Write(@"<html>
 <head>
 <style>
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
 .title {text-align: center;}
-.th_main {background-color:lightgrey;text-align: center;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .error_data {color: white;font-weight: bold;background-color: red;font-size: 2em; text-align: center;}
 </style>
 </head>
@@ -139,7 +139,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"false_positive\">");
+            this.Write("\t\t<td class=\"false_positive td_main\">");
             
             #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -154,7 +154,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"warning\">");
+            this.Write("\t\t<td class=\"warning td_main\">");
             
             #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -169,7 +169,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"error_with_explanation\">");
+            this.Write("\t\t<td class=\"error_with_explanation td_main\">");
             
             #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -184,7 +184,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"error\">");
+            this.Write("\t\t<td class=\"error td_main\">");
             
             #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -199,7 +199,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"success\">");
+            this.Write("\t\t<td class=\"success td_main\">");
             
             #line 67 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -427,7 +427,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"false_positive\">");
+            this.Write("\t\t<td class=\"false_positive td_main\">");
             
             #line 154 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -442,7 +442,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"warning\">");
+            this.Write("\t\t<td class=\"warning td_main\">");
             
             #line 157 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -457,7 +457,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"error_with_explanation\">");
+            this.Write("\t\t<td class=\"error_with_explanation td_main\">");
             
             #line 160 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -472,7 +472,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"error\">");
+            this.Write("\t\t<td class=\"error td_main\">");
             
             #line 163 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));
@@ -487,7 +487,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"success\">");
+            this.Write("\t\t<td class=\"success td_main\">");
             
             #line 166 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(countPerSeverity.Key));

@@ -3,17 +3,18 @@
 <script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type="text/javascript" src="tablefilter.js"></script>
 </head>
@@ -32,7 +33,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="12641341">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
@@ -43,8 +44,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -68,7 +69,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0010675</p>
+	<p>Duration : 00mn:00s:0012116</p>
 	<br/>
 	<ul>
 			</ul>
@@ -78,7 +79,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="10151776">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="td_main error">ERROR
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
@@ -89,20 +90,20 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
 				<ul>
 										<li>kristina.sepanek@yale.edu
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 									</ul>
 			</td>
 			<td>
 				<ul>
 										<li>										<del class='diffmod'>kristina.sepanek@yale</del><ins class='diffmod'>tian.xu@yale</ins>.edu
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -114,7 +115,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0276083</p>
+	<p>Duration : 00mn:00s:0253998</p>
 	<br/>
 	<ul>
 				<li>The content of the entries does not match.</li><br/>
@@ -125,7 +126,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="10290564">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
@@ -136,8 +137,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -161,7 +162,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0012514</p>
+	<p>Duration : 00mn:00s:0012974</p>
 	<br/>
 	<ul>
 			</ul>
@@ -171,7 +172,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="11091604">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
@@ -182,8 +183,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -207,7 +208,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0009644</p>
+	<p>Duration : 00mn:00s:0011673</p>
 	<br/>
 	<ul>
 			</ul>
@@ -217,7 +218,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="11472557">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
@@ -228,8 +229,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -253,7 +254,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0017006</p>
+	<p>Duration : 00mn:00s:0012756</p>
 	<br/>
 	<ul>
 			</ul>
@@ -263,7 +264,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="12149599">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
@@ -274,8 +275,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -299,7 +300,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0012802</p>
+	<p>Duration : 00mn:00s:000994</p>
 	<br/>
 	<ul>
 			</ul>
@@ -309,7 +310,7 @@
 	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="13132301">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
@@ -320,8 +321,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -345,7 +346,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0011525</p>
+	<p>Duration : 00mn:00s:0010605</p>
 	<br/>
 	<ul>
 			</ul>

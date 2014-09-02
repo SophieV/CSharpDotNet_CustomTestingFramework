@@ -3,17 +3,18 @@
 <script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type="text/javascript" src="tablefilter.js"></script>
 </head>
@@ -32,7 +33,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="12641341">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
@@ -43,8 +44,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[7]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 7]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -74,9 +75,9 @@
 										<li>										Yale University
 															</li>
 										<li>										Neurosurgery
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Psychiatry
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -88,7 +89,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0267871</p>
+	<p>Duration : 00mn:00s:02972</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -100,7 +101,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="10151776">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
@@ -111,8 +112,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[13]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 13]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -132,7 +133,7 @@
 			<td>
 				<ul>
 										<li>										MFIST Howard Hughes Medical Institute
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MGEN Administration
 															</li>
 										<li>										MYSM School Of Medicine
@@ -140,23 +141,23 @@
 										<li>										Genetics
 															</li>
 										<li>										Central Accounts
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MCDEPT Clinical Departments
 															</li>
 										<li>										MYSM School Operation
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Yale University
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										Yale University
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										Cancer Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Internal Medicine
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Academic Affairs
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										School of Law
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -168,7 +169,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0457752</p>
+	<p>Duration : 00mn:00s:025936</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -181,7 +182,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="10290564">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
@@ -192,8 +193,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -233,7 +234,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0006438</p>
+	<p>Duration : 00mn:00s:0006606</p>
 	<br/>
 	<ul>
 			</ul>
@@ -243,7 +244,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="11091604">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
@@ -254,8 +255,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[9]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 9]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -275,17 +276,17 @@
 			<td>
 				<ul>
 										<li>										Ophthalmology and Visual Science
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Comparative Medicine
 															</li>
 										<li>										MYSM School Of Medicine
 															</li>
 										<li>										MOPHTH Administration
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MCMED Administration
 															</li>
 										<li>										MCDEPT Clinical Departments
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Yale University
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										Yale University
@@ -303,7 +304,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:025348</p>
+	<p>Duration : 00mn:00s:0268808</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -316,7 +317,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="11472557">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="td_main error">ERROR
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
@@ -327,8 +328,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[7]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 7]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -336,7 +337,7 @@
 										<li>MYSM School Of Medicine
 															</li>
 										<li>Molecular Biophysics and Biochemistry
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>Yale University
 															</li>
 										<li>MMBB F A S Admin
@@ -350,7 +351,7 @@
 										<li>										MYSM School Of Medicine
 															</li>
 										<li>										MB and B
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MMBB F A S Admin
 															</li>
 										<li>										MSDEPT Basic Science Departments
@@ -358,9 +359,9 @@
 										<li>										Yale University
 															</li>
 										<li>										Cancer Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Clinical Departments
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -372,7 +373,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0455445</p>
+	<p>Duration : 00mn:00s:0584608</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -384,7 +385,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="12149599">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="td_main error">ERROR
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
@@ -395,14 +396,14 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
 				<ul>
 										<li>Yale School of Nursing
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>EDD Administration
 															</li>
 										<li>School Of Nursing
@@ -424,7 +425,7 @@
 										<li>										Yale University
 															</li>
 										<li>										Yale School of Medicine
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -436,7 +437,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0257044</p>
+	<p>Duration : 00mn:00s:0304693</p>
 	<br/>
 	<ul>
 			</ul>
@@ -446,7 +447,7 @@
 	<td class="td_main"><b>Comparing Organization IsImported/Primary</b><br/>
 		<a id="13132301">UserGeneralInfo_Organization_CheckIsPrimary_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
@@ -457,8 +458,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -472,13 +473,13 @@
 										<li>										MYSM School Of Medicine
 															</li>
 										<li>										MPSY Ribicoff CNRU
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Psychiatry
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MCDEPT Clinical Departments
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Yale University
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -490,7 +491,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0561085</p>
+	<p>Duration : 00mn:00s:0271797</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>

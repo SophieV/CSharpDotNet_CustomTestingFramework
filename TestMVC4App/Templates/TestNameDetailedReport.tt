@@ -11,19 +11,19 @@
 	</td>
 	<# switch (DetailedReportDataObject.Result) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-		<td class="false_positive"><#= DetailedReportDataObject.Result #>
+		<td class="td_main false_positive"><#= DetailedReportDataObject.Result #>
 		<# break;
 		case ResultSeverityType.WARNING: #>
-		<td class="warning"><#= DetailedReportDataObject.Result #>
+		<td class="td_main warning"><#= DetailedReportDataObject.Result #>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-		<td class="error_with_explanation"><#= DetailedReportDataObject.Result #>
+		<td class="td_main error_with_explanation"><#= DetailedReportDataObject.Result #>
 		<# break;
 		case ResultSeverityType.ERROR: #>
-		<td class="error"><#= DetailedReportDataObject.Result #>
+		<td class="td_main error"><#= DetailedReportDataObject.Result #>
 		<# break;
 		default: #>
-		<td class="success"><#= DetailedReportDataObject.Result #>
+		<td class="td_main success"><#= DetailedReportDataObject.Result #>
 		<# break;
 	} #>
 	</td>
@@ -36,8 +36,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[<#=DetailedReportDataObject.OldValues.Count #>]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[<#=DetailedReportDataObject.NewValues.Count #>]</span></td>
+			<td class="th_main">OLD SERVICE DATA <# if(DetailedReportDataObject.OldOrganizationValues.Count <= 0) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.OldValues.Count #>]</span><# } #></td>
+			<td class="th_main">NEW SERVICE DATA <# if(DetailedReportDataObject.NewOrganizationValues.Count <= 0) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.NewValues.Count #>]</span><# } #></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -46,28 +46,29 @@
 					string entry = string.Empty;
 					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.OldOrganizationValues) {
 						if (element.Depth < 0) {
-							entry = "[UNKNOWN] " + element.Name + " (" + element.ID + ")"; #>
+							entry = "[DEPTH NOT ASSIGNED] " + element.Name + " (" + element.ID + ")"; #>
 							<li><#= entry #>
-							<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+							<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 						</li><#
-					} }
-					var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					} } #>
+					<br/><br/>
+					<# var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
 						entry = string.Empty;
-						for (int i = 0; i < element.Depth; i++) { entry += "-"; }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<b>"; }
-						entry += "[L" + element.Depth + "] " + element.Name + " (" + element.ID + ")";
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "</b>"; } #>
+						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<span class=\"tree_depth_mismatch\">"; }
+						entry += "[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")";
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += " [MISMATCH WITH NEW SERVICE]</span>"; } #>
 					<li><#= entry #>
-					<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+					<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					</li>
 					<# } } else if(DetailedReportDataObject.OldValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (string oldValue in DetailedReportDataObject.OldValues) { #>
 					<li><# if(!string.IsNullOrEmpty(oldValue)) { #><#= oldValue #>
-					<# if(!DetailedReportDataObject.NewValues.Contains(oldValue)) { #><span class="missing">[MISSING]</span><# } #>
+					<# if(!DetailedReportDataObject.NewValues.Contains(oldValue)) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 					<# if(potentialDuplicates.Contains(oldValue)) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
@@ -79,21 +80,22 @@
 					string entry = string.Empty;
 					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.NewOrganizationValues) {
 						if (element.Depth < 0) {
-							entry = "[UNKNOWN] " + element.Name + " (" + element.ID + ")"; #>
+							entry = "[DEPTH NOT ASSIGNED] " + element.Name + " (" + element.ID + ")"; #>
 							<li><#= entry #>
-							<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+							<# if(element.IsMissing) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 							</li><#
-					} }
-					var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					} } #>
+					<br/><br/>
+					<# var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree2) {
 						entry = string.Empty;
-						for (int i = 0; i < element.Depth; i++) { entry += "-"; }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<b>"; }
-						entry += "[L" + element.Depth + "] " + element.Name + " (" + element.ID + ")";
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "</b>"; } #>
+						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<span class=\"tree_depth_mismatch\">"; }
+						entry += "[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")";
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += " [MISMATCH WITH OLD SERVICE]</span>"; } #>
 					<li><#= entry #>
-					<# if(element.IsMissing) { #><span class="missing">[MISSING]</span><# } #>
+					<# if(element.IsMissing) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					</li>
 					<# } } else if(DetailedReportDataObject.NewValues.Count > 0) {
@@ -108,7 +110,7 @@
 						newValueToDisplay = diffHelper.Build();
 					} #>
 					<#= newValueToDisplay #>
-					<# if(!DetailedReportDataObject.OldValues.Contains(newValue)) { #><span class="missing">[MISSING]</span><# } #>
+					<# if(!DetailedReportDataObject.OldValues.Contains(newValue)) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 					<# if(potentialDuplicates.Contains(newValue)) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					<# } else { #>NULL<# } #></li>
 					<# } } #>

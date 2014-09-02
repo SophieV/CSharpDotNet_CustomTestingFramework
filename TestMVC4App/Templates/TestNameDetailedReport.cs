@@ -57,7 +57,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"false_positive\">");
+            this.Write("\t\t<td class=\"td_main false_positive\">");
             
             #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -72,7 +72,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"warning\">");
+            this.Write("\t\t<td class=\"td_main warning\">");
             
             #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -87,7 +87,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"error_with_explanation\">");
+            this.Write("\t\t<td class=\"td_main error_with_explanation\">");
             
             #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -102,7 +102,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"error\">");
+            this.Write("\t\t<td class=\"td_main error\">");
             
             #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -117,7 +117,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"success\">");
+            this.Write("\t\t<td class=\"td_main success\">");
             
             #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
@@ -168,30 +168,57 @@ namespace TestMVC4App.Templates
             #line default
             #line hidden
             this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table class=\"table_main\">\r\n\t\t<tr>\r\n\t\t\t<td class=\"th_main\">OLD " +
-                    "SERVICE DATA <span class=\"error_color\">[");
+                    "SERVICE DATA ");
+            
+            #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+ if(DetailedReportDataObject.OldOrganizationValues.Count <= 0) { 
+            
+            #line default
+            #line hidden
+            this.Write("<span class=\"error_color\">[COUNT ELEMENTS: ");
             
             #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldValues.Count));
             
             #line default
             #line hidden
-            this.Write("]</span></td>\r\n\t\t\t<td class=\"th_main\">NEW SERVICE DATA <span class=\"error_color\">" +
-                    "[");
+            this.Write("]</span>");
+            
+            #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\t\t\t<td class=\"th_main\">NEW SERVICE DATA ");
+            
+            #line 40 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+ if(DetailedReportDataObject.NewOrganizationValues.Count <= 0) { 
+            
+            #line default
+            #line hidden
+            this.Write("<span class=\"error_color\">[COUNT ELEMENTS: ");
             
             #line 40 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.NewValues.Count));
             
             #line default
             #line hidden
-            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-right: 1px lightgrey solid;\"" +
-                    ">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
+            this.Write("]</span>");
+            
+            #line 40 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"border-right: 1px lightgrey solid;\">\r\n\t\t\t\t<" +
+                    "ul>\r\n\t\t\t\t\t");
             
             #line 45 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(DetailedReportDataObject.OldOrganizationValues.Count > 0) {
 					string entry = string.Empty;
 					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.OldOrganizationValues) {
 						if (element.Depth < 0) {
-							entry = "[UNKNOWN] " + element.Name + " (" + element.ID + ")"; 
+							entry = "[DEPTH NOT ASSIGNED] " + element.Name + " (" + element.ID + ")"; 
             
             #line default
             #line hidden
@@ -209,7 +236,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("<span class=\"missing\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING IN NEW SERVICE]</span>");
             
             #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
@@ -234,55 +261,61 @@ namespace TestMVC4App.Templates
             
             #line 53 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
 
-					} }
-					var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					} } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t<br/><br/>\r\n\t\t\t\t\t");
+            
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+ var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
 						entry = string.Empty;
-						for (int i = 0; i < element.Depth; i++) { entry += "-"; }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<b>"; }
-						entry += "[L" + element.Depth + "] " + element.Name + " (" + element.ID + ")";
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "</b>"; } 
+						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<span class=\"tree_depth_mismatch\">"; }
+						entry += "[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")";
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += " [MISMATCH WITH NEW SERVICE]</span>"; } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t<li>");
             
-            #line 62 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entry));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t\t\t");
             
-            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(element.IsMissing) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"missing\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING IN NEW SERVICE]</span>");
             
-            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 65 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(element.IsDuplicate) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
-            #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 65 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t</li>\r\n\t\t\t\t\t");
             
-            #line 66 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 67 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } } else if(DetailedReportDataObject.OldValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (string oldValue in DetailedReportDataObject.OldValues) { 
@@ -291,165 +324,171 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t\t\t\t<li>");
             
-            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(!string.IsNullOrEmpty(oldValue)) { 
             
             #line default
             #line hidden
             
-            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(oldValue));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t\t\t");
             
-            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(!DetailedReportDataObject.NewValues.Contains(oldValue)) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"missing\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING IN NEW SERVICE]</span>");
             
-            #line 70 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(potentialDuplicates.Contains(oldValue)) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
-            #line 71 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 73 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("NULL");
             
-            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 73 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("</li>\r\n\t\t\t\t\t");
             
-            #line 73 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 74 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t\t<td>\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
             
-            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(DetailedReportDataObject.NewOrganizationValues.Count > 0) {
 					string entry = string.Empty;
 					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.NewOrganizationValues) {
 						if (element.Depth < 0) {
-							entry = "[UNKNOWN] " + element.Name + " (" + element.ID + ")"; 
+							entry = "[DEPTH NOT ASSIGNED] " + element.Name + " (" + element.ID + ")"; 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\t\t<li>");
             
-            #line 83 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entry));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t\t\t\t\t");
             
-            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(element.IsMissing) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"missing\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING IN OLD SERVICE]</span>");
             
-            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\t\t");
             
-            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 86 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(element.IsDuplicate) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
-            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 86 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t\t\t</li>");
             
-            #line 86 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 87 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
 
-					} }
-					var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					} } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t<br/><br/>\r\n\t\t\t\t\t");
+            
+            #line 90 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+ var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree2) {
 						entry = string.Empty;
-						for (int i = 0; i < element.Depth; i++) { entry += "-"; }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<b>"; }
-						entry += "[L" + element.Depth + "] " + element.Name + " (" + element.ID + ")";
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "</b>"; } 
+						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<span class=\"tree_depth_mismatch\">"; }
+						entry += "[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")";
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += " [MISMATCH WITH OLD SERVICE]</span>"; } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t<li>");
             
-            #line 95 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 97 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entry));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t\t\t");
             
-            #line 96 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 98 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(element.IsMissing) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"missing\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING IN OLD SERVICE]</span>");
             
-            #line 96 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 98 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 97 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 99 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(element.IsDuplicate) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
-            #line 97 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 99 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t</li>\r\n\t\t\t\t\t");
             
-            #line 99 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 101 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } } else if(DetailedReportDataObject.NewValues.Count > 0) {
 					var potentialDuplicates = DetailedReportDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (string newValue in DetailedReportDataObject.NewValues) { 
@@ -458,14 +497,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t\t\t\t<li>");
             
-            #line 102 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 104 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(!string.IsNullOrEmpty(newValue)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 103 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 105 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  string newValueToDisplay = newValue;
 					if(DetailedReportDataObject.OldValues.Count <= 1 && DetailedReportDataObject.NewValues.Count <= 1) {
 						string oldValue = string.Empty;
@@ -478,56 +517,56 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 110 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 112 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(newValueToDisplay));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t\t\t\t");
             
-            #line 111 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 113 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(!DetailedReportDataObject.OldValues.Contains(newValue)) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"missing\">[MISSING]</span>");
+            this.Write("<span class=\"missing\">[MISSING IN OLD SERVICE]</span>");
             
-            #line 111 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 113 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 112 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 114 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(potentialDuplicates.Contains(newValue)) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
             
-            #line 112 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 114 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
-            #line 113 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 115 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("NULL");
             
-            #line 113 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 115 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } 
             
             #line default
             #line hidden
             this.Write("</li>\r\n\t\t\t\t\t");
             
-            #line 114 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 116 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } } 
             
             #line default
@@ -535,14 +574,14 @@ namespace TestMVC4App.Templates
             this.Write("\t\t\t\t</ul>\r\n\r\n\r\n\r\n\r\n\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\" " +
                     "style=\"width: 30%;\">\r\n\t<p>Duration : ");
             
-            #line 126 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 128 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t<br/>\r\n\t<ul>\r\n\t");
             
-            #line 129 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 131 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  if(DetailedReportDataObject.IdentifiedDataBehaviors != null) {
 		foreach(var observation in DetailedReportDataObject.IdentifiedDataBehaviors) { 
             
@@ -550,14 +589,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t\t\t<li>");
             
-            #line 131 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 133 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(observation)));
             
             #line default
             #line hidden
             this.Write("</li><br/>\r\n\t");
             
-            #line 132 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            #line 134 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  } } 
             
             #line default

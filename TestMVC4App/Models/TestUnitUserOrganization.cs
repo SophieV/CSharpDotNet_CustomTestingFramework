@@ -468,8 +468,8 @@ namespace TestMVC4App.Models
         {
             bool keepGoing = true;
             int index = 0;
-            IEnumerable<OrganizationTreeDescriptor> oldEntriesSameLevel;
-            IEnumerable<OrganizationTreeDescriptor> newEntriesSameLevel;
+            IEnumerable<OrganizationTreeDescriptor> oldEntriesSameDepth;
+            IEnumerable<OrganizationTreeDescriptor> newEntriesSameDepth;
             int oldCount;
             int newCount;
 
@@ -479,11 +479,11 @@ namespace TestMVC4App.Models
 
             while (keepGoing)
             {
-                oldEntriesSameLevel = oldTree.Where(x => x.Depth == index);
-                newEntriesSameLevel = newTree.Where(s => s.Depth == index);
+                oldEntriesSameDepth = oldTree.Where(x => x.Depth == index);
+                newEntriesSameDepth = newTree.Where(s => s.Depth == index);
 
-                oldCount = oldEntriesSameLevel.Count();
-                newCount = newEntriesSameLevel.Count();
+                oldCount = oldEntriesSameDepth.Count();
+                newCount = newEntriesSameDepth.Count();
 
                 if (oldCount == 0 && newCount == 0)
                 {
@@ -492,9 +492,9 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    // the only we can compare is that the old tree does not return more entries than the new one at a given level of depth
+                    // the only we can compare is that the old tree does not return more entries than the new one at a given depth of depth
                     // the new service may return more because it has enriched the old tree where some of the values may have been manually - ? - excluded
-                    Assert.IsFalse(oldCount > newCount, "Comparing at level index " + index);
+                    Assert.IsFalse(oldCount > newCount, "Comparing at depth index " + index);
 
                     resultReport.UpdateResult(ResultSeverityType.SUCCESS);
                 }
@@ -502,7 +502,7 @@ namespace TestMVC4App.Models
                 {
                     resultReport.UpdateResult(ResultSeverityType.ERROR);
                     resultReport.ErrorMessage = e.Message;
-                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN);
+                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH);
                     resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
                     resultReport.TreeComparisonIndexError = index;
 

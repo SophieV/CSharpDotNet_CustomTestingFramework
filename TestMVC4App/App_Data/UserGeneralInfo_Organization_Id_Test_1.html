@@ -3,17 +3,18 @@
 <script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type="text/javascript" src="tablefilter.js"></script>
 </head>
@@ -32,7 +33,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="12641341">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
@@ -43,8 +44,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[8]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[15]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 8]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 15]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -86,19 +87,19 @@
 										<li>										109802
 															</li>
 										<li>										112488
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109563
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109448
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										108855
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109077
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -110,7 +111,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0305219</p>
+	<p>Duration : 00mn:00s:0302726</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -122,7 +123,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="10151776">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
@@ -133,8 +134,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[23]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[36]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 23]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 36]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -212,11 +213,11 @@
 										<li>										110577
 															</li>
 										<li>										112788
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										114012
 															</li>
 										<li>										112651
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110256
 															</li>
 										<li>										109919
@@ -240,27 +241,27 @@
 										<li>										110442
 															</li>
 										<li>										109084
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113646
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										109081
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										108789
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110734
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										108748
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113596
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -272,7 +273,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0282579</p>
+	<p>Duration : 00mn:00s:0293373</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -285,7 +286,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="10290564">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
@@ -296,8 +297,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -307,15 +308,15 @@
 			<td>
 				<ul>
 										<li>										111924
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										108840
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113589
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113624
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -327,7 +328,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0250348</p>
+	<p>Duration : 00mn:00s:0527343</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -339,7 +340,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="11091604">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
@@ -350,8 +351,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[12]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[20]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 12]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 20]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -403,27 +404,27 @@
 										<li>										113592
 															</li>
 										<li>										112507
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										112235
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										114262
 															</li>
 										<li>										114408
 															</li>
 										<li>										113631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>					<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										113629
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110631
 															</li>
 										<li>										114062
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										114261
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -435,7 +436,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0287682</p>
+	<p>Duration : 00mn:00s:0312359</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -448,7 +449,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="11472557">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
@@ -459,8 +460,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[24]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[30]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 24]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 30]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -560,7 +561,7 @@
 										<li>										109357
 															</li>
 										<li>										112288
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109445
 															</li>
 										<li>										109889
@@ -568,15 +569,15 @@
 										<li>										109535
 															</li>
 										<li>										113629
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109081
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -588,7 +589,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:026671</p>
+	<p>Duration : 00mn:00s:0357281</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -600,7 +601,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="12149599">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
@@ -611,8 +612,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[3]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[8]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 8]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -634,15 +635,15 @@
 										<li>										109564
 															</li>
 										<li>										112990
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										108932
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113597
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113592
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -654,7 +655,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0251271</p>
+	<p>Duration : 00mn:00s:0290959</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -666,7 +667,7 @@
 	<td class="td_main"><b>Comparing Organization Ids</b><br/>
 		<a id="13132301">UserGeneralInfo_Organization_Id_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
@@ -677,8 +678,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -692,13 +693,13 @@
 										<li>										113592
 															</li>
 										<li>										112590
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										109077
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										113631
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										110762
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -710,7 +711,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0455999</p>
+	<p>Duration : 00mn:00s:0305793</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>

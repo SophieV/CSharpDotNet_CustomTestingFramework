@@ -3,17 +3,18 @@
 <script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type="text/javascript" src="tablefilter.js"></script>
 </head>
@@ -32,7 +33,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="12641341">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
@@ -43,8 +44,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -68,7 +69,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0010909</p>
+	<p>Duration : 00mn:00s:0012112</p>
 	<br/>
 	<ul>
 			</ul>
@@ -78,7 +79,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="10151776">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
@@ -89,8 +90,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -114,7 +115,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:001024</p>
+	<p>Duration : 00mn:00s:0009817</p>
 	<br/>
 	<ul>
 			</ul>
@@ -124,7 +125,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="10290564">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
@@ -135,8 +136,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -160,7 +161,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0009225</p>
+	<p>Duration : 00mn:00s:001715</p>
 	<br/>
 	<ul>
 			</ul>
@@ -170,7 +171,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="11091604">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
@@ -181,8 +182,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -206,7 +207,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0009628</p>
+	<p>Duration : 00mn:00s:001003</p>
 	<br/>
 	<ul>
 			</ul>
@@ -216,7 +217,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="11472557">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
@@ -227,8 +228,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -252,7 +253,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0009188</p>
+	<p>Duration : 00mn:00s:0009271</p>
 	<br/>
 	<ul>
 			</ul>
@@ -262,7 +263,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="12149599">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
@@ -273,8 +274,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -298,7 +299,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0009533</p>
+	<p>Duration : 00mn:00s:0009813</p>
 	<br/>
 	<ul>
 			</ul>
@@ -308,7 +309,7 @@
 	<td class="td_main"><b>Comparing NetId</b><br/>
 		<a id="13132301">UserBasicInfo_NetId_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
@@ -319,8 +320,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -344,7 +345,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0009254</p>
+	<p>Duration : 00mn:00s:000996</p>
 	<br/>
 	<ul>
 			</ul>

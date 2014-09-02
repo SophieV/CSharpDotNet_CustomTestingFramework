@@ -33,17 +33,18 @@ namespace TestMVC4App.Templates
 <script type=""text/css"" href=""filtergrid.css""></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type=""text/javascript"" src=""tablefilter.js""></script>
 </head>

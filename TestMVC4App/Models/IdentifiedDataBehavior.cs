@@ -24,8 +24,8 @@ namespace TestMVC4App.Models
         MISSING_VALUES_ON_NEW_SERVICE,
         [System.ComponentModel.Description("The content of the entries does not match.")]
         WRONG_VALUE,
-        [System.ComponentModel.Description("The old tree has more elements than the new one.")]
-        OLD_TREE_HAS_MORE_CHILDREN,
+        [System.ComponentModel.Description("The old tree has more elements than the new one at a given depth.")]
+        OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH,
         [System.ComponentModel.Description("The old tree does not include all the organizations returned by the old service.")]
         OLD_TREE_NON_EXHAUSTIVE,
         [System.ComponentModel.Description("The new tree contains at least as many elements as the old one.")]

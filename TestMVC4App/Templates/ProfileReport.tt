@@ -10,24 +10,24 @@
 <# foreach(KeyValuePair<string,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
 	<# switch (pair.Value) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-	<td class="false_positive"><#= pair.Value #><br/>
-	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="td_main false_positive"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
 		case ResultSeverityType.WARNING: #>
-	<td class="warning"><#= pair.Value #><br/>
-	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="td_main warning"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-	<td class="error_with_explanation"><#= pair.Value #><br/>
-	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="td_main error_with_explanation"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
 		case ResultSeverityType.ERROR: #>
-	<td class="error"><#= pair.Value #><br/>
-	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="td_main error"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
 		default: #>
-	<td class="success"><#= pair.Value #><br/>
-	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a>
+	<td class="td_main success"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Go to test for UPI <#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
 	} #>
 

@@ -218,7 +218,7 @@ namespace TestMVC4App.Models
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.WRONG_VALUE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN, 0);
+                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_NON_EXHAUSTIVE, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT, 0);
                 countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS, 0);

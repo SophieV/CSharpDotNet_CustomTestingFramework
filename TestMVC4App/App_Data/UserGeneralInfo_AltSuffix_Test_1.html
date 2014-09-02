@@ -3,17 +3,18 @@
 <script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type="text/javascript" src="tablefilter.js"></script>
 </head>
@@ -32,7 +33,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="12641341">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
@@ -43,8 +44,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -66,7 +67,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0696206</p>
+	<p>Duration : 00mn:00s:1070055</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>
@@ -77,7 +78,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="10151776">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
@@ -88,8 +89,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -111,7 +112,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:067249</p>
+	<p>Duration : 00mn:00s:0880621</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>
@@ -122,7 +123,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="10290564">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
@@ -133,8 +134,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -156,7 +157,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0843763</p>
+	<p>Duration : 00mn:00s:085186</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>
@@ -167,7 +168,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="11091604">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
@@ -178,8 +179,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -201,7 +202,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0658801</p>
+	<p>Duration : 00mn:00s:0900867</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>
@@ -212,7 +213,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="11472557">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
@@ -223,8 +224,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -246,7 +247,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0656506</p>
+	<p>Duration : 00mn:00s:0707037</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>
@@ -257,7 +258,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="12149599">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
@@ -268,8 +269,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -291,7 +292,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0666651</p>
+	<p>Duration : 00mn:00s:0777362</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>
@@ -302,7 +303,7 @@
 	<td class="td_main"><b>Comparing AltSuffix (if needed)</b><br/>
 		<a id="13132301">UserGeneralInfo_AltSuffix_Test</a>
 	</td>
-			<td class="warning">WARNING
+			<td class="td_main warning">WARNING
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
@@ -313,8 +314,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -336,7 +337,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0672712</p>
+	<p>Duration : 00mn:00s:0759728</p>
 	<br/>
 	<ul>
 				<li>No entry returned by the new nor the old service.</li><br/>

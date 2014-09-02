@@ -3,17 +3,18 @@
 <script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px lightgrey;border-collapse:collapse;}
-.th_main {background-color:lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:lightgrey;border-style:solid;}
-.warning {padding: 10px;background-color: beige;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.false_positive {padding: 10px;background-color: green;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error {padding: 10px;background-color: Red;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.success {padding: 10px;color:black;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
-.error_with_explanation {padding: 10px;background-color: orange;color:white;border-width:2px;border-color:lightgrey;border-style:solid;font-weight:bold;}
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
 <script type="text/javascript" src="tablefilter.js"></script>
 </head>
@@ -32,7 +33,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="12641341">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
@@ -43,8 +44,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[11]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[15]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 11]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 15]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -98,13 +99,13 @@
 										<li>										Yale University
 															</li>
 										<li>										Yale Medical Group
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Connecticut Mental Health Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Neurosurgery
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Psychiatry
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -116,7 +117,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:1101423</p>
+	<p>Duration : 00mn:00s:026983</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>
@@ -128,7 +129,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="10151776">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="td_main error">ERROR
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
@@ -139,14 +140,14 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[29]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[36]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 29]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 36]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
 				<ul>
 										<li>Yale Combined Program in the Biological and Biomedical Sciences (BBS)
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>Neuroscience
 															</li>
 										<li>Molecular Cell Biology, Genetics and Development
@@ -166,7 +167,7 @@
 										<li>Animal Organogenesis
 															</li>
 										<li>Diabetes Research Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>Genetics
 															</li>
 										<li>Tian Xu Lab
@@ -210,7 +211,7 @@
 										<li>										Office of Student Research
 															</li>
 										<li>										Biological and Biomedical Sciences (BBS)
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Cancer Genetics
 															</li>
 										<li>										Office of Cooperative Research
@@ -240,7 +241,7 @@
 										<li>										Molecular/Cellular Neuroscience
 															</li>
 										<li>										Diabetes Endocrinology Research Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MYSM School Of Medicine
 															</li>
 										<li>										Neuroscience
@@ -268,17 +269,17 @@
 										<li>										Yale University
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										Cancer Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Cancer Center, Yale
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Internal Medicine
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Developmental Biology at Yale
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Academic Affairs
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										School of Law
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -290,7 +291,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:049675</p>
+	<p>Duration : 00mn:00s:0557969</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -303,7 +304,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="10290564">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="success">SUCCESS
+			<td class="td_main success">SUCCESS
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
@@ -314,8 +315,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[5]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -355,7 +356,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0006832</p>
+	<p>Duration : 00mn:00s:0007341</p>
 	<br/>
 	<ul>
 			</ul>
@@ -365,7 +366,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="11091604">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
@@ -376,8 +377,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[17]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[20]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 17]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 20]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -457,9 +458,9 @@
 										<li>										Office of Student Research
 															</li>
 										<li>										Dean's Workshops
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Women in Medicine
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -471,7 +472,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0267383</p>
+	<p>Duration : 00mn:00s:0277726</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -484,7 +485,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="11472557">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="td_main error">ERROR
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
@@ -495,14 +496,14 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[27]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[30]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 27]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 30]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
 				<ul>
 										<li>Yale Combined Program in the Biological and Biomedical Sciences (BBS)
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>Immunology
 															</li>
 										<li>Microbiology
@@ -516,7 +517,7 @@
 										<li>Structural Biology
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>Molecular Biophysics and Biochemistry
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>Structural Biology
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>Mechanisms of Viral Pathogenesis
@@ -572,7 +573,7 @@
 										<li>										Structural Biology
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										Biological and Biomedical Sciences (BBS)
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Molecular Virology
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										Research Members
@@ -594,7 +595,7 @@
 										<li>										Structural Biology
 										<span class="duplicate">[DUPLICATE]</span>					</li>
 										<li>										MB and B
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Structural Analysis of Immune System Receptors and Effectors
 															</li>
 										<li>										Mounting an Immune Response
@@ -614,11 +615,11 @@
 										<li>										Yale University
 															</li>
 										<li>										Cancer Center, Yale
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Cancer Center
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Clinical Departments
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -630,7 +631,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0469339</p>
+	<p>Duration : 00mn:00s:0616991</p>
 	<br/>
 	<ul>
 				<li>The new service contains duplicates.</li><br/>
@@ -643,7 +644,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="12149599">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="error">ERROR
+			<td class="td_main error">ERROR
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
@@ -654,8 +655,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[8]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[8]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 8]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 8]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -663,7 +664,7 @@
 										<li>SBIRT Training in Yale Residency Programs
 															</li>
 										<li>Yale School of Nursing
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 										<li>EDD Administration
 															</li>
 										<li>School Of Nursing
@@ -695,7 +696,7 @@
 										<li>										Yale University
 															</li>
 										<li>										Yale School of Medicine
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -707,7 +708,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0250282</p>
+	<p>Duration : 00mn:00s:0276958</p>
 	<br/>
 	<ul>
 			</ul>
@@ -717,7 +718,7 @@
 	<td class="td_main"><b>Comparing Organization Names</b><br/>
 		<a id="13132301">UserGeneralInfo_Organization_Name_Test</a>
 	</td>
-			<td class="false_positive">FALSE_POSITIVE
+			<td class="td_main false_positive">FALSE_POSITIVE
 			</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
@@ -728,8 +729,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[5]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
 		</tr>
 		<tr>
 			<td style="border-right: 1px lightgrey solid;">
@@ -743,13 +744,13 @@
 										<li>										MYSM School Of Medicine
 															</li>
 										<li>										MPSY Ribicoff CNRU
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Psychiatry
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										MCDEPT Clinical Departments
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 										<li>										Yale University
-					<span class="missing">[MISSING]</span>										</li>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 
 
@@ -761,7 +762,7 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0501361</p>
+	<p>Duration : 00mn:00s:0297656</p>
 	<br/>
 	<ul>
 				<li>There are more entries in the new service.</li><br/>

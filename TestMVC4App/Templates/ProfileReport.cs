@@ -56,7 +56,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"false_positive\">");
+            this.Write("\t<td class=\"td_main false_positive\">");
             
             #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
@@ -90,7 +90,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t");
+            this.Write("</a></td>\r\n\t\t");
             
             #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
@@ -98,7 +98,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"warning\">");
+            this.Write("\t<td class=\"td_main warning\">");
             
             #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
@@ -132,7 +132,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t");
+            this.Write("</a></td>\r\n\t\t");
             
             #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
@@ -140,7 +140,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"error_with_explanation\">");
+            this.Write("\t<td class=\"td_main error_with_explanation\">");
             
             #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
@@ -174,7 +174,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t");
+            this.Write("</a></td>\r\n\t\t");
             
             #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
@@ -182,7 +182,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"error\">");
+            this.Write("\t<td class=\"td_main error\">");
             
             #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
@@ -216,7 +216,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t");
+            this.Write("</a></td>\r\n\t\t");
             
             #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
@@ -224,7 +224,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"success\">");
+            this.Write("\t<td class=\"td_main success\">");
             
             #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
@@ -258,7 +258,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t");
+            this.Write("</a></td>\r\n\t\t");
             
             #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
