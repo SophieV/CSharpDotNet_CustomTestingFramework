@@ -181,6 +181,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\CompareStrategyOrganization.cs" />
     <Compile Include="Models\CompareStrategy.cs" />
     <Compile Include="Models\ComparerOrganizationIdAndName.cs" />

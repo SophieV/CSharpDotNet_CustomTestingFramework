@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace TestMVC4App.Models
 {
-    public class TestSuiteUser : TestSuite
+    public sealed class TestSuiteUser : TestSuite, IDisposable
     {
         public override string newServiceURLBase
         {
@@ -206,6 +206,21 @@ namespace TestMVC4App.Models
             LogManager.Instance.WriteSummaryReport(watch.Elapsed, errorType, errorMessage);
 
             LogManager.Instance.CleanUpResources();
+        }
+
+        public void Dispose()
+        {
+            if (conn != null)
+            {
+                conn.Dispose();
+                conn = null;
+            }
+
+            if (queryCommand != null)
+            {
+                queryCommand.Dispose();
+                queryCommand = null;
+            }
         }
     }
 }

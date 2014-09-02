@@ -10,7 +10,7 @@ using TestMVC4App.Templates;
 
 namespace TestMVC4App.Models
 {
-    public sealed class LogManager
+    public sealed class LogManager : IDisposable
     {
         private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_User_PerProfile.html";
         private const string SUMMARY_FILENAME = "QA_Reporting_Summary_User_MAIN.html";
@@ -408,6 +408,7 @@ namespace TestMVC4App.Models
             template.Initialize();
             htmlWriterForSummaryReport.WriteLine(template.TransformText());
             htmlWriterForSummaryReport.Close();
+            htmlWriterForSummaryReport.Dispose();
             htmlWriterForSummaryReport = null;
         }
 
@@ -444,5 +445,26 @@ namespace TestMVC4App.Models
 
         #endregion
 
+
+        public void Dispose()
+        {
+            if (this.streamWriter != null)
+            {
+                this.streamWriter.Dispose();
+                this.streamWriter = null;
+            }
+
+            if (this.htmlWriterForSummaryReport != null)
+            {
+                this.htmlWriterForSummaryReport.Dispose();
+                this.htmlWriterForSummaryReport = null;
+            }
+
+            if (this.htmlWriterForProfileReport != null)
+            {
+                this.htmlWriterForProfileReport.Dispose();
+                this.htmlWriterForProfileReport = null;
+            }
+        }
     }
 }
