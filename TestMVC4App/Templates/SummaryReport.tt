@@ -13,7 +13,8 @@
 .title {text-align: center;}
 .th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
 .td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
-.warning {background-color: beige;color:black;font-weight:bold;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
 .false_positive {background-color: green;color:white;font-weight:bold;}
 .error {background-color: Red;color:white;font-weight:bold;}
 .success {color:black;font-weight:bold;}
@@ -54,9 +55,11 @@
 			case ResultSeverityType.FALSE_POSITIVE : #>
 		<td class="false_positive td_main"><#= countPerSeverity.Key #>
 			<# break;
-			case ResultSeverityType.WARNING:
-			case ResultSeverityType.WARNING_NO_DATA: #>
+			case ResultSeverityType.WARNING: #>
 		<td class="warning td_main"><#= countPerSeverity.Key #>
+			<# break;
+			case ResultSeverityType.WARNING_NO_DATA: #>
+		<td class="warning_no_data td_main"><#= countPerSeverity.Key #>
 			<# break;
 			case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
 		<td class="error_with_explanation td_main"><#= countPerSeverity.Key #>
@@ -154,9 +157,11 @@
 		case ResultSeverityType.FALSE_POSITIVE : #>
 		<td class="false_positive td_main"><#= countPerSeverity.Key #>
 		<# break;
-		case ResultSeverityType.WARNING:
-		case ResultSeverityType.WARNING_NO_DATA: #>
+		case ResultSeverityType.WARNING: #>
 		<td class="warning td_main"><#= countPerSeverity.Key #>
+		<# break;
+		case ResultSeverityType.WARNING_NO_DATA: #>
+		<td class="warning_no_data td_main"><#= countPerSeverity.Key #>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
 		<td class="error_with_explanation td_main"><#= countPerSeverity.Key #>

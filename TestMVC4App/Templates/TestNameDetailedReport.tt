@@ -13,9 +13,11 @@
 		case ResultSeverityType.FALSE_POSITIVE : #>
 		<td class="td_main false_positive"><#= DetailedReportDataObject.Result #>
 		<# break;
-		case ResultSeverityType.WARNING:
-		case ResultSeverityType.WARNING_NO_DATA: #>
+		case ResultSeverityType.WARNING: #>
 		<td class="td_main warning"><#= DetailedReportDataObject.Result #>
+		<# break;
+		case ResultSeverityType.WARNING_NO_DATA: #>
+		<td class="td_main warning_no_data"><#= DetailedReportDataObject.Result #>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
 		<td class="td_main error_with_explanation"><#= DetailedReportDataObject.Result #>

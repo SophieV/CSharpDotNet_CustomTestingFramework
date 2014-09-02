@@ -33,7 +33,8 @@ namespace TestMVC4App.Templates
 .table_main {border:solid 2px darkgrey;border-collapse:collapse;}
 .th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
 .td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
-.warning {background-color: beige;color:black;font-weight:bold;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
 .false_positive {background-color: green;color:white;font-weight:bold;}
 .error {background-color: Red;color:white;font-weight:bold;}
 .success {color:black;font-weight:bold;}
@@ -51,21 +52,21 @@ namespace TestMVC4App.Templates
 <td class=""th_main"">UPI</td>
 ");
             
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
  foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { 
             
             #line default
             #line hidden
             this.Write("<td class=\"th_main\">");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
             this.Write("</td>\r\n");
             
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
+            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
  } 
             
             #line default

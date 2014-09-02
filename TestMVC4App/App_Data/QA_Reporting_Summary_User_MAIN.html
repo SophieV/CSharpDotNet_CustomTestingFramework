@@ -5,7 +5,8 @@
 .title {text-align: center;}
 .th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
 .td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
-.warning {background-color: beige;color:black;font-weight:bold;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
 .false_positive {background-color: green;color:white;font-weight:bold;}
 .error {background-color: Red;color:white;font-weight:bold;}
 .success {color:black;font-weight:bold;}
@@ -23,8 +24,8 @@
 	Total count of tests run : 182<br/>
 	Count of tests per user profile : 26<br/>
 	Count of user profiles free from any kind of warning : 00<br/>
-	Duration : 00h: 00mn:12s:3208218</p>
-	<p>Average Duration by User Profile : 00h: 00mn:00s:25</p>
+	Duration : 00h: 00mn:12s:5336019</p>
+	<p>Average Duration by User Profile : 00h: 00mn:00s:254</p>
 	<br/>
 	<table class="table_main">
 		<tr>
@@ -35,19 +36,19 @@
 				<tr>
 					<td class="error td_main">ERROR
 					</td>
-		<td class="td_main">19</td>
+		<td class="td_main">09</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is not maintained.</td>
 	</tr>
 			<tr>
 					<td class="error_with_explanation td_main">ERROR_WITH_EXPLANATION
 					</td>
-		<td class="td_main">00</td>
+		<td class="td_main">10</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is not maintained AND some data behaviors were identified.</td>
 	</tr>
 			<tr>
 					<td class="false_positive td_main">FALSE_POSITIVE
 					</td>
-		<td class="td_main">20</td>
+		<td class="td_main">21</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained EVEN THOUGH the test returned an error.</td>
 	</tr>
 			<tr>
@@ -57,15 +58,15 @@
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained AND some data behaviors were identified.</td>
 	</tr>
 			<tr>
-					<td class="warning td_main">WARNING_NO_DATA
+					<td class="warning_no_data td_main">WARNING_NO_DATA
 					</td>
-		<td class="td_main">49</td>
+		<td class="td_main">39</td>
 		<td class="td_main" style="color:darkgrey;">None of the service has returned any data.</td>
 	</tr>
 			<tr>
 					<td class="success td_main">SUCCESS
 					</td>
-		<td class="td_main">88</td>
+		<td class="td_main">97</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained.</td>
 	</tr>
 		</table>
@@ -78,7 +79,7 @@
 	</tr>
 		<tr>
 		<td class="td_main">No entry returned by the new nor the old service.</td>
-		<td class="td_main">49</td>
+		<td class="td_main">39</td>
 	</tr>
 		<tr>
 		<td class="td_main">All the entries of the old service are found in the new service.</td>
@@ -89,20 +90,20 @@
 		<td class="td_main">23</td>
 	</tr>
 		<tr>
+		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
+		<td class="td_main">14</td>
+	</tr>
+		<tr>
+		<td class="td_main">The new service contains duplicates.</td>
+		<td class="td_main">09</td>
+	</tr>
+		<tr>
 		<td class="td_main">The new tree contains at least as many elements as the old one.</td>
 		<td class="td_main">06</td>
 	</tr>
 		<tr>
 		<td class="td_main">The mismatch between some entries is due to missing Id values.</td>
 		<td class="td_main">06</td>
-	</tr>
-		<tr>
-		<td class="td_main">The new service contains duplicates.</td>
-		<td class="td_main">04</td>
-	</tr>
-		<tr>
-		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
-		<td class="td_main">03</td>
 	</tr>
 		<tr>
 		<td class="td_main">Some entries of the old service are not found in the new service.</td>
@@ -188,7 +189,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:
+					00h: 00mn:00s:002
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_MiddleName_Test">Test Overview</a><br/>
@@ -218,7 +219,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:001
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_Gender_Test">Test Overview</a><br/>
@@ -263,7 +264,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:004
+					00h: 00mn:00s:007
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_Suffix_Test">Test Overview</a><br/>
@@ -278,7 +279,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:004
+					00h: 00mn:00s:005
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_Idx_Test">Test Overview</a><br/>
@@ -308,7 +309,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:005
+					00h: 00mn:00s:004
 					</td>
 		<td class="td_main">
 			<a href="#UserBasicInfo_Npi_Test">Test Overview</a><br/>
@@ -333,12 +334,12 @@
 		<tr>
 		<td class="td_main">UserGeneralInfo_Titles_Test</td>
 		<td class="td_main">
-						0.00 %
+						71.43 %
 		</td>
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:003
+					00h: 00mn:00s:001
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Titles_Test">Test Overview</a><br/>
@@ -398,7 +399,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:001
+					00h: 00mn:00s:003
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_AltMiddleName_Test">Test Overview</a><br/>
@@ -413,7 +414,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:007
+					00h: 00mn:00s:014
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_AltSuffix_Test">Test Overview</a><br/>
@@ -423,12 +424,12 @@
 		<tr>
 		<td class="td_main">UserGeneralInfo_SuffixNames_Test</td>
 		<td class="td_main">
-						0.00 %
+						71.43 %
 		</td>
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:006
+					00h: 00mn:00s:003
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_SuffixNames_Test">Test Overview</a><br/>
@@ -473,7 +474,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:004
+					00h: 00mn:00s:005
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Organization_Name_Test">Test Overview</a><br/>
@@ -488,7 +489,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:036
+					00h: 00mn:00s:038
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Organization_IdAndNameTogether_Test">Test Overview</a><br/>
@@ -518,7 +519,7 @@
 		<td class="td_main" style="width: 40%;">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:004
+					00h: 00mn:00s:005
 					</td>
 		<td class="td_main">
 			<a href="#UserGeneralInfo_Organization_CheckIsPrimary_Test">Test Overview</a><br/>
@@ -565,7 +566,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -626,7 +627,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -688,7 +689,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -734,8 +735,9 @@
 		<tr>
 			<td class="error_with_explanation td_main">ERROR_WITH_EXPLANATION
 				</td>
-		<td class="td_main">00</td>
+		<td class="td_main">03</td>
 		<td class="td_main">
+						42.86 %
 					</td>
 	</tr>
 		<tr>
@@ -753,11 +755,10 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
-		<td class="td_main">03</td>
+		<td class="td_main">00</td>
 		<td class="td_main">
-						42.86 %
 					</td>
 	</tr>
 		<tr>
@@ -777,7 +778,7 @@
 		<th class="th_main">Count</th>
 	</tr>
 		<tr>
-		<td class="td_main">No entry returned by the new nor the old service.</td>
+		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
 		<td class="td_main">03</td>
 	</tr>
 	</table>
@@ -819,7 +820,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -880,7 +881,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -941,7 +942,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -1002,7 +1003,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -1044,8 +1045,9 @@
 		<tr>
 			<td class="error_with_explanation td_main">ERROR_WITH_EXPLANATION
 				</td>
-		<td class="td_main">00</td>
+		<td class="td_main">07</td>
 		<td class="td_main">
+						100.00 %
 					</td>
 	</tr>
 		<tr>
@@ -1063,11 +1065,10 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
-		<td class="td_main">07</td>
+		<td class="td_main">00</td>
 		<td class="td_main">
-						100.00 %
 					</td>
 	</tr>
 		<tr>
@@ -1086,7 +1087,7 @@
 		<th class="th_main">Count</th>
 	</tr>
 		<tr>
-		<td class="td_main">No entry returned by the new nor the old service.</td>
+		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
 		<td class="td_main">07</td>
 	</tr>
 	</table>
@@ -1129,7 +1130,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">05</td>
 		<td class="td_main">
@@ -1203,7 +1204,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">05</td>
 		<td class="td_main">
@@ -1277,7 +1278,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">05</td>
 		<td class="td_main">
@@ -1350,7 +1351,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">05</td>
 		<td class="td_main">
@@ -1390,9 +1391,9 @@
 		<tr>
 			<td class="error td_main">ERROR
 				</td>
-		<td class="td_main">06</td>
+		<td class="td_main">01</td>
 		<td class="td_main">
-						85.71 %
+						14.29 %
 					</td>
 	</tr>
 		<tr>
@@ -1405,8 +1406,9 @@
 		<tr>
 			<td class="false_positive td_main">FALSE_POSITIVE
 				</td>
-		<td class="td_main">00</td>
+		<td class="td_main">01</td>
 		<td class="td_main">
+						14.29 %
 					</td>
 	</tr>
 		<tr>
@@ -1417,7 +1419,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">01</td>
 		<td class="td_main">
@@ -1427,8 +1429,9 @@
 		<tr>
 			<td class="success td_main">SUCCESS
 				</td>
-		<td class="td_main">00</td>
+		<td class="td_main">04</td>
 		<td class="td_main">
+						57.14 %
 					</td>
 	</tr>
 		</table>
@@ -1438,6 +1441,10 @@
 	<tr>
 		<th class="th_main">Identified Data Behavior</th>
 		<th class="th_main">Count</th>
+	</tr>
+		<tr>
+		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
+		<td class="td_main">01</td>
 	</tr>
 		<tr>
 		<td class="td_main">No entry returned by the new nor the old service.</td>
@@ -1482,7 +1489,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">06</td>
 		<td class="td_main">
@@ -1548,7 +1555,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -1609,7 +1616,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -1670,7 +1677,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">03</td>
 		<td class="td_main">
@@ -1736,7 +1743,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">07</td>
 		<td class="td_main">
@@ -1775,9 +1782,8 @@
 		<tr>
 			<td class="error td_main">ERROR
 				</td>
-		<td class="td_main">05</td>
+		<td class="td_main">00</td>
 		<td class="td_main">
-						71.43 %
 					</td>
 	</tr>
 		<tr>
@@ -1802,7 +1808,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">02</td>
 		<td class="td_main">
@@ -1812,8 +1818,9 @@
 		<tr>
 			<td class="success td_main">SUCCESS
 				</td>
-		<td class="td_main">00</td>
+		<td class="td_main">05</td>
 		<td class="td_main">
+						71.43 %
 					</td>
 	</tr>
 		</table>
@@ -1823,10 +1830,6 @@
 	<tr>
 		<th class="th_main">Identified Data Behavior</th>
 		<th class="th_main">Count</th>
-	</tr>
-		<tr>
-		<td class="td_main">The new service contains duplicates.</td>
-		<td class="td_main">03</td>
 	</tr>
 		<tr>
 		<td class="td_main">No entry returned by the new nor the old service.</td>
@@ -1871,7 +1874,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -1933,7 +1936,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -1961,6 +1964,10 @@
 		<tr>
 		<td class="td_main">There are more entries in the new service.</td>
 		<td class="td_main">07</td>
+	</tr>
+		<tr>
+		<td class="td_main">The new service contains duplicates.</td>
+		<td class="td_main">02</td>
 	</tr>
 	</table>
 	<hr/>
@@ -2003,7 +2010,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -2034,12 +2041,12 @@
 		<td class="td_main">03</td>
 	</tr>
 		<tr>
-		<td class="td_main">Some entries of the old service are not found in the new service.</td>
-		<td class="td_main">02</td>
+		<td class="td_main">The new service contains duplicates.</td>
+		<td class="td_main">03</td>
 	</tr>
 		<tr>
-		<td class="td_main">The new service contains duplicates.</td>
-		<td class="td_main">01</td>
+		<td class="td_main">Some entries of the old service are not found in the new service.</td>
+		<td class="td_main">02</td>
 	</tr>
 	</table>
 	<hr/>
@@ -2082,7 +2089,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -2114,6 +2121,10 @@
 		<tr>
 		<td class="td_main">The mismatch between some entries is due to trailing white spaces.</td>
 		<td class="td_main">03</td>
+	</tr>
+		<tr>
+		<td class="td_main">The new service contains duplicates.</td>
+		<td class="td_main">02</td>
 	</tr>
 	</table>
 	<hr/>
@@ -2155,7 +2166,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -2226,7 +2237,7 @@
 					</td>
 	</tr>
 		<tr>
-			<td class="warning td_main">WARNING_NO_DATA
+			<td class="warning_no_data td_main">WARNING_NO_DATA
 				</td>
 		<td class="td_main">00</td>
 		<td class="td_main">
@@ -2255,6 +2266,10 @@
 		<tr>
 		<td class="td_main">All the entries of the old service are found in the new service.</td>
 		<td class="td_main">04</td>
+	</tr>
+		<tr>
+		<td class="td_main">The new service contains duplicates.</td>
+		<td class="td_main">02</td>
 	</tr>
 		<tr>
 		<td class="td_main">Some entries of the old service are not found in the new service.</td>

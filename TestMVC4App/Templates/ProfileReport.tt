@@ -13,9 +13,12 @@
 	<td class="td_main false_positive"><#= pair.Value #><br/>
 	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
-		case ResultSeverityType.WARNING:
-		case ResultSeverityType.WARNING_NO_DATA: #>
+		case ResultSeverityType.WARNING: #>
 	<td class="td_main warning"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a></td>
+		<# break;
+		case ResultSeverityType.WARNING_NO_DATA: #>
+	<td class="td_main warning_no_data"><#= pair.Value #><br/>
 	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a></td>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
