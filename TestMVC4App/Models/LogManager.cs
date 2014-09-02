@@ -366,7 +366,7 @@ namespace TestMVC4App.Models
 
             if (StatsCountProfilesProcessed > 0)
             {
-                TimeSpan.FromMilliseconds(durationByProfile.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed);
+                averageDurationPerProfile = TimeSpan.FromMilliseconds(durationByProfile.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed);
 
                 foreach(var testNameEntry in duration_ByTestName)
                 {
