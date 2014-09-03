@@ -3,15 +3,6 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-	<script language="javascript" type="text/javascript">
-	var tableFilters = {
-		btn: true,
-		col_0: "none",
-		col_2: "select",
-		btn_text: "  >  "
-	}
-	setFilterGrid("individual_test_results");
-</script>
 </table>
 </body>
 </html>

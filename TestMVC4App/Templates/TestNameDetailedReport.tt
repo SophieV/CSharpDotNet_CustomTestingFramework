@@ -1,5 +1,6 @@
 ﻿<#@ template debug="true" language="C#"  #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
 <#@ import namespace="TestMVC4App.Models" #>
 <#@ import namespace="HtmlDiff" #>
 <#@ parameter 
@@ -43,7 +44,7 @@
 			<td class="th_main">NEW SERVICE DATA <# if(DetailedReportDataObject.NewOrganizationValues.Count <= 0) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.NewValues.Count #>]</span><# } #></td>
 		</tr>
 		<tr>
-			<td style="border-right: 1px lightgrey solid;">
+			<td class="td_main">
 				<ul>
 					<# if(DetailedReportDataObject.OldOrganizationValues.Count > 0) {
 					string entry = string.Empty;
@@ -58,11 +59,11 @@
 					<br/><br/>
 					<# var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
-						entry = string.Empty;
+						StringBuilder sb = new StringBuilder();
 						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<span class=\"tree_depth_mismatch\">"; }
-						entry += "[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")";
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += " [MISMATCH WITH NEW SERVICE]</span>"; } #>
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
+						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH NEW SERVICE]</span>"); } #>
 					<li><#= entry #>
 					<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
@@ -77,7 +78,7 @@
 					<# } } #>
 				</ul>
 			</td>
-			<td>
+			<td class="td_main">
 				<ul>
 					<# if(DetailedReportDataObject.NewOrganizationValues.Count > 0) {
 					string entry = string.Empty;
@@ -92,12 +93,12 @@
 					<br/><br/>
 					<# var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree2) {
-						entry = string.Empty;
-						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += "<span class=\"tree_depth_mismatch\">"; }
-						entry += "[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")";
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { entry += " [MISMATCH WITH OLD SERVICE]</span>"; } #>
-					<li><#= entry #>
+						StringBuilder sb = new StringBuilder();
+						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
+						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH OLD SERVICE]</span>"); } #>
+					<li><#= sb #>
 					<# if(element.IsMissing) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					</li>
@@ -118,11 +119,6 @@
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
 				</ul>
-
-
-
-
-
 			</td>
 		</tr>
 		</table>

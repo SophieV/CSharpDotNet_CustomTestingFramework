@@ -5,7 +5,6 @@
 <#@ import namespace="System.Collections.Generic" #>
 <html>
 <head>
-<script type="text/css" href="filtergrid.css"></script>
 <style>
 .diffins, .diffmod { background-color: yellow; }
 .table_main {border:solid 2px darkgrey;border-collapse:collapse;}

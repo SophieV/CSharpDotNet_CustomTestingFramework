@@ -28,9 +28,7 @@
 
 	<# if(!string.IsNullOrEmpty(SummaryReportDataObject.ErrorHappened)) { 
 	string message = "UNKNOWN ERROR(S) MAY MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !";
-	if (SummaryReportDataObject.ErrorHappened == "HTTP") {
-		message = "PROBLEMS CONNECTING TO DATA SERVICES MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !";
-		} #>
+	if (SummaryReportDataObject.ErrorHappened == "HTTP") { message = "PROBLEMS CONNECTING TO DATA SERVICES MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !"; } #>
 	 <p class="error_data"><#= message #><br/><#= SummaryReportDataObject.ErrorMessage #></p>
 	 <hr/>
 	<# } #>
@@ -53,25 +51,25 @@
 		<tr>
 			<# switch (countPerSeverity.Key) {
 			case ResultSeverityType.FALSE_POSITIVE : #>
-		<td class="false_positive td_main"><#= countPerSeverity.Key #>
+		<td class="false_positive td_main">
 			<# break;
 			case ResultSeverityType.WARNING: #>
-		<td class="warning td_main"><#= countPerSeverity.Key #>
+		<td class="warning td_main">
 			<# break;
 			case ResultSeverityType.WARNING_NO_DATA: #>
-		<td class="warning_no_data td_main"><#= countPerSeverity.Key #>
+		<td class="warning_no_data td_main">
 			<# break;
 			case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-		<td class="error_with_explanation td_main"><#= countPerSeverity.Key #>
+		<td class="error_with_explanation td_main">
 			<# break;
 			case ResultSeverityType.ERROR: #>
-		<td class="error td_main"><#= countPerSeverity.Key #>
+		<td class="error td_main">
 			<# break;
 			default: #>
-		<td class="success td_main"><#= countPerSeverity.Key #>
+		<td class="success td_main">
 			<# break;
 		} #>
-		</td>
+		<#= countPerSeverity.Key #></td>
 		<td class="td_main"><#= String.Format("{0:0,0}",countPerSeverity.Value) #></td>
 		<td class="td_main" style="color:darkgrey;"><#= LogManager.GetDescription(countPerSeverity.Key) #></td>
 	</tr>
@@ -155,25 +153,25 @@
 	<tr>
 	<# switch (countPerSeverity.Key) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-		<td class="false_positive td_main"><#= countPerSeverity.Key #>
+		<td class="false_positive td_main">
 		<# break;
 		case ResultSeverityType.WARNING: #>
-		<td class="warning td_main"><#= countPerSeverity.Key #>
+		<td class="warning td_main">
 		<# break;
 		case ResultSeverityType.WARNING_NO_DATA: #>
-		<td class="warning_no_data td_main"><#= countPerSeverity.Key #>
+		<td class="warning_no_data td_main">
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-		<td class="error_with_explanation td_main"><#= countPerSeverity.Key #>
+		<td class="error_with_explanation td_main">
 		<# break;
 		case ResultSeverityType.ERROR: #>
-		<td class="error td_main"><#= countPerSeverity.Key #>
+		<td class="error td_main">
 		<# break;
 		default: #>
-		<td class="success td_main"><#= countPerSeverity.Key #>
+		<td class="success td_main">
 		<# break;
 	} #>
-		</td>
+		<#= countPerSeverity.Key #></td>
 		<td class="td_main"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
 		<td class="td_main">
 			<# double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;

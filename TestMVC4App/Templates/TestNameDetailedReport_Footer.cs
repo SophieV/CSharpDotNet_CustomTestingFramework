@@ -28,9 +28,7 @@ namespace TestMVC4App.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\t<script language=\"javascript\" type=\"text/javascript\">\r\n\tvar tableFilters = {\r\n\t\t" +
-                    "btn: true,\r\n\t\tcol_0: \"none\",\r\n\t\tcol_2: \"select\",\r\n\t\tbtn_text: \"  >  \"\r\n\t}\r\n\tsetF" +
-                    "ilterGrid(\"individual_test_results\");\r\n</script>\r\n</table>\r\n</body>\r\n</html>");
+            this.Write("</table>\r\n</body>\r\n</html>");
             return this.GenerationEnvironment.ToString();
         }
     }
