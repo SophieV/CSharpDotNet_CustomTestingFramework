@@ -227,7 +227,7 @@ namespace TestMVC4App.Templates
             this.Write("\t<tr>\r\n\t\t<td class=\"td_main\">");
             
             #line 89 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(countPerIdentifiedDataBehavior.Key)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key]));
             
             #line default
             #line hidden
@@ -511,7 +511,7 @@ namespace TestMVC4App.Templates
             this.Write("\t<tr>\r\n\t\t<td class=\"td_main\">");
             
             #line 197 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(countPerIdentifiedDataBehavior.Key)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key]));
             
             #line default
             #line hidden

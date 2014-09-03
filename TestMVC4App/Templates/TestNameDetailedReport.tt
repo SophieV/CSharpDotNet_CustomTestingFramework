@@ -47,15 +47,13 @@
 			<td class="td_main">
 				<ul>
 					<# if(DetailedReportDataObject.OldOrganizationValues.Count > 0) {
-					string entry = string.Empty;
 					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.OldOrganizationValues) {
-						if (element.Depth < 0) {
-							entry = "[DEPTH NOT ASSIGNED] " + element.Name + " (" + element.ID + ")"; #>
-							<li><#= entry #>
+						if (element.Depth < 0) { #>
+							<li>[DEPTH NOT ASSIGNED] <#= element.Name #> (<#= element.ID #>)
 							<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
-						</li><#
-					} } #>
+						</li>
+						<# } } #>
 					<br/><br/>
 					<# var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
@@ -81,11 +79,9 @@
 			<td class="td_main">
 				<ul>
 					<# if(DetailedReportDataObject.NewOrganizationValues.Count > 0) {
-					string entry = string.Empty;
 					foreach (OrganizationTreeDescriptor element in DetailedReportDataObject.NewOrganizationValues) {
-						if (element.Depth < 0) {
-							entry = "[DEPTH NOT ASSIGNED] " + element.Name + " (" + element.ID + ")"; #>
-							<li><#= entry #>
+						if (element.Depth < 0) { #>
+							<li>[DEPTH NOT ASSIGNED] <#= element.Name #> (<#= element.ID #>)
 							<# if(element.IsMissing) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 							</li><#

@@ -30,12 +30,14 @@ namespace TestMVC4App.Models
         private static Dictionary<string, Dictionary<ResultSeverityType, int>> countSeverityTypes_ByTestName;
         private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> countIdentifiedDataBehaviors_ByTestName;
 
-        private static Dictionary<string, List<TimeSpan>> duration_ByTestName;
-        private static List<TimeSpan> durationByProfile;
+        private static Dictionary<string, HashSet<TimeSpan>> duration_ByTestName;
+        private static HashSet<TimeSpan> durationByProfile;
 
         private static Dictionary<int, bool> checkNoWarningNorError_ByUPI;
 
         private static Dictionary<string, string> sampleDataByTestName = new Dictionary<string,string>();
+
+        public static Dictionary<IdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
 
         public int StatsCountProfilesProcessed { get;set; }
 
@@ -89,17 +91,23 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test");
             allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
 
+            IdentifiedBehaviorsDescriptions = new Dictionary<IdentifiedDataBehavior, string>();
+            foreach (var behavior in (IdentifiedDataBehavior[]) Enum.GetValues(typeof(IdentifiedDataBehavior)))
+            {
+                IdentifiedBehaviorsDescriptions.Add(behavior, GetDescription(behavior));
+            }
+
             checkNoWarningNorError_ByUPI = new Dictionary<int, bool>();
             countSeverityTypes_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
             countIdentifiedDataBehaviors_ByTestName = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
 
-            duration_ByTestName = new Dictionary<string, List<TimeSpan>>();
+            duration_ByTestName = new Dictionary<string, HashSet<TimeSpan>>();
             foreach(var name in allTestNames)
             {
-                duration_ByTestName.Add(name, new List<TimeSpan>());
+                duration_ByTestName.Add(name, new HashSet<TimeSpan>());
             }
 
-            durationByProfile = new List<TimeSpan>();
+            durationByProfile = new HashSet<TimeSpan>();
 
             htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
 
@@ -210,19 +218,11 @@ namespace TestMVC4App.Models
             {
                 // initialize all the possible combinations for the given test name
                 countIdentifiedDataBehaviors_ByTestName.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.WRONG_VALUE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.OLD_TREE_NON_EXHAUSTIVE, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT, 0);
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS, 0);
+
+                foreach (var behavior in (IdentifiedDataBehavior[])Enum.GetValues(typeof(IdentifiedDataBehavior)))
+                {
+                    countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(behavior, 0);
+                }
             }
 
             // increase call counter

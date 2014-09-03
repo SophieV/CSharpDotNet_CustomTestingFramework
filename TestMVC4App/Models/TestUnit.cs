@@ -23,9 +23,9 @@ namespace TestMVC4App.Models
 
         public TestUnit Parent { get; set; }
 
-        public List<TestUnit> Children { get; set; }
+        public HashSet<TestUnit> Children { get; set; }
 
-        public List<ResultReport> DetailedResults { get; set; }
+        public HashSet<ResultReport> DetailedResults { get; set; }
 
         public ResultSeverityType OverallSeverity { get { return overallSeverity; } }
         private ResultSeverityType overallSeverity;
@@ -74,7 +74,7 @@ namespace TestMVC4App.Models
         {
             foreach (var child in Children)
             {
-                this.DetailedResults.AddRange(child.DetailedResults);
+                Array.ForEach(child.DetailedResults.ToArray(), x => this.DetailedResults.Add(x));
             }
         }
 
@@ -97,8 +97,8 @@ namespace TestMVC4App.Models
         {
             this.Master = master;
             this.Parent = parent;
-            this.Children = new List<TestUnit>();
-            this.DetailedResults = new List<ResultReport>();
+            this.Children = new HashSet<TestUnit>();
+            this.DetailedResults = new HashSet<ResultReport>();
         }
 
         protected abstract void RunAllSingleTests();

@@ -76,7 +76,7 @@ namespace TestMVC4App.Templates
             this.TestName = resultReport.TestName;
             this.Result = resultReport.Result;
             this.TestDescription = resultReport.TestDescription;
-            this.IdentifiedDataBehaviors = new HashSet<string>(resultReport.IdentifedDataBehaviors.Select(x=> LogManager.GetDescription(x)));
+            this.IdentifiedDataBehaviors = new HashSet<string>(LogManager.IdentifiedBehaviorsDescriptions.Where(x=>resultReport.IdentifedDataBehaviors.Contains(x.Key)).Select(x=>x.Value));
             this.OldValues = resultReport.OldValues;
             this.NewValues = resultReport.NewValues;
             this.OldOrganizationValues = resultReport.OldOrganizationValues;
