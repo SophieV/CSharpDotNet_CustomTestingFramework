@@ -7,14 +7,14 @@ namespace TestMVC4App.Models
     {
         protected ResultReport resultReport;
 
-        public CompareStrategy(List<string> oldValues, List<string> newValues, ResultReport resultReport)
+        public CompareStrategy(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
         {
             this.resultReport = resultReport;
             this.resultReport.AddDetailedValues(oldValues, newValues);
         }
 
-        public CompareStrategy(List<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
-                               List<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot, 
+        public CompareStrategy(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
+                               HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot, 
                                ResultReport resultReport)
         {
             this.resultReport = resultReport;

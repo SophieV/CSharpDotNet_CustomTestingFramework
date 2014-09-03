@@ -16,8 +16,8 @@ namespace TestMVC4App.Models
         private IEnumerable<Organization> newServiceOrganizations = new List<Organization>();
         private IEnumerable<XElement> oldServiceDepartments;
         private IEnumerable<XElement> oldServiceTreeDepartments;
-        private List<OrganizationTreeDescriptor> newServiceOrganizationDescriptors;
-        private List<OrganizationTreeDescriptor> oldServiceOrganizationDescriptors;
+        private HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptors;
+        private HashSet<OrganizationTreeDescriptor> oldServiceOrganizationDescriptors;
         private int userId;
         private int upi;
 
@@ -45,8 +45,8 @@ namespace TestMVC4App.Models
                 this.oldServiceTreeDepartments = oldServiceTreeDepartments;
             }
 
-            this.newServiceOrganizationDescriptors = new List<OrganizationTreeDescriptor>();
-            this.oldServiceOrganizationDescriptors = new List<OrganizationTreeDescriptor>();
+            this.newServiceOrganizationDescriptors = new HashSet<OrganizationTreeDescriptor>();
+            this.oldServiceOrganizationDescriptors = new HashSet<OrganizationTreeDescriptor>();
         }
         #endregion
 
@@ -89,10 +89,10 @@ namespace TestMVC4App.Models
 
             //Task.WaitAll(tasks);
 
-            UserGeneralInfo_Organization_Id_Test(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID).ToList(), 
-                                                 this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID).ToList());
-            UserGeneralInfo_Organization_Name_Test(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name).ToList(),
-                                                   this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name).ToList());
+            UserGeneralInfo_Organization_Id_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)),
+                                                 new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)));
+            UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)),
+                                                   new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)));
             UserGeneralInfo_Organization_IdAndNameTogether_Test(this.oldServiceOrganizationDescriptors,oldTreeRoot,this.newServiceOrganizationDescriptors,newTreeRoot);
             UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
             UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
@@ -261,7 +261,7 @@ namespace TestMVC4App.Models
             return rootContainer;
         }
 
-        private static void ParseRecursiveTree(XElement element, OrganizationTreeDescriptor parent, List<OrganizationTreeDescriptor> allPuzzlePieces, int depth = 0)
+        private static void ParseRecursiveTree(XElement element, OrganizationTreeDescriptor parent, HashSet<OrganizationTreeDescriptor> allPuzzlePieces, int depth = 0)
         {
             OrganizationTreeDescriptor orgDesc = parent;
 
@@ -392,9 +392,9 @@ namespace TestMVC4App.Models
 
         #region Single Tests
 
-        private void UserGeneralInfo_Organization_IdAndNameTogether_Test(List<OrganizationTreeDescriptor> oldServiceOrganizationDescriptor, 
+        private void UserGeneralInfo_Organization_IdAndNameTogether_Test(HashSet<OrganizationTreeDescriptor> oldServiceOrganizationDescriptor, 
                                                                          OrganizationTreeDescriptor oldTreeRoot,
-                                                                         List<OrganizationTreeDescriptor> newServiceOrganizationDescriptor,
+                                                                         HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptor,
                                                                          OrganizationTreeDescriptor newTreeRoot)
         {
             var watch = new Stopwatch();
@@ -424,7 +424,7 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Organization_Id_Test(List<string> oldValues, List<string> newValues)
+        private void UserGeneralInfo_Organization_Id_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -444,7 +444,7 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Organization_Name_Test(List<string> oldValues, List<string> newValues)
+        private void UserGeneralInfo_Organization_Name_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -464,7 +464,7 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(List<OrganizationTreeDescriptor> oldTree, List<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
+        private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
         {
             bool keepGoing = true;
             int index = 0;
@@ -533,7 +533,7 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Organization_CheckIsPrimary_Test(List<OrganizationTreeDescriptor> oldTree, List<OrganizationTreeDescriptor> newTree)
+        private void UserGeneralInfo_Organization_CheckIsPrimary_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -561,7 +561,7 @@ namespace TestMVC4App.Models
             }
 
             // this comparison can work because all the primary departments have a name assigned in the old service ! NOPE because the name may change...
-            var collectionComparison = new CompareStrategyStringCollection(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
+            var collectionComparison = new CompareStrategyStringCollection(new HashSet<string>(oldEntriesIsPrimary), new HashSet<string>(newEntriesIsPrimary), resultReport);
             collectionComparison.Investigate();
 
             watch.Stop();

@@ -12,25 +12,25 @@
 	</td>
 	<# switch (DetailedReportDataObject.Result) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-		<td class="td_main false_positive"><#= DetailedReportDataObject.Result #>
+		<td class="td_main false_positive">
 		<# break;
 		case ResultSeverityType.WARNING: #>
-		<td class="td_main warning"><#= DetailedReportDataObject.Result #>
+		<td class="td_main warning">
 		<# break;
 		case ResultSeverityType.WARNING_NO_DATA: #>
-		<td class="td_main warning_no_data"><#= DetailedReportDataObject.Result #>
+		<td class="td_main warning_no_data">
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-		<td class="td_main error_with_explanation"><#= DetailedReportDataObject.Result #>
+		<td class="td_main error_with_explanation">
 		<# break;
 		case ResultSeverityType.ERROR: #>
-		<td class="td_main error"><#= DetailedReportDataObject.Result #>
+		<td class="td_main error">
 		<# break;
 		default: #>
-		<td class="td_main success"><#= DetailedReportDataObject.Result #>
+		<td class="td_main success">
 		<# break;
 	} #>
-	</td>
+	<#= DetailedReportDataObject.Result #></td>
 	<td class="td_main" style="width: 20%;">
 		<a href="<#= DetailedReportDataObject.OldUrl #>">Profile data of UPI <#= DetailedReportDataObject.UPI #></a><br/>
 		<a href="<#= DetailedReportDataObject.NewUrl #>">User data of ID is <#= DetailedReportDataObject.UserId #></a>
@@ -60,11 +60,11 @@
 					<# var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
 						StringBuilder sb = new StringBuilder();
-						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
+						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
 						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
 						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
 						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH NEW SERVICE]</span>"); } #>
-					<li><#= entry #>
+					<li><#= sb #>
 					<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					</li>
@@ -129,7 +129,7 @@
 	<ul>
 	<# if(DetailedReportDataObject.IdentifiedDataBehaviors != null) {
 		foreach(var observation in DetailedReportDataObject.IdentifiedDataBehaviors) { #>
-			<li><#= LogManager.GetDescription(observation) #></li><br/>
+			<li><#= observation #></li><br/>
 	<# } } #>
 		</ul>
 	</td>

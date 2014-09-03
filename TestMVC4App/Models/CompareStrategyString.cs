@@ -9,7 +9,7 @@ namespace TestMVC4App.Models
         private string newValue = string.Empty;
 
         public CompareStrategyString(string oldValue, string newValue, ResultReport resultReport) 
-            : base (new List<string>() {oldValue}, new List<string>() {newValue}, resultReport)
+            : base (new HashSet<string>() {oldValue}, new HashSet<string>() {newValue}, resultReport)
         {
             if (!string.IsNullOrEmpty(oldValue))
             {

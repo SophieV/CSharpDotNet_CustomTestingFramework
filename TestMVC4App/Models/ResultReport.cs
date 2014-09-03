@@ -17,15 +17,15 @@ namespace TestMVC4App.Models
 
         public string TestDescription { get; private set; }
 
-        public List<string> OldValues { get; private set; }
+        public HashSet<string> OldValues { get; private set; }
 
-        public List<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
+        public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
-        public List<string> NewValues { get; private set; }
+        public HashSet<string> NewValues { get; private set; }
 
-        public List<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
+        public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
@@ -37,10 +37,10 @@ namespace TestMVC4App.Models
             this.TestDescription = testDescription;
             this.ErrorMessage = string.Empty;
             this.IdentifedDataBehaviors = new List<IdentifiedDataBehavior>();
-            this.OldValues = new List<string>();
-            this.NewValues = new List<string>();
-            this.OldOrganizationValues = new List<OrganizationTreeDescriptor>();
-            this.NewOrganizationValues = new List<OrganizationTreeDescriptor>();
+            this.OldValues = new HashSet<string>();
+            this.NewValues = new HashSet<string>();
+            this.OldOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
+            this.NewOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
             this.TreeComparisonIndexError = -1;
@@ -61,7 +61,7 @@ namespace TestMVC4App.Models
             this.IdentifedDataBehaviors.Clear();
         }
 
-        public void AddDetailedValues(List<string> oldValues, List<string> newValues)
+        public void AddDetailedValues(HashSet<string> oldValues, HashSet<string> newValues)
         {
             if (oldValues != null)
             {
@@ -74,7 +74,7 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void AddDetailedValues(List<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, List<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot)
+        public void AddDetailedValues(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot)
         {
             if (oldValues != null)
             {

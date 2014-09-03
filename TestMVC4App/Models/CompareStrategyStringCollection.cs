@@ -6,7 +6,7 @@ namespace TestMVC4App.Models
 {
     public class CompareStrategyStringCollection : CompareStrategy
     {
-        public CompareStrategyStringCollection(List<string> oldValues, List<string> newValues, ResultReport resultReport) 
+        public CompareStrategyStringCollection(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport) 
             : base(oldValues,newValues,resultReport)
         {
 
@@ -73,7 +73,7 @@ namespace TestMVC4App.Models
 
             try
             {
-                CollectionAssert.AreEquivalent(this.resultReport.OldValues, this.resultReport.NewValues, this.resultReport.TestDescription);
+                CollectionAssert.AreEquivalent(this.resultReport.OldValues.ToList(), this.resultReport.NewValues.ToList(), this.resultReport.TestDescription);
                 this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
             }
@@ -138,7 +138,7 @@ namespace TestMVC4App.Models
                 {
                     // TO DO : The evaluation of success may be delegated to a higher level - it could be that no OrgID is returned BUT all the dept names.
                     // This is why this ERROR is ranked as WARNING.
-                    CollectionAssert.IsSubsetOf(this.resultReport.OldValues, this.resultReport.NewValues, this.resultReport.TestDescription);
+                    CollectionAssert.IsSubsetOf(this.resultReport.OldValues.ToList(), this.resultReport.NewValues.ToList(), this.resultReport.TestDescription);
 
                     this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
                     this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);

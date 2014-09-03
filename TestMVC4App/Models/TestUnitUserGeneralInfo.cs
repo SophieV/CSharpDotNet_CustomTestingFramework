@@ -209,9 +209,9 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            List<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title", "titleName");
+            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title", "titleName");
 
-            List<string> newValues = new List<string>();
+            HashSet<string> newValues = new HashSet<string>();
             if(newServiceData.Titles.Count() > 0)
             {
                 foreach(var title in newServiceData.Titles)
@@ -244,7 +244,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            List<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/cv", "fileName");
+            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/cv", "fileName");
             string oldValue = oldValues.Count().ToString();
 
             string newValue = newServiceData.CVs.Count().ToString();
@@ -274,7 +274,7 @@ namespace TestMVC4App.Models
             string oldValuePart2 = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/professionalSuffix");
 
             string entry;
-            List<string> oldValues = new List<string>();
+            HashSet<string> oldValues = new HashSet<string>();
             var valuesPart1 = oldValuePart1.Split(',');
             foreach (string value in valuesPart1)
             {
@@ -294,7 +294,7 @@ namespace TestMVC4App.Models
                 };
             }
 
-            List<string> newValues = new List<string>();
+            HashSet<string> newValues = new HashSet<string>();
             if (newServiceData.Titles.Count() > 0)
             {
                 foreach (var suffix in newServiceData.Suffixes)
@@ -324,9 +324,9 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            List<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/language", "languageName");
+            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/language", "languageName");
 
-            List<string> newValues = new List<string>();
+            HashSet<string> newValues = new HashSet<string>();
             if (newServiceData.LanguageUsers.Count() > 0)
             {
                 foreach (var language in newServiceData.LanguageUsers)

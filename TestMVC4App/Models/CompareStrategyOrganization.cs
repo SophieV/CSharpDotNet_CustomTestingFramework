@@ -9,8 +9,8 @@ namespace TestMVC4App.Models
         private List<OrganizationTreeDescriptor> newList;
         private int leftOversOldCount = -1;
 
-        public CompareStrategyOrganization(List<OrganizationTreeDescriptor> listOldIdsAndNames, OrganizationTreeDescriptor oldTreeRoot, 
-                                           List<OrganizationTreeDescriptor> listNewIdsAndNames, OrganizationTreeDescriptor newTreeRoot, 
+        public CompareStrategyOrganization(HashSet<OrganizationTreeDescriptor> listOldIdsAndNames, OrganizationTreeDescriptor oldTreeRoot, 
+                                           HashSet<OrganizationTreeDescriptor> listNewIdsAndNames, OrganizationTreeDescriptor newTreeRoot, 
                                            ResultReport resultReport)
             : base(listOldIdsAndNames, oldTreeRoot,listNewIdsAndNames, newTreeRoot,resultReport)
         {

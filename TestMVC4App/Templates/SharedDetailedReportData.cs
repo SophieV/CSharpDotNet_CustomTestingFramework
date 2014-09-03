@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TestMVC4App.Models;
+using System.Linq;
 
 namespace TestMVC4App.Templates
 {
@@ -51,17 +52,17 @@ namespace TestMVC4App.Templates
         /// <summary>
         /// Hints provided by additional analysis.
         /// </summary>
-        public List<IdentifiedDataBehavior> IdentifiedDataBehaviors { get; private set; }
+        public HashSet<string> IdentifiedDataBehaviors { get; private set; }
 
-        public List<string> OldValues { get; private set; }
+        public HashSet<string> OldValues { get; private set; }
 
-        public List<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
+        public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
-        public List<string> NewValues { get; private set; }
+        public HashSet<string> NewValues { get; private set; }
 
-        public List<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
+        public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
@@ -75,7 +76,7 @@ namespace TestMVC4App.Templates
             this.TestName = resultReport.TestName;
             this.Result = resultReport.Result;
             this.TestDescription = resultReport.TestDescription;
-            this.IdentifiedDataBehaviors = resultReport.IdentifedDataBehaviors;
+            this.IdentifiedDataBehaviors = new HashSet<string>(resultReport.IdentifedDataBehaviors.Select(x=> LogManager.GetDescription(x)));
             this.OldValues = resultReport.OldValues;
             this.NewValues = resultReport.NewValues;
             this.OldOrganizationValues = resultReport.OldOrganizationValues;

@@ -58,14 +58,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"td_main false_positive\">");
-            
-            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t<td class=\"td_main false_positive\">\r\n\t\t");
             
             #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  break;
@@ -73,14 +66,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"td_main warning\">");
-            
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t<td class=\"td_main warning\">\r\n\t\t");
             
             #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  break;
@@ -88,14 +74,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"td_main warning_no_data\">");
-            
-            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t<td class=\"td_main warning_no_data\">\r\n\t\t");
             
             #line 22 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  break;
@@ -103,14 +82,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"td_main error_with_explanation\">");
-            
-            #line 24 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t<td class=\"td_main error_with_explanation\">\r\n\t\t");
             
             #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  break;
@@ -118,14 +90,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"td_main error\">");
-            
-            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t<td class=\"td_main error\">\r\n\t\t");
             
             #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  break;
@@ -133,14 +98,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t<td class=\"td_main success\">");
-            
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
+            this.Write("\t\t<td class=\"td_main success\">\r\n\t\t");
             
             #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
  break;
@@ -148,7 +106,14 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t</td>\r\n\t<td class=\"td_main\" style=\"width: 20%;\">\r\n\t\t<a href=\"");
+            this.Write("\t");
+            
+            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Result));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\t<td class=\"td_main\" style=\"width: 20%;\">\r\n\t\t<a href=\"");
             
             #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldUrl));
@@ -286,7 +251,7 @@ namespace TestMVC4App.Templates
  var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
 						StringBuilder sb = new StringBuilder();
-						for (int i = 0; i < element.Depth; i++) { entry += "- "; }
+						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
 						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
 						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
 						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH NEW SERVICE]</span>"); } 
@@ -296,7 +261,7 @@ namespace TestMVC4App.Templates
             this.Write("\t\t\t\t\t<li>");
             
             #line 67 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(entry));
+            this.Write(this.ToStringHelper.ToStringWithCulture(sb));
             
             #line default
             #line hidden
@@ -605,7 +570,7 @@ namespace TestMVC4App.Templates
             this.Write("\t\t\t<li>");
             
             #line 132 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(observation)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(observation));
             
             #line default
             #line hidden
