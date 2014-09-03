@@ -191,6 +191,7 @@
     <Compile Include="Models\LogManager.cs" />
     <Compile Include="Models\IdentifiedDataBehavior.cs" />
     <Compile Include="Models\OrganizationTreeDescriptor.cs" />
+    <Compile Include="Models\TestUnitUserContactLocationInfo.cs" />
     <Compile Include="Models\TestUnitUserOrganization.cs" />
     <Compile Include="Models\ResultReport.cs" />
     <Compile Include="Models\ResultSeverityType.cs" />

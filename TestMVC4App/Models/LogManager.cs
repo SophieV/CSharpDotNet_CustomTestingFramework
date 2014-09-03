@@ -91,6 +91,8 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test");
             allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
 
+            allTestNames.Add("UserContactLocationInfo_Assistants_Test");
+
             IdentifiedBehaviorsDescriptions = new Dictionary<IdentifiedDataBehavior, string>();
             foreach (var behavior in (IdentifiedDataBehavior[]) Enum.GetValues(typeof(IdentifiedDataBehavior)))
             {
@@ -161,7 +163,7 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void LogProfileResult(int upi, List<ResultReport> allTheResults, TimeSpan duration)
+        public void LogProfileResult(int upi, HashSet<ResultReport> allTheResults, TimeSpan duration)
         {
             lock (lockProfileOverview)
             {

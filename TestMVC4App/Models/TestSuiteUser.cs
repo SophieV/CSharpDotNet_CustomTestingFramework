@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Xml.Linq;
 using YSM.PMS.Web.Service.Clients;
 using System.Diagnostics;
+using System.Xml.XPath;
 
 namespace TestMVC4App.Models
 {
@@ -23,7 +24,7 @@ namespace TestMVC4App.Models
 
         private const int MaxProfilesForOneFile = 50000;
 
-        private List<int> upiList = new List<int>();
+        private HashSet<int> upiList = new HashSet<int>();
 
         #region Database Connection Details
 
@@ -34,8 +35,9 @@ namespace TestMVC4App.Models
         static SqlConnection conn = new SqlConnection(connectionString);
         SqlCommand queryCommand = new SqlCommand(selectStatement, conn);
 
-        private List<int> ConnectToDataSourceAndRetriveUPIs()
+        private HashSet<int> ConnectToDataSourceAndRetriveUPIs()
         {
+            var upiList = new HashSet<int>();
             conn.Open();
             System.Diagnostics.Debug.WriteLine("Connection state is: " + conn.State.ToString());
 
@@ -84,9 +86,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
-            upiList = new List<int>() { 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019 };
-            //List<int> upiList2 = upiList.Take(1000).ToList();
-            //upiList = upiList2;
+            //upiList = new HashSet<int>() { 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019 };
 #endif
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)
@@ -97,7 +97,11 @@ namespace TestMVC4App.Models
                     System.Diagnostics.Debug.WriteLine(upi);
 
                     LogManager.Instance.StatsCountProfilesProcessed++;
-                    System.Diagnostics.Debug.WriteLine(LogManager.Instance.StatsCountProfilesProcessed);
+
+                    if (LogManager.Instance.StatsCountProfilesProcessed > 100)
+                    {
+                        break;
+                    }
 
                     profileWatch = new Stopwatch();
                     profileWatch.Start();
@@ -135,8 +139,8 @@ namespace TestMVC4App.Models
                         }
                     }
 
-                    List<TestUnit> allTheTests = new List<TestUnit>();
-                    List<ResultReport> allTheResults = new List<ResultReport>();
+                    var allTheTests = new HashSet<TestUnit>();
+                    var allTheResults = new HashSet<ResultReport>();
 
                     if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                     {
@@ -159,14 +163,16 @@ namespace TestMVC4App.Models
                             userGeneralInfoTest.ProvideUserData(oldServiceXMLOutputDocument, upi, usersClient, userId);
                             userGeneralInfoTest.RunAllTests();
 
-                            userBasicInfoTest.ComputerOverallResults();
-                            userGeneralInfoTest.ComputerOverallResults();
-                            allTheResults.AddRange(userBasicInfoTest.DetailedResults);
-                            allTheResults.AddRange(userGeneralInfoTest.DetailedResults);
-
+                            TestUnitUserContactLocationInfo userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
+                            allTheTests.Add(userContactLocationInfoTest);
+                            userContactLocationInfoTest.ProvideUserData(oldServiceXMLOutputDocument, usersClient, upi, userId);
+                            userContactLocationInfoTest.RunAllTests();
 
                             foreach (var test in allTheTests)
                             {
+                                test.ComputerOverallResults();
+                                allTheResults.UnionWith(test.DetailedResults);
+
                                 // log only first occurence of error - enough to generate the warning
                                 if ((test.HttpErrorHappened || test.UnknownErrorHappened) && string.IsNullOrEmpty(errorMessage))
                                 {
