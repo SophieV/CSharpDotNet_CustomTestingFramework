@@ -1,0 +1,200 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Organization Tree Depth Coherence</b><br/>
+		<a id="11472557">UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58740/GeneralInfo">User data of ID is 58740</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.IsFalse failed. Comparing at depth index 1
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MSDEPT Basic Science Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MMBB F A S Admin ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Mounting an Immune Response (109882)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Infectious Disease and Host-Pathogen Interaction (109886)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Structural Analysis of Immune System Receptors and Effectors (109887)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Virology laboratories (109952)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Protein Folding, Dynamics and Degradation (110460)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Virology, Infection and Immunity (110463)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] crystallography, NMR, mass spectrometry, cryo-electron...faculty (110464)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Research Members (110577)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Primary Faculty (113857)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Immunology & Host Response (109891)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Viruses (109889)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Office of Student Research (110631)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>- <span class="tree_depth_mismatch">[DEPTH 1]  () [MISMATCH WITH NEW SERVICE]</span>
+															</li>
+										<li>- - [DEPTH 2] Yale Combined Program in the Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>- - - [DEPTH 3] Immunology (109534)
+															</li>
+										<li>- - - [DEPTH 3] Microbiology (109535)
+															</li>
+										<li>- - - [DEPTH 3] Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>- <span class="tree_depth_mismatch">[DEPTH 1] MYSM School Of Medicine (113592) [MISMATCH WITH NEW SERVICE]</span>
+															</li>
+										<li>- - [DEPTH 2]  ()
+															</li>
+										<li>- - - [DEPTH 3] Molecular Virology (110446)
+															</li>
+										<li>- - [DEPTH 2] Structural Biology (110083)
+															</li>
+										<li>- - [DEPTH 2]  ()
+															</li>
+										<li>- - - [DEPTH 3] Molecular Biophysics and Biochemistry (109083)
+															</li>
+										<li>- - - - [DEPTH 4] Structural Biology (109384)
+															</li>
+										<li>- - - - [DEPTH 4] Mechanisms of Viral Pathogenesis (109445)
+															</li>
+										<li>- - [DEPTH 2]  ()
+															</li>
+										<li>- - - [DEPTH 3]  ()
+															</li>
+										<li>- - - - [DEPTH 4] Molecular Virology (109357)
+															</li>
+										<li>- <span class="tree_depth_mismatch">[DEPTH 1] Office of Cooperative Research (114820) [MISMATCH WITH NEW SERVICE]</span>
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>- <span class="tree_depth_mismatch">[DEPTH 1] Office of Cooperative Research (114820) [MISMATCH WITH OLD SERVICE]</span>
+															</li>
+										<li>- <span class="tree_depth_mismatch">[DEPTH 1] MYSM School Of Medicine (113592) [MISMATCH WITH OLD SERVICE]</span>
+															</li>
+										<li>- - [DEPTH 2] MSDEPT Basic Science Departments (113629)
+															</li>
+										<li>- - - [DEPTH 3] MB and B (109083)
+															</li>
+										<li>- - - - [DEPTH 4] Primary Faculty (113857)
+															</li>
+										<li>- - - - [DEPTH 4] MMBB F A S Admin (112288)
+															</li>
+										<li>- - - - [DEPTH 4] Structural Biology (109384)
+															</li>
+										<li>- - - - [DEPTH 4] Mechanisms of Viral Pathogenesis (109445)
+															</li>
+										<li>- - [DEPTH 2] Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>- - - [DEPTH 3] Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>- - - - [DEPTH 4] crystallography, NMR, mass spectrometry, cryo-electron...faculty (110464)
+															</li>
+										<li>- - - - [DEPTH 4] Protein Folding, Dynamics and Degradation (110460)
+															</li>
+										<li>- - - - [DEPTH 4] Virology, Infection and Immunity (110463)
+															</li>
+										<li>- - - [DEPTH 3] Microbiology (109535)
+															</li>
+										<li>- - - - [DEPTH 4] Immunology & Host Response (109891)
+															</li>
+										<li>- - - - [DEPTH 4] Viruses (109889)
+															</li>
+										<li>- - - [DEPTH 3] Immunology (109534)
+															</li>
+										<li>- - - - [DEPTH 4] Structural Analysis of Immune System Receptors and Effectors (109887)
+															</li>
+										<li>- - - - [DEPTH 4] Mounting an Immune Response (109882)
+															</li>
+										<li>- - - - [DEPTH 4] Infectious Disease and Host-Pathogen Interaction (109886)
+															</li>
+										<li>- - [DEPTH 2] Structural Biology (110083)
+															</li>
+										<li>- - [DEPTH 2] Office of Student Research (110631)
+															</li>
+										<li>- - [DEPTH 2] Cancer Center, Yale (109631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>- - - [DEPTH 3] Molecular Virology (110446)
+															</li>
+										<li>- - - [DEPTH 3] Research Members (110577)
+															</li>
+										<li>- - [DEPTH 2] Clinical Departments (113631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>- - - [DEPTH 3] Cancer Center (109081)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>- - - - [DEPTH 4] Molecular Virology (109357)
+															</li>
+										<li>- - - - - [DEPTH 5] Virology laboratories (109952)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0308298</p>
+	<br/>
+	<ul>
+				<li>The old tree has more elements than the new one at a given depth.</li><br/>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>

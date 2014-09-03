@@ -86,7 +86,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
-            //upiList = new HashSet<int>() { 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019 };
+            upiList = new HashSet<int>() { 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019 };
 #endif
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)
@@ -98,10 +98,10 @@ namespace TestMVC4App.Models
 
                     LogManager.Instance.StatsCountProfilesProcessed++;
 
-                    if (LogManager.Instance.StatsCountProfilesProcessed > 100)
-                    {
-                        break;
-                    }
+                    //if (LogManager.Instance.StatsCountProfilesProcessed > 100)
+                    //{
+                    //    break;
+                    //}
 
                     profileWatch = new Stopwatch();
                     profileWatch.Start();
@@ -142,12 +142,21 @@ namespace TestMVC4App.Models
                     var allTheTests = new HashSet<TestUnit>();
                     var allTheResults = new HashSet<ResultReport>();
 
+                    XDocument oldServiceXMLOutputDocument = null;
+
                     if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                     {
                         try
                         {
-                            XDocument oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
+                            oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
+                        //} 
+                        //catch (Exception e)
+                        //{
+                        //    System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                        //}
 
+                        //try
+                        //{
                             var usersClient = new UsersClient();
 
                             // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.

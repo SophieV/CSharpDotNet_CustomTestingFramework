@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
@@ -65,7 +66,7 @@ namespace TestMVC4App.Models
 
             var resultReport = new ResultReport("UserGeneralInfo_Bio_Test", "Comparing Bio");
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/biography");
-            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Bio, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Bio, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -87,7 +88,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserGeneralInfo_AltLastName_Test", "Comparing AltLastName (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
-            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.LastName, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.LastName, resultReport);
             compareStrategy.Investigate();
 
             if(resultReport.Result != ResultSeverityType.SUCCESS)
@@ -95,7 +96,7 @@ namespace TestMVC4App.Models
                 resultReport.ResetForReTesting();
 
                 oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
-                compareStrategy = new CompareStrategyString(oldValue, newServiceData.AltLastName, resultReport);
+                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltLastName, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -118,7 +119,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserGeneralInfo_AltFirstName_Test", "Comparing AltFirstName (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
-            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.FirstName, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.FirstName, resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Result != ResultSeverityType.SUCCESS)
@@ -126,7 +127,7 @@ namespace TestMVC4App.Models
                 resultReport.ResetForReTesting();
 
                 oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
-                compareStrategy = new CompareStrategyString(oldValue, newServiceData.AltFirstName, resultReport);
+                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltFirstName, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -149,7 +150,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserGeneralInfo_AltSuffix_Test", "Comparing AltSuffix (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
-            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.Suffix, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Suffix, resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Result != ResultSeverityType.SUCCESS)
@@ -157,7 +158,7 @@ namespace TestMVC4App.Models
                 resultReport.ResetForReTesting();
 
                 oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
-                compareStrategy = new CompareStrategyString(oldValue, newServiceData.AltSuffix, resultReport);
+                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltSuffix, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -180,7 +181,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserGeneralInfo_AltMiddleName_Test", "Comparing AltMiddleName (if needed)");
 
             string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
-            var compareStrategy = new CompareStrategyString(oldValue, newServiceData.MiddleName, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Result != ResultSeverityType.SUCCESS)
@@ -188,7 +189,7 @@ namespace TestMVC4App.Models
                 resultReport.ResetForReTesting();
 
                 oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
-                compareStrategy = new CompareStrategyString(oldValue, newServiceData.AltMiddleName, resultReport);
+                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltMiddleName, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -224,7 +225,7 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport("UserGeneralInfo_Titles_Test", "Comparing Title(s)");
-            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -250,7 +251,7 @@ namespace TestMVC4App.Models
             string newValue = newServiceData.CVs.Count().ToString();
 
             var resultReport = new ResultReport("UserGeneralInfo_CountCVs_Test", "Count CVs listed");
-            var compareStrategy = new CompareStrategyString(oldValue, newValue, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newValue, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -304,7 +305,7 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport("UserGeneralInfo_SuffixNames_Test", "Comparing SuffixNames");
-            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -336,7 +337,7 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport("UserGeneralInfo_LanguageUsers_Test", "Comparing LanguageUser(s)");
-            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -353,12 +354,34 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
+            IEnumerable<XElement> departments;
+            IEnumerable<XElement> departmentTree;
+
             var organizationTest = new TestUnitUserOrganization(this.Master, this);
             this.Children.Add(organizationTest);
+
+            try
+            {
+                departments = oldServiceData.XPathSelectElements("/Faculty/facultyMember/department");
+            }
+            catch (Exception)
+            {
+                departments = new List<XElement>();
+            }
+
+            try
+            {
+                departmentTree = oldServiceData.XPathSelectElements("/Faculty/facultyMember/treeDepartments");
+            }
+            catch (Exception)
+            {
+                departmentTree = new List<XElement>();
+            }
+
             organizationTest.ProvideOrganizationData(userId, 
                                                      upi, 
-                                                     oldServiceData.XPathSelectElements("/Faculty/facultyMember/department"),
-                                                     oldServiceData.XPathSelectElements("/Faculty/facultyMember/treeDepartments"), 
+                                                     departments,
+                                                     departmentTree, 
                                                      newServiceData.Organizations);
             organizationTest.RunAllTests();
         }

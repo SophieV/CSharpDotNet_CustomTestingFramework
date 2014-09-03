@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestMVC4App.Models
 {
@@ -7,6 +9,39 @@ namespace TestMVC4App.Models
     {
         private string oldValue = string.Empty;
         private string newValue = string.Empty;
+
+        public CompareStrategyString(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
+        : base(oldValues, newValues, resultReport)
+        {
+            try
+            {
+                this.oldValue = oldValues.First();
+                if (string.IsNullOrEmpty(this.oldValue))
+                {
+                    this.oldValue = string.Empty;
+                }
+            }
+            catch(Exception)
+            {
+                this.oldValue = string.Empty;
+            }
+
+
+            try
+            {
+                this.newValue = newValues.First();
+                if (string.IsNullOrEmpty(this.newValue))
+                {
+                    this.newValue = string.Empty;
+                }
+            }
+            catch (Exception)
+            {
+                this.newValue = string.Empty;
+            }
+
+            System.Diagnostics.Debug.WriteLine("Current Test is " + resultReport.TestDescription);
+        }
 
         public CompareStrategyString(string oldValue, string newValue, ResultReport resultReport) 
             : base (new HashSet<string>() {oldValue}, new HashSet<string>() {newValue}, resultReport)

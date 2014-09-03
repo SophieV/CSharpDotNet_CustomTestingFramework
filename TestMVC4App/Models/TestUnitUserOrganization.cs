@@ -400,16 +400,12 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_IdAndNameTogether_Test", "Comparing Organization Id+Name Combinations");
-            var compareStrategy = new CompareStrategyOrganization(
+            var compareStrategy = new CompareStrategyContextSwitcher(
                 oldServiceOrganizationDescriptors,
                 oldTreeRoot,
                 newServiceOrganizationDescriptors,
                 newTreeRoot,
                 resultReport);
-            //var compareStrategy = new CompareStrategyOrganization(
-            //    this.oldServiceOrganizationDescriptors.Select(d => Tuple.Create<string, string>((d.ID == null ? string.Empty : d.ID), d.Name)).ToList(),
-            //    this.newServiceOrganizationDescriptors.Select(z => Tuple.Create<string, string>((z.ID == null ? string.Empty : z.ID), z.Name)).ToList(),
-            //    resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -429,7 +425,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids");
-            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -449,7 +445,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Name_Test", "Comparing Organization Names");
-            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -539,12 +535,12 @@ namespace TestMVC4App.Models
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_CheckIsPrimary_Test", "Comparing Organization IsImported/Primary");
 
-            var oldEntriesIsPrimary = new List<string>();
-            var newEntriesIsPrimary = new List<string>();
+            var oldEntriesIsPrimary = new HashSet<string>();
+            var newEntriesIsPrimary = new HashSet<string>();
 
             try
             {
-                oldEntriesIsPrimary = oldTree.Where(x => x.IsPrimary == true).Select(x => x.Name).ToList();
+                oldEntriesIsPrimary = new HashSet<string>(oldTree.Where(x => x.IsPrimary == true).Select(x => x.Name));
             } 
             catch(Exception)
             {
@@ -553,7 +549,7 @@ namespace TestMVC4App.Models
 
             try
             {
-                newEntriesIsPrimary = newTree.Where(s => s.IsPrimary == true).Select(x => x.Name).ToList();
+                newEntriesIsPrimary = new HashSet<string>(newTree.Where(s => s.IsPrimary == true).Select(x => x.Name));
             }
             catch (Exception)
             {
@@ -561,7 +557,7 @@ namespace TestMVC4App.Models
             }
 
             // this comparison can work because all the primary departments have a name assigned in the old service ! NOPE because the name may change...
-            var collectionComparison = new CompareStrategyStringCollection(new HashSet<string>(oldEntriesIsPrimary), new HashSet<string>(newEntriesIsPrimary), resultReport);
+            var collectionComparison = new CompareStrategyContextSwitcher(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
             collectionComparison.Investigate();
 
             watch.Stop();

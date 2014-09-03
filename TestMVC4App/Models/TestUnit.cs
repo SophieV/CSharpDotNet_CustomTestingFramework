@@ -154,11 +154,11 @@ namespace TestMVC4App.Models
 
             try
             {
-                var titles = oldServiceData.XPathSelectElements(listNodePath);
+                var elements = oldServiceData.XPathSelectElements(listNodePath);
 
-                foreach (XElement el in titles)
+                foreach (XElement element in elements)
                 {
-                    oldValues.Add(el.Element(listEntryNodeName).Value);
+                    oldValues.Add(element.Element(listEntryNodeName).Value);
                 }
             }
             catch (Exception)

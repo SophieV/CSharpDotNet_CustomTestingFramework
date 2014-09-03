@@ -134,29 +134,34 @@ namespace TestMVC4App.Models
             {
                 duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
 
-                var detailedReportData = new SharedDetailedReportData(resultReport)
+                // log only if added value
+                if (resultReport.Result != ResultSeverityType.SUCCESS && resultReport.Result != ResultSeverityType.WARNING_NO_DATA)
                 {
-                    UserId = userId,
-                    UPI = upi,
-                    OldUrl = oldUrl,
-                    NewUrl = newServiceUrl
-                };
 
-                var template = new TestNameDetailedReport();
-                template.Session = new Dictionary<string, object>()
+                    var detailedReportData = new SharedDetailedReportData(resultReport)
+                    {
+                        UserId = userId,
+                        UPI = upi,
+                        OldUrl = oldUrl,
+                        NewUrl = newServiceUrl
+                    };
+
+                    var template = new TestNameDetailedReport();
+                    template.Session = new Dictionary<string, object>()
             {
                 { "DetailedReportDataObject", detailedReportData }
             };
 
-                template.Initialize();
+                    template.Initialize();
 
-                if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
-                {
-                    htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(template.TransformText());
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine(resultReport.TestName);
+                    if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
+                    {
+                        htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(template.TransformText());
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine(resultReport.TestName);
+                    }
                 }
 
                 UpdateStatistics(upi, resultReport);

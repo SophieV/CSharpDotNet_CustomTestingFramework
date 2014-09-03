@@ -18,12 +18,12 @@ namespace TestMVC4App.Models
 
         public override string newServiceURLExtensionBeginning
         {
-            get { return "Users/blablala/"; }
+            get { return "Users/"; }
         }
 
         public override string newServiceURLExtensionEnding
         {
-            get { return string.Empty; }
+            get { return "/ContactLocation"; }
         }
 
         public TestUnitUserContactLocationInfo(TestSuite parent) : base(parent)
@@ -67,7 +67,7 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport("UserContactLocationInfo_Assistants_Test", "Comparing Assistant Name(s)");
-            var compareStrategy = new CompareStrategyStringCollection(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();

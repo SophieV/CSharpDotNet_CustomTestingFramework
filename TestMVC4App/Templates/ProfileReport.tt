@@ -10,25 +10,28 @@
 <# foreach(KeyValuePair<string,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
 	<# switch (pair.Value) {
 		case ResultSeverityType.FALSE_POSITIVE : #>
-	<td class="td_main false_positive">
+	<td class="td_main false_positive"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		case ResultSeverityType.WARNING: #>
-	<td class="td_main warning">
+	<td class="td_main warning"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		case ResultSeverityType.WARNING_NO_DATA: #>
-	<td class="td_main warning_no_data">
+	<td class="td_main warning_no_data"><#= pair.Value #>
 		<# break;
 		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
-	<td class="td_main error_with_explanation">
+	<td class="td_main error_with_explanation"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		case ResultSeverityType.ERROR: #>
-	<td class="td_main error">
+	<td class="td_main error"><#= pair.Value #><br/>
+	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
 		default: #>
-	<td class="td_main success">
+	<td class="td_main success"><#= pair.Value #>
 		<# break;
 	} #>
-	<#= pair.Value #><br/>
-	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a></td>
+	</td>
 <# } #>
 </tr>
