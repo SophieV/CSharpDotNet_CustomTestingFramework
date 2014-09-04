@@ -92,6 +92,11 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
 
             allTestNames.Add("UserContactLocationInfo_Assistants_Test");
+            allTestNames.Add("UserContactLocationInfo_LabWebsites_Names_Test");
+            allTestNames.Add("UserContactLocationInfo_LabWebsites_Links_Test");
+            allTestNames.Add("UserContactLocationInfo_UserAddress_StreetAddress_Test");
+            allTestNames.Add("UserContactLocationInfo_UserAddress_ZipCodes_Test");
+            allTestNames.Add("UserContactLocationInfo_UserAddress_IsMailing_Test");
 
             IdentifiedBehaviorsDescriptions = new Dictionary<IdentifiedDataBehavior, string>();
             foreach (var behavior in (IdentifiedDataBehavior[]) Enum.GetValues(typeof(IdentifiedDataBehavior)))

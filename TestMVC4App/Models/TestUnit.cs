@@ -148,6 +148,22 @@ namespace TestMVC4App.Models
             return oldValue;
         }
 
+        protected static string ParseSingleOldValue(IEnumerable<XElement> oldServiceData, string oldValueXMLPath)
+        {
+            string oldValue = string.Empty;
+
+            try
+            {
+                oldValue = oldServiceData.Where(x=>x.Name == oldValueXMLPath).Select(x=>x.Value).First();
+            }
+            catch (Exception)
+            {
+                // there is no existing attribute to parse
+            }
+
+            return oldValue;
+        }
+
         protected static HashSet<string> ParseListSimpleOldValues(XDocument oldServiceData, string listNodePath, string listEntryNodeName)
         {
             var oldValues = new HashSet<string>();
@@ -169,5 +185,53 @@ namespace TestMVC4App.Models
             return oldValues;
         }
 
+        protected static HashSet<string> ParseListSimpleOldValues(IEnumerable<XElement> elements, string nodeName)
+        {
+            var oldValues = new HashSet<string>();
+
+            try
+            {
+                foreach (XElement element in elements)
+                {
+                    oldValues.Add(element.Element(nodeName).Value);
+                }
+            }
+            catch (Exception)
+            {
+                // there is no existing attribute to parse
+            }
+
+            return oldValues;
+        }
+
+        protected static bool IsContentOfCollectionItemsSubsetOfOtherCollection(ICollection<string> collectionA, ICollection<string> collectionB)
+        {
+            bool wasFound = true;
+            bool wasFoundItem;
+
+            if (collectionA.Count() != collectionB.Count())
+            {
+                wasFound = false;
+            }
+
+            if (wasFound)
+            {
+                foreach (var a in collectionA)
+                {
+                    wasFoundItem = false;
+                    foreach (var b in collectionB)
+                    {
+                        if (!wasFoundItem && (a.Trim().Contains(b.Trim()) || b.Trim().Contains(a.Trim())))
+                        {
+                            wasFoundItem = true;
+                        }
+                    }
+
+                    wasFound &= wasFoundItem;
+                }
+            }
+
+            return wasFound;
+        }
     }
 }

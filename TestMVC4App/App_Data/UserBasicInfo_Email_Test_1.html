@@ -31,58 +31,16 @@
 
 <tr>
 	<td class="td_main"><b>Comparing Email</b><br/>
-		<a id="12641341">UserBasicInfo_Email_Test</a>
-	</td>
-			<td class="td_main warning">
-			WARNING</td>
-	<td class="td_main" style="width: 20%;">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
-		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/Upi/12641341">User data of ID is 58634</a>
-	</td>
-	<td class="td_main" style="width: 60%;">
-		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[]</span>. Actual:<span style='color:red;']</span>[franklin.brown@yale.edu]</span>. Comparing Email
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										<ins class='diffins'>franklin.brown@yale.edu</ins>
-					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:06113</p>
-	<br/>
-	<ul>
-				<li>All the entries of the old service are found in the new service.</li><br/>
-				<li>There are more entries in the new service.</li><br/>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Email</b><br/>
 		<a id="10151776">UserBasicInfo_Email_Test</a>
 	</td>
-			<td class="td_main warning">
-			WARNING</td>
+			<td class="td_main error">
+			ERROR</td>
 	<td class="td_main" style="width: 20%;">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
 		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/Upi/10151776">User data of ID is 58755</a>
 	</td>
 	<td class="td_main" style="width: 60%;">
-		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[]</span>. Actual:<span style='color:red;']</span>[tian.xu@yale.edu]</span>. Comparing Email
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[kristina.sepanek@yale.edu]</span>. Actual:<span style='color:red;']</span>[tian.xu@yale.edu]</span>. Comparing Email
 		<br/><br/>
 		<table class="table_main">
 		<tr>
@@ -92,12 +50,13 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>kristina.sepanek@yale.edu
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
 									</ul>
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>										<ins class='diffins'>tian.xu@yale.edu</ins>
+										<li>										<del class='diffmod'>kristina.sepanek@yale</del><ins class='diffmod'>tian.xu@yale</ins>.edu
 					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
 									</ul>
 			</td>
@@ -105,11 +64,10 @@
 		</table>
 	</td>
 	<td class="td_main" style="width: 30%;">
-	<p>Duration : 00mn:00s:0511506</p>
+	<p>Duration : 00mn:00s:0253567</p>
 	<br/>
 	<ul>
-				<li>All the entries of the old service are found in the new service.</li><br/>
-				<li>There are more entries in the new service.</li><br/>
+				<li>The content of the entries does not match.</li><br/>
 			</ul>
 	</td>
 </tr>

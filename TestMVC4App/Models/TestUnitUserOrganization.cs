@@ -13,7 +13,7 @@ namespace TestMVC4App.Models
     {
         # region Data Provided by Parent Test Unit
 
-        private IEnumerable<Organization> newServiceOrganizations = new List<Organization>();
+        private IEnumerable<Organization> newServiceOrganizations = new HashSet<Organization>();
         private IEnumerable<XElement> oldServiceDepartments;
         private IEnumerable<XElement> oldServiceTreeDepartments;
         private HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptors;
