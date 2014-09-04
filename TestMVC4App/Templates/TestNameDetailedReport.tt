@@ -53,15 +53,17 @@
 							<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 						</li>
-						<# } } #>
+						<# } } } #>
 					<br/><br/>
-					<# var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					<# if(DetailedReportDataObject.OldTreeRoot != null) {
+					var flattenedTree = new OrganizationTreeDescriptor[] { DetailedReportDataObject.OldTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree) {
 						StringBuilder sb = new StringBuilder();
 						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
+						if ((DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) || element.IsImportedFromNewService) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
 						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH NEW SERVICE]</span>"); } #>
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH NEW SERVICE]</span>"); }
+						if (element.IsImportedFromNewService) { sb.Append(" [IMPORTED FROM NEW SERVICE]</span>"); } #>
 					<li><#= sb #>
 					<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
@@ -85,15 +87,17 @@
 							<# if(element.IsMissing) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 							<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 							</li><#
-					} } #>
+					} } } #>
 					<br/><br/>
-					<# var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
+					<# if (DetailedReportDataObject.NewTreeRoot != null) {
+					var flattenedTree2 = new OrganizationTreeDescriptor[] { DetailedReportDataObject.NewTreeRoot }.SelectNestedChildren(t => t.Children).ToList();
 					foreach (OrganizationTreeDescriptor element in flattenedTree2) {
 						StringBuilder sb = new StringBuilder();
 						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
 						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
 						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH OLD SERVICE]</span>"); } #>
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH OLD SERVICE]</span>"); }
+						 #>
 					<li><#= sb #>
 					<# if(element.IsMissing) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>

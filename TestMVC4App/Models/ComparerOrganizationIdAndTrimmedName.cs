@@ -13,6 +13,12 @@ namespace TestMVC4App.Models
             if (x.ID == y.ID)
             {
                 areEqual = true;
+
+                if (x.Depth == y.Depth)
+                {
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
+                }
             }
 
             // if no ID on the old side and names match
@@ -36,6 +42,8 @@ namespace TestMVC4App.Models
                 if (oldString == newString)
                 {
                     areEqual = true;
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
                 }
             }
 

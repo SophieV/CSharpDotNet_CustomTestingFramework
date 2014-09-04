@@ -17,13 +17,16 @@ namespace TestMVC4App.Models
 
         public bool IsMissing { get; set; }
 
-        public bool hasBeenMatchedInOldTreeStructure { get; set; }
+        public bool HasBeenMatched { get; set; }
+
+        public bool IsImportedFromNewService { get; set; }
 
         public OrganizationTreeDescriptor()
         {
             this.Children = new List<OrganizationTreeDescriptor>();
             // default value - for orphans - should not mess up the search at level index
             this.Depth = -1;
+            this.HasBeenMatched = false;
         }
     }
 }

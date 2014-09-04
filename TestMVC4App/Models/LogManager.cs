@@ -90,6 +90,7 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_IdAndNameTogether_Test");
             allTestNames.Add("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test");
             allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
+            allTestNames.Add("UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test");
 
             allTestNames.Add("UserContactLocationInfo_Assistants_Test");
             allTestNames.Add("UserContactLocationInfo_LabWebsites_Names_Test");

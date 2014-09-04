@@ -79,14 +79,16 @@ namespace TestMVC4App.Models
             if (oldValues != null)
             {
                 this.OldOrganizationValues = oldValues;
-                this.OldTreeRoot = oldTreeRoot;
             }
+
+            this.OldTreeRoot = oldTreeRoot;
 
             if (newValues != null)
             {
                 this.NewOrganizationValues = newValues;
-                this.NewTreeRoot = newTreeRoot;
             }
+
+            this.NewTreeRoot = newTreeRoot;
         }
 
         public void UpdateResult(ResultSeverityType newSeverityStateReturned)

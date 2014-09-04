@@ -18,12 +18,20 @@ namespace TestMVC4App.Models
             if (x.ID == y.ID)
             {
                 areEqual = true;
+
+                if (x.Depth == y.Depth)
+                {
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
+                }
             }
 
             // if no ID on the old side and names match
             if ((string.IsNullOrEmpty(y.ID) && x.Name == y.Name) || (string.IsNullOrEmpty(x.ID) && x.Name == y.Name))
             {
                 areEqual = true;
+                x.HasBeenMatched = true;
+                y.HasBeenMatched = true;
             }
 
             System.Diagnostics.Debug.WriteLine("Comparing {" + x.ID + "," + x.ID + "} and {" + y.Name + "," + y.Name + "} is " + areEqual);

@@ -8,7 +8,17 @@ namespace TestMVC4App.Models
         {
             bool areEqual = true;
 
-            if (x.ID != y.ID|| x.Name != y.Name)
+            if (x.ID == y.ID && x.Name == y.Name)
+            {
+                areEqual = true;
+
+                if (x.Depth == y.Depth)
+                {
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
+                }
+            }
+            else
             {
                 areEqual = false;
             }
