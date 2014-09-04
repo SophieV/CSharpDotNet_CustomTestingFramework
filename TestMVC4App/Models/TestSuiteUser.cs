@@ -117,26 +117,32 @@ namespace TestMVC4App.Models
 
                     //Find a way to set the 'Timeout' property in Milliseconds. The old service can be slow.
                     //we also need exception handling!
-                    using (var webClient = new TimeoutExtendedWebClient())
+                    try
                     {
-                        try
+                        using (var webClient = new TimeoutExtendedWebClient())
                         {
-                            oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
-                        }
-                        catch (WebException we)
-                        {
-                            System.Diagnostics.Debug.WriteLine(we.StackTrace);
-                            System.Diagnostics.Debug.WriteLine("Trying to get data from old service for upi " + upi + " again");
-
                             try
                             {
                                 oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
                             }
-                            catch (WebException we2)
+                            catch (WebException we)
                             {
-                                System.Diagnostics.Debug.WriteLine(we2.StackTrace);
+                                System.Diagnostics.Debug.WriteLine(we.StackTrace);
+                                System.Diagnostics.Debug.WriteLine("Trying to get data from old service for upi " + upi + " again");
+
+                                try
+                                {
+                                    oldServiceXMLOutput = webClient.DownloadString(oldServiceURL);
+                                }
+                                catch (WebException we2)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(we2.StackTrace);
+                                }
                             }
                         }
+                    } catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine(e.StackTrace);
                     }
 
                     var allTheTests = new HashSet<TestUnit>();

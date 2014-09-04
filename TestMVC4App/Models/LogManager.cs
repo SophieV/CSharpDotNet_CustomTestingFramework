@@ -213,14 +213,13 @@ namespace TestMVC4App.Models
 
             if (!countSeverityTypes_ByTestName.ContainsKey(resultReport.TestName))
             {
-                // initialize all the possible combinations for the given test name
                 countSeverityTypes_ByTestName.Add(resultReport.TestName, new Dictionary<ResultSeverityType, int>());
-                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.ERROR, 0);
-                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.ERROR_WITH_EXPLANATION, 0);
-                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.FALSE_POSITIVE, 0);
-                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.WARNING, 0);
-                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.WARNING_NO_DATA, 0);
-                countSeverityTypes_ByTestName[resultReport.TestName].Add(ResultSeverityType.SUCCESS, 0);
+
+                // initialize all the possible combinations for the given test name
+                foreach (var severity in (ResultSeverityType[])Enum.GetValues(typeof(ResultSeverityType)))
+                {
+                    countSeverityTypes_ByTestName[resultReport.TestName].Add(severity, 0);
+                }
             }
 
             // increase call counter
