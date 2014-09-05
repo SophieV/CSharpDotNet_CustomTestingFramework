@@ -618,36 +618,38 @@ namespace TestMVC4App.Models
             {
                 foreach (var missing in missingPair.Value)
                 {
-                    foreach (var potential in potentialMatches[missingPair.Key])
+                    if (potentialMatches.ContainsKey(missingPair.Key))
                     {
-                        if (potential.ParentId == missing.ParentId || potential.Children.Count() >= missing.Children.Count())
+                        foreach (var potential in potentialMatches[missingPair.Key])
                         {
-                            var childrenIdsNew = potential.Children.Select(x => x.ID);
-                            var childrenIdsOld = missing.Children.Select(y => y.ID);
-
-                            var count = childrenIdsOld.Except(childrenIdsNew).Count();
-
-                            if (count == 0)
+                            if (potential.ParentId == missing.ParentId || potential.Children.Count() >= missing.Children.Count())
                             {
-                                potential.HasBeenMatched = true;
-                                missing.HasBeenMatched = true;
-                                potential.IsImportedFromNewService = true;
+                                var childrenIdsNew = potential.Children.Select(x => x.ID);
+                                var childrenIdsOld = missing.Children.Select(y => y.ID);
 
-                                potential.Children.Clear();
-                                potential.Parent = missing.Parent;
+                                var count = childrenIdsOld.Except(childrenIdsNew).Count();
 
-                                // replace in old tree
-                                foreach (var child in missing.Children)
+                                if (count == 0)
                                 {
-                                    child.Parent = potential;
-                                    potential.Children.Add(child);
+                                    potential.HasBeenMatched = true;
+                                    missing.HasBeenMatched = true;
+                                    potential.IsImportedFromNewService = true;
+
+                                    potential.Children.Clear();
+                                    potential.Parent = missing.Parent;
+
+                                    // replace in old tree
+                                    foreach (var child in missing.Children)
+                                    {
+                                        child.Parent = potential;
+                                        potential.Children.Add(child);
+                                    }
+
+                                    missing.Parent.Children.Add(potential);
+                                    missing.Parent.Children.Remove(missing);
+
+                                    oldTree.Remove(missing);
                                 }
-
-                                missing.Parent.Children.Add(potential);
-                                missing.Parent.Children.Remove(missing);
-
-
-                                oldTree.Remove(missing);
                             }
                         }
                     }

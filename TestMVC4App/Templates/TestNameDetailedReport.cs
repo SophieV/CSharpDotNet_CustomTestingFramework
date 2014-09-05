@@ -259,7 +259,7 @@ namespace TestMVC4App.Templates
 						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
 						if ((DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) || element.IsImportedFromNewService) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
 						sb.Append("[DEPTH " + element.Depth + "] " + element.Name + " (" + element.ID + ")");
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [MISMATCH WITH NEW SERVICE]</span>"); }
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [DEPTH COUNT MISMATCH WITH NEW SERVICE]</span>"); }
 						if (element.IsImportedFromNewService) { sb.Append(" [IMPORTED FROM NEW SERVICE]</span>"); } 
             
             #line default

@@ -1,0 +1,988 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="11161032">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11161032">Profile data of UPI 11161032</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/11161032/GeneralInfo">User data of ID is 60829</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[do RosÃ¡rio]</span>. Actual:<span style='color:red;']</span>[do Rosário]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>do RosÃ¡rio
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										do Ros<del class='diffmod'>Ã¡rio</del><ins class='diffmod'>ário</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0530201</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="11901212">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11901212">Profile data of UPI 11901212</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/11901212/GeneralInfo">User data of ID is 63420</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[MittelhÃ¶lzer]</span>. Actual:<span style='color:red;']</span>[Mittelhölzer  ]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>MittelhÃ¶lzer
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Mittelh<del class='diffmod'>Ã¶lzer</del><ins class='diffmod'>ölzer  </ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0459255</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="12761803">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12761803">Profile data of UPI 12761803</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/12761803/GeneralInfo">User data of ID is 65398</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[GonzÃ¡lez]</span>. Actual:<span style='color:red;']</span>[González]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>GonzÃ¡lez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Gonz<del class='diffmod'>Ã¡lez</del><ins class='diffmod'>ález</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0487503</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="12772343">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12772343">Profile data of UPI 12772343</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/12772343/GeneralInfo">User data of ID is 67915</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[ColÃ³n-Ramos]</span>. Actual:<span style='color:red;']</span>[Colón-Ramos]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>ColÃ³n-Ramos
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Col<del class='diffmod'>Ã³n</del><ins class='diffmod'>ón</ins>-Ramos
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:054515</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="11386588">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11386588">Profile data of UPI 11386588</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/11386588/GeneralInfo">User data of ID is 68953</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[AkgÃ¼n]</span>. Actual:<span style='color:red;']</span>[Akgün]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>AkgÃ¼n
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Akg<del class='diffmod'>Ã¼n</del><ins class='diffmod'>ün</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0566603</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="13220276">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13220276">Profile data of UPI 13220276</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/13220276/GeneralInfo">User data of ID is 69962</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[BenoÃ®t]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>BenoÃ®t
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:047317</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="13209787">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13209787">Profile data of UPI 13209787</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/13209787/GeneralInfo">User data of ID is 70810</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Tohan]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Tohan
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:064482</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="13413345">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13413345">Profile data of UPI 13413345</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/13413345/GeneralInfo">User data of ID is 71604</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Rosario]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Rosario
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0464396</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="12558075">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12558075">Profile data of UPI 12558075</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/12558075/GeneralInfo">User data of ID is 72118</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Hsieh]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Hsieh
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:054281</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="13527058">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_WITH_EXPLANATION</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13527058">Profile data of UPI 13527058</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/13527058/GeneralInfo">User data of ID is 72548</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Zaheer]</span>. Actual:<span style='color:red;']</span>[Zaheer ]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Zaheer
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Zaheer<ins class='diffins'> </ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0535772</p>
+	<br/>
+	<ul>
+				<li>The mismatch between some entries is due to trailing white spaces.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="13616631">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13616631">Profile data of UPI 13616631</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/13616631/GeneralInfo">User data of ID is 73328</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[AndrÃ©]</span>. Actual:<span style='color:red;']</span>[André]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>AndrÃ©
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Andr<del class='diffmod'>Ã©</del><ins class='diffmod'>é</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0479033</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="13509208">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13509208">Profile data of UPI 13509208</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/13509208/GeneralInfo">User data of ID is 73696</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[KrÃ¼ger]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>KrÃ¼ger
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0491691</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="12227221">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12227221">Profile data of UPI 12227221</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/12227221/GeneralInfo">User data of ID is 74010</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[GonzÃ¡lez-PÃ©rez]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>GonzÃ¡lez-PÃ©rez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0493494</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="10867272">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10867272">Profile data of UPI 10867272</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/10867272/GeneralInfo">User data of ID is 76160</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Darnell]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Darnell
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0483976</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="12696013">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12696013">Profile data of UPI 12696013</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/12696013/GeneralInfo">User data of ID is 78005</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Ãlvarez Lugo]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Ãlvarez Lugo
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:046968</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="14583455">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14583455">Profile data of UPI 14583455</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/14583455/GeneralInfo">User data of ID is 91892</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[GonzÃ¡lez]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>GonzÃ¡lez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0592347</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="14440774">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14440774">Profile data of UPI 14440774</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/14440774/GeneralInfo">User data of ID is 92871</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[SÃ¡nchez RamÃ­rez]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>SÃ¡nchez RamÃ­rez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0699207</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="15028991">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15028991">Profile data of UPI 15028991</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/15028991/GeneralInfo">User data of ID is 95962</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Healy]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Healy
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:048242</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="15046059">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15046059">Profile data of UPI 15046059</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/15046059/GeneralInfo">User data of ID is 96195</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[JÃ¤ger]</span>. Actual:<span style='color:red;']</span>[Jäger]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>JÃ¤ger
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										J<del class='diffmod'>Ã¤ger</del><ins class='diffmod'>äger</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0461349</p>
+	<br/>
+	<ul>
+				<li>The content of the entries does not match.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="15105236">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15105236">Profile data of UPI 15105236</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/15105236/GeneralInfo">User data of ID is 96670</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[MÃ¼ller]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>MÃ¼ller
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:046024</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="15138250">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15138250">Profile data of UPI 15138250</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/15138250/GeneralInfo">User data of ID is 96924</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[FiskesjÃ¶]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>FiskesjÃ¶
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:048635</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltLastName (if needed)</b><br/>
+		<a id="10718947">UserGeneralInfo_AltLastName_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10718947">Profile data of UPI 10718947</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/10718947/GeneralInfo">User data of ID is 97388</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Koskinas]</span>. Actual:<span style='color:red;']</span>[]</span>. Comparing AltLastName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Koskinas
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0629292</p>
+	<br/>
+	<ul>
+				<li>Some entries of the old service are not found in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>

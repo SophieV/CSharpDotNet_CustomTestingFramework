@@ -285,7 +285,7 @@ namespace TestMVC4App.Templates
             #line 116 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  double countTotalNotErrors = 0;
 			foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) {
-				if(countPerSeverity.Key == ResultSeverityType.SUCCESS || countPerSeverity.Key == ResultSeverityType.WARNING || countPerSeverity.Key == ResultSeverityType.FALSE_POSITIVE) {
+				if(countPerSeverity.Key == ResultSeverityType.SUCCESS || countPerSeverity.Key == ResultSeverityType.WARNING || countPerSeverity.Key == ResultSeverityType.WARNING_NO_DATA || countPerSeverity.Key == ResultSeverityType.FALSE_POSITIVE) {
 					countTotalNotErrors += countPerSeverity.Value;
 			} }
 			double frequencyNoErrors = countTotalNotErrors /(double) SummaryReportDataObject.CountProfilesTested; 
