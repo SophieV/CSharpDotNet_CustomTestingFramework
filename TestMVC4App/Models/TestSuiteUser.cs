@@ -45,7 +45,7 @@ namespace TestMVC4App.Models
 
             if (sdr.HasRows)
             {
-                while (sdr.Read())
+                while (sdr.Read()) // && upiList.Count < 200)
                 {
                     upiList.Add(sdr.GetInt32(0));
                 }
@@ -86,7 +86,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
-            upiList = new HashSet<int>() { 12149599, 12641341,  10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949 };
+            upiList = new HashSet<int>() { 10934133}; //12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949 };
 #endif
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)

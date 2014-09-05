@@ -586,7 +586,29 @@ namespace TestMVC4App.Models
             resultReport.Duration = watch.Elapsed;
 
             var missingOldElementsWithChildAndParentAgain = oldTree.Where(x => x.HasBeenMatched == false && string.IsNullOrEmpty(x.ID) && string.IsNullOrEmpty(x.Name)).GroupBy(x => x.Depth).ToDictionary(t => t.Key, t => t.ToList());
-            if (missingOldElementsWithChildAndParentAgain.Count() == 0)
+            int countLeft = missingOldElementsWithChildAndParentAgain.Count();
+
+            if (countLeft > 0)
+            {
+                // maybe a change of name ?
+                // oldTree.Where(z => z.HasBeenMatched == false && z.IsMissing == true && string.IsNullOrEmpty(z.ID)).ToList().ForEach(z => { z.Name = string.Empty; });
+                // FillGapsOfTree(countLeft, oldTree, newTree);
+
+                // go through children to find parent of matched item
+                // if the item is "hasbeenmatched == true" then use it and raise flag "usedmorethanonce" and add appropriate data behavior description
+
+                // if immediate child does not have matched item, try searching for it without same depth
+                // if works same as before but instead of "usedmorethanonce" then data behavior depth has been changed
+            }
+
+            countLeft = missingOldElementsWithChildAndParentAgain.Count();
+
+            if (countLeft > 0)
+            {
+                // maybe a change of structure ? navigate to closest nodes to find ancre points
+            }
+            
+            if (countLeft == 0)
             {
                 resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
             }
@@ -628,15 +650,26 @@ namespace TestMVC4App.Models
                                 // if there is only one potential match, don't be picky
                                 if (potentialMatches[missingPair.Key].Count() == 1||(potential.ParentId == missing.ParentId || potential.Children.Count() >= missing.Children.Count()))
                                 {
-                                    var childrenIdsNew = potential.Children.Select(x => x.ID);
-                                    var childrenIdsOld = missing.Children.Select(y => y.ID);
+                                    int countLeft = 1;
 
-                                    var count = childrenIdsOld.Except(childrenIdsNew).Count();
+                                    if (potential.Children.Select(x=>x.MatchedPartner).Count() > 0)
+                                    {
+                                        countLeft = missing.Children.Except(potential.Children.Select(x => x.MatchedPartner).Union(potential.Children)).Count();
+                                    }
+                                    else
+                                    {
+                                        var childrenIdsNew = potential.Children.Select(x => x.ID);
+                                        var childrenIdsOld = missing.Children.Select(y => y.ID);
 
-                                    if (potentialMatches[missingPair.Key].Count() == 1 || count == 0)
+                                        countLeft = childrenIdsOld.Except(childrenIdsNew).Count();
+                                    }
+
+                                    if (potentialMatches[missingPair.Key].Count() == 1 || countLeft == 0)
                                     {
                                         potential.HasBeenMatched = true;
+                                        potential.MatchedPartner = missing;
                                         missing.HasBeenMatched = true;
+                                        missing.MatchedPartner = potential;
                                         potential.IsImportedFromNewService = true;
                                         missing.IsMissing = false;
                                         potential.IsMissing = false;
@@ -645,10 +678,10 @@ namespace TestMVC4App.Models
                                         potential.Parent = missing.Parent;
 
                                         // replace in old tree
-                                        foreach (var child in missing.Children)
+                                        foreach (var childFromMissing in missing.Children)
                                         {
-                                            child.Parent = potential;
-                                            potential.Children.Add(child);
+                                            childFromMissing.Parent = potential;
+                                            potential.Children.Add(childFromMissing);
                                         }
 
                                         if (missing.Parent != null && missing.Parent.Children != null)

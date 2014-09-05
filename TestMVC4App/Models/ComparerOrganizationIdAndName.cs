@@ -15,7 +15,9 @@ namespace TestMVC4App.Models
                 if (x.Depth == y.Depth)
                 {
                     x.HasBeenMatched = true;
+                    x.MatchedPartner = y;
                     y.HasBeenMatched = true;
+                    y.MatchedPartner = x;
                 }
             }
             else
