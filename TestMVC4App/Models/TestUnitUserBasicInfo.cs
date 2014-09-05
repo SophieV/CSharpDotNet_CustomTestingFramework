@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Diagnostics;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
@@ -48,7 +49,14 @@ namespace TestMVC4App.Models
         protected override void RunAllSingleTests()
         {
             var newUserBasicInfo = newServiceAccessor.GetUserByUpi(upi);
-            MappedUserId = newUserBasicInfo.UserId;
+
+            try
+            {
+                MappedUserId = newUserBasicInfo.UserId;
+            } catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+            }
 
             UserBasicInfo_UPI_Test(newUserBasicInfo, oldServiceData);
             UserBasicInfo_LastName_Test(newUserBasicInfo, oldServiceData);

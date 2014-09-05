@@ -42,8 +42,12 @@ namespace TestMVC4App.Models
                 if (oldString == newString)
                 {
                     areEqual = true;
-                    x.HasBeenMatched = true;
-                    y.HasBeenMatched = true;
+
+                    if (x.Depth == y.Depth)
+                    {
+                        x.HasBeenMatched = true;
+                        y.HasBeenMatched = true;
+                    }
                 }
             }
 

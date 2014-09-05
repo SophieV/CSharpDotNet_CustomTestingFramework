@@ -39,8 +39,6 @@ namespace TestMVC4App.Models
             {
                 this.newValue = string.Empty;
             }
-
-            System.Diagnostics.Debug.WriteLine("Current Test is " + resultReport.TestDescription);
         }
 
         public CompareStrategyString(string oldValue, string newValue, ResultReport resultReport) 
@@ -55,8 +53,6 @@ namespace TestMVC4App.Models
             {
                 this.newValue = newValue;
             }
-
-            System.Diagnostics.Debug.WriteLine("Current Test is " + resultReport.TestDescription);
         }
 
         public override void Investigate()

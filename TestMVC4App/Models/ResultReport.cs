@@ -99,7 +99,6 @@ namespace TestMVC4App.Models
                     || (this.IdentifedDataBehaviors.Contains(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE) && this.IdentifedDataBehaviors.Contains(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND)))
                 {
                     this.Result = newSeverityStateReturned;
-                    System.Diagnostics.Debug.WriteLine("Severity was updated to " + newSeverityStateReturned);
                 }
             }
             else
@@ -107,7 +106,6 @@ namespace TestMVC4App.Models
                 // warnings are the only severity that is weaker than the rest and can happen afterwards
                 // for all the others we assume chronological order as it investigates more specific scenarios
                 this.Result = newSeverityStateReturned;
-                System.Diagnostics.Debug.WriteLine("Severity was updated to " + newSeverityStateReturned);
             }
         }
     }

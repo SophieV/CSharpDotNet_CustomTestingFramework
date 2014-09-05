@@ -30,11 +30,13 @@ namespace TestMVC4App.Models
             if ((string.IsNullOrEmpty(y.ID) && x.Name == y.Name) || (string.IsNullOrEmpty(x.ID) && x.Name == y.Name))
             {
                 areEqual = true;
-                x.HasBeenMatched = true;
-                y.HasBeenMatched = true;
-            }
 
-            System.Diagnostics.Debug.WriteLine("Comparing {" + x.ID + "," + x.ID + "} and {" + y.Name + "," + y.Name + "} is " + areEqual);
+                if (x.Depth == y.Depth)
+                {
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
+                }
+            }
 
             return areEqual;
         }
@@ -47,8 +49,6 @@ namespace TestMVC4App.Models
         /// <remarks>Implementations are required to ensure that if the Equals method returns true for two objects x and y, then the value returned by the GetHashCode method for x must equal the value returned for y.</remarks>
         int IEqualityComparer<OrganizationTreeDescriptor>.GetHashCode(OrganizationTreeDescriptor obj)
         {
-            System.Diagnostics.Debug.WriteLine("Hash {" + obj.ID + "," + obj.Name + "}");
-
             return obj.Name.ToLower().GetHashCode();
         }
     }

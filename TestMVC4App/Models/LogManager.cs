@@ -166,7 +166,7 @@ namespace TestMVC4App.Models
                     }
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine(resultReport.TestName);
+                        System.Diagnostics.Debug.WriteLine("no writer for " + resultReport.TestName);
                     }
                 }
 
@@ -260,7 +260,7 @@ namespace TestMVC4App.Models
                 foreach (string testName in allTestNames)
                 {
                     filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + ".html");
-                    System.Diagnostics.Debug.WriteLine(filePath);
+
                     streamWriter = new StreamWriter(filePath);
                     htmlWritersForDetailedReports_ByTestName.Add(testName, new HtmlTextWriter(streamWriter));
                 }
@@ -275,7 +275,6 @@ namespace TestMVC4App.Models
                 }
 
                 filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + SUMMARY_BY_PROFILE_FILENAME);
-                System.Diagnostics.Debug.WriteLine(filePath);
 
                 streamWriter = new StreamWriter(filePath);
                 htmlWriterForProfileReport = new HtmlTextWriter(streamWriter);
