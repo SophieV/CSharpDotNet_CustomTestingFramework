@@ -113,13 +113,7 @@
 	<tr>
 		<td class="td_main"><#= testName #></td>
 		<td class="td_main">
-			<# double countTotalNotErrors = 0;
-			foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) {
-				if(countPerSeverity.Key == ResultSeverityType.SUCCESS || countPerSeverity.Key == ResultSeverityType.WARNING || countPerSeverity.Key == ResultSeverityType.WARNING_NO_DATA || countPerSeverity.Key == ResultSeverityType.FALSE_POSITIVE) {
-					countTotalNotErrors += countPerSeverity.Value;
-			} }
-			double frequencyNoErrors = countTotalNotErrors /(double) SummaryReportDataObject.CountProfilesTested; #>
-			<#= frequencyNoErrors.ToString("P") #>
+			<#= SummaryReportDataObject.FrequencySuccess_ByTestName[testName].ToString("P") #>
 		</td>
 		<td class="td_main" style="width: 40%;">
 			<# if(SummaryReportDataObject.SampleData_ByTestName.ContainsKey(testName)) { #>

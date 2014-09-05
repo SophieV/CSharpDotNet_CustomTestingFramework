@@ -27,19 +27,19 @@ namespace TestMVC4App.Models
         private HtmlTextWriter htmlWriterForSummaryReport;
         private HtmlTextWriter htmlWriterForProfileReport;
 
-        private static Dictionary<string, Dictionary<ResultSeverityType, int>> countSeverityTypes_ByTestName;
-        private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> countIdentifiedDataBehaviors_ByTestName;
+        private static Dictionary<string, Dictionary<ResultSeverityType, int>> countSeverityResults_ByTestName;
+        private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> countDataBehaviors_ByTestName;
 
         private static Dictionary<string, HashSet<TimeSpan>> duration_ByTestName;
         private static HashSet<TimeSpan> durationByProfile;
 
-        private static Dictionary<int, bool> checkNoWarningNorError_ByUPI;
+        private static Dictionary<int, bool> NoWarningNorErrorHappenedFlag_ByUpi;
 
         private static Dictionary<string, string> sampleDataByTestName = new Dictionary<string,string>();
 
         public static Dictionary<IdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
 
-        public int StatsCountProfilesProcessed { get;set; }
+        public double StatsCountTotalUpis { get;set; }
 
         private static int countFilesGenerated = 0;
 
@@ -105,21 +105,21 @@ namespace TestMVC4App.Models
                 IdentifiedBehaviorsDescriptions.Add(behavior, GetDescription(behavior));
             }
 
-            checkNoWarningNorError_ByUPI = new Dictionary<int, bool>();
-            countSeverityTypes_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
-            countIdentifiedDataBehaviors_ByTestName = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
+            NoWarningNorErrorHappenedFlag_ByUpi = new Dictionary<int, bool>();
+            countSeverityResults_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
+            countDataBehaviors_ByTestName = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
 
             duration_ByTestName = new Dictionary<string, HashSet<TimeSpan>>();
-            foreach(var name in allTestNames)
+            foreach(var testName in allTestNames)
             {
-                duration_ByTestName.Add(name, new HashSet<TimeSpan>());
+                duration_ByTestName.Add(testName, new HashSet<TimeSpan>());
             }
 
             durationByProfile = new HashSet<TimeSpan>();
 
             htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
 
-            StatsCountProfilesProcessed = 0;
+            StatsCountTotalUpis = 0;
         }
 
         /// <summary>
@@ -202,45 +202,45 @@ namespace TestMVC4App.Models
         private static void UpdateStatistics(int upi, ResultReport resultReport)
         {
             // keeping track of profiles without failures by logging any failure happening
-            if (!checkNoWarningNorError_ByUPI.ContainsKey(upi))
+            if (!NoWarningNorErrorHappenedFlag_ByUpi.ContainsKey(upi))
             {
-                checkNoWarningNorError_ByUPI.Add(upi, false);
+                NoWarningNorErrorHappenedFlag_ByUpi.Add(upi, false);
             }
 
             if (resultReport.Result != ResultSeverityType.SUCCESS)
             {
-                checkNoWarningNorError_ByUPI[upi] = true;
+                NoWarningNorErrorHappenedFlag_ByUpi[upi] = true;
             }
 
-            if (!countSeverityTypes_ByTestName.ContainsKey(resultReport.TestName))
+            if (!countSeverityResults_ByTestName.ContainsKey(resultReport.TestName))
             {
-                countSeverityTypes_ByTestName.Add(resultReport.TestName, new Dictionary<ResultSeverityType, int>());
+                countSeverityResults_ByTestName.Add(resultReport.TestName, new Dictionary<ResultSeverityType, int>());
 
                 // initialize all the possible combinations for the given test name
                 foreach (var severity in (ResultSeverityType[])Enum.GetValues(typeof(ResultSeverityType)))
                 {
-                    countSeverityTypes_ByTestName[resultReport.TestName].Add(severity, 0);
+                    countSeverityResults_ByTestName[resultReport.TestName].Add(severity, 0);
                 }
             }
 
             // increase call counter
-            countSeverityTypes_ByTestName[resultReport.TestName][resultReport.Result]++;
+            countSeverityResults_ByTestName[resultReport.TestName][resultReport.Result]++;
 
-            if (!countIdentifiedDataBehaviors_ByTestName.ContainsKey(resultReport.TestName))
+            if (!countDataBehaviors_ByTestName.ContainsKey(resultReport.TestName))
             {
                 // initialize all the possible combinations for the given test name
-                countIdentifiedDataBehaviors_ByTestName.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
+                countDataBehaviors_ByTestName.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
 
                 foreach (var behavior in (IdentifiedDataBehavior[])Enum.GetValues(typeof(IdentifiedDataBehavior)))
                 {
-                    countIdentifiedDataBehaviors_ByTestName[resultReport.TestName].Add(behavior, 0);
+                    countDataBehaviors_ByTestName[resultReport.TestName].Add(behavior, 0);
                 }
             }
 
             // increase call counter
             foreach (IdentifiedDataBehavior label in resultReport.IdentifedDataBehaviors)
             {
-                countIdentifiedDataBehaviors_ByTestName[resultReport.TestName][label]++;
+                countDataBehaviors_ByTestName[resultReport.TestName][label]++;
             }
         }
 
@@ -333,78 +333,90 @@ namespace TestMVC4App.Models
         public void WriteSummaryReport(TimeSpan duration, string errorHappened, string errorMessage)
         {
             string filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + SUMMARY_FILENAME);
-            System.Diagnostics.Debug.WriteLine(filePath);
+            // System.Diagnostics.Debug.WriteLine(filePath);
             
             streamWriter = new StreamWriter(filePath);
             htmlWriterForSummaryReport = new HtmlTextWriter(streamWriter);
 
-            int countProfileNoWarningNorError = 0;
-            foreach (var entry in checkNoWarningNorError_ByUPI)
+            int countTroubleFreeUpis = 0;
+            TimeSpan averageDurationPerUpi = TimeSpan.Zero;
+            var countByDataBehavior = new Dictionary<IdentifiedDataBehavior, int>();
+            var averageDuration_ByTestName = new Dictionary<string, TimeSpan>();
+            var frequencySuccess_ByTestName = new Dictionary<string, double>();
+            double countSuccessResults = 0;
+
+            var countSeverityResults = new Dictionary<ResultSeverityType, int>();
+            foreach (var severity in (ResultSeverityType[])Enum.GetValues(typeof(ResultSeverityType)))
             {
-                if (entry.Value == false)
+                countSeverityResults.Add(severity, 0);
+            }
+
+            foreach (var upiPair in NoWarningNorErrorHappenedFlag_ByUpi)
+            {
+                if (upiPair.Value == false)
                 {
-                    countProfileNoWarningNorError++;
+                    countTroubleFreeUpis++;
                 }
             }
 
-            var countBySeverity = new Dictionary<ResultSeverityType, int>();
-            foreach (KeyValuePair<string, Dictionary<ResultSeverityType, int>> entry in countSeverityTypes_ByTestName)
+            // make sure no division by zero
+            if (StatsCountTotalUpis > 0)
             {
-                foreach (KeyValuePair<ResultSeverityType, int> subEntry in entry.Value)
+                foreach (var testName in allTestNames)
                 {
-                    if (!countBySeverity.ContainsKey(subEntry.Key))
+                    countSuccessResults = 0;
+
+                    foreach (var countSeverityResultsPair in countSeverityResults_ByTestName[testName])
                     {
-                        countBySeverity.Add(subEntry.Key, 0);
-                    }
-                    countBySeverity[subEntry.Key] += subEntry.Value;
-                }
-            }
+                        switch (countSeverityResultsPair.Key)
+                        {
+                            case ResultSeverityType.SUCCESS:
+                            case ResultSeverityType.WARNING_NO_DATA:
+                            case ResultSeverityType.WARNING:
+                            case ResultSeverityType.FALSE_POSITIVE:
+                                // define overall success % for given test
+                                countSuccessResults += countSeverityResultsPair.Value;
+                            break;
+                        }
 
-            var countByIdentifiedDataBehavior = new Dictionary<IdentifiedDataBehavior, int>();
-            foreach (var entry in countIdentifiedDataBehaviors_ByTestName)
-            {
-                foreach (var subEntry in entry.Value)
-                {
-                    if (!countByIdentifiedDataBehavior.ContainsKey(subEntry.Key))
+                        // add count of results to the overall total by severity, without considering the test name
+                        countSeverityResults[countSeverityResultsPair.Key] += countSeverityResultsPair.Value;
+                    }
+
+                    frequencySuccess_ByTestName.Add(testName, countSuccessResults / this.StatsCountTotalUpis);
+
+                    foreach (var countDataBehaviorPair in countDataBehaviors_ByTestName[testName])
                     {
-                        countByIdentifiedDataBehavior.Add(subEntry.Key, 0);
+                        if (!countByDataBehavior.ContainsKey(countDataBehaviorPair.Key))
+                        {
+                            countByDataBehavior.Add(countDataBehaviorPair.Key, 0);
+                        }
+                        countByDataBehavior[countDataBehaviorPair.Key] += countDataBehaviorPair.Value;
                     }
-                    countByIdentifiedDataBehavior[subEntry.Key] += subEntry.Value;
+
+                    averageDuration_ByTestName.Add(testName, TimeSpan.FromMilliseconds(duration_ByTestName[testName].Average(t => t.TotalMilliseconds) / this.StatsCountTotalUpis));
 
                 }
-            }
 
-            TimeSpan averageDurationPerProfile = TimeSpan.Zero;
-            Dictionary<string, TimeSpan> averageDuration_ByTestName = new Dictionary<string, TimeSpan>();
-
-            if (StatsCountProfilesProcessed > 0)
-            {
-                averageDurationPerProfile = TimeSpan.FromMilliseconds(durationByProfile.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed);
-
-                foreach(var testNameEntry in duration_ByTestName)
-                {
-                    if (testNameEntry.Value.Count() > 0)
-                    {
-                        averageDuration_ByTestName.Add(testNameEntry.Key, TimeSpan.FromMilliseconds(testNameEntry.Value.Average(t => t.TotalMilliseconds) / StatsCountProfilesProcessed));
-                    }
-                }
+                averageDurationPerUpi = TimeSpan.FromMilliseconds(durationByProfile.Average(t => t.TotalMilliseconds) / this.StatsCountTotalUpis);
             }
 
             var summaryReportData = new SharedSummaryReportData
             {
-                CountProfilesTested = StatsCountProfilesProcessed,
-                CountProfilesWithoutWarnings = countProfileNoWarningNorError,
-                CountBySeverity = countBySeverity,
-                CountByIdentifiedDataBehavior = countByIdentifiedDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
-                TestNames = countSeverityTypes_ByTestName.Keys.ToList(),
-                CountBySeverity_ByTestName = countSeverityTypes_ByTestName,
-                CountByIdentifiedDataBehavior_ByTestName = countIdentifiedDataBehaviors_ByTestName,
-                CountTestsRun = StatsCountProfilesProcessed * countSeverityTypes_ByTestName.Keys.ToList().Count(),
-                CountTestsPerUser = countSeverityTypes_ByTestName.Keys.ToList().Count(),
+                CountProfilesTested = StatsCountTotalUpis,
+                CountProfilesWithoutWarnings = countTroubleFreeUpis,
+                CountBySeverity = countSeverityResults,
+                CountByIdentifiedDataBehavior = countByDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
+                TestNames = countSeverityResults_ByTestName.Keys.ToList(),
+                CountBySeverity_ByTestName = countSeverityResults_ByTestName,
+                CountByIdentifiedDataBehavior_ByTestName = countDataBehaviors_ByTestName,
+                CountTestsRun = StatsCountTotalUpis * countSeverityResults_ByTestName.Keys.Count(),
+                CountTestsPerUser = countSeverityResults_ByTestName.Keys.Count(),
+                FrequencySuccess_ByTestName = frequencySuccess_ByTestName,
                 SampleData_ByTestName = sampleDataByTestName,
                 Duration = duration,
                 FileLinkEnd = "_" + countFilesGenerated + ".html",
-                AverageDurationPerProfile = averageDurationPerProfile,
+                AverageDurationPerProfile = averageDurationPerUpi,
                 AverageDuration_ByTestName = averageDuration_ByTestName,
                 ErrorHappened = errorHappened,
                 ErrorMessage = errorMessage,

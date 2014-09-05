@@ -86,7 +86,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.StartWritingDetailedReports();
 
 #if DEBUG
-            // upiList = new HashSet<int>() { 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019 };
+            upiList = new HashSet<int>() { 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019 };
 #endif
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)
@@ -96,7 +96,7 @@ namespace TestMVC4App.Models
 
                     System.Diagnostics.Debug.WriteLine(upi);
 
-                    LogManager.Instance.StatsCountProfilesProcessed++;
+                    LogManager.Instance.StatsCountTotalUpis++;
 
                     //if (LogManager.Instance.StatsCountProfilesProcessed > 100)
                     //{
@@ -106,7 +106,7 @@ namespace TestMVC4App.Models
                     profileWatch = new Stopwatch();
                     profileWatch.Start();
 
-                    if (LogManager.Instance.StatsCountProfilesProcessed % MaxProfilesForOneFile == 0)
+                    if (LogManager.Instance.StatsCountTotalUpis % MaxProfilesForOneFile == 0)
                     {
                         // change to next output files
                         LogManager.Instance.StartWritingDetailedReports();

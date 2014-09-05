@@ -6,9 +6,9 @@ namespace TestMVC4App.Templates
 {
     public class SharedSummaryReportData
     {
-        public int CountProfilesTested { get; set; }
+        public double CountProfilesTested { get; set; }
 
-        public int CountTestsRun { get; set; }
+        public double CountTestsRun { get; set; }
 
         public int CountTestsPerUser { get; set; }
 
@@ -23,6 +23,8 @@ namespace TestMVC4App.Templates
         public Dictionary<string, Dictionary<ResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
 
         public Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
+
+        public Dictionary<string, double> FrequencySuccess_ByTestName { get; set; }
 
         public List<string> TestNames { get; set; }
 
