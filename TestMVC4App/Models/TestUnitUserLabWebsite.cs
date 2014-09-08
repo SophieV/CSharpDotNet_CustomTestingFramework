@@ -16,7 +16,7 @@ namespace TestMVC4App.Models
         private int userId;
         private int upi;
 
-        public void ProvideOrganizationData(int userId,
+        public void ProvideData(int userId,
                                             int upi,
                                             IEnumerable<XElement> oldServiceWebsites,
                                             IEnumerable<LabWebsite> newServiceWebsites)

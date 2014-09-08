@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using YSM.PMS.Service.Common.DataTransfer;
 using YSM.PMS.Web.Service.Clients;
 
@@ -87,19 +88,14 @@ namespace TestMVC4App.Models
 
             OrganizationTreeDescriptor newTreeRoot = ParseNewServiceData();
 
-            //Task[] tasks = new Task[2]
-            //{
-            //Task.Factory.StartNew(() => UserGeneralInfo_Organization_Id_Test(oldOrganizationIdValues, newOrganizationIdValues)),
-            //Task.Factory.StartNew(() => UserGeneralInfo_Organization_Name_Test(oldOrganizationNameValues, newOrganizationNameValues))
-            //};
-
-            //Task.WaitAll(tasks);
-
             UserGeneralInfo_Organization_Id_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)),
                                                  new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)));
+
             UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)),
                                                    new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)));
+
             UserGeneralInfo_Organization_Type_Test(new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Type).Distinct()));
+
             UserGeneralInfo_Organization_IdAndNameTogether_Test(this.oldServiceOrganizationDescriptors,oldTreeRoot,this.newServiceOrganizationDescriptors,newTreeRoot);
             UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
             UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
@@ -432,70 +428,17 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organization_Id_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids", userId, upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Name_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_Name_Test", "Comparing Organization Names");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_Organization_Name_Test", "Comparing Organization Names", userId, upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_Type_Test", "Comparing Organization Types");
-
-            if (newValues.Count() > 0)
-            {
-                var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>() { "Academic Department" }, newValues, resultReport);
-                compareStrategy.Investigate();
-            }
-            else
-            {
-                resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
-            }
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_Organization_Type_Test", "Comparing Organization Types", userId, upi, (newValues.Count()>0?new HashSet<string>() { "Academic Department" }:new HashSet<string>()), newValues);
         }
 
         private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
@@ -737,6 +680,30 @@ namespace TestMVC4App.Models
 
                 FillGapsOfTree(newCount, oldTree, newTree);
             }
+        }
+
+        private void UserGeneralInfo_Organization_Missions_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        {
+            IEnumerable<XElement> missions;
+
+            var organizationMissionsTest = new TestUnitUserOrganizationMission(this.Master, this);
+            this.Children.Add(organizationMissionsTest);
+
+            try
+            {
+                // will return only one string
+                missions = oldServiceData.XPathSelectElements("/Faculty/facultyMember/mission");
+            }
+            catch (Exception)
+            {
+                missions = new List<XElement>();
+            }
+
+            //organizationMissionsTest.ProvideData(userId,
+            //                                            upi,
+            //                                            missions,
+            //                                            newServiceData.Organizations);
+            //organizationMissionsTest.RunAllTests();
         }
     }
 

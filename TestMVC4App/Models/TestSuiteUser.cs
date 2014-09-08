@@ -168,14 +168,14 @@ namespace TestMVC4App.Models
                             // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
                             TestUnitUserBasicInfo userBasicInfoTest = new TestUnitUserBasicInfo(this);
                             allTheTests.Add(userBasicInfoTest);
-                            userBasicInfoTest.ProvideUserData(oldServiceXMLOutputDocument, usersClient, upi);
+                            userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument, usersClient, upi);
                             userBasicInfoTest.RunAllTests();
 
                             int userId = userBasicInfoTest.MappedUserId;
 
                             TestUnitUserGeneralInfo userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
                             allTheTests.Add(userGeneralInfoTest);
-                            userGeneralInfoTest.ProvideUserData(oldServiceXMLOutputDocument, upi, usersClient, userId);
+                            userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument, upi, usersClient, userId);
                             userGeneralInfoTest.RunAllTests();
 
                             TestUnitUserContactLocationInfo userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);

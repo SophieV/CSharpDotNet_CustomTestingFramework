@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Xml.Linq;
@@ -132,6 +133,53 @@ namespace TestMVC4App.Models
             }
         }
 
+        public void CompareAndLog_Test(string testFullName, string testDescription, int userId, int upi, HashSet<string> oldValues, HashSet<string> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport(testFullName, testDescription);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(userId),
+                                              resultReport);
+        }
+
+        public void CompareAndLog_Test(string testFullName, string testDescription, int userId, int upi, XDocument oldServiceData, string oldSingleStringPath, string newValue)
+        {
+            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, oldSingleStringPath);
+
+            this.CompareAndLog_Test(testFullName, testDescription, userId, upi, oldValue, newValue);
+        }
+
+        public void CompareAndLog_Test(string testFullName, string testDescription, int userId, int upi, string oldValue, string newValue)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport(testFullName, testDescription);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newValue, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(userId),
+                                              resultReport);
+        }
+
         protected static string ParseSingleOldValue(XDocument oldServiceData,string oldValueXMLPath)
         {
             string oldValue = string.Empty;
@@ -202,45 +250,6 @@ namespace TestMVC4App.Models
             }
 
             return oldValues;
-        }
-
-        /// <summary>
-        /// Tries to match all the entries of the collections as subset from each other.
-        /// </summary>
-        /// <param name="collectionA"></param>
-        /// <param name="collectionB"></param>
-        /// <returns></returns>
-        protected static bool IsContentOfCollectionItemsSubsetOfOtherCollection(ICollection<string> collectionA, ICollection<string> collectionB)
-        {
-            bool wasFound = true;
-            bool wasFoundItem;
-
-            if (collectionA.Count() != collectionB.Count())
-            {
-                wasFound = false;
-            }
-
-            if (wasFound)
-            {
-                foreach (var a in collectionA)
-                {
-                    //wasFoundItem = false;
-
-                    wasFoundItem = collectionB.Any(x => x.Trim().Contains(a.Trim()) || a.Trim().Contains(x.Trim()));
-
-                    //foreach (var b in collectionB)
-                    //{
-                    //    if (!wasFoundItem && (a.Trim().Contains(b.Trim()) || b.Trim().Contains(a.Trim())))
-                    //    {
-                    //        wasFoundItem = true;
-                    //    }
-                    //}
-
-                    wasFound &= wasFoundItem;
-                }
-            }
-
-            return wasFound;
         }
     }
 }

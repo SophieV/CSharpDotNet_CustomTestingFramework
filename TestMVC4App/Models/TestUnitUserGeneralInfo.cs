@@ -33,24 +33,24 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            var newUserGeneralInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
+            var newServiceInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
 
-            UserGeneralInfo_Bio_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_Titles_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_LanguageUsers_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_AltLastName_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_AltFirstName_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_AltMiddleName_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_AltSuffix_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_AltMiddleNameDisplayed_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_SuffixNames_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_CountCVs_Test(newUserGeneralInfo, oldServiceData);
-            UserGeneralInfo_Organizations_Test(newUserGeneralInfo, oldServiceData);
+            this.CompareAndLog_Test("UserGeneralInfo_Bio_Test", "Comparing Bio", this.userId, this.upi, oldServiceData, "/Faculty/facultyMember/biography", newServiceInfo.Bio);
+            UserGeneralInfo_Titles_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_LanguageUsers_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_AltLastName_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_AltFirstName_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_AltMiddleName_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_AltSuffix_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_AltMiddleNameDisplayed_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_SuffixNames_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_CountCVs_Test(newServiceInfo, oldServiceData);
+            UserGeneralInfo_Organizations_Test(newServiceInfo, oldServiceData);
 
             ComputeOverallSeverity();
         }
 
-        public void ProvideUserData(XDocument oldData, int upi, UsersClient newDataAccessor, int userId)
+        public void ProvideData(XDocument oldData, int upi, UsersClient newDataAccessor, int userId)
         {
             this.newServiceAccessor = newDataAccessor;
             this.oldServiceData = oldData;
@@ -59,28 +59,6 @@ namespace TestMVC4App.Models
         }
 
         #region Field Comparison Tests
-
-        private void UserGeneralInfo_Bio_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-
-            var resultReport = new ResultReport("UserGeneralInfo_Bio_Test", "Comparing Bio");
-            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/biography");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Bio, resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
-        }
 
         private void UserGeneralInfo_AltLastName_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
@@ -230,9 +208,6 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-
             HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title", "titleName");
 
             HashSet<string> newValues = new HashSet<string>();
@@ -247,53 +222,21 @@ namespace TestMVC4App.Models
                 }
             }
 
-            var resultReport = new ResultReport("UserGeneralInfo_Titles_Test", "Comparing Title(s)");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_Titles_Test", "Comparing Title(s)",this.userId,this.upi,oldValues,newValues);
         }
 
         private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-
             HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/cv", "fileName");
             string oldValue = oldValues.Count().ToString();
 
             string newValue = newServiceData.CVs.Count().ToString();
 
-            var resultReport = new ResultReport("UserGeneralInfo_CountCVs_Test", "Count CVs listed");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newValue, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_CountCVs_Test", "Count CVs listed", this.userId, this.upi, oldValue, newValue);
         }
 
         private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-
             string oldValuePart1 = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/degree");
             string oldValuePart2 = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/professionalSuffix");
 
@@ -327,30 +270,14 @@ namespace TestMVC4App.Models
                 }
             }
 
-            var resultReport = new ResultReport("UserGeneralInfo_SuffixNames_Test", "Comparing SuffixNames");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_SuffixNames_Test", "Comparing SuffixNames", this.userId, this.upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
         {
-            var watch = new Stopwatch();
-            watch.Start();
+            var oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/language", "languageName");
 
-            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/language", "languageName");
-
-            HashSet<string> newValues = new HashSet<string>();
+            var newValues = new HashSet<string>();
             if (newServiceData.LanguageUsers.Count() > 0)
             {
                 foreach (var language in newServiceData.LanguageUsers)
@@ -359,20 +286,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            var resultReport = new ResultReport("UserGeneralInfo_LanguageUsers_Test", "Comparing LanguageUser(s)");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
-                                              resultReport);
+            this.CompareAndLog_Test("UserGeneralInfo_LanguageUsers_Test", "Comparing LanguageUser(s)", this.userId, this.upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)

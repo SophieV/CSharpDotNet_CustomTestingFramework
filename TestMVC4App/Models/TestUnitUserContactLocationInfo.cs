@@ -80,24 +80,8 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport("UserContactLocationInfo_Assistants_Test", "Comparing Assistant Name(s)");
-            resultReport.AddDetailedValues(oldValues, newValues);
 
-            if (oldValues.Count() > 0 || newValues.Count() > 0)
-            {
-                if (TestUnit.IsContentOfCollectionItemsSubsetOfOtherCollection(oldValues,newValues))
-                {
-                    resultReport.UpdateResult(ResultSeverityType.SUCCESS);
-                }
-                else
-                {
-                    resultReport.UpdateResult(ResultSeverityType.ERROR);
-                    resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml("The values do not match");
-                }
-            }
-            else
-            {
-                resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
-            }
+            var compareStrategy = new CompareStrategyStringContains(new Dictionary<HashSet<string>, HashSet<string>>() { {oldValues, newValues} }, resultReport);
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
@@ -127,10 +111,10 @@ namespace TestMVC4App.Models
                 labWebsites = new List<XElement>();
             }
 
-            labWesitesTest.ProvideOrganizationData(userId,
-                                                     upi,
-                                                     labWebsites,
-                                                     newServiceData.LabWebsites);
+            labWesitesTest.ProvideData(userId,
+                                        upi,
+                                        labWebsites,
+                                        newServiceData.LabWebsites);
             labWesitesTest.RunAllTests();
         }
 

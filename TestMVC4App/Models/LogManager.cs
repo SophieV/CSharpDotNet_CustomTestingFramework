@@ -94,6 +94,7 @@ namespace TestMVC4App.Models
             allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
             allTestNames.Add("UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test");
             allTestNames.Add("UserGeneralInfo_Organization_Type_Test");
+            allTestNames.Add("UserGeneralInfo_OrganizationMission_Name_Test");
 
             allTestNames.Add("UserContactLocationInfo_Assistants_Test");
             allTestNames.Add("UserContactLocationInfo_LabWebsites_Names_Test");
