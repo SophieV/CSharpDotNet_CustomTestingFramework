@@ -23,6 +23,8 @@ namespace TestMVC4App.Models
 
         public bool IsImportedFromNewService { get; set; }
 
+        public string Type { get; set; }
+
         public OrganizationTreeDescriptor()
         {
             this.Children = new List<OrganizationTreeDescriptor>();

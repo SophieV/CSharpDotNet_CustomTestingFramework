@@ -79,6 +79,12 @@ namespace TestMVC4App.Models
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
             }
 
+            if (this.oldServiceOrganizationDescriptors.Count == 1)
+            {
+                // it means that there is only the root node, which is equivalent to no tree
+                this.oldServiceOrganizationDescriptors.Clear();
+            }
+
             OrganizationTreeDescriptor newTreeRoot = ParseNewServiceData();
 
             //Task[] tasks = new Task[2]
@@ -93,6 +99,7 @@ namespace TestMVC4App.Models
                                                  new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)));
             UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)),
                                                    new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)));
+            UserGeneralInfo_Organization_Type_Test(new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Type).Distinct()));
             UserGeneralInfo_Organization_IdAndNameTogether_Test(this.oldServiceOrganizationDescriptors,oldTreeRoot,this.newServiceOrganizationDescriptors,newTreeRoot);
             UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
             UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
@@ -117,7 +124,8 @@ namespace TestMVC4App.Models
                         ID = organization.OrganizationId.ToString(),
                         Name = organization.Name,
                         IsPrimary = organization.IsImported,
-                        ParentId = organization.OrganizationParentId.ToString()
+                        ParentId = organization.OrganizationParentId.ToString(),
+                        Type = organization.Type
                     };
 
                     this.newServiceOrganizationDescriptors.Add(organizationDescriptor);
@@ -449,6 +457,34 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport("UserGeneralInfo_Organization_Name_Test", "Comparing Organization Names");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(userId),
+                                              resultReport);
+        }
+
+        private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserGeneralInfo_Organization_Type_Test", "Comparing Organization Types");
+
+            if (newValues.Count() > 0)
+            {
+                var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>() { "Academic Department" }, newValues, resultReport);
+                compareStrategy.Investigate();
+            }
+            else
+            {
+                resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
+            }
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;

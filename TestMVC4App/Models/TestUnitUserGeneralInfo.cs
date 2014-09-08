@@ -42,6 +42,7 @@ namespace TestMVC4App.Models
             UserGeneralInfo_AltFirstName_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_AltMiddleName_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_AltSuffix_Test(newUserGeneralInfo, oldServiceData);
+            UserGeneralInfo_AltMiddleNameDisplayed_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_SuffixNames_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_CountCVs_Test(newUserGeneralInfo, oldServiceData);
             UserGeneralInfo_Organizations_Test(newUserGeneralInfo, oldServiceData);
@@ -130,6 +131,28 @@ namespace TestMVC4App.Models
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltFirstName, resultReport);
                 compareStrategy.Investigate();
             }
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(upi),
+                                              resultReport);
+        }
+
+        private void UserGeneralInfo_AltMiddleNameDisplayed_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserGeneralInfo_AltMiddleNameDisplayed_Test", "Comparing AltMiddleNameDisplayed");
+
+            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/MiddleName");
+            var compareStrategy = new CompareStrategyContextSwitcher(string.IsNullOrEmpty(oldValue).ToString(), newServiceData.IsAltMiddleNameDisplayed.ToString(), resultReport);
+            compareStrategy.Investigate();
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;

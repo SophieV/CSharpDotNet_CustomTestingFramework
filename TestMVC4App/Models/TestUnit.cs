@@ -204,6 +204,12 @@ namespace TestMVC4App.Models
             return oldValues;
         }
 
+        /// <summary>
+        /// Tries to match all the entries of the collections as subset from each other.
+        /// </summary>
+        /// <param name="collectionA"></param>
+        /// <param name="collectionB"></param>
+        /// <returns></returns>
         protected static bool IsContentOfCollectionItemsSubsetOfOtherCollection(ICollection<string> collectionA, ICollection<string> collectionB)
         {
             bool wasFound = true;
@@ -218,14 +224,17 @@ namespace TestMVC4App.Models
             {
                 foreach (var a in collectionA)
                 {
-                    wasFoundItem = false;
-                    foreach (var b in collectionB)
-                    {
-                        if (!wasFoundItem && (a.Trim().Contains(b.Trim()) || b.Trim().Contains(a.Trim())))
-                        {
-                            wasFoundItem = true;
-                        }
-                    }
+                    //wasFoundItem = false;
+
+                    wasFoundItem = collectionB.Any(x => x.Trim().Contains(a.Trim()) || a.Trim().Contains(x.Trim()));
+
+                    //foreach (var b in collectionB)
+                    //{
+                    //    if (!wasFoundItem && (a.Trim().Contains(b.Trim()) || b.Trim().Contains(a.Trim())))
+                    //    {
+                    //        wasFoundItem = true;
+                    //    }
+                    //}
 
                     wasFound &= wasFoundItem;
                 }

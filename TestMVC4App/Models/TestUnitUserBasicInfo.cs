@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
@@ -70,9 +71,7 @@ namespace TestMVC4App.Models
             UserBasicInfo_Idx_Test(newUserBasicInfo, oldServiceData);
             UserBasicInfo_LicenseNumber_Test(newUserBasicInfo, oldServiceData);
             UserBasicInfo_Npi_Test(newUserBasicInfo, oldServiceData);
-
-            // TODO : Implement User Editors
-            // UserBasicInfo_UserEditors_Test
+            UserBasicInfo_UserEditors_Test(newUserBasicInfo, oldServiceData);
 
             ComputeOverallSeverity();
         }
@@ -353,9 +352,40 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        public void UserBasicInfo_UserEditors_Test()
+        // TODO: test ! The node name is not reliable ! I need an example with data
+        public void UserBasicInfo_UserEditors_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
-            throw new AssertInconclusiveException();
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport("UserBasicInfo_UserEditors_Test", "Comparing User Editors");
+
+            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/UserEditors", "emailAddress");
+
+            HashSet<string> newValues = new HashSet<string>();
+            if (newServiceData.UserEditors != null)
+            {
+                foreach (ProfileEditor profile in newServiceData.UserEditors)
+                {
+                    if (!string.IsNullOrEmpty(profile.YaleEmail))
+                    {
+                        newValues.Add(profile.YaleEmail);
+                    }
+                }
+            }
+
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(MappedUserId,
+                                              upi,
+                                              this.Master.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceFullURL(upi),
+                                              resultReport);
         }
 
         #endregion

@@ -52,6 +52,15 @@ namespace TestMVC4App.Models
             this.upi = upi;
         }
 
+        /// <summary>
+        /// The Assistant Name is a combination of the lastname and firstname.
+        /// We are interested in checking :
+        /// - whether the amount of persons listed as assistants is a match
+        /// - whether the name returned by the new service contains the firstname returned by the old service (defined as good enough match)
+        /// </summary>
+        /// <param name="newServiceData"></param>
+        /// <param name="oldServiceData"></param>
+        /// <remarks>Special syntax.</remarks>
         private void UserContactLocationInfo_Assistants_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)
         {
             var watch = new Stopwatch();
