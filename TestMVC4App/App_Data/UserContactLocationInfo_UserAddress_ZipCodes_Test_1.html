@@ -1,0 +1,546 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="10934133">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning">
+			WARNING</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10934133">Profile data of UPI 10934133</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/62889/ContactLocation">User data of ID is 62889</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[]</span>. Actual:<span style='color:red;']</span>[0651]</span>. Comparing Address Zip Code(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										<ins class='diffins'>0651</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0512764</p>
+	<br/>
+	<ul>
+				<li>All the entries of the old service are found in the new service.</li><br/>
+				<li>There are more entries in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="12149599">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58861/ContactLocation">User data of ID is 58861</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		CollectionAssert.AreEquivalent failed. The expected collection contains 1 occurrence(s) of <span style='color:red;']</span>[06511]</span>. The actual collection contains 0 occurrence(s). Comparing Address Zip Code(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>06511
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+										<li>06856
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+										<li>06708
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										0651
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										0670
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										0685
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0683194</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="12641341">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58634/ContactLocation">User data of ID is 58634</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		CollectionAssert.AreEquivalent failed. The expected collection contains 1 occurrence(s) of <span style='color:red;']</span>[06473]</span>. The actual collection contains 0 occurrence(s). Comparing Address Zip Code(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>06473
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+										<li>06519
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										0651
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										0647
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0261974</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="10151776">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning">
+			WARNING</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58755/ContactLocation">User data of ID is 58755</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[]</span>. Actual:<span style='color:red;']</span>[0651]</span>. Comparing Address Zip Code(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										<ins class='diffins'>0651</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:064294</p>
+	<br/>
+	<ul>
+				<li>All the entries of the old service are found in the new service.</li><br/>
+				<li>There are more entries in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="10290564">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/60863/ContactLocation">User data of ID is 60863</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0962934</p>
+	<br/>
+	<ul>
+				<li>No entry returned by the new nor the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="11091604">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning">
+			WARNING</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58810/ContactLocation">User data of ID is 58810</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[]</span>. Actual:<span style='color:red;']</span>[0651]</span>. Comparing Address Zip Code(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										<ins class='diffins'>0651</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0535116</p>
+	<br/>
+	<ul>
+				<li>All the entries of the old service are found in the new service.</li><br/>
+				<li>There are more entries in the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="11472557">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58740/ContactLocation">User data of ID is 58740</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0601052</p>
+	<br/>
+	<ul>
+				<li>No entry returned by the new nor the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="13132301">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58862/ContactLocation">User data of ID is 58862</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0657902</p>
+	<br/>
+	<ul>
+				<li>No entry returned by the new nor the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="10146455">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10146455">Profile data of UPI 10146455</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/60255/ContactLocation">User data of ID is 60255</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0545993</p>
+	<br/>
+	<ul>
+				<li>No entry returned by the new nor the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="13157019">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13157019">Profile data of UPI 13157019</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58828/ContactLocation">User data of ID is 58828</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0598408</p>
+	<br/>
+	<ul>
+				<li>No entry returned by the new nor the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="10646102">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10646102">Profile data of UPI 10646102</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/59712/ContactLocation">User data of ID is 59712</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0494583</p>
+	<br/>
+	<ul>
+				<li>No entry returned by the new nor the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Address Zip Code(s)</b><br/>
+		<a id="12192949">UserContactLocationInfo_UserAddress_ZipCodes_Test</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12192949">Profile data of UPI 12192949</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/70381/ContactLocation">User data of ID is 70381</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[2]</span>. Actual:<span style='color:red;']</span>[1]</span>.Comparing Address Zip Code(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>06510
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+										<li>06511
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										0651
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0294369</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>

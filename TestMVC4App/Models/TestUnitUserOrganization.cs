@@ -603,6 +603,8 @@ namespace TestMVC4App.Models
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test", "Trying to merge Organization Trees together");
 
+            var newTreeRootDeepClone = newTreeRoot.DeepClone();
+
             FillGapsOfTree(-1, oldTree, newTree);
 
             watch.Stop();
@@ -640,7 +642,7 @@ namespace TestMVC4App.Models
                 resultReport.UpdateResult(ResultSeverityType.ERROR);
             }
 
-            resultReport.AddDetailedValues(null, oldTree.Where(x=>x.Depth == 0).First(), null, null);
+            resultReport.AddDetailedValues(null, oldTree.Where(x=>x.Depth == 0).First(), null, newTreeRootDeepClone);
 
             this.DetailedResults.Add(resultReport);
 

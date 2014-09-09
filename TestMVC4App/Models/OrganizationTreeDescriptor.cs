@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TestMVC4App.Models
 {
@@ -34,6 +36,15 @@ namespace TestMVC4App.Models
             // default value - for orphans - should not mess up the search at level index
             this.Depth = -1;
             this.HasBeenMatched = false;
+        }
+
+        public OrganizationTreeDescriptor DeepClone()
+        {
+            var copy = (OrganizationTreeDescriptor)MemberwiseClone();
+
+            // deep copy of children
+            copy.Children = new HashSet<OrganizationTreeDescriptor>(Children.ToList().Select(x => x.DeepClone()));
+            return copy;
         }
     }
 }

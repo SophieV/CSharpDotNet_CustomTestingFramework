@@ -63,8 +63,6 @@ namespace TestMVC4App.Models
         /// <remarks>Special syntax.</remarks>
         private void UserContactLocationInfo_Assistants_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)
         {
-            var watch = new Stopwatch();
-            watch.Start();
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/assistant", "fname");
 
             HashSet<string> newValues = new HashSet<string>();
