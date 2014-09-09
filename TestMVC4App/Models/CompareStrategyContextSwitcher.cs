@@ -33,6 +33,11 @@ namespace TestMVC4App.Models
             compareStrategy = new CompareStrategyOrganization(listOldIdsAndNames,oldTreeRoot,listNewIdsAndNames,newTreeRoot,resultReport);
         }
 
+        public CompareStrategyContextSwitcher(Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, ResultReport resultReport, bool stringPartialMatch = false)
+        {
+            compareStrategy = new CompareStrategyStringDictionary_PartialOrFull(newAndOldValues, resultReport, stringPartialMatch);
+        }
+
         public void Investigate()
         {
             if (compareStrategy != null)

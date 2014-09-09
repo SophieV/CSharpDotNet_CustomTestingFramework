@@ -79,20 +79,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            var resultReport = new ResultReport("UserContactLocationInfo_Assistants_Test", "Comparing Assistant Name(s)");
-
-            var compareStrategy = new CompareStrategyStringContains(new Dictionary<HashSet<string>, HashSet<string>>() { {oldValues, newValues} }, resultReport);
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport);
-
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(upi),
-                                              resultReport);
+            this.CompareAndLog_Test("UserContactLocationInfo_Assistants_Test", "Comparing Assistant Name(s)",userId,upi,new Dictionary<HashSet<string>, HashSet<string>>() { {oldValues, newValues} },true);
         }
 
         private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)

@@ -5,14 +5,16 @@ using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class CompareStrategyStringContains : CompareStrategy
+    public class CompareStrategyStringDictionary_PartialOrFull : CompareStrategy
     {
         private Dictionary<HashSet<string>, HashSet<string>> containerAndContents;
+        private bool stringContainsMatch;
 
-        public CompareStrategyStringContains(Dictionary<HashSet<string>, HashSet<string>> containerAndContents, ResultReport resultReport)
+        public CompareStrategyStringDictionary_PartialOrFull(Dictionary<HashSet<string>, HashSet<string>> containerAndContents, ResultReport resultReport, bool stringPartialMatch)
             :base (new HashSet<string>(containerAndContents.SelectMany(x=>x.Key)), new HashSet<string>(containerAndContents.SelectMany(x=>x.Value)), resultReport)
         {
             this.containerAndContents = containerAndContents;
+            this.stringContainsMatch = stringPartialMatch;
         }
 
         public override void Investigate()
@@ -26,7 +28,14 @@ namespace TestMVC4App.Models
                 {
                     foreach (var entry in pair.Key)
                     {
-                        wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Contains(entry.Trim()) || entry.Trim().Contains(otherEntry.Trim()));
+                        if (stringContainsMatch)
+                        {
+                            wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Contains(entry.Trim()) || entry.Trim().Contains(otherEntry.Trim()));
+                        }
+                        else
+                        {
+                            wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Equals(entry.Trim()) || entry.Trim().Equals(otherEntry.Trim()));
+                        }
 
                         wasFound &= wasFoundItem;
                     }

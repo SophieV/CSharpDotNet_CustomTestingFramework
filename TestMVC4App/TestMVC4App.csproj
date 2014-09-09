@@ -188,7 +188,7 @@
     <Compile Include="Models\ComparerOrganizationIdAndName.cs" />
     <Compile Include="Models\ComparerOrganizationIdOrName.cs" />
     <Compile Include="Models\ComparerOrganizationIdAndTrimmedName.cs" />
-    <Compile Include="Models\CompareStrategyStringContains.cs" />
+    <Compile Include="Models\CompareStrategyStringDictionary_PartialOrFull.cs" />
     <Compile Include="Models\LinqTreeExtension.cs" />
     <Compile Include="Models\LogManager.cs" />
     <Compile Include="Models\IdentifiedDataBehavior.cs" />
@@ -203,7 +203,6 @@
     <Compile Include="Models\CompareStrategyString.cs" />
     <Compile Include="Models\TestSuite.cs" />
     <Compile Include="Models\TestUnit.cs" />
-    <Compile Include="Models\TestUnitUserOrganizationMission.cs" />
     <Compile Include="Models\TimeoutExtendedWebClient.cs">
       <SubType>Component</SubType>
     </Compile>

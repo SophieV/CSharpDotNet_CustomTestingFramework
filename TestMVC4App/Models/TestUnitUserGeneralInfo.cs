@@ -315,7 +315,7 @@ namespace TestMVC4App.Models
                 departmentTree = new List<XElement>();
             }
 
-            organizationTest.ProvideOrganizationData(userId, 
+            organizationTest.ProvideData(userId, 
                                                      upi, 
                                                      departments,
                                                      departmentTree, 

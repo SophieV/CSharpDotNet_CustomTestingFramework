@@ -10,7 +10,7 @@ namespace TestMVC4App.Models
 
         public string ParentId { get; set; }
         public bool IsPrimary { get; set; }
-        public List<OrganizationTreeDescriptor> Children { get; set; }
+        public HashSet<OrganizationTreeDescriptor> Children { get; set; }
         public int Depth { get; set; }
 
         public bool IsDuplicate { get; set; }
@@ -25,9 +25,12 @@ namespace TestMVC4App.Models
 
         public string Type { get; set; }
 
+        public HashSet<string> Missions { get; set; }
+
         public OrganizationTreeDescriptor()
         {
-            this.Children = new List<OrganizationTreeDescriptor>();
+            this.Children = new HashSet<OrganizationTreeDescriptor>();
+            this.Missions = new HashSet<string>();
             // default value - for orphans - should not mess up the search at level index
             this.Depth = -1;
             this.HasBeenMatched = false;

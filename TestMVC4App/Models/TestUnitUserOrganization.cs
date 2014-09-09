@@ -22,7 +22,7 @@ namespace TestMVC4App.Models
         private int userId;
         private int upi;
 
-        public void ProvideOrganizationData(int userId,
+        public void ProvideData(int userId,
                                             int upi,
                                             IEnumerable<XElement> oldServiceDepartments,
                                             IEnumerable<XElement> oldServiceTreeDepartments,
@@ -101,6 +101,8 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
             UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
 
+            UserGeneralInfo_Organization_Missions_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
+
             ComputeOverallSeverity();
         }
 
@@ -157,6 +159,7 @@ namespace TestMVC4App.Models
             string parsedOrgId = string.Empty;
             string parsedOrgName = string.Empty;
             bool parsedIsPrimary = false;
+            string parsedMissions = string.Empty;
 
             // first get the tree and its elements
             try
@@ -205,6 +208,16 @@ namespace TestMVC4App.Models
                         {
                             parsedIsPrimary = false;
                         }
+
+                        try
+                        {
+                            parsedMissions = el.Element("mission").Value;
+                        }
+                        catch (Exception)
+                        {
+                            // no value to parse
+                            parsedMissions = string.Empty;
+                        }
                     }
                     catch (Exception)
                     {
@@ -252,6 +265,16 @@ namespace TestMVC4App.Models
                             {
                                 organizationDescriptor.IsPrimary = parsedIsPrimary;
                             }
+
+                            if (organizationDescriptor.Missions.Count() == 0 && !string.IsNullOrEmpty(parsedMissions))
+                            {
+                                var tempValues = parsedMissions.Split(',');
+
+                                foreach (var temp in tempValues)
+                                {
+                                    organizationDescriptor.Missions.Add(temp);
+                                }
+                            }
                         }
                         else
                         {
@@ -270,6 +293,7 @@ namespace TestMVC4App.Models
         private static void ParseRecursiveTree(XElement element, OrganizationTreeDescriptor parent, HashSet<OrganizationTreeDescriptor> allPuzzlePieces, int depth = 0)
         {
             OrganizationTreeDescriptor orgDesc = parent;
+            string tempValue;
 
             if (element != null && element.Name == "treeDepartment") 
             {
@@ -287,6 +311,26 @@ namespace TestMVC4App.Models
                 try
                 {
                     orgDesc.Name = element.Element("name").Value.Trim();
+                }
+                catch (Exception)
+                {
+                    // no value to parse
+                }
+
+                try
+                {
+
+                    tempValue = element.Element("mission").Value;
+
+                    if (!string.IsNullOrEmpty(tempValue))
+                    {
+                        var tempValues = tempValue.Split(',');
+
+                        foreach(var temp in tempValues)
+                        {
+                            orgDesc.Missions.Add(temp);
+                        }
+                    }
                 }
                 catch (Exception)
                 {
@@ -438,7 +482,7 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
         {
-            this.CompareAndLog_Test("UserGeneralInfo_Organization_Type_Test", "Comparing Organization Types", userId, upi, (newValues.Count()>0?new HashSet<string>() { "Academic Department" }:new HashSet<string>()), newValues);
+            this.CompareAndLog_Test("UserGeneralInfo_Organization_Type_Test", "Comparing Organization Types", userId, upi, (newValues.ToList().Where(z=>z!=null).Count()>0?new HashSet<string>() { "Academic Department" }:new HashSet<string>()), newValues);
         }
 
         private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
@@ -682,28 +726,21 @@ namespace TestMVC4App.Models
             }
         }
 
-        private void UserGeneralInfo_Organization_Missions_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_Organization_Missions_Test(HashSet<OrganizationTreeDescriptor> oldEntries, HashSet<OrganizationTreeDescriptor> newEntries)
         {
-            IEnumerable<XElement> missions;
-
-            var organizationMissionsTest = new TestUnitUserOrganizationMission(this.Master, this);
-            this.Children.Add(organizationMissionsTest);
-
-            try
+            var watch = new Stopwatch();
+            watch.Start();
+            var missionsPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
+            
+            foreach (var entry in newEntries)
             {
-                // will return only one string
-                missions = oldServiceData.XPathSelectElements("/Faculty/facultyMember/mission");
+                if (entry.MatchedPartner != null && (entry.Missions.Count() > 0 || entry.MatchedPartner.Missions.Count() > 0))
+                {
+                    missionsPerOrg.Add(entry.MatchedPartner.Missions, entry.Missions);
+                }
             }
-            catch (Exception)
-            {
-                missions = new List<XElement>();
-            }
-
-            //organizationMissionsTest.ProvideData(userId,
-            //                                            upi,
-            //                                            missions,
-            //                                            newServiceData.Organizations);
-            //organizationMissionsTest.RunAllTests();
+            
+            this.CompareAndLog_Test("UserGeneralInfo_OrganizationMission_Name_Test", "Comparing Organization Missions", userId, upi, missionsPerOrg);
         }
     }
 
