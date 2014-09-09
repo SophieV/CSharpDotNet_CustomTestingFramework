@@ -67,9 +67,9 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test("UserBasicInfo_FirstName_Test", "Comparing FirstName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/firstname", newServiceInfo.FirstName);
             this.CompareAndLog_Test("UserBasicInfo_Gender_Test", "Comparing Gender", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/gender", newServiceInfo.Gender);
             this.CompareAndLog_Test("UserBasicInfo_NetId_Test", "Comparing NetId", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/netID", newServiceInfo.NetId);
-            this.CompareAndLog_Test("UserBasicInfo_PageName_Test", "Comparing PageName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/netID", newServiceInfo.NetId);
+            this.CompareAndLog_Test("UserBasicInfo_PageName_Test", "Comparing PageName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/pageName", newServiceInfo.PageName);
             this.CompareAndLog_Test("UserBasicInfo_Suffix_Test", "Comparing Suffix", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Suffix", newServiceInfo.Suffix);
-            this.CompareAndLog_Test("UserBasicInfo_Idx_Test", "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/pageName", newServiceInfo.PageName);
+            this.CompareAndLog_Test("UserBasicInfo_Idx_Test", "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Idx", newServiceInfo.Idx);
             this.CompareAndLog_Test("UserBasicInfo_LicenseNumber_Test", "Comparing License Number", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/LicenseNumber", newServiceInfo.LicenseNumber);
             this.CompareAndLog_Test("UserBasicInfo_Npi_Test", "Comparing Npi", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Npi", newServiceInfo.Npi);
             UserBasicInfo_UserEditors_Test(newServiceInfo, oldServiceData);

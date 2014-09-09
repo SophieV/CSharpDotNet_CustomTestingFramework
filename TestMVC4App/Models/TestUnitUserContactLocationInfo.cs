@@ -70,16 +70,22 @@ namespace TestMVC4App.Models
             HashSet<string> newValues = new HashSet<string>();
             if(newServiceData.Assistants.Count() > 0)
             {
-                foreach(var title in newServiceData.Assistants)
+                foreach(var assistant in newServiceData.Assistants)
                 {
-                    if (!string.IsNullOrEmpty(title.UserMinimalInfo.Name))
+                    if (!string.IsNullOrEmpty(assistant.UserMinimalInfo.Name))
                     {
-                        newValues.Add(title.UserMinimalInfo.Name);
+                        newValues.Add(assistant.UserMinimalInfo.Name);
                     }
                 }
             }
 
-            this.CompareAndLog_Test("UserContactLocationInfo_Assistants_Test", "Comparing Assistant Name(s)",userId,upi,new Dictionary<HashSet<string>, HashSet<string>>() { {oldValues, newValues} },true);
+            var pairs = new Dictionary<HashSet<string>, HashSet<string>>();
+            if (oldValues.Count() > 0 || newValues.Count() > 0)
+            {
+                pairs.Add(oldValues,newValues);
+            }
+
+            this.CompareAndLog_Test("UserContactLocationInfo_Assistants_Test", "Comparing Assistant Name(s)",userId,upi, pairs,true);
         }
 
         private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)
