@@ -64,7 +64,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceNodes, "titleName");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "titleName");
 
             var resultReport = new ResultReport("UserContactLocationInfo_LabWebsites_Names_Test", "Comparing LabWebsite Name(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
@@ -77,8 +77,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -87,7 +87,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceNodes, "link");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "link");
 
             var resultReport = new ResultReport("UserContactLocationInfo_LabWebsites_Links_Test", "Comparing LabWebsite Link(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
@@ -100,8 +100,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
     }

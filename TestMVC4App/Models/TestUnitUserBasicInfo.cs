@@ -89,7 +89,7 @@ namespace TestMVC4App.Models
         // TODO: test ! The node name is not reliable ! I need an example with data
         public void UserBasicInfo_UserEditors_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
         {
-            var oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/UserEditors", "emailAddress");
+            var oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/UserEditors", "emailAddress");
 
             var newValues = new HashSet<string>();
             if (newServiceData.UserEditors != null)

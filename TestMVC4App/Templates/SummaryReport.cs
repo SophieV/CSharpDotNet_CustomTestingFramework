@@ -203,7 +203,7 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n\t\t<td class=\"td_main\" style=\"color:darkgrey;\">");
             
             #line 74 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(LogManager.GetDescription(countPerSeverity.Key)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ParsingHelper.GetDescription(countPerSeverity.Key)));
             
             #line default
             #line hidden

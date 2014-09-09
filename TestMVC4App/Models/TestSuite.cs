@@ -9,9 +9,9 @@ namespace TestMVC4App.Models
 
         public abstract void RunAllTests();
 
-        public string BuildOldServiceFullURL(int oldUserUPI)
+        public string BuildOldServiceFullURL(int oldUserUpi)
         {
-            return this.oldServiceURLBase + oldUserUPI;
+            return this.oldServiceURLBase + oldUserUpi;
         }
     }
 }

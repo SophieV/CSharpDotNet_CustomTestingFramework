@@ -465,8 +465,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -549,8 +549,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -592,8 +592,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -646,8 +646,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 

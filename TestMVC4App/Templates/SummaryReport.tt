@@ -71,7 +71,7 @@
 		} #>
 		<#= countPerSeverity.Key #></td>
 		<td class="td_main"><#= String.Format("{0:0,0}",countPerSeverity.Value) #></td>
-		<td class="td_main" style="color:darkgrey;"><#= LogManager.GetDescription(countPerSeverity.Key) #></td>
+		<td class="td_main" style="color:darkgrey;"><#= ParsingHelper.GetDescription(countPerSeverity.Key) #></td>
 	</tr>
 	<# } #>
 	</table>

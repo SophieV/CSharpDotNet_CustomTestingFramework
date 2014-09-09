@@ -71,9 +71,9 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceNodes, "addressLine1");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "addressLine1");
 
-            var oldValue2 = TestUnit.ParseSingleOldValue(oldServiceMailingInfo, "mailingAddress2");
+            var oldValue2 = ParsingHelper.ParseSingleOldValue(oldServiceMailingInfo, "mailingAddress2");
 
             if (!string.IsNullOrEmpty(oldValue2))
             {
@@ -91,8 +91,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -101,7 +101,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            var oldValue2 = TestUnit.ParseSingleOldValue(oldServiceMailingInfo, "mailingAddress2");
+            var oldValue2 = ParsingHelper.ParseSingleOldValue(oldServiceMailingInfo, "mailingAddress2");
             var oldValues = new HashSet<string>();
             oldValues.Add(oldValue2);
 
@@ -116,8 +116,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -126,7 +126,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceNodes, "zipCode");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "zipCode");
 
             var resultReport = new ResultReport("UserContactLocationInfo_UserAddress_ZipCodes_Test", "Comparing Address Zip Code(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
@@ -139,8 +139,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
     }

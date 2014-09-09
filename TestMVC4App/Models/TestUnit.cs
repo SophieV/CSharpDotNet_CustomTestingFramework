@@ -20,7 +20,7 @@ namespace TestMVC4App.Models
 
         public abstract string newServiceURLExtensionEnding { get; }
 
-        public TestSuite Master { get; set; }
+        public TestSuite Container { get; set; }
 
         public TestUnit Parent { get; set; }
 
@@ -28,8 +28,7 @@ namespace TestMVC4App.Models
 
         public HashSet<ResultReport> DetailedResults { get; set; }
 
-        public ResultSeverityType OverallSeverity { get { return overallSeverity; } }
-        private ResultSeverityType overallSeverity;
+        public ResultSeverityType OverallSeverity { get; private set; }
 
         public void ComputeOverallSeverity()
         {
@@ -38,35 +37,35 @@ namespace TestMVC4App.Models
             var errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.ERROR).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if(keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityType.ERROR;
+                OverallSeverity = ResultSeverityType.ERROR;
                 keepGoing = false;
             }
 
             errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.ERROR_WITH_EXPLANATION).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityType.ERROR_WITH_EXPLANATION;
+                OverallSeverity = ResultSeverityType.ERROR_WITH_EXPLANATION;
                 keepGoing = false;
             }
 
             errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.FALSE_POSITIVE).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityType.FALSE_POSITIVE;
+                OverallSeverity = ResultSeverityType.FALSE_POSITIVE;
                 keepGoing = false;
             }
 
             errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.WARNING).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityType.WARNING;
+                OverallSeverity = ResultSeverityType.WARNING;
                 keepGoing = false;
             }
 
             errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.SUCCESS).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                overallSeverity = ResultSeverityType.SUCCESS;
+                OverallSeverity = ResultSeverityType.SUCCESS;
                 keepGoing = false;
             }
         }
@@ -82,21 +81,21 @@ namespace TestMVC4App.Models
         /// <summary>
         /// Creates the full path to the new web service data for this specific test.
         /// </summary>
-        /// <param name="newUserId"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        protected string BuildNewServiceFullURL(int newUserId)
+        protected string BuildNewServiceURL(int userId)
         {
-            if (Master == null)
+            if (Container == null)
             {
                 throw new NotImplementedException();
             }
 
-            return Master.newServiceURLBase + newServiceURLExtensionBeginning + newUserId + newServiceURLExtensionEnding;
+            return Container.newServiceURLBase + newServiceURLExtensionBeginning + userId + newServiceURLExtensionEnding;
         }
 
-        protected TestUnit(TestSuite master, TestUnit parent = null)
+        protected TestUnit(TestSuite container, TestUnit parent = null)
         {
-            this.Master = master;
+            this.Container = container;
             this.Parent = parent;
             this.Children = new HashSet<TestUnit>();
             this.DetailedResults = new HashSet<ResultReport>();
@@ -148,8 +147,8 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
@@ -168,14 +167,14 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
         }
 
         public void CompareAndLog_Test(string testFullName, string testDescription, int userId, int upi, XDocument oldServiceData, string oldSingleStringPath, string newValue)
         {
-            string oldValue = TestUnit.ParseSingleOldValue(oldServiceData, oldSingleStringPath);
+            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, oldSingleStringPath);
 
             this.CompareAndLog_Test(testFullName, testDescription, userId, upi, oldValue, newValue);
         }
@@ -195,81 +194,9 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Master.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceFullURL(userId),
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
                                               resultReport);
-        }
-
-        protected static string ParseSingleOldValue(XDocument oldServiceData,string oldValueXMLPath)
-        {
-            string oldValue = string.Empty;
-
-            try
-            {
-                oldValue = oldServiceData.XPathSelectElement(oldValueXMLPath).Value;
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            return oldValue;
-        }
-
-        protected static string ParseSingleOldValue(IEnumerable<XElement> oldServiceData, string oldValueXMLPath)
-        {
-            string oldValue = string.Empty;
-
-            try
-            {
-                oldValue = oldServiceData.Where(x=>x.Name == oldValueXMLPath).Select(x=>x.Value).First();
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            return oldValue;
-        }
-
-        protected static HashSet<string> ParseListSimpleOldValues(XDocument oldServiceData, string listNodePath, string listEntryNodeName)
-        {
-            var oldValues = new HashSet<string>();
-
-            try
-            {
-                var elements = oldServiceData.XPathSelectElements(listNodePath);
-
-                foreach (XElement element in elements)
-                {
-                    oldValues.Add(element.Element(listEntryNodeName).Value);
-                }
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            return oldValues;
-        }
-
-        protected static HashSet<string> ParseListSimpleOldValues(IEnumerable<XElement> elements, string nodeName)
-        {
-            var oldValues = new HashSet<string>();
-
-            try
-            {
-                foreach (XElement element in elements)
-                {
-                    oldValues.Add(element.Element(nodeName).Value);
-                }
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            return oldValues;
         }
     }
 }

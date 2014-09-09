@@ -108,7 +108,7 @@ namespace TestMVC4App.Models
             IdentifiedBehaviorsDescriptions = new Dictionary<IdentifiedDataBehavior, string>();
             foreach (var behavior in (IdentifiedDataBehavior[]) Enum.GetValues(typeof(IdentifiedDataBehavior)))
             {
-                IdentifiedBehaviorsDescriptions.Add(behavior, GetDescription(behavior));
+                IdentifiedBehaviorsDescriptions.Add(behavior, ParsingHelper.GetDescription(behavior));
             }
 
             NoWarningNorErrorHappenedFlag_ByUpi = new Dictionary<int, bool>();
@@ -452,24 +452,6 @@ namespace TestMVC4App.Models
             }
 
             htmlWritersForDetailedReports_ByTestName = null;
-        }
-
-        #endregion
-
-        #region Helpers
-
-        /// <summary>
-        /// Allows to display the string text associated with an enum entry.
-        /// </summary>
-        /// <param name="value">Enum type from which we want the description.</param>
-        /// <returns>Description text.</returns>
-        public static string GetDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            DescriptionAttribute[] attributes =
-                  (DescriptionAttribute[])fi.GetCustomAttributes(
-                  typeof(DescriptionAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
         #endregion

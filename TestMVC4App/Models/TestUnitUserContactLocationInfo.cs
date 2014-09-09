@@ -65,7 +65,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            HashSet<string> oldValues = TestUnit.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/assistant", "fname");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/assistant", "fname");
 
             HashSet<string> newValues = new HashSet<string>();
             if(newServiceData.Assistants.Count() > 0)
@@ -86,7 +86,7 @@ namespace TestMVC4App.Models
         {
             IEnumerable<XElement> labWebsites;
 
-            var labWesitesTest = new TestUnitUserLabWebsite(this.Master, this);
+            var labWesitesTest = new TestUnitUserLabWebsite(this.Container, this);
             this.Children.Add(labWesitesTest);
 
             try
@@ -110,7 +110,7 @@ namespace TestMVC4App.Models
             IEnumerable<XElement> addresses;
             IEnumerable<XElement> mailingInfo;
 
-            var addressesTest = new TestUnitUserAddress(this.Master, this);
+            var addressesTest = new TestUnitUserAddress(this.Container, this);
             this.Children.Add(addressesTest);
 
             try

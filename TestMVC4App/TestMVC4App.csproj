@@ -193,6 +193,7 @@
     <Compile Include="Models\LogManager.cs" />
     <Compile Include="Models\IdentifiedDataBehavior.cs" />
     <Compile Include="Models\OrganizationTreeDescriptor.cs" />
+    <Compile Include="Models\ParsingHelper.cs" />
     <Compile Include="Models\TestUnitUserAddress.cs" />
     <Compile Include="Models\TestUnitUserLabWebsite.cs" />
     <Compile Include="Models\TestUnitUserContactLocationInfo.cs" />
