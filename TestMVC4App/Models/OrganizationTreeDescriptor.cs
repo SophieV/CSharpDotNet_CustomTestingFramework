@@ -21,6 +21,10 @@ namespace TestMVC4App.Models
 
         public bool HasBeenMatched { get; set; }
 
+        public bool UsedMoreThanOnce { get; set; }
+
+        public bool WasOnlyOption { get; set; }
+
         public OrganizationTreeDescriptor MatchedPartner { get; set; }
 
         public bool IsImportedFromNewService { get; set; }

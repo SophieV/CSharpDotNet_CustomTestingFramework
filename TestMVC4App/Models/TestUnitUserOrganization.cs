@@ -603,47 +603,61 @@ namespace TestMVC4App.Models
             watch.Start();
             var resultReport = new ResultReport("UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test", "Trying to merge Organization Trees together");
 
-            var newTreeRootDeepClone = newTreeRoot.DeepClone();
-
-            FillGapsOfTree(-1, oldTree, newTree);
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            var missingOldElementsWithChildAndParentAgain = oldTree.Where(x => x.HasBeenMatched == false && string.IsNullOrEmpty(x.ID) && string.IsNullOrEmpty(x.Name)).GroupBy(x => x.Depth).ToDictionary(t => t.Key, t => t.ToList());
-            int countLeft = missingOldElementsWithChildAndParentAgain.Count();
-
-            if (countLeft > 0)
+            if (newTreeRoot != null && oldTreeRoot != null)
             {
-                // maybe a change of name ?
-                // oldTree.Where(z => z.HasBeenMatched == false && z.IsMissing == true && string.IsNullOrEmpty(z.ID)).ToList().ForEach(z => { z.Name = string.Empty; });
-                // FillGapsOfTree(countLeft, oldTree, newTree);
 
-                // go through children to find parent of matched item
-                // if the item is "hasbeenmatched == true" then use it and raise flag "usedmorethanonce" and add appropriate data behavior description
+                var newTreeRootDeepClone = newTreeRoot.DeepClone();
 
-                // if immediate child does not have matched item, try searching for it without same depth
-                // if works same as before but instead of "usedmorethanonce" then data behavior depth has been changed
-            }
+                PopulateGapsOfOldTree(oldTree, newTree, resultReport, true);
 
-            countLeft = missingOldElementsWithChildAndParentAgain.Count();
+                var missingElements = oldTree.Where(x => x.HasBeenMatched == false
+                                                                && string.IsNullOrEmpty(x.ID)
+                                                                && string.IsNullOrEmpty(x.Name)
+                                                                && x.Depth >= 0)
+                                                   .GroupBy(x => x.Depth)
+                                                   .ToDictionary(t => t.Key, t => t.ToList());
+                int countMissingElements = missingElements.Count();
 
-            if (countLeft > 0)
-            {
-                // maybe a change of structure ? navigate to closest nodes to find ancre points
-            }
-            
-            if (countLeft == 0)
-            {
-                resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                if (countMissingElements == 0)
+                {
+                    resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                }
+                else
+                {
+                    if (countMissingElements > 0)
+                    {
+                        PopulateGapsOfOldTree(oldTree, newTree, resultReport, false);
+
+                        missingElements = oldTree.Where(x => x.HasBeenMatched == false
+                                                                        && string.IsNullOrEmpty(x.ID)
+                                                                        && string.IsNullOrEmpty(x.Name)
+                                                                        && x.Depth >= 0)
+                                                           .GroupBy(x => x.Depth)
+                                                           .ToDictionary(t => t.Key, t => t.ToList());
+                        countMissingElements = missingElements.Count();
+                    }
+
+                    if (countMissingElements == 0)
+                    {
+                        resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                    }
+                    else
+                    {
+                        resultReport.UpdateResult(ResultSeverityType.ERROR);
+                    }
+                }
+
+                resultReport.AddDetailedValues(null, oldTree.Where(x => x.Depth == 0).First(), null, newTreeRootDeepClone);
             }
             else
             {
-                resultReport.UpdateResult(ResultSeverityType.ERROR);
+                resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
+                resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
             }
 
-            resultReport.AddDetailedValues(null, oldTree.Where(x=>x.Depth == 0).First(), null, newTreeRootDeepClone);
 
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
             this.DetailedResults.Add(resultReport);
 
             LogManager.Instance.LogTestResult(userId,
@@ -653,78 +667,119 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private static void FillGapsOfTree(int previousCount, HashSet<OrganizationTreeDescriptor> oldTree,HashSet<OrganizationTreeDescriptor> newTree)
+        private static void PopulateGapsOfOldTree(HashSet<OrganizationTreeDescriptor> oldTree,HashSet<OrganizationTreeDescriptor> newTree, ResultReport resultReport, bool excludeMatchedElements, int previousCountMissingElements = -1)
         {
-            var missingOldElementsWithChildAndParent = oldTree.Where(x => x.HasBeenMatched == false && string.IsNullOrEmpty(x.ID) && string.IsNullOrEmpty(x.Name) && x.Depth >= 0).GroupBy(x => x.Depth).ToDictionary(t => t.Key, t => t.ToList());
-            var potentialMatches = newTree.Where(x => x.HasBeenMatched == false).GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
-            var missingOldElementsWithChildAndParentAgain = oldTree.Where(x => x.HasBeenMatched == false && string.IsNullOrEmpty(x.ID) && string.IsNullOrEmpty(x.Name)).GroupBy(x => x.Depth).ToDictionary(t => t.Key, t => t.ToList());
+            int countUnmatchedChildrenOfMissingElement = 42;
+            bool onlyOneOptionAvailable = false;
+            bool matchingElementFound = false;
+            OrganizationTreeDescriptor matchingElement;
 
-            int newCount = missingOldElementsWithChildAndParentAgain.Select(x => x.Value).Count();
-            if (newCount > 0
-                && potentialMatches.Select(x => x.Value).Count() > 0
-                && newCount != previousCount)
+            var missingElementsByDepth = oldTree.Where(x => x.HasBeenMatched == false
+                                                && string.IsNullOrEmpty(x.ID)
+                                                && string.IsNullOrEmpty(x.Name)
+                                                && x.Depth >= 0)
+                                   .GroupBy(x => x.Depth)
+                                   .ToDictionary(t => t.Key, t => t.ToList());
+            
+            int countMissingElements = missingElementsByDepth.Count();
+
+            Dictionary<int, List<OrganizationTreeDescriptor>> potentialMatchingElementsByDepth;
+
+            if (excludeMatchedElements)
             {
-                foreach (var missingPair in missingOldElementsWithChildAndParent)
-                {
-                    foreach (var missing in missingPair.Value)
-                    {
-                        if (potentialMatches.ContainsKey(missingPair.Key))
-                        {
-                            foreach (var potential in potentialMatches[missingPair.Key])
-                            {
-                                // if there is only one potential match, don't be picky
-                                if (potentialMatches[missingPair.Key].Count() == 1||(potential.ParentId == missing.ParentId || potential.Children.Count() >= missing.Children.Count()))
-                                {
-                                    int countLeft = 1;
+                potentialMatchingElementsByDepth = newTree.Where(x => x.HasBeenMatched == false).GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
+            }
+            else
+            {
+                potentialMatchingElementsByDepth = newTree.GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
+            }
 
-                                    if (potential.Children.Select(x=>x.MatchedPartner).Count() > 0)
+            if (countMissingElements != previousCountMissingElements && countMissingElements > 0 && potentialMatchingElementsByDepth.Count() > 0)
+            {
+                foreach (var missingElementsPair in missingElementsByDepth)
+                {
+                    foreach (var missingElement in missingElementsPair.Value)
+                    {
+                        if (potentialMatchingElementsByDepth.ContainsKey(missingElementsPair.Key))
+                        {
+                            matchingElementFound = false;
+                            matchingElement = null;
+
+                            foreach (var potentialElement in potentialMatchingElementsByDepth[missingElementsPair.Key])
+                            {
+                                onlyOneOptionAvailable = potentialMatchingElementsByDepth[missingElementsPair.Key].Count() == 1;
+
+                                if ((potentialElement.ParentId == missingElement.ParentId
+                                    || string.IsNullOrEmpty(missingElement.ParentId))
+                                    && potentialElement.Children.Count() >= missingElement.Children.Count())
+                                {
+                                    if (potentialElement.Children.Select(x => x.MatchedPartner).Count() > 0)
                                     {
-                                        countLeft = missing.Children.Except(potential.Children.Select(x => x.MatchedPartner).Union(potential.Children)).Count();
+                                        countUnmatchedChildrenOfMissingElement = missingElement.Children.Except(potentialElement.Children.Select(x => x.MatchedPartner).Union(potentialElement.Children)).Count();
                                     }
                                     else
                                     {
-                                        var childrenIdsNew = potential.Children.Select(x => x.ID);
-                                        var childrenIdsOld = missing.Children.Select(y => y.ID);
-
-                                        countLeft = childrenIdsOld.Except(childrenIdsNew).Count();
+                                        countUnmatchedChildrenOfMissingElement = missingElement.Children.Select(y => y.ID).Except(potentialElement.Children.Select(x => x.ID)).Count();
                                     }
 
-                                    if (potentialMatches[missingPair.Key].Count() == 1 || countLeft == 0)
+                                    if (countUnmatchedChildrenOfMissingElement == 0)
                                     {
-                                        potential.HasBeenMatched = true;
-                                        potential.MatchedPartner = missing;
-                                        missing.HasBeenMatched = true;
-                                        missing.MatchedPartner = potential;
-                                        potential.IsImportedFromNewService = true;
-                                        missing.IsMissing = false;
-                                        potential.IsMissing = false;
-
-                                        potential.Children.Clear();
-                                        potential.Parent = missing.Parent;
-
-                                        // replace in old tree
-                                        foreach (var childFromMissing in missing.Children)
-                                        {
-                                            childFromMissing.Parent = potential;
-                                            potential.Children.Add(childFromMissing);
-                                        }
-
-                                        if (missing.Parent != null && missing.Parent.Children != null)
-                                        {
-                                            missing.Parent.Children.Add(potential);
-                                            missing.Parent.Children.Remove(missing);
-                                        }
-
-                                        oldTree.Add(potential);
-                                        oldTree.Remove(missing);
+                                        matchingElementFound = true;
+                                        matchingElement = potentialElement;
                                     }
                                 }
+
+                                // if there is only one potential match, don't be picky
+                                if (onlyOneOptionAvailable && !matchingElementFound)
+                                {
+                                    matchingElementFound = true;
+                                    matchingElement = potentialElement;
+                                    matchingElement.WasOnlyOption = true;
+                                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
+                                    resultReport.UpdateResult(ResultSeverityType.WARNING);
+                                }
+                            }
+
+                            if (matchingElementFound)
+                            {
+                                if (!excludeMatchedElements)
+                                {
+                                    matchingElement.UsedMoreThanOnce = true;
+                                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.REUSED_ELEMENT_TO_FILL_GAP);
+                                }
+
+                                matchingElement.HasBeenMatched = true;
+                                matchingElement.MatchedPartner = missingElement;
+                                missingElement.HasBeenMatched = true;
+                                missingElement.MatchedPartner = matchingElement;
+                                matchingElement.IsImportedFromNewService = true;
+                                missingElement.IsMissing = false;
+                                matchingElement.IsMissing = false;
+
+                                matchingElement.Children.Clear();
+                                matchingElement.Parent = missingElement.Parent;
+
+                                // replace in old tree
+                                foreach (var childFromMissing in missingElement.Children)
+                                {
+                                    childFromMissing.Parent = matchingElement;
+                                    matchingElement.Children.Add(childFromMissing);
+                                }
+
+                                if (missingElement.Parent != null && missingElement.Parent.Children != null)
+                                {
+                                    missingElement.Parent.Children.Add(matchingElement);
+                                    missingElement.Parent.Children.Remove(missingElement);
+                                }
+
+                                oldTree.Add(matchingElement);
+                                oldTree.Remove(missingElement);
                             }
                         }
                     }
                 }
 
-                FillGapsOfTree(newCount, oldTree, newTree);
+                PopulateGapsOfOldTree(oldTree, newTree, resultReport, excludeMatchedElements, countMissingElements);
             }
         }
 

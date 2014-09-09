@@ -40,8 +40,8 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <# if(DetailedReportDataObject.OldOrganizationValues.Count() <= 0) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.OldValues.Count() #>]</span><# } #></td>
-			<td class="th_main">NEW SERVICE DATA <# if(DetailedReportDataObject.NewOrganizationValues.Count() <= 0) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.NewValues.Count() #>]</span><# } #></td>
+			<td class="th_main">OLD SERVICE DATA <# if(DetailedReportDataObject.OldOrganizationValues.Count() == 0 && DetailedReportDataObject.OldTreeRoot == null) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.OldValues.Count() #>]</span><# } #></td>
+			<td class="th_main">NEW SERVICE DATA <# if(DetailedReportDataObject.NewOrganizationValues.Count() == 0 && DetailedReportDataObject.NewTreeRoot == null) { #><span class="error_color">[COUNT ELEMENTS: <#=DetailedReportDataObject.NewValues.Count() #>]</span><# } #></td>
 		</tr>
 		<tr>
 			<td class="td_main">
@@ -61,10 +61,13 @@
 						StringBuilder sb = new StringBuilder();
 						sb.Append("[DEPTH " + element.Depth + "] ");
 						for (int i = 0; i < element.Depth; i++) { sb.Append("- "); }
-						if ((DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) || element.IsImportedFromNewService) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
+						if ((DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) || element.IsImportedFromNewService || element.UsedMoreThanOnce || element.WasOnlyOption) { sb.Append("<span class=\"tree_depth_mismatch\">"); }
 						sb.Append(element.Name + " (" + element.ID + ")");
-						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [DEPTH COUNT MISMATCH WITH NEW SERVICE]</span>"); }
-						if (element.IsImportedFromNewService) { sb.Append(" [IMPORTED FROM NEW SERVICE]</span>"); } #>
+						if (DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) { sb.Append(" [DEPTH COUNT MISMATCH WITH NEW SERVICE]"); }
+						if (element.IsImportedFromNewService) { sb.Append(" [IMPORTED FROM NEW SERVICE]"); }
+						if (element.UsedMoreThanOnce) { sb.Append(" [USED MORE THAN ONCE]"); }
+						if (element.WasOnlyOption) { sb.Append(" [ONLY OPTION]"); }
+						if ((DetailedReportDataObject.TreeComparisonIndexError > 0 && element.Depth == DetailedReportDataObject.TreeComparisonIndexError) || element.IsImportedFromNewService || element.UsedMoreThanOnce || element.WasOnlyOption) { sb.Append("</span>"); } #>
 					<li><#= sb #>
 					<# if(element.IsMissing) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
 					<# if(element.IsDuplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>

@@ -31,6 +31,10 @@ namespace TestMVC4App.Models
         [System.ComponentModel.Description("The new tree contains at least as many elements as the old one.")]
         NEW_TREE_COUNT_CONSISTENT,
         [System.ComponentModel.Description("The mismatch between some entries is due to missing Id values.")]
-        MISMATCH_DUE_TO_MISSING_IDS
+        MISMATCH_DUE_TO_MISSING_IDS,
+        [System.ComponentModel.Description("Merging the trees required using a node at a given depth that may have failed the conditions.")]
+        MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH,
+        [System.ComponentModel.Description("Merging the trees required using a node several times.")]
+        REUSED_ELEMENT_TO_FILL_GAP
     }
 }
