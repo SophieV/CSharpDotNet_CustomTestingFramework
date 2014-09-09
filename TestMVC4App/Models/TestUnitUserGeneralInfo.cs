@@ -35,7 +35,7 @@ namespace TestMVC4App.Models
         {
             var newServiceInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
 
-            this.CompareAndLog_Test("UserGeneralInfo_Bio_Test", "Comparing Bio", this.userId, this.upi, oldServiceData, "/Faculty/facultyMember/biography", newServiceInfo.Bio);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Bio_Test, "Comparing Bio", this.userId, this.upi, oldServiceData, "/Faculty/facultyMember/biography", newServiceInfo.Bio);
             UserGeneralInfo_Titles_Test(newServiceInfo, oldServiceData);
             UserGeneralInfo_LanguageUsers_Test(newServiceInfo, oldServiceData);
             UserGeneralInfo_AltLastName_Test(newServiceInfo, oldServiceData);
@@ -64,7 +64,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltLastName_Test", "Comparing AltLastName (if needed)");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_AltLastName_Test, "Comparing AltLastName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.LastName, resultReport);
@@ -95,7 +95,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltFirstName_Test", "Comparing AltFirstName (if needed)");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_AltFirstName_Test, "Comparing AltFirstName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.FirstName, resultReport);
@@ -126,7 +126,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltMiddleNameDisplayed_Test", "Comparing AltMiddleNameDisplayed");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed_Test, "Comparing AltMiddleNameDisplayed");
 
             string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/MiddleName");
             var compareStrategy = new CompareStrategyContextSwitcher(string.IsNullOrEmpty(oldValue).ToString(), newServiceData.IsAltMiddleNameDisplayed.ToString(), resultReport);
@@ -148,7 +148,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltSuffix_Test", "Comparing AltSuffix (if needed)");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_AltSuffix_Test, "Comparing AltSuffix (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Suffix, resultReport);
@@ -179,7 +179,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_AltMiddleName_Test", "Comparing AltMiddleName (if needed)");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_AltMiddleName_Test, "Comparing AltMiddleName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.MiddleName, resultReport);
@@ -222,7 +222,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test("UserGeneralInfo_Titles_Test", "Comparing Title(s)",this.userId,this.upi,oldValues,newValues);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Titles_Test, "Comparing Title(s)", this.userId, this.upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
@@ -232,7 +232,7 @@ namespace TestMVC4App.Models
 
             string newValue = newServiceData.CVs.Count().ToString();
 
-            this.CompareAndLog_Test("UserGeneralInfo_CountCVs_Test", "Count CVs listed", this.userId, this.upi, oldValue, newValue);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_CountCVs_Test, "Count CVs listed", this.userId, this.upi, oldValue, newValue);
         }
 
         private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
@@ -270,7 +270,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test("UserGeneralInfo_SuffixNames_Test", "Comparing SuffixNames", this.userId, this.upi, oldValues, newValues);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_SuffixNames_Test, "Comparing SuffixNames", this.userId, this.upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
@@ -286,7 +286,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test("UserGeneralInfo_LanguageUsers_Test", "Comparing LanguageUser(s)", this.userId, this.upi, oldValues, newValues);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_LanguageUsers_Test, "Comparing LanguageUser(s)", this.userId, this.upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)

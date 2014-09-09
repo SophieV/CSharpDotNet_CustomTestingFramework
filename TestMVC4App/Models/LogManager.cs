@@ -23,16 +23,16 @@ namespace TestMVC4App.Models
         private static object lockLogResult = new object();
         private static object lockProfileOverview = new object();
 
-        private SortedSet<string> allTestNames;
+        private SortedSet<TestUnitNames> allTestNames;
         private StreamWriter streamWriter;
-        private Dictionary<string, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
+        private Dictionary<TestUnitNames, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
         private HtmlTextWriter htmlWriterForSummaryReport;
         private HtmlTextWriter htmlWriterForProfileReport;
 
-        private static Dictionary<string, Dictionary<ResultSeverityType, int>> countSeverityResults_ByTestName;
-        private static Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> countDataBehaviors_ByTestName;
+        private static Dictionary<TestUnitNames, Dictionary<ResultSeverityType, int>> countSeverityResults_ByTestName;
+        private static Dictionary<TestUnitNames, Dictionary<IdentifiedDataBehavior, int>> countDataBehaviors_ByTestName;
 
-        private static Dictionary<string, HashSet<TimeSpan>> duration_ByTestName;
+        private static Dictionary<TestUnitNames, HashSet<TimeSpan>> duration_ByTestName;
         private static HashSet<TimeSpan> durationByProfile;
 
         private static Dictionary<int, bool> NoWarningNorErrorHappenedFlag_ByUpi;
@@ -64,46 +64,11 @@ namespace TestMVC4App.Models
 
         private LogManager() {
             // the order here is quite important because this is implicitely the expectation of the templates
-            allTestNames = new SortedSet<string>();
-            allTestNames.Add("UserBasicInfo_LastName_Test");
-            allTestNames.Add("UserBasicInfo_FirstName_Test");
-            allTestNames.Add("UserBasicInfo_MiddleName_Test");
-            allTestNames.Add("UserBasicInfo_Email_Test");
-            allTestNames.Add("UserBasicInfo_NetId_Test");
-            allTestNames.Add("UserBasicInfo_PageName_Test");
-            allTestNames.Add("UserBasicInfo_Suffix_Test");
-            allTestNames.Add("UserBasicInfo_Idx_Test");
-            allTestNames.Add("UserBasicInfo_LicenseNumber_Test");
-            allTestNames.Add("UserBasicInfo_Npi_Test");
-            allTestNames.Add("UserBasicInfo_Gender_Test");
-            allTestNames.Add("UserBasicInfo_UPI_Test");
-            allTestNames.Add("UserBasicInfo_UserEditors_Test");
-
-            allTestNames.Add("UserGeneralInfo_Bio_Test");
-            allTestNames.Add("UserGeneralInfo_Titles_Test");
-            allTestNames.Add("UserGeneralInfo_LanguageUsers_Test");
-            allTestNames.Add("UserGeneralInfo_AltFirstName_Test");
-            allTestNames.Add("UserGeneralInfo_AltMiddleName_Test");
-            allTestNames.Add("UserGeneralInfo_AltMiddleNameDisplayed_Test");
-            allTestNames.Add("UserGeneralInfo_AltLastName_Test");
-            allTestNames.Add("UserGeneralInfo_AltSuffix_Test");
-            allTestNames.Add("UserGeneralInfo_SuffixNames_Test");
-            allTestNames.Add("UserGeneralInfo_CountCVs_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_Id_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_Name_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_IdAndNameTogether_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_CheckIsPrimary_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test");
-            allTestNames.Add("UserGeneralInfo_Organization_Type_Test");
-            allTestNames.Add("UserGeneralInfo_OrganizationMission_Name_Test");
-
-            allTestNames.Add("UserContactLocationInfo_Assistants_Test");
-            allTestNames.Add("UserContactLocationInfo_LabWebsites_Names_Test");
-            allTestNames.Add("UserContactLocationInfo_LabWebsites_Links_Test");
-            allTestNames.Add("UserContactLocationInfo_UserAddress_StreetAddress_Test");
-            allTestNames.Add("UserContactLocationInfo_UserAddress_ZipCodes_Test");
-            allTestNames.Add("UserContactLocationInfo_UserAddress_IsMailing_Test");
+            allTestNames = new SortedSet<TestUnitNames>();
+            foreach (var testName in (TestUnitNames[])Enum.GetValues(typeof(TestUnitNames)))
+            {
+                allTestNames.Add(testName);
+            }
 
             IdentifiedBehaviorsDescriptions = new Dictionary<IdentifiedDataBehavior, string>();
             foreach (var behavior in (IdentifiedDataBehavior[]) Enum.GetValues(typeof(IdentifiedDataBehavior)))
@@ -112,10 +77,10 @@ namespace TestMVC4App.Models
             }
 
             NoWarningNorErrorHappenedFlag_ByUpi = new Dictionary<int, bool>();
-            countSeverityResults_ByTestName = new Dictionary<string, Dictionary<ResultSeverityType, int>>();
-            countDataBehaviors_ByTestName = new Dictionary<string, Dictionary<IdentifiedDataBehavior, int>>();
+            countSeverityResults_ByTestName = new Dictionary<TestUnitNames, Dictionary<ResultSeverityType, int>>();
+            countDataBehaviors_ByTestName = new Dictionary<TestUnitNames, Dictionary<IdentifiedDataBehavior, int>>();
 
-            duration_ByTestName = new Dictionary<string, HashSet<TimeSpan>>();
+            duration_ByTestName = new Dictionary<TestUnitNames, HashSet<TimeSpan>>();
             foreach(var testName in allTestNames)
             {
                 duration_ByTestName.Add(testName, new HashSet<TimeSpan>());
@@ -123,7 +88,7 @@ namespace TestMVC4App.Models
 
             durationByProfile = new HashSet<TimeSpan>();
 
-            htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
+            htmlWritersForDetailedReports_ByTestName = new Dictionary<TestUnitNames, HtmlTextWriter>();
 
             StatsCountTotalUpis = 0;
         }
@@ -260,10 +225,10 @@ namespace TestMVC4App.Models
 
                 StopWritingDetailedReports();
 
-                htmlWritersForDetailedReports_ByTestName = new Dictionary<string, HtmlTextWriter>();
+                htmlWritersForDetailedReports_ByTestName = new Dictionary<TestUnitNames, HtmlTextWriter>();
                 countFilesGenerated++;
 
-                foreach (string testName in allTestNames)
+                foreach (TestUnitNames testName in allTestNames)
                 {
                     filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + ".html");
 
@@ -346,8 +311,8 @@ namespace TestMVC4App.Models
             int countTroubleFreeUpis = 0;
             TimeSpan averageDurationPerUpi = TimeSpan.Zero;
             var countByDataBehavior = new Dictionary<IdentifiedDataBehavior, int>();
-            var averageDuration_ByTestName = new Dictionary<string, TimeSpan>();
-            var frequencySuccess_ByTestName = new Dictionary<string, double>();
+            var averageDuration_ByTestName = new Dictionary<TestUnitNames, TimeSpan>();
+            var frequencySuccess_ByTestName = new Dictionary<TestUnitNames, double>();
             double countSuccessResults = 0;
 
             var countSeverityResults = new Dictionary<ResultSeverityType, int>();

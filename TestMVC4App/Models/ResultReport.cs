@@ -13,7 +13,7 @@ namespace TestMVC4App.Models
 
         public string ErrorMessage { get; set; }
 
-        public string TestName { get; private set; }
+        public TestUnitNames TestName { get; private set; }
 
         public string TestDescription { get; private set; }
 
@@ -31,7 +31,7 @@ namespace TestMVC4App.Models
 
         public int TreeComparisonIndexError { get; set; }
 
-        public ResultReport(string testName, string testDescription)
+        public ResultReport(TestUnitNames testName, string testDescription)
         {
             this.TestName = testName;
             this.TestDescription = testDescription;
