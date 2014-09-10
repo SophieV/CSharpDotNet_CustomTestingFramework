@@ -219,7 +219,7 @@ namespace TestMVC4App.Templates
             
             #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  var sortedDictionary = SummaryReportDataObject.CountByIdentifiedDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-	foreach (KeyValuePair<IdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary) {
+	foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary) {
 		if(countPerIdentifiedDataBehavior.Value > 0) { 
             
             #line default
@@ -261,7 +261,7 @@ namespace TestMVC4App.Templates
 	<table class=""table_main"">
 	<tr>
 	<th class=""th_main"">Test Name</th>
-	<th class=""th_main"">Success</th>
+	<th class=""th_main"">Overall Success</th>
 	<th class=""th_main"">Sample Data</th>
 	<th class=""th_main"">Average Duration</th>
 	<th class=""th_main"">More Info</th>
@@ -280,7 +280,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</td>\r\n\t\t<td class=\"td_main\">\r\n\t\t\t");
+            this.Write("</td>\r\n\t\t<td class=\"th_main\">\r\n\t\t\t");
             
             #line 116 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SummaryReportDataObject.FrequencySuccess_ByTestName[testName].ToString("P")));
@@ -491,7 +491,7 @@ namespace TestMVC4App.Templates
             #line 186 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
  if(SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName.ContainsKey(testName)) {
 	var sortedDictionary2 =SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-	foreach (KeyValuePair<IdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
+	foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
 		if(countPerIdentifiedDataBehavior.Value > 0) { 
             
             #line default

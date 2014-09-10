@@ -23,23 +23,23 @@ namespace TestMVC4App.Models
         private static object lockLogResult = new object();
         private static object lockProfileOverview = new object();
 
-        private SortedSet<TestUnitNames> allTestNames;
+        private SortedSet<EnumTestUnitNames> allTestNames;
         private StreamWriter streamWriter;
-        private Dictionary<TestUnitNames, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
+        private Dictionary<EnumTestUnitNames, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
         private HtmlTextWriter htmlWriterForSummaryReport;
         private HtmlTextWriter htmlWriterForProfileReport;
 
-        private static Dictionary<TestUnitNames, Dictionary<ResultSeverityType, int>> countSeverityResults_ByTestName;
-        private static Dictionary<TestUnitNames, Dictionary<IdentifiedDataBehavior, int>> countDataBehaviors_ByTestName;
+        private static Dictionary<EnumTestUnitNames, Dictionary<ResultSeverityType, int>> countSeverityResults_ByTestName;
+        private static Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>> countDataBehaviors_ByTestName;
 
-        private static Dictionary<TestUnitNames, HashSet<TimeSpan>> duration_ByTestName;
+        private static Dictionary<EnumTestUnitNames, HashSet<TimeSpan>> duration_ByTestName;
         private static HashSet<TimeSpan> durationByProfile;
 
         private static Dictionary<int, bool> NoWarningNorErrorHappenedFlag_ByUpi;
 
-        private static Dictionary<TestUnitNames, string> sampleDataByTestName = new Dictionary<TestUnitNames,string>();
+        private static Dictionary<EnumTestUnitNames, string> sampleDataByTestName = new Dictionary<EnumTestUnitNames,string>();
 
-        public static Dictionary<IdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
+        public static Dictionary<EnumIdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
 
         public double StatsCountTotalUpis { get;set; }
 
@@ -64,23 +64,23 @@ namespace TestMVC4App.Models
 
         private LogManager() {
             // the order here is quite important because this is implicitely the expectation of the templates
-            allTestNames = new SortedSet<TestUnitNames>();
-            foreach (var testName in (TestUnitNames[])Enum.GetValues(typeof(TestUnitNames)))
+            allTestNames = new SortedSet<EnumTestUnitNames>();
+            foreach (var testName in (EnumTestUnitNames[])Enum.GetValues(typeof(EnumTestUnitNames)))
             {
                 allTestNames.Add(testName);
             }
 
-            IdentifiedBehaviorsDescriptions = new Dictionary<IdentifiedDataBehavior, string>();
-            foreach (var behavior in (IdentifiedDataBehavior[]) Enum.GetValues(typeof(IdentifiedDataBehavior)))
+            IdentifiedBehaviorsDescriptions = new Dictionary<EnumIdentifiedDataBehavior, string>();
+            foreach (var behavior in (EnumIdentifiedDataBehavior[]) Enum.GetValues(typeof(EnumIdentifiedDataBehavior)))
             {
                 IdentifiedBehaviorsDescriptions.Add(behavior, ParsingHelper.GetDescription(behavior));
             }
 
             NoWarningNorErrorHappenedFlag_ByUpi = new Dictionary<int, bool>();
-            countSeverityResults_ByTestName = new Dictionary<TestUnitNames, Dictionary<ResultSeverityType, int>>();
-            countDataBehaviors_ByTestName = new Dictionary<TestUnitNames, Dictionary<IdentifiedDataBehavior, int>>();
+            countSeverityResults_ByTestName = new Dictionary<EnumTestUnitNames, Dictionary<ResultSeverityType, int>>();
+            countDataBehaviors_ByTestName = new Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>>();
 
-            duration_ByTestName = new Dictionary<TestUnitNames, HashSet<TimeSpan>>();
+            duration_ByTestName = new Dictionary<EnumTestUnitNames, HashSet<TimeSpan>>();
             foreach(var testName in allTestNames)
             {
                 duration_ByTestName.Add(testName, new HashSet<TimeSpan>());
@@ -88,7 +88,7 @@ namespace TestMVC4App.Models
 
             durationByProfile = new HashSet<TimeSpan>();
 
-            htmlWritersForDetailedReports_ByTestName = new Dictionary<TestUnitNames, HtmlTextWriter>();
+            htmlWritersForDetailedReports_ByTestName = new Dictionary<EnumTestUnitNames, HtmlTextWriter>();
 
             StatsCountTotalUpis = 0;
         }
@@ -200,16 +200,16 @@ namespace TestMVC4App.Models
             if (!countDataBehaviors_ByTestName.ContainsKey(resultReport.TestName))
             {
                 // initialize all the possible combinations for the given test name
-                countDataBehaviors_ByTestName.Add(resultReport.TestName, new Dictionary<IdentifiedDataBehavior, int>());
+                countDataBehaviors_ByTestName.Add(resultReport.TestName, new Dictionary<EnumIdentifiedDataBehavior, int>());
 
-                foreach (var behavior in (IdentifiedDataBehavior[])Enum.GetValues(typeof(IdentifiedDataBehavior)))
+                foreach (var behavior in (EnumIdentifiedDataBehavior[])Enum.GetValues(typeof(EnumIdentifiedDataBehavior)))
                 {
                     countDataBehaviors_ByTestName[resultReport.TestName].Add(behavior, 0);
                 }
             }
 
             // increase call counter
-            foreach (IdentifiedDataBehavior label in resultReport.IdentifedDataBehaviors)
+            foreach (EnumIdentifiedDataBehavior label in resultReport.IdentifedDataBehaviors)
             {
                 countDataBehaviors_ByTestName[resultReport.TestName][label]++;
             }
@@ -225,10 +225,10 @@ namespace TestMVC4App.Models
 
                 StopWritingDetailedReports();
 
-                htmlWritersForDetailedReports_ByTestName = new Dictionary<TestUnitNames, HtmlTextWriter>();
+                htmlWritersForDetailedReports_ByTestName = new Dictionary<EnumTestUnitNames, HtmlTextWriter>();
                 countFilesGenerated++;
 
-                foreach (TestUnitNames testName in allTestNames)
+                foreach (EnumTestUnitNames testName in allTestNames)
                 {
                     filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + ".html");
 
@@ -310,9 +310,9 @@ namespace TestMVC4App.Models
 
             int countTroubleFreeUpis = 0;
             TimeSpan averageDurationPerUpi = TimeSpan.Zero;
-            var countByDataBehavior = new Dictionary<IdentifiedDataBehavior, int>();
-            var averageDuration_ByTestName = new Dictionary<TestUnitNames, TimeSpan>();
-            var frequencySuccess_ByTestName = new Dictionary<TestUnitNames, double>();
+            var countByDataBehavior = new Dictionary<EnumIdentifiedDataBehavior, int>();
+            var averageDuration_ByTestName = new Dictionary<EnumTestUnitNames, TimeSpan>();
+            var frequencySuccess_ByTestName = new Dictionary<EnumTestUnitNames, double>();
             double countSuccessResults = 0;
 
             var countSeverityResults = new Dictionary<ResultSeverityType, int>();

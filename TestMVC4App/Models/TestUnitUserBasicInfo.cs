@@ -60,18 +60,18 @@ namespace TestMVC4App.Models
             }
 
             MappedUserId = newServiceInfo.UserId;
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_UPI_Test, "Comparing UPI", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/UPI", newServiceInfo.Upi.ToString());
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_LastName_Test, "Comparing LastName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/lastname", newServiceInfo.LastName);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_Email_Test, "Comparing Email", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/emailAddress", newServiceInfo.YaleEmail);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_MiddleName_Test, "Comparing MiddleName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/middle", newServiceInfo.MiddleName);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_FirstName_Test, "Comparing FirstName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/firstname", newServiceInfo.FirstName);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_Gender_Test, "Comparing Gender", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/gender", newServiceInfo.Gender);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_NetId_Test, "Comparing NetId", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/netID", newServiceInfo.NetId);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_PageName_Test, "Comparing PageName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/pageName", newServiceInfo.PageName);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_Suffix_Test, "Comparing Suffix", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Suffix", newServiceInfo.Suffix);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_Idx_Test, "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Idx", newServiceInfo.Idx);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_LicenseNumber_Test, "Comparing License Number", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/LicenseNumber", newServiceInfo.LicenseNumber);
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_Npi_Test, "Comparing Npi", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Npi", newServiceInfo.Npi);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UPI, "Comparing UPI", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/UPI", newServiceInfo.Upi.ToString());
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LastName, "Comparing LastName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/lastname", newServiceInfo.LastName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/emailAddress", newServiceInfo.YaleEmail);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/middle", newServiceInfo.MiddleName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/firstname", newServiceInfo.FirstName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Gender, "Comparing Gender", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/gender", newServiceInfo.Gender);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_NetId, "Comparing NetId", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/netID", newServiceInfo.NetId);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/pageName", newServiceInfo.PageName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Suffix, "Comparing Suffix", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Suffix", newServiceInfo.Suffix);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Idx, "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Idx", newServiceInfo.Idx);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LicenseNumber, "Comparing License Number", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/LicenseNumber", newServiceInfo.LicenseNumber);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Npi", newServiceInfo.Npi);
             UserBasicInfo_UserEditors_Test(newServiceInfo, oldServiceData);
 
             ComputeOverallSeverity();
@@ -103,7 +103,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(TestUnitNames.UserBasicInfo_UserEditors_Test, "Comparing User Editors",this.MappedUserId,this.upi,oldValues,newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UserEditors_Email, "Comparing User Editors",this.MappedUserId,this.upi,oldValues,newValues);
         }
 
         #endregion

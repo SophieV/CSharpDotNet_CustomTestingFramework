@@ -42,7 +42,7 @@ namespace TestMVC4App.Templates
         /// <summary>
         /// Caller method name indicating where the FAIL happened.
         /// </summary>
-        public TestUnitNames TestName { get; private set; }
+        public EnumTestUnitNames TestName { get; private set; }
 
         /// <summary>
         /// Severity of the test result.

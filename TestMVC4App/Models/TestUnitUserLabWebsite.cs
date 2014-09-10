@@ -66,7 +66,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "titleName");
 
-            var resultReport = new ResultReport(TestUnitNames.UserContactLocationInfo_LabWebsites_Names_Test, "Comparing LabWebsite Name(s)");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -89,7 +89,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "link");
 
-            var resultReport = new ResultReport(TestUnitNames.UserContactLocationInfo_LabWebsites_Links_Test, "Comparing LabWebsite Link(s)");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();

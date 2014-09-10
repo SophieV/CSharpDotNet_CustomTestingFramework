@@ -80,7 +80,7 @@ namespace TestMVC4App.Models
                 oldValues.Add(oldValue2);
             }
 
-            var resultReport = new ResultReport(TestUnitNames.UserContactLocationInfo_UserAddress_StreetAddress_Test, "Comparing Address StreetInfo(s)");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -105,7 +105,7 @@ namespace TestMVC4App.Models
             var oldValues = new HashSet<string>();
             oldValues.Add(oldValue2);
 
-            var resultReport = new ResultReport(TestUnitNames.UserContactLocationInfo_UserAddress_IsMailing_Test, "Comparing Mailing Address");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -128,7 +128,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "zipCode");
 
-            var resultReport = new ResultReport(TestUnitNames.UserContactLocationInfo_UserAddress_ZipCodes_Test, "Comparing Address Zip Code(s)");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
             compareStrategy.Investigate();
             watch.Stop();

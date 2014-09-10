@@ -69,7 +69,7 @@ namespace TestMVC4App.Models
                     }
                 }
 
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
@@ -82,7 +82,6 @@ namespace TestMVC4App.Models
 
             if (this.oldList.Count() <= 0 && this.newList.Count <= 0)
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
@@ -162,12 +161,12 @@ namespace TestMVC4App.Models
                 }
 
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS);
 
                 if (leftOvers.Count() == 0)
                 {
                     this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
-                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }
             }
@@ -206,12 +205,12 @@ namespace TestMVC4App.Models
                 }
 
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
 
                 if (leftOvers.Count() == 0)
                 {
                     this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
-                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }
             }
@@ -226,7 +225,7 @@ namespace TestMVC4App.Models
             if (this.leftOversOldCount > -1 && this.leftOversOldCount < 1)
             {
                 this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
             }
 
             return shouldContinueTesting;

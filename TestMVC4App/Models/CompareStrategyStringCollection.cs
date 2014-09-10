@@ -55,7 +55,6 @@ namespace TestMVC4App.Models
 
             if (this.resultReport.OldValues.Count <= 0 && this.resultReport.NewValues.Count <= 0)
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
@@ -98,7 +97,7 @@ namespace TestMVC4App.Models
 
                 if (differenceQueryToAvoidDoublons.Count() == 0)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
                     this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
                 }
             }
@@ -114,7 +113,7 @@ namespace TestMVC4App.Models
             var differenceQueryCheckDoublonsInNewService = this.resultReport.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
             if (differenceQueryCheckDoublonsInNewService.Count() > 0)
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
@@ -132,7 +131,7 @@ namespace TestMVC4App.Models
             // e.g. the old service does not always An Identifier for the Organization
             if (this.resultReport.NewValues.Count > this.resultReport.OldValues.Count)
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
 
                 try
                 {
@@ -141,12 +140,12 @@ namespace TestMVC4App.Models
                     CollectionAssert.IsSubsetOf(this.resultReport.OldValues.ToList(), this.resultReport.NewValues.ToList(), this.resultReport.TestDescription);
 
                     this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
-                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                 }
                 catch (AssertFailedException)
                 {
                     this.resultReport.UpdateResult(ResultSeverityType.WARNING);
-                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
                 }
             }
 
@@ -175,7 +174,7 @@ namespace TestMVC4App.Models
 
                 if (leftovers.Count() != missingOldValues.Count())
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
                     this.resultReport.UpdateResult(ResultSeverityType.WARNING);
 
                     // all of the mismatches are due to trailing spaces

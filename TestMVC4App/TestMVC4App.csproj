@@ -182,7 +182,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\TestUnitNames.cs" />
+    <Compile Include="Models\EnumTestUnitNames.cs" />
     <Compile Include="Models\CompareStrategyContextSwitcher.cs" />
     <Compile Include="Models\CompareStrategyOrganization.cs" />
     <Compile Include="Models\CompareStrategy.cs" />
@@ -192,7 +192,7 @@
     <Compile Include="Models\CompareStrategyStringDictionary_PartialOrFull.cs" />
     <Compile Include="Models\LinqTreeExtension.cs" />
     <Compile Include="Models\LogManager.cs" />
-    <Compile Include="Models\IdentifiedDataBehavior.cs" />
+    <Compile Include="Models\EnumIdentifiedDataBehavior.cs" />
     <Compile Include="Models\OrganizationTreeDescriptor.cs" />
     <Compile Include="Models\ParsingHelper.cs" />
     <Compile Include="Models\TestUnitUserAddress.cs" />

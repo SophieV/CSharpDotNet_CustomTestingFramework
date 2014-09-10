@@ -83,7 +83,7 @@ namespace TestMVC4App.Models
                 pairs.Add(oldValues,newValues);
             }
 
-            this.CompareAndLog_Test(TestUnitNames.UserContactLocationInfo_Assistants_Test, "Comparing Assistant Name(s)",userId,upi, pairs,true);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Assistants, "Comparing Assistant Name(s)",userId,upi, pairs,true);
         }
 
         private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)

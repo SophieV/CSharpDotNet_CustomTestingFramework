@@ -9,11 +9,11 @@ namespace TestMVC4App.Models
 
         public ResultSeverityType Result { get; private set; }
 
-        public List<IdentifiedDataBehavior> IdentifedDataBehaviors { get; set; }
+        public List<EnumIdentifiedDataBehavior> IdentifedDataBehaviors { get; set; }
 
         public string ErrorMessage { get; set; }
 
-        public TestUnitNames TestName { get; private set; }
+        public EnumTestUnitNames TestName { get; private set; }
 
         public string TestDescription { get; private set; }
 
@@ -31,12 +31,12 @@ namespace TestMVC4App.Models
 
         public int TreeComparisonIndexError { get; set; }
 
-        public ResultReport(TestUnitNames testName, string testDescription)
+        public ResultReport(EnumTestUnitNames testName, string testDescription)
         {
             this.TestName = testName;
             this.TestDescription = testDescription;
             this.ErrorMessage = string.Empty;
-            this.IdentifedDataBehaviors = new List<IdentifiedDataBehavior>();
+            this.IdentifedDataBehaviors = new List<EnumIdentifiedDataBehavior>();
             this.OldValues = new HashSet<string>();
             this.NewValues = new HashSet<string>();
             this.OldOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
@@ -96,7 +96,7 @@ namespace TestMVC4App.Models
             if (newSeverityStateReturned == ResultSeverityType.WARNING)
             {
                 if (this.Result == ResultSeverityType.SUCCESS 
-                    || (this.IdentifedDataBehaviors.Contains(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE) && this.IdentifedDataBehaviors.Contains(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND)))
+                    || (this.IdentifedDataBehaviors.Contains(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE) && this.IdentifedDataBehaviors.Contains(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND)))
                 {
                     this.Result = newSeverityStateReturned;
                 }

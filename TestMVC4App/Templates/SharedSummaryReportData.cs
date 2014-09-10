@@ -16,19 +16,19 @@ namespace TestMVC4App.Templates
 
         public Dictionary<ResultSeverityType, int> CountBySeverity { get; set; }
 
-        public Dictionary<IdentifiedDataBehavior, int> CountByIdentifiedDataBehavior { get; set; }
+        public Dictionary<EnumIdentifiedDataBehavior, int> CountByIdentifiedDataBehavior { get; set; }
 
-        public Dictionary<TestUnitNames, TimeSpan> AverageDuration_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, TimeSpan> AverageDuration_ByTestName { get; set; }
 
-        public Dictionary<TestUnitNames, Dictionary<ResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, Dictionary<ResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
 
-        public Dictionary<TestUnitNames, Dictionary<IdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
 
-        public Dictionary<TestUnitNames, double> FrequencySuccess_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, double> FrequencySuccess_ByTestName { get; set; }
 
-        public List<TestUnitNames> TestNames { get; set; }
+        public List<EnumTestUnitNames> TestNames { get; set; }
 
-        public Dictionary<TestUnitNames, string> SampleData_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, string> SampleData_ByTestName { get; set; }
 
         public TimeSpan Duration { get; set; }
 

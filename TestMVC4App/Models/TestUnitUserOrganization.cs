@@ -449,7 +449,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_IdAndNameTogether_Test, "Comparing Organization Id+Name Combinations");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_IdAndName, "Comparing Organization Id+Name Combinations");
             var compareStrategy = new CompareStrategyContextSwitcher(
                 oldServiceOrganizationDescriptors,
                 oldTreeRoot,
@@ -472,17 +472,17 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organization_Id_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Organization_Id_Test, "Comparing Organization Ids", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Id, "Comparing Organization Ids", userId, upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Name_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Organization_Name_Test, "Comparing Organization Names", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Name, "Comparing Organization Names", userId, upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Organization_Type_Test, "Comparing Organization Types", userId, upi, (newValues.ToList().Where(z => z != null).Count() > 0 ? new HashSet<string>() { "Academic Department" } : new HashSet<string>()), newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", userId, upi, (newValues.ToList().Where(z => z != null).Count() > 0 ? new HashSet<string>() { "Academic Department" } : new HashSet<string>()), newValues);
         }
 
         private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
@@ -496,7 +496,7 @@ namespace TestMVC4App.Models
 
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test, "Comparing Organization Tree Depth Coherence");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_TreeDepthCoherence, "Comparing Organization Tree Depth Coherence");
 
             while (keepGoing)
             {
@@ -523,7 +523,7 @@ namespace TestMVC4App.Models
                 {
                     resultReport.UpdateResult(ResultSeverityType.ERROR);
                     resultReport.ErrorMessage = e.Message;
-                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH);
+                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH);
                     resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
                     resultReport.TreeComparisonIndexError = index;
 
@@ -538,7 +538,7 @@ namespace TestMVC4App.Models
 
             if(resultReport.Result == ResultSeverityType.SUCCESS)
             {
-                resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT);
+                resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT);
                 resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
             }
 
@@ -558,7 +558,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_CheckIsPrimary_Test, "Comparing Organization IsImported/Primary");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_IsImportedPrimary, "Comparing Organization IsImported/Primary");
 
             var oldEntriesIsPrimary = new HashSet<string>();
             var newEntriesIsPrimary = new HashSet<string>();
@@ -601,7 +601,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test, "Trying to merge Organization Trees together");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_TreeMerged, "Trying to merge Organization Trees together");
 
             if (newTreeRoot != null && oldTreeRoot != null)
             {
@@ -651,7 +651,6 @@ namespace TestMVC4App.Models
             }
             else
             {
-                resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
                 resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
             }
 
@@ -735,7 +734,7 @@ namespace TestMVC4App.Models
                                     matchingElementFound = true;
                                     matchingElement = potentialElement;
                                     matchingElement.WasOnlyOption = true;
-                                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
+                                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
                                     resultReport.UpdateResult(ResultSeverityType.WARNING);
                                 }
                             }
@@ -745,7 +744,7 @@ namespace TestMVC4App.Models
                                 if (!excludeMatchedElements)
                                 {
                                     matchingElement.UsedMoreThanOnce = true;
-                                    resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.REUSED_ELEMENT_TO_FILL_GAP);
+                                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.REUSED_ELEMENT_TO_FILL_GAP);
                                 }
 
                                 matchingElement.HasBeenMatched = true;
@@ -797,7 +796,7 @@ namespace TestMVC4App.Models
                 }
             }
             
-            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_OrganizationMission_Name_Test, "Comparing Organization Missions", userId, upi, missionsPerOrg);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions, "Comparing Organization Missions", userId, upi, missionsPerOrg);
         }
     }
 

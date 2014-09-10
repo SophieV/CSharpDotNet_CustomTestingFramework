@@ -104,7 +104,6 @@ namespace TestMVC4App.Models
 
             if(string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue))
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
@@ -142,7 +141,7 @@ namespace TestMVC4App.Models
 
             if (oldValue.Trim() == newValue.Trim())
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
                 this.resultReport.UpdateResult(ResultSeverityType.ERROR_WITH_EXPLANATION);
                 shouldContinueTesting = false;
             }
@@ -156,7 +155,7 @@ namespace TestMVC4App.Models
 
             if (newValue == " ")
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
@@ -169,7 +168,7 @@ namespace TestMVC4App.Models
 
             if (!string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue))
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.WRONG_VALUE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.WRONG_VALUE);
                 // it is set as warning only because it provides more explicit info on the error
                 // the error has been logged already
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
@@ -184,8 +183,8 @@ namespace TestMVC4App.Models
 
             if (string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue) && newValue != " ")
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 
@@ -198,7 +197,7 @@ namespace TestMVC4App.Models
 
             if (!string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue) && newValue != " ")
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING);
             }
 

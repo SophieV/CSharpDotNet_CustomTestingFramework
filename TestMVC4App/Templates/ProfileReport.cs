@@ -44,7 +44,7 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n");
             
             #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
- foreach(KeyValuePair<TestUnitNames,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { 
+ foreach(KeyValuePair<EnumTestUnitNames,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { 
             
             #line default
             #line hidden

@@ -6,7 +6,7 @@ namespace TestMVC4App.Templates
 {
     public class SharedProfileReportData
     {
-        public Dictionary<TestUnitNames, ResultSeverityType> ResultSeverity_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, ResultSeverityType> ResultSeverity_ByTestName { get; set; }
 
         public int UPI { get; set; }
 

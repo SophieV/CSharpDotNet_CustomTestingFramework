@@ -132,7 +132,7 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void CompareAndLog_Test(TestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<string> oldValues, HashSet<string> newValues)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<string> oldValues, HashSet<string> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -152,7 +152,7 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(TestUnitNames testFullName, string testDescription, int userId, int upi, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, bool stringPartialMatch = false)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, bool stringPartialMatch = false)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -172,14 +172,14 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(TestUnitNames testFullName, string testDescription, int userId, int upi, XDocument oldServiceData, string oldSingleStringPath, string newValue)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, XDocument oldServiceData, string oldSingleStringPath, string newValue)
         {
             string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, oldSingleStringPath);
 
             this.CompareAndLog_Test(testFullName, testDescription, userId, upi, oldValue, newValue);
         }
 
-        public void CompareAndLog_Test(TestUnitNames testFullName, string testDescription, int userId, int upi, string oldValue, string newValue)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, string oldValue, string newValue)
         {
             var watch = new Stopwatch();
             watch.Start();

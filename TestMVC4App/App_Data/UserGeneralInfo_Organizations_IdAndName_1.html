@@ -1,0 +1,1240 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="10934133">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10934133">Profile data of UPI 10934133</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/62889/GeneralInfo">User data of ID is 62889</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MSDEPT Basic Science Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MMBB Administration ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MNBIO Administration ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Developmental Biology (109900)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Receptors and Signal Transduction (109912)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Development (109914)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Molecular/Cellular Neuroscience (109919)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Affiliated Faculty (110119)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Secondary Faculty (110331)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Neurobiology (110459)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Research Members (110577)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Research (113765)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Primary Faculty (113857)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Kavli Members (114194)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Neurobiology Site Secondary Faculty (114428)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Office of Student Research (110631)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - - Yale Combined Program in the Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>[DEPTH 3] - - - Neuroscience (109537)
+															</li>
+										<li>[DEPTH 3] - - - Molecular Cell Biology, Genetics and Development (109539)
+															</li>
+										<li>[DEPTH 3] - - - Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Principal Investigator (115091)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - Interdepartmental Neuroscience Program (109560)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Signal Transduction (110448)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Neurobiology (109906)
+															</li>
+										<li>[DEPTH 4] - - - - Kavli Institute for Neuroscience (109402)
+															</li>
+										<li>[DEPTH 3] - - - Molecular Biophysics and Biochemistry (109083)
+															</li>
+										<li>[DEPTH 4] - - - - Neurobiology (109379)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Signal Transduction (109386)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - MSDEPT Basic Science Departments (113629)
+															</li>
+										<li>[DEPTH 3] - - - MB and B (109083)
+															</li>
+										<li>[DEPTH 4] - - - - Primary Faculty (113857)
+															</li>
+										<li>[DEPTH 4] - - - - MMBB Administration (112284)
+															</li>
+										<li>[DEPTH 4] - - - - Neurobiology (109379)
+															</li>
+										<li>[DEPTH 3] - - - Neurobiology (108862)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Neurobiology Site Secondary Faculty (114428)
+															</li>
+										<li>[DEPTH 4] - - - - MNBIO Administration (112720)
+															</li>
+										<li>[DEPTH 4] - - - - Kavli Institute for Neuroscience (109402)
+															</li>
+										<li>[DEPTH 5] - - - - - Kavli Members (114194)
+															</li>
+										<li>[DEPTH 5] - - - - - Research (113765)
+															</li>
+										<li>[DEPTH 4] - - - - Secondary Faculty (110331)
+															</li>
+										<li>[DEPTH 2] - - Interdepartmental Neuroscience Program (109560)
+															</li>
+										<li>[DEPTH 2] - - Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>[DEPTH 3] - - - Neuroscience (109537)
+															</li>
+										<li>[DEPTH 4] - - - - Development (109914)
+															</li>
+										<li>[DEPTH 4] - - - - Molecular/Cellular Neuroscience (109919)
+															</li>
+										<li>[DEPTH 3] - - - Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>[DEPTH 4] - - - - Neurobiology (110459)
+															</li>
+										<li>[DEPTH 3] - - - Molecular Cell Biology, Genetics and Development (109539)
+															</li>
+										<li>[DEPTH 4] - - - - Receptors and Signal Transduction (109912)
+															</li>
+										<li>[DEPTH 4] - - - - Neurobiology (109906)
+															</li>
+										<li>[DEPTH 4] - - - - Developmental Biology (109900)
+															</li>
+										<li>[DEPTH 3] - - - Koleske Lab (115068)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Principal Investigator (115091)
+															</li>
+										<li>[DEPTH 2] - - Office of Student Research (110631)
+															</li>
+										<li>[DEPTH 2] - - Program in Cellular Neuroscience, Neurodegeneration and Repair (109385)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Affiliated Faculty (110119)
+															</li>
+										<li>[DEPTH 2] - - Cancer Center, Yale (109631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Signal Transduction (110448)
+															</li>
+										<li>[DEPTH 3] - - - Research Members (110577)
+															</li>
+										<li>[DEPTH 2] - - Clinical Departments (113631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Cancer Center (109081)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Signal Transduction (109386)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0063833</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="12149599">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58861/GeneralInfo">User data of ID is 58861</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] EDD Administration ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] YSNACA Operations ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] School Of Nursing ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] YMG Website (109564)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale Medical Group (109563)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - - SBIRT Training in Yale Residency Programs (110627)
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - - Yale School of Nursing ()
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - School Of Nursing (113597)
+															</li>
+										<li>[DEPTH 2] - - EDD Administration (108932)
+															</li>
+										<li>[DEPTH 3] - - - YSNACA Operations (112990)
+															</li>
+										<li>[DEPTH 1] - Yale School of Medicine (113592)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 2] - - Yale Medical Group (109563)
+															</li>
+										<li>[DEPTH 3] - - - YMG Website (109564)
+															</li>
+										<li>[DEPTH 2] - - SBIRT Training in Yale Residency Programs (110627)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0008486</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="12641341">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58634/GeneralInfo">User data of ID is 58634</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] MCDEPT Clinical Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MNEUR Clinical ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] YMG Credentialed (110193)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Office of Student Research (110631)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Neurology (108788)
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Neuropsychological Services (109802)
+															</li>
+										<li>[DEPTH 4] - - - - Epilepsy Program (109857)
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - -  ()
+															</li>
+										<li>[DEPTH 5] - - - - - Neuropsychological and Psychological Assessment Service (109854)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - MCDEPT Clinical Departments (113631)
+															</li>
+										<li>[DEPTH 3] - - - Neurology (108788)
+															</li>
+										<li>[DEPTH 4] - - - - MNEUR Clinical (112488)
+															</li>
+										<li>[DEPTH 3] - - - Neurosurgery (108855)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Epilepsy Program (109857)
+															</li>
+										<li>[DEPTH 4] - - - - Neuropsychological Services (109802)
+															</li>
+										<li>[DEPTH 3] - - - Psychiatry (109077)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Connecticut Mental Health Center (109448)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 5] - - - - - Neuropsychological and Psychological Assessment Service (109854)
+															</li>
+										<li>[DEPTH 2] - - Office of Student Research (110631)
+															</li>
+										<li>[DEPTH 2] - - Yale Medical Group (109563)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - YMG Credentialed (110193)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0001671</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="10151776">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58755/GeneralInfo">User data of ID is 58755</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] Central Accounts ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MCDEPT Clinical Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MYSM School Operation ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MGEN Administration ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MFIST Howard Hughes Medical Institute ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Oncogenes, Tumor Suppressor Genes, and Cell Cycle Control (109908)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Molecular/Cellular Neuroscience (109919)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Research Members (110577)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Investigator (114012)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] International Research and Programs (110721)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Genetics Faculty Site Listing R-Z (114415)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Genetics Site Department Administration Listing (114417)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Office of Student Research (110631)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - - Yale Combined Program in the Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>[DEPTH 3] - - - Neuroscience (109537)
+															</li>
+										<li>[DEPTH 3] - - - Molecular Cell Biology, Genetics and Development (109539)
+															</li>
+										<li>[DEPTH 1] - Global Health Initiative (110238)
+															</li>
+										<li>[DEPTH 2] - - Information & Biotechnology (110256)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - Stem Cell Center, Yale (109569)
+															</li>
+										<li>[DEPTH 3] - - - Stem Cell Genetics (113823)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Cancer Genetics & Genomics (110442)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Animal Organogenesis (110388)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Diabetes Research Center (109834)
+															</li>
+										<li>[DEPTH 3] - - - Genetics (108854)
+															</li>
+										<li>[DEPTH 4] - - - - Tian Xu Lab (114011)
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Cancer Genetics (109355)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - MYSM School Operation (113646)
+															</li>
+										<li>[DEPTH 3] - - - Central Accounts (109084)
+															</li>
+										<li>[DEPTH 4] - - - - MFIST Howard Hughes Medical Institute (112788)
+															</li>
+										<li>[DEPTH 2] - - MCDEPT Clinical Departments (113631)
+															</li>
+										<li>[DEPTH 3] - - - Genetics (108854)
+															</li>
+										<li>[DEPTH 4] - - - - Tian Xu Lab (114011)
+															</li>
+										<li>[DEPTH 5] - - - - - Investigator (114012)
+															</li>
+										<li>[DEPTH 4] - - - - Genetics Faculty Site Listing R-Z (114415)
+															</li>
+										<li>[DEPTH 4] - - - - Genetics Site Department Administration Listing (114417)
+															</li>
+										<li>[DEPTH 4] - - - - MGEN Administration (112651)
+															</li>
+										<li>[DEPTH 3] - - - Cancer Center (109081)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Cancer Genetics (109355)
+															</li>
+										<li>[DEPTH 3] - - - Internal Medicine (108789)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Diabetes Research Center (109834)
+															</li>
+										<li>[DEPTH 2] - - Stem Cell Center, Yale (109569)
+															</li>
+										<li>[DEPTH 3] - - - Stem Cell Genetics (113823)
+															</li>
+										<li>[DEPTH 2] - - Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>[DEPTH 3] - - - Neuroscience (109537)
+															</li>
+										<li>[DEPTH 4] - - - - Molecular/Cellular Neuroscience (109919)
+															</li>
+										<li>[DEPTH 3] - - - Molecular Cell Biology, Genetics and Development (109539)
+															</li>
+										<li>[DEPTH 4] - - - - Oncogenes, Tumor Suppressor Genes, and Cell Cycle Control (109908)
+															</li>
+										<li>[DEPTH 2] - - Office of Student Research (110631)
+															</li>
+										<li>[DEPTH 2] - - Cancer Center, Yale (109631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Cancer Genetics & Genomics (110442)
+															</li>
+										<li>[DEPTH 3] - - - Research Members (110577)
+															</li>
+										<li>[DEPTH 2] - - Developmental Biology at Yale (110734)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Animal Organogenesis (110388)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+										<li>[DEPTH 1] - Global Health Initiative (110238)
+															</li>
+										<li>[DEPTH 2] - - Information & Biotechnology (110256)
+															</li>
+										<li>[DEPTH 1] - School of Law (113596)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 2] - - Academic Affairs (108748)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - International Research and Programs (110721)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0011902</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="10290564">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/60863/GeneralInfo">User data of ID is 60863</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] FASEAS Chemical and Environmental Engineering (SEAS) ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Division of Physical Sciences ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] FAS ()
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - School of Engineering and Applied Science ()
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - FAS (113589)
+															</li>
+										<li>[DEPTH 2] - - Division of Physical Sciences (113624)
+															</li>
+										<li>[DEPTH 3] - - - School of Engineering and Applied Science (108840)
+															</li>
+										<li>[DEPTH 4] - - - - FASEAS Chemical and Environmental Engineering (SEAS) (111924)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0000689</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="11091604">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58810/GeneralInfo">User data of ID is 58810</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] MSDEPT Basic Science Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MCDEPT Clinical Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MCMED Administration ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MOPHTH Administration ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Secondary Research Research Faculty (110199)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Photo Issues1 (110671)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Still Missing (110681)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Past Presenters (114063)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Professors (114262)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Comparative Medicine Site Faculty Listing N-Z (114408)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Research-Neurobiology (115123)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Office of Student Research (110631)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Comparative Medicine (108744)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Ophthalmology and Visual Science (108741)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - MSDEPT Basic Science Departments (113629)
+															</li>
+										<li>[DEPTH 3] - - - Comparative Medicine (108744)
+															</li>
+										<li>[DEPTH 4] - - - - Research-Neurobiology (115123)
+															</li>
+										<li>[DEPTH 4] - - - - Comparative Medicine Site Faculty Listing N-Z (114408)
+															</li>
+										<li>[DEPTH 4] - - - - MCMED Administration (112235)
+															</li>
+										<li>[DEPTH 2] - - MCDEPT Clinical Departments (113631)
+															</li>
+										<li>[DEPTH 3] - - - Ophthalmology and Visual Science (108741)
+															</li>
+										<li>[DEPTH 4] - - - - Secondary Research Research Faculty (110199)
+															</li>
+										<li>[DEPTH 4] - - - - MOPHTH Administration (112507)
+															</li>
+										<li>[DEPTH 2] - - Office of Student Research (110631)
+															</li>
+										<li>[DEPTH 3] - - - Photo Issues1 (110671)
+															</li>
+										<li>[DEPTH 4] - - - - Still Missing (110681)
+															</li>
+										<li>[DEPTH 2] - - Women in Medicine (114261)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Professors (114262)
+															</li>
+										<li>[DEPTH 2] - - Dean's Workshops (114062)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Past Presenters (114063)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0002488</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="11472557">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58740/GeneralInfo">User data of ID is 58740</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] MMBB F A S Admin ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] MSDEPT Basic Science Departments ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Mounting an Immune Response (109882)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Infectious Disease and Host-Pathogen Interaction (109886)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Structural Analysis of Immune System Receptors and Effectors (109887)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Virology laboratories (109952)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Protein Folding, Dynamics and Degradation (110460)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Virology, Infection and Immunity (110463)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] crystallography, NMR, mass spectrometry, cryo-electron...faculty (110464)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Research Members (110577)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Primary Faculty (113857)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Immunology & Host Response (109891)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Viruses (109889)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Office of Student Research (110631)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - - Yale Combined Program in the Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>[DEPTH 3] - - - Immunology (109534)
+															</li>
+										<li>[DEPTH 3] - - - Microbiology (109535)
+															</li>
+										<li>[DEPTH 3] - - - Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Molecular Virology (110446)
+															</li>
+										<li>[DEPTH 2] - - Structural Biology (110083)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - - Molecular Biophysics and Biochemistry (109083)
+															</li>
+										<li>[DEPTH 4] - - - - Structural Biology (109384)
+															</li>
+										<li>[DEPTH 4] - - - - Mechanisms of Viral Pathogenesis (109445)
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Molecular Virology (109357)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - Office of Cooperative Research (114820)
+															</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - MSDEPT Basic Science Departments (113629)
+															</li>
+										<li>[DEPTH 3] - - - MB and B (109083)
+															</li>
+										<li>[DEPTH 4] - - - - Primary Faculty (113857)
+															</li>
+										<li>[DEPTH 4] - - - - MMBB F A S Admin (112288)
+															</li>
+										<li>[DEPTH 4] - - - - Structural Biology (109384)
+															</li>
+										<li>[DEPTH 4] - - - - Mechanisms of Viral Pathogenesis (109445)
+															</li>
+										<li>[DEPTH 2] - - Biological and Biomedical Sciences (BBS) (109532)
+															</li>
+										<li>[DEPTH 3] - - - Biochemistry, Biophysics and Structural Biology (110429)
+															</li>
+										<li>[DEPTH 4] - - - - crystallography, NMR, mass spectrometry, cryo-electron...faculty (110464)
+															</li>
+										<li>[DEPTH 4] - - - - Protein Folding, Dynamics and Degradation (110460)
+															</li>
+										<li>[DEPTH 4] - - - - Virology, Infection and Immunity (110463)
+															</li>
+										<li>[DEPTH 3] - - - Microbiology (109535)
+															</li>
+										<li>[DEPTH 4] - - - - Immunology & Host Response (109891)
+															</li>
+										<li>[DEPTH 4] - - - - Viruses (109889)
+															</li>
+										<li>[DEPTH 3] - - - Immunology (109534)
+															</li>
+										<li>[DEPTH 4] - - - - Structural Analysis of Immune System Receptors and Effectors (109887)
+															</li>
+										<li>[DEPTH 4] - - - - Mounting an Immune Response (109882)
+															</li>
+										<li>[DEPTH 4] - - - - Infectious Disease and Host-Pathogen Interaction (109886)
+															</li>
+										<li>[DEPTH 2] - - Structural Biology (110083)
+															</li>
+										<li>[DEPTH 2] - - Office of Student Research (110631)
+															</li>
+										<li>[DEPTH 2] - - Cancer Center, Yale (109631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Molecular Virology (110446)
+															</li>
+										<li>[DEPTH 3] - - - Research Members (110577)
+															</li>
+										<li>[DEPTH 2] - - Clinical Departments (113631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Cancer Center (109081)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Molecular Virology (109357)
+															</li>
+										<li>[DEPTH 5] - - - - - Virology laboratories (109952)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0233011</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="13132301">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13132301">Profile data of UPI 13132301</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58862/GeneralInfo">User data of ID is 58862</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] MYSM School Of Medicine (113592)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 1] - MYSM School Of Medicine (113592)
+															</li>
+										<li>[DEPTH 2] - - MCDEPT Clinical Departments (113631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Psychiatry (109077)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - MPSY Ribicoff CNRU (112590)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0000373</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="10146455">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10146455">Profile data of UPI 10146455</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/60255/GeneralInfo">User data of ID is 60255</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0000078</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="13157019">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13157019">Profile data of UPI 13157019</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58828/GeneralInfo">User data of ID is 58828</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0000078</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="10646102">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10646102">Profile data of UPI 10646102</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/59712/GeneralInfo">User data of ID is 59712</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] Yale University ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] History ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] FAS ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] FASHST History ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] Division of Humanities ()
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] International Research and Programs (110721)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] - MacMillan Center (110399)
+															</li>
+										<li>[DEPTH 2] - - European Studies (110578)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+															</li>
+										<li>[DEPTH 1] - MacMillan Center (110399)
+															</li>
+										<li>[DEPTH 2] - - European Studies (110578)
+															</li>
+										<li>[DEPTH 1] - FAS (113589)
+															</li>
+										<li>[DEPTH 2] - - Division of Humanities (113626)
+															</li>
+										<li>[DEPTH 3] - - - History (108726)
+															</li>
+										<li>[DEPTH 4] - - - - FASHST History (111711)
+															</li>
+										<li>[DEPTH 1] - School of Law (113596)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 2] - - Academic Affairs (108748)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - International Research and Programs (110721)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0008326</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Id+Name Combinations</b><br/>
+		<a id="12192949">UserGeneralInfo_Organizations_IdAndName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main" style="width: 20%;">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12192949">Profile data of UPI 12192949</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/70381/GeneralInfo">User data of ID is 70381</a>
+	</td>
+	<td class="td_main" style="width: 60%;">
+		The list of ids and names compared are not equal
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA </td>
+			<td class="th_main">NEW SERVICE DATA </td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+												<li>[DEPTH NOT ASSIGNED] YMG Credentialed (110193)
+							<span class="missing">[MISSING IN NEW SERVICE]</span>													</li>
+													<li>[DEPTH NOT ASSIGNED] Yale Medical Group (109563)
+																				</li>
+													<li>[DEPTH NOT ASSIGNED] YMG Website (109564)
+																				</li>
+											<br/><br/>
+										<li>[DEPTH 0]  ()
+															</li>
+										<li>[DEPTH 1] -  ()
+															</li>
+										<li>[DEPTH 2] - -  ()
+															</li>
+										<li>[DEPTH 3] - - -  ()
+															</li>
+										<li>[DEPTH 4] - - - - Pediatric Surgery ()
+															</li>
+										<li>[DEPTH 3] - - - Surgery (109076)
+															</li>
+										<li>[DEPTH 4] - - - - Pediatric Surgery (109556)
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>[DEPTH 0] Yale University (110762)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 1] - Yale School of Medicine (113592)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 2] - - Yale Medical Group (109563)
+															</li>
+										<li>[DEPTH 3] - - - YMG Website (109564)
+															</li>
+										<li>[DEPTH 2] - - Clinical Departments (113631)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 3] - - - Surgery (109076)
+															</li>
+										<li>[DEPTH 4] - - - - Pediatric Surgery (109556)
+															</li>
+										<li>[DEPTH 3] - - - Pediatrics (108852)
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>[DEPTH 4] - - - - Pediatric Surgery (110330)
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main" style="width: 30%;">
+	<p>Duration : 00mn:00s:0001338</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+				<li>Some mismatches are due to MISSING IDs.</li><br/>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>

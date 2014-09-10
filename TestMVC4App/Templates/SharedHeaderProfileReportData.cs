@@ -5,6 +5,6 @@ namespace TestMVC4App.Templates
 {
     public class SharedHeaderProfileReportData
     {
-        public SortedSet<TestUnitNames> AllTestNames { get; set; }
+        public SortedSet<EnumTestUnitNames> AllTestNames { get; set; }
     }
 }

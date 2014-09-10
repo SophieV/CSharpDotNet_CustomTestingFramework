@@ -53,7 +53,6 @@ namespace TestMVC4App.Models
             } 
             else 
             {
-                this.resultReport.IdentifedDataBehaviors.Add(IdentifiedDataBehavior.VALUES_NOT_POPULATED);
                 this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
             }
         }
