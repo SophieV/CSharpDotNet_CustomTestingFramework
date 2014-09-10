@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Xml.Linq;
 using YSM.PMS.Web.Service.Clients;
 using System.Diagnostics;
+using System.Xml.XPath;
 
 namespace TestMVC4App.Models
 {
@@ -84,12 +85,14 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.StartWritingDetailedReports();
 
-#if DEBUG
             upiList = new HashSet<int>() { 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949 };
-#endif
+
+            bool keepGoing = true;
             //loop on the list of all UPIs retrieved from the old database
             foreach (int upi in upiList)
-                //Parallel.ForEach(upiList, upi =>
+            //Parallel.ForEach(upiList, upi =>
+            {
+                if (keepGoing)
                 {
                     oldServiceXMLOutput = string.Empty;
 
@@ -97,10 +100,10 @@ namespace TestMVC4App.Models
 
                     LogManager.Instance.StatsCountTotalUpis++;
 
-                    //if (LogManager.Instance.StatsCountProfilesProcessed > 100)
-                    //{
-                    //    break;
-                    //}
+                    if (LogManager.Instance.StatsCountTotalUpis > 100)
+                    {
+                        keepGoing = false;
+                    }
 
                     profileWatch = new Stopwatch();
                     profileWatch.Start();
@@ -139,7 +142,8 @@ namespace TestMVC4App.Models
                                 }
                             }
                         }
-                    } catch (Exception e)
+                    }
+                    catch (Exception e)
                     {
                         System.Diagnostics.Debug.WriteLine(e.StackTrace);
                     }
@@ -154,32 +158,32 @@ namespace TestMVC4App.Models
                         try
                         {
                             oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
-                        //} 
-                        //catch (Exception e)
-                        //{
-                        //    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                        //}
+                            //} 
+                            //catch (Exception e)
+                            //{
+                            //    System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                            //}
 
-                        //try
-                        //{
+                            //try
+                            //{
                             var usersClient = new UsersClient();
 
                             // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
                             TestUnitUserBasicInfo userBasicInfoTest = new TestUnitUserBasicInfo(this);
                             allTheTests.Add(userBasicInfoTest);
-                            userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument, usersClient, upi);
+                            userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi);
                             userBasicInfoTest.RunAllTests();
 
                             int userId = userBasicInfoTest.MappedUserId;
 
                             TestUnitUserGeneralInfo userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
                             allTheTests.Add(userGeneralInfoTest);
-                            userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument, upi, usersClient, userId);
+                            userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), upi, usersClient, userId);
                             userGeneralInfoTest.RunAllTests();
 
                             TestUnitUserContactLocationInfo userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
                             allTheTests.Add(userContactLocationInfoTest);
-                            userContactLocationInfoTest.ProvideUserData(oldServiceXMLOutputDocument, usersClient, upi, userId);
+                            userContactLocationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
                             userContactLocationInfoTest.RunAllTests();
 
                             foreach (var test in allTheTests)
@@ -216,16 +220,16 @@ namespace TestMVC4App.Models
                     profileWatch.Stop();
 
                     LogManager.Instance.LogProfileResult(upi, allTheResults, profileWatch.Elapsed);
-
                 }
-            //);
+            }
+                //);
 
-            LogManager.Instance.StopWritingDetailedReports();
+                LogManager.Instance.StopWritingDetailedReports();
 
-            watch.Stop();
-            LogManager.Instance.WriteSummaryReport(watch.Elapsed, errorType, errorMessage);
+                watch.Stop();
+                LogManager.Instance.WriteSummaryReport(watch.Elapsed, errorType, errorMessage);
 
-            LogManager.Instance.CleanUpResources();
+                LogManager.Instance.CleanUpResources();
         }
 
         public void Dispose()

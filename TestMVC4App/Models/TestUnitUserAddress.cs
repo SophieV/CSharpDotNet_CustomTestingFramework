@@ -71,9 +71,9 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "addressLine1");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, "addressLine1");
 
-            var oldValue2 = ParsingHelper.ParseSingleOldValue(oldServiceMailingInfo, "mailingAddress2");
+            var oldValue2 = ParsingHelper.ParseSingleValue(oldServiceMailingInfo, "mailingAddress2");
 
             if (!string.IsNullOrEmpty(oldValue2))
             {
@@ -101,7 +101,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            var oldValue2 = ParsingHelper.ParseSingleOldValue(oldServiceMailingInfo, "mailingAddress2");
+            var oldValue2 = ParsingHelper.ParseSingleValue(oldServiceMailingInfo, "mailingAddress2");
             var oldValues = new HashSet<string>();
             oldValues.Add(oldValue2);
 
@@ -126,7 +126,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "zipCode");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, "zipCode");
 
             var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);

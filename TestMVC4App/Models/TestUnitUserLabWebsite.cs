@@ -64,7 +64,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "titleName");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, "titleName");
 
             var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
@@ -87,7 +87,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceNodes, "link");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, "link");
 
             var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);

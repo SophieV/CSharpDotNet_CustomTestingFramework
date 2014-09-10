@@ -14,7 +14,7 @@ namespace TestMVC4App.Models
     public class TestUnitUserContactLocationInfo : TestUnit
     {
         private UsersClient newServiceAccessor;
-        private XDocument oldServiceData;
+        private IEnumerable<XElement> oldServiceData;
         private int upi;
         private int userId;
 
@@ -44,7 +44,7 @@ namespace TestMVC4App.Models
             ComputeOverallSeverity();
         }
 
-        public void ProvideUserData(XDocument oldData, UsersClient newDataAccessor, int upi, int userId)
+        public void ProvideData(IEnumerable<XElement> oldData, UsersClient newDataAccessor, int upi, int userId)
         {
             this.newServiceAccessor = newDataAccessor;
             this.oldServiceData = oldData;
@@ -61,9 +61,9 @@ namespace TestMVC4App.Models
         /// <param name="newServiceData"></param>
         /// <param name="oldServiceData"></param>
         /// <remarks>Special syntax.</remarks>
-        private void UserContactLocationInfo_Assistants_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)
+        private void UserContactLocationInfo_Assistants_Test(UserContactLocationInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/assistant", "fname");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "assistant", "fname");
 
             HashSet<string> newValues = new HashSet<string>();
             if(newServiceData.Assistants.Count() > 0)
@@ -86,21 +86,12 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Assistants, "Comparing Assistant Name(s)",userId,upi, pairs,true);
         }
 
-        private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)
+        private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            IEnumerable<XElement> labWebsites;
+            var labWebsites = ParsingHelper.ParseListNode(oldServiceData, "labWebsite");
 
             var labWesitesTest = new TestUnitUserLabWebsite(this.Container, this);
             this.Children.Add(labWesitesTest);
-
-            try
-            {
-                labWebsites = oldServiceData.XPathSelectElements("/Faculty/facultyMember/labWebsite");
-            }
-            catch (Exception)
-            {
-                labWebsites = new List<XElement>();
-            }
 
             labWesitesTest.ProvideData(userId,
                                         upi,
@@ -109,31 +100,13 @@ namespace TestMVC4App.Models
             labWesitesTest.RunAllTests();
         }
 
-        private void UserContactLocationInfo_Addresses_Test(UserContactLocationInfo newServiceData, XDocument oldServiceData)
+        private void UserContactLocationInfo_Addresses_Test(UserContactLocationInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            IEnumerable<XElement> addresses;
-            IEnumerable<XElement> mailingInfo;
+            var addresses = ParsingHelper.ParseListNode(oldServiceData,"location");
+            var mailingInfo = ParsingHelper.ParseListNode(oldServiceData, "mailing", true);
 
             var addressesTest = new TestUnitUserAddress(this.Container, this);
             this.Children.Add(addressesTest);
-
-            try
-            {
-                addresses = oldServiceData.XPathSelectElements("/Faculty/facultyMember/location");
-            }
-            catch (Exception)
-            {
-                addresses = new List<XElement>();
-            }
-
-            try
-            {
-                mailingInfo = oldServiceData.XPathSelectElements("/Faculty/facultyMember/*[starts-with(name(),'mailing')]");
-            }
-            catch (Exception)
-            {
-                mailingInfo = new List<XElement>();
-            }
 
             addressesTest.ProvideOrganizationData(userId,
                                                      upi,

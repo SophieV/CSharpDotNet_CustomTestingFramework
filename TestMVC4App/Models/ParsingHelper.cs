@@ -41,33 +41,49 @@ namespace TestMVC4App.Models
             return oldValue;
         }
 
-        public static string ParseSingleOldValue(IEnumerable<XElement> oldServiceData, string oldValueXMLPath)
+        public static string ParseSingleValue(IEnumerable<XElement> elements, string nodeName)
         {
-            string oldValue = string.Empty;
+            string value = string.Empty;
 
             try
             {
-                oldValue = oldServiceData.Where(x => x.Name == oldValueXMLPath).Select(x => x.Value).First();
+                value = elements.Where(x => x.Name == nodeName).Select(x => x.Value).First();
             }
             catch (Exception)
             {
                 // there is no existing attribute to parse
             }
 
-            return oldValue;
+            return value;
         }
 
-        public static HashSet<string> ParseListSimpleOldValues(XDocument oldServiceData, string listNodePath, string listEntryNodeName)
+        public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName, string nodeAttributeName)
         {
-            var oldValues = new HashSet<string>();
+            var values = new HashSet<string>();
 
             try
             {
-                var elements = oldServiceData.XPathSelectElements(listNodePath);
+                var tempElements = elements.Where(x=>x.Name == nodeName).Select(x=>x.Attribute(nodeAttributeName).Value);
+            }
+            catch (Exception)
+            {
+                // there is no existing attribute to parse
+            }
 
-                foreach (XElement element in elements)
+            return values;
+        }
+
+        public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName)
+        {
+            var values = new HashSet<string>();
+
+            try
+            {
+                values = new HashSet<string>(elements.Where(x => x.Name == nodeName).Select(x=>x.Value));
+
+                if (values.Count() == 0)
                 {
-                    oldValues.Add(element.Element(listEntryNodeName).Value);
+                    values = new HashSet<string>(elements.Descendants().ToList().Where(x => x.Name == nodeName).Select(x => x.Value));
                 }
             }
             catch (Exception)
@@ -75,26 +91,30 @@ namespace TestMVC4App.Models
                 // there is no existing attribute to parse
             }
 
-            return oldValues;
+            return values;
         }
 
-        public static HashSet<string> ParseListSimpleOldValues(IEnumerable<XElement> elements, string nodeName)
+        public static IEnumerable<XElement> ParseListNode(IEnumerable<XElement> elements ,string nodeName, bool isBeginningPattern = false)
         {
-            var oldValues = new HashSet<string>();
+            var values = new List<XElement>();
 
             try
             {
-                foreach (XElement element in elements)
+                if (isBeginningPattern)
                 {
-                    oldValues.Add(element.Element(nodeName).Value);
+                    values = elements.Where(x => x.Name.ToString().StartsWith(nodeName)).ToList();
+                }
+                else
+                {
+                    values = elements.Where(x => x.Name == nodeName).ToList();
                 }
             }
             catch (Exception)
             {
-                // there is no existing attribute to parse
+                values = new List<XElement>();
             }
 
-            return oldValues;
+            return values;
         }
     }
 }

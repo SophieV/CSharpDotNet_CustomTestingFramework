@@ -12,7 +12,7 @@ namespace TestMVC4App.Models
     public class TestUnitUserGeneralInfo : TestUnit
     {
         private UsersClient newServiceAccessor;
-        private XDocument oldServiceData;
+        private IEnumerable<XElement> oldServiceData;
         private int userId;
         private int upi;
 
@@ -35,7 +35,7 @@ namespace TestMVC4App.Models
         {
             var newServiceInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.userId, this.upi, oldServiceData, "/Faculty/facultyMember/biography", newServiceInfo.Bio);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.userId, this.upi, oldServiceData, "biography", newServiceInfo.Bio);
             UserGeneralInfo_Titles_Test(newServiceInfo, oldServiceData);
             UserGeneralInfo_LanguageUsers_Test(newServiceInfo, oldServiceData);
             UserGeneralInfo_AltLastName_Test(newServiceInfo, oldServiceData);
@@ -50,7 +50,7 @@ namespace TestMVC4App.Models
             ComputeOverallSeverity();
         }
 
-        public void ProvideData(XDocument oldData, int upi, UsersClient newDataAccessor, int userId)
+        public void ProvideData(IEnumerable<XElement> oldData, int upi, UsersClient newDataAccessor, int userId)
         {
             this.newServiceAccessor = newDataAccessor;
             this.oldServiceData = oldData;
@@ -60,13 +60,13 @@ namespace TestMVC4App.Models
 
         #region Field Comparison Tests
 
-        private void UserGeneralInfo_AltLastName_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_AltLastName_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
+            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "lastname");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.LastName, resultReport);
             compareStrategy.Investigate();
 
@@ -74,7 +74,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/lastname");
+                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "lastname");
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltLastName, resultReport);
                 compareStrategy.Investigate();
             }
@@ -91,13 +91,13 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltFirstName_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_AltFirstName_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
+            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "firstname");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.FirstName, resultReport);
             compareStrategy.Investigate();
 
@@ -105,7 +105,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/firstname");
+                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "firstname");
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltFirstName, resultReport);
                 compareStrategy.Investigate();
             }
@@ -122,13 +122,13 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltMiddleNameDisplayed_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_AltMiddleNameDisplayed_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
 
-            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/MiddleName");
+            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "MiddleName");
             var compareStrategy = new CompareStrategyContextSwitcher(string.IsNullOrEmpty(oldValue).ToString(), newServiceData.IsAltMiddleNameDisplayed.ToString(), resultReport);
             compareStrategy.Investigate();
 
@@ -144,13 +144,13 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltSuffix_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_AltSuffix_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltSuffix, "Comparing AltSuffix (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
+            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "Suffix");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Suffix, resultReport);
             compareStrategy.Investigate();
 
@@ -158,7 +158,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/Suffix");
+                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "Suffix");
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltSuffix, resultReport);
                 compareStrategy.Investigate();
             }
@@ -175,13 +175,13 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltMiddleName_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_AltMiddleName_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
+            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "middle");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
@@ -189,7 +189,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/middle");
+                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "middle");
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltMiddleName, resultReport);
                 compareStrategy.Investigate();
             }
@@ -206,9 +206,9 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/title", "titleName");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "title", "titleName");
 
             HashSet<string> newValues = new HashSet<string>();
             if(newServiceData.Titles.Count() > 0)
@@ -225,9 +225,9 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Titles, "Comparing Title(s)", this.userId, this.upi, oldValues, newValues);
         }
 
-        private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/cv", "fileName");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "cv", "fileName");
             string oldValue = oldValues.Count().ToString();
 
             string newValue = newServiceData.CVs.Count().ToString();
@@ -235,10 +235,10 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", this.userId, this.upi, oldValue, newValue);
         }
 
-        private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            string oldValuePart1 = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/degree");
-            string oldValuePart2 = ParsingHelper.ParseSingleOldValue(oldServiceData, "/Faculty/facultyMember/professionalSuffix");
+            string oldValuePart1 = ParsingHelper.ParseSingleValue(oldServiceData, "degree");
+            string oldValuePart2 = ParsingHelper.ParseSingleValue(oldServiceData, "professionalSuffix");
 
             string entry;
             HashSet<string> oldValues = new HashSet<string>();
@@ -273,9 +273,9 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Suffixes, "Comparing SuffixNames", this.userId, this.upi, oldValues, newValues);
         }
 
-        private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            var oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/language", "languageName");
+            var oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "language", "languageName");
 
             var newValues = new HashSet<string>();
             if (newServiceData.LanguageUsers.Count() > 0)
@@ -289,31 +289,13 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", this.userId, this.upi, oldValues, newValues);
         }
 
-        private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, XDocument oldServiceData)
+        private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            IEnumerable<XElement> departments;
-            IEnumerable<XElement> departmentTree;
+            var departments = ParsingHelper.ParseListNode(oldServiceData,"department");
+            var departmentTree = ParsingHelper.ParseListNode(oldServiceData, "treeDepartments");
 
             var organizationTest = new TestUnitUserOrganization(this.Container, this);
             this.Children.Add(organizationTest);
-
-            try
-            {
-                departments = oldServiceData.XPathSelectElements("/Faculty/facultyMember/department");
-            }
-            catch (Exception)
-            {
-                departments = new List<XElement>();
-            }
-
-            try
-            {
-                departmentTree = oldServiceData.XPathSelectElements("/Faculty/facultyMember/treeDepartments");
-            }
-            catch (Exception)
-            {
-                departmentTree = new List<XElement>();
-            }
 
             organizationTest.ProvideData(userId, 
                                                      upi, 

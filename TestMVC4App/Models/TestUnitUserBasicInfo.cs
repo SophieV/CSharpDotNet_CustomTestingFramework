@@ -16,7 +16,7 @@ namespace TestMVC4App.Models
     public class TestUnitUserBasicInfo : TestUnit
     {
         private UsersClient newServiceAccessor;
-        private XDocument oldServiceData;
+        private IEnumerable<XElement> oldServiceData;
         private int upi;
 
         public override string newServiceURLExtensionBeginning
@@ -60,24 +60,24 @@ namespace TestMVC4App.Models
             }
 
             MappedUserId = newServiceInfo.UserId;
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UPI, "Comparing UPI", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/UPI", newServiceInfo.Upi.ToString());
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LastName, "Comparing LastName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/lastname", newServiceInfo.LastName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/emailAddress", newServiceInfo.YaleEmail);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/middle", newServiceInfo.MiddleName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/firstname", newServiceInfo.FirstName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Gender, "Comparing Gender", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/gender", newServiceInfo.Gender);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_NetId, "Comparing NetId", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/netID", newServiceInfo.NetId);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/pageName", newServiceInfo.PageName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Suffix, "Comparing Suffix", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Suffix", newServiceInfo.Suffix);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Idx, "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Idx", newServiceInfo.Idx);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LicenseNumber, "Comparing License Number", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/LicenseNumber", newServiceInfo.LicenseNumber);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.MappedUserId, this.upi, oldServiceData, "/Faculty/facultyMember/Npi", newServiceInfo.Npi);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UPI, "Comparing UPI", this.MappedUserId, this.upi, oldServiceData, "UPI", newServiceInfo.Upi.ToString());
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LastName, "Comparing LastName", this.MappedUserId, this.upi, oldServiceData, "lastname", newServiceInfo.LastName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.MappedUserId, this.upi, oldServiceData, "emailAddress", newServiceInfo.YaleEmail);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.MappedUserId, this.upi, oldServiceData, "middle", newServiceInfo.MiddleName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.MappedUserId, this.upi, oldServiceData, "firstname", newServiceInfo.FirstName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Gender, "Comparing Gender", this.MappedUserId, this.upi, oldServiceData, "gender", newServiceInfo.Gender);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_NetId, "Comparing NetId", this.MappedUserId, this.upi, oldServiceData, "netID", newServiceInfo.NetId);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.MappedUserId, this.upi, oldServiceData, "pageName", newServiceInfo.PageName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Suffix, "Comparing Suffix", this.MappedUserId, this.upi, oldServiceData, "Suffix", newServiceInfo.Suffix);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Idx, "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "Idx", newServiceInfo.Idx);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LicenseNumber, "Comparing License Number", this.MappedUserId, this.upi, oldServiceData, "LicenseNumber", newServiceInfo.LicenseNumber);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.MappedUserId, this.upi, oldServiceData, "Npi", newServiceInfo.Npi);
             UserBasicInfo_UserEditors_Test(newServiceInfo, oldServiceData);
 
             ComputeOverallSeverity();
         }
 
-        public void ProvideData(XDocument oldData, UsersClient newDataAccessor, int upi)
+        public void ProvideData(IEnumerable<XElement> oldData, UsersClient newDataAccessor, int upi)
         {
             this.newServiceAccessor = newDataAccessor;
             this.oldServiceData = oldData;
@@ -87,9 +87,9 @@ namespace TestMVC4App.Models
         #region Field Comparison Tests
 
         // TODO: test ! The node name is not reliable ! I need an example with data
-        public void UserBasicInfo_UserEditors_Test(UserBasicInfo newServiceData, XDocument oldServiceData)
+        public void UserBasicInfo_UserEditors_Test(UserBasicInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            var oldValues = ParsingHelper.ParseListSimpleOldValues(oldServiceData, "/Faculty/facultyMember/UserEditors", "emailAddress");
+            var oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "UserEditors", "emailAddress");
 
             var newValues = new HashSet<string>();
             if (newServiceData.UserEditors != null)

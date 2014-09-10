@@ -172,9 +172,9 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, XDocument oldServiceData, string oldSingleStringPath, string newValue)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, IEnumerable<XElement> oldServiceData, string oldSingleStringPath, string newValue)
         {
-            string oldValue = ParsingHelper.ParseSingleOldValue(oldServiceData, oldSingleStringPath);
+            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, oldSingleStringPath);
 
             this.CompareAndLog_Test(testFullName, testDescription, userId, upi, oldValue, newValue);
         }
