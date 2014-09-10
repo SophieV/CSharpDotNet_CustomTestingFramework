@@ -37,7 +37,7 @@ namespace TestMVC4App.Models
 
         private static Dictionary<int, bool> NoWarningNorErrorHappenedFlag_ByUpi;
 
-        private static Dictionary<string, string> sampleDataByTestName = new Dictionary<string,string>();
+        private static Dictionary<TestUnitNames, string> sampleDataByTestName = new Dictionary<TestUnitNames,string>();
 
         public static Dictionary<IdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
 

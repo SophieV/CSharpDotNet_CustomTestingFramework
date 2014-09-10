@@ -18,17 +18,17 @@ namespace TestMVC4App.Templates
 
         public Dictionary<IdentifiedDataBehavior, int> CountByIdentifiedDataBehavior { get; set; }
 
-        public Dictionary<string, TimeSpan> AverageDuration_ByTestName { get; set; }
+        public Dictionary<TestUnitNames, TimeSpan> AverageDuration_ByTestName { get; set; }
 
-        public Dictionary<string, Dictionary<ResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
+        public Dictionary<TestUnitNames, Dictionary<ResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
 
-        public Dictionary<string, Dictionary<IdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
+        public Dictionary<TestUnitNames, Dictionary<IdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
 
-        public Dictionary<string, double> FrequencySuccess_ByTestName { get; set; }
+        public Dictionary<TestUnitNames, double> FrequencySuccess_ByTestName { get; set; }
 
-        public List<string> TestNames { get; set; }
+        public List<TestUnitNames> TestNames { get; set; }
 
-        public Dictionary<string, string> SampleData_ByTestName { get; set; }
+        public Dictionary<TestUnitNames, string> SampleData_ByTestName { get; set; }
 
         public TimeSpan Duration { get; set; }
 

@@ -269,7 +269,7 @@ namespace TestMVC4App.Templates
 	");
             
             #line 112 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
- foreach (string testName in SummaryReportDataObject.TestNames) { 
+ foreach (var testName in SummaryReportDataObject.TestNames) { 
             
             #line default
             #line hidden
@@ -359,7 +359,7 @@ namespace TestMVC4App.Templates
             this.Write("\t</table>\r\n\t<br/>\r\n\t");
             
             #line 136 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\SummaryReport.tt"
- foreach (string testName in SummaryReportDataObject.TestNames) { 
+ foreach (var testName in SummaryReportDataObject.TestNames) { 
             
             #line default
             #line hidden

@@ -449,7 +449,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_IdAndNameTogether_Test", "Comparing Organization Id+Name Combinations");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_IdAndNameTogether_Test, "Comparing Organization Id+Name Combinations");
             var compareStrategy = new CompareStrategyContextSwitcher(
                 oldServiceOrganizationDescriptors,
                 oldTreeRoot,
@@ -472,17 +472,17 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organization_Id_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            this.CompareAndLog_Test("UserGeneralInfo_Organization_Id_Test", "Comparing Organization Ids", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Organization_Id_Test, "Comparing Organization Ids", userId, upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Name_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            this.CompareAndLog_Test("UserGeneralInfo_Organization_Name_Test", "Comparing Organization Names", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Organization_Name_Test, "Comparing Organization Names", userId, upi, oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
         {
-            this.CompareAndLog_Test("UserGeneralInfo_Organization_Type_Test", "Comparing Organization Types", userId, upi, (newValues.ToList().Where(z=>z!=null).Count()>0?new HashSet<string>() { "Academic Department" }:new HashSet<string>()), newValues);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_Organization_Type_Test, "Comparing Organization Types", userId, upi, (newValues.ToList().Where(z => z != null).Count() > 0 ? new HashSet<string>() { "Academic Department" } : new HashSet<string>()), newValues);
         }
 
         private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
@@ -496,7 +496,7 @@ namespace TestMVC4App.Models
 
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test", "Comparing Organization Tree Depth Coherence");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test, "Comparing Organization Tree Depth Coherence");
 
             while (keepGoing)
             {
@@ -558,7 +558,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_CheckIsPrimary_Test", "Comparing Organization IsImported/Primary");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_CheckIsPrimary_Test, "Comparing Organization IsImported/Primary");
 
             var oldEntriesIsPrimary = new HashSet<string>();
             var newEntriesIsPrimary = new HashSet<string>();
@@ -601,7 +601,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport("UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test", "Trying to merge Organization Trees together");
+            var resultReport = new ResultReport(TestUnitNames.UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test, "Trying to merge Organization Trees together");
 
             if (newTreeRoot != null && oldTreeRoot != null)
             {
@@ -797,7 +797,7 @@ namespace TestMVC4App.Models
                 }
             }
             
-            this.CompareAndLog_Test("UserGeneralInfo_OrganizationMission_Name_Test", "Comparing Organization Missions", userId, upi, missionsPerOrg);
+            this.CompareAndLog_Test(TestUnitNames.UserGeneralInfo_OrganizationMission_Name_Test, "Comparing Organization Missions", userId, upi, missionsPerOrg);
         }
     }
 

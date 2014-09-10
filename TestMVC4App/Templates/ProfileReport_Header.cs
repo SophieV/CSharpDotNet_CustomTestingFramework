@@ -53,7 +53,7 @@ namespace TestMVC4App.Templates
 ");
             
             #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport_Header.tt"
- foreach(string testName in ProfileHeaderReportDataObject.AllTestNames) { 
+ foreach(var testName in ProfileHeaderReportDataObject.AllTestNames) { 
             
             #line default
             #line hidden

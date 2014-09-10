@@ -109,7 +109,7 @@
 	<th class="th_main">Average Duration</th>
 	<th class="th_main">More Info</th>
 	</tr>
-	<# foreach (string testName in SummaryReportDataObject.TestNames) { #>
+	<# foreach (var testName in SummaryReportDataObject.TestNames) { #>
 	<tr>
 		<td class="td_main"><#= testName #></td>
 		<td class="td_main">
@@ -133,7 +133,7 @@
 	<# } #>
 	</table>
 	<br/>
-	<# foreach (string testName in SummaryReportDataObject.TestNames) { #>
+	<# foreach (var testName in SummaryReportDataObject.TestNames) { #>
 	<hr/>
 	<p><a href="#top">Back to top</a></p>
 	<h2><a id="<#= testName #>"><#= testName #></a></h2>
