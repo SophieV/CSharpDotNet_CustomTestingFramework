@@ -70,7 +70,7 @@ namespace TestMVC4App.Models
                 }
 
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -82,12 +82,12 @@ namespace TestMVC4App.Models
 
             if (this.oldList.Count() <= 0 && this.newList.Count <= 0)
             {
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
             else
             {
-                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
             }
 
             return shouldContinueTesting;
@@ -105,7 +105,7 @@ namespace TestMVC4App.Models
 
             if (this.leftOversOldCount == 0 && leftOversNewCount == 0)
             {
-                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
             }
             else
@@ -121,7 +121,7 @@ namespace TestMVC4App.Models
                 }
 
 
-                this.resultReport.UpdateResult(ResultSeverityType.ERROR);
+                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR);
                 this.resultReport.ErrorMessage = "The list of ids and names compared are not equal";
             }
 
@@ -160,12 +160,12 @@ namespace TestMVC4App.Models
                     }
                 }
 
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS);
 
                 if (leftOvers.Count() == 0)
                 {
-                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }
@@ -204,12 +204,12 @@ namespace TestMVC4App.Models
                     }
                 }
 
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
 
                 if (leftOvers.Count() == 0)
                 {
-                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
                     shouldContinueTesting = false;
                 }
@@ -224,7 +224,7 @@ namespace TestMVC4App.Models
 
             if (this.leftOversOldCount > -1 && this.leftOversOldCount < 1)
             {
-                this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
             }
 

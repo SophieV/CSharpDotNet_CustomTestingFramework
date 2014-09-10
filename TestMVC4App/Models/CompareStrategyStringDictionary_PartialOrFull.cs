@@ -43,17 +43,17 @@ namespace TestMVC4App.Models
 
                 if (wasFound)
                 {
-                    resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                    resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
                 } 
                 else 
                 {
-                    resultReport.UpdateResult(ResultSeverityType.ERROR);
-                    resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml("The values do not match");
+                    resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                    resultReport.ErrorMessage = "The values do not match";
                 }
             } 
             else 
             {
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
             }
         }
     }

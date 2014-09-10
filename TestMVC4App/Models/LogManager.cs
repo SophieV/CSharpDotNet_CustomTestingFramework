@@ -12,7 +12,7 @@ namespace TestMVC4App.Models
 {
     public sealed class LogManager : IDisposable
     {
-        private readonly bool isDebugMode = true;
+        private readonly bool isDebugMode = false;
 
         private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_User_PerProfile.html";
         private const string SUMMARY_FILENAME = "QA_Reporting_Summary_User_MAIN.html";
@@ -29,7 +29,7 @@ namespace TestMVC4App.Models
         private HtmlTextWriter htmlWriterForSummaryReport;
         private HtmlTextWriter htmlWriterForProfileReport;
 
-        private static Dictionary<EnumTestUnitNames, Dictionary<ResultSeverityType, int>> countSeverityResults_ByTestName;
+        private static Dictionary<EnumTestUnitNames, Dictionary<EnumResultSeverityType, int>> countSeverityResults_ByTestName;
         private static Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>> countDataBehaviors_ByTestName;
 
         private static Dictionary<EnumTestUnitNames, HashSet<TimeSpan>> duration_ByTestName;
@@ -77,7 +77,7 @@ namespace TestMVC4App.Models
             }
 
             NoWarningNorErrorHappenedFlag_ByUpi = new Dictionary<int, bool>();
-            countSeverityResults_ByTestName = new Dictionary<EnumTestUnitNames, Dictionary<ResultSeverityType, int>>();
+            countSeverityResults_ByTestName = new Dictionary<EnumTestUnitNames, Dictionary<EnumResultSeverityType, int>>();
             countDataBehaviors_ByTestName = new Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>>();
 
             duration_ByTestName = new Dictionary<EnumTestUnitNames, HashSet<TimeSpan>>();
@@ -112,7 +112,7 @@ namespace TestMVC4App.Models
                 duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
 
                 // log only if added value
-                if (isDebugMode || (resultReport.Result != ResultSeverityType.SUCCESS && resultReport.Result != ResultSeverityType.WARNING_NO_DATA))
+                if (isDebugMode || (resultReport.Result != EnumResultSeverityType.SUCCESS && resultReport.Result != EnumResultSeverityType.WARNING_NO_DATA))
                 {
 
                     var detailedReportData = new SharedDetailedReportData(resultReport)
@@ -178,17 +178,17 @@ namespace TestMVC4App.Models
                 NoWarningNorErrorHappenedFlag_ByUpi.Add(upi, false);
             }
 
-            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
             {
                 NoWarningNorErrorHappenedFlag_ByUpi[upi] = true;
             }
 
             if (!countSeverityResults_ByTestName.ContainsKey(resultReport.TestName))
             {
-                countSeverityResults_ByTestName.Add(resultReport.TestName, new Dictionary<ResultSeverityType, int>());
+                countSeverityResults_ByTestName.Add(resultReport.TestName, new Dictionary<EnumResultSeverityType, int>());
 
                 // initialize all the possible combinations for the given test name
-                foreach (var severity in (ResultSeverityType[])Enum.GetValues(typeof(ResultSeverityType)))
+                foreach (var severity in (EnumResultSeverityType[])Enum.GetValues(typeof(EnumResultSeverityType)))
                 {
                     countSeverityResults_ByTestName[resultReport.TestName].Add(severity, 0);
                 }
@@ -315,8 +315,8 @@ namespace TestMVC4App.Models
             var frequencySuccess_ByTestName = new Dictionary<EnumTestUnitNames, double>();
             double countSuccessResults = 0;
 
-            var countSeverityResults = new Dictionary<ResultSeverityType, int>();
-            foreach (var severity in (ResultSeverityType[])Enum.GetValues(typeof(ResultSeverityType)))
+            var countSeverityResults = new Dictionary<EnumResultSeverityType, int>();
+            foreach (var severity in (EnumResultSeverityType[])Enum.GetValues(typeof(EnumResultSeverityType)))
             {
                 countSeverityResults.Add(severity, 0);
             }
@@ -340,10 +340,11 @@ namespace TestMVC4App.Models
                     {
                         switch (countSeverityResultsPair.Key)
                         {
-                            case ResultSeverityType.SUCCESS:
-                            case ResultSeverityType.WARNING_NO_DATA:
-                            case ResultSeverityType.WARNING:
-                            case ResultSeverityType.FALSE_POSITIVE:
+                            case EnumResultSeverityType.SUCCESS:
+                            case EnumResultSeverityType.WARNING_NO_DATA:
+                            case EnumResultSeverityType.WARNING_ONLY_NEW:
+                            case EnumResultSeverityType.WARNING:
+                            case EnumResultSeverityType.FALSE_POSITIVE:
                                 // define overall success % for given test
                                 countSuccessResults += countSeverityResultsPair.Value;
                             break;

@@ -44,7 +44,7 @@ namespace TestMVC4App.Templates
             this.Write("</td>\r\n");
             
             #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
- foreach(KeyValuePair<EnumTestUnitNames,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { 
+ foreach(KeyValuePair<EnumTestUnitNames,EnumResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { 
             
             #line default
             #line hidden
@@ -52,7 +52,7 @@ namespace TestMVC4App.Templates
             
             #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  switch (pair.Value) {
-		case ResultSeverityType.FALSE_POSITIVE : 
+		case EnumResultSeverityType.FALSE_POSITIVE : 
             
             #line default
             #line hidden
@@ -94,146 +94,148 @@ namespace TestMVC4App.Templates
             
             #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
-		case ResultSeverityType.WARNING: 
+		case EnumResultSeverityType.WARNING:
+		case EnumResultSeverityType.WARNING_ONLY_NEW: 
             
             #line default
             #line hidden
             this.Write("\t<td class=\"td_main warning\">");
             
-            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
             this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
             #line hidden
             
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
             
             #line default
             #line hidden
             this.Write("#");
             
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("\">Test Details for UPI");
             
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("</a>\r\n\t\t");
             
-            #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
-		case ResultSeverityType.WARNING_NO_DATA: 
+		case EnumResultSeverityType.WARNING_NO_DATA: 
             
             #line default
             #line hidden
             this.Write("\t<td class=\"td_main warning_no_data\">");
             
-            #line 21 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 22 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 22 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
-		case ResultSeverityType.ERROR_WITH_EXPLANATION: 
+		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+		case EnumResultSeverityType.ERROR_ONLY_OLD: 
             
             #line default
             #line hidden
             this.Write("\t<td class=\"td_main error_with_explanation\">");
             
-            #line 24 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
             this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
-            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
             #line hidden
             
-            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
             
             #line default
             #line hidden
             this.Write("#");
             
-            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("\">Test Details for UPI");
             
-            #line 25 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("</a>\r\n\t\t");
             
-            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
-		case ResultSeverityType.ERROR: 
+		case EnumResultSeverityType.ERROR: 
             
             #line default
             #line hidden
             this.Write("\t<td class=\"td_main error\">");
             
-            #line 28 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
             this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
             
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Key));
             
             #line default
             #line hidden
             
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.FileLinkEnd));
             
             #line default
             #line hidden
             this.Write("#");
             
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("\">Test Details for UPI");
             
-            #line 29 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("</a>\r\n\t\t");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
 		default: 
             
@@ -241,14 +243,14 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t<td class=\"td_main success\">");
             
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 34 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(pair.Value));
             
             #line default
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  break;
 	} 
             
@@ -256,7 +258,7 @@ namespace TestMVC4App.Templates
             #line hidden
             this.Write("\t</td>\r\n");
             
-            #line 36 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
+            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\ProfileReport.tt"
  } 
             
             #line default

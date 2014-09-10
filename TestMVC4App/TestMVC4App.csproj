@@ -200,7 +200,7 @@
     <Compile Include="Models\TestUnitUserContactLocationInfo.cs" />
     <Compile Include="Models\TestUnitUserOrganization.cs" />
     <Compile Include="Models\ResultReport.cs" />
-    <Compile Include="Models\ResultSeverityType.cs" />
+    <Compile Include="Models\EnumResultSeverityType.cs" />
     <Compile Include="Models\CompareStrategyStringCollection.cs" />
     <Compile Include="Models\CompareStrategyString.cs" />
     <Compile Include="Models\TestSuite.cs" />

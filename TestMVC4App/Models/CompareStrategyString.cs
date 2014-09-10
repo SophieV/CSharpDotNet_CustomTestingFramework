@@ -67,6 +67,16 @@ namespace TestMVC4App.Models
 
             if (keepGoing)
             {
+                keepGoing = IsOldValueEmpty();
+            }
+
+            if (keepGoing)
+            {
+                keepGoing = IsNewValueEmpty();
+            }
+
+            if (keepGoing)
+            {
                 keepGoing = AreBothValuesEqual();
             }
 
@@ -104,12 +114,46 @@ namespace TestMVC4App.Models
 
             if(string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue))
             {
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
             else
             {
-                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool IsOldValueEmpty()
+        {
+            bool shouldContinueTesting = true;
+
+            if (string.IsNullOrEmpty(oldValue))
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_ONLY_NEW);
+                shouldContinueTesting = false;
+            }
+            else
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool IsNewValueEmpty()
+        {
+            bool shouldContinueTesting = true;
+
+            if (string.IsNullOrEmpty(newValue))
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR_ONLY_OLD);
+                shouldContinueTesting = false;
+            }
+            else
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
             }
 
             return shouldContinueTesting;
@@ -122,14 +166,14 @@ namespace TestMVC4App.Models
             try
             {
                 Assert.AreEqual(oldValue, newValue, this.resultReport.TestDescription);
-                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
 
             }
             catch (AssertFailedException e)
             {
-                this.resultReport.UpdateResult(ResultSeverityType.ERROR);
-                this.resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml(e.Message);
+                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                this.resultReport.ErrorMessage = ParsingHelper.ReplaceProblematicTagsForHtml(e.Message);
             }
 
             return shouldContinueTesting;
@@ -142,7 +186,7 @@ namespace TestMVC4App.Models
             if (oldValue.Trim() == newValue.Trim())
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
-                this.resultReport.UpdateResult(ResultSeverityType.ERROR_WITH_EXPLANATION);
+                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR_WITH_EXPLANATION);
                 shouldContinueTesting = false;
             }
 
@@ -156,7 +200,7 @@ namespace TestMVC4App.Models
             if (newValue == " ")
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -171,7 +215,7 @@ namespace TestMVC4App.Models
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.WRONG_VALUE);
                 // it is set as warning only because it provides more explicit info on the error
                 // the error has been logged already
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -185,7 +229,7 @@ namespace TestMVC4App.Models
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -198,7 +242,7 @@ namespace TestMVC4App.Models
             if (!string.IsNullOrEmpty(oldValue) && string.IsNullOrEmpty(newValue) && newValue != " ")
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;

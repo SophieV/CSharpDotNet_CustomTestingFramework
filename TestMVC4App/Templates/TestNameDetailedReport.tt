@@ -11,19 +11,21 @@
 		<a id="<#= DetailedReportDataObject.UPI #>"><#= DetailedReportDataObject.TestName #></a>
 	</td>
 	<# switch (DetailedReportDataObject.Result) {
-		case ResultSeverityType.FALSE_POSITIVE : #>
+		case EnumResultSeverityType.FALSE_POSITIVE : #>
 		<td class="td_main false_positive">
 		<# break;
-		case ResultSeverityType.WARNING: #>
+		case EnumResultSeverityType.WARNING:
+		case EnumResultSeverityType.WARNING_ONLY_NEW: #>
 		<td class="td_main warning">
 		<# break;
-		case ResultSeverityType.WARNING_NO_DATA: #>
+		case EnumResultSeverityType.WARNING_NO_DATA: #>
 		<td class="td_main warning_no_data">
 		<# break;
-		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
+		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+		case EnumResultSeverityType.ERROR_ONLY_OLD: #>
 		<td class="td_main error_with_explanation">
 		<# break;
-		case ResultSeverityType.ERROR: #>
+		case EnumResultSeverityType.ERROR: #>
 		<td class="td_main error">
 		<# break;
 		default: #>

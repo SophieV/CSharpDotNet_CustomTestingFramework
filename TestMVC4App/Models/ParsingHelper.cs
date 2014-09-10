@@ -116,5 +116,19 @@ namespace TestMVC4App.Models
 
             return values;
         }
+
+        /// <summary>
+        /// Replaces the default characters used for describing the mismatched values of the Assert so that their content
+        /// is not (mis)interpreted as HTML content.
+        /// </summary>
+        /// <param name="message">The string to clean.</param>
+        /// <returns>The cleansed string.</returns>
+        /// <remarks>This process has to take place before HTML content is generated for visualization on the report/includes exceptions to be rendered as HTML.</remarks>
+        public static String ReplaceProblematicTagsForHtml(string message)
+        {
+            message = message.Replace("<", "<span style='color:red;'>[");
+            message = message.Replace(">", "]</span>");
+            return message;
+        }
     }
 }

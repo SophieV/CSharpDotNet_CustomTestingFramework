@@ -7,24 +7,26 @@
 <tr>
 <td class="td_main"><#= ProfileReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></td>
 <td class="th_main"><#= ProfileReportDataObject.UPI #></td>
-<# foreach(KeyValuePair<TestUnitNames,ResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
+<# foreach(KeyValuePair<EnumTestUnitNames,EnumResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
 	<# switch (pair.Value) {
-		case ResultSeverityType.FALSE_POSITIVE : #>
+		case EnumResultSeverityType.FALSE_POSITIVE : #>
 	<td class="td_main false_positive"><#= pair.Value #><br/>
 	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
-		case ResultSeverityType.WARNING: #>
+		case EnumResultSeverityType.WARNING:
+		case EnumResultSeverityType.WARNING_ONLY_NEW: #>
 	<td class="td_main warning"><#= pair.Value #><br/>
 	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
-		case ResultSeverityType.WARNING_NO_DATA: #>
+		case EnumResultSeverityType.WARNING_NO_DATA: #>
 	<td class="td_main warning_no_data"><#= pair.Value #>
 		<# break;
-		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
+		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+		case EnumResultSeverityType.ERROR_ONLY_OLD: #>
 	<td class="td_main error_with_explanation"><#= pair.Value #><br/>
 	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;
-		case ResultSeverityType.ERROR: #>
+		case EnumResultSeverityType.ERROR: #>
 	<td class="td_main error"><#= pair.Value #><br/>
 	<a class="no_underline" href="<#= pair.Key #><#= ProfileReportDataObject.FileLinkEnd #>#<#= ProfileReportDataObject.UPI #>">Test Details for UPI<#= ProfileReportDataObject.UPI #></a>
 		<# break;

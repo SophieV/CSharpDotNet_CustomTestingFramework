@@ -47,7 +47,7 @@ namespace TestMVC4App.Templates
         /// <summary>
         /// Severity of the test result.
         /// </summary>
-        public ResultSeverityType Result { get; private set; }
+        public EnumResultSeverityType Result { get; private set; }
 
         /// <summary>
         /// Hints provided by additional analysis.

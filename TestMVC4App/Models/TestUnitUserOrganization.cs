@@ -517,17 +517,17 @@ namespace TestMVC4App.Models
                     // the new service may return more because it has enriched the old tree where some of the values may have been manually - ? - excluded
                     Assert.IsFalse(oldCount > newCount, "Comparing at depth index " + index);
 
-                    resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                    resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
                 }
                 catch (AssertFailedException e)
                 {
-                    resultReport.UpdateResult(ResultSeverityType.ERROR);
+                    resultReport.UpdateResult(EnumResultSeverityType.ERROR);
                     resultReport.ErrorMessage = e.Message;
                     resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH);
                     resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
                     resultReport.TreeComparisonIndexError = index;
 
-                    if (resultReport.Result == ResultSeverityType.ERROR)
+                    if (resultReport.Result == EnumResultSeverityType.ERROR)
                     {
                         keepGoing = false;
                     }
@@ -536,7 +536,7 @@ namespace TestMVC4App.Models
                 index++;
             }
 
-            if(resultReport.Result == ResultSeverityType.SUCCESS)
+            if(resultReport.Result == EnumResultSeverityType.SUCCESS)
             {
                 resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT);
                 resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
@@ -620,7 +620,7 @@ namespace TestMVC4App.Models
 
                 if (countMissingElements == 0)
                 {
-                    resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                    resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
                 }
                 else
                 {
@@ -639,11 +639,11 @@ namespace TestMVC4App.Models
 
                     if (countMissingElements == 0)
                     {
-                        resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                        resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                     }
                     else
                     {
-                        resultReport.UpdateResult(ResultSeverityType.ERROR);
+                        resultReport.UpdateResult(EnumResultSeverityType.ERROR);
                     }
                 }
 
@@ -651,7 +651,7 @@ namespace TestMVC4App.Models
             }
             else
             {
-                resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
+                resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
             }
 
 
@@ -735,7 +735,7 @@ namespace TestMVC4App.Models
                                     matchingElement = potentialElement;
                                     matchingElement.WasOnlyOption = true;
                                     resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
-                                    resultReport.UpdateResult(ResultSeverityType.WARNING);
+                                    resultReport.UpdateResult(EnumResultSeverityType.WARNING);
                                 }
                             }
 

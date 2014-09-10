@@ -7,7 +7,7 @@ namespace TestMVC4App.Models
     {
         public TimeSpan Duration { get; set; }
 
-        public ResultSeverityType Result { get; private set; }
+        public EnumResultSeverityType Result { get; private set; }
 
         public List<EnumIdentifiedDataBehavior> IdentifedDataBehaviors { get; set; }
 
@@ -44,7 +44,7 @@ namespace TestMVC4App.Models
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
             this.TreeComparisonIndexError = -1;
-            this.Result = ResultSeverityType.SUCCESS;
+            this.Result = EnumResultSeverityType.SUCCESS;
         }
 
         public void ResetForReTesting()
@@ -56,7 +56,7 @@ namespace TestMVC4App.Models
             this.TreeComparisonIndexError = -1;
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
-            this.Result = ResultSeverityType.SUCCESS;
+            this.Result = EnumResultSeverityType.SUCCESS;
             this.ErrorMessage = string.Empty;
             this.IdentifedDataBehaviors.Clear();
         }
@@ -91,11 +91,11 @@ namespace TestMVC4App.Models
             this.NewTreeRoot = newTreeRoot;
         }
 
-        public void UpdateResult(ResultSeverityType newSeverityStateReturned)
+        public void UpdateResult(EnumResultSeverityType newSeverityStateReturned)
         {
-            if (newSeverityStateReturned == ResultSeverityType.WARNING)
+            if (newSeverityStateReturned == EnumResultSeverityType.WARNING)
             {
-                if (this.Result == ResultSeverityType.SUCCESS 
+                if (this.Result == EnumResultSeverityType.SUCCESS 
                     || (this.IdentifedDataBehaviors.Contains(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE) && this.IdentifedDataBehaviors.Contains(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND)))
                 {
                     this.Result = newSeverityStateReturned;

@@ -4,13 +4,18 @@ namespace TestMVC4App.Models
     /// <summary>
     /// Result state.
     /// </summary>
-    public enum ResultSeverityType
+    public enum EnumResultSeverityType
     {
         /// <summary>
         /// Mismatch identified.
         /// </summary>
         [System.ComponentModel.Description("The data consistency between the services is not maintained.")]
         ERROR,
+        /// <summary>
+        /// Mismatch identified.
+        /// </summary>
+        [System.ComponentModel.Description("No data returned by the new service.")]
+        ERROR_ONLY_OLD,
         /// <summary>
         /// Mismatch identified and reason explained.
         /// </summary>
@@ -28,6 +33,12 @@ namespace TestMVC4App.Models
         /// <remarks>A warning means that NO data was returned by either service.</remarks>
         [System.ComponentModel.Description("None of the service has returned any data.")]
         WARNING_NO_DATA,
+        /// <summary>
+        /// No data.
+        /// </summary>
+        /// <remarks>A warning means that NO data was returned by either service.</remarks>
+        [System.ComponentModel.Description("Only the new service has returned any data.")]
+        WARNING_ONLY_NEW,
         /// <summary>
         /// Mismatch identified and pattern analysis revealed that there is no data inconsistency (e.g. doublons in the old service).
         /// </summary>

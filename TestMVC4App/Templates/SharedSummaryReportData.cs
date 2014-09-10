@@ -14,13 +14,13 @@ namespace TestMVC4App.Templates
 
         public int CountProfilesWithoutWarnings { get; set; }
 
-        public Dictionary<ResultSeverityType, int> CountBySeverity { get; set; }
+        public Dictionary<EnumResultSeverityType, int> CountBySeverity { get; set; }
 
         public Dictionary<EnumIdentifiedDataBehavior, int> CountByIdentifiedDataBehavior { get; set; }
 
         public Dictionary<EnumTestUnitNames, TimeSpan> AverageDuration_ByTestName { get; set; }
 
-        public Dictionary<EnumTestUnitNames, Dictionary<ResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
+        public Dictionary<EnumTestUnitNames, Dictionary<EnumResultSeverityType, int>> CountBySeverity_ByTestName { get; set; }
 
         public Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>> CountByIdentifiedDataBehavior_ByTestName { get; set; }
 

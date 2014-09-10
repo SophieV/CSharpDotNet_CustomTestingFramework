@@ -28,6 +28,16 @@ namespace TestMVC4App.Models
 
             if (keepGoing)
             {
+                keepGoing = DoesOldCollectionContainEntries();
+            }
+
+            if (keepGoing)
+            {
+                keepGoing = DoesNewCollectionContainEntries();
+            }
+
+            if (keepGoing)
+            {
                 keepGoing = AreBothCollectionsEquivalent();
             }
 
@@ -55,12 +65,46 @@ namespace TestMVC4App.Models
 
             if (this.resultReport.OldValues.Count <= 0 && this.resultReport.NewValues.Count <= 0)
             {
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING_NO_DATA);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
             else
             {
-                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool DoesOldCollectionContainEntries()
+        {
+            bool shouldContinueTesting = true;
+
+            if (this.resultReport.OldValues.Where(x => x != null).Count() <= 0)
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_ONLY_NEW);
+                shouldContinueTesting = false;
+            }
+            else
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool DoesNewCollectionContainEntries()
+        {
+            bool shouldContinueTesting = true;
+
+            if (this.resultReport.NewValues.Where(x=>x!=null).Count() <= 0)
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR_ONLY_OLD);
+                shouldContinueTesting = false;
+            }
+            else
+            {
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
             }
 
             return shouldContinueTesting;
@@ -73,13 +117,13 @@ namespace TestMVC4App.Models
             try
             {
                 CollectionAssert.AreEquivalent(this.resultReport.OldValues.ToList(), this.resultReport.NewValues.ToList(), this.resultReport.TestDescription);
-                this.resultReport.UpdateResult(ResultSeverityType.SUCCESS);
+                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
             }
             catch (AssertFailedException e)
             {
-                this.resultReport.UpdateResult(ResultSeverityType.ERROR);
-                this.resultReport.ErrorMessage = CompareStrategy.ReplaceProblematicTagsForHtml(e.Message);
+                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                this.resultReport.ErrorMessage = ParsingHelper.ReplaceProblematicTagsForHtml(e.Message);
             }
             return shouldContinueTesting;
         }
@@ -98,7 +142,7 @@ namespace TestMVC4App.Models
                 if (differenceQueryToAvoidDoublons.Count() == 0)
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
-                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                 }
             }
 
@@ -114,7 +158,7 @@ namespace TestMVC4App.Models
             if (differenceQueryCheckDoublonsInNewService.Count() > 0)
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -139,12 +183,12 @@ namespace TestMVC4App.Models
                     // This is why this ERROR is ranked as WARNING.
                     CollectionAssert.IsSubsetOf(this.resultReport.OldValues.ToList(), this.resultReport.NewValues.ToList(), this.resultReport.TestDescription);
 
-                    this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                 }
                 catch (AssertFailedException)
                 {
-                    this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISSING_VALUES_ON_NEW_SERVICE);
                 }
             }
@@ -175,12 +219,12 @@ namespace TestMVC4App.Models
                 if (leftovers.Count() != missingOldValues.Count())
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
-                    this.resultReport.UpdateResult(ResultSeverityType.WARNING);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
 
                     // all of the mismatches are due to trailing spaces
                     if (leftovers.Count() == 0)
                     {
-                        this.resultReport.UpdateResult(ResultSeverityType.FALSE_POSITIVE);
+                        this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
                     }
                 }
             }

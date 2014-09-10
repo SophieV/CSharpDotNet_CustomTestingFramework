@@ -47,22 +47,24 @@
 		<th class="th_main">Count</th>
 		<th class="th_main">Description</th>
 		</tr>
-		<# foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity) { #>
+		<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity) { #>
 		<tr>
 			<# switch (countPerSeverity.Key) {
-			case ResultSeverityType.FALSE_POSITIVE : #>
+			case EnumResultSeverityType.FALSE_POSITIVE : #>
 		<td class="false_positive td_main">
 			<# break;
-			case ResultSeverityType.WARNING: #>
+			case EnumResultSeverityType.WARNING:
+			case EnumResultSeverityType.WARNING_ONLY_NEW: #>
 		<td class="warning td_main">
 			<# break;
-			case ResultSeverityType.WARNING_NO_DATA: #>
+			case EnumResultSeverityType.WARNING_NO_DATA: #>
 		<td class="warning_no_data td_main">
 			<# break;
-			case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
+			case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+			case EnumResultSeverityType.ERROR_ONLY_OLD: #>
 		<td class="error_with_explanation td_main">
 			<# break;
-			case ResultSeverityType.ERROR: #>
+			case EnumResultSeverityType.ERROR: #>
 		<td class="error td_main">
 			<# break;
 			default: #>
@@ -143,22 +145,24 @@
 		<th class="th_main">Count</th>
 		<th class="th_main">Frequency</th>
 	</tr>
-	<# foreach (KeyValuePair<ResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { #>
+	<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { #>
 	<tr>
 	<# switch (countPerSeverity.Key) {
-		case ResultSeverityType.FALSE_POSITIVE : #>
+		case EnumResultSeverityType.FALSE_POSITIVE : #>
 		<td class="false_positive td_main">
 		<# break;
-		case ResultSeverityType.WARNING: #>
+		case EnumResultSeverityType.WARNING:
+		case EnumResultSeverityType.WARNING_ONLY_NEW: #>
 		<td class="warning td_main">
 		<# break;
-		case ResultSeverityType.WARNING_NO_DATA: #>
+		case EnumResultSeverityType.WARNING_NO_DATA: #>
 		<td class="warning_no_data td_main">
 		<# break;
-		case ResultSeverityType.ERROR_WITH_EXPLANATION: #>
+		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+		case EnumResultSeverityType.ERROR_ONLY_OLD: #>
 		<td class="error_with_explanation td_main">
 		<# break;
-		case ResultSeverityType.ERROR: #>
+		case EnumResultSeverityType.ERROR: #>
 		<td class="error td_main">
 		<# break;
 		default: #>

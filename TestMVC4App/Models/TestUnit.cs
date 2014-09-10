@@ -28,44 +28,44 @@ namespace TestMVC4App.Models
 
         public HashSet<ResultReport> DetailedResults { get; set; }
 
-        public ResultSeverityType OverallSeverity { get; private set; }
+        public EnumResultSeverityType OverallSeverity { get; private set; }
 
         public void ComputeOverallSeverity()
         {
             bool keepGoing = true;
 
-            var errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.ERROR).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            var errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.ERROR).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if(keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                OverallSeverity = ResultSeverityType.ERROR;
+                OverallSeverity = EnumResultSeverityType.ERROR;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.ERROR_WITH_EXPLANATION).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.ERROR_WITH_EXPLANATION).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                OverallSeverity = ResultSeverityType.ERROR_WITH_EXPLANATION;
+                OverallSeverity = EnumResultSeverityType.ERROR_WITH_EXPLANATION;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.FALSE_POSITIVE).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.FALSE_POSITIVE).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                OverallSeverity = ResultSeverityType.FALSE_POSITIVE;
+                OverallSeverity = EnumResultSeverityType.FALSE_POSITIVE;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.WARNING).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.WARNING).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                OverallSeverity = ResultSeverityType.WARNING;
+                OverallSeverity = EnumResultSeverityType.WARNING;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == ResultSeverityType.SUCCESS).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.SUCCESS).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
-                OverallSeverity = ResultSeverityType.SUCCESS;
+                OverallSeverity = EnumResultSeverityType.SUCCESS;
                 keepGoing = false;
             }
         }

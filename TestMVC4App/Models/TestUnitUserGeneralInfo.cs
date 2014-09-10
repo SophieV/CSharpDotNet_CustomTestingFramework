@@ -70,7 +70,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.LastName, resultReport);
             compareStrategy.Investigate();
 
-            if(resultReport.Result != ResultSeverityType.SUCCESS)
+            if(resultReport.Result != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -101,7 +101,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.FirstName, resultReport);
             compareStrategy.Investigate();
 
-            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -154,7 +154,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Suffix, resultReport);
             compareStrategy.Investigate();
 
-            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -185,7 +185,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
-            if (resultReport.Result != ResultSeverityType.SUCCESS)
+            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
