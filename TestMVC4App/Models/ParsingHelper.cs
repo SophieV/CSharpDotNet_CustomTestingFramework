@@ -57,17 +57,18 @@ namespace TestMVC4App.Models
             return value;
         }
 
-        public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName, string nodeAttributeName)
+        public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName, string childNodeName)
         {
-            var values = new HashSet<string>();
+            HashSet<string> values;
 
             try
             {
-                var tempElements = elements.Where(x=>x.Name == nodeName).Select(x=>x.Attribute(nodeAttributeName).Value);
+                values = new HashSet<string>(elements.Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => x.Value));
             }
             catch (Exception)
             {
                 // there is no existing attribute to parse
+                values = new HashSet<string>();
             }
 
             return values;
