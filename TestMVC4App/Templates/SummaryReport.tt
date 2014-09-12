@@ -106,11 +106,13 @@
 	<br/>
 	<table class="table_main">
 	<tr>
-	<th class="th_main">Test Name</th>
-	<th class="th_main">Overall Success</th>
-	<th class="th_main">Sample Data</th>
-	<th class="th_main">Average Duration</th>
-	<th class="th_main">More Info</th>
+		<th class="th_main">Test Name</th>
+		<th class="th_main">Overall Success</th>
+		<th class="th_main">Result Severity</th>
+		<th class="th_main">Observations</th>
+		<th class="th_main">Sample Data</th>
+		<th class="th_main">Average Duration</th>
+		<th class="th_main">More Info</th>
 	</tr>
 	<# foreach (var testName in SummaryReportDataObject.TestNames) { #>
 	<tr>
@@ -118,7 +120,62 @@
 		<td class="th_main">
 			<#= SummaryReportDataObject.FrequencySuccess_ByTestName[testName].ToString("P") #>
 		</td>
-		<td class="td_main" style="width: 40%;">
+		<td class="td_main">
+			<table class="table_main">
+			<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { #>
+			<tr>
+			<# switch (countPerSeverity.Key) {
+				case EnumResultSeverityType.FALSE_POSITIVE : #>
+				<td class="false_positive td_main">
+				<# break;
+				case EnumResultSeverityType.WARNING:
+				case EnumResultSeverityType.WARNING_ONLY_NEW: #>
+				<td class="warning td_main">
+				<# break;
+				case EnumResultSeverityType.WARNING_NO_DATA: #>
+				<td class="warning_no_data td_main">
+				<# break;
+				case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+				case EnumResultSeverityType.ERROR_ONLY_OLD: #>
+				<td class="error_with_explanation td_main">
+				<# break;
+				case EnumResultSeverityType.ERROR: #>
+				<td class="error td_main">
+				<# break;
+				default: #>
+				<td class="success td_main">
+				<# break;
+			} #>
+				<#= countPerSeverity.Key #></td>
+				<td class="td_main"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
+				<td class="td_main">
+					<# double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;
+					if (frequency > 0) { #>
+					<#= frequency.ToString("P") #>
+					<# } #>
+				</td>
+			</tr>
+			<# } #>
+			</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+				<# if(SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName.ContainsKey(testName)) {
+				var sortedDictionary2 =SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+				foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
+					if(countPerIdentifiedDataBehavior.Value > 0) { #>
+				<tr>
+					<td class="td_main"><#= LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key] #></td>
+					<td class="td_main"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
+				</tr>
+				<# } } } #>
+			</table>
+		</td>
+		<td class="td_main">
 			<# if(SummaryReportDataObject.SampleData_ByTestName.ContainsKey(testName)) { #>
 			<#= SummaryReportDataObject.SampleData_ByTestName[testName] #>
 			<# } #>
@@ -135,69 +192,5 @@
 	</tr>
 	<# } #>
 	</table>
-	<br/>
-	<# foreach (var testName in SummaryReportDataObject.TestNames) { #>
-	<hr/>
-	<p><a href="#top">Back to top</a></p>
-	<h2><a id="<#= testName #>"><#= testName #></a></h2>
-	<table class="table_main">
-	<tr>
-		<th class="th_main">Result Severity</th>
-		<th class="th_main">Count</th>
-		<th class="th_main">Frequency</th>
-	</tr>
-	<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { #>
-	<tr>
-	<# switch (countPerSeverity.Key) {
-		case EnumResultSeverityType.FALSE_POSITIVE : #>
-		<td class="false_positive td_main">
-		<# break;
-		case EnumResultSeverityType.WARNING:
-		case EnumResultSeverityType.WARNING_ONLY_NEW: #>
-		<td class="warning td_main">
-		<# break;
-		case EnumResultSeverityType.WARNING_NO_DATA: #>
-		<td class="warning_no_data td_main">
-		<# break;
-		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
-		case EnumResultSeverityType.ERROR_ONLY_OLD: #>
-		<td class="error_with_explanation td_main">
-		<# break;
-		case EnumResultSeverityType.ERROR: #>
-		<td class="error td_main">
-		<# break;
-		default: #>
-		<td class="success td_main">
-		<# break;
-	} #>
-		<#= countPerSeverity.Key #></td>
-		<td class="td_main"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
-		<td class="td_main">
-			<# double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;
-			if (frequency > 0) { #>
-			<#= frequency.ToString("P") #>
-			<# } #>
-		</td>
-	</tr>
-	<# } #>
-	</table>
-	<br/>
-	<br/>
-	<table class="table_main">
-	<tr>
-		<th class="th_main">Identified Data Behavior</th>
-		<th class="th_main">Count</th>
-	</tr>
-	<# if(SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName.ContainsKey(testName)) {
-	var sortedDictionary2 =SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-	foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
-		if(countPerIdentifiedDataBehavior.Value > 0) { #>
-	<tr>
-		<td class="td_main"><#= LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key] #></td>
-		<td class="td_main"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
-	</tr>
-	<# } } } #>
-</table>
-<# } #>
 </body>
 </html>

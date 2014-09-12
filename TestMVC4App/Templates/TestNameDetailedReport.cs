@@ -115,7 +115,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</td>\r\n\t<td class=\"td_main\" style=\"width: 20%;\">\r\n\t\t<a href=\"");
+            this.Write("</td>\r\n\t<td class=\"td_main\">\r\n\t\t<a href=\"");
             
             #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.OldUrl));
@@ -143,7 +143,7 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t</td>\r\n\t<td class=\"td_main\" style=\"width: 60%;\">\r\n\t\t");
+            this.Write("</a>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t\t");
             
             #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.ErrorMessage));
@@ -571,8 +571,8 @@ namespace TestMVC4App.Templates
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\" style=\"wid" +
-                    "th: 30%;\">\r\n\t<p>Duration : ");
+            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t<p>Dura" +
+                    "tion : ");
             
             #line 134 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\Templates\TestNameDetailedReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));

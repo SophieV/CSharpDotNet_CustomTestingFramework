@@ -33,11 +33,11 @@
 		<# break;
 	} #>
 	<#= DetailedReportDataObject.Result #></td>
-	<td class="td_main" style="width: 20%;">
+	<td class="td_main">
 		<a href="<#= DetailedReportDataObject.OldUrl #>">Profile data of UPI <#= DetailedReportDataObject.UPI #></a><br/>
 		<a href="<#= DetailedReportDataObject.NewUrl #>">User data of ID is <#= DetailedReportDataObject.UserId #></a>
 	</td>
-	<td class="td_main" style="width: 60%;">
+	<td class="td_main">
 		<#= DetailedReportDataObject.ErrorMessage #>
 		<br/><br/>
 		<table class="table_main">
@@ -130,7 +130,7 @@
 		</tr>
 		</table>
 	</td>
-	<td class="td_main" style="width: 30%;">
+	<td class="td_main">
 	<p>Duration : <#= DetailedReportDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
 	<ul>
