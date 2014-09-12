@@ -26,13 +26,13 @@ namespace TestMVC4App.Models
                 if (this.containerAndContents.Keys.Where(x => x.Count() > 0).Count() == 0)
                 {
                     keepGoing = false;
-                    resultReport.UpdateResult(EnumResultSeverityType.ERROR_ONLY_OLD);
+                    resultReport.UpdateResult(EnumResultSeverityType.WARNING_ONLY_NEW);
                 }
 
                 if (this.containerAndContents.Values.Where(x=>x.Count() > 0).Count() == 0)
                 {
                     keepGoing = false;
-                    resultReport.UpdateResult(EnumResultSeverityType.WARNING_ONLY_NEW);
+                    resultReport.UpdateResult(EnumResultSeverityType.ERROR_ONLY_OLD);
                 }
 
                 if (keepGoing)
