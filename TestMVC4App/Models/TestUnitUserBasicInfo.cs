@@ -39,6 +39,12 @@ namespace TestMVC4App.Models
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <remarks>Special case where the new service needs the UPI -instead of the UserID - in the URL.</remarks>
         override protected string BuildNewServiceURL(int userId)
         {
             if (Container == null)
@@ -82,7 +88,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Idx, "Comparing Idx", this.MappedUserId, this.upi, oldServiceData, "Idx", newServiceInfo.Idx);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LicenseNumber, "Comparing License Number", this.MappedUserId, this.upi, oldServiceData, "LicenseNumber", newServiceInfo.LicenseNumber);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.MappedUserId, this.upi, oldServiceData, "Npi", newServiceInfo.Npi);
-            UserBasicInfo_UserEditors_Test(newServiceInfo, oldServiceData);
 
             ComputeOverallSeverity();
         }
@@ -93,29 +98,5 @@ namespace TestMVC4App.Models
             this.oldServiceData = oldData;
             this.upi = upi;
         }
-
-        #region Field Comparison Tests
-
-        // TODO: test ! The node name is not reliable ! I need an example with data
-        public void UserBasicInfo_UserEditors_Test(UserBasicInfo newServiceData, IEnumerable<XElement> oldServiceData)
-        {
-            var oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "UserEditors", "emailAddress");
-
-            var newValues = new HashSet<string>();
-            if (newServiceData.UserEditors != null)
-            {
-                foreach (ProfileEditor profile in newServiceData.UserEditors)
-                {
-                    if (!string.IsNullOrEmpty(profile.YaleEmail))
-                    {
-                        newValues.Add(profile.YaleEmail);
-                    }
-                }
-            }
-
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UserEditors_Email, "Comparing User Editors",this.MappedUserId,this.upi,oldValues,newValues);
-        }
-
-        #endregion
     }
 }

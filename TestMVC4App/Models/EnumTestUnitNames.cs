@@ -19,7 +19,6 @@ namespace TestMVC4App.Models
             UserBasicInfo_Npi,
             UserBasicInfo_Gender,
             UserBasicInfo_UPI,
-            UserBasicInfo_UserEditors_Email,
             UserGeneralInfo_Bio,
             UserGeneralInfo_Titles,
             UserGeneralInfo_Languages,

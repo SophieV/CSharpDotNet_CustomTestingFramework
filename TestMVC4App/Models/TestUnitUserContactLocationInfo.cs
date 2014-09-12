@@ -108,7 +108,7 @@ namespace TestMVC4App.Models
             var addressesTest = new TestUnitUserAddress(this.Container, this);
             this.Children.Add(addressesTest);
 
-            addressesTest.ProvideOrganizationData(userId,
+            addressesTest.ProvideData(userId,
                                                      upi,
                                                      addresses,
                                                      mailingInfo,
