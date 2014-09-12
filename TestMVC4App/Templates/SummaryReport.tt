@@ -34,9 +34,10 @@
 	<# } #>
 
 	<h2>Overview</h2>
-	<p>Count of user profiles tested : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesTested) #><br/>
-	Total count of tests run : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsRun) #><br/>
+	<p>Total count of tests run : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsRun) #><br/>
 	Count of tests per user profile : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsPerUser) #><br/>
+	Count of user profiles tested : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesTested) #><br/>
+	Count of user profiles ignored : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesIgnored) #><br/>
 	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesWithoutWarnings) #><br/>
 	Duration : <#= SummaryReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
 	<p>Average Duration by User Profile : <#= SummaryReportDataObject.AverageDurationPerProfile.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>

@@ -41,5 +41,7 @@ namespace TestMVC4App.Templates
         public string ErrorHappened { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public double CountProfilesIgnored { get; set; }
     }
 }

@@ -291,8 +291,8 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            var departments = ParsingHelper.ParseListNode(oldServiceData,"department");
-            var departmentTree = ParsingHelper.ParseListNode(oldServiceData, "treeDepartments");
+            var departments = ParsingHelper.ParseListNodes(oldServiceData,"department");
+            var departmentTree = ParsingHelper.ParseListNodes(oldServiceData, "treeDepartments");
 
             var organizationTest = new TestUnitUserOrganization(this.Container, this);
             this.Children.Add(organizationTest);

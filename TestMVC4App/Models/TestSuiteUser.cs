@@ -166,45 +166,57 @@ namespace TestMVC4App.Models
 
                             //try
                             //{
-                            var usersClient = new UsersClient();
 
-                            // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
-                            TestUnitUserBasicInfo userBasicInfoTest = new TestUnitUserBasicInfo(this);
-                            allTheTests.Add(userBasicInfoTest);
-                            userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi);
-                            userBasicInfoTest.RunAllTests();
+                            bool isInactive = false;
 
-                            int userId = userBasicInfoTest.MappedUserId;
+                            isInactive = (ParsingHelper.ParseSingleValue(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/Inactive"),"Inactive") == "Yes");
 
-                            TestUnitUserGeneralInfo userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
-                            allTheTests.Add(userGeneralInfoTest);
-                            userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), upi, usersClient, userId);
-                            userGeneralInfoTest.RunAllTests();
-
-                            TestUnitUserContactLocationInfo userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
-                            allTheTests.Add(userContactLocationInfoTest);
-                            userContactLocationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
-                            userContactLocationInfoTest.RunAllTests();
-
-                            foreach (var test in allTheTests)
+                            if (!isInactive)
                             {
-                                test.ComputerOverallResults();
-                                allTheResults.UnionWith(test.DetailedResults);
+                                var usersClient = new UsersClient();
 
-                                // log only first occurence of error - enough to generate the warning
-                                if ((test.HttpErrorHappened || test.UnknownErrorHappened) && string.IsNullOrEmpty(errorMessage))
+                                // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
+                                TestUnitUserBasicInfo userBasicInfoTest = new TestUnitUserBasicInfo(this);
+                                allTheTests.Add(userBasicInfoTest);
+                                userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi);
+                                userBasicInfoTest.RunAllTests();
+
+                                int userId = userBasicInfoTest.MappedUserId;
+
+                                TestUnitUserGeneralInfo userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
+                                allTheTests.Add(userGeneralInfoTest);
+                                userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), upi, usersClient, userId);
+                                userGeneralInfoTest.RunAllTests();
+
+                                TestUnitUserContactLocationInfo userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
+                                allTheTests.Add(userContactLocationInfoTest);
+                                userContactLocationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
+                                userContactLocationInfoTest.RunAllTests();
+
+                                foreach (var test in allTheTests)
                                 {
-                                    errorMessage = test.ErrorMessage;
+                                    test.ComputerOverallResults();
+                                    allTheResults.UnionWith(test.DetailedResults);
 
-                                    if (test.HttpErrorHappened)
+                                    // log only first occurence of error - enough to generate the warning
+                                    if ((test.HttpErrorHappened || test.UnknownErrorHappened) && string.IsNullOrEmpty(errorMessage))
                                     {
-                                        errorType = "HTTP";
-                                    }
-                                    else
-                                    {
-                                        errorType = "UNKNOWN";
+                                        errorMessage = test.ErrorMessage;
+
+                                        if (test.HttpErrorHappened)
+                                        {
+                                            errorType = "HTTP";
+                                        }
+                                        else
+                                        {
+                                            errorType = "UNKNOWN";
+                                        }
                                     }
                                 }
+                            }
+                            else
+                            {
+                                LogManager.Instance.StatsCountProfilesIgnored++;
                             }
                         }
                         catch (Exception e)

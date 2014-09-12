@@ -88,7 +88,7 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            var labWebsites = ParsingHelper.ParseListNode(oldServiceData, "labWebsite");
+            var labWebsites = ParsingHelper.ParseListNodes(oldServiceData, "labWebsite");
 
             var labWesitesTest = new TestUnitUserLabWebsite(this.Container, this);
             this.Children.Add(labWesitesTest);
@@ -102,8 +102,8 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_Addresses_Test(UserContactLocationInfo newServiceData, IEnumerable<XElement> oldServiceData)
         {
-            var addresses = ParsingHelper.ParseListNode(oldServiceData,"location");
-            var mailingInfo = ParsingHelper.ParseListNode(oldServiceData, "mailing", true);
+            var addresses = ParsingHelper.ParseListNodes(oldServiceData,"location");
+            var mailingInfo = ParsingHelper.ParseListNodes(oldServiceData, "mailing", true);
 
             var addressesTest = new TestUnitUserAddress(this.Container, this);
             this.Children.Add(addressesTest);

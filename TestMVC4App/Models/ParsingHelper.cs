@@ -25,22 +25,6 @@ namespace TestMVC4App.Models
             return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
-        public static string ParseSingleOldValue(XDocument oldServiceData, string oldValueXMLPath)
-        {
-            string oldValue = string.Empty;
-
-            try
-            {
-                oldValue = HttpUtility.HtmlDecode(oldServiceData.XPathSelectElement(oldValueXMLPath).Value);
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            return oldValue;
-        }
-
         public static string ParseSingleValue(IEnumerable<XElement> elements, string nodeName)
         {
             string value = string.Empty;
@@ -95,7 +79,7 @@ namespace TestMVC4App.Models
             return values;
         }
 
-        public static IEnumerable<XElement> ParseListNode(IEnumerable<XElement> elements ,string nodeName, bool isBeginningPattern = false)
+        public static IEnumerable<XElement> ParseListNodes(IEnumerable<XElement> elements ,string nodeName, bool isBeginningPattern = false)
         {
             var values = new List<XElement>();
 

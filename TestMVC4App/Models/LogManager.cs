@@ -41,6 +41,7 @@ namespace TestMVC4App.Models
 
         public static Dictionary<EnumIdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
 
+        public double StatsCountProfilesIgnored { get; set; }
         public double StatsCountTotalUpis { get;set; }
 
         private static int countFilesGenerated = 0;
@@ -91,6 +92,7 @@ namespace TestMVC4App.Models
             htmlWritersForDetailedReports_ByTestName = new Dictionary<EnumTestUnitNames, HtmlTextWriter>();
 
             StatsCountTotalUpis = 0;
+            StatsCountProfilesIgnored = 0;
         }
 
         /// <summary>
@@ -332,6 +334,9 @@ namespace TestMVC4App.Models
             // make sure no division by zero
             if (StatsCountTotalUpis > 0)
             {
+                // deduce ignored profiles from statistics, to still reach 100%
+                this.StatsCountTotalUpis -= this.StatsCountProfilesIgnored;
+
                 foreach (var testName in allTestNames)
                 {
                     countSuccessResults = 0;
@@ -391,7 +396,8 @@ namespace TestMVC4App.Models
                 AverageDuration_ByTestName = averageDuration_ByTestName,
                 ErrorHappened = errorHappened,
                 ErrorMessage = errorMessage,
-                FileByProfileLink = SUMMARY_BY_PROFILE_FILENAME
+                FileByProfileLink = SUMMARY_BY_PROFILE_FILENAME,
+                CountProfilesIgnored = this.StatsCountProfilesIgnored
             };
 
             var template = new SummaryReport();
