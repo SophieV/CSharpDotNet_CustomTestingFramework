@@ -39,6 +39,16 @@ namespace TestMVC4App.Models
 
         }
 
+        override protected string BuildNewServiceURL(int userId)
+        {
+            if (Container == null)
+            {
+                throw new NotImplementedException();
+            }
+
+            return Container.newServiceURLBase + newServiceURLExtensionBeginning + this.upi + newServiceURLExtensionEnding;
+        }
+
         /// <summary>
         /// Main entry point that manages all the individuals tests for the fields 
         /// of the <see cref="YSM.PMS.Service.Common.DataTransfer.UserGeneralInfo"/> class.

@@ -83,7 +83,7 @@ namespace TestMVC4App.Models
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        protected string BuildNewServiceURL(int userId)
+        protected virtual string BuildNewServiceURL(int userId)
         {
             if (Container == null)
             {
