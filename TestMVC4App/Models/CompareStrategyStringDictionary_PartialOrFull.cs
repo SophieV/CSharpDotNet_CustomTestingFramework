@@ -21,34 +21,51 @@ namespace TestMVC4App.Models
         {
             if (this.containerAndContents != null && this.containerAndContents.Count() > 0)
             {
-                bool wasFound = true;
-                bool wasFoundItem;
+                bool keepGoing = true;
 
-                foreach (var pair in containerAndContents)
+                if (this.containerAndContents.Keys.Where(x => x.Count() > 0).Count() == 0)
                 {
-                    foreach (var entry in pair.Key)
-                    {
-                        if (stringContainsMatch)
-                        {
-                            wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Contains(entry.Trim()) || entry.Trim().Contains(otherEntry.Trim()));
-                        }
-                        else
-                        {
-                            wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Equals(entry.Trim()) || entry.Trim().Equals(otherEntry.Trim()));
-                        }
-
-                        wasFound &= wasFoundItem;
-                    }
+                    keepGoing = false;
+                    resultReport.UpdateResult(EnumResultSeverityType.ERROR_ONLY_OLD);
                 }
 
-                if (wasFound)
+                if (this.containerAndContents.Values.Where(x=>x.Count() > 0).Count() == 0)
                 {
-                    resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
-                } 
-                else 
+                    keepGoing = false;
+                    resultReport.UpdateResult(EnumResultSeverityType.WARNING_ONLY_NEW);
+                }
+
+                if (keepGoing)
                 {
-                    resultReport.UpdateResult(EnumResultSeverityType.ERROR);
-                    resultReport.ErrorMessage = "The values do not match";
+                    bool wasFound = true;
+                    bool wasFoundItem;
+
+                    foreach (var pair in containerAndContents)
+                    {
+                        foreach (var entry in pair.Key)
+                        {
+                            if (stringContainsMatch)
+                            {
+                                wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Contains(entry.Trim()) || entry.Trim().Contains(otherEntry.Trim()));
+                            }
+                            else
+                            {
+                                wasFoundItem = pair.Value.Any(otherEntry => otherEntry.Trim().Equals(entry.Trim()) || entry.Trim().Equals(otherEntry.Trim()));
+                            }
+
+                            wasFound &= wasFoundItem;
+                        }
+                    }
+
+                    if (wasFound)
+                    {
+                        resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+                    }
+                    else
+                    {
+                        resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                        resultReport.ErrorMessage = "The values do not match";
+                    }
                 }
             } 
             else 

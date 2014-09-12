@@ -793,6 +793,7 @@ namespace TestMVC4App.Models
                 // TODO: implement no data on old or new side
                 if (entry.MatchedPartner != null && (entry.Missions.Count() > 0 || entry.MatchedPartner.Missions.Count() > 0))
                 {
+                    // matched partner is old service data
                     missionsPerOrg.Add(entry.MatchedPartner.Missions, entry.Missions);
                 }
             }
