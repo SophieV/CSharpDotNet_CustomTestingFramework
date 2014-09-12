@@ -31,7 +31,7 @@ namespace TestMVC4App.Models
 
             try
             {
-                oldValue = oldServiceData.XPathSelectElement(oldValueXMLPath).Value;
+                oldValue = HttpUtility.HtmlDecode(oldServiceData.XPathSelectElement(oldValueXMLPath).Value);
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace TestMVC4App.Models
 
             try
             {
-                value = elements.Where(x => x.Name == nodeName).Select(x => x.Value).First();
+                value = HttpUtility.HtmlDecode(elements.Where(x => x.Name == nodeName).Select(x => x.Value).First());
             }
             catch (Exception)
             {

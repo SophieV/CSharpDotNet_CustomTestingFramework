@@ -790,6 +790,7 @@ namespace TestMVC4App.Models
             
             foreach (var entry in newEntries)
             {
+                // TODO: implement no data on old or new side
                 if (entry.MatchedPartner != null && (entry.Missions.Count() > 0 || entry.MatchedPartner.Missions.Count() > 0))
                 {
                     missionsPerOrg.Add(entry.MatchedPartner.Missions, entry.Missions);
