@@ -72,6 +72,8 @@
 \\psf\Home\Desktop\TestMVC4App\TestMVC4App\obj\Release\TestMVC4App.dll
 \\psf\Home\Desktop\TestMVC4App\TestMVC4App\obj\Release\TestMVC4App.pdb
 \\psf\Home\Desktop\TestMVC4App\TestMVC4App\obj\Release\TestMVC4App.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Release\TestMVC4App.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Release\TestMVC4App.g.resources
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\ServiceProxy\YSM.PMS.Web.Service.Clients.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Templates\filtergrid.css
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Templates\tablefilter.js
@@ -80,6 +82,7 @@
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\TestMVC4App.pdb
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Antlr3.Runtime.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\EntityFramework.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\HtmlDiff.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Microsoft.Data.Edm.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Microsoft.Data.OData.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\Microsoft.Web.Infrastructure.dll
@@ -147,6 +150,3 @@
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\zh-Hant\System.Spatial.resources.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Release\TestMVC4App.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Release\TestMVC4App.pdb
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\bin\HtmlDiff.dll
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Release\TestMVC4App.g.resources
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4App\obj\Release\TestMVC4App.csprojResolveAssemblyReference.cache

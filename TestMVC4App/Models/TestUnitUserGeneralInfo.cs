@@ -215,9 +215,9 @@ namespace TestMVC4App.Models
             {
                 foreach(var title in newServiceData.Titles)
                 {
-                    if (!string.IsNullOrEmpty(title.TitleName))
+                    if (!string.IsNullOrEmpty(title.Name))
                     {
-                        newValues.Add(title.TitleName);
+                        newValues.Add(title.Name);
                     }
                 }
             }
@@ -266,7 +266,7 @@ namespace TestMVC4App.Models
             {
                 foreach (var suffix in newServiceData.Suffixes)
                 {
-                    newValues.Add(suffix.SuffixName);
+                    newValues.Add(suffix.Name);
                 }
             }
 
