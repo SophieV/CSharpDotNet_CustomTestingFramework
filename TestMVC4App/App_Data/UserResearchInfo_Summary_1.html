@@ -1,0 +1,435 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="10071485">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main success">
+			SUCCESS</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10071485">Profile data of UPI 10071485</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/65053/Research">User data of ID is 65053</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Dr. Leffell and colleagues discovered the skin cancer gene, PTCH, in 1996 and have directed subsequent research towards understanding how skin cancer is formed. Other research includes studies of the p53 gene in skin cancer, epidemiology of skin cancer, and innovative diagnostic devices.
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Dr. Leffell and colleagues discovered the skin cancer gene, PTCH, in 1996 and have directed subsequent research towards understanding how skin cancer is formed. Other research includes studies of the p53 gene in skin cancer, epidemiology of skin cancer, and innovative diagnostic devices.
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000069</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="10934133">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_WITH_EXPLANATION</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10934133">Profile data of UPI 10934133</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/62889/Research">User data of ID is 62889</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Our long-term goal is to develop a comprehensive view of how cells detect differences in their adhesive environment and translate this information<span style='color:red;']</span>[br]</span>into changes in cell shape or migration. We are particularly interested in how these processes break down in cancer and neurodegenerative diseases.<span style='color:red;']</span>[br]</span>We have identified the Abl and Arg tyrosine kinases as essential regulators of cell migration and neuronal morphogenesis in response to adhesive<span style='color:red;']</span>[br]</span>cues and have demonstrated that Arg promotes lamellipodial protrusion, inhibits adhesion, and attenuates actomyosin contractility during integrin-mediated fibroblast migration on fibronectin. Using biochemical approaches and 4-D time-lapse imaging, we are studying how Abl and Arg help cells survey the adhesive landscape and coordinate the intracellular responses required for cell migration<span style='color:red;']</span>[br]</span>directed toward adhesive cues in normal and cancer cells. We are also interested in how the biochemical pathways we discovered promote the formation and<span style='color:red;']</span>[br]</span>maintenance of neuronal networks in the developing vertebrate brain and how these mechanisms are compromised in psychiatric and neurodegenerative diseases.]</span>. Actual:<span style='color:red;']</span>[Our long-term goal is to develop a comprehensive view of how cells detect differences in their adhesive environment and translate this information<span style='color:red;']</span>[br]</span>into changes in cell shape or migration. We are particularly interested in how these processes break down in cancer and neurodegenerative diseases.<span style='color:red;']</span>[br]</span>We have identified the Abl and Arg tyrosine kinases as essential regulators of cell migration and neuronal morphogenesis in response to adhesive<span style='color:red;']</span>[br]</span>cues and have demonstrated that Arg promotes lamellipodial protrusion, inhibits adhesion, and attenuates actomyosin contractility during integrin-mediated fibroblast migration on fibronectin. Using biochemical approaches and 4-D time-lapse imaging, we are studying how Abl and Arg help cells survey the adhesive landscape and coordinate the intracellular responses required for cell migration<span style='color:red;']</span>[br]</span>directed toward adhesive cues in normal and cancer cells. We are also interested in how the biochemical pathways we discovered promote the formation and<span style='color:red;']</span>[br]</span>maintenance of neuronal networks in the developing vertebrate brain and how these mechanisms are compromised in psychiatric and neurodegenerative diseases. ]</span>. Comparing Research Summary(ies)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Our long-term goal is to develop a comprehensive view of how cells detect differences in their adhesive environment and translate this information<br>into changes in cell shape or migration. We are particularly interested in how these processes break down in cancer and neurodegenerative diseases.<br>We have identified the Abl and Arg tyrosine kinases as essential regulators of cell migration and neuronal morphogenesis in response to adhesive<br>cues and have demonstrated that Arg promotes lamellipodial protrusion, inhibits adhesion, and attenuates actomyosin contractility during integrin-mediated fibroblast migration on fibronectin. Using biochemical approaches and 4-D time-lapse imaging, we are studying how Abl and Arg help cells survey the adhesive landscape and coordinate the intracellular responses required for cell migration<br>directed toward adhesive cues in normal and cancer cells. We are also interested in how the biochemical pathways we discovered promote the formation and<br>maintenance of neuronal networks in the developing vertebrate brain and how these mechanisms are compromised in psychiatric and neurodegenerative diseases.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Our long-term goal is to develop a comprehensive view of how cells detect differences in their adhesive environment and translate this information<br>into changes in cell shape or migration. We are particularly interested in how these processes break down in cancer and neurodegenerative diseases.<br>We have identified the Abl and Arg tyrosine kinases as essential regulators of cell migration and neuronal morphogenesis in response to adhesive<br>cues and have demonstrated that Arg promotes lamellipodial protrusion, inhibits adhesion, and attenuates actomyosin contractility during integrin-mediated fibroblast migration on fibronectin. Using biochemical approaches and 4-D time-lapse imaging, we are studying how Abl and Arg help cells survey the adhesive landscape and coordinate the intracellular responses required for cell migration<br>directed toward adhesive cues in normal and cancer cells. We are also interested in how the biochemical pathways we discovered promote the formation and<br>maintenance of neuronal networks in the developing vertebrate brain and how these mechanisms are compromised in psychiatric and neurodegenerative diseases.<ins class='diffins'> </ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0247026</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="12149599">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58861/Research">User data of ID is 58861</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000061</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="12641341">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58634/Research">User data of ID is 58634</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[<span style='color:red;']</span>[p]</span>Dr. Brown studies memory difficulties with neurological disorders. He is studying different cognitive tests to determine which seem to best differentiate Alzheimer's related cognitive decline from non-Alzheimer's causes such as the chronic effects of medical difficulties (cardiovascular disease, obesity, diabetes, etc.). This is important in that a patient with a medically caused form of cognitive impairment may be able to reduce decline through better control of their conditions, whereas Alzheimer’s Disease may require other forms of intervention or have different expectations for patients. Though biomarkers are also being studied, cognitive markers are also important for identifying actual symptoms of the disorder, and the need for treatment.<span style='color:red;']</span>[/p]</span>
+<span style='color:red;']</span>[p]</span>Though he has a general interest in cognition, Dr. Brown is most known for the development of the Brown Location Test which is a test of visual memory that does not require drawing skills, is not verbally encodable, and lacks a clear pattern, unlike many of the well-established visual memory tests. This has demonstrated validity in Temporal Lobe Epilepsy Patients, and is currently being studied in a variety of other patient populations.<span style='color:red;']</span>[/p]</span>
+<span style='color:red;']</span>[p]</span>He is also further exploring measures of cognitive efficiency. The inability to think efficiently may help explain why some individuals with cognitive complaints from the real world may do well on some test batteries; even though objective third party observers have noticed their difficulties. Many neuropsychological tests may have difficulty measuring thinking efficiency because they are designed to measure one key function; whereas thinking efficiency requires multiple functions working together. This tends to rely on connectivity between areas of the brain, which is heavily reliant on white matter pathways. Thus, cognitive efficiency is an important area to study in disorders with white matter abnormalities (e.g., Multiple Sclerosis).<span style='color:red;']</span>[/p]</span>]</span>. Actual:<span style='color:red;']</span>[<span style='color:red;']</span>[p]</span>Dr. Brown studies memory difficulties with neurological disorders. He is studying different cognitive tests to determine which seem to best differentiate Alzheimer's related cognitive decline from non-Alzheimer's causes such as the chronic effects of medical difficulties (cardiovascular disease, obesity, diabetes, etc.). This is important in that a patient with a medically caused form of cognitive impairment may be able to reduce decline through better control of their conditions, whereas Alzheimer&rsquo;s Disease may require other forms of intervention or have different expectations for patients. Though biomarkers are also being studied, cognitive markers are also important for identifying actual symptoms of the disorder, and the need for treatment.<span style='color:red;']</span>[/p]</span>
+<span style='color:red;']</span>[p]</span>Though he has a general interest in cognition, Dr. Brown is most known for the development of the Brown Location Test which is a test of visual memory that does not require drawing skills, is not verbally encodable, and lacks a clear pattern, unlike many of the well-established visual memory tests. This has demonstrated validity in Temporal Lobe Epilepsy Patients, and is currently being studied in a variety of other patient populations.<span style='color:red;']</span>[/p]</span>
+<span style='color:red;']</span>[p]</span>He is also further exploring measures of cognitive efficiency. The inability to think efficiently may help explain why some individuals with cognitive complaints from the real world may do well on some test batteries; even though objective third party observers have noticed their difficulties. Many neuropsychological tests may have difficulty measuring thinking efficiency because they are designed to measure one key function; whereas thinking efficiency requires multiple functions working together. This tends to rely on connectivity between areas of the brain, which is heavily reliant on white matter pathways. Thus, cognitive efficiency is an important area to study in disorders with white matter abnormalities (e.g., Multiple Sclerosis).<span style='color:red;']</span>[/p]</span>]</span>. Comparing Research Summary(ies)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li><p>Dr. Brown studies memory difficulties with neurological disorders. He is studying different cognitive tests to determine which seem to best differentiate Alzheimer's related cognitive decline from non-Alzheimer's causes such as the chronic effects of medical difficulties (cardiovascular disease, obesity, diabetes, etc.). This is important in that a patient with a medically caused form of cognitive impairment may be able to reduce decline through better control of their conditions, whereas Alzheimer’s Disease may require other forms of intervention or have different expectations for patients. Though biomarkers are also being studied, cognitive markers are also important for identifying actual symptoms of the disorder, and the need for treatment.</p>
+<p>Though he has a general interest in cognition, Dr. Brown is most known for the development of the Brown Location Test which is a test of visual memory that does not require drawing skills, is not verbally encodable, and lacks a clear pattern, unlike many of the well-established visual memory tests. This has demonstrated validity in Temporal Lobe Epilepsy Patients, and is currently being studied in a variety of other patient populations.</p>
+<p>He is also further exploring measures of cognitive efficiency. The inability to think efficiently may help explain why some individuals with cognitive complaints from the real world may do well on some test batteries; even though objective third party observers have noticed their difficulties. Many neuropsychological tests may have difficulty measuring thinking efficiency because they are designed to measure one key function; whereas thinking efficiency requires multiple functions working together. This tends to rely on connectivity between areas of the brain, which is heavily reliant on white matter pathways. Thus, cognitive efficiency is an important area to study in disorders with white matter abnormalities (e.g., Multiple Sclerosis).</p>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										<p>Dr. Brown studies memory difficulties with neurological disorders. He is studying different cognitive tests to determine which seem to best differentiate Alzheimer's related cognitive decline from non-Alzheimer's causes such as the chronic effects of medical difficulties (cardiovascular disease, obesity, diabetes, etc.). This is important in that a patient with a medically caused form of cognitive impairment may be able to reduce decline through better control of their conditions, whereas Alzheimer<del class='diffmod'>’s</del><ins class='diffmod'>&rsquo;s</ins> Disease may require other forms of intervention or have different expectations for patients. Though biomarkers are also being studied, cognitive markers are also important for identifying actual symptoms of the disorder, and the need for treatment.</p>
+<p>Though he has a general interest in cognition, Dr. Brown is most known for the development of the Brown Location Test which is a test of visual memory that does not require drawing skills, is not verbally encodable, and lacks a clear pattern, unlike many of the well-established visual memory tests. This has demonstrated validity in Temporal Lobe Epilepsy Patients, and is currently being studied in a variety of other patient populations.</p>
+<p>He is also further exploring measures of cognitive efficiency. The inability to think efficiently may help explain why some individuals with cognitive complaints from the real world may do well on some test batteries; even though objective third party observers have noticed their difficulties. Many neuropsychological tests may have difficulty measuring thinking efficiency because they are designed to measure one key function; whereas thinking efficiency requires multiple functions working together. This tends to rely on connectivity between areas of the brain, which is heavily reliant on white matter pathways. Thus, cognitive efficiency is an important area to study in disorders with white matter abnormalities (e.g., Multiple Sclerosis).</p>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0270212</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="10151776">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main success">
+			SUCCESS</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58755/Research">User data of ID is 58755</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>The Xu lab is is interested in utilizing model organisms to understand
+cancer biology and developmental mechanisms. In particular, the lab is
+developing and using new genetic approaches to identify genes that are
+involved in tumor growth and metastasis, and are exploring the
+developmental and biochemical functions of these genes.
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										The Xu lab is is interested in utilizing model organisms to understand
+cancer biology and developmental mechanisms. In particular, the lab is
+developing and using new genetic approaches to identify genes that are
+involved in tumor growth and metastasis, and are exploring the
+developmental and biochemical functions of these genes.
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000065</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="10290564">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/60863/Research">User data of ID is 60863</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000065</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="11091604">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_WITH_EXPLANATION</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58810/Research">User data of ID is 58810</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Our lab focuses of the means by which specialized cells of the retina, photoreceptors, survive or die in a range of blinding disorders. Understanding these mechanisms provides insight into how they could be delayed to preserve sight. We are also interested in evolutionary morphology, particularly of the retina, in a wide range of vertebrate species.]</span>. Actual:<span style='color:red;']</span>[Our lab focuses of the means by which specialized cells of the retina, photoreceptors, survive or die in a range of blinding disorders. Understanding these mechanisms provides insight into how they could be delayed to preserve sight. We are also interested in evolutionary morphology, particularly of the retina, in a wide range of vertebrate species. ]</span>. Comparing Research Summary(ies)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Our lab focuses of the means by which specialized cells of the retina, photoreceptors, survive or die in a range of blinding disorders. Understanding these mechanisms provides insight into how they could be delayed to preserve sight. We are also interested in evolutionary morphology, particularly of the retina, in a wide range of vertebrate species.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Our lab focuses of the means by which specialized cells of the retina, photoreceptors, survive or die in a range of blinding disorders. Understanding these mechanisms provides insight into how they could be delayed to preserve sight. We are also interested in evolutionary morphology, particularly of the retina, in a wide range of vertebrate species.<ins class='diffins'> </ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0236803</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="11472557">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/58740/Research">User data of ID is 58740</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Our lab uses structural biology methods to study biological systems that have direct health impacts. A primary interest is innate immune systems, in particular, host cellular factors that fight viral infections such as those in the human bodyâ€™s first line of defense against HIV. Another major interest is the mechanisms of fatty acid synthase (FAS), the cellular fat factory, and its close relationship to polyketide synthase (PKS), the cellular machinery that produces the most important natural products widely used in human medicine. Our goal is to provide a structural basis for understanding these systems and use the information gained to direct structure-based drug design of anti-viral, anti-fungal, and antibiotic compounds. Screening of inhibitors will be carried out at the Yale Chemical Genomics Screening Facility. Additionally, we are interested in the development of X-ray crystallographic methods that will push the limits of this technique.<span style='color:red;']</span>[p]</span><span style='color:red;']</span>[/p]</span>]</span>. Actual:<span style='color:red;']</span>[Our lab uses structural biology methods to study biological systems that have direct health impacts. A primary interest is innate immune systems, in particular, host cellular factors that fight viral infections such as those in the human body’s first line of defense against HIV. Another major interest is the mechanisms of fatty acid synthase (FAS), the cellular fat factory, and its close relationship to polyketide synthase (PKS), the cellular machinery that produces the most important natural products widely used in human medicine. Our goal is to provide a structural basis for understanding these systems and use the information gained to direct structure-based drug design of anti-viral, anti-fungal, and antibiotic compounds. Screening of inhibitors will be carried out at the Yale Chemical Genomics Screening Facility. Additionally, we are interested in the development of X-ray crystallographic methods that will push the limits of this technique.<span style='color:red;']</span>[p]</span><span style='color:red;']</span>[/p]</span>]</span>. Comparing Research Summary(ies)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>Our lab uses structural biology methods to study biological systems that have direct health impacts. A primary interest is innate immune systems, in particular, host cellular factors that fight viral infections such as those in the human bodyâ€™s first line of defense against HIV. Another major interest is the mechanisms of fatty acid synthase (FAS), the cellular fat factory, and its close relationship to polyketide synthase (PKS), the cellular machinery that produces the most important natural products widely used in human medicine. Our goal is to provide a structural basis for understanding these systems and use the information gained to direct structure-based drug design of anti-viral, anti-fungal, and antibiotic compounds. Screening of inhibitors will be carried out at the Yale Chemical Genomics Screening Facility. Additionally, we are interested in the development of X-ray crystallographic methods that will push the limits of this technique.<p></p>
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Our lab uses structural biology methods to study biological systems that have direct health impacts. A primary interest is innate immune systems, in particular, host cellular factors that fight viral infections such as those in the human body<del class='diffmod'>â€™s</del><ins class='diffmod'>’s</ins> first line of defense against HIV. Another major interest is the mechanisms of fatty acid synthase (FAS), the cellular fat factory, and its close relationship to polyketide synthase (PKS), the cellular machinery that produces the most important natural products widely used in human medicine. Our goal is to provide a structural basis for understanding these systems and use the information gained to direct structure-based drug design of anti-viral, anti-fungal, and antibiotic compounds. Screening of inhibitors will be carried out at the Yale Chemical Genomics Screening Facility. Additionally, we are interested in the development of X-ray crystallographic methods that will push the limits of this technique.<p></p>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0238071</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Research Summary(ies)</b><br/>
+		<a id="10646102">UserResearchInfo_Summary</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10646102">Profile data of UPI 10646102</a><br/>
+		<a href="http://ypms-service-a7.azurewebsites.net/service/Users/59712/Research">User data of ID is 59712</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>NULL</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000061</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>

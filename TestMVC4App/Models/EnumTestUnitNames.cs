@@ -43,6 +43,10 @@ namespace TestMVC4App.Models
             UserContactLocationInfo_LabWebsites_Links,
             UserContactLocationInfo_Addresses_StreetAddress,
             UserContactLocationInfo_Addresses_ZipCodes,
-            UserContactLocationInfo_Addresses_IsMailing
+            UserContactLocationInfo_Addresses_IsMailing,
+            UserPublicationInfo_Titles,
+            UserPublicationInfo_Citations,
+            UserResearchInfo_Summary,
+            UserResearchInfo_Overview
     }
 }

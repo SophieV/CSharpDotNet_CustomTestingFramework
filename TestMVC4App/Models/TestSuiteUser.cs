@@ -85,7 +85,7 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.StartWritingDetailedReports();
 
-            upiList = new HashSet<int>() { 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949 };
+            upiList = new HashSet<int>() { 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949 };
 
             bool keepGoing = true;
             //loop on the list of all UPIs retrieved from the old database
@@ -192,6 +192,16 @@ namespace TestMVC4App.Models
                                 allTheTests.Add(userContactLocationInfoTest);
                                 userContactLocationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
                                 userContactLocationInfoTest.RunAllTests();
+
+                                TestUnitUserPublicationInfo userPublicationInfoTest = new TestUnitUserPublicationInfo(this);
+                                allTheTests.Add(userPublicationInfoTest);
+                                userPublicationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/featuredPublication"), usersClient, upi, userId);
+                                userPublicationInfoTest.RunAllTests();
+
+                                TestUnitUserResearchInfo userResearchInfoTest = new TestUnitUserResearchInfo(this);
+                                allTheTests.Add(userResearchInfoTest);
+                                userResearchInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
+                                userResearchInfoTest.RunAllTests();
 
                                 foreach (var test in allTheTests)
                                 {
