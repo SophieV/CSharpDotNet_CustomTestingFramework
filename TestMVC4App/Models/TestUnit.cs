@@ -152,6 +152,26 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<Dictionary<OldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<OldServiceFieldsAsKeys, string>> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport(testFullName, testDescription);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(userId,
+                                              upi,
+                                              this.Container.BuildOldServiceFullURL(upi),
+                                              this.BuildNewServiceURL(userId),
+                                              resultReport);
+        }
+
         public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, bool stringPartialMatch = false)
         {
             var watch = new Stopwatch();

@@ -122,7 +122,7 @@ namespace TestMVC4App.Models
 
 
                 this.resultReport.UpdateResult(EnumResultSeverityType.ERROR);
-                this.resultReport.ErrorMessage = "The list of ids and names compared are not equal";
+                this.resultReport.ErrorMessage = "The lists of ids and names compared are not equal";
             }
 
             return shouldContinueTesting;

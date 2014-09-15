@@ -29,6 +29,50 @@
 </tr>
 
 
+<tr>
+	<td class="td_main"><b>Comparing AltFirstName (if needed)</b><br/>
+		<a id="10106216">UserGeneralInfo_AltFirstName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10106216">Profile data of UPI 10106216</a><br/>
+		<a href="http://ypms-service-a8.azurewebsites.net/service/Users/10106216/GeneralInfo">User data of ID is 58968</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[AgnÃ¨s]</span>. Actual:<span style='color:red;']</span>[Agnès]</span>. Comparing AltFirstName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>AgnÃ¨s
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<br/><br/>
+										<li>										Agn<del class='diffmod'>Ã¨s</del><ins class='diffmod'>ès</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0474428</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
 </table>
 </body>
 </html>

@@ -421,7 +421,7 @@ namespace TestMVC4App.Models
 
                 foreach (string orphanParentId in orphans.Select(x=>x.ParentId).Distinct())
                 {
-                    System.Diagnostics.Debug.WriteLine("can't find parent " + orphanParentId);
+                    //System.Diagnostics.Debug.WriteLine("can't find parent " + orphanParentId);
                     downloadedParent = organizationsClient.GetOrganization(int.Parse(orphanParentId));
                     downloadedParentDescriptor = new OrganizationTreeDescriptor()
                     {

@@ -31,7 +31,7 @@ namespace TestMVC4App.Models
 
             try
             {
-                value = HttpUtility.HtmlDecode(elements.Where(x => x.Name == nodeName).Select(x => x.Value).First());
+                value = elements.Where(x => x.Name == nodeName).Select(x => x.Value).First();
             }
             catch (Exception)
             {
@@ -39,6 +39,39 @@ namespace TestMVC4App.Models
             }
 
             return value;
+        }
+
+        public static HashSet<Dictionary<OldServiceFieldsAsKeys,string>> ParseListSimpleValuesStructure(IEnumerable<XElement> elements, string nodeName, OldServiceFieldsAsKeys[] childNodeNames)
+        {
+            var values = new HashSet<Dictionary<OldServiceFieldsAsKeys, string>>();
+            Dictionary<OldServiceFieldsAsKeys,string> properties;
+
+            var parentItems = elements.Where(x => x.Name == nodeName);
+
+            if (parentItems.Count() > 0)
+            {
+                foreach (var parentItem in parentItems)
+                {
+                    properties = new Dictionary<OldServiceFieldsAsKeys, string>();
+                    foreach (var childNodeName in childNodeNames)
+                    {
+                        try
+                        {
+                            properties.Add(childNodeName,parentItem.Descendants(childNodeName.ToString()).Select(x => x.Value).First());
+                        }
+                        catch (Exception)
+                        {
+                            // there is no existing attribute to parse
+                            // we need to make sure that there are just as many values as expected
+                            properties.Add(childNodeName,string.Empty);
+                        }
+                    }
+
+                    values.Add(properties);
+                }
+            }
+
+            return values;
         }
 
         public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName, string childNodeName)

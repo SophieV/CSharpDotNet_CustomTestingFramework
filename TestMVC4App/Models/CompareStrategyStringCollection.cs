@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -208,13 +209,28 @@ namespace TestMVC4App.Models
             var missingOldValues = this.resultReport.OldValues.Except(this.resultReport.NewValues);
             var missingNewValues = this.resultReport.NewValues.Except(this.resultReport.OldValues);
 
-                IEnumerable<string> trimmedMissingOldValues = missingOldValues.Select(s => s.Trim());
-                IEnumerable<string> trimmedMissingNewValues = missingNewValues.Select(s => s.Trim());
+                IEnumerable<string> trimmedMissingOldValues;
+                try 
+                {
+                    trimmedMissingOldValues = missingOldValues.Select(s => s.Trim());
+
+                } catch (Exception)
+                {
+                    trimmedMissingOldValues = new List<string>();
+                }
+
+                IEnumerable<string> trimmedMissingNewValues;
+                try
+                {
+                    trimmedMissingNewValues = missingNewValues.Select(s => s.Trim());
+
+                }
+                catch (Exception)
+                {
+                    trimmedMissingNewValues = new List<string>();
+                }
 
                 var leftovers = trimmedMissingOldValues.Except(trimmedMissingNewValues);
-#if DEBUG
-                System.Diagnostics.Debug.WriteLine(leftovers.Count());
-#endif
 
                 if (leftovers.Count() != missingOldValues.Count())
                 {

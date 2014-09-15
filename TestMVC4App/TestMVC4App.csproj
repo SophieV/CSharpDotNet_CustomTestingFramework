@@ -182,6 +182,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\ComparerStructureWithKeys.cs" />
+    <Compile Include="Models\ComparerStructureWithKeysTrimmed.cs" />
+    <Compile Include="Models\CompareStrategyStructureWithKeys.cs" />
     <Compile Include="Models\EnumTestUnitNames.cs" />
     <Compile Include="Models\CompareStrategyContextSwitcher.cs" />
     <Compile Include="Models\CompareStrategyOrganization.cs" />
@@ -196,6 +199,7 @@
     <Compile Include="Models\OrganizationTreeDescriptor.cs" />
     <Compile Include="Models\ParsingHelper.cs" />
     <Compile Include="Models\TestUnitUserAddress.cs" />
+    <Compile Include="Models\TestUnitUserEducationTrainingInfo.cs" />
     <Compile Include="Models\TestUnitUserLabWebsite.cs" />
     <Compile Include="Models\TestUnitUserContactLocationInfo.cs" />
     <Compile Include="Models\TestUnitUserOrganization.cs" />
