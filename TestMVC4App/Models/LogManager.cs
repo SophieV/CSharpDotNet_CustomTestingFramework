@@ -14,8 +14,9 @@ namespace TestMVC4App.Models
     {
         private readonly bool isDebugMode = false;
 
-        private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_User_PerProfile.html";
-        private const string SUMMARY_FILENAME = "QA_Reporting_Summary_User_MAIN.html";
+        private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_UPIs.htm";
+        private const string SUMMARY_FILENAME = "index.html";
+        private const string HTM_EXTENSION = ".htm";
 
         private static volatile LogManager instance;
         private static object syncRoot = new Object();
@@ -158,7 +159,7 @@ namespace TestMVC4App.Models
                 {
                     UPI = upi,
                     ResultSeverity_ByTestName = resultByTestName,
-                    FileLinkEnd = "_" + countFilesGenerated + ".html",
+                    FileLinkEnd = "_" + countFilesGenerated + HTM_EXTENSION,
                     Duration = duration
                 };
                 var template = new ProfileReport();
@@ -232,7 +233,7 @@ namespace TestMVC4App.Models
 
                 foreach (EnumTestUnitNames testName in allTestNames)
                 {
-                    filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + ".html");
+                    filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + HTM_EXTENSION);
 
                     streamWriter = new StreamWriter(filePath);
                     htmlWritersForDetailedReports_ByTestName.Add(testName, new HtmlTextWriter(streamWriter));
@@ -391,7 +392,7 @@ namespace TestMVC4App.Models
                 FrequencySuccess_ByTestName = frequencySuccess_ByTestName,
                 SampleData_ByTestName = sampleDataByTestName,
                 Duration = duration,
-                FileLinkEnd = "_" + countFilesGenerated + ".html",
+                FileLinkEnd = "_" + countFilesGenerated + HTM_EXTENSION,
                 AverageDurationPerProfile = averageDurationPerUpi,
                 AverageDuration_ByTestName = averageDuration_ByTestName,
                 ErrorHappened = errorHappened,
