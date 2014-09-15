@@ -12,7 +12,7 @@ namespace TestMVC4App.Models
 {
     public sealed class LogManager : IDisposable
     {
-        private readonly bool isDebugMode = true;
+        private readonly bool isDebugMode = false;
 
         private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_User_PerProfile.html";
         private const string SUMMARY_FILENAME = "QA_Reporting_Summary_User_MAIN.html";

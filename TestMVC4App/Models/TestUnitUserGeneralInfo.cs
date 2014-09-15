@@ -182,6 +182,10 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "middle");
+            if (string.IsNullOrEmpty(oldValue))
+            {
+                oldValue = "False";
+            }
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
