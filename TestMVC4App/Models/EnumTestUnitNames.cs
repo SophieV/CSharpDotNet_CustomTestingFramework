@@ -53,6 +53,10 @@ namespace TestMVC4App.Models
             UserHonorServiceInfo_Services,
             UserPatientCareInfo_AcceptedReferral,
             UserPatientCareInfo_BoardCertifications,
-            UserPatientCareInfo_CancersTreated
+            UserPatientCareInfo_CancersTreated,
+            UserPatientCareInfo_MyChart,
+            UserPatientCareInfo_IsSeeingNewPatients,
+            UserPatientCareInfo_IsSeeingPatientType,
+            UserPatientCareInfo_PhysicianBio
     }
 }

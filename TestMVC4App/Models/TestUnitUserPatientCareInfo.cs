@@ -42,7 +42,110 @@ namespace TestMVC4App.Models
         protected override void RunAllSingleTests()
         {
             UserPatientCareInfo newServiceInfo = newServiceAccessor.GetUserPatientCareById(userId);
+            UserPatientCareInfo_PhysicianBio(newServiceInfo);
+            UserPatientCareInfo_AcceptedReferral(newServiceInfo);
+            UserPatientCareInfo_MyChart(newServiceInfo);
+            UserPatientCareInfo_IsSeeingNewPatients(newServiceInfo);
+            UserPatientCareInfo_IsSeeingPatientType(newServiceInfo);
+            UserEducationTrainingInfo_BoardCertifications(newServiceInfo);
+            UserEducationTrainingInfo_CancersTreated(newServiceInfo);
 
+        }
+
+        private void UserPatientCareInfo_PhysicianBio(UserPatientCareInfo newServiceInfo)
+        {
+            string value = string.Empty;
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.PhysicianBio != null)
+            {
+                value = newServiceInfo.PatientCare.PhysicianBio;
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_PhysicianBio, "Comparing Physician Bio", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.physicianBio.ToString(), value);
+        }
+
+        private void UserPatientCareInfo_MyChart(UserPatientCareInfo newServiceInfo)
+        {
+            string value = string.Empty;
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsMyChartAvailable != null)
+            {
+                if (newServiceInfo.PatientCare.IsMyChartAvailable)
+                {
+                    value = "1";
+                }
+                else
+                {
+                    value = "0";
+                }
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_MyChart, "Comparing myChart", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.myChart.ToString(), value);
+        }
+
+        private void UserPatientCareInfo_IsSeeingNewPatients(UserPatientCareInfo newServiceInfo)
+        {
+            string value = string.Empty;
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingPatients != null)
+            {
+                if (newServiceInfo.PatientCare.IsSeeingPatients)
+                {
+                    value = "Yes";
+                }
+                else
+                {
+                    value = "No";
+                }
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_IsSeeingNewPatients, "Comparing Seeing New Patients", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.newPatients.ToString(), value);
+        }
+
+        private void UserPatientCareInfo_IsSeeingPatientType(UserPatientCareInfo newServiceInfo)
+        {
+            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(oldServiceData, EnumOldServiceFieldsAsKeys.patientsGroups.ToString()));
+            var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
+
+            var newValues = new HashSet<string>();
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingAdults != null)
+            {
+                if (newServiceInfo.PatientCare.IsSeeingAdults)
+                {
+                    newValues.Add("Adult");
+                }
+            }
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingChild != null)
+            {
+                if (newServiceInfo.PatientCare.IsSeeingChild)
+                {
+                    newValues.Add("Child");
+                }
+            }
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingAdolescent != null)
+            {
+                if (newServiceInfo.PatientCare.IsSeeingAdolescent)
+                {
+                    newValues.Add("Adolescent");
+                }
+            }
+
+            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingGeriatric != null)
+            {
+                if (newServiceInfo.PatientCare.IsSeeingGeriatric)
+                {
+                    newValues.Add("Geriatric");
+                }
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_IsSeeingPatientType, "Comparing Patient Type(s)", this.userId, this.upi, oldValues, newValues);
+        }
+
+        private void UserPatientCareInfo_AcceptedReferral(UserPatientCareInfo newServiceInfo)
+        {
             string value = string.Empty;
 
             if (newServiceInfo.PatientCare != null && !string.IsNullOrEmpty(newServiceInfo.PatientCare.AcceptedReferral))
@@ -51,9 +154,6 @@ namespace TestMVC4App.Models
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_AcceptedReferral, "Comparing AcceptedReferral", this.userId, this.upi, oldServiceData, "acceptReferrals", value);
-            UserEducationTrainingInfo_BoardCertifications(newServiceInfo);
-            UserEducationTrainingInfo_CancersTreated(newServiceInfo);
-
         }
 
         private void UserEducationTrainingInfo_BoardCertifications(UserPatientCareInfo newServiceInfo)

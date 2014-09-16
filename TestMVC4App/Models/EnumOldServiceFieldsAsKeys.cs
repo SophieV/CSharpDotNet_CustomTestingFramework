@@ -29,6 +29,10 @@ namespace TestMVC4App.Models
         description,
         boardCertification,
         certificationYear,
-        specialty
+        specialty,
+        newPatients,
+        patientsGroups,
+        myChart,
+        physicianBio
     }
 }
