@@ -12,8 +12,6 @@ namespace TestMVC4App.Models
 {
     public sealed class LogManager : IDisposable
     {
-        private readonly bool isDebugMode = false;
-
         private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_UPIs.htm";
         private const string SUMMARY_FILENAME = "index.html";
         private const string HTM_EXTENSION = ".htm";
@@ -115,7 +113,7 @@ namespace TestMVC4App.Models
                 duration_ByTestName[resultReport.TestName].Add(resultReport.Duration);
 
                 // log only if added value
-                if (isDebugMode || (resultReport.Result != EnumResultSeverityType.SUCCESS && resultReport.Result != EnumResultSeverityType.WARNING_NO_DATA))
+                if (TestSuiteUser.IsDebugMode || (resultReport.Result != EnumResultSeverityType.SUCCESS && resultReport.Result != EnumResultSeverityType.WARNING_NO_DATA))
                 {
 
                     var detailedReportData = new SharedDetailedReportData(resultReport)
@@ -126,21 +124,59 @@ namespace TestMVC4App.Models
                         NewUrl = newServiceUrl
                     };
 
-                    var template = new TestNameDetailedReport();
-                    template.Session = new Dictionary<string, object>()
-            {
-                { "DetailedReportDataObject", detailedReportData }
-            };
-
-                    template.Initialize();
-
-                    if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
+                    switch (resultReport.DisplayFormat)
                     {
-                        htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(template.TransformText());
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("no writer for " + resultReport.TestName);
+                        case EnumResultDisplayFormat.ListOfValues:
+                            var templateListValues = new TestNameDetailedReport_ListValues();
+                            templateListValues.Session = new Dictionary<string, object>()
+                            {
+                                { "DetailedReportDataObject", detailedReportData }
+                            };
+
+                            templateListValues.Initialize();
+                            if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
+                            {
+                                htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(templateListValues.TransformText());
+                            }
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine("no writer for " + resultReport.TestName);
+                            }
+                            break;
+                        case EnumResultDisplayFormat.OrganizationTree:
+                            var templateOrgTree = new TestNameDetailedReport_OrganizationTree();
+                            templateOrgTree.Session = new Dictionary<string, object>()
+                            {
+                                { "DetailedReportDataObject", detailedReportData }
+                            };
+
+                            templateOrgTree.Initialize();
+                            if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
+                            {
+                                htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(templateOrgTree.TransformText());
+                            }
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine("no writer for " + resultReport.TestName);
+                            }
+                            break;
+                        case EnumResultDisplayFormat.StructureOfValues:
+                            var templateListStructures = new TestNameDetailedReport_ListStructures();
+                            templateListStructures.Session = new Dictionary<string, object>()
+                            {
+                                { "DetailedReportDataObject", detailedReportData }
+                            };
+
+                            templateListStructures.Initialize();
+                            if (htmlWritersForDetailedReports_ByTestName.ContainsKey(resultReport.TestName))
+                            {
+                                htmlWritersForDetailedReports_ByTestName[resultReport.TestName].WriteLine(templateListStructures.TransformText());
+                            }
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine("no writer for " + resultReport.TestName);
+                            }
+                            break;
                     }
                 }
 

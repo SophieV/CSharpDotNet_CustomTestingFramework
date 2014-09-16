@@ -58,11 +58,15 @@ namespace TestMVC4App.Templates
 
         public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> OldStructureValues { get; private set; }
+
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
         public HashSet<string> NewValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
+
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> NewStructureValues { get; private set; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
@@ -81,6 +85,8 @@ namespace TestMVC4App.Templates
             this.NewValues = resultReport.NewValues;
             this.OldOrganizationValues = resultReport.OldOrganizationValues;
             this.NewOrganizationValues = resultReport.NewOrganizationValues;
+            this.OldStructureValues = resultReport.OldStructureValues;
+            this.NewStructureValues = resultReport.NewStructureValues;
             this.OldTreeRoot = resultReport.OldTreeRoot;
             this.NewTreeRoot = resultReport.NewTreeRoot;
             this.Duration = resultReport.Duration;

@@ -21,7 +21,7 @@ namespace TestMVC4App.Models
             }
         }
 
-        public CompareStrategyContextSwitcher(HashSet<Dictionary<OldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<OldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
+        public CompareStrategyContextSwitcher(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
         {
             compareStrategy = new CompareStrategyStructureWithKeys(oldValues, newValues, resultReport);
         }

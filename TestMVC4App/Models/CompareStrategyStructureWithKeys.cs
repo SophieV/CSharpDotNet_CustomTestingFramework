@@ -7,15 +7,15 @@ namespace TestMVC4App.Models
 {
     public class CompareStrategyStructureWithKeys : CompareStrategy
     {
-        private List<Dictionary<OldServiceFieldsAsKeys, string>> oldList;
-        private List<Dictionary<OldServiceFieldsAsKeys, string>> newList;
+        private HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldList;
+        private HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newList;
         private int leftOversOldCount = -1;
 
-        public CompareStrategyStructureWithKeys(HashSet<Dictionary<OldServiceFieldsAsKeys,string>> oldValues, HashSet<Dictionary<OldServiceFieldsAsKeys,string>> newValues, ResultReport resultReport)
-            : base(null,null,resultReport)
+        public CompareStrategyStructureWithKeys(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> newValues, ResultReport resultReport)
+            : base(oldValues,newValues,resultReport)
         {
-            this.oldList = oldValues.ToList();
-            this.newList = newValues.ToList();
+            this.oldList = oldValues;
+            this.newList = newValues;
         }
         public override void Investigate()
         {

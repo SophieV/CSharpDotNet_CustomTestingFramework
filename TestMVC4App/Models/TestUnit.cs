@@ -152,7 +152,7 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<Dictionary<OldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<OldServiceFieldsAsKeys, string>> newValues)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();

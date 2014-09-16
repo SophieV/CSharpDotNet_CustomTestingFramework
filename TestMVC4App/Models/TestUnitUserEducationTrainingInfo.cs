@@ -8,15 +8,6 @@ using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
-    public enum OldServiceFieldsAsKeys
-    {
-        departmentName, 
-        startYear, 
-        endYear, 
-        position, 
-        locationName
-    }
-
     public class TestUnitUserEducationTrainingInfo : TestUnit
     {
         private UsersClient newServiceAccessor;
@@ -51,68 +42,68 @@ namespace TestMVC4App.Models
         {
             UserEducationTrainingInfo newServiceInfo = newServiceAccessor.GetUserEducationTrainingById(userId);
 
-            var trainingsOld = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, "training", new OldServiceFieldsAsKeys[] { OldServiceFieldsAsKeys.departmentName, 
-                                                                                                                                       OldServiceFieldsAsKeys.startYear, 
-                                                                                                                                       OldServiceFieldsAsKeys.endYear, 
-                                                                                                                                       OldServiceFieldsAsKeys.position, 
-                                                                                                                                       OldServiceFieldsAsKeys.locationName });
+            var trainingsOld = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, "training", new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.departmentName, 
+                                                                                                                                       EnumOldServiceFieldsAsKeys.startYear, 
+                                                                                                                                       EnumOldServiceFieldsAsKeys.endYear, 
+                                                                                                                                       EnumOldServiceFieldsAsKeys.position, 
+                                                                                                                                       EnumOldServiceFieldsAsKeys.locationName });
 
             // TODO: Location belongs in a dedicated test
-            var trainingsNew = new HashSet<Dictionary<OldServiceFieldsAsKeys, string>>();
+            var trainingsNew = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
-            Dictionary<OldServiceFieldsAsKeys, string> properties;
+            Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
 
             foreach (var training in newServiceInfo.Trainings)
             {
-                properties = new Dictionary<OldServiceFieldsAsKeys, string>();
+                properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
 
                 try
                 {
-                    properties.Add(OldServiceFieldsAsKeys.departmentName, training.Department);
+                    properties.Add(EnumOldServiceFieldsAsKeys.departmentName, training.Department);
                 } catch (Exception)
                 {
                     // make sure a value is present for each index
-                    properties.Add(OldServiceFieldsAsKeys.departmentName, string.Empty);
+                    properties.Add(EnumOldServiceFieldsAsKeys.departmentName, string.Empty);
                 }
 
                 try
                 {
-                    properties.Add(OldServiceFieldsAsKeys.startYear,training.StartYear.ToString());
+                    properties.Add(EnumOldServiceFieldsAsKeys.startYear,training.StartYear.ToString());
                 }
                 catch (Exception)
                 {
                     // make sure a value is present for each index
-                    properties.Add(OldServiceFieldsAsKeys.startYear, string.Empty);
+                    properties.Add(EnumOldServiceFieldsAsKeys.startYear, string.Empty);
                 }
 
                 try
                 {
-                    properties.Add(OldServiceFieldsAsKeys.endYear, training.EndYear.ToString());
+                    properties.Add(EnumOldServiceFieldsAsKeys.endYear, training.EndYear.ToString());
                 }
                 catch (Exception)
                 {
                     // make sure a value is present for each index
-                    properties.Add(OldServiceFieldsAsKeys.endYear, string.Empty);
+                    properties.Add(EnumOldServiceFieldsAsKeys.endYear, string.Empty);
                 }
 
                 try
                 {
-                    properties.Add(OldServiceFieldsAsKeys.position, training.Position);
+                    properties.Add(EnumOldServiceFieldsAsKeys.position, training.Position);
                 }
                 catch (Exception)
                 {
                     // make sure a value is present for each index
-                    properties.Add(OldServiceFieldsAsKeys.position, string.Empty);
+                    properties.Add(EnumOldServiceFieldsAsKeys.position, string.Empty);
                 }
 
                 try
                 {
-                    properties.Add(OldServiceFieldsAsKeys.locationName, training.Institution);
+                    properties.Add(EnumOldServiceFieldsAsKeys.locationName, training.Institution);
                 }
                 catch (Exception)
                 {
                     // make sure a value is present for each index
-                    properties.Add(OldServiceFieldsAsKeys.locationName, string.Empty);
+                    properties.Add(EnumOldServiceFieldsAsKeys.locationName, string.Empty);
                 }
 
                 trainingsNew.Add(properties);

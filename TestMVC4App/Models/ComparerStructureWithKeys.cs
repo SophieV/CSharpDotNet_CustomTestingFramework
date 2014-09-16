@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class ComparerStructureWithKeys : IEqualityComparer<Dictionary<OldServiceFieldsAsKeys,string>>
+    public class ComparerStructureWithKeys : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys,string>>
     {
-        bool IEqualityComparer<Dictionary<OldServiceFieldsAsKeys, string>>.Equals(Dictionary<OldServiceFieldsAsKeys, string> x, Dictionary<OldServiceFieldsAsKeys, string> y)
+        bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, string>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, string> x, Dictionary<EnumOldServiceFieldsAsKeys, string> y)
         {
             bool areEqual = true;
             System.Diagnostics.Debug.WriteLine("TEST");
@@ -38,7 +38,7 @@ namespace TestMVC4App.Models
             return areEqual;
         }
 
-        int IEqualityComparer<Dictionary<OldServiceFieldsAsKeys, string>>.GetHashCode(Dictionary<OldServiceFieldsAsKeys, string> obj)
+        int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, string>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, string> obj)
         {
             System.Diagnostics.Debug.WriteLine(obj.Values.ToString().ToLower().GetHashCode());
             return obj.Values.ToString().ToLower().GetHashCode();

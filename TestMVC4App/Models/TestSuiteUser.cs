@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using YSM.PMS.Web.Service.Clients;
 using System.Diagnostics;
 using System.Xml.XPath;
+using System.Threading;
 
 namespace TestMVC4App.Models
 {
@@ -21,6 +22,8 @@ namespace TestMVC4App.Models
         {
             get { return "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI="; }
         }
+
+        public static bool IsDebugMode { get { return true;  } }
 
         private const int MaxProfilesForOneFile = 50000;
 
@@ -85,7 +88,10 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.StartWritingDetailedReports();
 
-            upiList = new HashSet<int>() { 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225 };
+            if (TestSuiteUser.IsDebugMode)
+            {
+                upiList = new HashSet<int>() { 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225 };
+            }
 
             bool keepGoing = true;
             //loop on the list of all UPIs retrieved from the old database
@@ -152,6 +158,12 @@ namespace TestMVC4App.Models
                     var allTheResults = new HashSet<ResultReport>();
 
                     XDocument oldServiceXMLOutputDocument = null;
+                    TestUnitUserBasicInfo userBasicInfoTest;
+                    TestUnitUserGeneralInfo userGeneralInfoTest;
+                    TestUnitUserContactLocationInfo userContactLocationInfoTest;
+                    TestUnitUserPublicationInfo userPublicationInfoTest;
+                    TestUnitUserResearchInfo userResearchInfoTest;
+                    TestUnitUserEducationTrainingInfo userEducationTrainingTest;
 
                     if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                     {
@@ -169,41 +181,49 @@ namespace TestMVC4App.Models
 
                             bool isInactive = false;
 
+                            // there is a third state : "Read-Only", not used for the moment
                             isInactive = (ParsingHelper.ParseSingleValue(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/Inactive"),"Inactive") == "Yes");
 
                             if (!isInactive)
                             {
                                 var usersClient = new UsersClient();
 
+                                userBasicInfoTest = null;
+                                userGeneralInfoTest = null;
+                                userContactLocationInfoTest = null;
+                                userPublicationInfoTest = null;
+                                userEducationTrainingTest = null;
+                                userEducationTrainingTest = null;
+
                                 // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
-                                TestUnitUserBasicInfo userBasicInfoTest = new TestUnitUserBasicInfo(this);
+                                userBasicInfoTest = new TestUnitUserBasicInfo(this);
                                 allTheTests.Add(userBasicInfoTest);
                                 userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi);
                                 userBasicInfoTest.RunAllTests();
 
                                 int userId = userBasicInfoTest.MappedUserId;
 
-                                TestUnitUserGeneralInfo userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
+                                userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
                                 allTheTests.Add(userGeneralInfoTest);
                                 userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), upi, usersClient, userId);
                                 userGeneralInfoTest.RunAllTests();
 
-                                TestUnitUserContactLocationInfo userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
+                                userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
                                 allTheTests.Add(userContactLocationInfoTest);
                                 userContactLocationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
                                 userContactLocationInfoTest.RunAllTests();
 
-                                TestUnitUserPublicationInfo userPublicationInfoTest = new TestUnitUserPublicationInfo(this);
+                                userPublicationInfoTest = new TestUnitUserPublicationInfo(this);
                                 allTheTests.Add(userPublicationInfoTest);
                                 userPublicationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/featuredPublication"), usersClient, upi, userId);
                                 userPublicationInfoTest.RunAllTests();
 
-                                TestUnitUserResearchInfo userResearchInfoTest = new TestUnitUserResearchInfo(this);
+                                userResearchInfoTest = new TestUnitUserResearchInfo(this);
                                 allTheTests.Add(userResearchInfoTest);
                                 userResearchInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
                                 userResearchInfoTest.RunAllTests();
 
-                                TestUnitUserEducationTrainingInfo userEducationTrainingTest = new TestUnitUserEducationTrainingInfo(this);
+                                userEducationTrainingTest = new TestUnitUserEducationTrainingInfo(this);
                                 allTheTests.Add(userEducationTrainingTest);
                                 userEducationTrainingTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/training"), usersClient, upi, userId);
                                 userEducationTrainingTest.RunAllTests();
@@ -233,6 +253,8 @@ namespace TestMVC4App.Models
                             {
                                 LogManager.Instance.StatsCountProfilesIgnored++;
                             }
+
+                            Thread.Sleep(5000);
                         }
                         catch (Exception e)
                         {

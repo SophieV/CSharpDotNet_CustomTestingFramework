@@ -5,6 +5,7 @@ namespace TestMVC4App.Models
 {
     public class ResultReport
     {
+        public EnumResultDisplayFormat DisplayFormat { get; private set; }
         public TimeSpan Duration { get; set; }
 
         public EnumResultSeverityType Result { get; private set; }
@@ -21,11 +22,15 @@ namespace TestMVC4App.Models
 
         public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> OldStructureValues { get; private set; }
+
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
         public HashSet<string> NewValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
+
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> NewStructureValues { get; private set; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
@@ -41,6 +46,8 @@ namespace TestMVC4App.Models
             this.NewValues = new HashSet<string>();
             this.OldOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
             this.NewOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
+            this.OldStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
+            this.NewStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
             this.TreeComparisonIndexError = -1;
@@ -72,6 +79,8 @@ namespace TestMVC4App.Models
             {
                 this.NewValues = newValues;
             }
+
+            this.DisplayFormat = EnumResultDisplayFormat.ListOfValues;
         }
 
         public void AddDetailedValues(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot)
@@ -89,6 +98,23 @@ namespace TestMVC4App.Models
             }
 
             this.NewTreeRoot = newTreeRoot;
+
+            this.DisplayFormat = EnumResultDisplayFormat.OrganizationTree;
+        }
+
+        public void AddDetailedValues(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> newValues)
+        {
+            if (oldValues != null)
+            {
+                this.OldStructureValues = oldValues;
+            }
+
+            if (newValues != null)
+            {
+                this.NewStructureValues = newValues;
+            }
+
+            this.DisplayFormat = EnumResultDisplayFormat.StructureOfValues;
         }
 
         public void UpdateResult(EnumResultSeverityType newSeverityStateReturned)

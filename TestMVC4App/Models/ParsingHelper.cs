@@ -41,10 +41,10 @@ namespace TestMVC4App.Models
             return value;
         }
 
-        public static HashSet<Dictionary<OldServiceFieldsAsKeys,string>> ParseListSimpleValuesStructure(IEnumerable<XElement> elements, string nodeName, OldServiceFieldsAsKeys[] childNodeNames)
+        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> ParseListSimpleValuesStructure(IEnumerable<XElement> elements, string nodeName, EnumOldServiceFieldsAsKeys[] childNodeNames)
         {
-            var values = new HashSet<Dictionary<OldServiceFieldsAsKeys, string>>();
-            Dictionary<OldServiceFieldsAsKeys,string> properties;
+            var values = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
+            Dictionary<EnumOldServiceFieldsAsKeys,string> properties;
 
             var parentItems = elements.Where(x => x.Name == nodeName);
 
@@ -52,7 +52,7 @@ namespace TestMVC4App.Models
             {
                 foreach (var parentItem in parentItems)
                 {
-                    properties = new Dictionary<OldServiceFieldsAsKeys, string>();
+                    properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
                     foreach (var childNodeName in childNodeNames)
                     {
                         try

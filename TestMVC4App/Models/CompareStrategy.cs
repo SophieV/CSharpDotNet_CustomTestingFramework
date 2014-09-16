@@ -21,6 +21,12 @@ namespace TestMVC4App.Models
             this.resultReport.AddDetailedValues(oldValues, oldTreeRoot, newValues, newTreeRoot);
         }
 
+        public CompareStrategy(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> newValues, ResultReport resultReport)
+        {
+            this.resultReport = resultReport;
+            this.resultReport.AddDetailedValues(oldValues, newValues);
+        }
+
         public abstract void Investigate();
     }
 }
