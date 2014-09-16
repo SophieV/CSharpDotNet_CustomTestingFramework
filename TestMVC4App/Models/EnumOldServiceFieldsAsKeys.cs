@@ -16,6 +16,16 @@ namespace TestMVC4App.Models
         education,
         degree,
         institution,
-        gradYear
+        gradYear,
+        professionalHonor,
+        award,
+        organization,
+        presentationDate,
+        category,
+        professionalService,
+        role,
+        startDate,
+        endDate,
+        description
     }
 }

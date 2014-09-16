@@ -202,6 +202,7 @@
     <Compile Include="Models\ParsingHelper.cs" />
     <Compile Include="Models\TestUnitUserAddress.cs" />
     <Compile Include="Models\TestUnitUserEducationTrainingInfo.cs" />
+    <Compile Include="Models\TestUnitUserHonorServiceInfo.cs" />
     <Compile Include="Models\TestUnitUserLabWebsite.cs" />
     <Compile Include="Models\TestUnitUserContactLocationInfo.cs" />
     <Compile Include="Models\TestUnitUserOrganization.cs" />

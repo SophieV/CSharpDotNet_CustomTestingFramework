@@ -44,6 +44,7 @@ namespace TestMVC4App.Models
 
             UserEducationTrainingInfo_Trainings(newServiceInfo);
             UserEducationTrainingInfo_Education(newServiceInfo);
+
         }
 
         private void UserEducationTrainingInfo_Education(UserEducationTrainingInfo newServiceInfo)
