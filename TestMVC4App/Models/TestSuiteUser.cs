@@ -106,10 +106,10 @@ namespace TestMVC4App.Models
 
                     LogManager.Instance.StatsCountTotalUpis++;
 
-                    //if (LogManager.Instance.StatsCountTotalUpis > 100)
-                    //{
-                    //    keepGoing = false;
-                    //}
+                    if (false && LogManager.Instance.StatsCountTotalUpis > 1000)
+                    {
+                        keepGoing = false;
+                    }
 
                     profileWatch = new Stopwatch();
                     profileWatch.Start();

@@ -79,6 +79,10 @@ namespace TestMVC4App.Models
                     value = "0";
                 }
             }
+            else
+            {
+                value = "0";
+            }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_MyChart, "Comparing myChart", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.myChart.ToString(), value);
         }

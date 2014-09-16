@@ -128,6 +128,8 @@ namespace TestMVC4App.Models
 
             foreach (var structure in oldValues)
             {
+                structure[EnumOldServiceFieldsAsKeys.role] = "Professional Organization";
+
                 if (structure[EnumOldServiceFieldsAsKeys.endDate] == "present")
                 {
                     structure[EnumOldServiceFieldsAsKeys.endDate] = string.Empty;
