@@ -10,16 +10,17 @@ namespace TestMVC4App.Models
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, string>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, string> x, Dictionary<EnumOldServiceFieldsAsKeys, string> y)
         {
             bool areEqual = true;
-            System.Diagnostics.Debug.WriteLine("TEST");
             foreach (var key in x.Keys)
             {
-                System.Diagnostics.Debug.WriteLine(key);
                 if (areEqual)
                 {
                     if (x.ContainsKey(key) && y.ContainsKey(key))
                     {
-                        System.Diagnostics.Debug.WriteLine(x[key].ToString());
-                        if (x[key] == y[key])
+                        if (string.IsNullOrEmpty(x[key]) && string.IsNullOrEmpty(y[key]))
+                        {
+                            areEqual = true;
+                        } 
+                        else if (x[key] == y[key])
                         {
                             areEqual = true;
                         }
@@ -40,7 +41,6 @@ namespace TestMVC4App.Models
 
         int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, string>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, string> obj)
         {
-            System.Diagnostics.Debug.WriteLine(obj.Values.ToString().ToLower().GetHashCode());
             return obj.Values.ToString().ToLower().GetHashCode();
         }
     }

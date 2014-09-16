@@ -7,10 +7,15 @@ namespace TestMVC4App.Models
 {
     public enum EnumOldServiceFieldsAsKeys
     {
+        training,
         departmentName,
         startYear,
         endYear,
         position,
-        locationName
+        locationName,
+        education,
+        degree,
+        institution,
+        gradYear
     }
 }

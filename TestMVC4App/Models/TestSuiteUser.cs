@@ -225,7 +225,7 @@ namespace TestMVC4App.Models
 
                                 userEducationTrainingTest = new TestUnitUserEducationTrainingInfo(this);
                                 allTheTests.Add(userEducationTrainingTest);
-                                userEducationTrainingTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/training"), usersClient, upi, userId);
+                                userEducationTrainingTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
                                 userEducationTrainingTest.RunAllTests();
 
                                 foreach (var test in allTheTests)

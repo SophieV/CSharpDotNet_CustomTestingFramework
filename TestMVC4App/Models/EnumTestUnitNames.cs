@@ -47,6 +47,7 @@ namespace TestMVC4App.Models
             UserPublicationInfo_Citations,
             UserResearchInfo_Summary,
             UserResearchInfo_Overview,
-            UserEducationTrainingInfo_Trainings
+            UserEducationTrainingInfo_Trainings,
+            UserEducationTrainingInfo_Education
     }
 }
