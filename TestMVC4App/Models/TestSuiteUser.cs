@@ -165,6 +165,7 @@ namespace TestMVC4App.Models
                     TestUnitUserResearchInfo userResearchInfoTest;
                     TestUnitUserEducationTrainingInfo userEducationTrainingTest;
                     TestUnitUserHonorServiceInfo userHonorServiceTest;
+                    TestUnitUserPatientCareInfo userPatientCareTest;
 
                     if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                     {
@@ -233,6 +234,11 @@ namespace TestMVC4App.Models
                                 allTheTests.Add(userHonorServiceTest);
                                 userHonorServiceTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
                                 userHonorServiceTest.RunAllTests();
+
+                                userPatientCareTest = new TestUnitUserPatientCareInfo(this);
+                                allTheTests.Add(userPatientCareTest);
+                                userPatientCareTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
+                                userPatientCareTest.RunAllTests();
 
                                 foreach (var test in allTheTests)
                                 {

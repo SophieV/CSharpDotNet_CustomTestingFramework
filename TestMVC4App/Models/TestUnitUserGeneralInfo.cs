@@ -244,27 +244,9 @@ namespace TestMVC4App.Models
             string oldValuePart1 = ParsingHelper.ParseSingleValue(oldServiceData, "degree");
             string oldValuePart2 = ParsingHelper.ParseSingleValue(oldServiceData, "professionalSuffix");
 
-            string entry;
-            HashSet<string> oldValues = new HashSet<string>();
-            var valuesPart1 = oldValuePart1.Split(',');
-            foreach (string value in valuesPart1)
-            {
-                entry = value.Trim();
-                if(!string.IsNullOrEmpty(entry))
-                {
-                    oldValues.Add(entry);
-                };
-            }
-            var valuesPart2 = oldValuePart2.Split(',');
-            foreach(string value in valuesPart2)
-            {
-                entry = value.Trim();
-                if (!string.IsNullOrEmpty(entry))
-                {
-                   oldValues.Add(entry);
-                };
-            }
-
+            HashSet<string> oldValues = ParsingHelper.StringToList(oldValuePart1, ',');
+            oldValues = ParsingHelper.StringToList(oldValuePart2, ',', oldValues);
+            
             HashSet<string> newValues = new HashSet<string>();
             if (newServiceData.Titles.Count() > 0)
             {

@@ -50,6 +50,9 @@ namespace TestMVC4App.Models
             UserEducationTrainingInfo_Trainings,
             UserEducationTrainingInfo_Education,
             UserHonorServiceInfo_Honors,
-            UserHonorServiceInfo_Services
+            UserHonorServiceInfo_Services,
+            UserPatientCareInfo_AcceptedReferral,
+            UserPatientCareInfo_BoardCertifications,
+            UserPatientCareInfo_CancersTreated
     }
 }

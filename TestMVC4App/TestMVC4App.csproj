@@ -212,6 +212,7 @@
     <Compile Include="Models\CompareStrategyString.cs" />
     <Compile Include="Models\TestSuite.cs" />
     <Compile Include="Models\TestUnit.cs" />
+    <Compile Include="Models\TestUnitUserPatientCareInfo.cs" />
     <Compile Include="Models\TestUnitUserPublicationInfo.cs" />
     <Compile Include="Models\TestUnitUserResearchInfo.cs" />
     <Compile Include="Models\TimeoutExtendedWebClient.cs">

@@ -135,6 +135,31 @@ namespace TestMVC4App.Models
             return values;
         }
 
+        public static HashSet<string> StringToList(string valueToSplit, char separator, HashSet<string> appendTo = null)
+        {
+            HashSet<string> values;
+            string entry;
+
+            if (appendTo != null)
+            {
+                values = appendTo;
+            } else {
+                values = new HashSet<string>();
+            }
+            
+            var valuesPart = valueToSplit.Split(separator);
+            foreach (string value in valuesPart)
+            {
+                entry = value.Trim();
+                if (!string.IsNullOrEmpty(entry))
+                {
+                    values.Add(entry);
+                };
+            }
+
+            return values;
+        }
+
         /// <summary>
         /// Replaces the default characters used for describing the mismatched values of the Assert so that their content
         /// is not (mis)interpreted as HTML content.

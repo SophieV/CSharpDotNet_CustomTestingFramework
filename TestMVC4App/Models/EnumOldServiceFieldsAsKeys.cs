@@ -26,6 +26,9 @@ namespace TestMVC4App.Models
         role,
         startDate,
         endDate,
-        description
+        description,
+        boardCertification,
+        certificationYear,
+        specialty
     }
 }

@@ -19,7 +19,11 @@ namespace TestMVC4App.Models
                         if (string.IsNullOrEmpty(x[key]) && string.IsNullOrEmpty(y[key]))
                         {
                             areEqual = true;
-                        } 
+                        }
+                        else if (string.IsNullOrEmpty(x[key]) || string.IsNullOrEmpty(y[key]))
+                        {
+                            areEqual = false;
+                        }
                         else if (x[key] == y[key])
                         {
                             areEqual = true;
