@@ -1,0 +1,13 @@
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\TestMVC4ConsoleApp.exe.config
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\TestMVC4ConsoleApp.exe
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\TestMVC4ConsoleApp.pdb
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\HtmlDiff.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\Newtonsoft.Json.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\PagedList.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\System.Net.Http.Formatting.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\YSM.PMS.Service.Common.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\YSM.PMS.Web.Service.Clients.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\YSM.PMS.Web.Service.dll
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.exe
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.pdb
