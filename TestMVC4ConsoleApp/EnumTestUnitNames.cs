@@ -37,7 +37,7 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Organizations_TreeMerged,
             UserGeneralInfo_Organizations_Type,
             UserGeneralInfo_Organizations_Missions,
-            UserContactLocationInfo_Assistants,
+            //UserContactLocationInfo_Assistants,
             UserContactLocationInfo_LabWebsites_Names,
             UserContactLocationInfo_LabWebsites_Links,
             UserContactLocationInfo_Addresses_StreetAddress,

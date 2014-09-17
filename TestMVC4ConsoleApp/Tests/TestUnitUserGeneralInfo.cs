@@ -7,6 +7,8 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserGeneralInfo : TestUnit
     {
+        private UserGeneralInfo newData;
+
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -17,26 +19,24 @@ namespace TestMVC4App.Models
             get { return "/GeneralInfo"; }
         }
 
-        public TestUnitUserGeneralInfo(TestSuite parent) : base(parent)
+        public TestUnitUserGeneralInfo(TestSuite parent, UserGeneralInfo newData) : base(parent)
         {
-
+            this.newData = newData;
         }
 
         protected override void RunAllSingleTests()
         {
-            var newServiceInfo = this.NewDataAccessor.GetUserGeneralInfoById(this.UserId);
-
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.UserId, this.Upi, this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), newServiceInfo.Bio);
-            UserGeneralInfo_Titles_Test(newServiceInfo);
-            UserGeneralInfo_LanguageUsers_Test(newServiceInfo);
-            UserGeneralInfo_AltLastName_Test(newServiceInfo);
-            UserGeneralInfo_AltFirstName_Test(newServiceInfo);
-            UserGeneralInfo_AltMiddleName_Test(newServiceInfo);
-            UserGeneralInfo_AltSuffix_Test(newServiceInfo);
-            UserGeneralInfo_AltMiddleNameDisplayed_Test(newServiceInfo);
-            UserGeneralInfo_SuffixNames_Test(newServiceInfo);
-            UserGeneralInfo_CountCVs_Test(newServiceInfo);
-            UserGeneralInfo_Organizations_Test(newServiceInfo);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.UserId, this.Upi, this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), this.newData.Bio);
+            UserGeneralInfo_Titles_Test(this.newData);
+            UserGeneralInfo_LanguageUsers_Test(this.newData);
+            UserGeneralInfo_AltLastName_Test(this.newData);
+            UserGeneralInfo_AltFirstName_Test(this.newData);
+            UserGeneralInfo_AltMiddleName_Test(this.newData);
+            UserGeneralInfo_AltSuffix_Test(this.newData);
+            UserGeneralInfo_AltMiddleNameDisplayed_Test(this.newData);
+            UserGeneralInfo_SuffixNames_Test(this.newData);
+            UserGeneralInfo_CountCVs_Test(this.newData);
+            UserGeneralInfo_Organizations_Test(this.newData);
 
             ComputeOverallSeverity();
         }

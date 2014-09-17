@@ -4,6 +4,8 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserResearchInfo : TestUnit
     {
+        private Research newData;
+
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -14,18 +16,18 @@ namespace TestMVC4App.Models
             get { return "/Research"; }
         }
 
-        public TestUnitUserResearchInfo(TestSuite parent) : base(parent)
+        public TestUnitUserResearchInfo(TestSuite parent, Research newData) : base(parent)
         {
+            this.newData = newData;
         }
 
         protected override void RunAllSingleTests()
         {
-            UserResearchInfo newServiceInfo = this.NewDataAccessor.GetUserResearchById(this.UserId);
             string newValue;
 
-            if (newServiceInfo.Research != null)
+            if (this.newData != null)
             {
-                newValue = newServiceInfo.Research.BriefSummary;
+                newValue = this.newData.BriefSummary;
             }
             else
             {
@@ -40,9 +42,9 @@ namespace TestMVC4App.Models
                 EnumOldServiceFieldsAsKeys.researchSummary.ToString(),
                 newValue);
 
-            if (newServiceInfo.Research != null)
+            if (this.newData != null)
             {
-                newValue = newServiceInfo.Research.ExtensiveDescription;
+                newValue = this.newData.ExtensiveDescription;
             }
             else
             {

@@ -8,6 +8,8 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserContactLocationInfo : TestUnit
     {
+        private IEnumerable<LabWebsite> newDataLabWebsite;
+        private IEnumerable<UserAddress> newDataUserAddress;
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -18,18 +20,19 @@ namespace TestMVC4App.Models
             get { return "/ContactLocation"; }
         }
 
-        public TestUnitUserContactLocationInfo(TestSuite parent) : base(parent)
+        public TestUnitUserContactLocationInfo(TestSuite parent, IEnumerable<LabWebsite> newDataLabWebsite, IEnumerable<UserAddress> newDataUserAddresses) 
+            : base(parent)
         {
-
+            this.newDataLabWebsite = newDataLabWebsite;
+            this.newDataUserAddress = newDataUserAddresses;
         }
 
         protected override void RunAllSingleTests()
         {
-            var newUserContactLocationInfo = this.NewDataAccessor.GetUserContactLocationById(this.UserId);
-
-            UserContactLocationInfo_Assistants_Test(newUserContactLocationInfo);
-            UserContactLocationInfo_LabWebsites_Test(newUserContactLocationInfo);
-            UserContactLocationInfo_Addresses_Test(newUserContactLocationInfo);
+            // TODO : not exposed yet
+            // UserContactLocationInfo_Assistants_Test();
+            UserContactLocationInfo_LabWebsites_Test();
+            UserContactLocationInfo_Addresses_Test();
 
             ComputeOverallSeverity();
         }
@@ -43,40 +46,40 @@ namespace TestMVC4App.Models
         /// <param name="newServiceData"></param>
         /// <param name="this.OldDataNodes"></param>
         /// <remarks>Special syntax.</remarks>
-        private void UserContactLocationInfo_Assistants_Test(UserContactLocationInfo newServiceData)
+        private void UserContactLocationInfo_Assistants_Test()
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.assistant.ToString(), EnumOldServiceFieldsAsKeys.fname.ToString());
+            //HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.assistant.ToString(), EnumOldServiceFieldsAsKeys.fname.ToString());
 
-            HashSet<string> newValues = new HashSet<string>();
-            if(newServiceData.Assistants.Count() > 0)
-            {
-                foreach(var assistant in newServiceData.Assistants)
-                {
-                    if (!string.IsNullOrEmpty(assistant.UserMinimalInfo.Name))
-                    {
-                        newValues.Add(assistant.UserMinimalInfo.Name);
-                    }
-                }
-            }
+            //HashSet<string> newValues = new HashSet<string>();
+            //if(newServiceData.Assistants.Count() > 0)
+            //{
+            //    foreach(var assistant in newServiceData.Assistants)
+            //    {
+            //        if (!string.IsNullOrEmpty(assistant.UserMinimalInfo.Name))
+            //        {
+            //            newValues.Add(assistant.UserMinimalInfo.Name);
+            //        }
+            //    }
+            //}
 
-            var pairs = new Dictionary<HashSet<string>, HashSet<string>>();
-            if (oldValues.Count() > 0 || newValues.Count() > 0)
-            {
-                pairs.Add(oldValues,newValues);
-            }
+            //var pairs = new Dictionary<HashSet<string>, HashSet<string>>();
+            //if (oldValues.Count() > 0 || newValues.Count() > 0)
+            //{
+            //    pairs.Add(oldValues,newValues);
+            //}
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Assistants, "Comparing Assistant Name(s)", this.UserId, this.Upi, pairs,true);
+            //this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Assistants, "Comparing Assistant Name(s)", this.UserId, this.Upi, pairs,true);
         }
 
-        private void UserContactLocationInfo_LabWebsites_Test(UserContactLocationInfo newServiceData)
+        private void UserContactLocationInfo_LabWebsites_Test()
         {
-            var labWebsites = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.labWebsite.ToString());
+            var oldDataLabWebsites = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.labWebsite.ToString());
 
-            UserContactLocationInfo_LabWebsites_Names_Test(labWebsites, new HashSet<string>(newServiceData.LabWebsites.Select(x => x.LabName)));
-            UserContactLocationInfo_LabWebsites_Links_Test(labWebsites, new HashSet<string>(newServiceData.LabWebsites.Select(x => x.LabUrl)));
+            UserContactLocationInfo_LabWebsites_Names_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => x.LabName)));
+            UserContactLocationInfo_LabWebsites_Links_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => x.LabUrl)));
         }
 
-        private void UserContactLocationInfo_Addresses_Test(UserContactLocationInfo newServiceData)
+        private void UserContactLocationInfo_Addresses_Test()
         {
             var addresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
             var mailingInfo = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(), true);
@@ -88,7 +91,7 @@ namespace TestMVC4App.Models
                                                      this.Upi,
                                                      addresses,
                                                      mailingInfo,
-                                                     newServiceData.UserAddresses);
+                                                     this.newDataUserAddress);
             addressesTest.RunAllTests();
         }
 

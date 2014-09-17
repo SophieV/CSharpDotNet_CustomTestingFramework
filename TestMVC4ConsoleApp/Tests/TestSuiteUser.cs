@@ -7,6 +7,7 @@ using YSM.PMS.Web.Service.Clients;
 using System.Diagnostics;
 using System.Xml.XPath;
 using System.Threading;
+using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
 {
@@ -116,6 +117,10 @@ namespace TestMVC4App.Models
 
                     XDocument oldServiceXMLOutputDocument = null;
                     IEnumerable<XElement> oldData = null;
+                    UserBasicInfo newDataBasic = null;
+                    UserCompleteInfo newData = null;
+                    string pageName = string.Empty;
+                    int userId;
 
                     if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                     {
@@ -145,32 +150,34 @@ namespace TestMVC4App.Models
                                 IEnumerable<XElement> oldDataSubset = null;
                                 var usersClient = new UsersClient();
 
+                                newDataBasic = usersClient.GetUserByUpi(upi);
+
                                 // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
                                 oldDataSubset = rootDepthOnly;
-                                testUnit = new TestUnitUserBasicInfo(this);
+                                testUnit = new TestUnitUserBasicInfo(this, newDataBasic);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi, 
                                     oldDataSubset, 
-                                    -1, 
-                                    usersClient);
+                                    -1);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
-                                int userId = testUnit.UserId;
+                                userId = testUnit.UserId;
+                                pageName = (testUnit as TestUnitUserBasicInfo).PageName;
+                                newData = usersClient.GetUserCompleteByPageName(pageName);
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.title.ToString(), new List<XElement>(rootDepthOnly));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.cv.ToString(), new List<XElement>(oldDataSubset));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.language.ToString(), new List<XElement>(oldDataSubset));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.department.ToString(), new List<XElement>(oldDataSubset));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.treeDepartments.ToString(), new List<XElement>(oldDataSubset));
-                                testUnit = new TestUnitUserGeneralInfo(this);
+                                testUnit = new TestUnitUserGeneralInfo(this, newData);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId,
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -178,71 +185,65 @@ namespace TestMVC4App.Models
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.labWebsite.ToString(), new List<XElement>(oldDataSubset));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.location.ToString(), new List<XElement>(oldDataSubset));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.mailing.ToString(), new List<XElement>(oldDataSubset),true);
-                                testUnit = new TestUnitUserContactLocationInfo(this);
+                                testUnit = new TestUnitUserContactLocationInfo(this, newData.LabWebsites, newData.UserAddresses);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId,
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.featuredPublication.ToString());
-                                testUnit = new TestUnitUserPublicationInfo(this);
+                                testUnit = new TestUnitUserPublicationInfo(this, newData.Publications);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset, 
-                                    userId, 
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.researchSummary.ToString());
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), new List<XElement>(oldDataSubset));
-                                testUnit = new TestUnitUserResearchInfo(this);
+                                testUnit = new TestUnitUserResearchInfo(this, newData.Research);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset, 
-                                    userId, 
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.education.ToString());
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.training.ToString(), new List<XElement>(oldDataSubset));
-                                testUnit = new TestUnitUserEducationTrainingInfo(this);
+                                testUnit = new TestUnitUserEducationTrainingInfo(this, newData.Educations, newData.Trainings);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId,
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.professionalHonor.ToString());
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new List<XElement>(oldDataSubset));
-                                testUnit = new TestUnitUserHonorServiceInfo(this);
+                                testUnit = new TestUnitUserHonorServiceInfo(this, newData.Honors, newData.Services);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId,
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.boardCertification.ToString(), new List<XElement>(rootDepthOnly));
-                                testUnit = new TestUnitUserPatientCareInfo(this);
+                                testUnit = new TestUnitUserPatientCareInfo(this, newData.BoardCertifications, newData.PatientCare);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId,
-                                    usersClient);
+                                    userId);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 

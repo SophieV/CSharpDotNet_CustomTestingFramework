@@ -7,6 +7,9 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserPatientCareInfo : TestUnit
     {
+        private IEnumerable<BoardCertification> newDataBoardCertification;
+        private PatientCare newDataPatientCare;
+
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -17,31 +20,32 @@ namespace TestMVC4App.Models
             get { return "/PatientCare"; }
         }
 
-        public TestUnitUserPatientCareInfo(TestSuite parent)
+        public TestUnitUserPatientCareInfo(TestSuite parent, IEnumerable<BoardCertification> newDataBoardCertification, PatientCare newDataPatientCare)
             : base(parent)
         {
+            this.newDataBoardCertification = newDataBoardCertification;
+            this.newDataPatientCare = newDataPatientCare;
         }
 
         protected override void RunAllSingleTests()
         {
-            UserPatientCareInfo newServiceInfo = this.NewDataAccessor.GetUserPatientCareById(this.UserId);
-            UserPatientCareInfo_PhysicianBio(newServiceInfo);
-            UserPatientCareInfo_AcceptedReferral(newServiceInfo);
-            UserPatientCareInfo_MyChart(newServiceInfo);
-            UserPatientCareInfo_IsSeeingNewPatients(newServiceInfo);
-            UserPatientCareInfo_IsSeeingPatientType(newServiceInfo);
-            UserEducationTrainingInfo_BoardCertifications(newServiceInfo);
-            UserEducationTrainingInfo_CancersTreated(newServiceInfo);
+            UserPatientCareInfo_PhysicianBio();
+            UserPatientCareInfo_AcceptedReferral();
+            UserPatientCareInfo_MyChart();
+            UserPatientCareInfo_IsSeeingNewPatients();
+            UserPatientCareInfo_IsSeeingPatientType();
+            UserEducationTrainingInfo_BoardCertifications();
+            UserEducationTrainingInfo_CancersTreated();
 
         }
 
-        private void UserPatientCareInfo_PhysicianBio(UserPatientCareInfo newServiceInfo)
+        private void UserPatientCareInfo_PhysicianBio()
         {
             string newValue = string.Empty;
 
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.PhysicianBio != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.PhysicianBio != null)
             {
-                newValue = newServiceInfo.PatientCare.PhysicianBio;
+                newValue = this.newDataPatientCare.PhysicianBio;
             }
 
             this.CompareAndLog_Test(
@@ -54,14 +58,14 @@ namespace TestMVC4App.Models
                 newValue);
         }
 
-        private void UserPatientCareInfo_MyChart(UserPatientCareInfo newServiceInfo)
+        private void UserPatientCareInfo_MyChart()
         {
             string newValue = string.Empty;
 
             // convert to values returned by the old service
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsMyChartAvailable != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.IsMyChartAvailable != null)
             {
-                if (newServiceInfo.PatientCare.IsMyChartAvailable)
+                if (this.newDataPatientCare.IsMyChartAvailable)
                 {
                     newValue = "1";
                 }
@@ -84,13 +88,13 @@ namespace TestMVC4App.Models
                 newValue);
         }
 
-        private void UserPatientCareInfo_IsSeeingNewPatients(UserPatientCareInfo newServiceInfo)
+        private void UserPatientCareInfo_IsSeeingNewPatients()
         {
             string newValue = string.Empty;
 
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingPatients != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingPatients != null)
             {
-                if (newServiceInfo.PatientCare.IsSeeingPatients)
+                if (this.newDataPatientCare.IsSeeingPatients)
                 {
                     newValue = "Yes";
                 }
@@ -109,40 +113,40 @@ namespace TestMVC4App.Models
                 newValue);
         }
 
-        private void UserPatientCareInfo_IsSeeingPatientType(UserPatientCareInfo newServiceInfo)
+        private void UserPatientCareInfo_IsSeeingPatientType()
         {
             var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.patientsGroups.ToString()));
             var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
 
             var newValues = new HashSet<string>();
 
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingAdults != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingAdults != null)
             {
-                if (newServiceInfo.PatientCare.IsSeeingAdults)
+                if (this.newDataPatientCare.IsSeeingAdults)
                 {
                     newValues.Add("Adult");
                 }
             }
 
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingChild != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingChild != null)
             {
-                if (newServiceInfo.PatientCare.IsSeeingChild)
+                if (this.newDataPatientCare.IsSeeingChild)
                 {
                     newValues.Add("Child");
                 }
             }
 
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingAdolescent != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingAdolescent != null)
             {
-                if (newServiceInfo.PatientCare.IsSeeingAdolescent)
+                if (this.newDataPatientCare.IsSeeingAdolescent)
                 {
                     newValues.Add("Adolescent");
                 }
             }
 
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingGeriatric != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingGeriatric != null)
             {
-                if (newServiceInfo.PatientCare.IsSeeingGeriatric)
+                if (this.newDataPatientCare.IsSeeingGeriatric)
                 {
                     newValues.Add("Geriatric");
                 }
@@ -157,13 +161,13 @@ namespace TestMVC4App.Models
                 newValues);
         }
 
-        private void UserPatientCareInfo_AcceptedReferral(UserPatientCareInfo newServiceInfo)
+        private void UserPatientCareInfo_AcceptedReferral()
         {
             string value = string.Empty;
 
-            if (newServiceInfo.PatientCare != null && !string.IsNullOrEmpty(newServiceInfo.PatientCare.AcceptedReferral))
+            if (this.newDataPatientCare != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral))
             {
-                value = newServiceInfo.PatientCare.AcceptedReferral;
+                value = this.newDataPatientCare.AcceptedReferral;
             }
 
             this.CompareAndLog_Test(
@@ -176,7 +180,7 @@ namespace TestMVC4App.Models
                 value);
         }
 
-        private void UserEducationTrainingInfo_BoardCertifications(UserPatientCareInfo newServiceInfo)
+        private void UserEducationTrainingInfo_BoardCertifications()
         {
             var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
                 this.OldDataNodes, 
@@ -190,45 +194,48 @@ namespace TestMVC4App.Models
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
 
-            foreach (var newValue in newServiceInfo.BoardCertifications)
+            if (this.newDataBoardCertification != null)
             {
-                properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
+                foreach (var newValue in this.newDataBoardCertification)
+                {
+                    properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
 
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.specialty, newValue.SpecialtyName);
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.specialty, string.Empty);
-                }
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.specialty, newValue.SpecialtyName);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.specialty, string.Empty);
+                    }
 
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.certificationYear, String.Format("{0:yyyy}", newValue.OriginalDate));
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.certificationYear, string.Empty);
-                }
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.certificationYear, String.Format("{0:yyyy}", newValue.OriginalDate));
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.certificationYear, string.Empty);
+                    }
 
-                newValues.Add(properties);
+                    newValues.Add(properties);
+                }
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_BoardCertifications, "Comparing Board Certification(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
-        private void UserEducationTrainingInfo_CancersTreated(UserPatientCareInfo newServiceInfo)
+        private void UserEducationTrainingInfo_CancersTreated()
         {
             var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cancersTreated.ToString()));
             var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
 
             var newValues = new HashSet<string>();
-            if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.CancersTreated != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.CancersTreated != null)
             {
-                foreach (var newValueEntry in newServiceInfo.PatientCare.CancersTreated)
+                foreach (var newValueEntry in this.newDataPatientCare.CancersTreated)
                 {
                     if (!string.IsNullOrEmpty(newValueEntry.Name))
                     {

@@ -36,8 +36,6 @@ namespace TestMVC4App.Models
 
         protected IEnumerable<XElement> OldDataNodes { get; private set; }
 
-        protected UsersClient NewDataAccessor { get; private set; }
-
         public void ComputeOverallSeverity()
         {
             bool keepGoing = true;
@@ -111,12 +109,11 @@ namespace TestMVC4App.Models
 
         protected abstract void RunAllSingleTests();
 
-        public void ProvideData(int upi, IEnumerable<XElement> oldDataNodes, int userId, UsersClient newDataAccessor)
+        public void ProvideData(int upi, IEnumerable<XElement> oldDataNodes, int userId)
         {
             this.Upi = upi;
             this.OldDataNodes = oldDataNodes;
             this.UserId = userId;
-            this.NewDataAccessor = newDataAccessor;
         }
 
         public void RunAllTests()

@@ -6,6 +6,7 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserPublicationInfo : TestUnit
     {
+        private IEnumerable<Publication> newData;
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -16,18 +17,18 @@ namespace TestMVC4App.Models
             get { return "/Publications"; }
         }
 
-        public TestUnitUserPublicationInfo(TestSuite parent) : base(parent)
+        public TestUnitUserPublicationInfo(TestSuite parent, IEnumerable<Publication> newData) : base(parent)
         {
+            this.newData = newData;
         }
 
         protected override void RunAllSingleTests()
         {
-            UserPublicationInfo newServiceInfo = this.NewDataAccessor.GetUserPublicationsById(this.UserId);
             HashSet<string> newValues;
 
-            if (newServiceInfo.Publications != null)
+            if (this.newData != null)
             {
-                newValues = new HashSet<string>(newServiceInfo.Publications.Where(x => x != null).Select(x => x.Title));
+                newValues = new HashSet<string>(newData.Where(x => x != null).Select(x => x.Title));
             } 
             else
             {
@@ -42,9 +43,9 @@ namespace TestMVC4App.Models
                         newValues);
 
 
-            if (newServiceInfo.Publications != null)
+            if (this.newData != null)
             {
-                newValues = new HashSet<string>(newServiceInfo.Publications.Where(x => x != null).Select(x => x.Citation));
+                newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => x.Citation));
             }
             else
             {

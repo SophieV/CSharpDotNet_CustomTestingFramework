@@ -7,6 +7,9 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserHonorServiceInfo : TestUnit
     {
+        IEnumerable<Honor> newDataHonor;
+        IEnumerable<Service> newDataService;
+
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -17,21 +20,21 @@ namespace TestMVC4App.Models
             get { return "/HonorService"; }
         }
 
-        public TestUnitUserHonorServiceInfo(TestSuite parent)
+        public TestUnitUserHonorServiceInfo(TestSuite parent, IEnumerable<Honor> newDataHonor, IEnumerable<Service> newDataService)
             : base(parent)
         {
+            this.newDataHonor = newDataHonor;
+            this.newDataService = newDataService;
         }
 
         protected override void RunAllSingleTests()
         {
-            UserEducationTrainingInfo newServiceInfo = this.NewDataAccessor.GetUserHonorServiceById(this.UserId);
-
-            UserEducationTrainingInfo_Honors(newServiceInfo);
-            UserEducationTrainingInfo_Services(newServiceInfo);
+            UserEducationTrainingInfo_Honors();
+            UserEducationTrainingInfo_Services();
 
         }
 
-        private void UserEducationTrainingInfo_Honors(UserEducationTrainingInfo newServiceInfo)
+        private void UserEducationTrainingInfo_Honors()
         {
             var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalHonor.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.award,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
@@ -42,65 +45,68 @@ namespace TestMVC4App.Models
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
 
-            foreach (var newValue in newServiceInfo.Honors)
+            if (this.newDataHonor != null)
             {
-                properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
+                foreach (var newValue in this.newDataHonor)
+                {
+                    properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
 
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.award, newValue.AwardName);
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.award, string.Empty);
-                }
-
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.organization, newValue.AwardingOrganization);
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.organization, string.Empty);
-                }
-
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Format("{0:yyyy}", newValue.AwardDate));
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, string.Empty);
-                }
-
-                try
-                {
-                    if (newValue.Category == "Unknown")
+                    try
                     {
-                        // keep coherent with old service for testing
+                        properties.Add(EnumOldServiceFieldsAsKeys.award, newValue.AwardName);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.award, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, newValue.AwardingOrganization);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Format("{0:yyyy}", newValue.AwardDate));
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, string.Empty);
+                    }
+
+                    try
+                    {
+                        if (newValue.Category == "Unknown")
+                        {
+                            // keep coherent with old service for testing
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
+                        }
+                        else
+                        {
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.Category);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
                         properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
                     }
-                    else
-                    {
-                        properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.Category);
-                    }
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
-                }
 
-                newValues.Add(properties);
+                    newValues.Add(properties);
+                }
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Honors, "Comparing Honor(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
-        private void UserEducationTrainingInfo_Services(UserEducationTrainingInfo newServiceInfo)
+        private void UserEducationTrainingInfo_Services()
         {
             var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.role,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
@@ -135,79 +141,82 @@ namespace TestMVC4App.Models
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
 
-            foreach (var newValue in newServiceInfo.Services)
+            if (this.newDataService != null)
             {
-                properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
+                foreach (var newValue in newDataService)
+                {
+                    properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
 
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.role, newValue.ServiceType);
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.role, string.Empty);
-                }
-
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.organization, newValue.ServiceOrganization);
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.organization, string.Empty);
-                }
-
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.startDate, newValue.StartYear.ToString());
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.startDate, string.Empty);
-                }
-
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.endDate, newValue.EndYear.ToString());
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.endDate, string.Empty);
-                }
-
-                try
-                {
-                    if (newValue.ServiceCategory == "Unknown")
+                    try
                     {
-                        // keep coherent with old service for testing
+                        properties.Add(EnumOldServiceFieldsAsKeys.role, newValue.ServiceType);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.role, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, newValue.ServiceOrganization);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.startDate, newValue.StartYear.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.startDate, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.endDate, newValue.EndYear.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.endDate, string.Empty);
+                    }
+
+                    try
+                    {
+                        if (newValue.ServiceCategory == "Unknown")
+                        {
+                            // keep coherent with old service for testing
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
+                        }
+                        else
+                        {
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.ServiceCategory);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
                         properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
                     }
-                    else
+
+                    try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.ServiceCategory);
+                        properties.Add(EnumOldServiceFieldsAsKeys.description, newValue.Description);
                     }
-                }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
-                }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.description, string.Empty);
+                    }
 
-                try
-                {
-                    properties.Add(EnumOldServiceFieldsAsKeys.description, newValue.Description);
+                    newValues.Add(properties);
                 }
-                catch (Exception)
-                {
-                    // make sure a value is present for each index
-                    properties.Add(EnumOldServiceFieldsAsKeys.description, string.Empty);
-                }
-
-                newValues.Add(properties);
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Services, "Comparing Service(s)", this.UserId, this.Upi, oldValues, newValues);
