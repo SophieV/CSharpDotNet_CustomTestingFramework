@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Net;
 using System.Web.Configuration;
 using System.Xml.Linq;
@@ -11,7 +10,7 @@ using System.Threading;
 
 namespace TestMVC4App.Models
 {
-    public sealed class TestSuiteUser : TestSuite, IDisposable
+    public sealed class TestSuiteUser : TestSuite
     {
         public override string newServiceURLBase
         {
@@ -29,48 +28,6 @@ namespace TestMVC4App.Models
 
         private HashSet<int> upiList = new HashSet<int>();
 
-        #region Database Connection Details
-
-        //retrieve all of the Users by UPI in the database
-        //TODO: move this to a connection setting!
-        static string connectionString = @"Server=tcp:le9rmjfn5q.database.windows.net,1433;Database=yfmps-entities;User ID=slamTHEdbNOince@le9rmjfn5q;Password=allQUIETallsWELL104;Encrypt=True;Connection Timeout=30;";
-        static string selectStatement = "SELECT Upi FROM [User]";
-        static SqlConnection conn = new SqlConnection(connectionString);
-        SqlCommand queryCommand = new SqlCommand(selectStatement, conn);
-
-        private HashSet<int> ConnectToDataSourceAndRetriveUPIs()
-        {
-            var upiList = new HashSet<int>();
-            conn.Open();
-            System.Diagnostics.Debug.WriteLine("Connection state is: " + conn.State.ToString());
-
-            SqlDataReader sdr = queryCommand.ExecuteReader();
-
-            if (sdr.HasRows)
-            {
-                while (sdr.Read()) // && upiList.Count < 200)
-                {
-                    upiList.Add(sdr.GetInt32(0));
-                }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("No rows found.");
-            }
-
-            //foreach (int upi in upiList)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(upi);
-            //}
-            sdr.Close();
-
-            conn.Close();
-
-            return upiList;
-        }
-
-        #endregion
-
         public override void RunAllTests()
         {
             //init all loop variables
@@ -80,7 +37,7 @@ namespace TestMVC4App.Models
             string errorType = string.Empty;
             string errorMessage = string.Empty;
 
-            upiList = ConnectToDataSourceAndRetriveUPIs();
+            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs();
 
             Stopwatch profileWatch = null;
             var watch = new Stopwatch();
@@ -158,20 +115,16 @@ namespace TestMVC4App.Models
                     var allTheResults = new HashSet<ResultReport>();
 
                     XDocument oldServiceXMLOutputDocument = null;
-                    TestUnitUserBasicInfo userBasicInfoTest;
-                    TestUnitUserGeneralInfo userGeneralInfoTest;
-                    TestUnitUserContactLocationInfo userContactLocationInfoTest;
-                    TestUnitUserPublicationInfo userPublicationInfoTest;
-                    TestUnitUserResearchInfo userResearchInfoTest;
-                    TestUnitUserEducationTrainingInfo userEducationTrainingTest;
-                    TestUnitUserHonorServiceInfo userHonorServiceTest;
-                    TestUnitUserPatientCareInfo userPatientCareTest;
+                    IEnumerable<XElement> oldData = null;
 
                     if (!string.IsNullOrEmpty(oldServiceXMLOutput))
                     {
                         try
                         {
                             oldServiceXMLOutputDocument = XDocument.Parse(oldServiceXMLOutput);
+                            oldData = oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*");
+
+                            var rootDepthOnly = ParsingHelper.ParseListNodesOnlySameDepth(oldData, null);
                             //} 
                             //catch (Exception e)
                             //{
@@ -184,61 +137,114 @@ namespace TestMVC4App.Models
                             bool isInactive = false;
 
                             // there is a third state : "Read-Only", not used for the moment
-                            isInactive = (ParsingHelper.ParseSingleValue(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/Inactive"),"Inactive") == "Yes");
+                            isInactive = (ParsingHelper.ParseSingleValue(oldData,"Inactive") == "Yes");
 
                             if (!isInactive)
                             {
+                                TestUnit testUnit;
+                                IEnumerable<XElement> oldDataSubset = null;
                                 var usersClient = new UsersClient();
 
-                                userBasicInfoTest = null;
-                                userGeneralInfoTest = null;
-                                userContactLocationInfoTest = null;
-                                userPublicationInfoTest = null;
-                                userEducationTrainingTest = null;
-                                userEducationTrainingTest = null;
-
                                 // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
-                                userBasicInfoTest = new TestUnitUserBasicInfo(this);
-                                allTheTests.Add(userBasicInfoTest);
-                                userBasicInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi);
-                                userBasicInfoTest.RunAllTests();
+                                oldDataSubset = rootDepthOnly;
+                                testUnit = new TestUnitUserBasicInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi, 
+                                    oldDataSubset, 
+                                    -1, 
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                int userId = userBasicInfoTest.MappedUserId;
+                                int userId = testUnit.UserId;
 
-                                userGeneralInfoTest = new TestUnitUserGeneralInfo(this);
-                                allTheTests.Add(userGeneralInfoTest);
-                                userGeneralInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), upi, usersClient, userId);
-                                userGeneralInfoTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.title.ToString(), new List<XElement>(rootDepthOnly));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.cv.ToString(), new List<XElement>(oldDataSubset));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.language.ToString(), new List<XElement>(oldDataSubset));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.department.ToString(), new List<XElement>(oldDataSubset));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.treeDepartments.ToString(), new List<XElement>(oldDataSubset));
+                                testUnit = new TestUnitUserGeneralInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    userId,
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                userContactLocationInfoTest = new TestUnitUserContactLocationInfo(this);
-                                allTheTests.Add(userContactLocationInfoTest);
-                                userContactLocationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
-                                userContactLocationInfoTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.assistant.ToString());
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.labWebsite.ToString(), new List<XElement>(oldDataSubset));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.location.ToString(), new List<XElement>(oldDataSubset));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.mailing.ToString(), new List<XElement>(oldDataSubset),true);
+                                testUnit = new TestUnitUserContactLocationInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    userId,
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                userPublicationInfoTest = new TestUnitUserPublicationInfo(this);
-                                allTheTests.Add(userPublicationInfoTest);
-                                userPublicationInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/featuredPublication"), usersClient, upi, userId);
-                                userPublicationInfoTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.featuredPublication.ToString());
+                                testUnit = new TestUnitUserPublicationInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset, 
+                                    userId, 
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                userResearchInfoTest = new TestUnitUserResearchInfo(this);
-                                allTheTests.Add(userResearchInfoTest);
-                                userResearchInfoTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
-                                userResearchInfoTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.researchSummary.ToString());
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), new List<XElement>(oldDataSubset));
+                                testUnit = new TestUnitUserResearchInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset, 
+                                    userId, 
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                userEducationTrainingTest = new TestUnitUserEducationTrainingInfo(this);
-                                allTheTests.Add(userEducationTrainingTest);
-                                userEducationTrainingTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
-                                userEducationTrainingTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.education.ToString());
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.training.ToString(), new List<XElement>(oldDataSubset));
+                                testUnit = new TestUnitUserEducationTrainingInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    userId,
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                userHonorServiceTest = new TestUnitUserHonorServiceInfo(this);
-                                allTheTests.Add(userHonorServiceTest);
-                                userHonorServiceTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
-                                userHonorServiceTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.professionalHonor.ToString());
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new List<XElement>(oldDataSubset));
+                                testUnit = new TestUnitUserHonorServiceInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    userId,
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
-                                userPatientCareTest = new TestUnitUserPatientCareInfo(this);
-                                allTheTests.Add(userPatientCareTest);
-                                userPatientCareTest.ProvideData(oldServiceXMLOutputDocument.XPathSelectElements("/Faculty/facultyMember/*"), usersClient, upi, userId);
-                                userPatientCareTest.RunAllTests();
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.boardCertification.ToString(), new List<XElement>(rootDepthOnly));
+                                testUnit = new TestUnitUserPatientCareInfo(this);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    userId,
+                                    usersClient);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
 
                                 foreach (var test in allTheTests)
                                 {
@@ -291,21 +297,6 @@ namespace TestMVC4App.Models
                 LogManager.Instance.WriteSummaryReport(watch.Elapsed, errorType, errorMessage);
 
                 LogManager.Instance.CleanUpResources();
-        }
-
-        public void Dispose()
-        {
-            if (conn != null)
-            {
-                conn.Dispose();
-                conn = null;
-            }
-
-            if (queryCommand != null)
-            {
-                queryCommand.Dispose();
-                queryCommand = null;
-            }
         }
     }
 }

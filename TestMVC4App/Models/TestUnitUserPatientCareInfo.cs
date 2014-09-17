@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Web;
-using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
-using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
     public class TestUnitUserPatientCareInfo : TestUnit
     {
-        private UsersClient newServiceAccessor;
-        private IEnumerable<XElement> oldServiceData;
-        private int upi;
-        private int userId;
-
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -31,17 +22,9 @@ namespace TestMVC4App.Models
         {
         }
 
-        public void ProvideData(IEnumerable<XElement> oldData, UsersClient newDataAccessor, int upi, int userId)
-        {
-            this.newServiceAccessor = newDataAccessor;
-            this.oldServiceData = oldData;
-            this.upi = upi;
-            this.userId = userId;
-        }
-
         protected override void RunAllSingleTests()
         {
-            UserPatientCareInfo newServiceInfo = newServiceAccessor.GetUserPatientCareById(userId);
+            UserPatientCareInfo newServiceInfo = this.NewDataAccessor.GetUserPatientCareById(this.UserId);
             UserPatientCareInfo_PhysicianBio(newServiceInfo);
             UserPatientCareInfo_AcceptedReferral(newServiceInfo);
             UserPatientCareInfo_MyChart(newServiceInfo);
@@ -54,61 +37,81 @@ namespace TestMVC4App.Models
 
         private void UserPatientCareInfo_PhysicianBio(UserPatientCareInfo newServiceInfo)
         {
-            string value = string.Empty;
+            string newValue = string.Empty;
 
             if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.PhysicianBio != null)
             {
-                value = newServiceInfo.PatientCare.PhysicianBio;
+                newValue = newServiceInfo.PatientCare.PhysicianBio;
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_PhysicianBio, "Comparing Physician Bio", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.physicianBio.ToString(), value);
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_PhysicianBio, 
+                "Comparing Physician Bio", 
+                this.UserId, 
+                this.Upi, 
+                this.OldDataNodes, 
+                EnumOldServiceFieldsAsKeys.physicianBio.ToString(), 
+                newValue);
         }
 
         private void UserPatientCareInfo_MyChart(UserPatientCareInfo newServiceInfo)
         {
-            string value = string.Empty;
+            string newValue = string.Empty;
 
+            // convert to values returned by the old service
             if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsMyChartAvailable != null)
             {
                 if (newServiceInfo.PatientCare.IsMyChartAvailable)
                 {
-                    value = "1";
+                    newValue = "1";
                 }
                 else
                 {
-                    value = "0";
+                    newValue = "0";
                 }
             }
             else
             {
-                value = "0";
+                newValue = "0";
             }
-
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_MyChart, "Comparing myChart", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.myChart.ToString(), value);
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_MyChart, 
+                "Comparing myChart", 
+                this.UserId, 
+                this.Upi, 
+                this.OldDataNodes, 
+                EnumOldServiceFieldsAsKeys.myChart.ToString(), 
+                newValue);
         }
 
         private void UserPatientCareInfo_IsSeeingNewPatients(UserPatientCareInfo newServiceInfo)
         {
-            string value = string.Empty;
+            string newValue = string.Empty;
 
             if (newServiceInfo.PatientCare != null && newServiceInfo.PatientCare.IsSeeingPatients != null)
             {
                 if (newServiceInfo.PatientCare.IsSeeingPatients)
                 {
-                    value = "Yes";
+                    newValue = "Yes";
                 }
                 else
                 {
-                    value = "No";
+                    newValue = "No";
                 }
             }
-
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_IsSeeingNewPatients, "Comparing Seeing New Patients", this.userId, this.upi, oldServiceData, EnumOldServiceFieldsAsKeys.newPatients.ToString(), value);
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_IsSeeingNewPatients, 
+                "Comparing Seeing New Patients", 
+                this.UserId, 
+                this.Upi, 
+                this.OldDataNodes, 
+                EnumOldServiceFieldsAsKeys.newPatients.ToString(), 
+                newValue);
         }
 
         private void UserPatientCareInfo_IsSeeingPatientType(UserPatientCareInfo newServiceInfo)
         {
-            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(oldServiceData, EnumOldServiceFieldsAsKeys.patientsGroups.ToString()));
+            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.patientsGroups.ToString()));
             var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
 
             var newValues = new HashSet<string>();
@@ -145,7 +148,13 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_IsSeeingPatientType, "Comparing Patient Type(s)", this.userId, this.upi, oldValues, newValues);
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_IsSeeingPatientType, 
+                "Comparing Patient Type(s)", 
+                this.UserId, 
+                this.Upi, 
+                oldValues, 
+                newValues);
         }
 
         private void UserPatientCareInfo_AcceptedReferral(UserPatientCareInfo newServiceInfo)
@@ -157,13 +166,25 @@ namespace TestMVC4App.Models
                 value = newServiceInfo.PatientCare.AcceptedReferral;
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_AcceptedReferral, "Comparing AcceptedReferral", this.userId, this.upi, oldServiceData, "acceptReferrals", value);
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_AcceptedReferral, 
+                "Comparing AcceptedReferral", 
+                this.UserId, 
+                this.Upi, 
+                this.OldDataNodes,
+                EnumOldServiceFieldsAsKeys.acceptReferrals.ToString(), 
+                value);
         }
 
         private void UserEducationTrainingInfo_BoardCertifications(UserPatientCareInfo newServiceInfo)
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, EnumOldServiceFieldsAsKeys.boardCertification.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.specialty,
-                                                                                                                                        EnumOldServiceFieldsAsKeys.certificationYear});
+            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
+                this.OldDataNodes, 
+                EnumOldServiceFieldsAsKeys.boardCertification.ToString(), 
+                new EnumOldServiceFieldsAsKeys[] { 
+                    EnumOldServiceFieldsAsKeys.specialty, 
+                    EnumOldServiceFieldsAsKeys.certificationYear});
+
             // TODO: Location belongs in a dedicated test
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
@@ -196,12 +217,12 @@ namespace TestMVC4App.Models
                 newValues.Add(properties);
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_BoardCertifications, "Comparing Board Certification(s)", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_BoardCertifications, "Comparing Board Certification(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
         private void UserEducationTrainingInfo_CancersTreated(UserPatientCareInfo newServiceInfo)
         {
-            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(oldServiceData, "cancersTreated"));
+            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cancersTreated.ToString()));
             var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
 
             var newValues = new HashSet<string>();
@@ -216,7 +237,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_CancersTreated, "Comparing Cancer(s) Treated", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_CancersTreated, "Comparing Cancer(s) Treated", this.UserId, this.Upi, oldValues, newValues);
         }
     }
 }

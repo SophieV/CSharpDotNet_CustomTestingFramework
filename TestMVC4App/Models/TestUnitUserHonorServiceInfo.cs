@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Web;
-using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
-using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
     public class TestUnitUserHonorServiceInfo : TestUnit
     {
-        private UsersClient newServiceAccessor;
-        private IEnumerable<XElement> oldServiceData;
-        private int upi;
-        private int userId;
-
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -31,17 +22,9 @@ namespace TestMVC4App.Models
         {
         }
 
-        public void ProvideData(IEnumerable<XElement> oldData, UsersClient newDataAccessor, int upi, int userId)
-        {
-            this.newServiceAccessor = newDataAccessor;
-            this.oldServiceData = oldData;
-            this.upi = upi;
-            this.userId = userId;
-        }
-
         protected override void RunAllSingleTests()
         {
-            UserEducationTrainingInfo newServiceInfo = newServiceAccessor.GetUserHonorServiceById(userId);
+            UserEducationTrainingInfo newServiceInfo = this.NewDataAccessor.GetUserHonorServiceById(this.UserId);
 
             UserEducationTrainingInfo_Honors(newServiceInfo);
             UserEducationTrainingInfo_Services(newServiceInfo);
@@ -50,7 +33,7 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_Honors(UserEducationTrainingInfo newServiceInfo)
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, EnumOldServiceFieldsAsKeys.professionalHonor.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.award,
+            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalHonor.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.award,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
                                                                                                                                         EnumOldServiceFieldsAsKeys.presentationDate,
                                                                                                                                         EnumOldServiceFieldsAsKeys.category});
@@ -114,12 +97,12 @@ namespace TestMVC4App.Models
                 newValues.Add(properties);
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Honors, "Comparing Honor(s)", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Honors, "Comparing Honor(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
         private void UserEducationTrainingInfo_Services(UserEducationTrainingInfo newServiceInfo)
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.role,
+            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.role,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
                                                                                                                                         EnumOldServiceFieldsAsKeys.startDate,
                                                                                                                                         EnumOldServiceFieldsAsKeys.endDate,
@@ -227,7 +210,7 @@ namespace TestMVC4App.Models
                 newValues.Add(properties);
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Services, "Comparing Service(s)", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Services, "Comparing Service(s)", this.UserId, this.Upi, oldValues, newValues);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Xml.Linq;
-using System.Xml.XPath;
+using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
@@ -29,6 +29,14 @@ namespace TestMVC4App.Models
         public HashSet<ResultReport> DetailedResults { get; set; }
 
         public EnumResultSeverityType OverallSeverity { get; private set; }
+
+        protected int Upi { get; private set; }
+
+        public int UserId { get; protected set; }
+
+        protected IEnumerable<XElement> OldDataNodes { get; private set; }
+
+        protected UsersClient NewDataAccessor { get; private set; }
 
         public void ComputeOverallSeverity()
         {
@@ -102,6 +110,14 @@ namespace TestMVC4App.Models
         }
 
         protected abstract void RunAllSingleTests();
+
+        public void ProvideData(int upi, IEnumerable<XElement> oldDataNodes, int userId, UsersClient newDataAccessor)
+        {
+            this.Upi = upi;
+            this.OldDataNodes = oldDataNodes;
+            this.UserId = userId;
+            this.NewDataAccessor = newDataAccessor;
+        }
 
         public void RunAllTests()
         {

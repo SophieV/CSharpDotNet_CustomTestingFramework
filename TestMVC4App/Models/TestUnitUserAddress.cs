@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
 
@@ -71,9 +69,9 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, "addressLine1");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.addressLine1.ToString());
 
-            var oldValue2 = ParsingHelper.ParseSingleValue(oldServiceMailingInfo, "mailingAddress2");
+            var oldValue2 = ParsingHelper.ParseSingleValue(oldServiceMailingInfo, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString());
 
             if (!string.IsNullOrEmpty(oldValue2))
             {
@@ -101,7 +99,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            var oldValue2 = ParsingHelper.ParseSingleValue(oldServiceMailingInfo, "mailingAddress2");
+            var oldValue2 = ParsingHelper.ParseSingleValue(oldServiceMailingInfo, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString());
             var oldValues = new HashSet<string>();
             oldValues.Add(oldValue2);
 
@@ -126,7 +124,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, "zipCode");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
 
             var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);

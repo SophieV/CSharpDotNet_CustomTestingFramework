@@ -114,25 +114,51 @@ namespace TestMVC4App.Models
 
         public static IEnumerable<XElement> ParseListNodes(IEnumerable<XElement> elements ,string nodeName, bool isBeginningPattern = false)
         {
-            var values = new List<XElement>();
+            return ParseListNodes(elements, nodeName, new List<XElement>(), isBeginningPattern);
+        }
+
+        public static IEnumerable<XElement> ParseListNodes(IEnumerable<XElement> elements, string nodeName, List<XElement> appendTo, bool isBeginningPattern = false)
+        {
+            if (appendTo == null)
+            {
+                appendTo = new List<XElement>();
+            }
 
             try
             {
                 if (isBeginningPattern)
                 {
-                    values = elements.Where(x => x.Name.ToString().StartsWith(nodeName)).ToList();
+                    appendTo.AddRange(elements.Where(x => x.Name.ToString().StartsWith(nodeName)));
                 }
                 else
                 {
-                    values = elements.Where(x => x.Name == nodeName).ToList();
+                    appendTo.AddRange(elements.Where(x => x.Name == nodeName));
                 }
             }
             catch (Exception)
             {
-                values = new List<XElement>();
             }
 
-            return values;
+            return appendTo;
+        }
+
+        public static IEnumerable<XElement> ParseListNodesOnlySameDepth(IEnumerable<XElement> elements, List<XElement> appendTo, bool isBeginningPattern = false)
+        {
+            if (appendTo == null)
+            {
+                appendTo = new List<XElement>();
+            }
+
+            try
+            {
+                appendTo.AddRange(elements.Where(x => x.Descendants().Count() == 0));
+
+            }
+            catch (Exception)
+            {
+            }
+
+            return appendTo;
         }
 
         public static HashSet<string> StringToList(string valueToSplit, char separator, HashSet<string> appendTo = null)

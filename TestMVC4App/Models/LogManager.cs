@@ -22,7 +22,7 @@ namespace TestMVC4App.Models
         private static object lockLogResult = new object();
         private static object lockProfileOverview = new object();
 
-        private SortedSet<EnumTestUnitNames> allTestNames;
+        public SortedSet<EnumTestUnitNames> AllTestNames {get; private set;}
         private StreamWriter streamWriter;
         private Dictionary<EnumTestUnitNames, HtmlTextWriter> htmlWritersForDetailedReports_ByTestName;
         private HtmlTextWriter htmlWriterForSummaryReport;
@@ -64,10 +64,10 @@ namespace TestMVC4App.Models
 
         private LogManager() {
             // the order here is quite important because this is implicitely the expectation of the templates
-            allTestNames = new SortedSet<EnumTestUnitNames>();
+            AllTestNames = new SortedSet<EnumTestUnitNames>();
             foreach (var testName in (EnumTestUnitNames[])Enum.GetValues(typeof(EnumTestUnitNames)))
             {
-                allTestNames.Add(testName);
+                AllTestNames.Add(testName);
             }
 
             IdentifiedBehaviorsDescriptions = new Dictionary<EnumIdentifiedDataBehavior, string>();
@@ -81,7 +81,7 @@ namespace TestMVC4App.Models
             countDataBehaviors_ByTestName = new Dictionary<EnumTestUnitNames, Dictionary<EnumIdentifiedDataBehavior, int>>();
 
             duration_ByTestName = new Dictionary<EnumTestUnitNames, HashSet<TimeSpan>>();
-            foreach(var testName in allTestNames)
+            foreach(var testName in AllTestNames)
             {
                 duration_ByTestName.Add(testName, new HashSet<TimeSpan>());
             }
@@ -267,7 +267,7 @@ namespace TestMVC4App.Models
                 htmlWritersForDetailedReports_ByTestName = new Dictionary<EnumTestUnitNames, HtmlTextWriter>();
                 countFilesGenerated++;
 
-                foreach (EnumTestUnitNames testName in allTestNames)
+                foreach (EnumTestUnitNames testName in AllTestNames)
                 {
                     filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + testName + "_" + countFilesGenerated + HTM_EXTENSION);
 
@@ -289,7 +289,7 @@ namespace TestMVC4App.Models
                 streamWriter = new StreamWriter(filePath);
                 htmlWriterForProfileReport = new HtmlTextWriter(streamWriter);
 
-                var sharedHeaderProfileData = new SharedHeaderProfileReportData() { AllTestNames = allTestNames };
+                var sharedHeaderProfileData = new SharedHeaderProfileReportData() { AllTestNames = AllTestNames };
 
                 var headerProfileTemplate = new ProfileReport_Header();
                 headerProfileTemplate.Session = new Dictionary<string, object>()
@@ -374,7 +374,7 @@ namespace TestMVC4App.Models
                 // deduce ignored profiles from statistics, to still reach 100%
                 this.StatsCountTotalUpis -= this.StatsCountProfilesIgnored;
 
-                foreach (var testName in allTestNames)
+                foreach (var testName in AllTestNames)
                 {
                     countSuccessResults = 0;
 

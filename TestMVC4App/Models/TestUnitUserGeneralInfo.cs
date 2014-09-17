@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using YSM.PMS.Service.Common.DataTransfer;
-using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
     public class TestUnitUserGeneralInfo : TestUnit
     {
-        private UsersClient newServiceAccessor;
-        private IEnumerable<XElement> oldServiceData;
-        private int userId;
-        private int upi;
-
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -33,40 +24,32 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            var newServiceInfo = newServiceAccessor.GetUserGeneralInfoById(userId);
+            var newServiceInfo = this.NewDataAccessor.GetUserGeneralInfoById(this.UserId);
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.userId, this.upi, oldServiceData, "biography", newServiceInfo.Bio);
-            UserGeneralInfo_Titles_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_LanguageUsers_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_AltLastName_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_AltFirstName_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_AltMiddleName_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_AltSuffix_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_AltMiddleNameDisplayed_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_SuffixNames_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_CountCVs_Test(newServiceInfo, oldServiceData);
-            UserGeneralInfo_Organizations_Test(newServiceInfo, oldServiceData);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.UserId, this.Upi, this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), newServiceInfo.Bio);
+            UserGeneralInfo_Titles_Test(newServiceInfo);
+            UserGeneralInfo_LanguageUsers_Test(newServiceInfo);
+            UserGeneralInfo_AltLastName_Test(newServiceInfo);
+            UserGeneralInfo_AltFirstName_Test(newServiceInfo);
+            UserGeneralInfo_AltMiddleName_Test(newServiceInfo);
+            UserGeneralInfo_AltSuffix_Test(newServiceInfo);
+            UserGeneralInfo_AltMiddleNameDisplayed_Test(newServiceInfo);
+            UserGeneralInfo_SuffixNames_Test(newServiceInfo);
+            UserGeneralInfo_CountCVs_Test(newServiceInfo);
+            UserGeneralInfo_Organizations_Test(newServiceInfo);
 
             ComputeOverallSeverity();
         }
 
-        public void ProvideData(IEnumerable<XElement> oldData, int upi, UsersClient newDataAccessor, int userId)
-        {
-            this.newServiceAccessor = newDataAccessor;
-            this.oldServiceData = oldData;
-            this.userId = userId;
-            this.upi = upi;
-        }
-
         #region Field Comparison Tests
 
-        private void UserGeneralInfo_AltLastName_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_AltLastName_Test(UserGeneralInfo newServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "lastname");
+            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.LastName, resultReport);
             compareStrategy.Investigate();
 
@@ -74,7 +57,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "lastname");
+                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltLastName, resultReport);
                 compareStrategy.Investigate();
             }
@@ -84,20 +67,20 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.Upi),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltFirstName_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_AltFirstName_Test(UserGeneralInfo newServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "firstname");
+            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.FirstName, resultReport);
             compareStrategy.Investigate();
 
@@ -105,7 +88,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "firstname");
+                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltFirstName, resultReport);
                 compareStrategy.Investigate();
             }
@@ -115,20 +98,20 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.Upi),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltMiddleNameDisplayed_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_AltMiddleNameDisplayed_Test(UserGeneralInfo newServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
 
-            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "MiddleName");
+            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.MiddleName.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(string.IsNullOrEmpty(oldValue).ToString(), newServiceData.IsAltMiddleNameDisplayed.ToString(), resultReport);
             compareStrategy.Investigate();
 
@@ -137,20 +120,20 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.Upi),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltSuffix_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_AltSuffix_Test(UserGeneralInfo newServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltSuffix, "Comparing AltSuffix (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "Suffix");
+            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.Suffix.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.Suffix, resultReport);
             compareStrategy.Investigate();
 
@@ -158,7 +141,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "Suffix");
+                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.Suffix.ToString());
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltSuffix, resultReport);
                 compareStrategy.Investigate();
             }
@@ -168,20 +151,20 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.Upi),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltMiddleName_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_AltMiddleName_Test(UserGeneralInfo newServiceData)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "middle");
+            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
             if (string.IsNullOrEmpty(oldValue))
             {
                 oldValue = "False";
@@ -193,7 +176,7 @@ namespace TestMVC4App.Models
             {
                 resultReport.ResetForReTesting();
 
-                oldValue = ParsingHelper.ParseSingleValue(oldServiceData, "middle");
+                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
                 compareStrategy = new CompareStrategyContextSwitcher(oldValue, newServiceData.AltMiddleName, resultReport);
                 compareStrategy.Investigate();
             }
@@ -203,16 +186,16 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.Upi),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_Titles_Test(UserGeneralInfo newServiceData)
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "title", "titleName");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.title.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString());
 
             HashSet<string> newValues = new HashSet<string>();
             if(newServiceData.Titles.Count() > 0)
@@ -226,23 +209,23 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Titles, "Comparing Title(s)", this.userId, this.upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Titles, "Comparing Title(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
-        private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData)
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "cv", "fileName");
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cv.ToString(), EnumOldServiceFieldsAsKeys.fileName.ToString());
             string oldValue = oldValues.Count().ToString();
 
             string newValue = newServiceData.CVs.Count().ToString();
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", this.userId, this.upi, oldValue, newValue);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", this.UserId, this.Upi, oldValue, newValue);
         }
 
-        private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData)
         {
-            string oldValuePart1 = ParsingHelper.ParseSingleValue(oldServiceData, "degree");
-            string oldValuePart2 = ParsingHelper.ParseSingleValue(oldServiceData, "professionalSuffix");
+            string oldValuePart1 = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.degree.ToString());
+            string oldValuePart2 = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalSuffix.ToString());
 
             HashSet<string> oldValues = ParsingHelper.StringToList(oldValuePart1, ',');
             oldValues = ParsingHelper.StringToList(oldValuePart2, ',', oldValues);
@@ -256,12 +239,12 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Suffixes, "Comparing SuffixNames", this.userId, this.upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Suffixes, "Comparing SuffixNames", this.UserId, this.Upi, oldValues, newValues);
         }
 
-        private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData)
         {
-            var oldValues = ParsingHelper.ParseListSimpleValues(oldServiceData, "language", "languageName");
+            var oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.language.ToString(), EnumOldServiceFieldsAsKeys.languageName.ToString());
 
             var newValues = new HashSet<string>();
             if (newServiceData.LanguageUsers.Count() > 0)
@@ -272,19 +255,19 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", this.userId, this.upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
-        private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData, IEnumerable<XElement> oldServiceData)
+        private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData)
         {
-            var departments = ParsingHelper.ParseListNodes(oldServiceData,"department");
-            var departmentTree = ParsingHelper.ParseListNodes(oldServiceData, "treeDepartments");
+            var departments = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.department.ToString());
+            var departmentTree = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.treeDepartments.ToString());
 
             var organizationTest = new TestUnitUserOrganization(this.Container, this);
             this.Children.Add(organizationTest);
 
-            organizationTest.ProvideData(userId, 
-                                                     upi, 
+            organizationTest.ProvideData(this.UserId, 
+                                                     this.Upi, 
                                                      departments,
                                                      departmentTree, 
                                                      newServiceData.Organizations);

@@ -185,6 +185,7 @@
     <Compile Include="Models\ComparerStructureWithKeys.cs" />
     <Compile Include="Models\ComparerStructureWithKeysTrimmed.cs" />
     <Compile Include="Models\CompareStrategyStructureWithKeys.cs" />
+    <Compile Include="Models\DatabaseFacade.cs" />
     <Compile Include="Models\EnumOldServiceFieldsAsKeys.cs" />
     <Compile Include="Models\EnumResultDisplayFormat.cs" />
     <Compile Include="Models\EnumTestUnitNames.cs" />
@@ -203,7 +204,6 @@
     <Compile Include="Models\TestUnitUserAddress.cs" />
     <Compile Include="Models\TestUnitUserEducationTrainingInfo.cs" />
     <Compile Include="Models\TestUnitUserHonorServiceInfo.cs" />
-    <Compile Include="Models\TestUnitUserLabWebsite.cs" />
     <Compile Include="Models\TestUnitUserContactLocationInfo.cs" />
     <Compile Include="Models\TestUnitUserOrganization.cs" />
     <Compile Include="Models\ResultReport.cs" />
@@ -370,9 +370,6 @@
     <Content Include="ServiceProxy\System.Net.Http.Formatting.dll" />
     <Content Include="ServiceProxy\YSM.PMS.Service.Common.dll" />
     <Content Include="ServiceProxy\YSM.PMS.Web.Service.Clients.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\filtergrid.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Web.config" />

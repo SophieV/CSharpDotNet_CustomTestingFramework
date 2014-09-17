@@ -1,20 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
-using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
     public class TestUnitUserEducationTrainingInfo : TestUnit
     {
-        private UsersClient newServiceAccessor;
-        private IEnumerable<XElement> oldServiceData;
-        private int upi;
-        private int userId;
-
         public override string newServiceURLExtensionBeginning
         {
             get { return "Users/"; }
@@ -30,17 +21,9 @@ namespace TestMVC4App.Models
         {
         }
 
-        public void ProvideData(IEnumerable<XElement> oldData, UsersClient newDataAccessor, int upi, int userId)
-        {
-            this.newServiceAccessor = newDataAccessor;
-            this.oldServiceData = oldData;
-            this.upi = upi;
-            this.userId = userId;
-        }
-
         protected override void RunAllSingleTests()
         {
-            UserEducationTrainingInfo newServiceInfo = newServiceAccessor.GetUserEducationTrainingById(userId);
+            UserEducationTrainingInfo newServiceInfo = this.NewDataAccessor.GetUserEducationTrainingById(this.UserId);
 
             UserEducationTrainingInfo_Trainings(newServiceInfo);
             UserEducationTrainingInfo_Education(newServiceInfo);
@@ -49,9 +32,12 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_Education(UserEducationTrainingInfo newServiceInfo)
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, EnumOldServiceFieldsAsKeys.education.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.degree,
-                                                                                                                                        EnumOldServiceFieldsAsKeys.institution,
-                                                                                                                                        EnumOldServiceFieldsAsKeys.gradYear});
+            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
+                this.OldDataNodes, 
+                EnumOldServiceFieldsAsKeys.education.ToString(), 
+                new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.degree,
+                                                    EnumOldServiceFieldsAsKeys.institution,
+                                                    EnumOldServiceFieldsAsKeys.gradYear});
             // TODO: Location belongs in a dedicated test
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
@@ -94,16 +80,19 @@ namespace TestMVC4App.Models
                 newValues.Add(properties);
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Education, "Comparing Education(s)", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Education, "Comparing Education(s)", this.UserId, this.Upi, oldValues, newValues);
         }
 
         private void UserEducationTrainingInfo_Trainings(UserEducationTrainingInfo newServiceInfo)
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(oldServiceData, EnumOldServiceFieldsAsKeys.training.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.departmentName, 
-                                                                                                                                       EnumOldServiceFieldsAsKeys.startYear, 
-                                                                                                                                       EnumOldServiceFieldsAsKeys.endYear, 
-                                                                                                                                       EnumOldServiceFieldsAsKeys.position, 
-                                                                                                                                       EnumOldServiceFieldsAsKeys.locationName });
+            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
+                this.OldDataNodes, 
+                EnumOldServiceFieldsAsKeys.training.ToString(), new 
+                    EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.departmentName, 
+                                                    EnumOldServiceFieldsAsKeys.startYear, 
+                                                    EnumOldServiceFieldsAsKeys.endYear, 
+                                                    EnumOldServiceFieldsAsKeys.position, 
+                                                    EnumOldServiceFieldsAsKeys.locationName });
             // TODO: Location belongs in a dedicated test
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
@@ -166,7 +155,7 @@ namespace TestMVC4App.Models
                 newValues.Add(properties);
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Trainings, "Comparing Training(s)", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Trainings, "Comparing Training(s)", this.UserId, this.Upi, oldValues, newValues);
         }
     }
 }

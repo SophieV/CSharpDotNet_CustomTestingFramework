@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
-using System.Xml.XPath;
 using YSM.PMS.Service.Common.DataTransfer;
 using YSM.PMS.Web.Service.Clients;
 
@@ -179,7 +178,7 @@ namespace TestMVC4App.Models
                 {
                     try
                     {
-                        parsedOrgId = el.Element("OrgID").Value;
+                        parsedOrgId = el.Element(EnumOldServiceFieldsAsKeys.OrgID.ToString()).Value;
                     }
                     catch (Exception)
                     {
@@ -189,7 +188,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        parsedOrgName = el.Element("departmentName").Value;
+                        parsedOrgName = el.Element(EnumOldServiceFieldsAsKeys.departmentName.ToString()).Value;
                     }
                     catch (Exception)
                     {
@@ -199,7 +198,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        string isPrimary = el.Element("primaryDept").Value.Trim();
+                        string isPrimary = el.Element(EnumOldServiceFieldsAsKeys.primaryDept.ToString()).Value.Trim();
                         if (isPrimary == "Y")
                         {
                              parsedIsPrimary = true;
@@ -211,7 +210,7 @@ namespace TestMVC4App.Models
 
                         try
                         {
-                            parsedMissions = el.Element("mission").Value;
+                            parsedMissions = el.Element(EnumOldServiceFieldsAsKeys.mission.ToString()).Value;
                         }
                         catch (Exception)
                         {
@@ -295,13 +294,13 @@ namespace TestMVC4App.Models
             OrganizationTreeDescriptor orgDesc = parent;
             string tempValue;
 
-            if (element != null && element.Name == "treeDepartment") 
+            if (element != null && element.Name == EnumOldServiceFieldsAsKeys.treeDepartment.ToString()) 
             {
                 orgDesc = new OrganizationTreeDescriptor();
 
                 try
                 {
-                    orgDesc.ID = element.Element("orgID").Value.Trim();
+                    orgDesc.ID = element.Element(EnumOldServiceFieldsAsKeys.orgID.ToString()).Value.Trim();
                 }
                 catch (Exception)
                 {
@@ -310,7 +309,7 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    orgDesc.Name = element.Element("name").Value.Trim();
+                    orgDesc.Name = element.Element(EnumOldServiceFieldsAsKeys.name.ToString()).Value.Trim();
                 }
                 catch (Exception)
                 {
@@ -320,7 +319,7 @@ namespace TestMVC4App.Models
                 try
                 {
 
-                    tempValue = element.Element("mission").Value;
+                    tempValue = element.Element(EnumOldServiceFieldsAsKeys.mission.ToString()).Value;
 
                     if (!string.IsNullOrEmpty(tempValue))
                     {
@@ -339,7 +338,7 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    string isPrimary = element.Element("primaryDept").Value.Trim();
+                    string isPrimary = element.Element(EnumOldServiceFieldsAsKeys.primaryDept.ToString()).Value.Trim();
                     if(isPrimary == "Y")
                     {
                         orgDesc.IsPrimary = true;
@@ -369,9 +368,9 @@ namespace TestMVC4App.Models
                 allPuzzlePieces.Add(orgDesc);
         }
 
-            if (element.Elements("treeDepartment").Count() > 0)
+            if (element.Elements(EnumOldServiceFieldsAsKeys.treeDepartment.ToString()).Count() > 0)
             {
-                foreach (XElement child in element.Elements("treeDepartment"))
+                foreach (XElement child in element.Elements(EnumOldServiceFieldsAsKeys.treeDepartment.ToString()))
                 {
                     ParseRecursiveTree(child, orgDesc, allPuzzlePieces, depth + 1);
                 }
