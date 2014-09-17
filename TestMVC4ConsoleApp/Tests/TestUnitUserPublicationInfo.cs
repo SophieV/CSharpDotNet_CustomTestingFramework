@@ -7,15 +7,6 @@ namespace TestMVC4App.Models
     public class TestUnitUserPublicationInfo : TestUnit
     {
         private IEnumerable<Publication> newData;
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/Publications"; }
-        }
 
         public TestUnitUserPublicationInfo(TestSuite parent, IEnumerable<Publication> newData) : base(parent)
         {
@@ -37,8 +28,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                         EnumTestUnitNames.UserPublicationInfo_Titles,
                         "Comparing Publication Title(s)",
-                        this.UserId,
-                        this.Upi,
                         ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString()),
                         newValues);
 
@@ -54,8 +43,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                         EnumTestUnitNames.UserPublicationInfo_Citations,
                         "Comparing Publication Citation(s)",
-                        this.UserId,
-                        this.Upi,
                         ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.description.ToString()),
                         newValues);
         }

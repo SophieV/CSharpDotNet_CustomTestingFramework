@@ -39,16 +39,6 @@ namespace TestMVC4App.Models
             }
         }
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return Parent.newServiceURLExtensionBeginning; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return Parent.newServiceURLExtensionEnding; }
-        }
-
         public TestUnitUserAddress(TestSuite parent, TestUnit bigBrother) 
         : base (parent,bigBrother)
         {
@@ -90,7 +80,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(userId,
                                               upi,
                                               this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -115,7 +105,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(userId,
                                               upi,
                                               this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -138,7 +128,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(userId,
                                               upi,
                                               this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
     }

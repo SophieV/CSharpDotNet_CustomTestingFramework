@@ -158,8 +158,9 @@ namespace TestMVC4App.Models
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi, 
-                                    oldDataSubset, 
-                                    -1);
+                                    oldDataSubset,
+                                    -1,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -177,7 +178,8 @@ namespace TestMVC4App.Models
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId);
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -190,7 +192,8 @@ namespace TestMVC4App.Models
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId);
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -199,8 +202,9 @@ namespace TestMVC4App.Models
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
-                                    oldDataSubset, 
-                                    userId);
+                                    oldDataSubset,
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -210,8 +214,9 @@ namespace TestMVC4App.Models
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,
-                                    oldDataSubset, 
-                                    userId);
+                                    oldDataSubset,
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -222,7 +227,8 @@ namespace TestMVC4App.Models
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId);
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -233,7 +239,8 @@ namespace TestMVC4App.Models
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId);
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
@@ -243,7 +250,8 @@ namespace TestMVC4App.Models
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    userId);
+                                    userId,
+                                    pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 

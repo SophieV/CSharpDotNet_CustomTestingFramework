@@ -10,15 +10,6 @@ namespace TestMVC4App.Models
     {
         private IEnumerable<LabWebsite> newDataLabWebsite;
         private IEnumerable<UserAddress> newDataUserAddress;
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/ContactLocation"; }
-        }
 
         public TestUnitUserContactLocationInfo(TestSuite parent, IEnumerable<LabWebsite> newDataLabWebsite, IEnumerable<UserAddress> newDataUserAddresses) 
             : base(parent)
@@ -114,7 +105,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.UserId),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -137,7 +128,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.UserId),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
     }

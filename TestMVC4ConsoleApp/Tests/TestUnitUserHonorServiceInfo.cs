@@ -10,16 +10,6 @@ namespace TestMVC4App.Models
         IEnumerable<Honor> newDataHonor;
         IEnumerable<Service> newDataService;
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/HonorService"; }
-        }
-
         public TestUnitUserHonorServiceInfo(TestSuite parent, IEnumerable<Honor> newDataHonor, IEnumerable<Service> newDataService)
             : base(parent)
         {
@@ -103,7 +93,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Honors, "Comparing Honor(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Honors, "Comparing Honor(s)", oldValues, newValues);
         }
 
         private void UserEducationTrainingInfo_Services()
@@ -219,7 +209,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Services, "Comparing Service(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Services, "Comparing Service(s)", oldValues, newValues);
         }
     }
 }

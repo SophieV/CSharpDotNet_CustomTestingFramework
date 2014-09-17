@@ -6,16 +6,6 @@ namespace TestMVC4App.Models
     {
         private Research newData;
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/Research"; }
-        }
-
         public TestUnitUserResearchInfo(TestSuite parent, Research newData) : base(parent)
         {
             this.newData = newData;
@@ -36,8 +26,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserResearchInfo_Summary, 
                 "Comparing Research Summary(ies)", 
-                this.UserId, 
-                this.Upi, 
                 this.OldDataNodes,
                 EnumOldServiceFieldsAsKeys.researchSummary.ToString(),
                 newValue);
@@ -52,9 +40,7 @@ namespace TestMVC4App.Models
             }
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserResearchInfo_Overview, 
-                "Comparing Research Overview(s)", 
-                this.UserId, 
-                this.Upi, 
+                "Comparing Research Overview(s)",  
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.researchOverview.ToString(), 
                 newValue);

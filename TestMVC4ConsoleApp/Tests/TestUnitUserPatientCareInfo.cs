@@ -10,16 +10,6 @@ namespace TestMVC4App.Models
         private IEnumerable<BoardCertification> newDataBoardCertification;
         private PatientCare newDataPatientCare;
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/PatientCare"; }
-        }
-
         public TestUnitUserPatientCareInfo(TestSuite parent, IEnumerable<BoardCertification> newDataBoardCertification, PatientCare newDataPatientCare)
             : base(parent)
         {
@@ -51,8 +41,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_PhysicianBio, 
                 "Comparing Physician Bio", 
-                this.UserId, 
-                this.Upi, 
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.physicianBio.ToString(), 
                 newValue);
@@ -81,8 +69,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_MyChart, 
                 "Comparing myChart", 
-                this.UserId, 
-                this.Upi, 
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.myChart.ToString(), 
                 newValue);
@@ -106,8 +92,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_IsSeeingNewPatients, 
                 "Comparing Seeing New Patients", 
-                this.UserId, 
-                this.Upi, 
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.newPatients.ToString(), 
                 newValue);
@@ -155,8 +139,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_IsSeeingPatientType, 
                 "Comparing Patient Type(s)", 
-                this.UserId, 
-                this.Upi, 
                 oldValues, 
                 newValues);
         }
@@ -173,8 +155,6 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_AcceptedReferral, 
                 "Comparing AcceptedReferral", 
-                this.UserId, 
-                this.Upi, 
                 this.OldDataNodes,
                 EnumOldServiceFieldsAsKeys.acceptReferrals.ToString(), 
                 value);
@@ -224,7 +204,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_BoardCertifications, "Comparing Board Certification(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_BoardCertifications, "Comparing Board Certification(s)", oldValues, newValues);
         }
 
         private void UserEducationTrainingInfo_CancersTreated()
@@ -244,7 +224,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_CancersTreated, "Comparing Cancer(s) Treated", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserPatientCareInfo_CancersTreated, "Comparing Cancer(s) Treated", oldValues, newValues);
         }
     }
 }

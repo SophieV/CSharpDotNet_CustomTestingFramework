@@ -9,16 +9,6 @@ namespace TestMVC4App.Models
     {
         private UserGeneralInfo newData;
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/GeneralInfo"; }
-        }
-
         public TestUnitUserGeneralInfo(TestSuite parent, UserGeneralInfo newData) : base(parent)
         {
             this.newData = newData;
@@ -26,7 +16,7 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.UserId, this.Upi, this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), this.newData.Bio);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), this.newData.Bio);
             UserGeneralInfo_Titles_Test(this.newData);
             UserGeneralInfo_LanguageUsers_Test(this.newData);
             UserGeneralInfo_AltLastName_Test(this.newData);
@@ -70,7 +60,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -101,7 +91,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -123,7 +113,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -154,7 +144,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -189,7 +179,7 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.UserId,
                                               this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -209,7 +199,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Titles, "Comparing Title(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Titles, "Comparing Title(s)", oldValues, newValues);
         }
 
         private void UserGeneralInfo_CountCVs_Test(UserGeneralInfo newServiceData)
@@ -219,7 +209,7 @@ namespace TestMVC4App.Models
 
             string newValue = newServiceData.CVs.Count().ToString();
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", this.UserId, this.Upi, oldValue, newValue);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", oldValue, newValue);
         }
 
         private void UserGeneralInfo_SuffixNames_Test(UserGeneralInfo newServiceData)
@@ -239,7 +229,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Suffixes, "Comparing SuffixNames", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Suffixes, "Comparing SuffixNames", oldValues, newValues);
         }
 
         private void UserGeneralInfo_LanguageUsers_Test(UserGeneralInfo newServiceData)
@@ -255,7 +245,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData)

@@ -9,16 +9,6 @@ namespace TestMVC4App.Models
         IEnumerable<Education> newDataEducation;
         IEnumerable<Training> newDataTraining;
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return "Users/"; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return "/EducationTraining"; }
-        }
-
         public TestUnitUserEducationTrainingInfo(TestSuite parent, IEnumerable<Education> newDataEducation, IEnumerable<Training> newDataTraining)
             : base(parent)
         {
@@ -86,7 +76,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Education, "Comparing Education(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Education, "Comparing Education(s)", oldValues, newValues);
         }
 
         private void UserEducationTrainingInfo_Trainings()
@@ -164,7 +154,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Trainings, "Comparing Training(s)", this.UserId, this.Upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserEducationTrainingInfo_Trainings, "Comparing Training(s)", oldValues, newValues);
         }
     }
 }

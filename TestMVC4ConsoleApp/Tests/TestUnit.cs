@@ -16,9 +16,15 @@ namespace TestMVC4App.Models
 
         public string ErrorMessage { get; set; }
 
-        public abstract string newServiceURLExtensionBeginning { get; }
+        public virtual string NewServiceURLExtensionBeginning
+        {
+            get { return "Users/PageName/"; }
+        }
 
-        public abstract string newServiceURLExtensionEnding { get; }
+        public virtual string NewServiceURLExtensionEnding
+        {
+            get { return "/Complete"; }
+        }
 
         public TestSuite Container { get; set; }
 
@@ -33,6 +39,8 @@ namespace TestMVC4App.Models
         protected int Upi { get; private set; }
 
         public int UserId { get; protected set; }
+
+        protected string PageName { get; private set; }
 
         protected IEnumerable<XElement> OldDataNodes { get; private set; }
 
@@ -89,14 +97,14 @@ namespace TestMVC4App.Models
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        protected virtual string BuildNewServiceURL(int userId)
+        protected virtual string BuildNewServiceURL(string pageName)
         {
             if (Container == null)
             {
                 throw new NotImplementedException();
             }
 
-            return Container.newServiceURLBase + newServiceURLExtensionBeginning + userId + newServiceURLExtensionEnding;
+            return Container.newServiceURLBase + NewServiceURLExtensionBeginning + pageName + NewServiceURLExtensionEnding;
         }
 
         protected TestUnit(TestSuite container, TestUnit parent = null)
@@ -109,11 +117,12 @@ namespace TestMVC4App.Models
 
         protected abstract void RunAllSingleTests();
 
-        public void ProvideData(int upi, IEnumerable<XElement> oldDataNodes, int userId)
+        public void ProvideData(int upi, IEnumerable<XElement> oldDataNodes, int userId, string pageName)
         {
             this.Upi = upi;
             this.OldDataNodes = oldDataNodes;
             this.UserId = userId;
+            this.PageName = pageName;
         }
 
         public void RunAllTests()
@@ -145,7 +154,7 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<string> oldValues, HashSet<string> newValues)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, HashSet<string> oldValues, HashSet<string> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -158,14 +167,14 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -178,14 +187,14 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, bool stringPartialMatch = false)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, bool stringPartialMatch = false)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -198,21 +207,21 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, IEnumerable<XElement> oldServiceData, string oldSingleStringPath, string newValue)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, IEnumerable<XElement> oldServiceData, string oldSingleStringPath, string newValue)
         {
             string oldValue = ParsingHelper.ParseSingleValue(oldServiceData, oldSingleStringPath);
 
-            this.CompareAndLog_Test(testFullName, testDescription, userId, upi, oldValue, newValue);
+            this.CompareAndLog_Test(testFullName, testDescription, oldValue, newValue);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, int userId, int upi, string oldValue, string newValue)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, string oldValue, string newValue)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -225,10 +234,10 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
     }

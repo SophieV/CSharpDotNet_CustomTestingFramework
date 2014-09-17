@@ -50,16 +50,6 @@ namespace TestMVC4App.Models
         }
         #endregion
 
-        public override string newServiceURLExtensionBeginning
-        {
-            get { return Parent.newServiceURLExtensionBeginning; }
-        }
-
-        public override string newServiceURLExtensionEnding
-        {
-            get { return Parent.newServiceURLExtensionEnding; }
-        }
-
         public TestUnitUserOrganization(TestSuite parent, TestUnit bigBrother) 
             : base (parent,bigBrother)
         {
@@ -464,24 +454,24 @@ namespace TestMVC4App.Models
 
             LogManager.Instance.LogTestResult(userId,
                                               upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
         private void UserGeneralInfo_Organization_Id_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Id, "Comparing Organization Ids", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Id, "Comparing Organization Ids", oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Name_Test(HashSet<string> oldValues, HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Name, "Comparing Organization Names", userId, upi, oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Name, "Comparing Organization Names", oldValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", userId, upi, (newValues.ToList().Where(z => z != null).Count() > 0 ? new HashSet<string>() { "Academic Department" } : new HashSet<string>()), newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", (newValues.ToList().Where(z => z != null).Count() > 0 ? new HashSet<string>() { "Academic Department" } : new HashSet<string>()), newValues);
         }
 
         private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
