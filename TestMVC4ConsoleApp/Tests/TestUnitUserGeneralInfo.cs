@@ -26,7 +26,6 @@ namespace TestMVC4App.Models
             UserGeneralInfo_AltMiddleNameDisplayed_Test(this.newData);
             UserGeneralInfo_SuffixNames_Test(this.newData);
             UserGeneralInfo_CountCVs_Test(this.newData);
-            UserGeneralInfo_Organizations_Test(this.newData);
 
             ComputeOverallSeverity();
         }
@@ -246,20 +245,6 @@ namespace TestMVC4App.Models
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", oldValues, newValues);
-        }
-
-        private void UserGeneralInfo_Organizations_Test(UserGeneralInfo newServiceData)
-        {
-            var departments = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.department.ToString());
-            var departmentTree = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.treeDepartments.ToString());
-
-            var organizationTest = new TestUnitUserOrganization(this.Container, this, this.UserId, this.Upi, this.PageName);
-            this.Children.Add(organizationTest);
-
-            organizationTest.ProvideData(departments,
-                                                     departmentTree, 
-                                                     newServiceData.Organizations);
-            organizationTest.RunAllTests();
         }
 
         #endregion

@@ -13,40 +13,18 @@ namespace TestMVC4App.Models
     {
         # region Data Provided by Parent Test Unit
 
-        private IEnumerable<Organization> newServiceOrganizations = new HashSet<Organization>();
-        private IEnumerable<XElement> oldServiceDepartments;
-        private IEnumerable<XElement> oldServiceTreeDepartments;
+        private IEnumerable<OrganizationTreeInfo> newData;
         private HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptors;
         private HashSet<OrganizationTreeDescriptor> oldServiceOrganizationDescriptors;
 
-        public void ProvideData(IEnumerable<XElement> oldServiceDepartments,
-                                            IEnumerable<XElement> oldServiceTreeDepartments,
-                                            IEnumerable<Organization> newServiceOrganizations)
-        {
-            if (newServiceOrganizations != null)
-            {
-                this.newServiceOrganizations = newServiceOrganizations;
-            }
-
-            if (oldServiceDepartments != null)
-            {
-                this.oldServiceDepartments = oldServiceDepartments;
-            }
-
-            if (oldServiceTreeDepartments != null)
-            {
-                this.oldServiceTreeDepartments = oldServiceTreeDepartments;
-            }
-
-            this.newServiceOrganizationDescriptors = new HashSet<OrganizationTreeDescriptor>();
-            this.oldServiceOrganizationDescriptors = new HashSet<OrganizationTreeDescriptor>();
-        }
         #endregion
 
-        public TestUnitUserOrganization(TestSuite parent, TestUnit bigBrother, int userId, int upi, string pageName) 
-            : base (parent,bigBrother)
+        public TestUnitUserOrganization(TestSuite parent, IEnumerable<OrganizationTreeInfo> newData)
+            :base(parent)
         {
-            this.ProvideData(upi, null, userId, pageName);
+            this.newData = newData;
+            this.newServiceOrganizationDescriptors = new HashSet<OrganizationTreeDescriptor>();
+            this.oldServiceOrganizationDescriptors = new HashSet<OrganizationTreeDescriptor>();
         }
 
         protected override void RunAllSingleTests()
@@ -76,11 +54,11 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)),
                                                    new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)));
 
-            UserGeneralInfo_Organization_Type_Test(new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Type).Distinct()));
+            UserGeneralInfo_Organization_Type_Test(new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Type)).Select(a => a.Type).Distinct()));
 
             UserGeneralInfo_Organization_IdAndNameTogether_Test(this.oldServiceOrganizationDescriptors,oldTreeRoot,this.newServiceOrganizationDescriptors,newTreeRoot);
             UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
-            UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
+            //UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
             UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
 
             UserGeneralInfo_Organization_Missions_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
@@ -92,43 +70,44 @@ namespace TestMVC4App.Models
 
         private OrganizationTreeDescriptor ParseNewServiceData()
         {
-            OrganizationTreeDescriptor root = null;
-            OrganizationTreeDescriptor organizationDescriptor = null;
+            var rootContainer = new OrganizationTreeDescriptor();
+            rootContainer.Depth = 0;
+            this.newServiceOrganizationDescriptors.Add(rootContainer);
 
-            if (this.newServiceOrganizations.Count() > 0)
+            if (this.newData != null && this.newData.Count() > 0)
             {
-                foreach (var organization in this.newServiceOrganizations)
+                foreach (var organization in this.newData)
                 {
-                    organizationDescriptor = new OrganizationTreeDescriptor()
-                    {
-                        ID = organization.OrganizationId.ToString(),
-                        Name = organization.Name,
-                        IsPrimary = organization.IsImported,
-                        ParentId = organization.OrganizationParentId.ToString(),
-                        Type = organization.Type
-                    };
-
-                    this.newServiceOrganizationDescriptors.Add(organizationDescriptor);
-                    organizationDescriptor = null;
+                    PopulateTreeDescriptor(organization, rootContainer);
                 }
-
-                LinkElementsOfOrganizationTree();
-
-                root = this.newServiceOrganizationDescriptors.Where(z => z.Parent == null).First();
-
-                AssignDepthProperty(root);
             }
 
-            return root;
+            return rootContainer;
         }
 
-        private void AssignDepthProperty(OrganizationTreeDescriptor treeOrganizationElement, int depth = 0)
+        private void PopulateTreeDescriptor(OrganizationTreeInfo newData, OrganizationTreeDescriptor parent, int depth = 0)
         {
-            treeOrganizationElement.Depth = depth;
-
-            foreach (var child in treeOrganizationElement.Children)
+            var organizationDescriptor = new OrganizationTreeDescriptor()
             {
-                AssignDepthProperty(child, depth + 1);
+                ID = newData.OrganizationId.ToString(),
+                Name = newData.Name,
+                Type = newData.Type,
+                Depth = depth + 1
+            };
+
+            if (parent != null)
+            {
+                organizationDescriptor.ParentId = parent.ID;
+                organizationDescriptor.Parent = parent;
+
+                parent.Children.Add(organizationDescriptor);
+            }
+
+            this.newServiceOrganizationDescriptors.Add(organizationDescriptor);
+
+            foreach (var child in newData.Children)
+            {
+                PopulateTreeDescriptor(child, organizationDescriptor, depth + 1);
             }
         }
 
@@ -140,129 +119,12 @@ namespace TestMVC4App.Models
 
             string parsedOrgId = string.Empty;
             string parsedOrgName = string.Empty;
-            bool parsedIsPrimary = false;
             string parsedMissions = string.Empty;
 
             // first get the tree and its elements
             try
             {
-                ParseRecursiveTree(this.oldServiceTreeDepartments.First(), rootContainer, this.oldServiceOrganizationDescriptors);
-            }
-            catch (Exception)
-            {
-                // there is no existing attribute to parse
-            }
-
-            // then try to complete the info about the elements of the tree
-            // or add the elements separately to the list if not be found
-            try
-            {
-                foreach (XElement el in oldServiceDepartments)
-                {
-                    try
-                    {
-                        parsedOrgId = el.Element(EnumOldServiceFieldsAsKeys.OrgID.ToString()).Value;
-                    }
-                    catch (Exception)
-                    {
-                        // no value to parse
-                        parsedOrgId = string.Empty;
-                    }
-
-                    try
-                    {
-                        parsedOrgName = el.Element(EnumOldServiceFieldsAsKeys.departmentName.ToString()).Value;
-                    }
-                    catch (Exception)
-                    {
-                        // no value to parse
-                        parsedOrgName = string.Empty;
-                    }
-
-                    try
-                    {
-                        string isPrimary = el.Element(EnumOldServiceFieldsAsKeys.primaryDept.ToString()).Value.Trim();
-                        if (isPrimary == "Y")
-                        {
-                             parsedIsPrimary = true;
-                        }
-                        else
-                        {
-                            parsedIsPrimary = false;
-                        }
-
-                        try
-                        {
-                            parsedMissions = el.Element(EnumOldServiceFieldsAsKeys.mission.ToString()).Value;
-                        }
-                        catch (Exception)
-                        {
-                            // no value to parse
-                            parsedMissions = string.Empty;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // no value to parse
-                        parsedIsPrimary = false;
-                    }
-
-                    IEnumerable<OrganizationTreeDescriptor> findOrganizationResults = null;
-
-                    if (!string.IsNullOrWhiteSpace(parsedOrgId))
-                    {
-                        findOrganizationResults = this.oldServiceOrganizationDescriptors.Where(i => i.ID == parsedOrgId);
-
-                        if (findOrganizationResults == null || findOrganizationResults.Count() == 0)
-                        {
-                            findOrganizationResults = this.oldServiceOrganizationDescriptors.Where(i => i.Name == parsedOrgName && string.IsNullOrEmpty(i.ID));
-                        }
-                    }
-                    else
-                    {
-                        findOrganizationResults = this.oldServiceOrganizationDescriptors.Where(i => i.Name == parsedOrgName);
-                    }
-
-                        if(findOrganizationResults.Count() == 0)
-                        {
-                            // was not found, create new one
-                            var organizationDescriptor = new OrganizationTreeDescriptor() { ID = parsedOrgId, Name = parsedOrgName, IsPrimary = parsedIsPrimary };
-                            this.oldServiceOrganizationDescriptors.Add(organizationDescriptor);
-                        }
-                        else if (findOrganizationResults.Count() == 1)
-                        {
-                            var organizationDescriptor = findOrganizationResults.First();
-
-                            if (string.IsNullOrWhiteSpace(organizationDescriptor.ID))
-                            {
-                                organizationDescriptor.ID = parsedOrgId;
-                            }
-
-                            if (string.IsNullOrWhiteSpace(organizationDescriptor.Name))
-                            {
-                                organizationDescriptor.Name = parsedOrgName;
-                            }
-
-                            if (!organizationDescriptor.IsPrimary)
-                            {
-                                organizationDescriptor.IsPrimary = parsedIsPrimary;
-                            }
-
-                            if (organizationDescriptor.Missions.Count() == 0 && !string.IsNullOrEmpty(parsedMissions))
-                            {
-                                var tempValues = parsedMissions.Split(',');
-
-                                foreach (var temp in tempValues)
-                                {
-                                    organizationDescriptor.Missions.Add(temp);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            System.Diagnostics.Debug.WriteLine("More than one results returned for the unique organization. PROBLEM !");
-                        }
-                }
+                ParseRecursiveTree(this.OldDataNodes.First(), rootContainer, this.oldServiceOrganizationDescriptors);
             }
             catch (Exception)
             {
@@ -288,6 +150,7 @@ namespace TestMVC4App.Models
                 catch (Exception)
                 {
                     // no value to parse
+                    orgDesc.ID = string.Empty;
                 }
 
                 try
@@ -297,6 +160,7 @@ namespace TestMVC4App.Models
                 catch (Exception)
                 {
                     // no value to parse
+                    orgDesc.Name = string.Empty;
                 }
 
                 try
@@ -360,63 +224,119 @@ namespace TestMVC4App.Models
             }
         }
 
-        private void LinkElementsOfOrganizationTree()
+        private static void PopulateGapsOfOldTree(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, ResultReport resultReport, bool excludeMatchedElements, int previousCountMissingElements = -1)
         {
-            OrganizationTreeDescriptor potentialParent;
-            var puzzlePiecesEnumerator = new List<OrganizationTreeDescriptor>();
-            puzzlePiecesEnumerator.AddRange(this.newServiceOrganizationDescriptors);
+            int countUnmatchedChildrenOfMissingElement = 42;
+            bool onlyOneOptionAvailable = false;
+            bool matchingElementFound = false;
+            OrganizationTreeDescriptor matchingElement;
 
-            // get list of orphans
-            List<OrganizationTreeDescriptor> orphans = new List<OrganizationTreeDescriptor>();
+            var missingElementsByDepth = oldTree.Where(x => x.HasBeenMatched == false
+                                                && string.IsNullOrEmpty(x.ID)
+                                                && string.IsNullOrEmpty(x.Name)
+                                                && x.Depth >= 0)
+                                   .GroupBy(x => x.Depth)
+                                   .ToDictionary(t => t.Key, t => t.ToList());
 
-            // try to stitch pieces together
-            foreach (var piece in puzzlePiecesEnumerator)
+            int countMissingElements = missingElementsByDepth.Count();
+
+            Dictionary<int, List<OrganizationTreeDescriptor>> potentialMatchingElementsByDepth;
+
+            if (excludeMatchedElements)
             {
-                if (piece.Parent == null && !string.IsNullOrEmpty(piece.ParentId))
-                {
-                    try
-                    {
-                        potentialParent = puzzlePiecesEnumerator.Where(x => x.ID == piece.ParentId).First();
-                    }
-                    catch (Exception)
-                    {
-                        potentialParent = null;
-                    }
-
-                    if (potentialParent != null)
-                    {
-                        piece.Parent = potentialParent;
-                        potentialParent.Children.Add(piece);
-                    }
-                    else
-                    {
-                        orphans.Add(piece);
-                    }
-                }
+                potentialMatchingElementsByDepth = newTree.Where(x => x.HasBeenMatched == false).GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
+            }
+            else
+            {
+                potentialMatchingElementsByDepth = newTree.GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
             }
 
-            if (orphans.Count() > 0)
+            if (countMissingElements != previousCountMissingElements && countMissingElements > 0 && potentialMatchingElementsByDepth.Count() > 0)
             {
-                var organizationsClient = new OrganizationsClient();
-                Organization downloadedParent;
-                OrganizationTreeDescriptor downloadedParentDescriptor;
-
-                foreach (string orphanParentId in orphans.Select(x=>x.ParentId).Distinct())
+                foreach (var missingElementsPair in missingElementsByDepth)
                 {
-                    //System.Diagnostics.Debug.WriteLine("can't find parent " + orphanParentId);
-                    downloadedParent = organizationsClient.GetOrganization(int.Parse(orphanParentId));
-                    downloadedParentDescriptor = new OrganizationTreeDescriptor()
+                    foreach (var missingElement in missingElementsPair.Value)
                     {
-                        ID = downloadedParent.OrganizationId.ToString(),
-                        Name = downloadedParent.Name,
-                        IsPrimary = downloadedParent.IsImported,
-                        ParentId = downloadedParent.OrganizationParentId.ToString(),
-                        Parent = null
-                    };
-                    this.newServiceOrganizationDescriptors.Add(downloadedParentDescriptor);
+                        if (potentialMatchingElementsByDepth.ContainsKey(missingElementsPair.Key))
+                        {
+                            matchingElementFound = false;
+                            matchingElement = null;
+
+                            foreach (var potentialElement in potentialMatchingElementsByDepth[missingElementsPair.Key])
+                            {
+                                onlyOneOptionAvailable = potentialMatchingElementsByDepth[missingElementsPair.Key].Count() == 1;
+
+                                if ((potentialElement.ParentId == missingElement.ParentId
+                                    || string.IsNullOrEmpty(missingElement.ParentId))
+                                    && potentialElement.Children.Count() >= missingElement.Children.Count())
+                                {
+                                    if (potentialElement.Children.Select(x => x.MatchedPartner).Count() > 0)
+                                    {
+                                        countUnmatchedChildrenOfMissingElement = missingElement.Children.Except(potentialElement.Children.Select(x => x.MatchedPartner).Union(potentialElement.Children)).Count();
+                                    }
+                                    else
+                                    {
+                                        countUnmatchedChildrenOfMissingElement = missingElement.Children.Select(y => y.ID).Except(potentialElement.Children.Select(x => x.ID)).Count();
+                                    }
+
+                                    if (countUnmatchedChildrenOfMissingElement == 0)
+                                    {
+                                        matchingElementFound = true;
+                                        matchingElement = potentialElement;
+                                    }
+                                }
+
+                                // if there is only one potential match, don't be picky
+                                if (onlyOneOptionAvailable && !matchingElementFound)
+                                {
+                                    matchingElementFound = true;
+                                    matchingElement = potentialElement;
+                                    matchingElement.WasOnlyOption = true;
+                                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
+                                    resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+                                }
+                            }
+
+                            if (matchingElementFound)
+                            {
+                                if (!excludeMatchedElements)
+                                {
+                                    matchingElement.UsedMoreThanOnce = true;
+                                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.REUSED_ELEMENT_TO_FILL_GAP);
+                                }
+
+                                matchingElement.HasBeenMatched = true;
+                                matchingElement.MatchedPartner = missingElement;
+                                missingElement.HasBeenMatched = true;
+                                missingElement.MatchedPartner = matchingElement;
+                                matchingElement.IsImportedFromNewService = true;
+                                missingElement.IsMissing = false;
+                                matchingElement.IsMissing = false;
+
+                                matchingElement.Children.Clear();
+                                matchingElement.Parent = missingElement.Parent;
+
+                                // replace in old tree
+                                foreach (var childFromMissing in missingElement.Children)
+                                {
+                                    childFromMissing.Parent = matchingElement;
+                                    matchingElement.Children.Add(childFromMissing);
+                                }
+
+                                if (missingElement.Parent != null && missingElement.Parent.Children != null)
+                                {
+                                    missingElement.Parent.Children.Add(matchingElement);
+                                    missingElement.Parent.Children.Remove(missingElement);
+                                }
+
+                                oldTree.Add(matchingElement);
+                                oldTree.Remove(missingElement);
+                            }
+                        }
+                    }
                 }
 
-                LinkElementsOfOrganizationTree();
+                PopulateGapsOfOldTree(oldTree, newTree, resultReport, excludeMatchedElements, countMissingElements);
             }
         }
 
@@ -538,45 +458,45 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organization_CheckIsPrimary_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_IsImportedPrimary, "Comparing Organization IsImported/Primary");
+            //var watch = new Stopwatch();
+            //watch.Start();
+            //var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_IsImportedPrimary, "Comparing Organization IsImported/Primary");
 
-            var oldEntriesIsPrimary = new HashSet<string>();
-            var newEntriesIsPrimary = new HashSet<string>();
+            //var oldEntriesIsPrimary = new HashSet<string>();
+            //var newEntriesIsPrimary = new HashSet<string>();
 
-            try
-            {
-                oldEntriesIsPrimary = new HashSet<string>(oldTree.Where(x => x.IsPrimary == true).Select(x => x.Name));
-            } 
-            catch(Exception)
-            {
+            //try
+            //{
+            //    oldEntriesIsPrimary = new HashSet<string>(oldTree.Where(x => x.IsPrimary == true).Select(x => x.Name));
+            //} 
+            //catch(Exception)
+            //{
 
-            }
+            //}
 
-            try
-            {
-                newEntriesIsPrimary = new HashSet<string>(newTree.Where(s => s.IsPrimary == true).Select(x => x.Name));
-            }
-            catch (Exception)
-            {
+            //try
+            //{
+            //    newEntriesIsPrimary = new HashSet<string>(newTree.Where(s => s.IsPrimary == true).Select(x => x.Name));
+            //}
+            //catch (Exception)
+            //{
 
-            }
+            //}
 
-            // this comparison can work because all the primary departments have a name assigned in the old service ! NOPE because the name may change...
-            var collectionComparison = new CompareStrategyContextSwitcher(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
-            collectionComparison.Investigate();
+            //// this comparison can work because all the primary departments have a name assigned in the old service ! NOPE because the name may change...
+            //var collectionComparison = new CompareStrategyContextSwitcher(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
+            //collectionComparison.Investigate();
 
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
+            //watch.Stop();
+            //resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            //this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            //LogManager.Instance.LogTestResult(this.UserId,
+            //                                  this.Upi,
+            //                                  this.Container.BuildOldServiceFullURL(this.Upi),
+            //                                  this.BuildNewServiceURL(this.PageName),
+            //                                  resultReport);
         }
 
         private void UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(HashSet<OrganizationTreeDescriptor> oldTree, OrganizationTreeDescriptor oldTreeRoot, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor newTreeRoot)
@@ -646,122 +566,6 @@ namespace TestMVC4App.Models
                                               this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
-        }
-
-        private static void PopulateGapsOfOldTree(HashSet<OrganizationTreeDescriptor> oldTree,HashSet<OrganizationTreeDescriptor> newTree, ResultReport resultReport, bool excludeMatchedElements, int previousCountMissingElements = -1)
-        {
-            int countUnmatchedChildrenOfMissingElement = 42;
-            bool onlyOneOptionAvailable = false;
-            bool matchingElementFound = false;
-            OrganizationTreeDescriptor matchingElement;
-
-            var missingElementsByDepth = oldTree.Where(x => x.HasBeenMatched == false
-                                                && string.IsNullOrEmpty(x.ID)
-                                                && string.IsNullOrEmpty(x.Name)
-                                                && x.Depth >= 0)
-                                   .GroupBy(x => x.Depth)
-                                   .ToDictionary(t => t.Key, t => t.ToList());
-            
-            int countMissingElements = missingElementsByDepth.Count();
-
-            Dictionary<int, List<OrganizationTreeDescriptor>> potentialMatchingElementsByDepth;
-
-            if (excludeMatchedElements)
-            {
-                potentialMatchingElementsByDepth = newTree.Where(x => x.HasBeenMatched == false).GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
-            }
-            else
-            {
-                potentialMatchingElementsByDepth = newTree.GroupBy(g => g.Depth).ToDictionary(t => t.Key, t => t.ToList());
-            }
-
-            if (countMissingElements != previousCountMissingElements && countMissingElements > 0 && potentialMatchingElementsByDepth.Count() > 0)
-            {
-                foreach (var missingElementsPair in missingElementsByDepth)
-                {
-                    foreach (var missingElement in missingElementsPair.Value)
-                    {
-                        if (potentialMatchingElementsByDepth.ContainsKey(missingElementsPair.Key))
-                        {
-                            matchingElementFound = false;
-                            matchingElement = null;
-
-                            foreach (var potentialElement in potentialMatchingElementsByDepth[missingElementsPair.Key])
-                            {
-                                onlyOneOptionAvailable = potentialMatchingElementsByDepth[missingElementsPair.Key].Count() == 1;
-
-                                if ((potentialElement.ParentId == missingElement.ParentId
-                                    || string.IsNullOrEmpty(missingElement.ParentId))
-                                    && potentialElement.Children.Count() >= missingElement.Children.Count())
-                                {
-                                    if (potentialElement.Children.Select(x => x.MatchedPartner).Count() > 0)
-                                    {
-                                        countUnmatchedChildrenOfMissingElement = missingElement.Children.Except(potentialElement.Children.Select(x => x.MatchedPartner).Union(potentialElement.Children)).Count();
-                                    }
-                                    else
-                                    {
-                                        countUnmatchedChildrenOfMissingElement = missingElement.Children.Select(y => y.ID).Except(potentialElement.Children.Select(x => x.ID)).Count();
-                                    }
-
-                                    if (countUnmatchedChildrenOfMissingElement == 0)
-                                    {
-                                        matchingElementFound = true;
-                                        matchingElement = potentialElement;
-                                    }
-                                }
-
-                                // if there is only one potential match, don't be picky
-                                if (onlyOneOptionAvailable && !matchingElementFound)
-                                {
-                                    matchingElementFound = true;
-                                    matchingElement = potentialElement;
-                                    matchingElement.WasOnlyOption = true;
-                                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
-                                    resultReport.UpdateResult(EnumResultSeverityType.WARNING);
-                                }
-                            }
-
-                            if (matchingElementFound)
-                            {
-                                if (!excludeMatchedElements)
-                                {
-                                    matchingElement.UsedMoreThanOnce = true;
-                                    resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.REUSED_ELEMENT_TO_FILL_GAP);
-                                }
-
-                                matchingElement.HasBeenMatched = true;
-                                matchingElement.MatchedPartner = missingElement;
-                                missingElement.HasBeenMatched = true;
-                                missingElement.MatchedPartner = matchingElement;
-                                matchingElement.IsImportedFromNewService = true;
-                                missingElement.IsMissing = false;
-                                matchingElement.IsMissing = false;
-
-                                matchingElement.Children.Clear();
-                                matchingElement.Parent = missingElement.Parent;
-
-                                // replace in old tree
-                                foreach (var childFromMissing in missingElement.Children)
-                                {
-                                    childFromMissing.Parent = matchingElement;
-                                    matchingElement.Children.Add(childFromMissing);
-                                }
-
-                                if (missingElement.Parent != null && missingElement.Parent.Children != null)
-                                {
-                                    missingElement.Parent.Children.Add(matchingElement);
-                                    missingElement.Parent.Children.Remove(missingElement);
-                                }
-
-                                oldTree.Add(matchingElement);
-                                oldTree.Remove(missingElement);
-                            }
-                        }
-                    }
-                }
-
-                PopulateGapsOfOldTree(oldTree, newTree, resultReport, excludeMatchedElements, countMissingElements);
-            }
         }
 
         private void UserGeneralInfo_Organization_Missions_Test(HashSet<OrganizationTreeDescriptor> oldEntries, HashSet<OrganizationTreeDescriptor> newEntries)

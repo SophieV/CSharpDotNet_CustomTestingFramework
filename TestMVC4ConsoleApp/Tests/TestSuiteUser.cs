@@ -255,6 +255,17 @@ namespace TestMVC4App.Models
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.treeDepartments.ToString());
+                                testUnit = new TestUnitUserOrganization(this, newData.OrganizationsTree);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    userId,
+                                    pageName);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
+
                                 foreach (var test in allTheTests)
                                 {
                                     test.ComputerOverallResults();

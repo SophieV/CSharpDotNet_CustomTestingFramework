@@ -33,7 +33,7 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Organizations_Name,
             UserGeneralInfo_Organizations_IdAndName,
             UserGeneralInfo_Organizations_TreeDepthCoherence,
-            UserGeneralInfo_Organizations_IsImportedPrimary,
+            //UserGeneralInfo_Organizations_IsImportedPrimary,
             UserGeneralInfo_Organizations_TreeMerged,
             UserGeneralInfo_Organizations_Type,
             UserGeneralInfo_Organizations_Missions,
