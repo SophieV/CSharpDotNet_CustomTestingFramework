@@ -75,7 +75,7 @@ namespace TestMVC4App.Models
             var addresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
             var mailingInfo = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(), true);
 
-            var addressesTest = new TestUnitUserAddress(this.Container, this);
+            var addressesTest = new TestUnitUserAddress(this.Container, this, this.Upi,this.UserId, this.PageName);
             this.Children.Add(addressesTest);
 
             addressesTest.ProvideData(this.UserId,

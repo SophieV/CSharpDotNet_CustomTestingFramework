@@ -11,8 +11,6 @@ namespace TestMVC4App.Models
         private IEnumerable<UserAddress> newServiceAddresses = new HashSet<UserAddress>();
         private IEnumerable<XElement> oldServiceAddresses;
         private IEnumerable<XElement> oldServiceMailingInfo;
-        private int userId;
-        private int upi;
 
         public void ProvideData(int userId,
                                             int upi,
@@ -20,9 +18,6 @@ namespace TestMVC4App.Models
                                             IEnumerable<XElement> oldServiceMailingInfo,
                                             IEnumerable<UserAddress> newServiceAddresses)
         {
-            this.userId = userId;
-            this.upi = upi;
-
             if (newServiceAddresses != null)
             {
                 this.newServiceAddresses = newServiceAddresses;
@@ -39,10 +34,10 @@ namespace TestMVC4App.Models
             }
         }
 
-        public TestUnitUserAddress(TestSuite parent, TestUnit bigBrother) 
+        public TestUnitUserAddress(TestSuite parent, TestUnit bigBrother, int upi, int userId, string pageName) 
         : base (parent,bigBrother)
         {
-
+            this.ProvideData(upi, null, userId, pageName);
         }
 
         protected override void RunAllSingleTests()
@@ -77,9 +72,9 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -102,9 +97,9 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -125,9 +120,9 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }

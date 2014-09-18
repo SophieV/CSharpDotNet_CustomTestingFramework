@@ -18,18 +18,11 @@ namespace TestMVC4App.Models
         private IEnumerable<XElement> oldServiceTreeDepartments;
         private HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptors;
         private HashSet<OrganizationTreeDescriptor> oldServiceOrganizationDescriptors;
-        private int userId;
-        private int upi;
 
-        public void ProvideData(int userId,
-                                            int upi,
-                                            IEnumerable<XElement> oldServiceDepartments,
+        public void ProvideData(IEnumerable<XElement> oldServiceDepartments,
                                             IEnumerable<XElement> oldServiceTreeDepartments,
                                             IEnumerable<Organization> newServiceOrganizations)
         {
-            this.userId = userId;
-            this.upi = upi;
-
             if (newServiceOrganizations != null)
             {
                 this.newServiceOrganizations = newServiceOrganizations;
@@ -50,10 +43,10 @@ namespace TestMVC4App.Models
         }
         #endregion
 
-        public TestUnitUserOrganization(TestSuite parent, TestUnit bigBrother) 
+        public TestUnitUserOrganization(TestSuite parent, TestUnit bigBrother, int userId, int upi, string pageName) 
             : base (parent,bigBrother)
         {
-
+            this.ProvideData(upi, null, userId, pageName);
         }
 
         protected override void RunAllSingleTests()
@@ -452,8 +445,8 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
                                               this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
@@ -536,10 +529,10 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -579,10 +572,10 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -648,10 +641,10 @@ namespace TestMVC4App.Models
             resultReport.Duration = watch.Elapsed;
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(userId,
-                                              upi,
-                                              this.Container.BuildOldServiceFullURL(upi),
-                                              this.BuildNewServiceURL(userId),
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
@@ -787,7 +780,7 @@ namespace TestMVC4App.Models
                 }
             }
             
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions, "Comparing Organization Missions", userId, upi, missionsPerOrg);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions, "Comparing Organization Missions", missionsPerOrg);
         }
     }
 

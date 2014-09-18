@@ -253,12 +253,10 @@ namespace TestMVC4App.Models
             var departments = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.department.ToString());
             var departmentTree = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.treeDepartments.ToString());
 
-            var organizationTest = new TestUnitUserOrganization(this.Container, this);
+            var organizationTest = new TestUnitUserOrganization(this.Container, this, this.UserId, this.Upi, this.PageName);
             this.Children.Add(organizationTest);
 
-            organizationTest.ProvideData(this.UserId, 
-                                                     this.Upi, 
-                                                     departments,
+            organizationTest.ProvideData(departments,
                                                      departmentTree, 
                                                      newServiceData.Organizations);
             organizationTest.RunAllTests();
