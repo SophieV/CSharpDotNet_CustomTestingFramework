@@ -99,7 +99,7 @@ namespace TestMVC4App.Models
         /// <returns></returns>
         protected virtual string BuildNewServiceURL(string pageName)
         {
-            if (Container == null)
+            if (this.Container == null)
             {
                 throw new NotImplementedException();
             }

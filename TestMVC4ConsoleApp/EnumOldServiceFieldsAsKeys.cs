@@ -76,6 +76,8 @@ namespace TestMVC4App.Models
         name,
         mission,
         orgID,
-        OrgID
+        OrgID,
+        publicHealthKeywords,
+        keyword
     }
 }

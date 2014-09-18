@@ -549,7 +549,15 @@ namespace TestMVC4App.Models
                     }
                 }
 
-                resultReport.AddDetailedValues(null, oldTree.Where(x => x.Depth == 0).First(), null, newTreeRootDeepClone);
+                OrganizationTreeDescriptor root = null;
+
+                try
+                {
+                    root = oldTree.Where(x => x.Depth == 0).First();
+                } catch (Exception)
+                { }
+
+                resultReport.AddDetailedValues(null, root, null, newTreeRootDeepClone);
             }
             else
             {

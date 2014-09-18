@@ -23,7 +23,7 @@ namespace TestMVC4App.Models
             get { return "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI="; }
         }
 
-        public static bool IsDebugMode { get { return true;  } }
+        public static bool IsDebugMode { get { return false;  } }
 
         private const int MaxProfilesForOneFile = 50000;
 
@@ -48,7 +48,7 @@ namespace TestMVC4App.Models
 
             if (TestSuiteUser.IsDebugMode)
             {
-                upiList = new HashSet<int>() { 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225 };
+                upiList = new HashSet<int>() {10410346, 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225 };
             }
 
             bool keepGoing = true;
@@ -210,6 +210,7 @@ namespace TestMVC4App.Models
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.researchSummary.ToString());
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), new List<XElement>(oldDataSubset));
+                                oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.publicHealthKeywords.ToString(), new List<XElement>(oldDataSubset));
                                 testUnit = new TestUnitUserResearchInfo(this, newData.Research);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(

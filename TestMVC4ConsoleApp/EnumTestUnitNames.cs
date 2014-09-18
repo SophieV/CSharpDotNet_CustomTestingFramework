@@ -57,6 +57,7 @@ namespace TestMVC4App.Models
             UserPatientCareInfo_MyChart,
             UserPatientCareInfo_IsSeeingNewPatients,
             UserPatientCareInfo_IsSeeingPatientType,
-            UserPatientCareInfo_PhysicianBio
+            UserPatientCareInfo_PhysicianBio,
+            UserResearchInfo_PublicHealthKeywords
     }
 }
