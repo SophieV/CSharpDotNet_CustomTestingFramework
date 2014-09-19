@@ -149,7 +149,20 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral))
             {
-                value = this.newDataPatientCare.AcceptedReferral;
+                //value = this.newDataPatientCare.AcceptedReferral;
+
+                switch (this.newDataPatientCare.AcceptedReferral)
+                {
+                    case "From patients or physicians":
+                        value = "Accepts referrals from patients";
+                        break;
+                    case "From physicians only":
+                        value = "Requires referral from a physician";
+                        break;
+                    case "Not Applicable":
+                        value = "NA";
+                        break;
+                }
             }
 
             this.CompareAndLog_Test(

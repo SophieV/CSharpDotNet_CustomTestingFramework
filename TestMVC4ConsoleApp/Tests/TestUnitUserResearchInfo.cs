@@ -17,6 +17,7 @@ namespace TestMVC4App.Models
         {
             UserResearchInfo_Summary();
             UserResearchInfo_Overview();
+            UserResearchInfo_PublicHealthKeywords();
         }
 
         private void UserResearchInfo_PublicHealthKeywords()

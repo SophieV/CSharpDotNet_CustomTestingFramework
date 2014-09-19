@@ -23,7 +23,7 @@ namespace TestMVC4App.Models
             get { return "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI="; }
         }
 
-        public static bool IsDebugMode { get { return false;  } }
+        public static bool IsDebugMode { get { return true;  } }
 
         private const int MaxProfilesForOneFile = 50000;
 
