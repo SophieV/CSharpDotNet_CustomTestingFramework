@@ -1,0 +1,362 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="10292213">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10292213">Profile data of UPI 10292213</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/daniel_zelterman/Complete">User data of ID is 58816</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>http://medicine.yale.edu/ysph/people/daniel_zelterman.profile</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000221</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="10390813">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10390813">Profile data of UPI 10390813</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/carol_soroka/Complete">User data of ID is 59302</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[1]</span>. Actual:<span style='color:red;']</span>[2]</span>.Comparing LabWebsite Link(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 2]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>http://livercenter.yale.edu
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										http://livercenter.yale.edu
+															</li>
+										<li>										https://livercenter.yale.edu
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000385</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="12110431">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12110431">Profile data of UPI 12110431</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/carlo_spirli/Complete">User data of ID is 60231</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>http://info.med.yale.edu/intmed/faculty/spirli.html</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000213</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="10317645">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10317645">Profile data of UPI 10317645</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/rhea_paul/Complete">User data of ID is 60598</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 2]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>NULL</li>
+										<li>										http://info.med.yale.edu/chldstdy/autism/ldcd/
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000106</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="10396576">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10396576">Profile data of UPI 10396576</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/kyle_pruett/Complete">User data of ID is 60679</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>drkylepruett.com</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000213</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="11697144">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11697144">Profile data of UPI 11697144</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/patrick_sung/Complete">User data of ID is 61086</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[http://medicine.yale.edu/lab/sung/index.aspx]</span>. Actual:<span style='color:red;']</span>[http://info.med.yale.edu/mbb/sung/index.html]</span>. Comparing LabWebsite Link(s)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>http://medicine.yale.edu/lab/sung/index.aspx
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										http:/<del class='diffmod'>/medicine</del><ins class='diffmod'>/info.med</ins>.yale.edu<del class='diffmod'>/lab</del><ins class='diffmod'>/mbb</ins>/sung/index<del class='diffmod'>.aspx</del><ins class='diffmod'>.html</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000299</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="12768654">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12768654">Profile data of UPI 12768654</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/richard_sutton/Complete">User data of ID is 61103</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>http://info.med.yale.edu/intmed/faculty/sutton.html</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000316</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="10282319">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10282319">Profile data of UPI 10282319</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/brian_smith/Complete">User data of ID is 61212</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>http://www.medicine.yale.edu/labmed/faculty/brianrsmith.aspx</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000213</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LabWebsite Link(s)</b><br/>
+		<a id="10342533">UserContactLocationInfo_LabWebsites_Links</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10342533">Profile data of UPI 10342533</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.

@@ -95,6 +95,11 @@ namespace TestMVC4App.Models
                 Depth = depth + 1
             };
 
+            if (newData.Missions != null)
+            {
+                organizationDescriptor.Missions = new HashSet<string>(newData.Missions.Select(x => x.Name));
+            }
+
             if (parent != null)
             {
                 organizationDescriptor.ParentId = parent.ID;

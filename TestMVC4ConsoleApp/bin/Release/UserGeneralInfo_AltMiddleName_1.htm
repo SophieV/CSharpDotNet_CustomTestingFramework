@@ -1,0 +1,117 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="10352869">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_WITH_EXPLANATION</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10352869">Profile data of UPI 10352869</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/lynn_wilson/Complete">User data of ID is 59693</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[D.]</span>. Actual:<span style='color:red;']</span>[D. ]</span>. Comparing AltMiddleName (if needed)
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>D.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										D.<ins class='diffins'> </ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000492</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="10090610">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10090610">Profile data of UPI 10090610</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/PageName/elizabeth_roessler/Complete">User data of ID is 59829</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>M</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000648</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="11161032">UserGeneralInfo_AltMiddleName</a>
+	
