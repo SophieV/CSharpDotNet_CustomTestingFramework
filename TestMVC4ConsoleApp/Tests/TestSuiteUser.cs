@@ -61,6 +61,7 @@ namespace TestMVC4App.Models
                     oldServiceXMLOutput = string.Empty;
 
                     System.Diagnostics.Debug.WriteLine(upi);
+                    System.Console.Out.WriteLine(upi);
 
                     LogManager.Instance.StatsCountTotalUpis++;
 

@@ -51,7 +51,7 @@ namespace TestMVC4App.Models
         lastname,
         firstname,
         MiddleName,
-        Suffix,
+        suffix,
         middle,
         title,
         fileName,
