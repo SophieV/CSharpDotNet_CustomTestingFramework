@@ -54,6 +54,16 @@ namespace TestMVC4App.Models
 
             if (keepGoing)
             {
+                keepGoing = AreMissingValuesOnTheNewSideContainedInValuesFromTheOldSide();
+            }
+
+            if (keepGoing)
+            {
+                keepGoing = WasOldValueShifted();
+            }
+
+            if (keepGoing)
+            {
                 keepGoing = AreTheMismatchesDueToTrailingSpaces();
             }
         }
@@ -144,6 +154,87 @@ namespace TestMVC4App.Models
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
                     this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
+                }
+            }
+
+            return shouldContinueTesting;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Scenario to cover "blah, Division of" becoming "Division of blah"</remarks>
+        private bool WasOldValueShifted()
+        {
+            bool shouldContinueTesting = true;
+
+            if (this.resultReport.OldValues.Where(z => z != null).Count() > 0 && this.resultReport.NewValues.Where(z => z != null).Count() > 0)
+            {
+                // check if some of the inconsistencies are due to trailing spaces in the single string values
+                List<string> missingOldValues = this.resultReport.OldValues.Except(this.resultReport.NewValues).Where(x => x.Contains(',')).Select(x => x.Split(',')[1].Trim() + " " + x.Split(',')[0].Trim()).ToList();
+                int countMissingOldValuesBefore = missingOldValues.Count();
+
+                if (countMissingOldValuesBefore > 0)
+                {
+                    var missingNewValues = this.resultReport.NewValues.Except(this.resultReport.OldValues);
+
+                    foreach (var missingNewValue in missingNewValues)
+                    {
+                        var temp = missingOldValues.Where(x => !string.IsNullOrEmpty(missingNewValue) && x.Contains(missingNewValue));
+                        if (temp.Count() == 1)
+                        {
+                            missingOldValues.Remove(temp.First());
+                        }
+                    }
+
+                    if (missingOldValues.Count() != countMissingOldValuesBefore)
+                    {
+                        this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_CONTAINED_IN_OLD);
+                        this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+
+                        // all of the mismatches are due to trailing spaces
+                        if (missingOldValues.Count() == 0 && this.resultReport.OldValues.Except(this.resultReport.NewValues).Count() == countMissingOldValuesBefore)
+                        {
+                            this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
+                        }
+                    }
+                }
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool AreMissingValuesOnTheNewSideContainedInValuesFromTheOldSide()
+        {
+            bool shouldContinueTesting = true;
+
+            if (this.resultReport.OldValues.Where(z => z != null).Count() > 0 && this.resultReport.NewValues.Where(z => z != null).Count() > 0)
+           { 
+                // check if some of the inconsistencies are due to trailing spaces in the single string values
+                List<string> missingOldValues = this.resultReport.OldValues.Except(this.resultReport.NewValues).ToList();
+                var missingNewValues = this.resultReport.NewValues.Except(this.resultReport.OldValues);
+                int countMissingOldValuesBefore = missingOldValues.Count();
+
+                foreach (var missingNewValue in missingNewValues)
+                {
+                    var temp = missingOldValues.Where(x => !string.IsNullOrEmpty(missingNewValue) && x.Contains(missingNewValue));
+                    if (temp.Count() == 1)
+                    {
+                        missingOldValues.Remove(temp.First());
+                    }
+                }
+
+                if (missingOldValues.Count() != countMissingOldValuesBefore)
+                {
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_CONTAINED_IN_OLD);
+                    this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+
+                    // all of the mismatches are due to trailing spaces
+                    if (missingOldValues.Count() == 0)
+                    {
+                        this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
+                    }
                 }
             }
 

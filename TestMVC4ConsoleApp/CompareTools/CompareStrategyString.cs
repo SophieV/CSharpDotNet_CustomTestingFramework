@@ -92,6 +92,11 @@ namespace TestMVC4App.Models
 
             if (keepGoing)
             {
+                keepGoing = DoesOldContainNew();
+            }
+
+            if (keepGoing)
+            {
                 keepGoing = DoBothValuesHaveDifferentContent();
             }
 
@@ -174,6 +179,20 @@ namespace TestMVC4App.Models
             {
                 this.resultReport.UpdateResult(EnumResultSeverityType.ERROR);
                 this.resultReport.ErrorMessage = ParsingHelper.ReplaceProblematicTagsForHtml(e.Message);
+            }
+
+            return shouldContinueTesting;
+        }
+
+        private bool DoesOldContainNew()
+        {
+            bool shouldContinueTesting = true;
+
+            if (!string.IsNullOrEmpty(oldValue) && !string.IsNullOrEmpty(newValue) & oldValue.Contains(newValue))
+            {
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_CONTAINED_IN_OLD);
+                this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
+                shouldContinueTesting = false;
             }
 
             return shouldContinueTesting;
