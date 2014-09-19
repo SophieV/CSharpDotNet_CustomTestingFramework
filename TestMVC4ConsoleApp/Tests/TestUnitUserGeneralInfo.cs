@@ -100,8 +100,8 @@ namespace TestMVC4App.Models
             watch.Start();
             var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
 
-            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.MiddleName.ToString());
-            var compareStrategy = new CompareStrategyContextSwitcher(string.IsNullOrEmpty(oldValue).ToString(), newServiceData.IsAltMiddleNameDisplayed.ToString(), resultReport);
+            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
+            var compareStrategy = new CompareStrategyContextSwitcher((!string.IsNullOrEmpty(oldValue)).ToString(), newServiceData.IsAltMiddleNameDisplayed.ToString(), resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
