@@ -69,6 +69,7 @@ namespace TestMVC4App.Models
         emailAddress,
         link,
         addressLine1,
+        mailingAddress1,
         mailingAddress2,
         zipCode,
         treeDepartment,

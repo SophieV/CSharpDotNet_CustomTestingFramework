@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
 
@@ -72,18 +73,12 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_Addresses_Test()
         {
-            var addresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
-            var mailingInfo = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(), true);
+            var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
+            var allOldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(),oldAddresses.ToList(), true);
 
-            var addressesTest = new TestUnitUserAddress(this.Container, this, this.Upi,this.UserId, this.PageName);
-            this.Children.Add(addressesTest);
-
-            addressesTest.ProvideData(this.UserId,
-                                                     this.Upi,
-                                                     addresses,
-                                                     mailingInfo,
-                                                     this.newDataUserAddress);
-            addressesTest.RunAllTests();
+            UserContactLocationInfo_UserAddress_StreetAddress_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.StreetAddress)));
+            UserContactLocationInfo_UserAddress_ZipCodes_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
+            UserContactLocationInfo_UserAddress_IsMailing_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => x.Address.BaseAddress.StreetAddress)));
         }
 
         private void UserContactLocationInfo_LabWebsites_Names_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
@@ -118,6 +113,87 @@ namespace TestMVC4App.Models
 
             var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+            watch.Stop();
+
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
+                                              resultReport);
+        }
+
+
+        private void UserContactLocationInfo_UserAddress_StreetAddress_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.addressLine1.ToString());
+
+            StringBuilder mailingAddress = new StringBuilder();
+            mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress1.ToString()));
+            mailingAddress.Append(" ");
+            mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString()));
+            oldValues.Add(mailingAddress.ToString());
+
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+            watch.Stop();
+
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
+                                              resultReport);
+        }
+
+        private void UserContactLocationInfo_UserAddress_IsMailing_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            StringBuilder mailingAddress = new StringBuilder();
+            mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress1.ToString()));
+            mailingAddress.Append(" ");
+            mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString()));
+            var oldValues = new HashSet<string>();
+            oldValues.Add(mailingAddress.ToString());
+
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address");
+            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            compareStrategy.Investigate();
+            watch.Stop();
+
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
+                                              resultReport);
+        }
+
+        private void UserContactLocationInfo_UserAddress_ZipCodes_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
+
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
+            var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 

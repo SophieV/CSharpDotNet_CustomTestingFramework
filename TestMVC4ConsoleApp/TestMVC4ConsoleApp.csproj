@@ -149,7 +149,6 @@
     <Compile Include="Tests\TestSuite.cs" />
     <Compile Include="Tests\TestSuiteUser.cs" />
     <Compile Include="Tests\TestUnit.cs" />
-    <Compile Include="Tests\TestUnitUserAddress.cs" />
     <Compile Include="Tests\TestUnitUserBasicInfo.cs" />
     <Compile Include="Tests\TestUnitUserContactLocationInfo.cs" />
     <Compile Include="Tests\TestUnitUserEducationTrainingInfo.cs" />
