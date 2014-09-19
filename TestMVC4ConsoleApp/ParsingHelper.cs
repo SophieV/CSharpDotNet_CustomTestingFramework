@@ -81,6 +81,11 @@ namespace TestMVC4App.Models
             try
             {
                 values = new HashSet<string>(elements.Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => x.Value));
+
+                if (values.Count() == 0)
+                {
+                    values = new HashSet<string>(elements.Descendants().Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => x.Value));
+                }
             }
             catch (Exception)
             {
