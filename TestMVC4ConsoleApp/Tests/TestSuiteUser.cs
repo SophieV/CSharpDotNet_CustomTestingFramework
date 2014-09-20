@@ -293,8 +293,6 @@ namespace TestMVC4App.Models
                             {
                                 LogManager.Instance.StatsCountProfilesIgnored++;
                             }
-
-                            Thread.Sleep(5000);
                         }
                         catch (Exception e)
                         {
