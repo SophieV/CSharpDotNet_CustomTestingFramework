@@ -23,7 +23,7 @@ namespace TestMVC4App.Models
             get { return "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI="; }
         }
 
-        public static bool IsDebugMode { get { return true;  } }
+        public static bool IsDebugMode { get { return false;  } }
 
         private const int MaxProfilesForOneFile = 50000;
 
@@ -152,6 +152,8 @@ namespace TestMVC4App.Models
                                 var usersClient = new UsersClient();
 
                                 newDataBasic = usersClient.GetUserByUpi(upi);
+                                userId = newDataBasic.UserId;
+                                pageName = newDataBasic.PageName;
 
                                 // This service has to be called first because it will provided the User ID mapped to the UPI for the next calls.
                                 oldDataSubset = rootDepthOnly;
@@ -165,8 +167,6 @@ namespace TestMVC4App.Models
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
-                                userId = testUnit.UserId;
-                                pageName = (testUnit as TestUnitUserBasicInfo).PageName;
                                 newData = usersClient.GetUserCompleteByPageName(pageName);
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.title.ToString(), new List<XElement>(rootDepthOnly));

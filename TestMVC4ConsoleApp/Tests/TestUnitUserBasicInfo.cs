@@ -21,8 +21,6 @@ namespace TestMVC4App.Models
             get { return string.Empty; }
         }
 
-        public string PageName { get; private set; }
-
         public TestUnitUserBasicInfo(TestSuite parent, UserBasicInfo newData) : base(parent)
         {
             this.newData = newData;
@@ -57,7 +55,6 @@ namespace TestMVC4App.Models
             try
             {
                 this.UserId = this.newData.UserId;
-                this.PageName = this.newData.PageName;
             } 
             catch (Exception e)
             {
