@@ -85,6 +85,84 @@ namespace TestMVC4App.Models
                                                                                                                                         EnumOldServiceFieldsAsKeys.longitude,
                                                                                                                                         EnumOldServiceFieldsAsKeys.type});
 
+            // add mailing address manually
+            if (this.OldDataNodes != null)
+            {
+                var mailingAddress = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
+
+                try
+                {
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.locationName, ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddressName.ToString()));
+                }
+                catch (Exception)
+                {
+                    // make sure a value is present for each index
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.locationName, string.Empty);
+                }
+
+                mailingAddress.Add(EnumOldServiceFieldsAsKeys.building, string.Empty);
+
+
+                try
+                {
+                    StringBuilder value = new StringBuilder();
+                    value.Append(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddress1.ToString()));
+                    value.Append(" ");
+                    value.Append(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString()));
+                        
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.addressLine1, value.ToString());
+                }
+                catch (Exception)
+                {
+                    // make sure a value is present for each index
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.addressLine1, string.Empty);
+                }
+                
+                mailingAddress.Add(EnumOldServiceFieldsAsKeys.suite, string.Empty);
+
+
+                try
+                {
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.city, ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddressCity.ToString()));
+                }
+                catch (Exception)
+                {
+                    // make sure a value is present for each index
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.city, string.Empty);
+                }
+
+                try
+                {
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.state, ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddressState.ToString()));
+                }
+                catch (Exception)
+                {
+                    // make sure a value is present for each index
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.state, string.Empty);
+                }
+
+                try
+                {
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.zipCode, ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddressZip.ToString()));
+                }
+                catch (Exception)
+                {
+                    // make sure a value is present for each index
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.zipCode, string.Empty);
+                }
+
+                mailingAddress.Add(EnumOldServiceFieldsAsKeys.latitude, string.Empty);
+                mailingAddress.Add(EnumOldServiceFieldsAsKeys.longitude, string.Empty);
+
+                bool atLeastOneFieldPopulated = mailingAddress.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Count() > 0;
+
+                if (atLeastOneFieldPopulated)
+                {
+                    oldValues.Add(mailingAddress);
+                }
+            }
+
+
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
@@ -204,9 +282,56 @@ namespace TestMVC4App.Models
             var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
             var allOldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(),oldAddresses.ToList(), true);
 
+            UserContactLocationInfo_LabWebsites_Geo_Test(oldAddresses,new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Location.GeoPoint)));
             UserContactLocationInfo_UserAddress_StreetAddress_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.StreetAddress)));
             UserContactLocationInfo_UserAddress_ZipCodes_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
             UserContactLocationInfo_UserAddress_IsMailing_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => x.Address.BaseAddress.StreetAddress)));
+        }
+
+        private void UserContactLocationInfo_LabWebsites_Geo_Test(IEnumerable<XElement> oldServiceNodes, HashSet<GeoPoint> newValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            List<string> oldValues = new List<string>();
+            oldValues.AddRange(ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.latitude.ToString()));
+            oldValues.AddRange(ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.longitude.ToString()));
+
+            HashSet<string> roundedOldValues = new HashSet<string>(oldValues.Where(x=>!string.IsNullOrEmpty(x)).Select(x=>Math.Round(Double.Parse(x),0).ToString()));
+
+            HashSet<string> roundedNewValues = new HashSet<string>();
+            if (newValues != null)
+            {
+                foreach (var value in newValues)
+                {
+                    try
+                    {
+                        roundedNewValues.Add(Math.Round((double)value.Latitude, 0).ToString());
+                    }
+                    catch (Exception) { }
+
+                    try
+                    {
+                        roundedNewValues.Add(Math.Round((double)value.Longitude, 0).ToString());
+                    }
+                    catch (Exception) { }
+                }
+            }
+
+            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_Geo, "Comparing Geo Location Data");
+            var compareStrategy = new CompareStrategyContextSwitcher(roundedOldValues, roundedNewValues, resultReport);
+            compareStrategy.Investigate();
+            watch.Stop();
+
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport);
+
+            LogManager.Instance.LogTestResult(this.UserId,
+                                              this.Upi,
+                                              this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
+                                              resultReport);
         }
 
         private void UserContactLocationInfo_LabWebsites_Names_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
