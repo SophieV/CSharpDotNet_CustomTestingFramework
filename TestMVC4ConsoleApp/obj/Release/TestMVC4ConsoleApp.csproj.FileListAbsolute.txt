@@ -1,3 +1,4 @@
+\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.csprojResolveAssemblyReference.cache
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\TestMVC4ConsoleApp.exe.config
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\TestMVC4ConsoleApp.exe
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\TestMVC4ConsoleApp.pdb
@@ -10,4 +11,3 @@
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\bin\Release\YSM.PMS.Web.Service.dll
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.exe
 \\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.pdb
-\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\obj\Release\TestMVC4ConsoleApp.csprojResolveAssemblyReference.cache
