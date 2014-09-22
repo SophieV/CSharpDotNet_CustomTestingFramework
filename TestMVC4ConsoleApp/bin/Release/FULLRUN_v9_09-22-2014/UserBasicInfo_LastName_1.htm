@@ -1,0 +1,2260 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10011526">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10011526">Profile data of UPI 10011526</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10011526">User data of ID is 59513</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[van Dyck]</span>. Actual:<span style='color:red;']</span>[Van Dyck]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>van Dyck
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>van</del><ins class='diffmod'>Van</ins> Dyck
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000702</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12328286">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12328286">Profile data of UPI 12328286</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12328286">User data of ID is 59556</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Haslip (Volkova)]</span>. Actual:<span style='color:red;']</span>[Haslip]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Haslip (Volkova)
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Haslip<del class='diffdel'> (Volkova)</del>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000739</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12216800">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12216800">Profile data of UPI 12216800</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12216800">User data of ID is 59694</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[DiZazzo Wilson]</span>. Actual:<span style='color:red;']</span>[Wilson]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>DiZazzo Wilson
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffdel'>DiZazzo </del>Wilson
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000734</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11161032">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11161032">Profile data of UPI 11161032</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11161032">User data of ID is 60829</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[do RosÃ¡rio]</span>. Actual:<span style='color:red;']</span>[Rosario-Campos]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>do RosÃ¡rio
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>do RosÃ¡rio</del><ins class='diffmod'>Rosario-Campos</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000521</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12635102">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12635102">Profile data of UPI 12635102</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12635102">User data of ID is 61404</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Motlagh]</span>. Actual:<span style='color:red;']</span>[Ghanbari Motlagh]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Motlagh
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>Ghanbari </ins>Motlagh
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000763</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13119058">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13119058">Profile data of UPI 13119058</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13119058">User data of ID is 61408</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Sousa]</span>. Actual:<span style='color:red;']</span>[Moura da Costa e Sousa]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Sousa
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>Moura da Costa e </ins>Sousa
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000644</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12493815">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12493815">Profile data of UPI 12493815</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12493815">User data of ID is 62062</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Ritvo-Slifka]</span>. Actual:<span style='color:red;']</span>[Ritvo]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Ritvo-Slifka
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Ritvo<del class='diffdel'>-Slifka</del>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:000071</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11981945">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11981945">Profile data of UPI 11981945</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11981945">User data of ID is 62700</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Nunez-Smith]</span>. Actual:<span style='color:red;']</span>[Smith]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Nunez-Smith
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Nunez-Smith</del><ins class='diffmod'>Smith</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000755</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12613580">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12613580">Profile data of UPI 12613580</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12613580">User data of ID is 63411</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Mitchell]</span>. Actual:<span style='color:red;']</span>[Mitchell - Richards]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Mitchell
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Mitchell<ins class='diffins'> - Richards</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000755</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11901212">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11901212">Profile data of UPI 11901212</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11901212">User data of ID is 63420</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[MittelhÃ¶lzer]</span>. Actual:<span style='color:red;']</span>[Mittelholzer]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>MittelhÃ¶lzer
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>MittelhÃ¶lzer</del><ins class='diffmod'>Mittelholzer</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000702</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10290071">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290071">Profile data of UPI 10290071</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10290071">User data of ID is 65304</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Vaz Fragoso]</span>. Actual:<span style='color:red;']</span>[Fragoso]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Vaz Fragoso
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffdel'>Vaz </del>Fragoso
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000743</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11866328">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11866328">Profile data of UPI 11866328</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11866328">User data of ID is 65319</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Sanganahalli]</span>. Actual:<span style='color:red;']</span>[Ganganna]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Sanganahalli
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Sanganahalli</del><ins class='diffmod'>Ganganna</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000751</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12761803">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12761803">Profile data of UPI 12761803</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12761803">User data of ID is 65398</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[GonzÃ¡lez]</span>. Actual:<span style='color:red;']</span>[Gonzalez]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>GonzÃ¡lez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>GonzÃ¡lez</del><ins class='diffmod'>Gonzalez</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000673</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12190909">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12190909">Profile data of UPI 12190909</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12190909">User data of ID is 66041</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[DeWan]</span>. Actual:<span style='color:red;']</span>[Dewan]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>DeWan
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>DeWan</del><ins class='diffmod'>Dewan</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000739</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12138005">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12138005">Profile data of UPI 12138005</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12138005">User data of ID is 67597</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Can]</span>. Actual:<span style='color:red;']</span>[Bruce]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Can
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Can</del><ins class='diffmod'>Bruce</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000685</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12772343">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12772343">Profile data of UPI 12772343</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12772343">User data of ID is 67915</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[ColÃ³n-Ramos]</span>. Actual:<span style='color:red;']</span>[Colon-Ramos]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>ColÃ³n-Ramos
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>ColÃ³n</del><ins class='diffmod'>Colon</ins>-Ramos
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000628</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11386588">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11386588">Profile data of UPI 11386588</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11386588">User data of ID is 68953</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[AkgÃ¼n]</span>. Actual:<span style='color:red;']</span>[Akgun]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>AkgÃ¼n
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>AkgÃ¼n</del><ins class='diffmod'>Akgun</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:000073</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10638401">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10638401">Profile data of UPI 10638401</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10638401">User data of ID is 69109</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Andrejeva-Wright]</span>. Actual:<span style='color:red;']</span>[Andrejeva]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Andrejeva-Wright
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Andrejeva<del class='diffdel'>-Wright</del>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000714</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10356847">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10356847">Profile data of UPI 10356847</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10356847">User data of ID is 69526</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Bessinger - Van Graan]</span>. Actual:<span style='color:red;']</span>[Bessinger]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Bessinger - Van Graan
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Bessinger<del class='diffdel'> - Van Graan</del>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:000073</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11433083">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11433083">Profile data of UPI 11433083</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11433083">User data of ID is 69577</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[O'Connell]</span>. Actual:<span style='color:red;']</span>[Bonarrigo]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>O'Connell
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>O'Connell</del><ins class='diffmod'>Bonarrigo</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000759</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13227076">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13227076">Profile data of UPI 13227076</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13227076">User data of ID is 69897</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Albino]</span>. Actual:<span style='color:red;']</span>[Gonce]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Albino
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Albino</del><ins class='diffmod'>Gonce</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000755</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13205061">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13205061">Profile data of UPI 13205061</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13205061">User data of ID is 70223</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Pinar]</span>. Actual:<span style='color:red;']</span>[Uzunpinar]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Pinar
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Pinar</del><ins class='diffmod'>Uzunpinar</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000751</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13361529">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13361529">Profile data of UPI 13361529</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13361529">User data of ID is 71241</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Siegelman]</span>. Actual:<span style='color:red;']</span>[Willmann-Siegelman]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Siegelman
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Siegelman</del><ins class='diffmod'>Willmann-Siegelman</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000759</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13413345">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13413345">Profile data of UPI 13413345</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13413345">User data of ID is 71604</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Rosario]</span>. Actual:<span style='color:red;']</span>[Jimenez]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Rosario
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Rosario</del><ins class='diffmod'>Jimenez</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000644</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12558075">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12558075">Profile data of UPI 12558075</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12558075">User data of ID is 72118</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Hsieh]</span>. Actual:<span style='color:red;']</span>[Donroe]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Hsieh
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Hsieh</del><ins class='diffmod'>Donroe</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000726</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13527058">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13527058">Profile data of UPI 13527058</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13527058">User data of ID is 72548</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Zaheer]</span>. Actual:<span style='color:red;']</span>[Kidwai]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Zaheer
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Zaheer</del><ins class='diffmod'>Kidwai</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000739</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13545996">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13545996">Profile data of UPI 13545996</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13545996">User data of ID is 72653</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Web Group]</span>. Actual:<span style='color:red;']</span>[Profiletester]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Web Group
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Web Group</del><ins class='diffmod'>Profiletester</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000726</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13616631">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13616631">Profile data of UPI 13616631</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13616631">User data of ID is 73328</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[AndrÃ©]</span>. Actual:<span style='color:red;']</span>[Andre]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>AndrÃ©
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>AndrÃ©</del><ins class='diffmod'>Andre</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000636</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="11692452">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11692452">Profile data of UPI 11692452</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/11692452">User data of ID is 73980</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Gilo]</span>. Actual:<span style='color:red;']</span>[Gilo-Tomkins]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Gilo
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Gilo<ins class='diffins'>-Tomkins</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000726</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12227221">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12227221">Profile data of UPI 12227221</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12227221">User data of ID is 74010</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[GonzÃ¡lez-PÃ©rez]</span>. Actual:<span style='color:red;']</span>[González-Pérez]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>GonzÃ¡lez-PÃ©rez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Gonz<del class='diffmod'>Ã¡lez</del><ins class='diffmod'>ález</ins>-P<del class='diffmod'>Ã©rez</del><ins class='diffmod'>érez</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000685</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10132209">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10132209">Profile data of UPI 10132209</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10132209">User data of ID is 74661</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Sabe Colom]</span>. Actual:<span style='color:red;']</span>[Sabe]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Sabe Colom
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Sabe<del class='diffdel'> Colom</del>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000944</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10867272">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10867272">Profile data of UPI 10867272</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10867272">User data of ID is 76160</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Darnell]</span>. Actual:<span style='color:red;']</span>[Manassa]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Darnell
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Darnell</del><ins class='diffmod'>Manassa</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000661</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10476918">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10476918">Profile data of UPI 10476918</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10476918">User data of ID is 76939</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Ananth]</span>. Actual:<span style='color:red;']</span>[Ananthanarayanan]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Ananth
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Ananth</del><ins class='diffmod'>Ananthanarayanan</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000743</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13929652">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13929652">Profile data of UPI 13929652</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13929652">User data of ID is 77618</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Byrd]</span>. Actual:<span style='color:red;']</span>[Avent]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Byrd
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Byrd</del><ins class='diffmod'>Avent</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000603</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12696013">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12696013">Profile data of UPI 12696013</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12696013">User data of ID is 78005</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Ãlvarez Lugo]</span>. Actual:<span style='color:red;']</span>[Álvarez Lugo]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Ãlvarez Lugo
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Ãlvarez</del><ins class='diffmod'>Álvarez</ins> Lugo
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000755</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12591208">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12591208">Profile data of UPI 12591208</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12591208">User data of ID is 81922</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Gadow]</span>. Actual:<span style='color:red;']</span>[Torento]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Gadow
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Gadow</del><ins class='diffmod'>Torento</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000656</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12197811">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12197811">Profile data of UPI 12197811</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12197811">User data of ID is 82514</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Moliterno]</span>. Actual:<span style='color:red;']</span>[Moliterno Gunel]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Moliterno
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Moliterno<ins class='diffins'> Gunel</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000681</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="12279683">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12279683">Profile data of UPI 12279683</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/12279683">User data of ID is 83347</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Cristal]</span>. Actual:<span style='color:red;']</span>[Rollenhagen]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Cristal
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Cristal</del><ins class='diffmod'>Rollenhagen</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000751</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="13154350">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13154350">Profile data of UPI 13154350</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/13154350">User data of ID is 85437</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Robeson]</span>. Actual:<span style='color:red;']</span>[Robeson-Gewuerz]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Robeson
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Robeson<ins class='diffins'>-Gewuerz</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000583</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14431815">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14431815">Profile data of UPI 14431815</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14431815">User data of ID is 89597</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Bichsel]</span>. Actual:<span style='color:red;']</span>[Tebbenkamp]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Bichsel
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Bichsel</del><ins class='diffmod'>Tebbenkamp</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000726</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14500852">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14500852">Profile data of UPI 14500852</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14500852">User data of ID is 90573</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Issaeva]</span>. Actual:<span style='color:red;']</span>[Isaeva]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Issaeva
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Issaeva</del><ins class='diffmod'>Isaeva</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000734</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10737970">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10737970">Profile data of UPI 10737970</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10737970">User data of ID is 90630</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Beslow]</span>. Actual:<span style='color:red;']</span>[Beslow-Kaye]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Beslow
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Beslow<ins class='diffins'>-Kaye</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000714</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14559281">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14559281">Profile data of UPI 14559281</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14559281">User data of ID is 91457</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Romero]</span>. Actual:<span style='color:red;']</span>[Romero Calducho]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Romero
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Romero<ins class='diffins'> Calducho</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:000073</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14573816">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14573816">Profile data of UPI 14573816</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14573816">User data of ID is 91794</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Shojae]</span>. Actual:<span style='color:red;']</span>[Shojaee]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Shojae
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Shojae</del><ins class='diffmod'>Shojaee</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000755</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14583455">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14583455">Profile data of UPI 14583455</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14583455">User data of ID is 91892</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[GonzÃ¡lez]</span>. Actual:<span style='color:red;']</span>[González]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>GonzÃ¡lez
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Gonz<del class='diffmod'>Ã¡lez</del><ins class='diffmod'>ález</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000697</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14607765">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14607765">Profile data of UPI 14607765</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14607765">User data of ID is 92205</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Manfredo-Vieira]</span>. Actual:<span style='color:red;']</span>[Manfredo Vieira]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Manfredo-Vieira
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Manfredo<del class='diffmod'>-Vieira</del><ins class='diffmod'> Vieira</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0017688</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10289952">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10289952">Profile data of UPI 10289952</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10289952">User data of ID is 93373</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[DeVito]</span>. Actual:<span style='color:red;']</span>[Devito]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>DeVito
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>DeVito</del><ins class='diffmod'>Devito</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000751</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14875005">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14875005">Profile data of UPI 14875005</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14875005">User data of ID is 93918</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Divine-Cadavid]</span>. Actual:<span style='color:red;']</span>[Cadavid]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Divine-Cadavid
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Divine-Cadavid</del><ins class='diffmod'>Cadavid</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000624</p>
+	<br/>
+	<ul>
+				<li>The data of the new service is contained in the data from the old service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="14682973">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14682973">Profile data of UPI 14682973</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/14682973">User data of ID is 94257</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Echeverri]</span>. Actual:<span style='color:red;']</span>[Echeverri Munoz]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Echeverri
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Echeverri<ins class='diffins'> Munoz</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000685</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="15000465">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15000465">Profile data of UPI 15000465</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/15000465">User data of ID is 95702</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Moeini Naghani]</span>. Actual:<span style='color:red;']</span>[Moeini-Naghani]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Moeini Naghani
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Moeini<del class='diffmod'> Naghani</del><ins class='diffmod'>-Naghani</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000763</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="15028991">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15028991">Profile data of UPI 15028991</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/15028991">User data of ID is 95962</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Healy]</span>. Actual:<span style='color:red;']</span>[Healey]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Healy
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Healy</del><ins class='diffmod'>Healey</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000706</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="15046059">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15046059">Profile data of UPI 15046059</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/15046059">User data of ID is 96195</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[JÃ¤ger]</span>. Actual:<span style='color:red;']</span>[Jaeger]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>JÃ¤ger
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>JÃ¤ger</del><ins class='diffmod'>Jaeger</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:000071</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing LastName</b><br/>
+		<a id="10718947">UserBasicInfo_LastName</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10718947">Profile data of UPI 10718947</a><br/>
+		<a href="http://ypms-service-a9.azurewebsites.net/service/Users/Upi/10718947">User data of ID is 97388</a>
+	</td>
+	<td class="td_main">
+		Assert.AreEqual failed. Expected:<span style='color:red;']</span>[Koskinas]</span>. Actual:<span style='color:red;']</span>[Eastwood]</span>. Comparing LastName
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Koskinas
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<del class='diffmod'>Koskinas</del><ins class='diffmod'>Eastwood</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000739</p>
+	<br/>
+	<ul>
+				<li>WRONG VALUE when comparing.</li><br/>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>
