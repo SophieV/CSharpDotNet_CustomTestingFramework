@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -73,6 +74,133 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_Addresses_Test()
         {
+            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.location.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.locationName,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.building,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.addressLine1,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.suite,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.city,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.state,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.zipCode,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.latitude,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.longitude,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.type});
+
+            var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
+
+            Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
+
+            if (this.newDataUserAddress != null)
+            {
+                foreach (var newValue in this.newDataUserAddress)
+                {
+                    properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.locationName, newValue.Address.OfficeName);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.locationName, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.building, newValue.Address.BaseAddress.Building.Name);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.building, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.addressLine1, newValue.Address.BaseAddress.StreetAddress);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.addressLine1, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.suite, newValue.Address.Detail);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.suite, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.city, newValue.Address.BaseAddress.Location.City);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.city, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.state, newValue.Address.BaseAddress.Location.StateRegionProvince);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.state, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.zipCode, newValue.Address.BaseAddress.Zip);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.zipCode, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.latitude, newValue.Address.BaseAddress.Location.GeoPoint.Latitude.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.latitude, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.longitude, newValue.Address.BaseAddress.Location.GeoPoint.Longitude.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.longitude, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.type, newValue.Address.AddressType.Name);
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.type, string.Empty);
+                    }
+
+                    newValues.Add(properties);
+                }
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses, "Comparing Address(es)", oldValues, newValues);
+
             var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
             var allOldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(),oldAddresses.ToList(), true);
 

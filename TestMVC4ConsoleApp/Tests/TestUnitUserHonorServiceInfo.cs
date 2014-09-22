@@ -126,7 +126,6 @@ namespace TestMVC4App.Models
                 catch (Exception) { }
             }
 
-            // TODO: Location belongs in a dedicated test
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;

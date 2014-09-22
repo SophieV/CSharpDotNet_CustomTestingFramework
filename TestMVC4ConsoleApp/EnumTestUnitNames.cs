@@ -40,6 +40,7 @@ namespace TestMVC4App.Models
             //UserContactLocationInfo_Assistants,
             UserContactLocationInfo_LabWebsites_Names,
             UserContactLocationInfo_LabWebsites_Links,
+            UserContactLocationInfo_Addresses,
             UserContactLocationInfo_Addresses_StreetAddress,
             UserContactLocationInfo_Addresses_ZipCodes,
             UserContactLocationInfo_Addresses_IsMailing,

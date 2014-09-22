@@ -68,9 +68,14 @@ namespace TestMVC4App.Models
         emailAddress,
         link,
         addressLine1,
+        suite,
+        city,
+        state,
         mailingAddress1,
         mailingAddress2,
         zipCode,
+        building,
+        type,
         treeDepartment,
         primaryDept,
         name,
@@ -78,6 +83,8 @@ namespace TestMVC4App.Models
         orgID,
         OrgID,
         publicHealthKeywords,
-        keyword
+        keyword,
+        longitude,
+        latitude
     }
 }
