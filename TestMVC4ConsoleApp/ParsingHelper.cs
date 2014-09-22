@@ -204,5 +204,23 @@ namespace TestMVC4App.Models
             message = message.Replace(">", "]</span>");
             return message;
         }
+
+        public static string FormatPhoneNumber(string unformattedPhoneNumber)
+        {
+            if (!string.IsNullOrWhiteSpace(unformattedPhoneNumber))
+            {
+                unformattedPhoneNumber = new System.Text.RegularExpressions.Regex(@"\D")
+                    .Replace(unformattedPhoneNumber, string.Empty);
+                unformattedPhoneNumber = unformattedPhoneNumber.TrimStart('1');
+                if (unformattedPhoneNumber.Length == 7)
+                    return Convert.ToInt64(unformattedPhoneNumber).ToString("###-####");
+                if (unformattedPhoneNumber.Length == 10)
+                    return Convert.ToInt64(unformattedPhoneNumber).ToString("(###) ###-####");
+                if (unformattedPhoneNumber.Length > 10)
+                    return Convert.ToInt64(unformattedPhoneNumber)
+                        .ToString("###-###-#### " + new String('#', (unformattedPhoneNumber.Length - 10)));
+            }
+            return unformattedPhoneNumber;
+        }
     }
 }

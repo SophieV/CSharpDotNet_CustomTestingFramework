@@ -268,6 +268,17 @@ namespace TestMVC4App.Models
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
+                                oldDataSubset = rootDepthOnly;
+                                testUnit = new TestUnitUserGeneralContact(this, newData.GeneralContact);
+                                allTheTests.Add(testUnit);
+                                testUnit.ProvideData(
+                                    upi,
+                                    oldDataSubset,
+                                    -1,
+                                    pageName);
+                                testUnit.RunAllTests();
+                                oldDataSubset = null;
+
                                 foreach (var test in allTheTests)
                                 {
                                     test.ComputerOverallResults();

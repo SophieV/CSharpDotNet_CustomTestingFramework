@@ -60,6 +60,10 @@ namespace TestMVC4App.Models
             UserPatientCareInfo_IsSeeingNewPatients,
             UserPatientCareInfo_IsSeeingPatientType,
             UserPatientCareInfo_PhysicianBio,
-            UserResearchInfo_PublicHealthKeywords
+            UserResearchInfo_PublicHealthKeywords,
+            UserContactLocationInfo_GeneralContact_OfficePhone,
+            UserContactLocationInfo_GeneralContact_ClinicPhone,
+            UserContactLocationInfo_GeneralContact_ClinicFax,
+            UserContactLocationInfo_GeneralContact_OfficeFax
     }
 }

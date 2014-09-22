@@ -89,6 +89,10 @@ namespace TestMVC4App.Models
         publicHealthKeywords,
         keyword,
         longitude,
-        latitude
+        latitude,
+        officePhone,
+        officeFax,
+        clinicPhone,
+        clinicFax
     }
 }
