@@ -392,7 +392,11 @@ namespace TestMVC4App.Models
             mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress1.ToString()));
             mailingAddress.Append(" ");
             mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString()));
-            oldValues.Add(mailingAddress.ToString());
+
+            if (!string.IsNullOrWhiteSpace(mailingAddress.ToString()))
+            {
+                oldValues.Add(mailingAddress.ToString());
+            }
 
             var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);

@@ -69,7 +69,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Gender, "Comparing Gender", this.OldDataNodes, EnumOldServiceFieldsAsKeys.gender.ToString(), this.newData.Gender);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_NetId, "Comparing NetId", this.OldDataNodes, EnumOldServiceFieldsAsKeys.netID.ToString(), this.newData.NetId);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.pageName.ToString(), this.newData.PageName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Suffix, "Comparing Suffix", this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString(), this.newData.Suffix);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_SuffixName, "Comparing SuffixName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString(), this.newData.Suffix);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Idx, "Comparing Idx", this.OldDataNodes, EnumOldServiceFieldsAsKeys.Idx.ToString(), this.newData.Idx);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LicenseNumber, "Comparing License Number", this.OldDataNodes, EnumOldServiceFieldsAsKeys.LicenseNumber.ToString(), this.newData.LicenseNumber);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.OldDataNodes, EnumOldServiceFieldsAsKeys.Npi.ToString(), this.newData.Npi);

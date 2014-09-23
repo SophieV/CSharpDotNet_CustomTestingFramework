@@ -22,9 +22,9 @@ namespace TestMVC4App.Models
             UserGeneralInfo_AltLastName_Test();
             UserGeneralInfo_AltFirstName_Test();
             UserGeneralInfo_AltMiddleName_Test();
-            UserGeneralInfo_AltSuffix_Test();
+            UserGeneralInfo_AltSuffixName_Test();
             UserGeneralInfo_AltMiddleNameDisplayed_Test();
-            UserGeneralInfo_SuffixNames_Test();
+            UserGeneralInfo_All_EduProfSuffixes();
             UserGeneralInfo_CountCVs_Test();
 
             ComputeOverallSeverity();
@@ -116,11 +116,11 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltSuffix_Test()
+        private void UserGeneralInfo_AltSuffixName_Test()
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltSuffix, "Comparing AltSuffix (if needed)");
+            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.Suffix, resultReport);
@@ -211,7 +211,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", oldValue, newValue);
         }
 
-        private void UserGeneralInfo_SuffixNames_Test()
+        private void UserGeneralInfo_All_EduProfSuffixes()
         {
             string oldValuePart1 = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.degree.ToString());
             string oldValuePart2 = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalSuffix.ToString());
@@ -228,7 +228,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Suffixes, "Comparing SuffixNames", oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_All_EduProfSuffixes, "Comparing list of Suffix(es)", oldValues, newValues);
         }
 
         private void UserGeneralInfo_LanguageUsers_Test()
