@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -205,22 +206,39 @@ namespace TestMVC4App.Models
             return message;
         }
 
-        public static string FormatPhoneNumber(string unformattedPhoneNumber)
+        /// <summary>
+        /// Transforms an unformatted Phone Number from the new Service into the format returned by the Old Service.
+        /// </summary>
+        /// <param name="unformattedPhoneNumber"></param>
+        /// <param name="optionalPhoneExtension"></param>
+        /// <returns></returns>
+        public static string FormatPhoneNumber(string unformattedPhoneNumber, string optionalPhoneExtension = "")
         {
+            StringBuilder value = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(unformattedPhoneNumber))
             {
-                unformattedPhoneNumber = new System.Text.RegularExpressions.Regex(@"\D")
-                    .Replace(unformattedPhoneNumber, string.Empty);
+                unformattedPhoneNumber = new System.Text.RegularExpressions.Regex(@"\D").Replace(unformattedPhoneNumber, string.Empty);
                 unformattedPhoneNumber = unformattedPhoneNumber.TrimStart('1');
+                
                 if (unformattedPhoneNumber.Length == 7)
-                    return Convert.ToInt64(unformattedPhoneNumber).ToString("###-####");
-                if (unformattedPhoneNumber.Length == 10)
-                    return Convert.ToInt64(unformattedPhoneNumber).ToString("(###) ###-####");
-                if (unformattedPhoneNumber.Length > 10)
-                    return Convert.ToInt64(unformattedPhoneNumber)
-                        .ToString("###-###-#### " + new String('#', (unformattedPhoneNumber.Length - 10)));
+                {
+                    value.Append(Convert.ToInt64(unformattedPhoneNumber).ToString("###-####"));
+                }
+                else if (unformattedPhoneNumber.Length == 10)
+                {
+                    value.Append(Convert.ToInt64(unformattedPhoneNumber).ToString("(###) ###-####"));
+                }
+                else if (unformattedPhoneNumber.Length > 10)
+                {
+                    value.Append(Convert.ToInt64(unformattedPhoneNumber).ToString("###-###-#### " + new String('#', (unformattedPhoneNumber.Length - 10))));
+                }
             }
-            return unformattedPhoneNumber;
+
+            if (!string.IsNullOrEmpty(optionalPhoneExtension))
+            {
+                value.Append(" x" + optionalPhoneExtension);
+            }
+            return value.ToString();
         }
     }
 }

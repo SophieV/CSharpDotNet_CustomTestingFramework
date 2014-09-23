@@ -80,23 +80,6 @@
 	</table>
 	<br/>
 	<br/>
-	<table class="table_main">
-	<tr>
-		<th class="th_main">Identified Data Behavior</th>
-		<th class="th_main">Count</th>
-	</tr>
-	<# var sortedDictionary = SummaryReportDataObject.CountByIdentifiedDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-	foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary) {
-		if(countPerIdentifiedDataBehavior.Value > 0) { #>
-	<tr>
-		<td class="td_main"><#= LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key] #></td>
-		<td class="td_main"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
-	</tr>
-	<# } } #>
-	</table>
-	<br/>
-	<br/>
-	<br/>
 	<hr/>
 	<h2>Overview By Test Name Per User Profile</h2>
 	<a href="<#= SummaryReportDataObject.FileByProfileLink #>">Go to Overview of Results by UPI</a>

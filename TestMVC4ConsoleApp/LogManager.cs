@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Web.UI;
 using TestMVC4App.Templates;
+using TestMVC4ConsoleApp.Templates;
 
 namespace TestMVC4App.Models
 {
@@ -359,6 +360,7 @@ namespace TestMVC4App.Models
             {
                 countSeverityResults.Add(severity, 0);
             }
+            
 
             foreach (var upiPair in NoWarningNorErrorHappenedFlag_ByUpi)
             {
@@ -418,7 +420,7 @@ namespace TestMVC4App.Models
             {
                 CountProfilesTested = StatsCountTotalUpis,
                 CountProfilesWithoutWarnings = countTroubleFreeUpis,
-                CountBySeverity = countSeverityResults,
+                CountBySeverity = countSeverityResults.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
                 CountByIdentifiedDataBehavior = countByDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
                 TestNames = countSeverityResults_ByTestName.Keys.ToList(),
                 CountBySeverity_ByTestName = countSeverityResults_ByTestName,

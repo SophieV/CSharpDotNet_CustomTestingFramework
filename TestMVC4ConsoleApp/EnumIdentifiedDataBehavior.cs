@@ -22,7 +22,7 @@ namespace TestMVC4App.Models
         MISSING_VALUES_ON_NEW_SERVICE,
         [System.ComponentModel.Description("WRONG VALUE when comparing.")]
         WRONG_VALUE,
-        [System.ComponentModel.Description("Tree contains LESS elements at a give depth.")]
+        [System.ComponentModel.Description("Tree contains LESS elements at a given depth.")]
         OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH,
         [System.ComponentModel.Description("Tree contains AT LEAST AS MANY ELEMENTS at a given depth.")]
         NEW_TREE_COUNT_CONSISTENT,

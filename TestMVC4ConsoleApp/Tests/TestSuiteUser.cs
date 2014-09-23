@@ -274,7 +274,7 @@ namespace TestMVC4App.Models
                                 testUnit.ProvideData(
                                     upi,
                                     oldDataSubset,
-                                    -1,
+                                    userId,
                                     pageName);
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
