@@ -64,6 +64,7 @@ namespace TestMVC4App.Models
             UserContactLocationInfo_GeneralContact_OfficePhone,
             UserContactLocationInfo_GeneralContact_ClinicPhone,
             UserContactLocationInfo_GeneralContact_ClinicFax,
-            UserContactLocationInfo_GeneralContact_OfficeFax
+            UserContactLocationInfo_GeneralContact_OfficeFax,
+            UserContactLocationInfo_GeneralContact_LabPhone
     }
 }
