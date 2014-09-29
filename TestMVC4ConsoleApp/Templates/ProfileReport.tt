@@ -5,7 +5,11 @@
 	name="ProfileReportDataObject" 
 	type="TestMVC4App.Templates.SharedProfileReportData" #>
 <tr>
-<td class="td_main"><#= ProfileReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></td>
+<td class="td_main" style="min-width: 220px;">
+<ul>
+	<li><#= ProfileReportDataObject.ProfileProcessingDuration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></li>
+	<li><#= ProfileReportDataObject.OldServiceDuration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></li>
+	<li><#= ProfileReportDataObject.NewServiceDuration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></li></ul></td>
 <td class="th_main"><#= ProfileReportDataObject.UPI #></td>
 <# foreach(KeyValuePair<EnumTestUnitNames,EnumResultSeverityType> pair in ProfileReportDataObject.ResultSeverity_ByTestName) { #>
 	<# switch (pair.Value) {

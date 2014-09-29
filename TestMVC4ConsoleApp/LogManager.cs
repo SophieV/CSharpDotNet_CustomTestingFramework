@@ -185,11 +185,11 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void LogProfileResult(int upi, HashSet<ResultReport> allTheResults, TimeSpan duration)
+        public void LogProfileResult(int upi, HashSet<ResultReport> allTheResults, TimeSpan profileProcessingDuration, TimeSpan oldDataRQDuration, TimeSpan newDataRQDuration)
         {
             lock (lockProfileOverview)
             {
-                durationByProfile.Add(duration);
+                durationByProfile.Add(profileProcessingDuration);
 
                 var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).OrderBy(z => z.TestName).ToDictionary(x => x.TestName, x => x.Result);
                 var summaryProfileData = new SharedProfileReportData()
@@ -197,7 +197,9 @@ namespace TestMVC4App.Models
                     UPI = upi,
                     ResultSeverity_ByTestName = resultByTestName,
                     FileLinkEnd = "_" + countFilesGenerated + HTM_EXTENSION,
-                    Duration = duration
+                    ProfileProcessingDuration = profileProcessingDuration,
+                     OldServiceDuration = oldDataRQDuration,
+                     NewServiceDuration = newDataRQDuration
                 };
                 var template = new ProfileReport();
                 template.Session = new Dictionary<string, object>()

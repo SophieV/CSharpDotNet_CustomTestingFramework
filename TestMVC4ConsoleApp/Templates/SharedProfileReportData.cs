@@ -12,6 +12,10 @@ namespace TestMVC4App.Templates
 
         public string FileLinkEnd { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        public TimeSpan ProfileProcessingDuration { get; set; }
+
+        public TimeSpan OldServiceDuration { get; set; }
+
+        public TimeSpan NewServiceDuration { get; set; }
     }
 }

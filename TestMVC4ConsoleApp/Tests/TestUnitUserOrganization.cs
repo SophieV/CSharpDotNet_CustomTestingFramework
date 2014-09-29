@@ -92,7 +92,8 @@ namespace TestMVC4App.Models
                 ID = newData.OrganizationId.ToString(),
                 Name = newData.Name,
                 Type = newData.Type,
-                Depth = depth + 1
+                Depth = depth + 1,
+                FacultyType = newData.Type
             };
 
             if (newData.Missions != null)

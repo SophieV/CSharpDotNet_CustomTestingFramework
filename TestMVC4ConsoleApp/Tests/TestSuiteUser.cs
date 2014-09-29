@@ -23,7 +23,7 @@ namespace TestMVC4App.Models
             get { return "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI="; }
         }
 
-        public static bool IsDebugMode { get { return true;  } }
+        public static bool IsDebugMode { get { return false;  } }
 
         private const int MaxProfilesForOneFile = 50000;
 
@@ -40,15 +40,18 @@ namespace TestMVC4App.Models
 
             upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs();
 
-            Stopwatch profileWatch = null;
-            var watch = new Stopwatch();
-            watch.Start();
+            var singleProfileWatch = new Stopwatch();
+            var testingDurationWatch = new Stopwatch();
+            var oldServiceDataWatch = new Stopwatch();
+            var newServiceDataWatch = new Stopwatch();
+
+            testingDurationWatch.Start();
 
             LogManager.Instance.StartWritingDetailedReports();
 
             if (TestSuiteUser.IsDebugMode)
             {
-                upiList = new HashSet<int>() { 12445467, 10044421, 11842460, 10273683, 11228709, 12528002, 10410346, 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225, 11161032, 11832447, 11436806, 10736848 };
+               //upiList = new HashSet<int>() { 12445467, 10044421, 11842460, 10273683, 11228709, 12528002, 10410346, 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225, 11161032, 11832447, 11436806, 10736848 };
             }
 
             bool keepGoing = true;
@@ -70,8 +73,8 @@ namespace TestMVC4App.Models
                         keepGoing = false;
                     }
 
-                    profileWatch = new Stopwatch();
-                    profileWatch.Start();
+                    
+                    singleProfileWatch.Start();
 
                     if (LogManager.Instance.StatsCountTotalUpis % MaxProfilesForOneFile == 0)
                     {
@@ -84,6 +87,7 @@ namespace TestMVC4App.Models
 
                     //Find a way to set the 'Timeout' property in Milliseconds. The old service can be slow.
                     //we also need exception handling!
+                    oldServiceDataWatch.Start();
                     try
                     {
                         using (var webClient = new TimeoutExtendedWebClient())
@@ -112,6 +116,7 @@ namespace TestMVC4App.Models
                     {
                         System.Diagnostics.Debug.WriteLine(e.StackTrace);
                     }
+                    oldServiceDataWatch.Stop();
 
                     var allTheTests = new HashSet<TestUnit>();
                     var allTheResults = new HashSet<ResultReport>();
@@ -151,7 +156,12 @@ namespace TestMVC4App.Models
                                 IEnumerable<XElement> oldDataSubset = null;
                                 var usersClient = new UsersClient();
 
+                                newServiceDataWatch.Start();
+
                                 newDataBasic = usersClient.GetUserByUpi(upi);
+
+                                newServiceDataWatch.Stop();
+
                                 userId = newDataBasic.UserId;
                                 pageName = newDataBasic.PageName;
 
@@ -167,7 +177,11 @@ namespace TestMVC4App.Models
                                 testUnit.RunAllTests();
                                 oldDataSubset = null;
 
+                                newServiceDataWatch.Start();
+
                                 newData = usersClient.GetUserCompleteByPageName(pageName);
+
+                                newServiceDataWatch.Stop();
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.title.ToString(), new List<XElement>(rootDepthOnly));
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.cv.ToString(), new List<XElement>(oldDataSubset));
@@ -316,17 +330,22 @@ namespace TestMVC4App.Models
                         System.Diagnostics.Debug.WriteLine("No data returned by old service for UPI " + upi);
                     }
 
-                    profileWatch.Stop();
+                    singleProfileWatch.Stop();
 
-                    LogManager.Instance.LogProfileResult(upi, allTheResults, profileWatch.Elapsed);
+                    LogManager.Instance.LogProfileResult(upi, allTheResults, singleProfileWatch.Elapsed, oldServiceDataWatch.Elapsed, newServiceDataWatch.Elapsed);
+
+                    singleProfileWatch.Reset();
+                    oldServiceDataWatch.Reset();
+                    newServiceDataWatch.Reset();
                 }
             }
                 //);
 
                 LogManager.Instance.StopWritingDetailedReports();
 
-                watch.Stop();
-                LogManager.Instance.WriteSummaryReport(watch.Elapsed, errorType, errorMessage);
+                testingDurationWatch.Stop();
+
+                LogManager.Instance.WriteSummaryReport(testingDurationWatch.Elapsed, errorType, errorMessage);
 
                 LogManager.Instance.CleanUpResources();
         }

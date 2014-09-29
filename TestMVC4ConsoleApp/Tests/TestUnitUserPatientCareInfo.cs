@@ -51,7 +51,7 @@ namespace TestMVC4App.Models
             string newValue = string.Empty;
 
             // convert to values returned by the old service
-            if (this.newDataPatientCare != null && this.newDataPatientCare.IsMyChartAvailable != null)
+            if (this.newDataPatientCare != null)
             {
                 if (this.newDataPatientCare.IsMyChartAvailable)
                 {
@@ -78,7 +78,7 @@ namespace TestMVC4App.Models
         {
             string newValue = string.Empty;
 
-            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingPatients != null)
+            if (this.newDataPatientCare != null)
             {
                 if (this.newDataPatientCare.IsSeeingPatients)
                 {
@@ -104,7 +104,7 @@ namespace TestMVC4App.Models
 
             var newValues = new HashSet<string>();
 
-            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingAdults != null)
+            if (this.newDataPatientCare != null)
             {
                 if (this.newDataPatientCare.IsSeeingAdults)
                 {
@@ -112,7 +112,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingChild != null)
+            if (this.newDataPatientCare != null)
             {
                 if (this.newDataPatientCare.IsSeeingChild)
                 {
@@ -120,7 +120,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingAdolescent != null)
+            if (this.newDataPatientCare != null)
             {
                 if (this.newDataPatientCare.IsSeeingAdolescent)
                 {
@@ -128,7 +128,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            if (this.newDataPatientCare != null && this.newDataPatientCare.IsSeeingGeriatric != null)
+            if (this.newDataPatientCare != null)
             {
                 if (this.newDataPatientCare.IsSeeingGeriatric)
                 {

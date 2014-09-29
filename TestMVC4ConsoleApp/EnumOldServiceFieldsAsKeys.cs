@@ -94,6 +94,7 @@ namespace TestMVC4App.Models
         officeFax,
         clinicPhone,
         clinicFax,
-        labPhone
+        labPhone,
+        facultyType
     }
 }

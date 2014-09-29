@@ -33,6 +33,8 @@ namespace TestMVC4App.Models
 
         public HashSet<string> Missions { get; set; }
 
+        public string FacultyType { get; set; }
+
         public OrganizationTreeDescriptor()
         {
             this.Children = new HashSet<OrganizationTreeDescriptor>();
