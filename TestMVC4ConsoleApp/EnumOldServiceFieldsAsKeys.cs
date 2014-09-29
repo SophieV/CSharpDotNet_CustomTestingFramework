@@ -80,6 +80,7 @@ namespace TestMVC4App.Models
         zipCode,
         building,
         type,
+        Type,
         treeDepartment,
         primaryDept,
         name,

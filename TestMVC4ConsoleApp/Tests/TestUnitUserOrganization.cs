@@ -171,6 +171,16 @@ namespace TestMVC4App.Models
 
                 try
                 {
+                    orgDesc.Type = element.Element(EnumOldServiceFieldsAsKeys.Type.ToString()).Value.Trim();
+                }
+                catch (Exception)
+                {
+                    // no value to parse
+                    orgDesc.Type = string.Empty;
+                }
+
+                try
+                {
 
                     tempValue = element.Element(EnumOldServiceFieldsAsKeys.mission.ToString()).Value;
 
@@ -390,7 +400,7 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", (newValues.ToList().Where(z => z != null).Count() > 0 ? new HashSet<string>() { "Academic Department" } : new HashSet<string>()), newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", newValues, newValues);
         }
 
         private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)

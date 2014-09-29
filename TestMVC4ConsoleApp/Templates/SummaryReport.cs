@@ -129,8 +129,8 @@ namespace TestMVC4ConsoleApp.Templates
             #line default
             #line hidden
             this.Write("</p>\r\n\t<br/>\r\n\t<table class=\"table_main\">\r\n\t\t<tr>\r\n\t\t<th class=\"th_main\">Result</" +
-                    "th>du\r\n\t\t<th class=\"th_main\">Count</th>\r\n\t\t<th class=\"th_main\">Description</th>\r" +
-                    "\n\t\t</tr>\r\n\t\t");
+                    "th>\r\n\t\t<th class=\"th_main\">Count</th>\r\n\t\t<th class=\"th_main\">Description</th>\r\n\t" +
+                    "\t</tr>\r\n\t\t");
             
             #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\SummaryReport.tt"
  foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity) { 

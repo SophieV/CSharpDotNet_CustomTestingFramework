@@ -27,24 +27,24 @@ namespace TestMVC4ConsoleApp.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<tr>\r\n<td class=\"td_main\" style=\"min-width: 220px;\">\r\n<ul>\r\n\t<li>");
+            this.Write("<tr>\r\n<td class=\"td_main\">\r\n<ul>\r\n\t<li>");
             
             #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.ProfileProcessingDuration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF")));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.ProfileProcessingDuration.ToString("mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
             this.Write("</li>\r\n\t<li>");
             
             #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.OldServiceDuration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF")));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.OldServiceDuration.ToString("mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
             this.Write("</li>\r\n\t<li>");
             
             #line 12 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.NewServiceDuration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF")));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfileReportDataObject.NewServiceDuration.ToString("mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
