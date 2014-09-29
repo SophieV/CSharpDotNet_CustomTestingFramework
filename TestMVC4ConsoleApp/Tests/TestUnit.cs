@@ -159,7 +159,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(testFullName, testDescription);
+            var resultReport = new ResultReport(this.UserId,this.Upi, testFullName, testDescription);
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
@@ -168,9 +168,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -179,7 +177,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(testFullName, testDescription);
+            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
@@ -188,9 +186,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -199,7 +195,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(testFullName, testDescription);
+            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
             var compareStrategy = new CompareStrategyContextSwitcher(newAndOldValues,resultReport,stringPartialMatch);
             compareStrategy.Investigate();
 
@@ -208,9 +204,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -226,7 +220,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(testFullName, testDescription);
+            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newValue, resultReport);
             compareStrategy.Investigate();
 
@@ -235,9 +229,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }

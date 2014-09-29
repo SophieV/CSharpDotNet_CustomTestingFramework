@@ -11,13 +11,9 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserOrganization : TestUnit
     {
-        # region Data Provided by Parent Test Unit
-
         private IEnumerable<OrganizationTreeInfo> newData;
         private HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptors;
         private HashSet<OrganizationTreeDescriptor> oldServiceOrganizationDescriptors;
-
-        #endregion
 
         public TestUnitUserOrganization(TestSuite parent, IEnumerable<OrganizationTreeInfo> newData)
             :base(parent)
@@ -33,7 +29,7 @@ namespace TestMVC4App.Models
 
             try 
             { 
-                oldTreeRoot = ParseOldServiceData(); //.Children.First(); 
+                oldTreeRoot = ParseOldServiceData(); 
             } 
             catch (Exception e)
             {
@@ -54,14 +50,14 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)),
                                                    new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)));
 
-            UserGeneralInfo_Organization_Type_Test(new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Type)).Select(a => a.Type).Distinct()));
+            UserGeneralInfo_Organization_Type_Test();
 
-            UserGeneralInfo_Organization_IdAndNameTogether_Test(this.oldServiceOrganizationDescriptors,oldTreeRoot,this.newServiceOrganizationDescriptors,newTreeRoot);
-            UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, oldTreeRoot, newTreeRoot);
-            //UserGeneralInfo_Organization_CheckIsPrimary_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
-            UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
+            UserGeneralInfo_Organization_IdAndNameTogether_Test(oldTreeRoot,newTreeRoot);
+            UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(oldTreeRoot, newTreeRoot);
+            UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(oldTreeRoot, newTreeRoot);
 
-            UserGeneralInfo_Organization_Missions_Test(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors);
+            UserGeneralInfo_Organization_Missions_Test();
+            UserGeneralInfo_Organizations_YmgStatus_Test();
 
             ComputeOverallSeverity();
         }
@@ -78,14 +74,14 @@ namespace TestMVC4App.Models
             {
                 foreach (var organization in this.newData)
                 {
-                    PopulateTreeDescriptor(organization, rootContainer);
+                    PopulateTreeDescriptorsFromNew(organization, rootContainer);
                 }
             }
 
             return rootContainer;
         }
 
-        private void PopulateTreeDescriptor(OrganizationTreeInfo newData, OrganizationTreeDescriptor parent, int depth = 0)
+        private void PopulateTreeDescriptorsFromNew(OrganizationTreeInfo newData, OrganizationTreeDescriptor parent, int depth = 0)
         {
             var organizationDescriptor = new OrganizationTreeDescriptor()
             {
@@ -93,7 +89,7 @@ namespace TestMVC4App.Models
                 Name = newData.Name,
                 Type = newData.Type,
                 Depth = depth + 1,
-                FacultyType = newData.Type
+                IsDisplayedOnYmg = newData.IsDisplayedOnYmg
             };
 
             if (newData.Missions != null)
@@ -113,7 +109,7 @@ namespace TestMVC4App.Models
 
             foreach (var child in newData.Children)
             {
-                PopulateTreeDescriptor(child, organizationDescriptor, depth + 1);
+                PopulateTreeDescriptorsFromNew(child, organizationDescriptor, depth + 1);
             }
         }
 
@@ -130,7 +126,7 @@ namespace TestMVC4App.Models
             // first get the tree and its elements
             try
             {
-                ParseRecursiveTree(this.OldDataNodes.First(), rootContainer, this.oldServiceOrganizationDescriptors);
+                PopulateTreeDescriptorsFromOld(this.OldDataNodes.First(), rootContainer, this.oldServiceOrganizationDescriptors);
             }
             catch (Exception)
             {
@@ -140,7 +136,7 @@ namespace TestMVC4App.Models
             return rootContainer;
         }
 
-        private static void ParseRecursiveTree(XElement element, OrganizationTreeDescriptor parent, HashSet<OrganizationTreeDescriptor> allPuzzlePieces, int depth = 0)
+        private static void PopulateTreeDescriptorsFromOld(XElement element, OrganizationTreeDescriptor parent, HashSet<OrganizationTreeDescriptor> allPuzzlePieces, int depth = 0)
         {
             OrganizationTreeDescriptor orgDesc = parent;
             string tempValue;
@@ -171,12 +167,22 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    orgDesc.Type = element.Element(EnumOldServiceFieldsAsKeys.Type.ToString()).Value.Trim();
+                    orgDesc.Type = element.Element(EnumOldServiceFieldsAsKeys.orgType.ToString()).Value.Trim();
                 }
                 catch (Exception)
                 {
                     // no value to parse
                     orgDesc.Type = string.Empty;
+                }
+
+                try
+                {
+                    orgDesc.IsDisplayedOnYmg = (element.Element(EnumOldServiceFieldsAsKeys.ymgStatus.ToString()).Value.Trim() == "Y");
+                }
+                catch (Exception)
+                {
+                    // no value to parse
+                    orgDesc.IsDisplayedOnYmg = false;
                 }
 
                 try
@@ -235,7 +241,7 @@ namespace TestMVC4App.Models
             {
                 foreach (XElement child in element.Elements(EnumOldServiceFieldsAsKeys.treeDepartment.ToString()))
                 {
-                    ParseRecursiveTree(child, orgDesc, allPuzzlePieces, depth + 1);
+                    PopulateTreeDescriptorsFromOld(child, orgDesc, allPuzzlePieces, depth + 1);
                 }
             }
         }
@@ -360,14 +366,11 @@ namespace TestMVC4App.Models
 
         #region Single Tests
 
-        private void UserGeneralInfo_Organization_IdAndNameTogether_Test(HashSet<OrganizationTreeDescriptor> oldServiceOrganizationDescriptor, 
-                                                                         OrganizationTreeDescriptor oldTreeRoot,
-                                                                         HashSet<OrganizationTreeDescriptor> newServiceOrganizationDescriptor,
-                                                                         OrganizationTreeDescriptor newTreeRoot)
+        private void UserGeneralInfo_Organization_IdAndNameTogether_Test(OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_IdAndName, "Comparing Organization Id+Name Combinations");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_Organizations_IdAndName, "Comparing Organization Id+Name Combinations");
             var compareStrategy = new CompareStrategyContextSwitcher(
                 oldServiceOrganizationDescriptors,
                 oldTreeRoot,
@@ -381,9 +384,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -398,12 +399,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Name, "Comparing Organization Names", oldValues, newValues);
         }
 
-        private void UserGeneralInfo_Organization_Type_Test(HashSet<string> newValues)
-        {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", newValues, newValues);
-        }
-
-        private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
+        private void UserGeneralInfo_Organization_CheckTreeDepthCoherence_Test(OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
         {
             bool keepGoing = true;
             int index = 0;
@@ -414,12 +410,12 @@ namespace TestMVC4App.Models
 
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_TreeDepthCoherence, "Comparing Organization Tree Depth Coherence");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_Organizations_TreeDepthCoherence, "Comparing Organization Tree Depth Coherence");
 
             while (keepGoing)
             {
-                oldEntriesSameDepth = oldTree.Where(x => x.Depth == index);
-                newEntriesSameDepth = newTree.Where(s => s.Depth == index);
+                oldEntriesSameDepth = this.oldServiceOrganizationDescriptors.Where(x => x.Depth == index);
+                newEntriesSameDepth = this.newServiceOrganizationDescriptors.Where(s => s.Depth == index);
 
                 oldCount = oldEntriesSameDepth.Count();
                 newCount = newEntriesSameDepth.Count();
@@ -442,7 +438,7 @@ namespace TestMVC4App.Models
                     resultReport.UpdateResult(EnumResultSeverityType.ERROR);
                     resultReport.ErrorMessage = e.Message;
                     resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH);
-                    resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
+                    resultReport.AddDetailedValues(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
                     resultReport.TreeComparisonIndexError = index;
 
                     if (resultReport.Result == EnumResultSeverityType.ERROR)
@@ -457,7 +453,7 @@ namespace TestMVC4App.Models
             if(resultReport.Result == EnumResultSeverityType.SUCCESS)
             {
                 resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT);
-                resultReport.AddDetailedValues(oldTree, oldTreeRoot, newTree, newTreeRoot);
+                resultReport.AddDetailedValues(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
             }
 
             watch.Stop();
@@ -465,70 +461,25 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Organization_CheckIsPrimary_Test(HashSet<OrganizationTreeDescriptor> oldTree, HashSet<OrganizationTreeDescriptor> newTree)
-        {
-            //var watch = new Stopwatch();
-            //watch.Start();
-            //var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_IsImportedPrimary, "Comparing Organization IsImported/Primary");
-
-            //var oldEntriesIsPrimary = new HashSet<string>();
-            //var newEntriesIsPrimary = new HashSet<string>();
-
-            //try
-            //{
-            //    oldEntriesIsPrimary = new HashSet<string>(oldTree.Where(x => x.IsPrimary == true).Select(x => x.Name));
-            //} 
-            //catch(Exception)
-            //{
-
-            //}
-
-            //try
-            //{
-            //    newEntriesIsPrimary = new HashSet<string>(newTree.Where(s => s.IsPrimary == true).Select(x => x.Name));
-            //}
-            //catch (Exception)
-            //{
-
-            //}
-
-            //// this comparison can work because all the primary departments have a name assigned in the old service ! NOPE because the name may change...
-            //var collectionComparison = new CompareStrategyContextSwitcher(oldEntriesIsPrimary, newEntriesIsPrimary, resultReport);
-            //collectionComparison.Investigate();
-
-            //watch.Stop();
-            //resultReport.Duration = watch.Elapsed;
-
-            //this.DetailedResults.Add(resultReport);
-
-            //LogManager.Instance.LogTestResult(this.UserId,
-            //                                  this.Upi,
-            //                                  this.Container.BuildOldServiceFullURL(this.Upi),
-            //                                  this.BuildNewServiceURL(this.PageName),
-            //                                  resultReport);
-        }
-
-        private void UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(HashSet<OrganizationTreeDescriptor> oldTree, OrganizationTreeDescriptor oldTreeRoot, HashSet<OrganizationTreeDescriptor> newTree, OrganizationTreeDescriptor newTreeRoot)
+        private void UserGeneralInfo_Organization_MergingNewTreeToOldOne_Test(OrganizationTreeDescriptor oldTreeRoot, OrganizationTreeDescriptor newTreeRoot)
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_Organizations_TreeMerged, "Trying to merge Organization Trees together");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_Organizations_TreeMerged, "Trying to merge Organization Trees together");
 
             if (newTreeRoot != null && oldTreeRoot != null)
             {
 
                 var newTreeRootDeepClone = newTreeRoot.DeepClone();
 
-                PopulateGapsOfOldTree(oldTree, newTree, resultReport, true);
+                PopulateGapsOfOldTree(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, resultReport, true);
 
-                var missingElements = oldTree.Where(x => x.HasBeenMatched == false
+                var missingElements = this.oldServiceOrganizationDescriptors.Where(x => x.HasBeenMatched == false
                                                                 && string.IsNullOrEmpty(x.ID)
                                                                 && string.IsNullOrEmpty(x.Name)
                                                                 && x.Depth >= 0)
@@ -542,18 +493,18 @@ namespace TestMVC4App.Models
                 }
                 else
                 {
-                    if (countMissingElements > 0)
-                    {
-                        PopulateGapsOfOldTree(oldTree, newTree, resultReport, false);
+                    //if (countMissingElements > 0)
+                    //{
+                    //    PopulateGapsOfOldTree(this.oldServiceOrganizationDescriptors, this.newServiceOrganizationDescriptors, resultReport, false);
 
-                        missingElements = oldTree.Where(x => x.HasBeenMatched == false
-                                                                        && string.IsNullOrEmpty(x.ID)
-                                                                        && string.IsNullOrEmpty(x.Name)
-                                                                        && x.Depth >= 0)
-                                                           .GroupBy(x => x.Depth)
-                                                           .ToDictionary(t => t.Key, t => t.ToList());
-                        countMissingElements = missingElements.Count();
-                    }
+                    //    missingElements = this.oldServiceOrganizationDescriptors.Where(x => x.HasBeenMatched == false
+                    //                                                    && string.IsNullOrEmpty(x.ID)
+                    //                                                    && string.IsNullOrEmpty(x.Name)
+                    //                                                    && x.Depth >= 0)
+                    //                                       .GroupBy(x => x.Depth)
+                    //                                       .ToDictionary(t => t.Key, t => t.ToList());
+                    //    countMissingElements = missingElements.Count();
+                    //}
 
                     if (countMissingElements == 0)
                     {
@@ -569,7 +520,7 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    root = oldTree.Where(x => x.Depth == 0).First();
+                    root = this.oldServiceOrganizationDescriptors.Where(x => x.Depth == 0).First();
                 } catch (Exception)
                 { }
 
@@ -585,22 +536,19 @@ namespace TestMVC4App.Models
             resultReport.Duration = watch.Elapsed;
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
 
-        private void UserGeneralInfo_Organization_Missions_Test(HashSet<OrganizationTreeDescriptor> oldEntries, HashSet<OrganizationTreeDescriptor> newEntries)
+        private void UserGeneralInfo_Organization_Missions_Test()
         {
             var watch = new Stopwatch();
             watch.Start();
             var missionsPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
             
-            foreach (var entry in newEntries)
+            foreach (var entry in this.newServiceOrganizationDescriptors)
             {
-                // TODO: implement no data on old or new side
                 if (entry.MatchedPartner != null && (entry.Missions.Count() > 0 || entry.MatchedPartner.Missions.Count() > 0))
                 {
                     // matched partner is old service data
@@ -609,6 +557,43 @@ namespace TestMVC4App.Models
             }
             
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions, "Comparing Organization Missions", missionsPerOrg);
+        }
+
+        private void UserGeneralInfo_Organization_Type_Test()
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var valuesPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
+
+            foreach (var entry in this.newServiceOrganizationDescriptors)
+            {
+                // TODO: implement no data on old or new side
+                if (entry.MatchedPartner != null)
+                {
+                    // matched partner is old service data
+                    valuesPerOrg.Add(new HashSet<string>(){entry.MatchedPartner.Type}, new HashSet<string>() {entry.Type});
+                }
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", valuesPerOrg);
+        }
+
+        private void UserGeneralInfo_Organizations_YmgStatus_Test()
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var valuesPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
+
+            foreach (var entry in this.newServiceOrganizationDescriptors)
+            {
+                if (entry.MatchedPartner != null)
+                {
+                    // matched partner is old service data
+                    valuesPerOrg.Add(new HashSet<string>() { entry.MatchedPartner.IsDisplayedOnYmg.ToString() }, new HashSet<string>() { entry.IsDisplayedOnYmg.ToString() });
+                }
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_YmgStatus, "Comparing Display On YMG Status", valuesPerOrg);
         }
     }
 

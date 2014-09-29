@@ -5,6 +5,10 @@ namespace TestMVC4App.Models
 {
     public class ResultReport
     {
+        public int Upi { get; private set; }
+
+        public int UserId { get; protected set; }
+
         public EnumResultDisplayFormat DisplayFormat { get; private set; }
         public TimeSpan Duration { get; set; }
 
@@ -36,7 +40,7 @@ namespace TestMVC4App.Models
 
         public int TreeComparisonIndexError { get; set; }
 
-        public ResultReport(EnumTestUnitNames testName, string testDescription)
+        public ResultReport(int userId, int upi, EnumTestUnitNames testName, string testDescription)
         {
             this.TestName = testName;
             this.TestDescription = testDescription;
@@ -52,6 +56,8 @@ namespace TestMVC4App.Models
             this.NewTreeRoot = null;
             this.TreeComparisonIndexError = -1;
             this.Result = EnumResultSeverityType.SUCCESS;
+            this.Upi = upi;
+            this.UserId = userId;
         }
 
         public void ResetForReTesting()

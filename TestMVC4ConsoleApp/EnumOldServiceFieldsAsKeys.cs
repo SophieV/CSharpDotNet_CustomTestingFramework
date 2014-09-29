@@ -5,6 +5,9 @@ using System.Web;
 
 namespace TestMVC4App.Models
 {
+    /// <summary>
+    /// List of keys used in the old (Yale) service.
+    /// </summary>
     public enum EnumOldServiceFieldsAsKeys
     {
         UPI,
@@ -80,7 +83,7 @@ namespace TestMVC4App.Models
         zipCode,
         building,
         type,
-        Type,
+        orgType,
         treeDepartment,
         primaryDept,
         name,
@@ -96,6 +99,7 @@ namespace TestMVC4App.Models
         clinicPhone,
         clinicFax,
         labPhone,
-        facultyType
+        facultyType,
+        ymgStatus
     }
 }

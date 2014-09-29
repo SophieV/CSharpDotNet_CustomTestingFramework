@@ -1,0 +1,1534 @@
+<html>
+<head>
+<style>
+.diffins, .diffmod { background-color: yellow; }
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.missing {color: purple;}
+.duplicate {color: pink;}
+.error_color {color: red;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
+</style>
+<script type="text/javascript" src="tablefilter.js"></script>
+</head>
+<body>
+<table id="individual_test_results" class="table_main">
+<tr>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
+</tr>
+
+
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="12445467">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12445467">Profile data of UPI 12445467</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/mario_perez/Complete">User data of ID is 61648</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0153356</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10044421">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main success">
+			SUCCESS</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10044421">Profile data of UPI 10044421</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/EY4/Complete">User data of ID is 58782</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										113592
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000053</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11842460">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main error">
+			ERROR</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11842460">Profile data of UPI 11842460</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/alyson_zeitlin/Complete">User data of ID is 58811</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[2]</span>. Actual:<span style='color:red;']</span>[1]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 2]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>109082
+					<span class="missing">[MISSING IN NEW SERVICE]</span>										</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										113592
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0121684</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10273683">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10273683">Profile data of UPI 10273683</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/carlos_grilo/Complete">User data of ID is 58648</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[6]</span>. Actual:<span style='color:red;']</span>[8]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 6]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 8]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>109077
+															</li>
+										<li>109504
+															</li>
+										<li>109848
+															</li>
+										<li>110098
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109077
+															</li>
+										<li>										110098
+															</li>
+										<li>										109504
+															</li>
+										<li>										109848
+															</li>
+										<li>										110144
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:009206</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11228709">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11228709">Profile data of UPI 11228709</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/stephanie_halene/Complete">User data of ID is 58649</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[9]</span>. Actual:<span style='color:red;']</span>[18]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 9]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 18]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>109569
+															</li>
+										<li>109960
+															</li>
+										<li>113824
+															</li>
+										<li>109631
+															</li>
+										<li>109712
+															</li>
+										<li>110442
+															</li>
+										<li>109159
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										109563
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109564
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110193
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109569
+															</li>
+										<li>										109960
+															</li>
+										<li>										113824
+															</li>
+										<li>										109631
+															</li>
+										<li>										110577
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109342
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109712
+															</li>
+										<li>										110502
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110442
+															</li>
+										<li>										114653
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109159
+															</li>
+										<li>										114265
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0084637</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="12528002">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main success">
+			SUCCESS</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12528002">Profile data of UPI 12528002</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/rita_ohene-adjei/Complete">User data of ID is 58668</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										113592
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000053</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10410346">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10410346">Profile data of UPI 10410346</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jeanmarie_giovanelli/Complete">User data of ID is 58647</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>113592</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0072003</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10071485">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10071485">Profile data of UPI 10071485</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/david_leffell/Complete">User data of ID is 65053</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[11]</span>. Actual:<span style='color:red;']</span>[20]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 11]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 20]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>109631
+															</li>
+										<li>109339
+															</li>
+										<li>109709
+															</li>
+										<li>110442
+															</li>
+										<li>108735
+															</li>
+										<li>108737
+															</li>
+										<li>109151
+															</li>
+										<li>109810
+															</li>
+										<li>109346
+															</li>
+										<li>109355
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110721
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										113592
+															</li>
+										<li>										108735
+															</li>
+										<li>										109563
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109564
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110193
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109631
+															</li>
+										<li>										110577
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109339
+															</li>
+										<li>										110497
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109709
+															</li>
+										<li>										110512
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110442
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108737
+															</li>
+										<li>										109346
+															</li>
+										<li>										109151
+															</li>
+										<li>										109810
+															</li>
+										<li>										109355
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:012604</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10934133">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10934133">Profile data of UPI 10934133</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/anthony_koleske/Complete">User data of ID is 62889</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[13]</span>. Actual:<span style='color:red;']</span>[27]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 13]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 27]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>109532
+															</li>
+										<li>109537
+															</li>
+										<li>109539
+															</li>
+										<li>110429
+															</li>
+										<li>115091
+															</li>
+										<li>113592
+															</li>
+										<li>109560
+															</li>
+										<li>110448
+															</li>
+										<li>109402
+															</li>
+										<li>109083
+															</li>
+										<li>109379
+															</li>
+										<li>109386
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										110119
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110577
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109386
+															</li>
+										<li>										109532
+															</li>
+										<li>										110429
+															</li>
+										<li>										110459
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										115091
+															</li>
+										<li>										109537
+															</li>
+										<li>										109914
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109919
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109539
+															</li>
+										<li>										109900
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109906
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109912
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109560
+															</li>
+										<li>										110448
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110331
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109402
+															</li>
+										<li>										113765
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114194
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114428
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109083
+															</li>
+										<li>										113857
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109379
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0081106</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="12149599">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/stephen_thung/Complete">User data of ID is 58861</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[1]</span>. Actual:<span style='color:red;']</span>[3]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>110627
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										109563
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109564
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110627
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0078462</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="12641341">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/franklin_brown/Complete">User data of ID is 58634</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[6]</span>. Actual:<span style='color:red;']</span>[8]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 6]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 8]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>108788
+															</li>
+										<li>109802
+															</li>
+										<li>109857
+															</li>
+										<li>109854
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										110193
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109854
+															</li>
+										<li>										108788
+															</li>
+										<li>										109802
+															</li>
+										<li>										109857
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0081077</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10151776">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/tian_xu/Complete">User data of ID is 58755</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[15]</span>. Actual:<span style='color:red;']</span>[23]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 15]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 23]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>109532
+															</li>
+										<li>109537
+															</li>
+										<li>109539
+															</li>
+										<li>110238
+															</li>
+										<li>110256
+															</li>
+										<li>113592
+															</li>
+										<li>109569
+															</li>
+										<li>113823
+															</li>
+										<li>110442
+															</li>
+										<li>110388
+															</li>
+										<li>109834
+															</li>
+										<li>108854
+															</li>
+										<li>114011
+															</li>
+										<li>109355
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										110238
+															</li>
+										<li>										110256
+															</li>
+										<li>										110721
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										113592
+															</li>
+										<li>										110388
+															</li>
+										<li>										110577
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109532
+															</li>
+										<li>										109537
+															</li>
+										<li>										109919
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109539
+															</li>
+										<li>										109908
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109569
+															</li>
+										<li>										113823
+															</li>
+										<li>										110442
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108854
+															</li>
+										<li>										114011
+															</li>
+										<li>										114012
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114415
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114417
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109355
+															</li>
+										<li>										109834
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0079948</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10290564">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main warning_no_data">
+			WARNING_NO_DATA</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/daniel_rosner/Complete">User data of ID is 60863</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0148257</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11091604">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/caroline_zeiss/Complete">User data of ID is 58810</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[4]</span>. Actual:<span style='color:red;']</span>[12]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 4]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 12]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>108744
+															</li>
+										<li>108741
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110671
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110681
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108744
+															</li>
+										<li>										114408
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										115123
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108741
+															</li>
+										<li>										110199
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114063
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114262
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0084116</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11472557">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/yong_xiong/Complete">User data of ID is 58740</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[12]</span>. Actual:<span style='color:red;']</span>[24]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 12]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 24]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>109532
+															</li>
+										<li>109534
+															</li>
+										<li>109535
+															</li>
+										<li>110429
+															</li>
+										<li>113592
+															</li>
+										<li>110446
+															</li>
+										<li>110083
+															</li>
+										<li>109083
+															</li>
+										<li>109384
+															</li>
+										<li>109445
+															</li>
+										<li>109357
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										110577
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109357
+															</li>
+										<li>										109952
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109532
+															</li>
+										<li>										110429
+															</li>
+										<li>										110460
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110463
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110464
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109534
+															</li>
+										<li>										109882
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109886
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109887
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109535
+															</li>
+										<li>										109889
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109891
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110083
+															</li>
+										<li>										110446
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109083
+															</li>
+										<li>										113857
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109384
+															</li>
+										<li>										109445
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0082966</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10646102">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10646102">Profile data of UPI 10646102</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jay_winter/Complete">User data of ID is 59712</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[2]</span>. Actual:<span style='color:red;']</span>[3]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 2]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>110399
+															</li>
+										<li>110578
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										110399
+															</li>
+										<li>										110578
+															</li>
+										<li>										110721
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0079731</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10106216">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10106216">Profile data of UPI 10106216</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/agnes_vignery/Complete">User data of ID is 58968</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[12]</span>. Actual:<span style='color:red;']</span>[20]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 12]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 20]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>109532
+															</li>
+										<li>109539
+															</li>
+										<li>113592
+															</li>
+										<li>109569
+															</li>
+										<li>109961
+															</li>
+										<li>109701
+															</li>
+										<li>108792
+															</li>
+										<li>109253
+															</li>
+										<li>109260
+															</li>
+										<li>108791
+															</li>
+										<li>109356
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										109532
+															</li>
+										<li>										109539
+															</li>
+										<li>										109900
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109569
+															</li>
+										<li>										109961
+															</li>
+										<li>										109701
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108792
+															</li>
+										<li>										110180
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										113677
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109253
+															</li>
+										<li>										109260
+															</li>
+										<li>										108791
+															</li>
+										<li>										110102
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114030
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109437
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109356
+															</li>
+										<li>										114273
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0140316</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="12268225">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main success">
+			SUCCESS</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12268225">Profile data of UPI 12268225</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jian_xu/Complete">User data of ID is 58748</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>108736
+															</li>
+										<li>115179
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										113592
+															</li>
+										<li>										108736
+															</li>
+										<li>										115179
+															</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000151</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11161032">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11161032">Profile data of UPI 11161032</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/maria_rosario-campos/Complete">User data of ID is 60829</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[1]</span>. Actual:<span style='color:red;']</span>[3]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										113592
+															</li>
+										<li>										113672
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114245
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0088492</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11832447">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11832447">Profile data of UPI 11832447</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/fattaneh_tavassoli/Complete">User data of ID is 60555</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[7]</span>. Actual:<span style='color:red;']</span>[15]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 7]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 15]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>109631
+															</li>
+										<li>109333
+															</li>
+										<li>108738
+															</li>
+										<li>109465
+															</li>
+										<li>110368
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										109563
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109564
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110193
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109631
+															</li>
+										<li>										109333
+															</li>
+										<li>										110479
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108738
+															</li>
+										<li>										109465
+															</li>
+										<li>										110368
+															</li>
+										<li>										114769
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114974
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114262
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0111226</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="11436806">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11436806">Profile data of UPI 11436806</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jose_obando/Complete">User data of ID is 63465</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[5]</span>. Actual:<span style='color:red;']</span>[7]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 5]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 7]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>113592
+															</li>
+										<li>108740
+															</li>
+										<li>109288
+															</li>
+										<li>109293
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										113592
+															</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										108740
+															</li>
+										<li>										109288
+															</li>
+										<li>										109293
+															</li>
+										<li>										114610
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0084727</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Organization Ids</b><br/>
+		<a id="10736848">UserGeneralInfo_Organizations_Id</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10736848">Profile data of UPI 10736848</a><br/>
+		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/ingrid_nembhard/Complete">User data of ID is 61503</a>
+	</td>
+	<td class="td_main">
+		CollectionAssert.AreEquivalent failed. The number of elements in the collections do not match. Expected:<span style='color:red;']</span>[7]</span>. Actual:<span style='color:red;']</span>[12]</span>.Comparing Organization Ids
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 7]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 12]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>110238
+															</li>
+										<li>110247
+															</li>
+										<li>113592
+															</li>
+										<li>109082
+															</li>
+										<li>109212
+															</li>
+										<li>113598
+															</li>
+										<li>114820
+															</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										114820
+															</li>
+										<li>										110238
+															</li>
+										<li>										110247
+															</li>
+										<li>										113592
+															</li>
+										<li>										114449
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										110631
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										109082
+															</li>
+										<li>										109212
+															</li>
+										<li>										114050
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										114264
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+										<li>										113598
+															</li>
+										<li>										109086
+					<span class="missing">[MISSING IN OLD SERVICE]</span>										</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0094101</p>
+	<br/>
+	<ul>
+				<li>ALL the EXPECTED DATA was FOUND.</li><br/>
+				<li>More data from the new service.</li><br/>
+			</ul>
+	</td>
+</tr>
+</table>
+</body>
+</html>

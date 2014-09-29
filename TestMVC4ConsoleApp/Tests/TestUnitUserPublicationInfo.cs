@@ -15,12 +15,18 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
+            UserPublicationInfo_Titles();
+            UserPublicationInfo_Citations();
+        }
+
+        private HashSet<string> UserPublicationInfo_Titles()
+        {
             HashSet<string> newValues;
 
             if (this.newData != null)
             {
                 newValues = new HashSet<string>(newData.Where(x => x != null).Select(x => x.Title));
-            } 
+            }
             else
             {
                 newValues = new HashSet<string>();
@@ -30,7 +36,12 @@ namespace TestMVC4App.Models
                         "Comparing Publication Title(s)",
                         ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString()),
                         newValues);
+            return newValues;
+        }
 
+        private void UserPublicationInfo_Citations()
+        {
+            HashSet<string> newValues;
 
             if (this.newData != null)
             {

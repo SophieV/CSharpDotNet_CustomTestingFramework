@@ -22,54 +22,22 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            // TODO : not exposed yet
-            // UserContactLocationInfo_Assistants_Test();
-            UserContactLocationInfo_LabWebsites_Test();
-            UserContactLocationInfo_Addresses_Test();
-
-            ComputeOverallSeverity();
-        }
-
-        /// <summary>
-        /// The Assistant Name is a combination of the lastname and firstname.
-        /// We are interested in checking :
-        /// - whether the amount of persons listed as assistants is a match
-        /// - whether the name returned by the new service contains the firstname returned by the old service (defined as good enough match)
-        /// </summary>
-        /// <param name="newServiceData"></param>
-        /// <param name="this.OldDataNodes"></param>
-        /// <remarks>Special syntax.</remarks>
-        private void UserContactLocationInfo_Assistants_Test()
-        {
-            //HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.assistant.ToString(), EnumOldServiceFieldsAsKeys.fname.ToString());
-
-            //HashSet<string> newValues = new HashSet<string>();
-            //if(newServiceData.Assistants.Count() > 0)
-            //{
-            //    foreach(var assistant in newServiceData.Assistants)
-            //    {
-            //        if (!string.IsNullOrEmpty(assistant.UserMinimalInfo.Name))
-            //        {
-            //            newValues.Add(assistant.UserMinimalInfo.Name);
-            //        }
-            //    }
-            //}
-
-            //var pairs = new Dictionary<HashSet<string>, HashSet<string>>();
-            //if (oldValues.Count() > 0 || newValues.Count() > 0)
-            //{
-            //    pairs.Add(oldValues,newValues);
-            //}
-
-            //this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Assistants, "Comparing Assistant Name(s)", this.UserId, this.Upi, pairs,true);
-        }
-
-        private void UserContactLocationInfo_LabWebsites_Test()
-        {
             var oldDataLabWebsites = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.labWebsite.ToString());
 
             UserContactLocationInfo_LabWebsites_Names_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => x.LabName)));
             UserContactLocationInfo_LabWebsites_Links_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => x.LabUrl)));
+
+            UserContactLocationInfo_Addresses_Test();
+
+            var oldAddressesWithoutMailing = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.location.ToString());
+            var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(), oldAddressesWithoutMailing.ToList(), true);
+
+            UserContactLocationInfo_Addresses_Geo(oldAddressesWithoutMailing, new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Location.GeoPoint)));
+            UserContactLocationInfo_UserAddress_StreetAddress_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.StreetAddress)));
+            UserContactLocationInfo_UserAddress_ZipCodes_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
+            UserContactLocationInfo_UserAddress_IsMailing_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => x.Address.BaseAddress.StreetAddress)));
+
+            ComputeOverallSeverity();
         }
 
         private void UserContactLocationInfo_Addresses_Test()
@@ -278,17 +246,9 @@ namespace TestMVC4App.Models
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses, "Comparing Address(es)", oldValues, newValues);
-
-            var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes,EnumOldServiceFieldsAsKeys.location.ToString());
-            var allOldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(),oldAddresses.ToList(), true);
-
-            UserContactLocationInfo_LabWebsites_Geo_Test(oldAddresses,new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Location.GeoPoint)));
-            UserContactLocationInfo_UserAddress_StreetAddress_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.StreetAddress)));
-            UserContactLocationInfo_UserAddress_ZipCodes_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
-            UserContactLocationInfo_UserAddress_IsMailing_Test(allOldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => x.Address.BaseAddress.StreetAddress)));
         }
 
-        private void UserContactLocationInfo_LabWebsites_Geo_Test(IEnumerable<XElement> oldServiceNodes, HashSet<GeoPoint> newValues)
+        private void UserContactLocationInfo_Addresses_Geo(IEnumerable<XElement> oldServiceNodes, HashSet<GeoPoint> newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -318,7 +278,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_Geo, "Comparing Geo Location Data");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_Geo, "Comparing Geo Location Data");
             var compareStrategy = new CompareStrategyContextSwitcher(roundedOldValues, roundedNewValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -327,9 +287,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -341,7 +299,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.titleName.ToString());
 
-            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -350,9 +308,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -364,7 +320,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.link.ToString());
 
-            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -373,13 +329,10 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
-
 
         private void UserContactLocationInfo_UserAddress_StreetAddress_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
         {
@@ -398,7 +351,7 @@ namespace TestMVC4App.Models
                 oldValues.Add(mailingAddress.ToString());
             }
 
-            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -407,9 +360,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -426,7 +377,7 @@ namespace TestMVC4App.Models
             var oldValues = new HashSet<string>();
             oldValues.Add(mailingAddress.ToString());
 
-            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address");
             var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -435,9 +386,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -449,7 +398,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
 
-            var resultReport = new ResultReport(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
             var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
             compareStrategy.Investigate();
             watch.Stop();
@@ -458,9 +407,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }

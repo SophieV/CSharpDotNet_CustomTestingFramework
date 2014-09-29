@@ -29,6 +29,8 @@ namespace TestMVC4App.Models
 
         public bool IsImportedFromNewService { get; set; }
 
+        public bool IsDisplayedOnYmg { get; set; }
+
         public string Type { get; set; }
 
         public HashSet<string> Missions { get; set; }

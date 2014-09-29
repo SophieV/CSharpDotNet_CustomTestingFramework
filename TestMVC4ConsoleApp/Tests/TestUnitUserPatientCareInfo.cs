@@ -143,6 +143,9 @@ namespace TestMVC4App.Models
                 newValues);
         }
 
+        /// <summary>
+        /// Case where the data from the new service is converted into values returned by the old service.
+        /// </summary>
         private void UserPatientCareInfo_AcceptedReferral()
         {
             string value = string.Empty;

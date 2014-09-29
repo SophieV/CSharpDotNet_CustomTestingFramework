@@ -30,7 +30,7 @@ namespace TestMVC4App.Models
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
                                                                                                                                         EnumOldServiceFieldsAsKeys.presentationDate,
                                                                                                                                         EnumOldServiceFieldsAsKeys.category});
-            // TODO: Location belongs in a dedicated test
+
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;
@@ -96,6 +96,9 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserHonorServiceInfo_Honors, "Comparing Honor(s)", oldValues, newValues);
         }
 
+        /// <summary>
+        /// This is an example where the data is compared as a structure.
+        /// </summary>
         private void UserEducationTrainingInfo_Services()
         {
             var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.role,
@@ -107,6 +110,7 @@ namespace TestMVC4App.Models
 
             foreach (var structure in oldValues)
             {
+                // metadata is added for comparison with more complete new data
                 structure[EnumOldServiceFieldsAsKeys.role] = "Professional Organization";
 
                 if (structure[EnumOldServiceFieldsAsKeys.endDate] == "present")

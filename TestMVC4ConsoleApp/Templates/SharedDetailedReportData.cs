@@ -91,6 +91,8 @@ namespace TestMVC4App.Templates
             this.NewTreeRoot = resultReport.NewTreeRoot;
             this.Duration = resultReport.Duration;
             this.TreeComparisonIndexError = resultReport.TreeComparisonIndexError;
+            this.UPI = resultReport.Upi;
+            this.UserId = resultReport.UserId;
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
+    /// <summary>
+    /// Linq Extension that allows to Flatten a tree.
+    /// </summary>
     public static class LinqTreeExtension
     {
         public static IEnumerable<T> SelectNestedChildren<T>

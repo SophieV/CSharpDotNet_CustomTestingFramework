@@ -30,13 +30,11 @@ namespace TestMVC4App.Models
             ComputeOverallSeverity();
         }
 
-        #region Field Comparison Tests
-
         private void UserGeneralInfo_AltLastName_Test()
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.LastName, resultReport);
@@ -56,9 +54,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -67,7 +63,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.FirstName, resultReport);
@@ -87,9 +83,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -98,7 +92,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher((!string.IsNullOrEmpty(oldValue)).ToString(), newData.IsAltMiddleNameDisplayed.ToString(), resultReport);
@@ -109,9 +103,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -120,7 +112,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.Suffix, resultReport);
@@ -140,9 +132,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -151,7 +141,7 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
-            var resultReport = new ResultReport(EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
             if (string.IsNullOrEmpty(oldValue))
@@ -175,9 +165,7 @@ namespace TestMVC4App.Models
 
             this.DetailedResults.Add(resultReport);
 
-            LogManager.Instance.LogTestResult(this.UserId,
-                                              this.Upi,
-                                              this.Container.BuildOldServiceFullURL(this.Upi),
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
         }
@@ -247,6 +235,5 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", oldValues, newValues);
         }
 
-        #endregion
     }
 }

@@ -47,7 +47,7 @@ namespace TestMVC4App.Models
 
             testingDurationWatch.Start();
 
-            LogManager.Instance.StartWritingDetailedReports();
+            LogManager.Instance.StartWritingReports();
 
             if (TestSuiteUser.IsDebugMode)
             {
@@ -79,7 +79,7 @@ namespace TestMVC4App.Models
                     if (LogManager.Instance.StatsCountTotalUpis % MaxProfilesForOneFile == 0)
                     {
                         // change to next output files
-                        LogManager.Instance.StartWritingDetailedReports();
+                        LogManager.Instance.StartWritingReports();
                     }
 
                     //go to the old service and retrieve the data
@@ -339,15 +339,11 @@ namespace TestMVC4App.Models
                     newServiceDataWatch.Reset();
                 }
             }
-                //);
-
-                LogManager.Instance.StopWritingDetailedReports();
-
                 testingDurationWatch.Stop();
 
-                LogManager.Instance.WriteSummaryReport(testingDurationWatch.Elapsed, errorType, errorMessage);
+                LogManager.Instance.LogSummary(testingDurationWatch.Elapsed, errorType, errorMessage);
 
-                LogManager.Instance.CleanUpResources();
+                LogManager.Instance.Dispose();
         }
     }
 }

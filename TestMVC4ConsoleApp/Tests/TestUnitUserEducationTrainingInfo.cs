@@ -31,7 +31,7 @@ namespace TestMVC4App.Models
                 new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.degree,
                                                     EnumOldServiceFieldsAsKeys.institution,
                                                     EnumOldServiceFieldsAsKeys.gradYear});
-            // TODO: Location belongs in a dedicated test
+
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
             Dictionary<EnumOldServiceFieldsAsKeys, string> properties;

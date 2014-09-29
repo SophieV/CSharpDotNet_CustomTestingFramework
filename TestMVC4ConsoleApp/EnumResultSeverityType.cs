@@ -1,8 +1,7 @@
-﻿
-namespace TestMVC4App.Models
+﻿namespace TestMVC4App.Models
 {
     /// <summary>
-    /// Result state.
+    /// Defines the various Result States possible (SUCCESS, ERROR, WARNING and sub-categories).
     /// </summary>
     public enum EnumResultSeverityType
     {
