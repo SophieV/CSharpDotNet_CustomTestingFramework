@@ -50,10 +50,10 @@
 				<ul>
 					<# if(SharedDataObject.OldValues.Count() > 0) {
 					var potentialDuplicates = SharedDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-					foreach (string oldValue in SharedDataObject.OldValues) { #>
-					<li><# if(!string.IsNullOrEmpty(oldValue)) { #><#= oldValue #>
-					<# if(!SharedDataObject.NewValues.Contains(oldValue)) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
-					<# if(potentialDuplicates.Contains(oldValue)) { #><span class="duplicate">[DUPLICATE]</span><# } #>
+					foreach (StringDescriptor oldValue in SharedDataObject.OldValues) { #>
+					<li><# if(!string.IsNullOrEmpty(oldValue.Value)) { #><#= oldValue #>
+					<# if(!oldValue.HasBeenMatched) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
+					<# if(oldValue.Duplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
 				</ul>
@@ -62,18 +62,18 @@
 				<ul>
 					<# if(SharedDataObject.NewValues.Count > 0) {
 					var potentialDuplicates = SharedDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-					foreach (string newValue in SharedDataObject.NewValues) { #>
-					<li><# if(!string.IsNullOrEmpty(newValue)) { #>
-					<# string newValueToDisplay = newValue;
+					foreach (StringDescriptor newValue in SharedDataObject.NewValues) { #>
+					<li><# if(!string.IsNullOrEmpty(newValue.Value)) { #>
+					<# string newValueToDisplay = newValue.Value;
 					if(SharedDataObject.OldValues.Count <= 1 && SharedDataObject.NewValues.Count <= 1) {
 						string oldValue = string.Empty;
-						if(SharedDataObject.OldValues.Count > 0) { oldValue = SharedDataObject.OldValues.First(); if(oldValue == null) { oldValue = string.Empty; } }
-						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue);
+						if(SharedDataObject.OldValues.Count() > 0) { oldValue = SharedDataObject.OldValues.First().Value; if(oldValue == null) { oldValue = string.Empty; } }
+						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue.Value);
 						newValueToDisplay = diffHelper.Build();
 					} #>
 					<#= newValueToDisplay #>
-					<# if(!SharedDataObject.OldValues.Contains(newValue)) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
-					<# if(potentialDuplicates.Contains(newValue)) { #><span class="duplicate">[DUPLICATE]</span><# } #>
+					<# if(!newValue.HasBeenMatched) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
+					<# if(newValue.Duplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
 				</ul>

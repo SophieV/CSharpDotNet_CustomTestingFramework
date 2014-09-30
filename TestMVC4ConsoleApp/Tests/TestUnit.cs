@@ -200,12 +200,30 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, bool stringPartialMatch = false)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<Dictionary<EnumOldServiceFieldsAsKeys, string>,Dictionary<EnumOldServiceFieldsAsKeys, string>> oldAndNewValues)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyContextSwitcher(newAndOldValues,resultReport,stringPartialMatch);
+            var compareStrategy = new CompareStrategyContextSwitcher(oldAndNewValues, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
+
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
+                                              resultReport);
+        }
+
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
+            var compareStrategy = new CompareStrategyContextSwitcher(newAndOldValues,resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();

@@ -184,7 +184,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\t\t\t\t\t\t<li>");
             
             #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(!string.IsNullOrEmpty(oldValuePair.Value)) { 
+ if(!string.IsNullOrEmpty(oldValuePair.Value.Value)) { 
             
             #line default
             #line hidden
@@ -241,7 +241,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\t\t\t\t\t\t<li>");
             
             #line 66 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(!string.IsNullOrEmpty(newValuePair.Value)) { 
+ if(!string.IsNullOrEmpty(newValuePair.Value.Value)) { 
             
             #line default
             #line hidden

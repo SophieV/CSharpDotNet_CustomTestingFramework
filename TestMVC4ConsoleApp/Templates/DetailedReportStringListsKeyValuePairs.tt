@@ -51,7 +51,7 @@
 				foreach (var oldValueStructure in SharedDataObject.OldStructureValues) { #>
 				<ul>
 					<# foreach (var oldValuePair in oldValueStructure) { #>
-						<li><# if(!string.IsNullOrEmpty(oldValuePair.Value)) { #>
+						<li><# if(!string.IsNullOrEmpty(oldValuePair.Value.Value)) { #>
 						<#= oldValuePair.Value #>
 						<# } else { #>NULL<# } #></li>
 					<# } #>
@@ -63,7 +63,7 @@
 				foreach (var newValueStructure in SharedDataObject.NewStructureValues) { #>
 				<ul>
 					<# foreach (var newValuePair in newValueStructure) { #>
-						<li><# if(!string.IsNullOrEmpty(newValuePair.Value)) { #>
+						<li><# if(!string.IsNullOrEmpty(newValuePair.Value.Value)) { #>
 						<#= newValuePair.Value #>
 						<# } else { #>NULL<# } #></li>
 					<# } #>

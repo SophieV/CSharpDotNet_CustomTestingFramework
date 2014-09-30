@@ -7,47 +7,93 @@ namespace TestMVC4App.Models
 {
     public class CompareStrategyContextSwitcher
     {
-        private CompareStrategy compareStrategy;
+        // compare a bunch of data that belongs together - an entity
+        private HashSet<CompareStrategy> compareStrategies;
 
+        /// <summary>
+        /// Compare values.
+        /// </summary>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        /// <param name="resultReport"></param>
+        public CompareStrategyContextSwitcher(string oldValue, string newValue, ResultReport resultReport)
+        {
+            compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(oldValue), StringDescriptor.EmbedInDescriptors(newValue), resultReport));
+        }
+
+        /// <summary>
+        /// Compare list of values.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
+        /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
         {
-            if (oldValues.Count() <= 1 && newValues.Count() <= 1)
+            compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(oldValues),StringDescriptor.EmbedInDescriptors(newValues),resultReport));
+        }
+
+        /// <summary>
+        /// Compare list of values. Each value is mapped to a specific key.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
+        /// <param name="resultReport"></param>
+        public CompareStrategyContextSwitcher(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
+        {
+            compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(oldValues), StringDescriptor.EmbedInDescriptors(newValues), resultReport));
+        }
+
+        /// <summary>
+        /// Compare lists of values. They are organized in slices.
+        /// </summary>
+        /// <param name="oldAndNewValues"></param>
+        /// <param name="resultReport"></param>
+        /// <param name="stringPartialMatch"></param>
+        public CompareStrategyContextSwitcher(Dictionary<HashSet<string>, HashSet<string>> oldAndNewValues, ResultReport resultReport)
+        {
+            foreach(var slice in oldAndNewValues)
             {
-                compareStrategy = new CompareStrategyString(oldValues, newValues,resultReport);
-            } 
-            else
-            {
-                compareStrategy = new CompareStrategyStringCollection(oldValues,newValues,resultReport);
+                compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value), resultReport));
             }
         }
 
-        public CompareStrategyContextSwitcher(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
+        /// <summary>
+        /// Compare lists of values. They are organized in slices. And each value is mapped to a specific key.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
+        /// <param name="resultReport"></param>
+        public CompareStrategyContextSwitcher(Dictionary<Dictionary<EnumOldServiceFieldsAsKeys, string>,Dictionary<EnumOldServiceFieldsAsKeys, string>> oldAndNewValues, ResultReport resultReport)
         {
-            compareStrategy = new CompareStrategyStructureWithKeys(oldValues, newValues, resultReport);
+            foreach (var slice in oldAndNewValues)
+            {
+                compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value),resultReport));
+            }
         }
 
-        public CompareStrategyContextSwitcher(string oldValue, string newValue, ResultReport resultReport)
-        {
-            compareStrategy = new CompareStrategyString(oldValue, newValue, resultReport);
-        }
-
-        public CompareStrategyContextSwitcher(HashSet<OrganizationTreeDescriptor> listOldIdsAndNames, OrganizationTreeDescriptor oldTreeRoot, 
-                                           HashSet<OrganizationTreeDescriptor> listNewIdsAndNames, OrganizationTreeDescriptor newTreeRoot, 
+        /// <summary>
+        /// Compare Trees of Organizations.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="oldTreeRoot"></param>
+        /// <param name="newValues"></param>
+        /// <param name="newTreeRoot"></param>
+        /// <param name="resultReport"></param>
+        public CompareStrategyContextSwitcher(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
+                                           HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot, 
                                            ResultReport resultReport)
         {
-            compareStrategy = new CompareStrategyOrganization(listOldIdsAndNames,oldTreeRoot,listNewIdsAndNames,newTreeRoot,resultReport);
-        }
-
-        public CompareStrategyContextSwitcher(Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, ResultReport resultReport, bool stringPartialMatch = false)
-        {
-            compareStrategy = new CompareStrategyStringDictionary_PartialOrFull(newAndOldValues, resultReport, stringPartialMatch);
+            compareStrategies.Add(new CompareStrategyOrganizationList(oldValues,oldTreeRoot,newValues,newTreeRoot,resultReport));
         }
 
         public void Investigate()
         {
-            if (compareStrategy != null)
+            if (compareStrategies != null && compareStrategies.Count() > 0)
             {
-                this.compareStrategy.Investigate();
+                foreach (var compareStrategy in compareStrategies)
+                {
+                    compareStrategy.Investigate();
+                }
             }
         }
     }

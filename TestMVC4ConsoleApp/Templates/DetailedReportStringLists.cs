@@ -171,14 +171,14 @@ namespace TestMVC4ConsoleApp.Templates
             #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  if(SharedDataObject.OldValues.Count() > 0) {
 					var potentialDuplicates = SharedDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-					foreach (string oldValue in SharedDataObject.OldValues) { 
+					foreach (StringDescriptor oldValue in SharedDataObject.OldValues) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t<li>");
             
             #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(!string.IsNullOrEmpty(oldValue)) { 
+ if(!string.IsNullOrEmpty(oldValue.Value)) { 
             
             #line default
             #line hidden
@@ -191,7 +191,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\r\n\t\t\t\t\t");
             
             #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(!SharedDataObject.NewValues.Contains(oldValue)) { 
+ if(!oldValue.HasBeenMatched) { 
             
             #line default
             #line hidden
@@ -205,7 +205,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\t\t\t\t\t");
             
             #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(potentialDuplicates.Contains(oldValue)) { 
+ if(oldValue.Duplicate) { 
             
             #line default
             #line hidden
@@ -242,25 +242,25 @@ namespace TestMVC4ConsoleApp.Templates
             #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  if(SharedDataObject.NewValues.Count > 0) {
 					var potentialDuplicates = SharedDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-					foreach (string newValue in SharedDataObject.NewValues) { 
+					foreach (StringDescriptor newValue in SharedDataObject.NewValues) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t<li>");
             
             #line 66 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(!string.IsNullOrEmpty(newValue)) { 
+ if(!string.IsNullOrEmpty(newValue.Value)) { 
             
             #line default
             #line hidden
             this.Write("\t\t\t\t\t");
             
             #line 67 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- string newValueToDisplay = newValue;
+ string newValueToDisplay = newValue.Value;
 					if(SharedDataObject.OldValues.Count <= 1 && SharedDataObject.NewValues.Count <= 1) {
 						string oldValue = string.Empty;
-						if(SharedDataObject.OldValues.Count > 0) { oldValue = SharedDataObject.OldValues.First(); if(oldValue == null) { oldValue = string.Empty; } }
-						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue);
+						if(SharedDataObject.OldValues.Count() > 0) { oldValue = SharedDataObject.OldValues.First().Value; if(oldValue == null) { oldValue = string.Empty; } }
+						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue.Value);
 						newValueToDisplay = diffHelper.Build();
 					} 
             
@@ -276,7 +276,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\r\n\t\t\t\t\t");
             
             #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(!SharedDataObject.OldValues.Contains(newValue)) { 
+ if(!newValue.HasBeenMatched) { 
             
             #line default
             #line hidden
@@ -290,7 +290,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\t\t\t\t\t");
             
             #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(potentialDuplicates.Contains(newValue)) { 
+ if(newValue.Duplicate) { 
             
             #line default
             #line hidden

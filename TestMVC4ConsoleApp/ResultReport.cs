@@ -123,6 +123,21 @@ namespace TestMVC4App.Models
             this.DisplayFormat = EnumResultDisplayFormat.StructureOfValues;
         }
 
+        public void AppendDetailedValues(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> oldValues, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> newValues)
+        {
+            if (oldValues != null)
+            {
+                this.OldStructureValues.Add(oldValues);
+            }
+
+            if (newValues != null)
+            {
+                this.NewStructureValues.Add(newValues);
+            }
+
+            this.DisplayFormat = EnumResultDisplayFormat.StructureOfValues;
+        }
+
         public void UpdateSeverity(EnumResultSeverityType newSeverityStateReturned)
         {
             if (newSeverityStateReturned == EnumResultSeverityType.WARNING)

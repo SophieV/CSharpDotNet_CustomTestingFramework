@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TestMVC4App.Models
 {
-    public class ComparerStructureWithKeys : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys,string>>
+    public class ComparerStringWithKey : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>>
     {
-        bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, string>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, string> x, Dictionary<EnumOldServiceFieldsAsKeys, string> y)
+        bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
             bool areEqual = true;
             foreach (var key in x.Keys)
@@ -16,17 +16,21 @@ namespace TestMVC4App.Models
                 {
                     if (x.ContainsKey(key) && y.ContainsKey(key))
                     {
-                        if (string.IsNullOrEmpty(x[key]) && string.IsNullOrEmpty(y[key]))
+                        if (string.IsNullOrEmpty(x[key].Value) && string.IsNullOrEmpty(y[key].Value))
                         {
                             areEqual = true;
+                            x[key].HasBeenMatched = true;
+                            y[key].HasBeenMatched = true;
                         }
-                        else if (string.IsNullOrEmpty(x[key]) || string.IsNullOrEmpty(y[key]))
+                        else if (string.IsNullOrEmpty(x[key].Value) || string.IsNullOrEmpty(y[key].Value))
                         {
                             areEqual = false;
                         }
-                        else if (x[key] == y[key])
+                        else if (x[key].Value == y[key].Value)
                         {
                             areEqual = true;
+                            x[key].HasBeenMatched = true;
+                            y[key].HasBeenMatched = true;
                         }
                         else
                         {
@@ -43,7 +47,7 @@ namespace TestMVC4App.Models
             return areEqual;
         }
 
-        int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, string>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, string> obj)
+        int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> obj)
         {
             return obj.Values.ToString().ToLower().GetHashCode();
         }

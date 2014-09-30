@@ -35,12 +35,42 @@ namespace TestMVC4App.Models
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static HashSet<StringDescriptor> EmbedInDescriptors(HashSet<string> values)
+        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(HashSet<string> values)
         {
-            HashSet<StringDescriptor> embeddedValues = new HashSet<StringDescriptor>();
+            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
             foreach(string value in values)
             {
-                embeddedValues.Add(new StringDescriptor(value));
+                embeddedValues.Add(EnumOldServiceFieldsAsKeys.GENERIC_KEY, new StringDescriptor(value));
+            }
+            return embeddedValues;
+        }
+
+        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> values)
+        {
+            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+            foreach (var element in values)
+            {
+                foreach (var value in element)
+                {
+                    embeddedValues.Add(value.Key, new StringDescriptor(value.Value));
+                }
+            }
+            return embeddedValues;
+        }
+
+        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(string value)
+        {
+            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+            embeddedValues.Add(EnumOldServiceFieldsAsKeys.GENERIC_KEY, new StringDescriptor(value));
+            return embeddedValues;
+        }
+
+        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(Dictionary<EnumOldServiceFieldsAsKeys, string> values)
+        {
+            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+            foreach (var value in values)
+            {
+                embeddedValues.Add(value.Key, new StringDescriptor(value.Value));
             }
             return embeddedValues;
         }

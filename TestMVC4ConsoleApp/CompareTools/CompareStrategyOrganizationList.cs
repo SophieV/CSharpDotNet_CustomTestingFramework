@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace TestMVC4App.Models
 {
-    public class CompareStrategyOrganization : CompareStrategy
+    public class CompareStrategyOrganizationList : CompareStrategy
     {
         private List<OrganizationTreeDescriptor> oldList;
         private List<OrganizationTreeDescriptor> newList;
         private int leftOversOldCount = -1;
 
-        public CompareStrategyOrganization(HashSet<OrganizationTreeDescriptor> listOldIdsAndNames, OrganizationTreeDescriptor oldTreeRoot, 
+        public CompareStrategyOrganizationList(HashSet<OrganizationTreeDescriptor> listOldIdsAndNames, OrganizationTreeDescriptor oldTreeRoot, 
                                            HashSet<OrganizationTreeDescriptor> listNewIdsAndNames, OrganizationTreeDescriptor newTreeRoot, 
                                            ResultReport resultReport)
             : base(listOldIdsAndNames, oldTreeRoot,listNewIdsAndNames, newTreeRoot,resultReport)
@@ -70,7 +70,7 @@ namespace TestMVC4App.Models
                 }
 
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
             }
 
             return shouldContinueTesting;
@@ -82,12 +82,12 @@ namespace TestMVC4App.Models
 
             if (this.oldList.Count() <= 0 && this.newList.Count <= 0)
             {
-                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
             }
             else
             {
-                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
             }
 
             return shouldContinueTesting;
@@ -105,7 +105,7 @@ namespace TestMVC4App.Models
 
             if (this.leftOversOldCount == 0 && leftOversNewCount == 0)
             {
-                this.resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
             }
             else
@@ -121,7 +121,7 @@ namespace TestMVC4App.Models
                 }
 
 
-                this.resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR);
                 this.resultReport.ErrorMessage = "The lists of ids and names compared are not equal";
             }
 
@@ -160,13 +160,12 @@ namespace TestMVC4App.Models
                     }
                 }
 
-                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_MISSING_IDS);
 
                 if (leftOvers.Count() == 0)
                 {
-                    this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
                     shouldContinueTesting = false;
                 }
             }
@@ -204,13 +203,12 @@ namespace TestMVC4App.Models
                     }
                 }
 
-                this.resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MISMATCH_DUE_TO_TRAILING_WHITE_SPACES);
 
                 if (leftOvers.Count() == 0)
                 {
-                    this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
                     shouldContinueTesting = false;
                 }
             }
@@ -224,8 +222,7 @@ namespace TestMVC4App.Models
 
             if (this.leftOversOldCount > -1 && this.leftOversOldCount < 1)
             {
-                this.resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
-                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
             }
 
             return shouldContinueTesting;

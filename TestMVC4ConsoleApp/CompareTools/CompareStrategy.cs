@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestMVC4App.Models
 {
@@ -7,10 +8,10 @@ namespace TestMVC4App.Models
     {
         protected ResultReport resultReport;
 
-        public CompareStrategy(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
+        public CompareStrategy(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> oldValues, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> newValues, ResultReport resultReport)
         {
             this.resultReport = resultReport;
-            this.resultReport.AddDetailedValues(oldValues, newValues);
+            this.resultReport.AppendDetailedValues(oldValues,newValues);
         }
 
         public CompareStrategy(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
@@ -19,12 +20,6 @@ namespace TestMVC4App.Models
         {
             this.resultReport = resultReport;
             this.resultReport.AddDetailedValues(oldValues, oldTreeRoot, newValues, newTreeRoot);
-        }
-
-        public CompareStrategy(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> newValues, ResultReport resultReport)
-        {
-            this.resultReport = resultReport;
-            this.resultReport.AddDetailedValues(oldValues, newValues);
         }
 
         public abstract void Investigate();

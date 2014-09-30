@@ -54,19 +54,19 @@ namespace TestMVC4App.Templates
         /// </summary>
         public HashSet<string> IdentifiedDataBehaviors { get; private set; }
 
-        public HashSet<string> OldValues { get; private set; }
+        public HashSet<StringDescriptor> OldValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> OldStructureValues { get; private set; }
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> OldStructureValues { get; private set; }
 
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
-        public HashSet<string> NewValues { get; private set; }
+        public HashSet<StringDescriptor> NewValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> NewStructureValues { get; private set; }
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> NewStructureValues { get; private set; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 

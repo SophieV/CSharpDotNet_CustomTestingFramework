@@ -75,11 +75,6 @@
     <Compile Include="CompareTools\ComparerOrganizationIdAndName.cs" />
     <Compile Include="CompareTools\ComparerOrganizationIdAndTrimmedName.cs" />
     <Compile Include="CompareTools\ComparerOrganizationIdOrName.cs" />
-    <Compile Include="CompareTools\ComparerString.cs" />
-    <Compile Include="CompareTools\ComparerStringNotCaseSensitive.cs" />
-    <Compile Include="CompareTools\ComparerStringPartial.cs" />
-    <Compile Include="CompareTools\ComparerStringShifted.cs" />
-    <Compile Include="CompareTools\ComparerStringTrimmed.cs" />
     <Compile Include="CompareTools\ComparerStringWithKey.cs" />
     <Compile Include="CompareTools\ComparerStringWithKeyNotCaseSensitive.cs" />
     <Compile Include="CompareTools\ComparerStringWithKeyPartial.cs" />
@@ -87,9 +82,7 @@
     <Compile Include="CompareTools\CompareStrategy.cs" />
     <Compile Include="CompareTools\CompareStrategyContextSwitcher.cs" />
     <Compile Include="CompareTools\CompareStrategyOrganizationList.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringList.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringMatchingLists.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringListsKeyValuePairs.cs" />
+    <Compile Include="CompareTools\CompareStrategyStringInStructure.cs" />
     <Compile Include="CompareTools\ComparerStringWithKeyShifted.cs" />
     <Compile Include="DatabaseFacade.cs" />
     <Compile Include="EnumIdentifiedDataBehavior.cs" />
