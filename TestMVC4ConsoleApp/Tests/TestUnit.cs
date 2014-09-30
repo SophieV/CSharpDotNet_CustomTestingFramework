@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Xml.Linq;
-using YSM.PMS.Web.Service.Clients;
 
 namespace TestMVC4App.Models
 {
@@ -32,7 +31,7 @@ namespace TestMVC4App.Models
 
         public HashSet<TestUnit> Children { get; set; }
 
-        public HashSet<ResultReport> DetailedResults { get; set; }
+        public Dictionary<EnumTestUnitNames,ResultReport> DetailedResults { get; set; }
 
         public EnumResultSeverityType OverallSeverity { get; private set; }
 
@@ -44,39 +43,42 @@ namespace TestMVC4App.Models
 
         protected IEnumerable<XElement> OldDataNodes { get; private set; }
 
+        /// <summary>
+        /// Defines the overall Result Severity by counting the occurences of Severity Types in the detailed Results.
+        /// </summary>
         public void ComputeOverallSeverity()
         {
             bool keepGoing = true;
 
-            var errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.ERROR).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            var errors = this.DetailedResults.Where(r => r.Value.Severity == EnumResultSeverityType.ERROR).GroupBy(results => results.Value.Severity).Select(x => new { Severity = x.Key, Count = x.Count() });
             if(keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
                 OverallSeverity = EnumResultSeverityType.ERROR;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.ERROR_WITH_EXPLANATION).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Value.Severity == EnumResultSeverityType.ERROR_WITH_EXPLANATION).GroupBy(results => results.Value.Severity).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
                 OverallSeverity = EnumResultSeverityType.ERROR_WITH_EXPLANATION;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.FALSE_POSITIVE).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Value.Severity == EnumResultSeverityType.FALSE_POSITIVE).GroupBy(results => results.Value.Severity).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
                 OverallSeverity = EnumResultSeverityType.FALSE_POSITIVE;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.WARNING).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Value.Severity == EnumResultSeverityType.WARNING).GroupBy(results => results.Value.Severity).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
                 OverallSeverity = EnumResultSeverityType.WARNING;
                 keepGoing = false;
             }
 
-            errors = this.DetailedResults.Where(r => r.Result == EnumResultSeverityType.SUCCESS).GroupBy(results => results.Result).Select(x => new { Severity = x.Key, Count = x.Count() });
+            errors = this.DetailedResults.Where(r => r.Value.Severity == EnumResultSeverityType.SUCCESS).GroupBy(results => results.Value.Severity).Select(x => new { Severity = x.Key, Count = x.Count() });
             if (keepGoing && errors.Count() > 0 && errors.First().Count > 0)
             {
                 OverallSeverity = EnumResultSeverityType.SUCCESS;
@@ -84,11 +86,14 @@ namespace TestMVC4App.Models
             }
         }
 
+        /// <summary>
+        /// Adds the children of children to this level so that results can be computed together.
+        /// </summary>
         public void ComputerOverallResults()
         {
             foreach (var child in Children)
             {
-                Array.ForEach(child.DetailedResults.ToArray(), x => this.DetailedResults.Add(x));
+                Array.ForEach(child.DetailedResults.ToArray(), x => this.DetailedResults.Add(x.Key,x.Value));
             }
         }
 
@@ -112,7 +117,7 @@ namespace TestMVC4App.Models
             this.Container = container;
             this.Parent = parent;
             this.Children = new HashSet<TestUnit>();
-            this.DetailedResults = new HashSet<ResultReport>();
+            this.DetailedResults = new Dictionary<EnumTestUnitNames,ResultReport>();
         }
 
         protected abstract void RunAllSingleTests();
@@ -166,7 +171,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -184,7 +189,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -202,7 +207,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -227,7 +232,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),

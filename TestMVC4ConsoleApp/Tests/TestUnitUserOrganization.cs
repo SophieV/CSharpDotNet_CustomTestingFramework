@@ -315,7 +315,7 @@ namespace TestMVC4App.Models
                                     matchingElement = potentialElement;
                                     matchingElement.WasOnlyOption = true;
                                     resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH);
-                                    resultReport.UpdateResult(EnumResultSeverityType.WARNING);
+                                    resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
                                 }
                             }
 
@@ -382,7 +382,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -431,17 +431,17 @@ namespace TestMVC4App.Models
                     // the new service may return more because it has enriched the old tree where some of the values may have been manually - ? - excluded
                     Assert.IsFalse(oldCount > newCount, "Comparing at depth index " + index);
 
-                    resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+                    resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                 }
                 catch (AssertFailedException e)
                 {
-                    resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                    resultReport.UpdateSeverity(EnumResultSeverityType.ERROR);
                     resultReport.ErrorMessage = e.Message;
                     resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH);
                     resultReport.AddDetailedValues(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
                     resultReport.TreeComparisonIndexError = index;
 
-                    if (resultReport.Result == EnumResultSeverityType.ERROR)
+                    if (resultReport.Severity == EnumResultSeverityType.ERROR)
                     {
                         keepGoing = false;
                     }
@@ -450,7 +450,7 @@ namespace TestMVC4App.Models
                 index++;
             }
 
-            if(resultReport.Result == EnumResultSeverityType.SUCCESS)
+            if(resultReport.Severity == EnumResultSeverityType.SUCCESS)
             {
                 resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_TREE_COUNT_CONSISTENT);
                 resultReport.AddDetailedValues(this.oldServiceOrganizationDescriptors, oldTreeRoot, this.newServiceOrganizationDescriptors, newTreeRoot);
@@ -459,7 +459,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -489,7 +489,7 @@ namespace TestMVC4App.Models
 
                 if (countMissingElements == 0)
                 {
-                    resultReport.UpdateResult(EnumResultSeverityType.SUCCESS);
+                    resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                 }
                 else
                 {
@@ -508,11 +508,11 @@ namespace TestMVC4App.Models
 
                     if (countMissingElements == 0)
                     {
-                        resultReport.UpdateResult(EnumResultSeverityType.FALSE_POSITIVE);
+                        resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
                     }
                     else
                     {
-                        resultReport.UpdateResult(EnumResultSeverityType.ERROR);
+                        resultReport.UpdateSeverity(EnumResultSeverityType.ERROR);
                     }
                 }
 
@@ -528,13 +528,13 @@ namespace TestMVC4App.Models
             }
             else
             {
-                resultReport.UpdateResult(EnumResultSeverityType.WARNING_NO_DATA);
+                resultReport.UpdateSeverity(EnumResultSeverityType.WARNING_NO_DATA);
             }
 
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),

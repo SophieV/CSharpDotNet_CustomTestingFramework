@@ -285,7 +285,7 @@ namespace TestMVC4App.Models
 
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -306,7 +306,7 @@ namespace TestMVC4App.Models
 
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -327,7 +327,7 @@ namespace TestMVC4App.Models
 
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -358,7 +358,7 @@ namespace TestMVC4App.Models
 
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -384,7 +384,7 @@ namespace TestMVC4App.Models
 
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -405,7 +405,7 @@ namespace TestMVC4App.Models
 
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),

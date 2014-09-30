@@ -40,7 +40,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.LastName, resultReport);
             compareStrategy.Investigate();
 
-            if(resultReport.Result != EnumResultSeverityType.SUCCESS)
+            if(resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -52,7 +52,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -69,7 +69,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.FirstName, resultReport);
             compareStrategy.Investigate();
 
-            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
+            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -81,7 +81,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -101,7 +101,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -118,7 +118,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.Suffix, resultReport);
             compareStrategy.Investigate();
 
-            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
+            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -130,7 +130,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
@@ -151,7 +151,7 @@ namespace TestMVC4App.Models
             var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
-            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
+            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
                 resultReport.ResetForReTesting();
 
@@ -163,7 +163,7 @@ namespace TestMVC4App.Models
             watch.Stop();
             resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport);
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
 
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),

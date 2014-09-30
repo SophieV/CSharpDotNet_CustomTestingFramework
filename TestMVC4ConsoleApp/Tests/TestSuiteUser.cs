@@ -296,7 +296,7 @@ namespace TestMVC4App.Models
                                 foreach (var test in allTheTests)
                                 {
                                     test.ComputerOverallResults();
-                                    allTheResults.UnionWith(test.DetailedResults);
+                                    allTheResults.UnionWith(test.DetailedResults.Values);
 
                                     // log only first occurence of error - enough to generate the warning
                                     if ((test.HttpErrorHappened || test.UnknownErrorHappened) && string.IsNullOrEmpty(errorMessage))

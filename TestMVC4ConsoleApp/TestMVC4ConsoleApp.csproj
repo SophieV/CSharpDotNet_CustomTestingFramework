@@ -79,11 +79,11 @@
     <Compile Include="CompareTools\ComparerStructureWithKeysTrimmed.cs" />
     <Compile Include="CompareTools\CompareStrategy.cs" />
     <Compile Include="CompareTools\CompareStrategyContextSwitcher.cs" />
-    <Compile Include="CompareTools\CompareStrategyOrganization.cs" />
+    <Compile Include="CompareTools\CompareStrategyOrganizationList.cs" />
     <Compile Include="CompareTools\CompareStrategyString.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringCollection.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringDictionary_PartialOrFull.cs" />
-    <Compile Include="CompareTools\CompareStrategyStructureWithKeys.cs" />
+    <Compile Include="CompareTools\CompareStrategyStringList.cs" />
+    <Compile Include="CompareTools\CompareStrategyStringLists.cs" />
+    <Compile Include="CompareTools\CompareStrategyStringListsKeyValuePairs.cs" />
     <Compile Include="DatabaseFacade.cs" />
     <Compile Include="EnumIdentifiedDataBehavior.cs" />
     <Compile Include="EnumOldServiceFieldsAsKeys.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultReport.cs" />
+    <Compile Include="StringDescriptor.cs" />
     <Compile Include="Templates\ProfileReport.cs">
       <DependentUpon>ProfileReport.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -112,37 +113,37 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\SharedDetailedReportData.cs" />
-    <Compile Include="Templates\SharedHeaderProfileReportData.cs" />
-    <Compile Include="Templates\SharedProfileReportData.cs" />
-    <Compile Include="Templates\SharedSummaryReportData.cs" />
+    <Compile Include="Templates\DetailedReportSharedData.cs" />
+    <Compile Include="Templates\ProfileReportSharedHeaderData.cs" />
+    <Compile Include="Templates\ProfileReportSharedData.cs" />
+    <Compile Include="Templates\SummaryReportSharedData.cs" />
     <Compile Include="Templates\SummaryReport.cs">
       <DependentUpon>SummaryReport.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\TestNameDetailedReport_Footer.cs">
-      <DependentUpon>TestNameDetailedReport_Footer.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReport_Footer.cs">
+      <DependentUpon>DetailedReport_Footer.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\TestNameDetailedReport_Header.cs">
-      <DependentUpon>TestNameDetailedReport_Header.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReport_Header.cs">
+      <DependentUpon>DetailedReport_Header.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\TestNameDetailedReport_ListStructures.cs">
-      <DependentUpon>TestNameDetailedReport_ListStructures.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReportStringListsKeyValuePairs.cs">
+      <DependentUpon>DetailedReportStringListsKeyValuePairs.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\TestNameDetailedReport_ListValues.cs">
-      <DependentUpon>TestNameDetailedReport_ListValues.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReportStringLists.cs">
+      <DependentUpon>DetailedReportStringLists.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\TestNameDetailedReport_OrganizationTree.cs">
-      <DependentUpon>TestNameDetailedReport_OrganizationTree.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReportOrganizationTree.cs">
+      <DependentUpon>DetailedReportOrganizationTree.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -188,25 +189,25 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SummaryReport.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\TestNameDetailedReport_Footer.tt">
+    <Content Include="Templates\DetailedReport_Footer.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TestNameDetailedReport_Footer.cs</LastGenOutput>
+      <LastGenOutput>DetailedReport_Footer.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\TestNameDetailedReport_Header.tt">
+    <Content Include="Templates\DetailedReport_Header.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TestNameDetailedReport_Header.cs</LastGenOutput>
+      <LastGenOutput>DetailedReport_Header.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\TestNameDetailedReport_ListStructures.tt">
+    <Content Include="Templates\DetailedReportStringListsKeyValuePairs.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TestNameDetailedReport_ListStructures.cs</LastGenOutput>
+      <LastGenOutput>DetailedReportStringListsKeyValuePairs.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\TestNameDetailedReport_ListValues.tt">
+    <Content Include="Templates\DetailedReportStringLists.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TestNameDetailedReport_ListValues.cs</LastGenOutput>
+      <LastGenOutput>DetailedReportStringLists.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\TestNameDetailedReport_OrganizationTree.tt">
+    <Content Include="Templates\DetailedReportOrganizationTree.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TestNameDetailedReport_OrganizationTree.cs</LastGenOutput>
+      <LastGenOutput>DetailedReportOrganizationTree.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
