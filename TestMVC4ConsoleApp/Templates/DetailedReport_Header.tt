@@ -1,12 +1,12 @@
 ﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="TestMVC4App.Models" #>
-<#@ parameter 
-	name="SharedDataObject" 
-	type="TestMVC4App.Templates.ProfileReportSharedHeaderData" #>
 <html>
 <head>
 <style>
+.diffins, .diffmod { background-color: yellow; }
 .table_main {border:solid 2px darkgrey;border-collapse:collapse;}
 .th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
 .td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
@@ -19,15 +19,17 @@
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
-.no_underline{text-decoration: none;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
+<script type="text/javascript" src="tablefilter.js"></script>
 </head>
 <body>
-<table class="table_main">
+<table id="individual_test_results" class="table_main">
 <tr>
-<td class="th_main">Duration</td>
-<td class="th_main">UPI</td>
-<# foreach(var testName in SharedDataObject.AllTestNames) { #>
-<td class="th_main"><#= testName #></td>
-<# } #>
+<td class="th_main">Test Name</td>
+<td class="th_main">Status</td>
+<td class="th_main">User</td>
+<td class="th_main">Result</td>
+<td class="th_main">Additional Info</td>
 </tr>
+

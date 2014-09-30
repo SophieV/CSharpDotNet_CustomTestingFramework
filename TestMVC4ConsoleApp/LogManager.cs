@@ -116,9 +116,9 @@ namespace TestMVC4App.Models
         {
             UpdateStatistics(resultReport);
 
-            if (TestSuiteUser.IsDebugMode || (resultReport.Result != EnumResultSeverityType.SUCCESS && resultReport.Result != EnumResultSeverityType.WARNING_NO_DATA))
+            if (TestSuiteUser.IsDebugMode || (resultReport.Severity != EnumResultSeverityType.SUCCESS && resultReport.Severity != EnumResultSeverityType.WARNING_NO_DATA))
             {
-                var detailedReportData = new SharedDetailedReportData(resultReport)
+                var detailedReportData = new DetailedReportSharedData(resultReport)
                 {
                     OldUrl = oldUrl,
                     NewUrl = newServiceUrl
@@ -142,15 +142,15 @@ namespace TestMVC4App.Models
             {
                 durationByProfile.Add(profileProcessingDuration);
 
-                var resultByTestName = allTheResults.Select(x => new { x.TestName, x.Result }).OrderBy(z => z.TestName).ToDictionary(x => x.TestName, x => x.Result);
-                var summaryProfileData = new SharedProfileReportData()
+                var severityByTestName = allTheResults.Select(x => new { x.TestName, x.Severity }).OrderBy(z => z.TestName).ToDictionary(x => x.TestName, x => x.Severity);
+                var summaryProfileData = new ProfileReportSharedData()
                 {
                     UPI = upi,
-                    ResultSeverity_ByTestName = resultByTestName,
-                    FileLinkEnd = "_" + countFilesGenerated + HTM_EXTENSION,
-                    ProfileProcessingDuration = profileProcessingDuration,
-                     OldServiceDuration = oldDataRQDuration,
-                     NewServiceDuration = newDataRQDuration
+                    SeverityByTestName = severityByTestName,
+                    LinkEnd2TestNameFile = "_" + countFilesGenerated + HTM_EXTENSION,
+                    DurationTestingProfile = profileProcessingDuration,
+                     DurationDownloadingDataFromOldService = oldDataRQDuration,
+                     DurationDownloadingDataFromNewService = newDataRQDuration
                 };
 
                 WriteProfileEntry(summaryProfileData);
@@ -170,7 +170,7 @@ namespace TestMVC4App.Models
                 NoWarningNorErrorHappenedFlag_ByUpi.Add(resultReport.Upi, false);
             }
 
-            if (resultReport.Result != EnumResultSeverityType.SUCCESS)
+            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
                 NoWarningNorErrorHappenedFlag_ByUpi[resultReport.Upi] = true;
             }
@@ -187,7 +187,7 @@ namespace TestMVC4App.Models
             }
 
             // increase call counter
-            countSeverityTypeOccurences[resultReport.TestName][resultReport.Result]++;
+            countSeverityTypeOccurences[resultReport.TestName][resultReport.Severity]++;
 
             if (!countDataBehaviorOccurences.ContainsKey(resultReport.TestName))
             {
@@ -209,7 +209,7 @@ namespace TestMVC4App.Models
             durations[resultReport.TestName].Add(resultReport.Duration);
         }
 
-        private SharedSummaryReportData ComputeSummaryStatistics(TimeSpan duration, string errorHappened, string errorMessage)
+        private SummaryReportSharedData ComputeSummaryStatistics(TimeSpan duration, string errorHappened, string errorMessage)
         {
             int countTroubleFreeUpis = 0;
             TimeSpan averageDurationPerUpi = TimeSpan.Zero;
@@ -272,6 +272,8 @@ namespace TestMVC4App.Models
                         countByDataBehavior[countDataBehaviorPair.Key] += countDataBehaviorPair.Value;
                     }
 
+                    countDataBehaviorOccurences[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
                     averageDuration_ByTestName.Add(testName, TimeSpan.FromMilliseconds(durations[testName].Average(t => t.TotalMilliseconds) / this.StatsCountTotalUpis));
 
                 }
@@ -279,26 +281,26 @@ namespace TestMVC4App.Models
                 averageDurationPerUpi = TimeSpan.FromMilliseconds(durationByProfile.Average(t => t.TotalMilliseconds) / this.StatsCountTotalUpis);
             }
 
-            var summaryReportData = new SharedSummaryReportData
+            var summaryReportData = new SummaryReportSharedData
             {
                 CountProfilesTested = StatsCountTotalUpis,
                 CountProfilesWithoutWarnings = countTroubleFreeUpis,
                 CountBySeverity = countSeverityResults.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
                 CountByIdentifiedDataBehavior = countByDataBehavior.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
-                TestNames = countSeverityTypeOccurences.Keys.ToList(),
-                CountBySeverity_ByTestName = countSeverityTypeOccurences,
-                CountByIdentifiedDataBehavior_ByTestName = countDataBehaviorOccurences,
+                AllTestNames = countSeverityTypeOccurences.Keys.ToList(),
+                CountSeverityByTestName = countSeverityTypeOccurences,
+                CountIdentifiedDataBehaviorByTestName = countDataBehaviorOccurences,
                 CountTestsRun = StatsCountTotalUpis * countSeverityResults.Keys.Count(),
                 CountTestsPerUser = countSeverityResults.Keys.Count(),
-                FrequencySuccess_ByTestName = frequencySuccess_ByTestName,
-                SampleData_ByTestName = sampleDataByTestName,
+                FrequencySuccessByTestName = frequencySuccess_ByTestName,
+                SampleDataByTestName = sampleDataByTestName,
                 Duration = duration,
-                FileLinkEnd = "_" + countFilesGenerated + HTM_EXTENSION,
+                LinkEnd2TestNameFile = "_" + countFilesGenerated + HTM_EXTENSION,
                 AverageDurationPerProfile = averageDurationPerUpi,
-                AverageDuration_ByTestName = averageDuration_ByTestName,
+                AverageDurationByTestName = averageDuration_ByTestName,
                 ErrorHappened = errorHappened,
                 ErrorMessage = errorMessage,
-                FileByProfileLink = SUMMARY_BY_PROFILE_FILENAME,
+                Link2ProfileFile = SUMMARY_BY_PROFILE_FILENAME,
                 CountProfilesIgnored = this.StatsCountProfilesIgnored
             };
             return summaryReportData;
@@ -313,8 +315,6 @@ namespace TestMVC4App.Models
         {
             try
             {
-                string filePath;
-
                 StopWritingReports();
 
                 detailedReportsWriters = new Dictionary<EnumTestUnitNames, HtmlTextWriter>();
@@ -322,21 +322,17 @@ namespace TestMVC4App.Models
 
                 foreach (EnumTestUnitNames testName in AllTestNames)
                 {
-                    filePath = testName + "_" + countFilesGenerated + HTM_EXTENSION;
-                    detailedReportsWriters.Add(testName, new HtmlTextWriter(new StreamWriter(filePath)));
+                    detailedReportsWriters.Add(testName, new HtmlTextWriter(new StreamWriter(testName + "_" + countFilesGenerated + HTM_EXTENSION)));
                 }
-
-                TestNameDetailedReport_Header headerTemplate = null;
 
                 foreach (HtmlTextWriter htmlWriter in detailedReportsWriters.Values)
                 {
                     // if the header template is created out of the loop, its content duplicates itself...
-                    headerTemplate = new TestNameDetailedReport_Header();
+                    var headerTemplate = new DetailedReport_Header();
                     htmlWriter.WriteLine(headerTemplate.TransformText());
                 }
 
-                filePath = SUMMARY_BY_PROFILE_FILENAME;
-                profileReportWriter = new HtmlTextWriter(new StreamWriter(filePath));
+                profileReportWriter = new HtmlTextWriter(new StreamWriter(SUMMARY_BY_PROFILE_FILENAME));
             }
             catch (IOException ioe)
             {
@@ -351,12 +347,12 @@ namespace TestMVC4App.Models
         {
             try
             {
-                var sharedHeaderProfileData = new SharedHeaderProfileReportData() { AllTestNames = AllTestNames };
+                var templateData = new ProfileReportSharedHeaderData() { AllTestNames = AllTestNames };
 
                 var headerProfileTemplate = new ProfileReport_Header();
                 headerProfileTemplate.Session = new Dictionary<string, object>()
                     {
-                        { "ProfileHeaderReportDataObject", sharedHeaderProfileData }
+                        { "SharedDataObject", templateData }
                     };
 
                 headerProfileTemplate.Initialize();
@@ -379,12 +375,12 @@ namespace TestMVC4App.Models
                 if (detailedReportsWriters.Count > 0)
                 {
                     // finish the HTML syntax and cleanup resource
-                    TestNameDetailedReport_Footer jsTemplate = null;
+                    DetailedReport_Footer jsTemplate = null;
 
                     foreach (HtmlTextWriter htmlTestWriter in detailedReportsWriters.Values)
                     {
                         // if the template is created out of the loop, its content duplicates itself...
-                        jsTemplate = new TestNameDetailedReport_Footer();
+                        jsTemplate = new DetailedReport_Footer();
                         htmlTestWriter.WriteLine(jsTemplate.TransformText());
                         htmlTestWriter.Close();
                     }
@@ -412,14 +408,14 @@ namespace TestMVC4App.Models
         /// <param name="duration"></param>
         /// <param name="errorHappened"></param>
         /// <param name="errorMessage"></param>
-        private static void WriteSummaryReport(SharedSummaryReportData templateData)
+        private static void WriteSummaryReport(SummaryReportSharedData templateData)
         {
             var htmlWriterForSummaryReport = new HtmlTextWriter(new StreamWriter(SUMMARY_FILENAME));
 
             var template = new SummaryReport();
             template.Session = new Dictionary<string, object>()
                     {
-                        { "SummaryReportDataObject", templateData }
+                        { "SharedDataObject", templateData }
                     };
 
             template.Initialize();
@@ -435,17 +431,17 @@ namespace TestMVC4App.Models
         /// </summary>
         /// <param name="templateData"></param>
         /// <param name="displayFormat"></param>
-        private static void WriteDetailedEntry(SharedDetailedReportData templateData, EnumResultDisplayFormat displayFormat)
+        private static void WriteDetailedEntry(DetailedReportSharedData templateData, EnumResultDisplayFormat displayFormat)
         {
             lock (lockLogResult)
             {
                 switch (displayFormat)
                 {
                     case EnumResultDisplayFormat.ListOfValues:
-                        var templateListValues = new TestNameDetailedReport_ListValues();
+                        var templateListValues = new DetailedReportStringLists();
                         templateListValues.Session = new Dictionary<string, object>()
                         {
-                            { "DetailedReportDataObject", templateData }
+                            { "SharedDataObject", templateData }
                         };
 
                         templateListValues.Initialize();
@@ -459,10 +455,10 @@ namespace TestMVC4App.Models
                         }
                         break;
                     case EnumResultDisplayFormat.OrganizationTree:
-                        var templateOrgTree = new TestNameDetailedReport_OrganizationTree();
+                        var templateOrgTree = new DetailedReportOrganizationTree();
                         templateOrgTree.Session = new Dictionary<string, object>()
                         {
-                            { "DetailedReportDataObject", templateData }
+                            { "SharedDataObject", templateData }
                         };
 
                         templateOrgTree.Initialize();
@@ -476,10 +472,10 @@ namespace TestMVC4App.Models
                         }
                         break;
                     case EnumResultDisplayFormat.StructureOfValues:
-                        var templateListStructures = new TestNameDetailedReport_ListStructures();
+                        var templateListStructures = new DetailedReportStringListsKeyValuePairs();
                         templateListStructures.Session = new Dictionary<string, object>()
                         {
-                            { "DetailedReportDataObject", templateData }
+                            { "SharedDataObject", templateData }
                         };
 
                         templateListStructures.Initialize();
@@ -496,12 +492,12 @@ namespace TestMVC4App.Models
             }
         }
 
-        private static void WriteProfileEntry(SharedProfileReportData summaryProfileData)
+        private static void WriteProfileEntry(ProfileReportSharedData templateData)
         {
             var template = new ProfileReport();
             template.Session = new Dictionary<string, object>()
             {
-                { "ProfileReportDataObject", summaryProfileData }
+                { "SharedDataObject", templateData }
             };
 
             template.Initialize();

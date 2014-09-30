@@ -4,8 +4,8 @@
 <#@ import namespace="System.Globalization" #>
 <#@ import namespace="TestMVC4App.Models" #>
 <#@ parameter 
-	name="SummaryReportDataObject" 
-	type="TestMVC4App.Templates.SharedSummaryReportData" #>
+	name="SharedDataObject" 
+	type="TestMVC4App.Templates.SummaryReportSharedData" #>
 <html>
 <head>
 <style>
@@ -26,21 +26,21 @@
 	<h1 id="top" class="title">Summary Report</h1>
 	<hr/>
 
-	<# if(!string.IsNullOrEmpty(SummaryReportDataObject.ErrorHappened)) { 
+	<# if(!string.IsNullOrEmpty(SharedDataObject.ErrorHappened)) { 
 	string message = "UNKNOWN ERROR(S) MAY MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !";
-	if (SummaryReportDataObject.ErrorHappened == "HTTP") { message = "PROBLEMS CONNECTING TO DATA SERVICES MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !"; } #>
-	 <p class="error_data"><#= message #><br/><#= SummaryReportDataObject.ErrorMessage #></p>
+	if (SharedDataObject.ErrorHappened == "HTTP") { message = "PROBLEMS CONNECTING TO DATA SERVICES MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !"; } #>
+	 <p class="error_data"><#= message #><br/><#= SharedDataObject.ErrorMessage #></p>
 	 <hr/>
 	<# } #>
 
 	<h2>Overview</h2>
-	<p>Total count of tests run : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsRun) #><br/>
-	Count of tests per user profile : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountTestsPerUser) #><br/>
-	Count of user profiles tested : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesTested) #><br/>
-	Count of user profiles ignored : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesIgnored) #><br/>
-	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SummaryReportDataObject.CountProfilesWithoutWarnings) #><br/>
-	Profile Average Testing Duration : <#= SummaryReportDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
-	<p>Average Duration by User Profile : <#= SummaryReportDataObject.AverageDurationPerProfile.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
+	<p>Total count of tests run : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsRun) #><br/>
+	Count of tests per user profile : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsPerUser) #><br/>
+	Count of user profiles tested : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesTested) #><br/>
+	Count of user profiles ignored : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesIgnored) #><br/>
+	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesWithoutWarnings) #><br/>
+	Profile Average Testing Duration : <#= SharedDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
+	<p>Average Duration by User Profile : <#= SharedDataObject.AverageDurationPerProfile.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
 	<br/>
 	<table class="table_main">
 		<tr>
@@ -48,7 +48,7 @@
 		<th class="th_main">Count</th>
 		<th class="th_main">Description</th>
 		</tr>
-		<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity) { #>
+		<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SharedDataObject.CountBySeverity) { #>
 		<tr>
 			<# switch (countPerSeverity.Key) {
 			case EnumResultSeverityType.FALSE_POSITIVE : #>
@@ -82,7 +82,7 @@
 	<br/>
 	<hr/>
 	<h2>Overview By Test Name Per User Profile</h2>
-	<a href="<#= SummaryReportDataObject.FileByProfileLink #>">Go to Overview of Results by UPI</a>
+	<a href="<#= SharedDataObject.Link2ProfileFile #>">Go to Overview of Results by UPI</a>
 	<br/>
 	<hr/>
 	<h2>Overview By Test Name</h2>
@@ -97,15 +97,15 @@
 		<th class="th_main">Average Duration</th>
 		<th class="th_main">More Info</th>
 	</tr>
-	<# foreach (var testName in SummaryReportDataObject.TestNames) { #>
+	<# foreach (var testName in SharedDataObject.AllTestNames) { #>
 	<tr>
 		<td class="td_main"><#= testName #></td>
 		<td class="th_main">
-			<#= SummaryReportDataObject.FrequencySuccess_ByTestName[testName].ToString("P") #>
+			<#= SharedDataObject.FrequencySuccessByTestName[testName].ToString("P") #>
 		</td>
 		<td class="td_main">
 			<table class="table_main">
-			<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SummaryReportDataObject.CountBySeverity_ByTestName[testName]) { #>
+			<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SharedDataObject.CountSeverityByTestName[testName]) { #>
 			<tr>
 			<# switch (countPerSeverity.Key) {
 				case EnumResultSeverityType.FALSE_POSITIVE : #>
@@ -132,7 +132,7 @@
 				<#= countPerSeverity.Key #></td>
 				<td class="td_main"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
 				<td class="td_main">
-					<# double frequency = (double)countPerSeverity.Value /(double) SummaryReportDataObject.CountProfilesTested;
+					<# double frequency = (double)countPerSeverity.Value /(double) SharedDataObject.CountProfilesTested;
 					if (frequency > 0) { #>
 					<#= frequency.ToString("P") #>
 					<# } #>
@@ -147,9 +147,8 @@
 					<th class="th_main">Identified Data Behavior</th>
 					<th class="th_main">Count</th>
 				</tr>
-				<# if(SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName.ContainsKey(testName)) {
-				var sortedDictionary2 =SummaryReportDataObject.CountByIdentifiedDataBehavior_ByTestName[testName].OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-				foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in sortedDictionary2) {
+				<# if(SharedDataObject.CountIdentifiedDataBehaviorByTestName.ContainsKey(testName)) {
+				foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in SharedDataObject.CountIdentifiedDataBehaviorByTestName[testName]) {
 					if(countPerIdentifiedDataBehavior.Value > 0) { #>
 				<tr>
 					<td class="td_main"><#= LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key] #></td>
@@ -159,17 +158,17 @@
 			</table>
 		</td>
 		<td class="td_main">
-			<# if(SummaryReportDataObject.SampleData_ByTestName.ContainsKey(testName)) { #>
-			<#= SummaryReportDataObject.SampleData_ByTestName[testName] #>
+			<# if(SharedDataObject.SampleDataByTestName.ContainsKey(testName)) { #>
+			<#= SharedDataObject.SampleDataByTestName[testName] #>
 			<# } #>
 		</td>
 		<td class="td_main">
-		<# if(SummaryReportDataObject.AverageDuration_ByTestName.ContainsKey(testName)) { #>
-			<#= SummaryReportDataObject.AverageDuration_ByTestName[testName].ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #>
+		<# if(SharedDataObject.AverageDurationByTestName.ContainsKey(testName)) { #>
+			<#= SharedDataObject.AverageDurationByTestName[testName].ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #>
 			<# } #>
 		</td>
 		<td class="td_main">
-			<a href="<#= testName #><#= SummaryReportDataObject.FileLinkEnd #>">Test Details</a>
+			<a href="<#= testName #><#= SharedDataObject.LinkEnd2TestNameFile #>">Test Details</a>
 		</td>
 	</tr>
 	<# } #>

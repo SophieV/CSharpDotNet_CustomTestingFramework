@@ -46,6 +46,10 @@ namespace TestMVC4App.Models
             this.HasBeenMatched = false;
         }
 
+        /// <summary>
+        /// Copies an element including its children (recursive).
+        /// </summary>
+        /// <returns></returns>
         public OrganizationTreeDescriptor DeepClone()
         {
             var copy = (OrganizationTreeDescriptor)MemberwiseClone();

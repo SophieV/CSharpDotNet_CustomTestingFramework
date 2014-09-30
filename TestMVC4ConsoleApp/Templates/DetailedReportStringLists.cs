@@ -9,17 +9,19 @@
 // ------------------------------------------------------------------------------
 namespace TestMVC4ConsoleApp.Templates
 {
-    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using TestMVC4App.Models;
+    using HtmlDiff;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ProfileReport : ProfileReportBase
+    public partial class DetailedReportStringLists : DetailedReportStringListsBase
     {
 #line hidden
         /// <summary>
@@ -27,268 +29,341 @@ namespace TestMVC4ConsoleApp.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<tr>\r\n<td class=\"td_main\">\r\n<ul>\r\n\t<li>");
+            this.Write("<tr>\r\n\t<td class=\"td_main\"><b>");
             
-            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.DurationTestingProfile.ToString("mm'mn:'ss's:'FFFFFFF")));
-            
-            #line default
-            #line hidden
-            this.Write("</li>\r\n\t<li>");
-            
-            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.DurationDownloadingDataFromOldService.ToString("mm'mn:'ss's:'FFFFFFF")));
+            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.TestDescription));
             
             #line default
             #line hidden
-            this.Write("</li>\r\n\t<li>");
+            this.Write("</b><br/>\r\n\t\t<a id=\"");
             
-            #line 12 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.DurationDownloadingDataFromNewService.ToString("mm'mn:'ss's:'FFFFFFF")));
-            
-            #line default
-            #line hidden
-            this.Write("</li></ul></td>\r\n<td class=\"th_main\">");
-            
-            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n");
+            this.Write("\">");
             
-            #line 14 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
- foreach(KeyValuePair<EnumTestUnitNames,EnumResultSeverityType> severityByTestName in SharedDataObject.SeverityByTestName) { 
+            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.TestName));
             
             #line default
             #line hidden
-            this.Write("\t");
+            this.Write("</a>\r\n\t</td>\r\n\t");
             
-            #line 15 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
- switch (severityByTestName.Value) {
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ switch (SharedDataObject.Result) {
 		case EnumResultSeverityType.FALSE_POSITIVE : 
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"td_main false_positive\">");
+            this.Write("\t\t<td class=\"td_main false_positive\">\r\n\t\t");
             
-            #line 17 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Value));
-            
-            #line default
-            #line hidden
-            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
-            
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Key));
-            
-            #line default
-            #line hidden
-            
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.LinkEnd2TestNameFile));
-            
-            #line default
-            #line hidden
-            this.Write("#");
-            
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("\">Test Details for UPI");
-            
-            #line 18 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n\t\t");
-            
-            #line 19 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  break;
 		case EnumResultSeverityType.WARNING:
 		case EnumResultSeverityType.WARNING_ONLY_NEW: 
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"td_main warning\">");
+            this.Write("\t\t<td class=\"td_main warning\">\r\n\t\t");
             
-            #line 22 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Value));
-            
-            #line default
-            #line hidden
-            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
-            
-            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Key));
-            
-            #line default
-            #line hidden
-            
-            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.LinkEnd2TestNameFile));
-            
-            #line default
-            #line hidden
-            this.Write("#");
-            
-            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("\">Test Details for UPI");
-            
-            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n\t\t");
-            
-            #line 24 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  break;
 		case EnumResultSeverityType.WARNING_NO_DATA: 
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"td_main warning_no_data\">");
+            this.Write("\t\t<td class=\"td_main warning_no_data\">\r\n\t\t");
             
-            #line 26 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Value));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
-            
-            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  break;
 		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
 		case EnumResultSeverityType.ERROR_ONLY_OLD: 
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"td_main error_with_explanation\">");
+            this.Write("\t\t<td class=\"td_main error_with_explanation\">\r\n\t\t");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Value));
-            
-            #line default
-            #line hidden
-            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
-            
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Key));
-            
-            #line default
-            #line hidden
-            
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.LinkEnd2TestNameFile));
-            
-            #line default
-            #line hidden
-            this.Write("#");
-            
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("\">Test Details for UPI");
-            
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n\t\t");
-            
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  break;
 		case EnumResultSeverityType.ERROR: 
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"td_main error\">");
+            this.Write("\t\t<td class=\"td_main error\">\r\n\t\t");
             
-            #line 34 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Value));
-            
-            #line default
-            #line hidden
-            this.Write("<br/>\r\n\t<a class=\"no_underline\" href=\"");
-            
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Key));
-            
-            #line default
-            #line hidden
-            
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.LinkEnd2TestNameFile));
-            
-            #line default
-            #line hidden
-            this.Write("#");
-            
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("\">Test Details for UPI");
-            
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
-            
-            #line default
-            #line hidden
-            this.Write("</a>\r\n\t\t");
-            
-            #line 36 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  break;
 		default: 
             
             #line default
             #line hidden
-            this.Write("\t<td class=\"td_main success\">");
+            this.Write("\t\t<td class=\"td_main success\">\r\n\t\t");
             
-            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(severityByTestName.Value));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\t\t");
-            
-            #line 39 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  break;
 	} 
             
             #line default
             #line hidden
-            this.Write("\t</td>\r\n");
+            this.Write("\t");
             
-            #line 42 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.Result));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\t<td class=\"td_main\">\r\n\t\t<a href=\"");
+            
+            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.OldUrl));
+            
+            #line default
+            #line hidden
+            this.Write("\">Profile data of UPI ");
+            
+            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
+            
+            #line default
+            #line hidden
+            this.Write("</a><br/>\r\n\t\t<a href=\"");
+            
+            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.NewUrl));
+            
+            #line default
+            #line hidden
+            this.Write("\">User data of ID is ");
+            
+            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UserId));
+            
+            #line default
+            #line hidden
+            this.Write("</a>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t\t");
+            
+            #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.ErrorMessage));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table class=\"table_main\">\r\n\t\t<tr>\r\n\t\t\t<td class=\"th_main\">OLD " +
+                    "SERVICE DATA <span class=\"error_color\">[COUNT ELEMENTS: ");
+            
+            #line 45 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.OldValues.Count()));
+            
+            #line default
+            #line hidden
+            this.Write("]</span></td>\r\n\t\t\t<td class=\"th_main\">NEW SERVICE DATA <span class=\"error_color\">" +
+                    "[COUNT ELEMENTS: ");
+            
+            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.NewValues.Count()));
+            
+            #line default
+            #line hidden
+            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td class=\"td_main\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
+            
+            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(SharedDataObject.OldValues.Count() > 0) {
+					var potentialDuplicates = SharedDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+					foreach (string oldValue in SharedDataObject.OldValues) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t<li>");
+            
+            #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(!string.IsNullOrEmpty(oldValue)) { 
+            
+            #line default
+            #line hidden
+            
+            #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(oldValue));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t\t\t");
+            
+            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(!SharedDataObject.NewValues.Contains(oldValue)) { 
+            
+            #line default
+            #line hidden
+            this.Write("<span class=\"missing\">[MISSING IN NEW SERVICE]</span>");
+            
+            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("</tr>");
+            this.Write("\t\t\t\t\t");
+            
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(potentialDuplicates.Contains(oldValue)) { 
+            
+            #line default
+            #line hidden
+            this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
+            
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t");
+            
+            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("NULL");
+            
+            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("</li>\r\n\t\t\t\t\t");
+            
+            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t\t<td class=\"td_main\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
+            
+            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(SharedDataObject.NewValues.Count > 0) {
+					var potentialDuplicates = SharedDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+					foreach (string newValue in SharedDataObject.NewValues) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t<li>");
+            
+            #line 66 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(!string.IsNullOrEmpty(newValue)) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t");
+            
+            #line 67 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ string newValueToDisplay = newValue;
+					if(SharedDataObject.OldValues.Count <= 1 && SharedDataObject.NewValues.Count <= 1) {
+						string oldValue = string.Empty;
+						if(SharedDataObject.OldValues.Count > 0) { oldValue = SharedDataObject.OldValues.First(); if(oldValue == null) { oldValue = string.Empty; } }
+						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue);
+						newValueToDisplay = diffHelper.Build();
+					} 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t");
+            
+            #line 74 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(newValueToDisplay));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t\t\t");
+            
+            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(!SharedDataObject.OldValues.Contains(newValue)) { 
+            
+            #line default
+            #line hidden
+            this.Write("<span class=\"missing\">[MISSING IN OLD SERVICE]</span>");
+            
+            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t");
+            
+            #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(potentialDuplicates.Contains(newValue)) { 
+            
+            #line default
+            #line hidden
+            this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
+            
+            #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t");
+            
+            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("NULL");
+            
+            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("</li>\r\n\t\t\t\t\t");
+            
+            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t<p>Dura" +
+                    "tion : ");
+            
+            #line 85 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));
+            
+            #line default
+            #line hidden
+            this.Write("</p>\r\n\t<br/>\r\n\t<ul>\r\n\t");
+            
+            #line 88 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ if(SharedDataObject.IdentifiedDataBehaviors != null) {
+		foreach(var observation in SharedDataObject.IdentifiedDataBehaviors) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t<li>");
+            
+            #line 90 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(observation));
+            
+            #line default
+            #line hidden
+            this.Write("</li><br/>\r\n\t");
+            
+            #line 91 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
+ } } 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t</ul>\r\n\t</td>\r\n</tr>");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport.tt"
+        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
 
-private global::TestMVC4App.Templates.ProfileReportSharedData _SharedDataObjectField;
+private global::TestMVC4App.Templates.DetailedReportSharedData _SharedDataObjectField;
 
 /// <summary>
 /// Access the SharedDataObject parameter of the template.
 /// </summary>
-private global::TestMVC4App.Templates.ProfileReportSharedData SharedDataObject
+private global::TestMVC4App.Templates.DetailedReportSharedData SharedDataObject
 {
     get
     {
@@ -307,7 +382,7 @@ public virtual void Initialize()
 bool SharedDataObjectValueAcquired = false;
 if (this.Session.ContainsKey("SharedDataObject"))
 {
-    this._SharedDataObjectField = ((global::TestMVC4App.Templates.ProfileReportSharedData)(this.Session["SharedDataObject"]));
+    this._SharedDataObjectField = ((global::TestMVC4App.Templates.DetailedReportSharedData)(this.Session["SharedDataObject"]));
     SharedDataObjectValueAcquired = true;
 }
 if ((SharedDataObjectValueAcquired == false))
@@ -315,7 +390,7 @@ if ((SharedDataObjectValueAcquired == false))
     object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("SharedDataObject");
     if ((data != null))
     {
-        this._SharedDataObjectField = ((global::TestMVC4App.Templates.ProfileReportSharedData)(data));
+        this._SharedDataObjectField = ((global::TestMVC4App.Templates.DetailedReportSharedData)(data));
     }
 }
 
@@ -336,7 +411,7 @@ if ((SharedDataObjectValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ProfileReportBase
+    public class DetailedReportStringListsBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

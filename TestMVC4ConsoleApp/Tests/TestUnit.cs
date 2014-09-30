@@ -9,6 +9,8 @@ namespace TestMVC4App.Models
 {
     public abstract class TestUnit
     {
+        # region Properties
+
         public bool HttpErrorHappened { get; set; }
 
         public bool UnknownErrorHappened { get; set; }
@@ -42,6 +44,8 @@ namespace TestMVC4App.Models
         protected string PageName { get; private set; }
 
         protected IEnumerable<XElement> OldDataNodes { get; private set; }
+
+        #endregion Properties
 
         /// <summary>
         /// Defines the overall Result Severity by counting the occurences of Severity Types in the detailed Results.

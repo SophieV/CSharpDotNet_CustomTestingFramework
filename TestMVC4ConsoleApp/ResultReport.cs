@@ -12,7 +12,7 @@ namespace TestMVC4App.Models
         public EnumResultDisplayFormat DisplayFormat { get; private set; }
         public TimeSpan Duration { get; set; }
 
-        public EnumResultSeverityType Result { get; private set; }
+        public EnumResultSeverityType Severity { get; private set; }
 
         public List<EnumIdentifiedDataBehavior> IdentifedDataBehaviors { get; set; }
 
@@ -22,19 +22,19 @@ namespace TestMVC4App.Models
 
         public string TestDescription { get; private set; }
 
-        public HashSet<string> OldValues { get; private set; }
+        public HashSet<StringDescriptor> OldValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> OldStructureValues { get; private set; }
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> OldStructureValues { get; private set; }
 
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
-        public HashSet<string> NewValues { get; private set; }
+        public HashSet<StringDescriptor> NewValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> NewStructureValues { get; private set; }
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> NewStructureValues { get; private set; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
@@ -46,16 +46,16 @@ namespace TestMVC4App.Models
             this.TestDescription = testDescription;
             this.ErrorMessage = string.Empty;
             this.IdentifedDataBehaviors = new List<EnumIdentifiedDataBehavior>();
-            this.OldValues = new HashSet<string>();
-            this.NewValues = new HashSet<string>();
+            this.OldValues = new HashSet<StringDescriptor>();
+            this.NewValues = new HashSet<StringDescriptor>();
             this.OldOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
             this.NewOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
-            this.OldStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
-            this.NewStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
+            this.OldStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            this.NewStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
             this.TreeComparisonIndexError = -1;
-            this.Result = EnumResultSeverityType.SUCCESS;
+            this.Severity = EnumResultSeverityType.SUCCESS;
             this.Upi = upi;
             this.UserId = userId;
         }
@@ -69,12 +69,12 @@ namespace TestMVC4App.Models
             this.TreeComparisonIndexError = -1;
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
-            this.Result = EnumResultSeverityType.SUCCESS;
+            this.Severity = EnumResultSeverityType.SUCCESS;
             this.ErrorMessage = string.Empty;
             this.IdentifedDataBehaviors.Clear();
         }
 
-        public void AddDetailedValues(HashSet<string> oldValues, HashSet<string> newValues)
+        public void AddDetailedValues(HashSet<StringDescriptor> oldValues, HashSet<StringDescriptor> newValues)
         {
             if (oldValues != null)
             {
@@ -108,7 +108,7 @@ namespace TestMVC4App.Models
             this.DisplayFormat = EnumResultDisplayFormat.OrganizationTree;
         }
 
-        public void AddDetailedValues(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> newValues)
+        public void AddDetailedValues(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>> newValues)
         {
             if (oldValues != null)
             {
@@ -123,21 +123,20 @@ namespace TestMVC4App.Models
             this.DisplayFormat = EnumResultDisplayFormat.StructureOfValues;
         }
 
-        public void UpdateResult(EnumResultSeverityType newSeverityStateReturned)
+        public void UpdateSeverity(EnumResultSeverityType newSeverityStateReturned)
         {
             if (newSeverityStateReturned == EnumResultSeverityType.WARNING)
             {
-                if (this.Result == EnumResultSeverityType.SUCCESS 
-                    || (this.IdentifedDataBehaviors.Contains(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE) && this.IdentifedDataBehaviors.Contains(EnumIdentifiedDataBehavior.ALL_VALUES_OF_OLD_SUBSET_FOUND)))
+                if (this.Severity == EnumResultSeverityType.SUCCESS || this.Severity == EnumResultSeverityType.FALSE_POSITIVE)
                 {
-                    this.Result = newSeverityStateReturned;
+                    this.Severity = newSeverityStateReturned;
                 }
             }
             else
             {
                 // warnings are the only severity that is weaker than the rest and can happen afterwards
                 // for all the others we assume chronological order as it investigates more specific scenarios
-                this.Result = newSeverityStateReturned;
+                this.Severity = newSeverityStateReturned;
             }
         }
     }

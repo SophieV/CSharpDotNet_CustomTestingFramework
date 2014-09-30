@@ -9,17 +9,18 @@
 // ------------------------------------------------------------------------------
 namespace TestMVC4ConsoleApp.Templates
 {
+    using System.Linq;
+    using System.Text;
     using System.Collections.Generic;
-    using TestMVC4App.Models;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReport_Header.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class ProfileReport_Header : ProfileReport_HeaderBase
+    public partial class DetailedReport_Header : DetailedReport_HeaderBase
     {
 #line hidden
         /// <summary>
@@ -30,6 +31,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write(@"<html>
 <head>
 <style>
+.diffins, .diffmod { background-color: yellow; }
 .table_main {border:solid 2px darkgrey;border-collapse:collapse;}
 .th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
 .td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
@@ -42,85 +44,23 @@ namespace TestMVC4ConsoleApp.Templates
 .missing {color: purple;}
 .duplicate {color: pink;}
 .error_color {color: red;}
-.no_underline{text-decoration: none;}
+.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
+<script type=""text/javascript"" src=""tablefilter.js""></script>
 </head>
 <body>
-<table class=""table_main"">
+<table id=""individual_test_results"" class=""table_main"">
 <tr>
-<td class=""th_main"">Duration</td>
-<td class=""th_main"">UPI</td>
+<td class=""th_main"">Test Name</td>
+<td class=""th_main"">Status</td>
+<td class=""th_main"">User</td>
+<td class=""th_main"">Result</td>
+<td class=""th_main"">Additional Info</td>
+</tr>
+
 ");
-            
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
- foreach(var testName in SharedDataObject.AllTestNames) { 
-            
-            #line default
-            #line hidden
-            this.Write("<td class=\"th_main\">");
-            
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(testName));
-            
-            #line default
-            #line hidden
-            this.Write("</td>\r\n");
-            
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("</tr>");
             return this.GenerationEnvironment.ToString();
         }
-        
-        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
-
-private global::TestMVC4App.Templates.ProfileReportSharedHeaderData _SharedDataObjectField;
-
-/// <summary>
-/// Access the SharedDataObject parameter of the template.
-/// </summary>
-private global::TestMVC4App.Templates.ProfileReportSharedHeaderData SharedDataObject
-{
-    get
-    {
-        return this._SharedDataObjectField;
-    }
-}
-
-
-/// <summary>
-/// Initialize the template
-/// </summary>
-public virtual void Initialize()
-{
-    if ((this.Errors.HasErrors == false))
-    {
-bool SharedDataObjectValueAcquired = false;
-if (this.Session.ContainsKey("SharedDataObject"))
-{
-    this._SharedDataObjectField = ((global::TestMVC4App.Templates.ProfileReportSharedHeaderData)(this.Session["SharedDataObject"]));
-    SharedDataObjectValueAcquired = true;
-}
-if ((SharedDataObjectValueAcquired == false))
-{
-    object data = global::System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("SharedDataObject");
-    if ((data != null))
-    {
-        this._SharedDataObjectField = ((global::TestMVC4App.Templates.ProfileReportSharedHeaderData)(data));
-    }
-}
-
-
-    }
-}
-
-
-        
-        #line default
-        #line hidden
     }
     
     #line default
@@ -130,7 +70,7 @@ if ((SharedDataObjectValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class ProfileReport_HeaderBase
+    public class DetailedReport_HeaderBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -6,8 +6,6 @@ namespace TestMVC4App.Models
     /// </summary>
     public enum EnumIdentifiedDataBehavior
     {
-        [System.ComponentModel.Description("ALL the EXPECTED DATA was FOUND.")]
-        ALL_VALUES_OF_OLD_SUBSET_FOUND,
         [System.ComponentModel.Description("More data from the new service.")]
         MORE_VALUES_ON_NEW_SERVICE,
         [System.ComponentModel.Description("More data from the old service, ALL DUPLICATES.")]
@@ -18,10 +16,8 @@ namespace TestMVC4App.Models
         VALUE_POPULATED_WITH_WHITE_SPACE_ON_NEW_SERVICE,
         [System.ComponentModel.Description("Some mismatches are caused by trailing WHITE SPACES.")]
         MISMATCH_DUE_TO_TRAILING_WHITE_SPACES,
-        [System.ComponentModel.Description("MISSING EXPECTED DATA.")]
-        MISSING_VALUES_ON_NEW_SERVICE,
-        [System.ComponentModel.Description("WRONG VALUE when comparing.")]
-        WRONG_VALUE,
+        [System.ComponentModel.Description("Some mismatches are caused by differences in the CASE.")]
+        MISMATCH_DUE_TO_CASE_DIFFERENCES,
         [System.ComponentModel.Description("Tree contains LESS elements at a given depth.")]
         OLD_TREE_HAS_MORE_CHILDREN_GIVEN_DEPTH,
         [System.ComponentModel.Description("Tree contains AT LEAST AS MANY ELEMENTS at a given depth.")]
