@@ -5,7 +5,7 @@ namespace TestMVC4App.Models
 {
     public class StringDescriptor
     {
-        public String Value { get; set; }
+        public string Value { get; set; }
 
         public bool HasBeenMatched { get; set; }
 
@@ -35,43 +35,50 @@ namespace TestMVC4App.Models
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(HashSet<string> values)
+        public static HashSet<StringDescriptor> EmbedInDescriptors(HashSet<string> values)
         {
-            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+            var embeddedValues = new HashSet<StringDescriptor>();
             foreach(string value in values)
             {
-                embeddedValues.Add(EnumOldServiceFieldsAsKeys.GENERIC_KEY, new StringDescriptor(value));
+                embeddedValues.Add(new StringDescriptor(value));
             }
             return embeddedValues;
         }
 
-        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> values)
+        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> EmbedInDescriptors(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> values)
         {
-            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+            var embeddedValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> dic;
+
             foreach (var element in values)
             {
+                dic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
                 foreach (var value in element)
                 {
-                    embeddedValues.Add(value.Key, new StringDescriptor(value.Value));
+                    dic.Add(value.Key, new StringDescriptor(value.Value));
                 }
+                embeddedValues.Add(dic);
             }
             return embeddedValues;
         }
 
-        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(string value)
+        public static HashSet<StringDescriptor> EmbedInDescriptors(string value)
         {
-            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
-            embeddedValues.Add(EnumOldServiceFieldsAsKeys.GENERIC_KEY, new StringDescriptor(value));
+            var embeddedValues = new HashSet<StringDescriptor>();
+            embeddedValues.Add(new StringDescriptor(value));
             return embeddedValues;
         }
 
-        public static Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> EmbedInDescriptors(Dictionary<EnumOldServiceFieldsAsKeys, string> values)
+        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> EmbedInDescriptors(Dictionary<EnumOldServiceFieldsAsKeys, string> values)
         {
-            var embeddedValues = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+            var embeddedValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            var embeddedDic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+
             foreach (var value in values)
             {
-                embeddedValues.Add(value.Key, new StringDescriptor(value.Value));
+                embeddedDic.Add(value.Key, new StringDescriptor(value.Value));
             }
+            embeddedValues.Add(embeddedDic);
             return embeddedValues;
         }
     }

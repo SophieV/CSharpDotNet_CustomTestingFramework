@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
@@ -10,36 +8,51 @@ namespace TestMVC4App.Models
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
             bool areEqual = true;
-            foreach (var key in x.Keys)
+
+            foreach( var pair in x)
             {
-                if (areEqual)
+                if (!pair.Value.HasBeenMatched)
                 {
-                    if (x.ContainsKey(key) && y.ContainsKey(key))
+                    if (y.ContainsKey(pair.Key) && !y[pair.Key].HasBeenMatched)
                     {
-                        if (string.IsNullOrEmpty(x[key].Value) && string.IsNullOrEmpty(y[key].Value))
+                        if (string.IsNullOrEmpty(pair.Value.Value) && string.IsNullOrEmpty(y[pair.Key].Value))
                         {
-                            areEqual = true;
-                            x[key].HasBeenMatched = true;
-                            y[key].HasBeenMatched = true;
+                            pair.Value.HasBeenMatched = true;
+                            y[pair.Key].HasBeenMatched = true;
                         }
-                        else if (string.IsNullOrEmpty(x[key].Value) || string.IsNullOrEmpty(y[key].Value))
+                        else if (pair.Value.Value == y[pair.Key].Value)
                         {
-                            areEqual = false;
-                        }
-                        else if (x[key].Value == y[key].Value)
-                        {
-                            areEqual = true;
-                            x[key].HasBeenMatched = true;
-                            y[key].HasBeenMatched = true;
+                            pair.Value.HasBeenMatched = true;
+                            y[pair.Key].HasBeenMatched = true;
                         }
                         else
                         {
                             areEqual = false;
                         }
                     }
-                    else
+                }
+            }
+
+            foreach (var pair in y)
+            {
+                if (!pair.Value.HasBeenMatched)
+                {
+                    if (x.ContainsKey(pair.Key) && !x[pair.Key].HasBeenMatched)
                     {
-                        areEqual = false;
+                        if (string.IsNullOrEmpty(pair.Value.Value) && string.IsNullOrEmpty(x[pair.Key].Value))
+                        {
+                            pair.Value.HasBeenMatched = true;
+                            x[pair.Key].HasBeenMatched = true;
+                        }
+                        else if (pair.Value.Value == y[pair.Key].Value)
+                        {
+                            pair.Value.HasBeenMatched = true;
+                            x[pair.Key].HasBeenMatched = true;
+                        }
+                        else
+                        {
+                            areEqual = false;
+                        }
                     }
                 }
             }

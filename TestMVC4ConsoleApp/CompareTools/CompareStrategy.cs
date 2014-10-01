@@ -8,10 +8,16 @@ namespace TestMVC4App.Models
     {
         protected ResultReport resultReport;
 
-        public CompareStrategy(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> oldValues, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> newValues, ResultReport resultReport)
+        public CompareStrategy(HashSet<StringDescriptor> oldValues,HashSet<StringDescriptor> newValues, ResultReport resultReport)
         {
             this.resultReport = resultReport;
-            this.resultReport.AppendDetailedValues(oldValues,newValues);
+            this.resultReport.AddDetailedValues(oldValues, newValues);
+        }
+
+        public CompareStrategy(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues, ResultReport resultReport)
+        {
+            this.resultReport = resultReport;
+            this.resultReport.AddDetailedValues(oldValues,newValues);
         }
 
         public CompareStrategy(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 

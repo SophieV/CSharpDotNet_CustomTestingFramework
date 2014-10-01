@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
@@ -14,29 +10,30 @@ namespace TestMVC4ConsoleApp.CompareTools
             bool areEqual = true;
             foreach (var key in x.Keys)
             {
-                if (areEqual)
+                if (x.ContainsKey(key) && y.ContainsKey(key) && !x[key].HasBeenMatched && !y[key].HasBeenMatched)
                 {
-                    if (x.ContainsKey(key) && y.ContainsKey(key))
+                    if (!string.IsNullOrEmpty(x[key].Value) && x[key].Value.Length > 4 && !string.IsNullOrEmpty(y[key].Value) && x[key].Value.Trim().Contains(y[key].Value.Trim()))
                     {
-                        if (!string.IsNullOrEmpty(x[key].Value) && x[key].Value.Length > 9 && !string.IsNullOrEmpty(y[key].Value) && x[key].Value.Contains(y[key].Value)
-                            || !string.IsNullOrEmpty(y[key].Value) && y[key].Value.Length > 9 && !string.IsNullOrEmpty(x[key].Value) && y[key].Value.Contains(x[key].Value))
-                        {
-                            areEqual = true;
-                            x[key].HasBeenMatched = true;
-                            y[key].HasBeenMatched = true;
-                            x[key].MismatchDueToTrailingSpaces = true;
-                            x[key].MismatchDueToTrailingSpaces = true;
-
-                        }
-                        else
-                        {
-                            areEqual = false;
-                        }
+                        areEqual = true;
+                        x[key].HasBeenMatched = true;
+                        y[key].HasBeenMatched = true;
+                        y[key].MismatchDueToPartialName = true;
+                    }
+                    else if (!string.IsNullOrEmpty(y[key].Value) && y[key].Value.Length > 4 && !string.IsNullOrEmpty(x[key].Value) && y[key].Value.Trim().Contains(x[key].Value.Trim()))
+                    {
+                        areEqual = true;
+                        x[key].HasBeenMatched = true;
+                        y[key].HasBeenMatched = true;
+                        x[key].MismatchDueToPartialName = true;
                     }
                     else
                     {
-                        areEqual = false;
+                        areEqual &= false;
                     }
+                }
+                else
+                {
+                    areEqual &= false;
                 }
             }
 

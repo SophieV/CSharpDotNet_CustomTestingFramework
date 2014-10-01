@@ -1,8 +1,5 @@
 ﻿
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace TestMVC4App.Models
 {
@@ -14,35 +11,41 @@ namespace TestMVC4App.Models
 
             foreach (var key in x.Keys)
             {
-                if (areEqual)
+                if (x.ContainsKey(key) && y.ContainsKey(key) && !x[key].HasBeenMatched && !y[key].HasBeenMatched)
                 {
-                    if (x.ContainsKey(key) && y.ContainsKey(key))
+                    if (!string.IsNullOrEmpty(x[key].Value) && !string.IsNullOrEmpty(y[key].Value))
                     {
-                        if (string.IsNullOrEmpty(x[key].Value) && string.IsNullOrEmpty(y[key].Value))
+                        if (x[key].Value.Trim() == y[key].Value)
                         {
-                            areEqual = true;
+                            areEqual &= true;
+                            x[key].HasBeenMatched = true;
+                            x[key].MismatchDueToTrailingSpaces = true;
+                            y[key].HasBeenMatched = true;
                         }
-                        else if (string.IsNullOrEmpty(x[key].Value) || string.IsNullOrEmpty(y[key].Value))
+                        else if (x[key].Value == y[key].Value.Trim())
                         {
-                            areEqual = false;
+                            areEqual &= true;
+                            x[key].HasBeenMatched = true;
+                            y[key].HasBeenMatched = true;
+                            y[key].MismatchDueToTrailingSpaces = true;
                         }
                         else if (x[key].Value.Trim() == y[key].Value.Trim())
                         {
-                            areEqual = true;
+                            areEqual &= true;
                             x[key].HasBeenMatched = true;
                             x[key].MismatchDueToTrailingSpaces = true;
                             y[key].HasBeenMatched = true;
                             y[key].MismatchDueToTrailingSpaces = true;
                         }
-                        else
-                        {
-                            areEqual = false;
-                        }
                     }
                     else
                     {
-                        areEqual = false;
+                        areEqual &= false;
                     }
+                }
+                else
+                {
+                    areEqual &= false;
                 }
             }
 

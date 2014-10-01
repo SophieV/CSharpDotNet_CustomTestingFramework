@@ -20,13 +20,13 @@
 
 	
 	<h2>Overview</h2>
-	<p>Total count of tests run : 50<br/>
-	Count of tests per user profile : 50<br/>
+	<p>Total count of tests run : 08<br/>
+	Count of tests per user profile : 08<br/>
 	Count of user profiles tested : 01<br/>
 	Count of user profiles ignored : 00<br/>
 	Count of user profiles free from any kind of warning : 00<br/>
-	Duration : 00h: 00mn:06s:7508394</p>
-	<p>Average Duration by User Profile : 00h: 00mn:06s:67</p>
+	Profile Average Testing Duration : 00h: 00mn:01s:7566233</p>
+	<p>Average Duration by User Profile : 00h: 00mn:01s:681</p>
 	<br/>
 	<table class="table_main">
 		<tr>
@@ -35,16 +35,40 @@
 		<th class="th_main">Description</th>
 		</tr>
 				<tr>
-					<td class="error td_main">
-					ERROR</td>
-		<td class="td_main">06</td>
-		<td class="td_main" style="color:darkgrey;">The data consistency between the services is not maintained.</td>
+					<td class="success td_main">
+					SUCCESS</td>
+		<td class="td_main">30</td>
+		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained.</td>
+	</tr>
+			<tr>
+					<td class="warning_no_data td_main">
+					WARNING_NO_DATA</td>
+		<td class="td_main">11</td>
+		<td class="td_main" style="color:darkgrey;">None of the service has returned any data.</td>
 	</tr>
 			<tr>
 					<td class="error_with_explanation td_main">
 					ERROR_ONLY_OLD</td>
-		<td class="td_main">02</td>
+		<td class="td_main">06</td>
 		<td class="td_main" style="color:darkgrey;">No data returned by the new service.</td>
+	</tr>
+			<tr>
+					<td class="warning td_main">
+					WARNING_ONLY_NEW</td>
+		<td class="td_main">06</td>
+		<td class="td_main" style="color:darkgrey;">Only the new service has returned any data.</td>
+	</tr>
+			<tr>
+					<td class="error td_main">
+					ERROR</td>
+		<td class="td_main">04</td>
+		<td class="td_main" style="color:darkgrey;">The data consistency between the services is not maintained.</td>
+	</tr>
+			<tr>
+					<td class="false_positive td_main">
+					FALSE_POSITIVE</td>
+		<td class="td_main">01</td>
+		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained EVEN THOUGH the test returned an error.</td>
 	</tr>
 			<tr>
 					<td class="error_with_explanation td_main">
@@ -58,64 +82,7 @@
 		<td class="td_main">00</td>
 		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained AND some data behaviors were identified.</td>
 	</tr>
-			<tr>
-					<td class="warning_no_data td_main">
-					WARNING_NO_DATA</td>
-		<td class="td_main">22</td>
-		<td class="td_main" style="color:darkgrey;">None of the service has returned any data.</td>
-	</tr>
-			<tr>
-					<td class="warning td_main">
-					WARNING_ONLY_NEW</td>
-		<td class="td_main">04</td>
-		<td class="td_main" style="color:darkgrey;">Only the new service has returned any data.</td>
-	</tr>
-			<tr>
-					<td class="false_positive td_main">
-					FALSE_POSITIVE</td>
-		<td class="td_main">01</td>
-		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained EVEN THOUGH the test returned an error.</td>
-	</tr>
-			<tr>
-					<td class="success td_main">
-					SUCCESS</td>
-		<td class="td_main">15</td>
-		<td class="td_main" style="color:darkgrey;">The data consistency between the services is maintained.</td>
-	</tr>
 		</table>
-	<br/>
-	<br/>
-	<table class="table_main">
-	<tr>
-		<th class="th_main">Identified Data Behavior</th>
-		<th class="th_main">Count</th>
-	</tr>
-		<tr>
-		<td class="td_main">More data from the new service.</td>
-		<td class="td_main">02</td>
-	</tr>
-		<tr>
-		<td class="td_main">ALL the EXPECTED DATA was FOUND.</td>
-		<td class="td_main">01</td>
-	</tr>
-		<tr>
-		<td class="td_main">MISSING EXPECTED DATA.</td>
-		<td class="td_main">01</td>
-	</tr>
-		<tr>
-		<td class="td_main">WRONG VALUE when comparing.</td>
-		<td class="td_main">01</td>
-	</tr>
-		<tr>
-		<td class="td_main">Tree contains LESS elements at a give depth.</td>
-		<td class="td_main">01</td>
-	</tr>
-		<tr>
-		<td class="td_main">Merging the trees required using an element at a given depth that MAY have failed the conditions.</td>
-		<td class="td_main">01</td>
-	</tr>
-		</table>
-	<br/>
 	<br/>
 	<br/>
 	<hr/>
@@ -212,7 +179,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:034
+					00h: 00mn:00s:009
 					</td>
 		<td class="td_main">
 			<a href="UserBasicInfo_UPI_1.htm">Test Details</a>
@@ -429,9 +396,8 @@
 						<tr>
 							<td class="warning td_main">
 								WARNING_ONLY_NEW</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -444,8 +410,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -800,7 +767,7 @@
 		</td>
 	</tr>
 		<tr>
-		<td class="td_main">UserBasicInfo_Suffix</td>
+		<td class="td_main">UserBasicInfo_SuffixName</td>
 		<td class="th_main">
 			100.00 %
 		</td>
@@ -879,7 +846,7 @@
 					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
-			<a href="UserBasicInfo_Suffix_1.htm">Test Details</a>
+			<a href="UserBasicInfo_SuffixName_1.htm">Test Details</a>
 		</td>
 	</tr>
 		<tr>
@@ -1003,16 +970,16 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
 							<td class="warning td_main">
 								WARNING_ONLY_NEW</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -1169,9 +1136,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -1191,8 +1157,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -1374,7 +1341,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:02
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserGeneralInfo_Languages_1.htm">Test Details</a>
@@ -1591,9 +1558,8 @@
 						<tr>
 							<td class="warning td_main">
 								WARNING_ONLY_NEW</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -1606,8 +1572,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -1623,14 +1590,14 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:031
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserGeneralInfo_AltMiddleName_1.htm">Test Details</a>
 		</td>
 	</tr>
 		<tr>
-		<td class="td_main">UserGeneralInfo_AltSuffix</td>
+		<td class="td_main">UserGeneralInfo_AltSuffixName</td>
 		<td class="th_main">
 			100.00 %
 		</td>
@@ -1709,7 +1676,7 @@
 					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
-			<a href="UserGeneralInfo_AltSuffix_1.htm">Test Details</a>
+			<a href="UserGeneralInfo_AltSuffixName_1.htm">Test Details</a>
 		</td>
 	</tr>
 		<tr>
@@ -1789,14 +1756,14 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:01
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserGeneralInfo_AltMiddleNameDisplayed_1.htm">Test Details</a>
 		</td>
 	</tr>
 		<tr>
-		<td class="td_main">UserGeneralInfo_Suffixes</td>
+		<td class="td_main">UserGeneralInfo_All_EduProfSuffixes</td>
 		<td class="th_main">
 			100.00 %
 		</td>
@@ -1872,10 +1839,10 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:003
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
-			<a href="UserGeneralInfo_Suffixes_1.htm">Test Details</a>
+			<a href="UserGeneralInfo_All_EduProfSuffixes_1.htm">Test Details</a>
 		</td>
 	</tr>
 		<tr>
@@ -2038,7 +2005,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:019
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserContactLocationInfo_LabWebsites_Names_1.htm">Test Details</a>
@@ -2121,97 +2088,14 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:016
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserContactLocationInfo_LabWebsites_Links_1.htm">Test Details</a>
 		</td>
 	</tr>
 		<tr>
-		<td class="td_main">UserContactLocationInfo_Addresses_StreetAddress</td>
-		<td class="th_main">
-			0.00 %
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-						<tr>
-							<td class="error td_main">
-								ERROR</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_ONLY_OLD</td>
-				<td class="td_main">01</td>
-				<td class="td_main">
-										100.00 %
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_WITH_EXPLANATION</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning_no_data td_main">
-								WARNING_NO_DATA</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING_ONLY_NEW</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="false_positive td_main">
-								FALSE_POSITIVE</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="success td_main">
-								SUCCESS</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						</table>
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-				<tr>
-					<th class="th_main">Identified Data Behavior</th>
-					<th class="th_main">Count</th>
-				</tr>
-							</table>
-		</td>
-		<td class="td_main">
-					</td>
-		<td class="td_main">
-					00h: 00mn:00s:027
-					</td>
-		<td class="td_main">
-			<a href="UserContactLocationInfo_Addresses_StreetAddress_1.htm">Test Details</a>
-		</td>
-	</tr>
-		<tr>
-		<td class="td_main">UserContactLocationInfo_Addresses_ZipCodes</td>
+		<td class="td_main">UserContactLocationInfo_Addresses</td>
 		<td class="th_main">
 			100.00 %
 		</td>
@@ -2248,9 +2132,258 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
 				<td class="td_main">01</td>
 				<td class="td_main">
 										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:006
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_Addresses_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_Addresses_Geo</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_Addresses_Geo_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_Addresses_StreetAddress</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_Addresses_StreetAddress_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_Addresses_ZipCodes</td>
+		<td class="th_main">
+			0.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
 									</td>
 			</tr>
 						<tr>
@@ -2282,12 +2415,24 @@
 					<th class="th_main">Identified Data Behavior</th>
 					<th class="th_main">Count</th>
 				</tr>
+								<tr>
+					<td class="td_main">Some mismatches are caused by trailing WHITE SPACES.</td>
+					<td class="td_main">01</td>
+				</tr>
+								<tr>
+					<td class="td_main">Some mismatches are caused by differences in the CASE.</td>
+					<td class="td_main">01</td>
+				</tr>
+								<tr>
+					<td class="td_main">The data of the new service is contained in the data from the old service.</td>
+					<td class="td_main">01</td>
+				</tr>
 							</table>
 		</td>
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:015
+					00h: 00mn:00s:004
 					</td>
 		<td class="td_main">
 			<a href="UserContactLocationInfo_Addresses_ZipCodes_1.htm">Test Details</a>
@@ -2370,7 +2515,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:022
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserContactLocationInfo_Addresses_IsMailing_1.htm">Test Details</a>
@@ -2453,7 +2598,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:022
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserPublicationInfo_Titles_1.htm">Test Details</a>
@@ -2462,7 +2607,7 @@
 		<tr>
 		<td class="td_main">UserPublicationInfo_Citations</td>
 		<td class="th_main">
-			100.00 %
+			0.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
@@ -2476,8 +2621,9 @@
 						<tr>
 							<td class="error_with_explanation td_main">
 								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2497,9 +2643,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2536,7 +2681,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:014
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserPublicationInfo_Citations_1.htm">Test Details</a>
@@ -2580,9 +2725,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2602,8 +2746,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -2663,9 +2808,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2685,8 +2829,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -2746,9 +2891,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2768,8 +2912,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -2785,7 +2930,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:015
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserResearchInfo_PublicHealthKeywords_1.htm">Test Details</a>
@@ -2829,9 +2974,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2851,8 +2995,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -2868,7 +3013,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:001
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserEducationTrainingInfo_Trainings_1.htm">Test Details</a>
@@ -2877,16 +3022,15 @@
 		<tr>
 		<td class="td_main">UserEducationTrainingInfo_Education</td>
 		<td class="th_main">
-			0.00 %
+			100.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
 						<tr>
 							<td class="error td_main">
 								ERROR</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -2934,8 +3078,9 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -2951,7 +3096,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:003
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserEducationTrainingInfo_Education_1.htm">Test Details</a>
@@ -3126,7 +3271,7 @@
 		<tr>
 		<td class="td_main">UserPatientCareInfo_PhysicianBio</td>
 		<td class="th_main">
-			100.00 %
+			0.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
@@ -3140,8 +3285,9 @@
 						<tr>
 							<td class="error_with_explanation td_main">
 								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3161,9 +3307,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3209,7 +3354,7 @@
 		<tr>
 		<td class="td_main">UserPatientCareInfo_AcceptedReferral</td>
 		<td class="th_main">
-			100.00 %
+			0.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
@@ -3223,8 +3368,9 @@
 						<tr>
 							<td class="error_with_explanation td_main">
 								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3244,9 +3390,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3292,15 +3437,16 @@
 		<tr>
 		<td class="td_main">UserPatientCareInfo_MyChart</td>
 		<td class="th_main">
-			100.00 %
+			0.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
 						<tr>
 							<td class="error td_main">
 								ERROR</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3348,9 +3494,8 @@
 						<tr>
 							<td class="success td_main">
 								SUCCESS</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						</table>
@@ -3375,7 +3520,7 @@
 		<tr>
 		<td class="td_main">UserPatientCareInfo_IsSeeingNewPatients</td>
 		<td class="th_main">
-			100.00 %
+			0.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
@@ -3389,8 +3534,9 @@
 						<tr>
 							<td class="error_with_explanation td_main">
 								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3410,9 +3556,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3458,7 +3603,7 @@
 		<tr>
 		<td class="td_main">UserPatientCareInfo_IsSeeingPatientType</td>
 		<td class="th_main">
-			100.00 %
+			0.00 %
 		</td>
 		<td class="td_main">
 			<table class="table_main">
@@ -3472,8 +3617,9 @@
 						<tr>
 							<td class="error_with_explanation td_main">
 								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
+				<td class="td_main">01</td>
 				<td class="td_main">
+										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3493,9 +3639,8 @@
 						<tr>
 							<td class="warning_no_data td_main">
 								WARNING_NO_DATA</td>
-				<td class="td_main">01</td>
+				<td class="td_main">00</td>
 				<td class="td_main">
-										100.00 %
 									</td>
 			</tr>
 						<tr>
@@ -3532,7 +3677,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:029
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserPatientCareInfo_IsSeeingPatientType_1.htm">Test Details</a>
@@ -3698,7 +3843,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:016
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
 			<a href="UserPatientCareInfo_CancersTreated_1.htm">Test Details</a>
@@ -3706,6 +3851,255 @@
 	</tr>
 		<tr>
 		<td class="td_main">UserGeneralInfo_Organizations_Id</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserGeneralInfo_Organizations_Id_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserGeneralInfo_Organizations_Name</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserGeneralInfo_Organizations_Name_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserGeneralInfo_Organizations_Type</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserGeneralInfo_Organizations_Type_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserGeneralInfo_Organizations_IdAndName</td>
 		<td class="th_main">
 			100.00 %
 		</td>
@@ -3777,11 +4171,7 @@
 					<th class="th_main">Count</th>
 				</tr>
 								<tr>
-					<td class="td_main">ALL the EXPECTED DATA was FOUND.</td>
-					<td class="td_main">01</td>
-				</tr>
-								<tr>
-					<td class="td_main">More data from the new service.</td>
+					<td class="td_main">Some mismatches are caused by trailing WHITE SPACES.</td>
 					<td class="td_main">01</td>
 				</tr>
 							</table>
@@ -3789,268 +4179,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:014
-					</td>
-		<td class="td_main">
-			<a href="UserGeneralInfo_Organizations_Id_1.htm">Test Details</a>
-		</td>
-	</tr>
-		<tr>
-		<td class="td_main">UserGeneralInfo_Organizations_Name</td>
-		<td class="th_main">
-			0.00 %
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-						<tr>
-							<td class="error td_main">
-								ERROR</td>
-				<td class="td_main">01</td>
-				<td class="td_main">
-										100.00 %
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_WITH_EXPLANATION</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning_no_data td_main">
-								WARNING_NO_DATA</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING_ONLY_NEW</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="false_positive td_main">
-								FALSE_POSITIVE</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="success td_main">
-								SUCCESS</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						</table>
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-				<tr>
-					<th class="th_main">Identified Data Behavior</th>
-					<th class="th_main">Count</th>
-				</tr>
-								<tr>
-					<td class="td_main">More data from the new service.</td>
-					<td class="td_main">01</td>
-				</tr>
-								<tr>
-					<td class="td_main">MISSING EXPECTED DATA.</td>
-					<td class="td_main">01</td>
-				</tr>
-							</table>
-		</td>
-		<td class="td_main">
-					</td>
-		<td class="td_main">
-					00h: 00mn:00s:019
-					</td>
-		<td class="td_main">
-			<a href="UserGeneralInfo_Organizations_Name_1.htm">Test Details</a>
-		</td>
-	</tr>
-		<tr>
-		<td class="td_main">UserGeneralInfo_Organizations_Type</td>
-		<td class="th_main">
-			0.00 %
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-						<tr>
-							<td class="error td_main">
-								ERROR</td>
-				<td class="td_main">01</td>
-				<td class="td_main">
-										100.00 %
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_WITH_EXPLANATION</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning_no_data td_main">
-								WARNING_NO_DATA</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING_ONLY_NEW</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="false_positive td_main">
-								FALSE_POSITIVE</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="success td_main">
-								SUCCESS</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						</table>
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-				<tr>
-					<th class="th_main">Identified Data Behavior</th>
-					<th class="th_main">Count</th>
-				</tr>
-								<tr>
-					<td class="td_main">WRONG VALUE when comparing.</td>
-					<td class="td_main">01</td>
-				</tr>
-							</table>
-		</td>
-		<td class="td_main">
-					</td>
-		<td class="td_main">
-					00h: 00mn:00s:012
-					</td>
-		<td class="td_main">
-			<a href="UserGeneralInfo_Organizations_Type_1.htm">Test Details</a>
-		</td>
-	</tr>
-		<tr>
-		<td class="td_main">UserGeneralInfo_Organizations_IdAndName</td>
-		<td class="th_main">
-			0.00 %
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-						<tr>
-							<td class="error td_main">
-								ERROR</td>
-				<td class="td_main">01</td>
-				<td class="td_main">
-										100.00 %
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_ONLY_OLD</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="error_with_explanation td_main">
-								ERROR_WITH_EXPLANATION</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning_no_data td_main">
-								WARNING_NO_DATA</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="warning td_main">
-								WARNING_ONLY_NEW</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="false_positive td_main">
-								FALSE_POSITIVE</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						<tr>
-							<td class="success td_main">
-								SUCCESS</td>
-				<td class="td_main">00</td>
-				<td class="td_main">
-									</td>
-			</tr>
-						</table>
-		</td>
-		<td class="td_main">
-			<table class="table_main">
-				<tr>
-					<th class="th_main">Identified Data Behavior</th>
-					<th class="th_main">Count</th>
-				</tr>
-							</table>
-		</td>
-		<td class="td_main">
-					</td>
-		<td class="td_main">
-					00h: 00mn:00s:005
+					00h: 00mn:00s:006
 					</td>
 		<td class="td_main">
 			<a href="UserGeneralInfo_Organizations_IdAndName_1.htm">Test Details</a>
@@ -4129,7 +4258,7 @@
 					<th class="th_main">Count</th>
 				</tr>
 								<tr>
-					<td class="td_main">Tree contains LESS elements at a give depth.</td>
+					<td class="td_main">Tree contains LESS elements at a given depth.</td>
 					<td class="td_main">01</td>
 				</tr>
 							</table>
@@ -4137,7 +4266,7 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:009
+					00h: 00mn:00s:022
 					</td>
 		<td class="td_main">
 			<a href="UserGeneralInfo_Organizations_TreeDepthCoherence_1.htm">Test Details</a>
@@ -4215,16 +4344,12 @@
 					<th class="th_main">Identified Data Behavior</th>
 					<th class="th_main">Count</th>
 				</tr>
-								<tr>
-					<td class="td_main">Merging the trees required using an element at a given depth that MAY have failed the conditions.</td>
-					<td class="td_main">01</td>
-				</tr>
 							</table>
 		</td>
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:006
+					00h: 00mn:00s:004
 					</td>
 		<td class="td_main">
 			<a href="UserGeneralInfo_Organizations_TreeMerged_1.htm">Test Details</a>
@@ -4232,6 +4357,89 @@
 	</tr>
 		<tr>
 		<td class="td_main">UserGeneralInfo_Organizations_Missions</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserGeneralInfo_Organizations_Missions_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserGeneralInfo_Organizations_YmgStatus</td>
 		<td class="th_main">
 			100.00 %
 		</td>
@@ -4307,10 +4515,425 @@
 		<td class="td_main">
 					</td>
 		<td class="td_main">
-					00h: 00mn:00s:004
+					00h: 00mn:00s:
 					</td>
 		<td class="td_main">
-			<a href="UserGeneralInfo_Organizations_Missions_1.htm">Test Details</a>
+			<a href="UserGeneralInfo_Organizations_YmgStatus_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_GeneralContact_OfficePhone</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_GeneralContact_OfficePhone_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_GeneralContact_ClinicPhone</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_GeneralContact_ClinicPhone_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_GeneralContact_LabPhone</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_GeneralContact_LabPhone_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_GeneralContact_OfficeFax</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_GeneralContact_OfficeFax_1.htm">Test Details</a>
+		</td>
+	</tr>
+		<tr>
+		<td class="td_main">UserContactLocationInfo_GeneralContact_ClinicFax</td>
+		<td class="th_main">
+			100.00 %
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+						<tr>
+							<td class="error td_main">
+								ERROR</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_ONLY_OLD</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="error_with_explanation td_main">
+								ERROR_WITH_EXPLANATION</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning_no_data td_main">
+								WARNING_NO_DATA</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="warning td_main">
+								WARNING_ONLY_NEW</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="false_positive td_main">
+								FALSE_POSITIVE</td>
+				<td class="td_main">00</td>
+				<td class="td_main">
+									</td>
+			</tr>
+						<tr>
+							<td class="success td_main">
+								SUCCESS</td>
+				<td class="td_main">01</td>
+				<td class="td_main">
+										100.00 %
+									</td>
+			</tr>
+						</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+							</table>
+		</td>
+		<td class="td_main">
+					</td>
+		<td class="td_main">
+					00h: 00mn:00s:
+					</td>
+		<td class="td_main">
+			<a href="UserContactLocationInfo_GeneralContact_ClinicFax_1.htm">Test Details</a>
 		</td>
 	</tr>
 		</table>

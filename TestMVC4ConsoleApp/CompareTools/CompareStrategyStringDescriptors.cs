@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using TestMVC4ConsoleApp.CompareTools;
+using System.Text;
+using System.Threading.Tasks;
+using TestMVC4App.Models;
 
-namespace TestMVC4App.Models
+namespace TestMVC4ConsoleApp.CompareTools
 {
-    public class CompareStrategyStringInStructure : CompareStrategy
+    public class CompareStrategyStringDescriptors : CompareStrategy
     {
         private int leftOversOldCount = -1;
-        private Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> oldValues;
-        private Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> newValues;
+        private HashSet<StringDescriptor> oldValues;
+        private HashSet<StringDescriptor> newValues;
 
-        public CompareStrategyStringInStructure(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> oldValues, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> newValues, ResultReport resultReport) 
-            : base(oldValues,newValues,resultReport)
+        public CompareStrategyStringDescriptors(HashSet<StringDescriptor> oldValues, HashSet<StringDescriptor> newValues, ResultReport resultReport)
+            : base(oldValues, newValues, resultReport)
         {
-
+            this.oldValues = oldValues;
+            this.newValues = newValues;
         }
 
         public override void Investigate()
@@ -21,11 +25,6 @@ namespace TestMVC4App.Models
             bool keepGoing = true;
 
             if (keepGoing)
-            {
-                keepGoing = AreThereDuplicatesOnTheNewSide();
-            }
-
-            if(keepGoing)
             {
                 keepGoing = AreBothListsEmpty();
             }
@@ -42,8 +41,13 @@ namespace TestMVC4App.Models
 
             if (keepGoing)
             {
+                keepGoing = AreThereDuplicatesOnTheNewSide();
+            }
+
+            if (keepGoing)
+            {
                 // plain : case sensitive, not shifted, not trimmed, not partial
-                keepGoing = AreBothCollectionsEquivalent(true,false, false, false);
+                keepGoing = AreBothCollectionsEquivalent(true, false, false, false);
             }
 
             if (keepGoing)
@@ -72,7 +76,7 @@ namespace TestMVC4App.Models
             if (keepGoing)
             {
                 // not case sensitive, not shifted, not trimmed, not partial
-                keepGoing = AreBothCollectionsEquivalent(false,false, false, false);
+                keepGoing = AreBothCollectionsEquivalent(false, false, false, false);
             }
         }
 
@@ -82,8 +86,8 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            if (this.oldValues.Where(x => !string.IsNullOrEmpty(x.Value.Value)).Count() <= 0 
-                && this.newValues.Where(x => !string.IsNullOrEmpty(x.Value.Value)).Count() <= 0)
+            if (this.oldValues.Where(x => !string.IsNullOrEmpty(x.Value)).Count() <= 0
+                && this.newValues.Where(x => !string.IsNullOrEmpty(x.Value)).Count() <= 0)
             {
                 this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING_NO_DATA);
                 shouldContinueTesting = false;
@@ -100,7 +104,7 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            if (this.oldValues.Where(x => !string.IsNullOrEmpty(x.Value.Value)).Count() <= 0)
+            if (this.oldValues.Where(x => !string.IsNullOrEmpty(x.Value)).Count() <= 0)
             {
                 this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING_ONLY_NEW);
                 shouldContinueTesting = false;
@@ -117,7 +121,7 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            if (this.newValues.Where(x=>!string.IsNullOrEmpty(x.Value.Value)).Count() <= 0)
+            if (this.newValues.Where(x => !string.IsNullOrEmpty(x.Value)).Count() <= 0)
             {
                 this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR_ONLY_OLD);
                 shouldContinueTesting = false;
@@ -148,41 +152,43 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            IEnumerable<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>> leftOversOld;
-            IEnumerable<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> leftOversNew;
+            IEnumerable<HashSet<StringDescriptor>> leftOversOld;
+            IEnumerable<HashSet<StringDescriptor>> leftOversNew;
 
-            int previousCount = this.oldValues.Where(x => !x.Value.HasBeenMatched).Count();
+            int previousCount = this.oldValues.Where(x => !x.HasBeenMatched).Count();
+
+            List<HashSet<StringDescriptor>> oldValuesList = new List<HashSet<StringDescriptor>>();
+            oldValuesList.Add(new HashSet<StringDescriptor>(this.oldValues.Where(x => !x.HasBeenMatched)));
+
+            List<HashSet<StringDescriptor>> newValuesList = new List<HashSet<StringDescriptor>>();
+            newValuesList.Add(new HashSet<StringDescriptor>(this.newValues.Where(x => !x.HasBeenMatched)));
 
             if (partial)
             {
-                leftOversOld = this.oldValues.Except(this.newValues, new ComparerStringWithKeyPartial());
-                leftOversNew = this.newValues.Where(x => !x.Value.HasBeenMatched).Except(this.newValues.Where(x => !x.Value.HasBeenMatched), new ComparerStringWithKeyPartial());
+                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringPartial());
+                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringPartial());
             }
             else if (shifted)
             {
-                this.oldValues.Except(this.newValues, new ComparerStringWithKeyPartial());
-                leftOversOld = this.oldValues.Where(x => !x.Value.HasBeenMatched).Except(this.newValues.Where(x => !x.Value.HasBeenMatched), new ComparerStringWithKeyShifted());
-                leftOversNew = this.newValues.Where(x => !x.Value.HasBeenMatched).Except(this.newValues.Where(x => !x.Value.HasBeenMatched), new ComparerStringWithKeyShifted());
+                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringShifted());
+                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringShifted());
             }
             else if (trim)
             {
-                leftOversOld = this.oldValues.Where(x => !x.HasBeenMatched).Except(this.newValues.Where(x => !x.HasBeenMatched), new ComparerStringWithKeyTrimmed());
-                leftOversNew = this.newValues.Where(x => !x.HasBeenMatched).Except(this.oldValues.Where(x => !x.HasBeenMatched), new ComparerStringWithKeyTrimmed());
+                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringTrimmed());
+                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringTrimmed());
             }
             else if (caseSensitive)
             {
-                ComparerStringWithKey comparer = new ComparerStringWithKey();
-                comparer.Default.Equals(this.oldValues as object, this.newValues as object);
-
-                var leftOversOld2 = this.oldValues.Except(this.newValues, new ComparerStringWithKey());
-                var leftOversNew2 = this.newValues.Except(this.oldValues, new ComparerStringWithKey());
+                leftOversOld = oldValuesList.Except(newValuesList, new ComparerString());
+                leftOversNew = newValuesList.Except(oldValuesList, new ComparerString());
             }
             else
             {
-                leftOversOld = this.oldValues.Where(x => !x.HasBeenMatched).Except(this.newValues.Where(x => !x.HasBeenMatched), new ComparerStringWithKeyNotCaseSensitive());
-                leftOversNew = this.newValues.Where(x => !x.HasBeenMatched).Except(this.oldValues.Where(x => !x.HasBeenMatched), new ComparerStringWithKeyNotCaseSensitive());
+                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringNotCaseSensitive());
+                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringNotCaseSensitive());
             }
-             
+
             this.leftOversOldCount = leftOversOld.Count();
             var leftOversNewCount = leftOversNew.Count();
 
@@ -210,8 +216,8 @@ namespace TestMVC4App.Models
                 if (!caseSensitive || trim || shifted)
                 {
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
-                } 
-                else 
+                }
+                else
                 {
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                     shouldContinueTesting = false;
@@ -239,17 +245,16 @@ namespace TestMVC4App.Models
 
                 if (potentialDuplicates.Count() > 0)
                 {
-
                     foreach (var duplicateGroup in potentialDuplicates)
                     {
                         foreach (var duplicatedMember in duplicateGroup.Members)
                         {
-                            duplicatedMember.Value.Duplicate = true;
+                            duplicatedMember.Duplicate = true;
                         }
                     }
                 }
 
-                if (this.oldValues.Where(x=>!x.Value.HasBeenMatched).Count() == 0)
+                if (this.oldValues.Where(x => !x.HasBeenMatched).Count() == 0)
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
@@ -263,12 +268,15 @@ namespace TestMVC4App.Models
         {
             bool shouldContinueTesting = true;
 
-            var potentialDuplicates = this.newValues.GroupBy(v => v.Value).Where(g => g.Count() > 1).Select(g => g.Key);
+            var potentialDuplicates = this.newValues.GroupBy(v => new { v.Value }).Where(g => g.Count() > 1).Select(g => new { GroupName = g.Key, Members = g });
             if (potentialDuplicates.Count() > 0)
             {
-                foreach (var duplicate in potentialDuplicates)
+                foreach (var duplicateGroup in potentialDuplicates)
                 {
-                    duplicate.Duplicate = true;
+                    foreach (var duplicatedMember in duplicateGroup.Members)
+                    {
+                        duplicatedMember.Duplicate = true;
+                    }
                 }
 
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.DUPLICATED_VALUES_ON_NEW_SERVICE);

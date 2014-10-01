@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TestMVC4ConsoleApp.CompareTools;
 
 namespace TestMVC4App.Models
 {
     public class CompareStrategyContextSwitcher
     {
         // compare a bunch of data that belongs together - an entity
-        private HashSet<CompareStrategy> compareStrategies;
+        private HashSet<CompareStrategy> compareStrategies = new HashSet<CompareStrategy>();
 
         /// <summary>
         /// Compare values.
@@ -18,7 +19,7 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(string oldValue, string newValue, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(oldValue), StringDescriptor.EmbedInDescriptors(newValue), resultReport));
+            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(oldValue), StringDescriptor.EmbedInDescriptors(newValue), resultReport));
         }
 
         /// <summary>
@@ -29,18 +30,18 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(oldValues),StringDescriptor.EmbedInDescriptors(newValues),resultReport));
+            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(oldValues),StringDescriptor.EmbedInDescriptors(newValues),resultReport));
         }
 
         /// <summary>
-        /// Compare list of values. Each value is mapped to a specific key.
+        /// Compare list of structured values. Each property value is mapped to a specific key.
         /// </summary>
         /// <param name="oldValues"></param>
         /// <param name="newValues"></param>
         /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(oldValues), StringDescriptor.EmbedInDescriptors(newValues), resultReport));
+            compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(oldValues), StringDescriptor.EmbedInDescriptors(newValues), resultReport));
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace TestMVC4App.Models
         {
             foreach(var slice in oldAndNewValues)
             {
-                compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value), resultReport));
+                compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value), resultReport));
             }
         }
 
@@ -67,7 +68,7 @@ namespace TestMVC4App.Models
         {
             foreach (var slice in oldAndNewValues)
             {
-                compareStrategies.Add(new CompareStrategyStringInStructure(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value),resultReport));
+                compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value),resultReport));
             }
         }
 

@@ -10,7 +10,6 @@ namespace TestMVC4App.Models
     /// </summary>
     public enum EnumOldServiceFieldsAsKeys
     {
-        GENERIC_KEY,
         UPI,
         gender,
         netID,
