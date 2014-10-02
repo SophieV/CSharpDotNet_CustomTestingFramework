@@ -3,6 +3,9 @@ using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
+    /// <summary>
+    /// Compares values having the same key : whether they match if both sides are made case-insensitive.
+    /// </summary>
     public class ComparerStringWithKeyNotCaseSensitive : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
@@ -17,8 +20,8 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         pairX.Value.HasBeenMatched = true;
                         y[pairX.Key].HasBeenMatched = true;
-                        pairX.Value.MismatchDueToCase = true;
-                        y[pairX.Key].MismatchDueToCase = true;
+                        pairX.Value.MatchedOnceCaseCorrected = true;
+                        y[pairX.Key].MatchedOnceCaseCorrected = true;
                     }
                 }
             }
@@ -33,8 +36,8 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         pairY.Value.HasBeenMatched = true;
                         x[pairY.Key].HasBeenMatched = true;
-                        pairY.Value.MismatchDueToCase = true;
-                        x[pairY.Key].MismatchDueToCase = true;
+                        pairY.Value.MatchedOnceCaseCorrected = true;
+                        x[pairY.Key].MatchedOnceCaseCorrected = true;
                     }
                 }
             }

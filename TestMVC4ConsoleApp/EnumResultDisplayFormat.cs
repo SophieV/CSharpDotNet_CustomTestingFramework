@@ -7,7 +7,7 @@ using System.Web;
 namespace TestMVC4App.Models
 {
     /// <summary>
-    /// Flag scanned when the templates are populated.
+    /// Indicates the data structure used for populating the templates.
     /// </summary>
     public enum EnumResultDisplayFormat
     {

@@ -8,11 +8,31 @@ using TestMVC4ConsoleApp.Templates;
 
 namespace TestMVC4App.Models
 {
+    /// <summary>
+    /// Component that is in charge of :
+    /// - holding statistics.
+    /// - coordinating I/O file system operations.
+    /// </summary>
     public sealed class LogManager : IDisposable
     {
+        /// <summary>
+        /// Exhaustive reference list of the specific tests run by this application.
+        /// </summary>
         public static SortedSet<EnumTestUnitNames> AllTestNames { get; private set; }
+
+        /// <summary>
+        /// Populated with human-readable equivalent of the keys used to refer to identified data patterns.
+        /// </summary>
         public static Dictionary<EnumIdentifiedDataBehavior, string> IdentifiedBehaviorsDescriptions { get; private set; }
+
+        /// <summary>
+        /// Keeping track of ignored inactive profiles.
+        /// </summary>
         public double StatsCountProfilesIgnored { get; set; }
+
+        /// <summary>
+        /// Keeping track of the tested profiles.
+        /// </summary>
         public double StatsCountTotalUpis { get; set; }
 
         private const string SUMMARY_BY_PROFILE_FILENAME = "QA_Reporting_Summary_UPIs.htm";
@@ -209,6 +229,13 @@ namespace TestMVC4App.Models
             durations[resultReport.TestName].Add(resultReport.Duration);
         }
 
+        /// <summary>
+        /// Computes the gathered data together for the home page.
+        /// </summary>
+        /// <param name="duration"></param>
+        /// <param name="errorHappened"></param>
+        /// <param name="errorMessage"></param>
+        /// <returns></returns>
         private SummaryReportSharedData ComputeSummaryStatistics(TimeSpan duration, string errorHappened, string errorMessage)
         {
             int countTroubleFreeUpis = 0;
@@ -309,7 +336,7 @@ namespace TestMVC4App.Models
         #region I/O - Files
 
         /// <summary>
-        /// Creates and Adds the header to the Detailed HTML file.
+        /// Creates and adds headers to the DetailedReport files.
         /// </summary>
         private static void StartWritingDetailedReports()
         {
@@ -341,7 +368,7 @@ namespace TestMVC4App.Models
         }
 
         /// <summary>
-        /// Creates and Adds the header to the Profile Overview HTML file.
+        /// Creates and adds the header to the ProfileReport file.
         /// </summary>
         private static void StartWritingProfileReport()
         {
@@ -365,8 +392,8 @@ namespace TestMVC4App.Models
         }
 
         /// <summary>
-        /// Closes after Adding the footer to the Profile Overview HTML file.
-        /// Closes all other HTML files.
+        /// Adds the footer to the ProfileReport file abd closes it.
+        /// Closes all the other detailed HTML files.
         /// </summary>
         private static void StopWritingReports()
         {
@@ -401,13 +428,9 @@ namespace TestMVC4App.Models
         }
 
         /// <summary>
-        /// Prepares Aggregations for Template and populates it. 
+        /// Populates the SummaryReport template. 
         /// </summary>
-        /// <param name="countTotalUpis"></param>
-        /// <param name="countIgnoredUpis"></param>
-        /// <param name="duration"></param>
-        /// <param name="errorHappened"></param>
-        /// <param name="errorMessage"></param>
+        /// <param name="templateData"></param>
         private static void WriteSummaryReport(SummaryReportSharedData templateData)
         {
             var htmlWriterForSummaryReport = new HtmlTextWriter(new StreamWriter(SUMMARY_FILENAME));
@@ -427,7 +450,7 @@ namespace TestMVC4App.Models
         }
 
         /// <summary>
-        /// Writes entry of specific Test to File.
+        /// Populates the appropriate template based on the display format needed (Un)Structured Lists/Tree of Organizations.
         /// </summary>
         /// <param name="templateData"></param>
         /// <param name="displayFormat"></param>
@@ -438,7 +461,7 @@ namespace TestMVC4App.Models
                 switch (displayFormat)
                 {
                     case EnumResultDisplayFormat.ListOfValues:
-                        var templateListValues = new DetailedReportStringLists();
+                        var templateListValues = new DetailedReportUnstructuredLists();
                         templateListValues.Session = new Dictionary<string, object>()
                         {
                             { "SharedDataObject", templateData }
@@ -472,7 +495,7 @@ namespace TestMVC4App.Models
                         }
                         break;
                     case EnumResultDisplayFormat.StructureOfValues:
-                        var templateListStructures = new DetailedReportStringListsKeyValuePairs();
+                        var templateListStructures = new DetailedReportStructuredLists();
                         templateListStructures.Session = new Dictionary<string, object>()
                         {
                             { "SharedDataObject", templateData }
@@ -492,6 +515,10 @@ namespace TestMVC4App.Models
             }
         }
 
+        /// <summary>
+        /// Populates the ProfileReport template.
+        /// </summary>
+        /// <param name="templateData"></param>
         private static void WriteProfileEntry(ProfileReportSharedData templateData)
         {
             var template = new ProfileReport();

@@ -4,6 +4,9 @@ using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
+    /// <summary>
+    /// Compares values having the same key : whether they match if one of the sides is split and reassembled.
+    /// </summary>
     public class ComparerStringWithKeyShifted : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
@@ -22,7 +25,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                         {
                             pairX.Value.HasBeenMatched = true;
                             y[pairX.Key].HasBeenMatched = true;
-                            pairX.Value.MismatchDueToShiftedName = true;
+                            pairX.Value.MatchedOnceShifted = true;
                         }
                     }
                     else if (y[pairX.Key].Value.Contains(','))
@@ -33,7 +36,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                         {
                             pairX.Value.HasBeenMatched = true;
                             y[pairX.Key].HasBeenMatched = true;
-                            y[pairX.Key].MismatchDueToShiftedName = true;
+                            y[pairX.Key].MatchedOnceShifted = true;
                         }
                     }
                 }
@@ -53,7 +56,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                         {
                             pairY.Value.HasBeenMatched = true;
                             x[pairY.Key].HasBeenMatched = true;
-                            pairY.Value.MismatchDueToShiftedName = true;
+                            pairY.Value.MatchedOnceShifted = true;
                         }
                     }
                     else if (x[pairY.Key].Value.Contains(','))
@@ -64,7 +67,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                         {
                             pairY.Value.HasBeenMatched = true;
                             x[pairY.Key].HasBeenMatched = true;
-                            x[pairY.Key].MismatchDueToShiftedName = true;
+                            x[pairY.Key].MatchedOnceShifted = true;
                         }
                     }
                 }

@@ -1,7 +1,7 @@
 ﻿namespace TestMVC4App.Models
 {
     /// <summary>
-    /// Explicit list of all the implemented Tests.
+    /// Exhaustive list of all the implemented Tests.
     /// </summary>
     public enum EnumTestUnitNames
     {

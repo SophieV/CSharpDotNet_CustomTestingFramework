@@ -1,9 +1,10 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace TestMVC4App.Models
 {
+    /// <summary>
+    /// Compares values : whether they match if one or both sides have trailing spaces removed.
+    /// </summary>
     public class ComparerStringTrimmed : IEqualityComparer<StringDescriptor>
     {
         bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
@@ -16,20 +17,20 @@ namespace TestMVC4App.Models
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        y.MismatchDueToTrailingSpaces = true;
+                        y.MatchedOnceTrailingSpacesRemoved = true;
                     }
                     else if (x.Value.Trim() == y.Value)
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        x.MismatchDueToTrailingSpaces = true;
+                        x.MatchedOnceTrailingSpacesRemoved = true;
                     }
                     else if (x.Value.Trim() == y.Value.Trim())
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        x.MismatchDueToTrailingSpaces = true;
-                        y.MismatchDueToTrailingSpaces = true;
+                        x.MatchedOnceTrailingSpacesRemoved = true;
+                        y.MatchedOnceTrailingSpacesRemoved = true;
                     }
                 }
             }

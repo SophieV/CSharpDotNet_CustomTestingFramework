@@ -42,23 +42,23 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.OldStructureValues.Count() #>]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.NewStructureValues.Count() #>]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.StructuredOldValues.Count() #>]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.StructuredNewValues.Count() #>]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
-				<# if(SharedDataObject.OldStructureValues.Count() > 0) {
-				foreach (var oldValueStructure in SharedDataObject.OldStructureValues) { #>
+				<# if(SharedDataObject.StructuredOldValues.Count() > 0) {
+				foreach (var oldValueStructure in SharedDataObject.StructuredOldValues) { #>
 				<ul>
 					<# foreach (var oldValuePair in oldValueStructure) { #>
 						<li><# if(!string.IsNullOrEmpty(oldValuePair.Value.Value)) { #>
 						<#= oldValuePair.Value.Value #>
 						<# if(!oldValuePair.Value.HasBeenMatched) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
-						<# if(oldValuePair.Value.Duplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
-						<# if(oldValuePair.Value.MismatchDueToTrailingSpaces) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
-						<# if(oldValuePair.Value.MismatchDueToCase) { #><span class="missing">[CASE]</span><# } #>
-						<# if(oldValuePair.Value.MismatchDueToPartialName) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
-						<# if(oldValuePair.Value.MismatchDueToShiftedName) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
+						<# if(oldValuePair.Value.IsDuplicate) { #><span class="IsDuplicate">[IsDuplicate]</span><# } #>
+						<# if(oldValuePair.Value.MatchedOnceTrailingSpacesRemoved) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
+						<# if(oldValuePair.Value.MatchedOnceCaseCorrected) { #><span class="missing">[CASE]</span><# } #>
+						<# if(oldValuePair.Value.PartialMatchOnly) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
+						<# if(oldValuePair.Value.MatchedOnceShifted) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
 
 						<# } else { #>NULL<# } #></li>
 					<# } #>
@@ -66,18 +66,18 @@
 				<# } } #>
 			</td>
 			<td class="td_main">
-				<# if(SharedDataObject.NewStructureValues.Count > 0) {
-				foreach (var newValueStructure in SharedDataObject.NewStructureValues) { #>
+				<# if(SharedDataObject.StructuredNewValues.Count > 0) {
+				foreach (var newValueStructure in SharedDataObject.StructuredNewValues) { #>
 				<ul>
 					<# foreach (var newValuePair in newValueStructure) { #>
 						<li><# if(!string.IsNullOrEmpty(newValuePair.Value.Value)) { #>
 						<#= newValuePair.Value.Value #>
 						<# if(!newValuePair.Value.HasBeenMatched) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
-						<# if(newValuePair.Value.Duplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
-						<# if(newValuePair.Value.MismatchDueToTrailingSpaces) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
-						<# if(newValuePair.Value.MismatchDueToCase) { #><span class="missing">[CASE]</span><# } #>
-						<# if(newValuePair.Value.MismatchDueToPartialName) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
-						<# if(newValuePair.Value.MismatchDueToShiftedName) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
+						<# if(newValuePair.Value.IsDuplicate) { #><span class="IsDuplicate">[IsDuplicate]</span><# } #>
+						<# if(newValuePair.Value.MatchedOnceTrailingSpacesRemoved) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
+						<# if(newValuePair.Value.MatchedOnceCaseCorrected) { #><span class="missing">[CASE]</span><# } #>
+						<# if(newValuePair.Value.PartialMatchOnly) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
+						<# if(newValuePair.Value.MatchedOnceShifted) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
 						<# } else { #>NULL<# } #></li>
 					<# } #>
 				</ul>

@@ -42,7 +42,7 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_Addresses_Test()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.location.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.locationName,
+            var oldValues = ParsingHelper.ParseStructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.location.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.locationName,
                                                                                                                                         EnumOldServiceFieldsAsKeys.building,
                                                                                                                                         EnumOldServiceFieldsAsKeys.addressLine1,
                                                                                                                                         EnumOldServiceFieldsAsKeys.suite,
@@ -76,7 +76,7 @@ namespace TestMVC4App.Models
                     value.Append(" ");
                     value.Append(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailingAddress2.ToString()));
                         
-                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.addressLine1, value.ToString());
+                    mailingAddress.Add(EnumOldServiceFieldsAsKeys.addressLine1, value.ToString().Trim());
                 }
                 catch (Exception)
                 {
@@ -229,8 +229,8 @@ namespace TestMVC4App.Models
             watch.Start();
 
             List<string> oldValues = new List<string>();
-            oldValues.AddRange(ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.latitude.ToString()));
-            oldValues.AddRange(ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.longitude.ToString()));
+            oldValues.AddRange(ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.latitude.ToString()));
+            oldValues.AddRange(ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.longitude.ToString()));
 
             HashSet<string> roundedOldValues = new HashSet<string>(oldValues.Where(x=>!string.IsNullOrEmpty(x)).Select(x=>Math.Round(Double.Parse(x),0).ToString()));
 
@@ -254,7 +254,7 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_Geo, "Comparing Geo Location Data");
-            var compareStrategy = new CompareStrategyContextSwitcher(roundedOldValues, roundedNewValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(roundedOldValues, roundedNewValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -272,10 +272,10 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.titleName.ToString());
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.titleName.ToString());
 
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -293,10 +293,10 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.link.ToString());
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.link.ToString());
 
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -314,7 +314,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.addressLine1.ToString());
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.addressLine1.ToString());
 
             StringBuilder mailingAddress = new StringBuilder();
             mailingAddress.Append(ParsingHelper.ParseSingleValue(oldServiceNodes, EnumOldServiceFieldsAsKeys.mailingAddress1.ToString()));
@@ -327,7 +327,7 @@ namespace TestMVC4App.Models
             }
 
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -353,7 +353,7 @@ namespace TestMVC4App.Models
             oldValues.Add(mailingAddress.ToString());
 
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address");
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 
@@ -371,10 +371,10 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
 
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
 
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
-            var compareStrategy = new CompareStrategyContextSwitcher(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
+            var compareStrategy = new CompareStrategyFactory(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
             compareStrategy.Investigate();
             watch.Stop();
 

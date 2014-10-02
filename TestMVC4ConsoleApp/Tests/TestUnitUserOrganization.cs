@@ -196,7 +196,7 @@ namespace TestMVC4App.Models
 
                         foreach(var temp in tempValues)
                         {
-                            orgDesc.Missions.Add(temp);
+                            orgDesc.Missions.Add(temp.Trim());
                         }
                     }
                 }
@@ -371,7 +371,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_Organizations_IdAndName, "Comparing Organization Id+Name Combinations");
-            var compareStrategy = new CompareStrategyContextSwitcher(
+            var compareStrategy = new CompareStrategyFactory(
                 oldServiceOrganizationDescriptors,
                 oldTreeRoot,
                 newServiceOrganizationDescriptors,

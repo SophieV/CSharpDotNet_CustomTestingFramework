@@ -34,7 +34,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                         EnumTestUnitNames.UserPublicationInfo_Titles,
                         "Comparing Publication Title(s)",
-                        ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString()),
+                        ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString()),
                         newValues);
             return newValues;
         }
@@ -54,7 +54,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                         EnumTestUnitNames.UserPublicationInfo_Citations,
                         "Comparing Publication Citation(s)",
-                        ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.description.ToString()),
+                        ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.featuredPublication.ToString(), EnumOldServiceFieldsAsKeys.description.ToString()),
                         newValues);
         }
     }

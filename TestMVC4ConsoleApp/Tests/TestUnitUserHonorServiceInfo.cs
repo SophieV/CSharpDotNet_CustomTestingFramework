@@ -26,7 +26,7 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_Honors()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalHonor.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.award,
+            var oldValues = ParsingHelper.ParseStructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalHonor.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.award,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
                                                                                                                                         EnumOldServiceFieldsAsKeys.presentationDate,
                                                                                                                                         EnumOldServiceFieldsAsKeys.category});
@@ -101,7 +101,7 @@ namespace TestMVC4App.Models
         /// </summary>
         private void UserEducationTrainingInfo_Services()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.role,
+            var oldValues = ParsingHelper.ParseStructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalService.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.role,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
                                                                                                                                         EnumOldServiceFieldsAsKeys.startDate,
                                                                                                                                         EnumOldServiceFieldsAsKeys.endDate,

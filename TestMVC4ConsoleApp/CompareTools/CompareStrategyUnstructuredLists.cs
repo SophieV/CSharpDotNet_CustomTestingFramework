@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
-    public class CompareStrategyStringDescriptors : CompareStrategy
+    /// <summary>
+    /// Compares lists of unstructured data against each other.
+    /// </summary>
+    public class CompareStrategyUnstructuredLists : CompareStrategy
     {
         private HashSet<StringDescriptor> oldValues;
         private HashSet<StringDescriptor> newValues;
 
-        public CompareStrategyStringDescriptors(HashSet<StringDescriptor> oldValues, HashSet<StringDescriptor> newValues, ResultReport resultReport)
+        public CompareStrategyUnstructuredLists(HashSet<StringDescriptor> oldValues, HashSet<StringDescriptor> newValues, ResultReport resultReport)
             : base(oldValues, newValues, resultReport)
         {
             this.oldValues = oldValues;
@@ -62,6 +62,12 @@ namespace TestMVC4ConsoleApp.CompareTools
 
             if (keepGoing)
             {
+                // not case sensitive, not shifted, not trimmed, not partial
+                keepGoing = AreBothCollectionsEquivalent(false, false, false, false);
+            }
+
+            if (keepGoing)
+            {
                 // case sensitive, shifted, not trimmed, not partial
                 keepGoing = AreBothCollectionsEquivalent(true, true, false, false);
             }
@@ -70,12 +76,6 @@ namespace TestMVC4ConsoleApp.CompareTools
             {
                 // plain : case sensitive, not shifted, not trimmed, partial
                 keepGoing = AreBothCollectionsEquivalent(true, false, false, true);
-            }
-
-            if (keepGoing)
-            {
-                // not case sensitive, not shifted, not trimmed, not partial
-                keepGoing = AreBothCollectionsEquivalent(false, false, false, false);
             }
         }
 
@@ -190,13 +190,13 @@ namespace TestMVC4ConsoleApp.CompareTools
             {
                 if (partial)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
-                    this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.PARTIAL_MATCH);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR_WITH_EXPLANATION);
                 } 
                 else if (shifted)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
-                    this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.PARTIAL_MATCH);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR_WITH_EXPLANATION);
                 }
                 else if (trim)
                 {
@@ -215,12 +215,19 @@ namespace TestMVC4ConsoleApp.CompareTools
                 if (!caseSensitive || trim || shifted || partial)
                 {
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
+                    shouldContinueTesting = false;
                 }
                 else
                 {
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                     shouldContinueTesting = false;
                 }
+            }
+            else if (oldCount == 0)
+            {
+                this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
+                shouldContinueTesting = false;
             }
             else
             {
@@ -247,12 +254,12 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         foreach (var duplicatedMember in duplicateGroup.Members)
                         {
-                            duplicatedMember.Duplicate = true;
+                            duplicatedMember.IsDuplicate = true;
                         }
                     }
                 }
 
-                if (this.oldValues.Where(x => !x.HasBeenMatched).Count() == 0)
+                if (this.oldValues.Where(x => !x.HasBeenMatched && !x.IsDuplicate).Count() == 0)
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
@@ -273,7 +280,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                 {
                     foreach (var duplicatedMember in duplicateGroup.Members)
                     {
-                        duplicatedMember.Duplicate = true;
+                        duplicatedMember.IsDuplicate = true;
                     }
                 }
 

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TestMVC4App.Models;
 
+/// <summary>
+/// Compares values : whether they match if both sides are made-case insensitive.
+/// </summary>
 namespace TestMVC4ConsoleApp.CompareTools
 {
     public class ComparerStringNotCaseSensitive : IEqualityComparer<StringDescriptor>
@@ -12,24 +14,12 @@ namespace TestMVC4ConsoleApp.CompareTools
             {
                 if (!string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(y.Value))
                 {
-                    if (y.Value.ToLower() == x.Value)
+                     if (y.Value.ToLower() == x.Value.ToLower())
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        y.MismatchDueToCase = true;
-                    }
-                    else if (y.Value == x.Value.ToLower())
-                    {
-                        x.HasBeenMatched = true;
-                        y.HasBeenMatched = true;
-                        x.MismatchDueToCase = true;
-                    }
-                    else if (y.Value.ToLower() == x.Value.ToLower())
-                    {
-                        x.HasBeenMatched = true;
-                        y.HasBeenMatched = true;
-                        y.MismatchDueToCase = true;
-                        x.MismatchDueToCase = true;
+                        y.MatchedOnceCaseCorrected = true;
+                        x.MatchedOnceCaseCorrected = true;
                     }
                 }
             }

@@ -35,7 +35,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                         EnumTestUnitNames.UserResearchInfo_PublicHealthKeywords,
                         "Comparing Public Health Keyword(s)",
-                        ParsingHelper.ParseListSimpleValues(ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.publicHealthKeywords.ToString()), EnumOldServiceFieldsAsKeys.keyword.ToString(), EnumOldServiceFieldsAsKeys.name.ToString()),
+                        ParsingHelper.ParseUnstructuredListOfValues(ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.publicHealthKeywords.ToString()), EnumOldServiceFieldsAsKeys.keyword.ToString(), EnumOldServiceFieldsAsKeys.name.ToString()),
                         newValues);
         }
 

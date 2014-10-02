@@ -169,7 +169,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId,this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -187,7 +187,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValues, newValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -205,7 +205,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyContextSwitcher(oldAndNewValues, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldAndNewValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -223,7 +223,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyContextSwitcher(newAndOldValues,resultReport);
+            var compareStrategy = new CompareStrategyFactory(newAndOldValues,resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -248,7 +248,7 @@ namespace TestMVC4App.Models
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newValue, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, newValue, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();

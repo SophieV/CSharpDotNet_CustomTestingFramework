@@ -178,7 +178,7 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_BoardCertifications()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
+            var oldValues = ParsingHelper.ParseStructuredListOfValues(
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.boardCertification.ToString(), 
                 new EnumOldServiceFieldsAsKeys[] { 

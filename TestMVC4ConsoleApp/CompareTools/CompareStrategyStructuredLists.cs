@@ -1,16 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TestMVC4ConsoleApp.CompareTools;
 
 namespace TestMVC4App.Models
 {
-    public class CompareStrategyStringDescriptorsDictionary : CompareStrategy
+    /// <summary>
+    /// Compares lists of structured data (with keys) against each other.
+    /// Limitations :
+    /// String values are matched regardless of the structure they belong to, as long as they are in the same list.
+    /// However they are matched with consideration to the key they are mapped to.
+    /// 
+    /// No check for duplicates.
+    /// </summary>
+    public class CompareStrategyStructuredLists : CompareStrategy
     {
         private HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues;
         private HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues;
 
-        public CompareStrategyStringDescriptorsDictionary(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues, ResultReport resultReport) 
+        public CompareStrategyStructuredLists(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues, ResultReport resultReport) 
             : base(oldValues,newValues,resultReport)
         {
             this.oldValues = oldValues;
@@ -50,6 +57,12 @@ namespace TestMVC4App.Models
 
             if (keepGoing)
             {
+                // not case sensitive, not shifted, not trimmed, not partial
+                keepGoing = AreBothCollectionsEquivalent(false, false, false, false);
+            }
+
+            if (keepGoing)
+            {
                 // case sensitive, shifted, not trimmed, not partial
                 keepGoing = AreBothCollectionsEquivalent(true, true, false, false);
             }
@@ -58,12 +71,6 @@ namespace TestMVC4App.Models
             {
                 // plain : case sensitive, not shifted, not trimmed, partial
                 keepGoing = AreBothCollectionsEquivalent(true, false, false, true);
-            }
-
-            if (keepGoing)
-            {
-                // not case sensitive, not shifted, not trimmed, not partial
-                keepGoing = AreBothCollectionsEquivalent(false,false, false, false);
             }
         }
 
@@ -172,13 +179,13 @@ namespace TestMVC4App.Models
             {
                 if (partial)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
-                    this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.PARTIAL_MATCH);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR_WITH_EXPLANATION);
                 } 
                 else if (shifted)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
-                    this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.PARTIAL_MATCH);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR_WITH_EXPLANATION);
                 }
                 else if (trim)
                 {
@@ -207,7 +214,7 @@ namespace TestMVC4App.Models
             } else if (oldCount == 0)
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
-                this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
+                this.resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                 shouldContinueTesting = false;
             }
             else

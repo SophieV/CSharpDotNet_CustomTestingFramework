@@ -4,6 +4,9 @@ using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
+    /// <summary>
+    /// Compares values : whether they match if one side is split and reassembled.
+    /// </summary>
     public class ComparerStringShifted : IEqualityComparer<StringDescriptor>
     {
         bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
@@ -16,13 +19,13 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        x.MismatchDueToShiftedName = true;
+                        x.MatchedOnceShifted = true;
                     }
                     if (y.Value.Contains(',') && x.Value == y.Value.Split(',')[1].Trim() + " " + y.Value.Split(',')[0].Trim())
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        y.MismatchDueToShiftedName = true;
+                        y.MatchedOnceShifted = true;
                     }
                 }
             }

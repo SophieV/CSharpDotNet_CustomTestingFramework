@@ -4,6 +4,10 @@ using TestMVC4App.Models;
 
 namespace TestMVC4App.Templates
 {
+    /// <summary>
+    /// Object shared between the application logic and the UI template.
+    /// It contains the necessary data needed for display on the Report.
+    /// </summary>
     public class SummaryReportSharedData
     {
         public double CountProfilesTested { get; set; }

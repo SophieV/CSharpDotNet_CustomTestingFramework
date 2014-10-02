@@ -25,7 +25,7 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_Education()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
+            var oldValues = ParsingHelper.ParseStructuredListOfValues(
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.education.ToString(), 
                 new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.degree,
@@ -81,7 +81,7 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_Trainings()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValuesStructure(
+            var oldValues = ParsingHelper.ParseStructuredListOfValues(
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.training.ToString(), new 
                     EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.departmentName, 

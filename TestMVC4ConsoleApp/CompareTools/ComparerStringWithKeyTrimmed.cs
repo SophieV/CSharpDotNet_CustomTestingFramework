@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace TestMVC4App.Models
 {
+    /// <summary>
+    /// Compares values having the same key : whether they match if one or both sides have trailing spaces removed.
+    /// </summary>
     public class ComparerStringWithKeyTrimmed : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
@@ -17,20 +20,20 @@ namespace TestMVC4App.Models
                     {
                         pairX.Value.HasBeenMatched = true;
                         y[pairX.Key].HasBeenMatched = true;
-                        pairX.Value.MismatchDueToTrailingSpaces = true;
+                        pairX.Value.MatchedOnceTrailingSpacesRemoved = true;
                     }
                     else if (pairX.Value.Value == y[pairX.Key].Value.Trim())
                     {
                         pairX.Value.HasBeenMatched = true;
                         y[pairX.Key].HasBeenMatched = true;
-                        y[pairX.Key].MismatchDueToTrailingSpaces = true;
+                        y[pairX.Key].MatchedOnceTrailingSpacesRemoved = true;
                     }
                     else if (pairX.Value.Value.Trim() == y[pairX.Key].Value.Trim())
                     {
                         pairX.Value.HasBeenMatched = true;
                         y[pairX.Key].HasBeenMatched = true;
-                        pairX.Value.MismatchDueToTrailingSpaces = true;
-                        y[pairX.Key].MismatchDueToTrailingSpaces = true;
+                        pairX.Value.MatchedOnceTrailingSpacesRemoved = true;
+                        y[pairX.Key].MatchedOnceTrailingSpacesRemoved = true;
                     }
                 }
             }
@@ -45,20 +48,20 @@ namespace TestMVC4App.Models
                     {
                         pairY.Value.HasBeenMatched = true;
                         x[pairY.Key].HasBeenMatched = true;
-                        pairY.Value.MismatchDueToTrailingSpaces = true;
+                        pairY.Value.MatchedOnceTrailingSpacesRemoved = true;
                     }
                     else if (pairY.Value.Value == x[pairY.Key].Value.Trim())
                     {
                         pairY.Value.HasBeenMatched = true;
                         x[pairY.Key].HasBeenMatched = true;
-                        x[pairY.Key].MismatchDueToTrailingSpaces = true;
+                        x[pairY.Key].MatchedOnceTrailingSpacesRemoved = true;
                     }
                     else if (pairY.Value.Value.Trim() == x[pairY.Key].Value.Trim())
                     {
                         pairY.Value.HasBeenMatched = true;
                         x[pairY.Key].HasBeenMatched = true;
-                        pairY.Value.MismatchDueToTrailingSpaces = true;
-                        x[pairY.Key].MismatchDueToTrailingSpaces = true;
+                        pairY.Value.MatchedOnceTrailingSpacesRemoved = true;
+                        x[pairY.Key].MatchedOnceTrailingSpacesRemoved = true;
                     }
                 }
             }

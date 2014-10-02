@@ -6,7 +6,6 @@ using System.Xml.Linq;
 using YSM.PMS.Web.Service.Clients;
 using System.Diagnostics;
 using System.Xml.XPath;
-using System.Threading;
 using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models

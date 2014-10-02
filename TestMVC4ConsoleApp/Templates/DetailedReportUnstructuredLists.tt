@@ -42,44 +42,44 @@
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.OldValues.Count() #>]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.NewValues.Count() #>]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.UnstructuredOldValues.Count() #>]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: <#=SharedDataObject.UnstructuredNewValues.Count() #>]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
-					<# if(SharedDataObject.OldValues.Count() > 0) {
-					foreach (StringDescriptor oldValue in SharedDataObject.OldValues) { #>
+					<# if(SharedDataObject.UnstructuredOldValues.Count() > 0) {
+					foreach (StringDescriptor oldValue in SharedDataObject.UnstructuredOldValues) { #>
 					<li><# if(!string.IsNullOrEmpty(oldValue.Value)) { #><#= oldValue.Value #>
 					<# if(!oldValue.HasBeenMatched) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
-					<# if(oldValue.Duplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
-					<# if(oldValue.MismatchDueToTrailingSpaces) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
-					<# if(oldValue.MismatchDueToCase) { #><span class="missing">[CASE]</span><# } #>
-					<# if(oldValue.MismatchDueToPartialName) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
-					<# if(oldValue.MismatchDueToShiftedName) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
+					<# if(oldValue.IsDuplicate) { #><span class="IsDuplicate">[IsDuplicate]</span><# } #>
+					<# if(oldValue.MatchedOnceTrailingSpacesRemoved) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
+					<# if(oldValue.MatchedOnceCaseCorrected) { #><span class="missing">[CASE]</span><# } #>
+					<# if(oldValue.PartialMatchOnly) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
+					<# if(oldValue.MatchedOnceShifted) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
 				</ul>
 			</td>
 			<td class="td_main">
 				<ul>
-					<# if(SharedDataObject.NewValues.Count > 0) {
-					foreach (StringDescriptor newValue in SharedDataObject.NewValues) { #>
+					<# if(SharedDataObject.UnstructuredNewValues.Count > 0) {
+					foreach (StringDescriptor newValue in SharedDataObject.UnstructuredNewValues) { #>
 					<li><# if(!string.IsNullOrEmpty(newValue.Value)) { #>
 					<# string newValueToDisplay = newValue.Value;
-					if(SharedDataObject.OldValues.Count <= 1 && SharedDataObject.NewValues.Count <= 1) {
+					if(SharedDataObject.UnstructuredOldValues.Count <= 1 && SharedDataObject.UnstructuredNewValues.Count <= 1) {
 						string oldValue = string.Empty;
-						if(SharedDataObject.OldValues.Count() > 0) { oldValue = SharedDataObject.OldValues.First().Value; if(oldValue == null) { oldValue = string.Empty; } }
+						if(SharedDataObject.UnstructuredOldValues.Count() > 0) { oldValue = SharedDataObject.UnstructuredOldValues.First().Value; if(oldValue == null) { oldValue = string.Empty; } }
 						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue.Value);
 						newValueToDisplay = diffHelper.Build();
 					} #>
 					<#= newValueToDisplay #>
 					<# if(!newValue.HasBeenMatched) { #><span class="missing">[MISSING IN OLD SERVICE]</span><# } #>
-					<# if(newValue.Duplicate) { #><span class="duplicate">[DUPLICATE]</span><# } #>
-					<# if(newValue.MismatchDueToTrailingSpaces) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
-					<# if(newValue.MismatchDueToCase) { #><span class="missing">[CASE]</span><# } #>
-					<# if(newValue.MismatchDueToPartialName) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
-					<# if(newValue.MismatchDueToShiftedName) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
+					<# if(newValue.IsDuplicate) { #><span class="IsDuplicate">[IsDuplicate]</span><# } #>
+					<# if(newValue.MatchedOnceTrailingSpacesRemoved) { #><span class="missing">[TRAILING WHITE SPACES]</span><# } #>
+					<# if(newValue.MatchedOnceCaseCorrected) { #><span class="missing">[CASE]</span><# } #>
+					<# if(newValue.PartialMatchOnly) { #><span class="missing">[PARTIAL MATCH]</span><# } #>
+					<# if(newValue.MatchedOnceShifted) { #><span class="missing">[NAME REORGANIZED]</span><# } #>
 					<# } else { #>NULL<# } #></li>
 					<# } } #>
 				</ul>

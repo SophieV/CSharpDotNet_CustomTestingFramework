@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
+    /// <summary>
+    /// Compares values : whether one contains the other.
+    /// </summary>
     public class ComparerStringPartial : IEqualityComparer<StringDescriptor>
     {
         bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
@@ -16,13 +18,13 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        x.MismatchDueToPartialName = true;
+                        x.PartialMatchOnly = true;
                     }
                     else if (y.Value.Length > 4 && x.Value.Contains(y.Value))
                     {
                         x.HasBeenMatched = true;
                         y.HasBeenMatched = true;
-                        y.MismatchDueToPartialName = true;
+                        y.PartialMatchOnly = true;
                     }
                 }
             }

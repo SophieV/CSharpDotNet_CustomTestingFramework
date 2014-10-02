@@ -37,15 +37,15 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.LastName, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, newData.LastName, resultReport);
             compareStrategy.Investigate();
 
             if(resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
-                resultReport.ResetForReTesting();
+                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
-                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.AltLastName, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltLastName, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -66,15 +66,15 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.FirstName, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, newData.FirstName, resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
-                resultReport.ResetForReTesting();
+                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
-                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.AltFirstName, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltFirstName, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -95,7 +95,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-            var compareStrategy = new CompareStrategyContextSwitcher((!string.IsNullOrEmpty(oldValue)).ToString(), newData.IsAltMiddleNameDisplayed.ToString(), resultReport);
+            var compareStrategy = new CompareStrategyFactory((!string.IsNullOrEmpty(oldValue)).ToString(), newData.IsAltMiddleNameDisplayed.ToString(), resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -115,15 +115,15 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.Suffix, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, newData.Suffix, resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
-                resultReport.ResetForReTesting();
+                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
-                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.AltSuffix, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltSuffix, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -148,15 +148,15 @@ namespace TestMVC4App.Models
             {
                 oldValue = "False";
             }
-            var compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.MiddleName, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, newData.MiddleName, resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
             {
-                resultReport.ResetForReTesting();
+                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-                compareStrategy = new CompareStrategyContextSwitcher(oldValue, newData.AltMiddleName, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltMiddleName, resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -172,7 +172,7 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_Titles_Test()
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.title.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString());
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.title.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString());
 
             HashSet<string> newValues = new HashSet<string>();
             if(newData.Titles.Count() > 0)
@@ -191,7 +191,7 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_CountCVs_Test()
         {
-            HashSet<string> oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cv.ToString(), EnumOldServiceFieldsAsKeys.fileName.ToString());
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cv.ToString(), EnumOldServiceFieldsAsKeys.fileName.ToString());
             string oldValue = oldValues.Count().ToString();
 
             string newValue = newData.CVs.Count().ToString();
@@ -221,7 +221,7 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_LanguageUsers_Test()
         {
-            var oldValues = ParsingHelper.ParseListSimpleValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.language.ToString(), EnumOldServiceFieldsAsKeys.languageName.ToString());
+            var oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.language.ToString(), EnumOldServiceFieldsAsKeys.languageName.ToString());
 
             var newValues = new HashSet<string>();
             if (newData.LanguageUsers.Count() > 0)

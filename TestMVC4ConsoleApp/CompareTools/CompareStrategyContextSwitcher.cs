@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TestMVC4ConsoleApp.CompareTools;
 
 namespace TestMVC4App.Models
 {
-    public class CompareStrategyContextSwitcher
+    /// <summary>
+    /// Will create a <see cref="CompareStrategy"/> based on the context - data types supplied.
+    /// </summary>
+    public class CompareStrategyFactory
     {
         // compare a bunch of data that belongs together - an entity
         private HashSet<CompareStrategy> compareStrategies = new HashSet<CompareStrategy>();
@@ -17,58 +18,58 @@ namespace TestMVC4App.Models
         /// <param name="oldValue"></param>
         /// <param name="newValue"></param>
         /// <param name="resultReport"></param>
-        public CompareStrategyContextSwitcher(string oldValue, string newValue, ResultReport resultReport)
+        public CompareStrategyFactory(string oldValue, string newValue, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(true, oldValue), StringDescriptor.EmbedInDescriptors(false, newValue), resultReport));
+            compareStrategies.Add(new CompareStrategyUnstructuredLists(StringDescriptor.EmbedInDescriptors(true, oldValue), StringDescriptor.EmbedInDescriptors(false, newValue), resultReport));
         }
 
         /// <summary>
-        /// Compare list of values.
+        /// Compare unstructured lists of values.
         /// </summary>
         /// <param name="oldValues"></param>
         /// <param name="newValues"></param>
         /// <param name="resultReport"></param>
-        public CompareStrategyContextSwitcher(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
+        public CompareStrategyFactory(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(true, oldValues),StringDescriptor.EmbedInDescriptors(false, newValues),resultReport));
+            compareStrategies.Add(new CompareStrategyUnstructuredLists(StringDescriptor.EmbedInDescriptors(true, oldValues),StringDescriptor.EmbedInDescriptors(false, newValues),resultReport));
         }
 
         /// <summary>
-        /// Compare list of structured values. Each property value is mapped to a specific key.
+        /// Compare structured lists of values. Each property value is mapped to a specific key.
         /// </summary>
         /// <param name="oldValues"></param>
         /// <param name="newValues"></param>
         /// <param name="resultReport"></param>
-        public CompareStrategyContextSwitcher(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
+        public CompareStrategyFactory(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(true, oldValues), StringDescriptor.EmbedInDescriptors(false, newValues), resultReport));
+            compareStrategies.Add(new CompareStrategyStructuredLists(StringDescriptor.EmbedInDescriptors(true, oldValues), StringDescriptor.EmbedInDescriptors(false, newValues), resultReport));
         }
 
         /// <summary>
-        /// Compare lists of values. They are organized in slices.
+        /// Compare unstructured lists of values. They are organized in slices.
         /// </summary>
         /// <param name="oldAndNewValues"></param>
         /// <param name="resultReport"></param>
         /// <param name="stringPartialMatch"></param>
-        public CompareStrategyContextSwitcher(Dictionary<HashSet<string>, HashSet<string>> oldAndNewValues, ResultReport resultReport)
+        public CompareStrategyFactory(Dictionary<HashSet<string>, HashSet<string>> oldAndNewValues, ResultReport resultReport)
         {
             foreach(var slice in oldAndNewValues)
             {
-                compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(true, slice.Key), StringDescriptor.EmbedInDescriptors(false, slice.Value), resultReport));
+                compareStrategies.Add(new CompareStrategyUnstructuredLists(StringDescriptor.EmbedInDescriptors(true, slice.Key), StringDescriptor.EmbedInDescriptors(false, slice.Value), resultReport));
             }
         }
 
         /// <summary>
-        /// Compare lists of values. They are organized in slices. And each value is mapped to a specific key.
+        /// Compare structured lists of values. They are organized in slices. And each value is mapped to a specific key.
         /// </summary>
         /// <param name="oldValues"></param>
         /// <param name="newValues"></param>
         /// <param name="resultReport"></param>
-        public CompareStrategyContextSwitcher(Dictionary<Dictionary<EnumOldServiceFieldsAsKeys, string>,Dictionary<EnumOldServiceFieldsAsKeys, string>> oldAndNewValues, ResultReport resultReport)
+        public CompareStrategyFactory(Dictionary<Dictionary<EnumOldServiceFieldsAsKeys, string>,Dictionary<EnumOldServiceFieldsAsKeys, string>> oldAndNewValues, ResultReport resultReport)
         {
             foreach (var slice in oldAndNewValues)
             {
-                compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(true, slice.Key), StringDescriptor.EmbedInDescriptors(false, slice.Value),resultReport));
+                compareStrategies.Add(new CompareStrategyStructuredLists(StringDescriptor.EmbedInDescriptors(true, slice.Key), StringDescriptor.EmbedInDescriptors(false, slice.Value),resultReport));
             }
         }
 
@@ -80,7 +81,7 @@ namespace TestMVC4App.Models
         /// <param name="newValues"></param>
         /// <param name="newTreeRoot"></param>
         /// <param name="resultReport"></param>
-        public CompareStrategyContextSwitcher(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
+        public CompareStrategyFactory(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, 
                                            HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot, 
                                            ResultReport resultReport)
         {

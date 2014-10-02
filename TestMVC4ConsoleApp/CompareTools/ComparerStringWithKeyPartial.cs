@@ -3,6 +3,9 @@ using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
+    /// <summary>
+    /// Compares values having the same key : whether one contains the other.
+    /// </summary>
     public class ComparerStringWithKeyPartial : IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
@@ -17,13 +20,13 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         pairX.Value.HasBeenMatched = true;
                         y[pairX.Key].HasBeenMatched = true;
-                        y[pairX.Key].MismatchDueToPartialName = true;
+                        y[pairX.Key].PartialMatchOnly = true;
                     }
                     else if (y[pairX.Key].Value.Length > 4 && y[pairX.Key].Value.Trim().Contains(pairX.Value.Value.Trim()))
                     {
                         pairX.Value.HasBeenMatched = true;
                         y[pairX.Key].HasBeenMatched = true;
-                        pairX.Value.MismatchDueToPartialName = true;
+                        pairX.Value.PartialMatchOnly = true;
                     }
                 }
             }
@@ -38,13 +41,13 @@ namespace TestMVC4ConsoleApp.CompareTools
                     {
                         pairY.Value.HasBeenMatched = true;
                         x[pairY.Key].HasBeenMatched = true;
-                        x[pairY.Key].MismatchDueToPartialName = true;
+                        x[pairY.Key].PartialMatchOnly = true;
                     }
                     else if (x[pairY.Key].Value.Length > 4 && x[pairY.Key].Value.Trim().Contains(pairY.Value.Value.Trim()))
                     {
                         pairY.Value.HasBeenMatched = true;
                         x[pairY.Key].HasBeenMatched = true;
-                        pairY.Value.MismatchDueToPartialName = true;
+                        pairY.Value.PartialMatchOnly = true;
                     }
                 }
             }

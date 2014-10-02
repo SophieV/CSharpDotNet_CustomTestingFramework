@@ -5,11 +5,20 @@ namespace TestMVC4App.Models
 {
     public class ResultReport
     {
+        #region Shared
+
         public int Upi { get; private set; }
 
         public int UserId { get; protected set; }
 
+        /// <summary>
+        /// Will trigger the appropriate template for : Unstructured/Structured List of Strings, Tree of Organizations
+        /// </summary>
         public EnumResultDisplayFormat DisplayFormat { get; private set; }
+
+        /// <summary>
+        /// Overall duration of the test.
+        /// </summary>
         public TimeSpan Duration { get; set; }
 
         public EnumResultSeverityType Severity { get; private set; }
@@ -22,36 +31,57 @@ namespace TestMVC4App.Models
 
         public string TestDescription { get; private set; }
 
-        public HashSet<StringDescriptor> OldValues { get; private set; }
+        #endregion
 
-        public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
+        #region Unstructured List of Strings
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> OldStructureValues { get; private set; }
+        public HashSet<StringDescriptor> UnstructuredOldValues { get; private set; }
+
+        public HashSet<StringDescriptor> UnstructuredNewValues { get; private set; }
+
+        #endregion
+
+        #region Structured List of Strings
+
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> StructuredOldValues { get; private set; }
+
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> StructuredNewValues { get; private set; }
+
+        #endregion
+
+        #region Tree of Organizations
 
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
-        public HashSet<StringDescriptor> NewValues { get; private set; }
-
         public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> NewStructureValues { get; private set; }
+        public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
         public int TreeComparisonIndexError { get; set; }
 
+        #endregion
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="upi"></param>
+        /// <param name="testName"></param>
+        /// <param name="testDescription"></param>
         public ResultReport(int userId, int upi, EnumTestUnitNames testName, string testDescription)
         {
             this.TestName = testName;
             this.TestDescription = testDescription;
             this.ErrorMessage = string.Empty;
             this.IdentifedDataBehaviors = new List<EnumIdentifiedDataBehavior>();
-            this.OldValues = new HashSet<StringDescriptor>();
-            this.NewValues = new HashSet<StringDescriptor>();
+            this.UnstructuredOldValues = new HashSet<StringDescriptor>();
+            this.UnstructuredNewValues = new HashSet<StringDescriptor>();
             this.OldOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
             this.NewOrganizationValues = new HashSet<OrganizationTreeDescriptor>();
-            this.OldStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
-            this.NewStructureValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            this.StructuredOldValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            this.StructuredNewValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
             this.OldTreeRoot = null;
             this.NewTreeRoot = null;
             this.TreeComparisonIndexError = -1;
@@ -60,35 +90,33 @@ namespace TestMVC4App.Models
             this.UserId = userId;
         }
 
-        public void ResetForReTesting()
-        {
-            this.OldValues.Clear();
-            this.NewValues.Clear();
-            this.OldOrganizationValues.Clear();
-            this.NewOrganizationValues.Clear();
-            this.TreeComparisonIndexError = -1;
-            this.OldTreeRoot = null;
-            this.NewTreeRoot = null;
-            this.Severity = EnumResultSeverityType.SUCCESS;
-            this.ErrorMessage = string.Empty;
-            this.IdentifedDataBehaviors.Clear();
-        }
-
+        /// <summary>
+        /// Overloaded method that stores the input data for later display, according to the data types supplied.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
         public void AddDetailedValues(HashSet<StringDescriptor> oldValues, HashSet<StringDescriptor> newValues)
         {
             if (oldValues != null)
             {
-                this.OldValues = oldValues;
+                this.UnstructuredOldValues = oldValues;
             }
 
             if (newValues != null)
             {
-                this.NewValues = newValues;
+                this.UnstructuredNewValues = newValues;
             }
 
             this.DisplayFormat = EnumResultDisplayFormat.ListOfValues;
         }
 
+        /// <summary>
+        /// Overloaded method that stores the input data for later display, according to the data types supplied.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="oldTreeRoot"></param>
+        /// <param name="newValues"></param>
+        /// <param name="newTreeRoot"></param>
         public void AddDetailedValues(HashSet<OrganizationTreeDescriptor> oldValues, OrganizationTreeDescriptor oldTreeRoot, HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot)
         {
             if (oldValues != null)
@@ -108,36 +136,33 @@ namespace TestMVC4App.Models
             this.DisplayFormat = EnumResultDisplayFormat.OrganizationTree;
         }
 
+        /// <summary>
+        /// Overloaded method that stores the input data for later display, according to the data types supplied.
+        /// </summary>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
         public void AddDetailedValues(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>> newValues)
         {
             if (oldValues != null)
             {
-                this.OldStructureValues = oldValues;
+                this.StructuredOldValues = oldValues;
             }
 
             if (newValues != null)
             {
-                this.NewStructureValues = newValues;
+                this.StructuredNewValues = newValues;
             }
 
             this.DisplayFormat = EnumResultDisplayFormat.StructureOfValues;
         }
 
-        public void AppendDetailedValues(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> oldValues, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> newValues)
-        {
-            if (oldValues != null)
-            {
-                this.OldStructureValues.Add(oldValues);
-            }
-
-            if (newValues != null)
-            {
-                this.NewStructureValues.Add(newValues);
-            }
-
-            this.DisplayFormat = EnumResultDisplayFormat.StructureOfValues;
-        }
-
+        /// <summary>
+        /// Keeps track of the overall severity of the test result and updates accordingly.
+        /// Algorithm :
+        /// Warnings are the only severity that is weaker than the rest and can happen afterwards.
+        /// For all the others we assume chronological order as more specific scenarios are investigated.
+        /// </summary>
+        /// <param name="newSeverityStateReturned"></param>
         public void UpdateSeverity(EnumResultSeverityType newSeverityStateReturned)
         {
             if (newSeverityStateReturned == EnumResultSeverityType.WARNING)
@@ -149,8 +174,6 @@ namespace TestMVC4App.Models
             }
             else
             {
-                // warnings are the only severity that is weaker than the rest and can happen afterwards
-                // for all the others we assume chronological order as it investigates more specific scenarios
                 this.Severity = newSeverityStateReturned;
             }
         }

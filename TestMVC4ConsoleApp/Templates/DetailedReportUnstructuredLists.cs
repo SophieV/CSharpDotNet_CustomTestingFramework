@@ -19,9 +19,9 @@ namespace TestMVC4ConsoleApp.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+    #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public partial class DetailedReportStringListsKeyValuePairs : DetailedReportStringListsKeyValuePairsBase
+    public partial class DetailedReportUnstructuredLists : DetailedReportUnstructuredListsBase
     {
 #line hidden
         /// <summary>
@@ -31,28 +31,28 @@ namespace TestMVC4ConsoleApp.Templates
         {
             this.Write("<tr>\r\n\t<td class=\"td_main\"><b>");
             
-            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 10 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.TestDescription));
             
             #line default
             #line hidden
             this.Write("</b><br/>\r\n\t\t<a id=\"");
             
-            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 11 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.TestName));
             
             #line default
             #line hidden
             this.Write("</a>\r\n\t</td>\r\n\t");
             
-            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 13 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  switch (SharedDataObject.Result) {
 		case EnumResultSeverityType.FALSE_POSITIVE : 
             
@@ -60,7 +60,7 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t<td class=\"td_main false_positive\">\r\n\t\t");
             
-            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 16 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  break;
 		case EnumResultSeverityType.WARNING:
 		case EnumResultSeverityType.WARNING_ONLY_NEW: 
@@ -69,7 +69,7 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t<td class=\"td_main warning\">\r\n\t\t");
             
-            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 20 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  break;
 		case EnumResultSeverityType.WARNING_NO_DATA: 
             
@@ -77,7 +77,7 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t<td class=\"td_main warning_no_data\">\r\n\t\t");
             
-            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 23 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  break;
 		case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
 		case EnumResultSeverityType.ERROR_ONLY_OLD: 
@@ -86,7 +86,7 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t<td class=\"td_main error_with_explanation\">\r\n\t\t");
             
-            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 27 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  break;
 		case EnumResultSeverityType.ERROR: 
             
@@ -94,7 +94,7 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t<td class=\"td_main error\">\r\n\t\t");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  break;
 		default: 
             
@@ -102,7 +102,7 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t<td class=\"td_main success\">\r\n\t\t");
             
-            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  break;
 	} 
             
@@ -110,42 +110,42 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t");
             
-            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 35 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.Result));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\t<td class=\"td_main\">\r\n\t\t<a href=\"");
             
-            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.OldUrl));
             
             #line default
             #line hidden
             this.Write("\">Profile data of UPI ");
             
-            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UPI));
             
             #line default
             #line hidden
             this.Write("</a><br/>\r\n\t\t<a href=\"");
             
-            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.NewUrl));
             
             #line default
             #line hidden
             this.Write("\">User data of ID is ");
             
-            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 38 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UserId));
             
             #line default
             #line hidden
             this.Write("</a>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t\t");
             
-            #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 41 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.ErrorMessage));
             
             #line default
@@ -153,311 +153,296 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\r\n\t\t<br/><br/>\r\n\t\t<table class=\"table_main\">\r\n\t\t<tr>\r\n\t\t\t<td class=\"th_main\">OLD " +
                     "SERVICE DATA <span class=\"error_color\">[COUNT ELEMENTS: ");
             
-            #line 45 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.OldStructureValues.Count()));
+            #line 45 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UnstructuredOldValues.Count()));
             
             #line default
             #line hidden
             this.Write("]</span></td>\r\n\t\t\t<td class=\"th_main\">NEW SERVICE DATA <span class=\"error_color\">" +
                     "[COUNT ELEMENTS: ");
             
-            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.NewStructureValues.Count()));
+            #line 46 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.UnstructuredNewValues.Count()));
             
             #line default
             #line hidden
-            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td class=\"td_main\">\r\n\t\t\t\t");
+            this.Write("]</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td class=\"td_main\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
             
-            #line 50 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(SharedDataObject.OldStructureValues.Count() > 0) {
-				foreach (var oldValueStructure in SharedDataObject.OldStructureValues) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<ul>\r\n\t\t\t\t\t");
-            
-            #line 53 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- foreach (var oldValuePair in oldValueStructure) { 
+            #line 51 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(SharedDataObject.UnstructuredOldValues.Count() > 0) {
+					foreach (StringDescriptor oldValue in SharedDataObject.UnstructuredOldValues) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t<li>");
+            this.Write("\t\t\t\t\t<li>");
             
-            #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(!string.IsNullOrEmpty(oldValuePair.Value.Value)) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t\t");
-            
-            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(oldValuePair.Value.Value));
+            #line 53 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(!string.IsNullOrEmpty(oldValue.Value)) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t\t\t");
             
-            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(!oldValuePair.Value.HasBeenMatched) { 
+            #line 53 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(oldValue.Value));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t\t\t");
+            
+            #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(!oldValue.HasBeenMatched) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[MISSING IN NEW SERVICE]</span>");
             
-            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 54 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(oldValuePair.Value.Duplicate) { 
+            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(oldValue.IsDuplicate) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
+            this.Write("<span class=\"IsDuplicate\">[IsDuplicate]</span>");
             
-            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(oldValuePair.Value.MismatchDueToTrailingSpaces) { 
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(oldValue.MatchedOnceTrailingSpacesRemoved) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[TRAILING WHITE SPACES]</span>");
             
-            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 56 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 59 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(oldValuePair.Value.MismatchDueToCase) { 
+            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(oldValue.MatchedOnceCaseCorrected) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[CASE]</span>");
             
-            #line 59 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 57 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 60 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(oldValuePair.Value.MismatchDueToPartialName) { 
+            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(oldValue.PartialMatchOnly) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[PARTIAL MATCH]</span>");
             
-            #line 60 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 58 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(oldValuePair.Value.MismatchDueToShiftedName) { 
+            #line 59 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(oldValue.MatchedOnceShifted) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[NAME REORGANIZED]</span>");
             
-            #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 59 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 60 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("NULL");
             
-            #line 63 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 60 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
             this.Write("</li>\r\n\t\t\t\t\t");
             
-            #line 64 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t</ul>\r\n\t\t\t\t");
-            
-            #line 66 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 61 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t</td>\r\n\t\t\t<td class=\"td_main\">\r\n\t\t\t\t");
+            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t\t<td class=\"td_main\">\r\n\t\t\t\t<ul>\r\n\t\t\t\t\t");
             
-            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(SharedDataObject.NewStructureValues.Count > 0) {
-				foreach (var newValueStructure in SharedDataObject.NewStructureValues) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t<ul>\r\n\t\t\t\t\t");
-            
-            #line 72 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- foreach (var newValuePair in newValueStructure) { 
+            #line 66 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(SharedDataObject.UnstructuredNewValues.Count > 0) {
+					foreach (StringDescriptor newValue in SharedDataObject.UnstructuredNewValues) { 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t<li>");
+            this.Write("\t\t\t\t\t<li>");
             
-            #line 73 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(!string.IsNullOrEmpty(newValuePair.Value.Value)) { 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t\t\t");
-            
-            #line 74 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(newValuePair.Value.Value));
+            #line 68 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(!string.IsNullOrEmpty(newValue.Value)) { 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(!newValuePair.Value.HasBeenMatched) { 
+            #line 69 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ string newValueToDisplay = newValue.Value;
+					if(SharedDataObject.UnstructuredOldValues.Count <= 1 && SharedDataObject.UnstructuredNewValues.Count <= 1) {
+						string oldValue = string.Empty;
+						if(SharedDataObject.UnstructuredOldValues.Count() > 0) { oldValue = SharedDataObject.UnstructuredOldValues.First().Value; if(oldValue == null) { oldValue = string.Empty; } }
+						HtmlDiff diffHelper = new HtmlDiff(oldValue, newValue.Value);
+						newValueToDisplay = diffHelper.Build();
+					} 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t");
+            
+            #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(newValueToDisplay));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t\t\t");
+            
+            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(!newValue.HasBeenMatched) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[MISSING IN OLD SERVICE]</span>");
             
-            #line 75 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(newValuePair.Value.Duplicate) { 
+            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(newValue.IsDuplicate) { 
             
             #line default
             #line hidden
-            this.Write("<span class=\"duplicate\">[DUPLICATE]</span>");
+            this.Write("<span class=\"IsDuplicate\">[IsDuplicate]</span>");
             
-            #line 76 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(newValuePair.Value.MismatchDueToTrailingSpaces) { 
+            #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(newValue.MatchedOnceTrailingSpacesRemoved) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[TRAILING WHITE SPACES]</span>");
             
-            #line 77 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(newValuePair.Value.MismatchDueToCase) { 
+            #line 80 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(newValue.MatchedOnceCaseCorrected) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[CASE]</span>");
             
-            #line 78 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 80 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(newValuePair.Value.MismatchDueToPartialName) { 
+            #line 81 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(newValue.PartialMatchOnly) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[PARTIAL MATCH]</span>");
             
-            #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 81 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 80 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- if(newValuePair.Value.MismatchDueToShiftedName) { 
+            #line 82 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
+ if(newValue.MatchedOnceShifted) { 
             
             #line default
             #line hidden
             this.Write("<span class=\"missing\">[NAME REORGANIZED]</span>");
             
-            #line 80 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 82 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t");
             
-            #line 81 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 83 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } else { 
             
             #line default
             #line hidden
             this.Write("NULL");
             
-            #line 81 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 83 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } 
             
             #line default
             #line hidden
             this.Write("</li>\r\n\t\t\t\t\t");
             
-            #line 82 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\t\t</ul>\r\n\t\t\t\t");
-            
-            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 84 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } } 
             
             #line default
             #line hidden
-            this.Write("\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t<p>Duration : ");
+            this.Write("\t\t\t\t</ul>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t</table>\r\n\t</td>\r\n\t<td class=\"td_main\">\r\n\t<p>Dura" +
+                    "tion : ");
             
-            #line 90 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 91 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.Duration.ToString("mm'mn:'ss's:'FFFFFFF")));
             
             #line default
             #line hidden
             this.Write("</p>\r\n\t<br/>\r\n\t<ul>\r\n\t");
             
-            #line 93 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 94 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  if(SharedDataObject.IdentifiedDataBehaviors != null) {
 		foreach(var observation in SharedDataObject.IdentifiedDataBehaviors) { 
             
@@ -465,14 +450,14 @@ namespace TestMVC4ConsoleApp.Templates
             #line hidden
             this.Write("\t\t\t<li>");
             
-            #line 95 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 96 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(observation));
             
             #line default
             #line hidden
             this.Write("</li><br/>\r\n\t");
             
-            #line 96 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+            #line 97 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
  } } 
             
             #line default
@@ -481,7 +466,7 @@ namespace TestMVC4ConsoleApp.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringListsKeyValuePairs.tt"
+        #line 1 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportUnstructuredLists.tt"
 
 private global::TestMVC4App.Templates.DetailedReportSharedData _SharedDataObjectField;
 
@@ -536,7 +521,7 @@ if ((SharedDataObjectValueAcquired == false))
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
-    public class DetailedReportStringListsKeyValuePairsBase
+    public class DetailedReportUnstructuredListsBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace TestMVC4App.Templates
 {
+    /// <summary>
+    /// Object shared between the application logic and the UI template.
+    /// It contains the necessary data needed for display on the Report.
+    /// </summary>
     public class DetailedReportSharedData
     {
         /// <summary>
@@ -54,19 +58,19 @@ namespace TestMVC4App.Templates
         /// </summary>
         public HashSet<string> IdentifiedDataBehaviors { get; private set; }
 
-        public HashSet<StringDescriptor> OldValues { get; private set; }
+        public HashSet<StringDescriptor> UnstructuredOldValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> OldOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> OldStructureValues { get; private set; }
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> StructuredOldValues { get; private set; }
 
         public OrganizationTreeDescriptor OldTreeRoot { private set; get; }
 
-        public HashSet<StringDescriptor> NewValues { get; private set; }
+        public HashSet<StringDescriptor> UnstructuredNewValues { get; private set; }
 
         public HashSet<OrganizationTreeDescriptor> NewOrganizationValues { private set; get; }
 
-        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> NewStructureValues { get; private set; }
+        public HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> StructuredNewValues { get; private set; }
 
         public OrganizationTreeDescriptor NewTreeRoot { private set; get; }
 
@@ -81,12 +85,12 @@ namespace TestMVC4App.Templates
             this.Result = resultReport.Severity;
             this.TestDescription = resultReport.TestDescription;
             this.IdentifiedDataBehaviors = new HashSet<string>(LogManager.IdentifiedBehaviorsDescriptions.Where(x=>resultReport.IdentifedDataBehaviors.Contains(x.Key)).Select(x=>x.Value));
-            this.OldValues = resultReport.OldValues;
-            this.NewValues = resultReport.NewValues;
+            this.UnstructuredOldValues = resultReport.UnstructuredOldValues;
+            this.UnstructuredNewValues = resultReport.UnstructuredNewValues;
             this.OldOrganizationValues = resultReport.OldOrganizationValues;
             this.NewOrganizationValues = resultReport.NewOrganizationValues;
-            this.OldStructureValues = resultReport.OldStructureValues;
-            this.NewStructureValues = resultReport.NewStructureValues;
+            this.StructuredOldValues = resultReport.StructuredOldValues;
+            this.StructuredNewValues = resultReport.StructuredNewValues;
             this.OldTreeRoot = resultReport.OldTreeRoot;
             this.NewTreeRoot = resultReport.NewTreeRoot;
             this.Duration = resultReport.Duration;

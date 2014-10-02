@@ -4,16 +4,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Web;
 using System.Xml.Linq;
-using System.Xml.XPath;
 
 namespace TestMVC4App.Models
 {
+    /// <summary>
+    /// This helper groups functions used to extract data from the services, as well as tools to adapt the format(s) to a common ground for testing.
+    /// </summary>
     public class ParsingHelper
     {
         /// <summary>
-        /// Allows to display the string text associated with an enum entry.
+        /// Allows to display the string text associated with an Enum entry.
         /// </summary>
         /// <param name="value">Enum type from which we want the description.</param>
         /// <returns>Description text.</returns>
@@ -26,6 +27,12 @@ namespace TestMVC4App.Models
             return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
+        /// <summary>
+        /// Extracts a single value from the XML input data.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="nodeName"></param>
+        /// <returns></returns>
         public static string ParseSingleValue(IEnumerable<XElement> elements, string nodeName)
         {
             string value = string.Empty;
@@ -42,7 +49,14 @@ namespace TestMVC4App.Models
             return value;
         }
 
-        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> ParseListSimpleValuesStructure(IEnumerable<XElement> elements, string nodeName, EnumOldServiceFieldsAsKeys[] childNodeNames)
+        /// <summary>
+        /// Extracts a list of values from the XML input data and stores them with the matching key.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="childNodeNames"></param>
+        /// <returns></returns>
+        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> ParseStructuredListOfValues(IEnumerable<XElement> elements, string nodeName, EnumOldServiceFieldsAsKeys[] childNodeNames)
         {
             var values = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
             Dictionary<EnumOldServiceFieldsAsKeys,string> properties;
@@ -75,7 +89,14 @@ namespace TestMVC4App.Models
             return values;
         }
 
-        public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName, string childNodeName)
+        /// <summary>
+        /// Extracts a list of values from the XML input data.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="childNodeName"></param>
+        /// <returns></returns>
+        public static HashSet<string> ParseUnstructuredListOfValues(IEnumerable<XElement> elements, string nodeName, string childNodeName)
         {
             HashSet<string> values;
 
@@ -97,7 +118,13 @@ namespace TestMVC4App.Models
             return values;
         }
 
-        public static HashSet<string> ParseListSimpleValues(IEnumerable<XElement> elements, string nodeName)
+        /// <summary>
+        /// Extracts a list of values from the XML input data.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="nodeName"></param>
+        /// <returns></returns>
+        public static HashSet<string> ParseUnstructuredListOfValues(IEnumerable<XElement> elements, string nodeName)
         {
             var values = new HashSet<string>();
 
@@ -118,11 +145,29 @@ namespace TestMVC4App.Models
             return values;
         }
 
+        /// <summary>
+        /// Extracts a list of children nodes from the XML input data.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="isBeginningPattern"></param>
+        /// <returns></returns>
+        /// <remarks>Is used to dispatch more efficiently the old service data to the various tests.</remarks>
         public static IEnumerable<XElement> ParseListNodes(IEnumerable<XElement> elements ,string nodeName, bool isBeginningPattern = false)
         {
             return ParseListNodes(elements, nodeName, new List<XElement>(), isBeginningPattern);
         }
 
+        /// <summary>
+        /// Extracts a list of children nodes from the XML input data.
+        /// Apprends to an existing list.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="appendTo"></param>
+        /// <param name="isBeginningPattern"></param>
+        /// <returns></returns>
+        /// <remarks>Is used to dispatch more efficiently the old service data to the various tests.</remarks>
         public static IEnumerable<XElement> ParseListNodes(IEnumerable<XElement> elements, string nodeName, List<XElement> appendTo, bool isBeginningPattern = false)
         {
             if (appendTo == null)
@@ -148,6 +193,16 @@ namespace TestMVC4App.Models
             return appendTo;
         }
 
+        /// <summary>
+        /// Extracts a list of children nodes from the XML input data.
+        /// Apprends to an existing list.
+        /// Excludes nodes with descendants.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="appendTo"></param>
+        /// <param name="isBeginningPattern"></param>
+        /// <returns></returns>
+        /// <remarks>Is used to dispatch more efficiently the old service data to the various tests.</remarks>
         public static IEnumerable<XElement> ParseListNodesOnlySameDepth(IEnumerable<XElement> elements, List<XElement> appendTo, bool isBeginningPattern = false)
         {
             if (appendTo == null)
@@ -167,6 +222,14 @@ namespace TestMVC4App.Models
             return appendTo;
         }
 
+        /// <summary>
+        /// Extracts several values contained in a string to a list of values.
+        /// </summary>
+        /// <param name="valueToSplit"></param>
+        /// <param name="separator"></param>
+        /// <param name="appendTo"></param>
+        /// <returns></returns>
+        /// <remarks>Is used to convert data from the old service into a matching format to the new service.</remarks>
         public static HashSet<string> StringToList(string valueToSplit, char separator, HashSet<string> appendTo = null)
         {
             HashSet<string> values;
@@ -193,25 +256,12 @@ namespace TestMVC4App.Models
         }
 
         /// <summary>
-        /// Replaces the default characters used for describing the mismatched values of the Assert so that their content
-        /// is not (mis)interpreted as HTML content.
-        /// </summary>
-        /// <param name="message">The string to clean.</param>
-        /// <returns>The cleansed string.</returns>
-        /// <remarks>This process has to take place before HTML content is generated for visualization on the report/includes exceptions to be rendered as HTML.</remarks>
-        public static String ReplaceProblematicTagsForHtml(string message)
-        {
-            message = message.Replace("<", "<span style='color:red;'>[");
-            message = message.Replace(">", "]</span>");
-            return message;
-        }
-
-        /// <summary>
-        /// Transforms an unformatted Phone Number from the new Service into the format returned by the Old Service.
+        /// Formats a raw Phone Number.
         /// </summary>
         /// <param name="unformattedPhoneNumber"></param>
         /// <param name="optionalPhoneExtension"></param>
         /// <returns></returns>
+        /// <remarks>Is used to convert data from the new service to match the format returned by the old service.</remarks>
         public static string FormatPhoneNumber(string unformattedPhoneNumber, string optionalPhoneExtension = "")
         {
             StringBuilder value = new StringBuilder();

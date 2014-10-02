@@ -87,8 +87,8 @@
     <Compile Include="CompareTools\CompareStrategy.cs" />
     <Compile Include="CompareTools\CompareStrategyContextSwitcher.cs" />
     <Compile Include="CompareTools\CompareStrategyOrganizationList.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringDescriptors.cs" />
-    <Compile Include="CompareTools\CompareStrategyStringDescriptorsDictionary.cs" />
+    <Compile Include="CompareTools\CompareStrategyUnstructuredLists.cs" />
+    <Compile Include="CompareTools\CompareStrategyStructuredLists.cs" />
     <Compile Include="CompareTools\ComparerStringWithKeyShifted.cs" />
     <Compile Include="DatabaseFacade.cs" />
     <Compile Include="EnumIdentifiedDataBehavior.cs" />
@@ -138,13 +138,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\DetailedReportStringListsKeyValuePairs.cs">
-      <DependentUpon>DetailedReportStringListsKeyValuePairs.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReportStructuredLists.cs">
+      <DependentUpon>DetailedReportStructuredLists.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\DetailedReportStringLists.cs">
-      <DependentUpon>DetailedReportStringLists.tt</DependentUpon>
+    <Compile Include="Templates\DetailedReportUnstructuredLists.cs">
+      <DependentUpon>DetailedReportUnstructuredLists.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -203,13 +203,13 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DetailedReport_Header.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\DetailedReportStringListsKeyValuePairs.tt">
+    <Content Include="Templates\DetailedReportStructuredLists.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DetailedReportStringListsKeyValuePairs.cs</LastGenOutput>
+      <LastGenOutput>DetailedReportStructuredLists.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\DetailedReportStringLists.tt">
+    <Content Include="Templates\DetailedReportUnstructuredLists.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DetailedReportStringLists.cs</LastGenOutput>
+      <LastGenOutput>DetailedReportUnstructuredLists.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\DetailedReportOrganizationTree.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
