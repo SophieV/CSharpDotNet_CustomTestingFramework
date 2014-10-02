@@ -28,7 +28,7 @@ namespace TestMVC4App.Models
         MATCHING_SINGLE_ELEMENT_GIVEN_DEPTH_MISMATCH,
         [System.ComponentModel.Description("Merging the trees required using an element SEVERAL TIMES.")]
         REUSED_ELEMENT_TO_FILL_GAP,
-        [System.ComponentModel.Description("The data of the new service is contained in the data from the old service.")]
-        NEW_CONTAINED_IN_OLD
+        [System.ComponentModel.Description("value returned by the old service is CONTAINED in the value from the new service.")]
+        OLD_VALUE_CONTAINED_IN_NEW
     }
 }

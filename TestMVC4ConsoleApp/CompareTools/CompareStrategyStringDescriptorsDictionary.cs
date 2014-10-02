@@ -7,7 +7,6 @@ namespace TestMVC4App.Models
 {
     public class CompareStrategyStringDescriptorsDictionary : CompareStrategy
     {
-        private int leftOversOldCount = -1;
         private HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues;
         private HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues;
 
@@ -137,7 +136,8 @@ namespace TestMVC4App.Models
             IEnumerable<Dictionary<EnumOldServiceFieldsAsKeys,StringDescriptor>> leftOversOld;
             IEnumerable<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> leftOversNew;
 
-            int previousCount = CountEntriesNotMatched(oldValues);
+            int previousOldCount = CompareStrategy.CountEntriesNotMatched(oldValues);
+            int previousNewCount = CompareStrategy.CountEntriesNotMatched(newValues);
 
             if (partial)
             {
@@ -164,21 +164,20 @@ namespace TestMVC4App.Models
                 leftOversOld = oldValues.Except(newValues, new ComparerStringWithKeyNotCaseSensitive());
                 leftOversNew = newValues.Except(oldValues, new ComparerStringWithKeyNotCaseSensitive());
             }
-             
-            this.leftOversOldCount = CountEntriesNotMatched(leftOversOld);
-            var leftOversNewCount = CountEntriesNotMatched(leftOversNew);
 
-            int newCount = CountEntriesNotMatched(oldValues);
-            if (newCount < previousCount)
+            int oldCount = CompareStrategy.CountEntriesNotMatched(leftOversOld);
+            int newCount = CompareStrategy.CountEntriesNotMatched(leftOversNew);
+
+            if (oldCount < previousOldCount || newCount < previousNewCount)
             {
                 if (partial)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_CONTAINED_IN_OLD);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
                 } 
                 else if (shifted)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_CONTAINED_IN_OLD);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
                 }
                 else if (trim)
@@ -193,7 +192,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            if (this.leftOversOldCount == 0 && leftOversNewCount == 0)
+            if (oldCount == 0 && newCount == 0)
             {
                 if (!caseSensitive || trim || shifted || partial)
                 {
@@ -205,7 +204,7 @@ namespace TestMVC4App.Models
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.SUCCESS);
                     shouldContinueTesting = false;
                 }
-            } else if (this.leftOversOldCount == 0)
+            } else if (oldCount == 0)
             {
                 this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_NEW_SERVICE);
                 this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
@@ -214,25 +213,9 @@ namespace TestMVC4App.Models
             else
             {
                 this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR);
-                this.resultReport.ErrorMessage = "The lists of " + (trim ? "trimmed " : string.Empty) + (shifted ? "shifted " : string.Empty) + " strings compared " + (!caseSensitive ? "without case " : string.Empty) + "are not equal";
             }
 
             return shouldContinueTesting;
-        }
-
-        private int CountEntriesNotMatched(IEnumerable<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> list)
-        {
-            int count = 0;
-
-            if (list != null)
-            {
-                foreach (var pair in list)
-                {
-                    count += pair.Values.Where(x => !x.SingleValueHasBeenMatched).Count();
-                }
-            }
-
-            return count;
         }
 
         #endregion

@@ -49,7 +49,6 @@
 			<td class="td_main">
 				<ul>
 					<# if(SharedDataObject.OldValues.Count() > 0) {
-					var potentialDuplicates = SharedDataObject.OldValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (StringDescriptor oldValue in SharedDataObject.OldValues) { #>
 					<li><# if(!string.IsNullOrEmpty(oldValue.Value)) { #><#= oldValue.Value #>
 					<# if(!oldValue.HasBeenMatched) { #><span class="missing">[MISSING IN NEW SERVICE]</span><# } #>
@@ -65,7 +64,6 @@
 			<td class="td_main">
 				<ul>
 					<# if(SharedDataObject.NewValues.Count > 0) {
-					var potentialDuplicates = SharedDataObject.NewValues.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
 					foreach (StringDescriptor newValue in SharedDataObject.NewValues) { #>
 					<li><# if(!string.IsNullOrEmpty(newValue.Value)) { #>
 					<# string newValueToDisplay = newValue.Value;

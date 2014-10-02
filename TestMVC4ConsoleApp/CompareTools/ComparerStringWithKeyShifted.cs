@@ -10,7 +10,7 @@ namespace TestMVC4ConsoleApp.CompareTools
         {
             foreach (var pairX in x)
             {
-                if (!pairX.Value.SingleValueHasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].SingleValueHasBeenMatched 
+                if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched 
                     && !string.IsNullOrEmpty(y[pairX.Key].Value) && !string.IsNullOrEmpty(pairX.Value.Value) 
                     && pairX.Value.IsOld != y[pairX.Key].IsOld)
                 {
@@ -20,8 +20,8 @@ namespace TestMVC4ConsoleApp.CompareTools
 
                         if (y[pairX.Key].Value == shiftedValue)
                         {
-                            pairX.Value.SingleValueHasBeenMatched = true;
-                            y[pairX.Key].SingleValueHasBeenMatched = true;
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
                             pairX.Value.MismatchDueToShiftedName = true;
                         }
                     }
@@ -31,8 +31,8 @@ namespace TestMVC4ConsoleApp.CompareTools
 
                         if (pairX.Value.Value == shiftedValue)
                         {
-                            pairX.Value.SingleValueHasBeenMatched = true;
-                            y[pairX.Key].SingleValueHasBeenMatched = true;
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
                             y[pairX.Key].MismatchDueToShiftedName = true;
                         }
                     }
@@ -41,7 +41,7 @@ namespace TestMVC4ConsoleApp.CompareTools
 
             foreach (var pairY in y)
             {
-                if (!pairY.Value.SingleValueHasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].SingleValueHasBeenMatched
+                if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
                     && !string.IsNullOrEmpty(x[pairY.Key].Value) && !string.IsNullOrEmpty(pairY.Value.Value)
                     && pairY.Value.IsOld != y[pairY.Key].IsOld)
                 {
@@ -51,8 +51,8 @@ namespace TestMVC4ConsoleApp.CompareTools
 
                         if (x[pairY.Key].Value == shiftedValue)
                         {
-                            pairY.Value.SingleValueHasBeenMatched = true;
-                            x[pairY.Key].SingleValueHasBeenMatched = true;
+                            pairY.Value.HasBeenMatched = true;
+                            x[pairY.Key].HasBeenMatched = true;
                             pairY.Value.MismatchDueToShiftedName = true;
                         }
                     }
@@ -62,8 +62,8 @@ namespace TestMVC4ConsoleApp.CompareTools
 
                         if (pairY.Value.Value == shiftedValue)
                         {
-                            pairY.Value.SingleValueHasBeenMatched = true;
-                            x[pairY.Key].SingleValueHasBeenMatched = true;
+                            pairY.Value.HasBeenMatched = true;
+                            x[pairY.Key].HasBeenMatched = true;
                             x[pairY.Key].MismatchDueToShiftedName = true;
                         }
                     }

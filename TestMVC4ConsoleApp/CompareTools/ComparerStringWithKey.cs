@@ -10,34 +10,34 @@ namespace TestMVC4App.Models
         {
             foreach (var pairX in x)
             {
-                if (!pairX.Value.SingleValueHasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].SingleValueHasBeenMatched && pairX.Value.IsOld != y[pairX.Key].IsOld)
+                if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched && pairX.Value.IsOld != y[pairX.Key].IsOld)
                     {
                         if (string.IsNullOrEmpty(pairX.Value.Value) && string.IsNullOrEmpty(y[pairX.Key].Value))
                         {
-                            pairX.Value.SingleValueHasBeenMatched = true;
-                            y[pairX.Key].SingleValueHasBeenMatched = true;
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
                         }
                         else if (pairX.Value.Value == y[pairX.Key].Value)
                         {
-                            pairX.Value.SingleValueHasBeenMatched = true;
-                            y[pairX.Key].SingleValueHasBeenMatched = true;
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
                         }
                     }
             }
 
             foreach (var pairY in y)
             {
-                if (!pairY.Value.SingleValueHasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].SingleValueHasBeenMatched && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched && pairY.Value.IsOld != y[pairY.Key].IsOld)
                 {
                     if (string.IsNullOrEmpty(pairY.Value.Value) && string.IsNullOrEmpty(x[pairY.Key].Value))
                     {
-                        pairY.Value.SingleValueHasBeenMatched = true;
-                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.HasBeenMatched = true;
+                        x[pairY.Key].HasBeenMatched = true;
                     }
                     else if (pairY.Value.Value == x[pairY.Key].Value)
                     {
-                        pairY.Value.SingleValueHasBeenMatched = true;
-                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.HasBeenMatched = true;
+                        x[pairY.Key].HasBeenMatched = true;
                     }
                 }
             }

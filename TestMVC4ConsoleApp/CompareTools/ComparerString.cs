@@ -1,29 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TestMVC4App.Models
 {
-    public class ComparerString : IEqualityComparer<HashSet<StringDescriptor>>
+    public class ComparerString : IEqualityComparer<StringDescriptor>
     {
-        bool IEqualityComparer<HashSet<StringDescriptor>>.Equals(HashSet<StringDescriptor> x, HashSet<StringDescriptor> y)
+        bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
         {
-            bool areEqual = false;
-            foreach( var element in x)
+            if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
             {
-                var potentialMatch = y.Where(n => n.Value == element.Value);
-
-                if(potentialMatch.Count() == 1)
+                if (string.IsNullOrEmpty(x.Value) && string.IsNullOrEmpty(y.Value))
                 {
-                    areEqual = true;
-                    potentialMatch.First().SingleValueHasBeenMatched = true;
-                    element.SingleValueHasBeenMatched = true;
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
+                }
+                else if (x.Value == y.Value)
+                {
+                    x.HasBeenMatched = true;
+                    y.HasBeenMatched = true;
                 }
             }
 
-            return areEqual;
+            return false;
         }
 
-        int IEqualityComparer<HashSet<StringDescriptor>>.GetHashCode(HashSet<StringDescriptor> obj)
+        int IEqualityComparer<StringDescriptor>.GetHashCode(StringDescriptor obj)
         {
             return obj.ToString().ToLower().GetHashCode();
         }

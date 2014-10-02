@@ -11,7 +11,7 @@ namespace TestMVC4App.Models
         public bool IsOld { get; private set; }
         public string Value { get; set; }
 
-        public bool SingleValueHasBeenMatched { get; set; }
+        public bool HasBeenMatched { get; set; }
 
         public bool Duplicate { get; set; }
 
@@ -27,7 +27,7 @@ namespace TestMVC4App.Models
         {
             this.IsOld = isOld;
             this.Value = value;
-            this.SingleValueHasBeenMatched = false;
+            this.HasBeenMatched = false;
             this.Duplicate = false;
             this.MismatchDueToCase = false;
             this.MismatchDueToTrailingSpaces = false;

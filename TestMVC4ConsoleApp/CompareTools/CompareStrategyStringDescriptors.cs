@@ -9,7 +9,6 @@ namespace TestMVC4ConsoleApp.CompareTools
 {
     public class CompareStrategyStringDescriptors : CompareStrategy
     {
-        private int leftOversOldCount = -1;
         private HashSet<StringDescriptor> oldValues;
         private HashSet<StringDescriptor> newValues;
 
@@ -57,14 +56,14 @@ namespace TestMVC4ConsoleApp.CompareTools
 
             if (keepGoing)
             {
-                // case sensitive, shifted, not trimmed, not partial
-                keepGoing = AreBothCollectionsEquivalent(true, true, false, false);
+                // case sensitive, not shifted, trimmed, not partial
+                keepGoing = AreBothCollectionsEquivalent(true, false, true, false);
             }
 
             if (keepGoing)
             {
-                // case sensitive, not shifted, trimmed, not partial
-                keepGoing = AreBothCollectionsEquivalent(true, false, true, false);
+                // case sensitive, shifted, not trimmed, not partial
+                keepGoing = AreBothCollectionsEquivalent(true, true, false, false);
             }
 
             if (keepGoing)
@@ -152,51 +151,51 @@ namespace TestMVC4ConsoleApp.CompareTools
         {
             bool shouldContinueTesting = true;
 
-            IEnumerable<HashSet<StringDescriptor>> leftOversOld;
-            IEnumerable<HashSet<StringDescriptor>> leftOversNew;
+            IEnumerable<StringDescriptor> leftOversOld;
+            IEnumerable<StringDescriptor> leftOversNew;
 
-            int previousCount = this.oldValues.Where(x => !x.SingleValueHasBeenMatched).Count();
-
-            List<HashSet<StringDescriptor>> oldValuesList = new List<HashSet<StringDescriptor>>();
-            oldValuesList.Add(new HashSet<StringDescriptor>(this.oldValues.Where(x => !x.SingleValueHasBeenMatched)));
-
-            List<HashSet<StringDescriptor>> newValuesList = new List<HashSet<StringDescriptor>>();
-            newValuesList.Add(new HashSet<StringDescriptor>(this.newValues.Where(x => !x.SingleValueHasBeenMatched)));
+            int previousOldCount = this.oldValues.Where(x => !x.HasBeenMatched).Count();
+            int previousNewCount = this.newValues.Where(x => !x.HasBeenMatched).Count();
 
             if (partial)
             {
-                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringPartial());
-                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringPartial());
+                leftOversOld = oldValues.Except(newValues, new ComparerStringPartial());
+                leftOversNew = newValues.Except(oldValues, new ComparerStringPartial());
             }
             else if (shifted)
             {
-                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringShifted());
-                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringShifted());
+                leftOversOld = oldValues.Except(newValues, new ComparerStringShifted());
+                leftOversNew = newValues.Except(oldValues, new ComparerStringShifted());
             }
             else if (trim)
             {
-                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringTrimmed());
-                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringTrimmed());
+                leftOversOld = oldValues.Except(newValues, new ComparerStringTrimmed());
+                leftOversNew = newValues.Except(oldValues, new ComparerStringTrimmed());
             }
             else if (caseSensitive)
             {
-                leftOversOld = oldValuesList.Except(newValuesList, new ComparerString());
-                leftOversNew = newValuesList.Except(oldValuesList, new ComparerString());
+                leftOversOld = oldValues.Except(newValues, new ComparerString());
+                leftOversNew = newValues.Except(oldValues, new ComparerString());
             }
             else
             {
-                leftOversOld = oldValuesList.Except(newValuesList, new ComparerStringNotCaseSensitive());
-                leftOversNew = newValuesList.Except(oldValuesList, new ComparerStringNotCaseSensitive());
+                leftOversOld = oldValues.Except(newValues, new ComparerStringNotCaseSensitive());
+                leftOversNew = newValues.Except(oldValues, new ComparerStringNotCaseSensitive());
             }
 
-            this.leftOversOldCount = leftOversOld.Count();
-            var leftOversNewCount = leftOversNew.Count();
+            int oldCount = leftOversOld.Where(x => !x.HasBeenMatched).Count();
+            int newCount = leftOversNew.Where(x => !x.HasBeenMatched).Count();
 
-            if (this.leftOversOldCount < previousCount)
+            if (oldCount < previousOldCount || newCount < previousNewCount)
             {
-                if (shifted)
+                if (partial)
                 {
-                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.NEW_CONTAINED_IN_OLD);
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
+                    this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
+                } 
+                else if (shifted)
+                {
+                    this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.OLD_VALUE_CONTAINED_IN_NEW);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.WARNING);
                 }
                 else if (trim)
@@ -211,9 +210,9 @@ namespace TestMVC4ConsoleApp.CompareTools
                 }
             }
 
-            if (this.leftOversOldCount == 0 && leftOversNewCount == 0)
+            if (oldCount == 0 && newCount == 0)
             {
-                if (!caseSensitive || trim || shifted)
+                if (!caseSensitive || trim || shifted || partial)
                 {
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);
                 }
@@ -226,7 +225,6 @@ namespace TestMVC4ConsoleApp.CompareTools
             else
             {
                 this.resultReport.UpdateSeverity(EnumResultSeverityType.ERROR);
-                this.resultReport.ErrorMessage = "The lists of " + (trim ? "trimmed " : string.Empty) + (shifted ? "shifted " : string.Empty) + " strings compared " + (!caseSensitive ? "without case " : string.Empty) + "are not equal";
             }
 
             return shouldContinueTesting;
@@ -254,7 +252,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                     }
                 }
 
-                if (this.oldValues.Where(x => !x.SingleValueHasBeenMatched).Count() == 0)
+                if (this.oldValues.Where(x => !x.HasBeenMatched).Count() == 0)
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);

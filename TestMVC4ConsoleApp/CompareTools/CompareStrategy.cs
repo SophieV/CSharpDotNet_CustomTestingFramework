@@ -29,5 +29,20 @@ namespace TestMVC4App.Models
         }
 
         public abstract void Investigate();
+
+        public static int CountEntriesNotMatched(IEnumerable<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> list)
+        {
+            int count = 0;
+
+            if (list != null)
+            {
+                foreach (var pair in list)
+                {
+                    count += pair.Values.Where(x => !x.HasBeenMatched).Count();
+                }
+            }
+
+            return count;
+        }
     }
 }

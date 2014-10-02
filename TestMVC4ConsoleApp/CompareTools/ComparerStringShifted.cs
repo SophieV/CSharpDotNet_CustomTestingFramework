@@ -4,30 +4,33 @@ using TestMVC4App.Models;
 
 namespace TestMVC4ConsoleApp.CompareTools
 {
-    public class ComparerStringShifted : IEqualityComparer<HashSet<StringDescriptor>>
+    public class ComparerStringShifted : IEqualityComparer<StringDescriptor>
     {
-        bool IEqualityComparer<HashSet<StringDescriptor>>.Equals(HashSet<StringDescriptor> x, HashSet<StringDescriptor> y)
+        bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
         {
-            bool areEqual = false;
-            foreach (var element in x)
+            if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
             {
-                var potentialMatch = y.Where(n => !string.IsNullOrEmpty(element.Value) && !string.IsNullOrEmpty(element.Value)
-                                                && ((n.Value.Contains(',') && element.Value == n.Value.Split(',')[1].Trim() + " " + n.Value.Split(',')[0].Trim())
-                                                || (element.Value.Contains(',') && n.Value == element.Value.Split(',')[1].Trim() + " " + element.Value.Split(',')[0].Trim())));
-
-                if (potentialMatch.Count() == 1)
+                if (!string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(y.Value))
                 {
-                    potentialMatch.First().SingleValueHasBeenMatched = true;
-                    potentialMatch.First().MismatchDueToPartialName = true;
-                    element.SingleValueHasBeenMatched = true;
-                    element.MismatchDueToPartialName = true;
+                    if (x.Value.Contains(',') && y.Value == x.Value.Split(',')[1].Trim() + " " + x.Value.Split(',')[0].Trim())
+                    {
+                        x.HasBeenMatched = true;
+                        y.HasBeenMatched = true;
+                        x.MismatchDueToShiftedName = true;
+                    }
+                    if (y.Value.Contains(',') && x.Value == y.Value.Split(',')[1].Trim() + " " + y.Value.Split(',')[0].Trim())
+                    {
+                        x.HasBeenMatched = true;
+                        y.HasBeenMatched = true;
+                        y.MismatchDueToShiftedName = true;
+                    }
                 }
             }
 
-            return areEqual;
+            return false;
         }
 
-        int IEqualityComparer<HashSet<StringDescriptor>>.GetHashCode(HashSet<StringDescriptor> obj)
+        int IEqualityComparer<StringDescriptor>.GetHashCode(StringDescriptor obj)
         {
             return obj.ToString().ToLower().GetHashCode();
         }

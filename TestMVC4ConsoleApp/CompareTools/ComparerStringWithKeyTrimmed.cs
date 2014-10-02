@@ -9,26 +9,26 @@ namespace TestMVC4App.Models
         {
             foreach (var pairX in x)
             {
-                if (!pairX.Value.SingleValueHasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].SingleValueHasBeenMatched 
+                if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched 
                     && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
                     && pairX.Value.IsOld != y[pairX.Key].IsOld)
                 {
                     if (pairX.Value.Value.Trim() == y[pairX.Key].Value)
                     {
-                        pairX.Value.SingleValueHasBeenMatched = true;
-                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        pairX.Value.HasBeenMatched = true;
+                        y[pairX.Key].HasBeenMatched = true;
                         pairX.Value.MismatchDueToTrailingSpaces = true;
                     }
                     else if (pairX.Value.Value == y[pairX.Key].Value.Trim())
                     {
-                        pairX.Value.SingleValueHasBeenMatched = true;
-                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        pairX.Value.HasBeenMatched = true;
+                        y[pairX.Key].HasBeenMatched = true;
                         y[pairX.Key].MismatchDueToTrailingSpaces = true;
                     }
                     else if (pairX.Value.Value.Trim() == y[pairX.Key].Value.Trim())
                     {
-                        pairX.Value.SingleValueHasBeenMatched = true;
-                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        pairX.Value.HasBeenMatched = true;
+                        y[pairX.Key].HasBeenMatched = true;
                         pairX.Value.MismatchDueToTrailingSpaces = true;
                         y[pairX.Key].MismatchDueToTrailingSpaces = true;
                     }
@@ -37,26 +37,26 @@ namespace TestMVC4App.Models
 
             foreach (var pairY in y)
             {
-                if (!pairY.Value.SingleValueHasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].SingleValueHasBeenMatched
+                if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
                     && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value)
                     && pairY.Value.IsOld != y[pairY.Key].IsOld)
                 {
                     if (pairY.Value.Value.ToLower() == x[pairY.Key].Value.Trim())
                     {
-                        pairY.Value.SingleValueHasBeenMatched = true;
-                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.HasBeenMatched = true;
+                        x[pairY.Key].HasBeenMatched = true;
                         pairY.Value.MismatchDueToTrailingSpaces = true;
                     }
                     else if (pairY.Value.Value == x[pairY.Key].Value.Trim())
                     {
-                        pairY.Value.SingleValueHasBeenMatched = true;
-                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.HasBeenMatched = true;
+                        x[pairY.Key].HasBeenMatched = true;
                         x[pairY.Key].MismatchDueToTrailingSpaces = true;
                     }
                     else if (pairY.Value.Value.Trim() == x[pairY.Key].Value.Trim())
                     {
-                        pairY.Value.SingleValueHasBeenMatched = true;
-                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.HasBeenMatched = true;
+                        x[pairY.Key].HasBeenMatched = true;
                         pairY.Value.MismatchDueToTrailingSpaces = true;
                         x[pairY.Key].MismatchDueToTrailingSpaces = true;
                     }
