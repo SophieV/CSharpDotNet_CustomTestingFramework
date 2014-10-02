@@ -155,13 +155,13 @@ namespace TestMVC4ConsoleApp.CompareTools
             IEnumerable<HashSet<StringDescriptor>> leftOversOld;
             IEnumerable<HashSet<StringDescriptor>> leftOversNew;
 
-            int previousCount = this.oldValues.Where(x => !x.HasBeenMatched).Count();
+            int previousCount = this.oldValues.Where(x => !x.SingleValueHasBeenMatched).Count();
 
             List<HashSet<StringDescriptor>> oldValuesList = new List<HashSet<StringDescriptor>>();
-            oldValuesList.Add(new HashSet<StringDescriptor>(this.oldValues.Where(x => !x.HasBeenMatched)));
+            oldValuesList.Add(new HashSet<StringDescriptor>(this.oldValues.Where(x => !x.SingleValueHasBeenMatched)));
 
             List<HashSet<StringDescriptor>> newValuesList = new List<HashSet<StringDescriptor>>();
-            newValuesList.Add(new HashSet<StringDescriptor>(this.newValues.Where(x => !x.HasBeenMatched)));
+            newValuesList.Add(new HashSet<StringDescriptor>(this.newValues.Where(x => !x.SingleValueHasBeenMatched)));
 
             if (partial)
             {
@@ -254,7 +254,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                     }
                 }
 
-                if (this.oldValues.Where(x => !x.HasBeenMatched).Count() == 0)
+                if (this.oldValues.Where(x => !x.SingleValueHasBeenMatched).Count() == 0)
                 {
                     this.resultReport.IdentifedDataBehaviors.Add(EnumIdentifiedDataBehavior.MORE_VALUES_ON_OLD_SERVICE_ALL_DUPLICATES);
                     this.resultReport.UpdateSeverity(EnumResultSeverityType.FALSE_POSITIVE);

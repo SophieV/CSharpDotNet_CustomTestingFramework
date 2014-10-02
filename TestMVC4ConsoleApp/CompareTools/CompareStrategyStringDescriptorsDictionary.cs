@@ -168,7 +168,8 @@ namespace TestMVC4App.Models
             this.leftOversOldCount = CountEntriesNotMatched(leftOversOld);
             var leftOversNewCount = CountEntriesNotMatched(leftOversNew);
 
-            if (this.leftOversOldCount < previousCount)
+            int newCount = CountEntriesNotMatched(oldValues);
+            if (newCount < previousCount)
             {
                 if (partial)
                 {
@@ -223,9 +224,12 @@ namespace TestMVC4App.Models
         {
             int count = 0;
 
-            foreach(var pair in list)
+            if (list != null)
             {
-                count += pair.Values.Where(x => !x.HasBeenMatched).Count();
+                foreach (var pair in list)
+                {
+                    count += pair.Values.Where(x => !x.SingleValueHasBeenMatched).Count();
+                }
             }
 
             return count;

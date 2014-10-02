@@ -15,9 +15,9 @@ namespace TestMVC4App.Models
 
                 if (potentialMatch.Count() == 1)
                 {
-                    potentialMatch.First().HasBeenMatched = true;
+                    potentialMatch.First().SingleValueHasBeenMatched = true;
                     potentialMatch.First().MismatchDueToTrailingSpaces = true;
-                    element.HasBeenMatched = true;
+                    element.SingleValueHasBeenMatched = true;
                     element.MismatchDueToTrailingSpaces = true;
                 }
             }

@@ -191,7 +191,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\r\n\t\t\t\t\t");
             
             #line 55 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(!oldValue.HasBeenMatched) { 
+ if(!oldValue.SingleValueHasBeenMatched) { 
             
             #line default
             #line hidden
@@ -332,7 +332,7 @@ namespace TestMVC4ConsoleApp.Templates
             this.Write("\r\n\t\t\t\t\t");
             
             #line 79 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\DetailedReportStringLists.tt"
- if(!newValue.HasBeenMatched) { 
+ if(!newValue.SingleValueHasBeenMatched) { 
             
             #line default
             #line hidden

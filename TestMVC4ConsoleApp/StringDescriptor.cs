@@ -5,9 +5,13 @@ namespace TestMVC4App.Models
 {
     public class StringDescriptor
     {
+        /// <summary>
+        /// Used to make sure comparison of values is not done on the "same side".
+        /// </summary>
+        public bool IsOld { get; private set; }
         public string Value { get; set; }
 
-        public bool HasBeenMatched { get; set; }
+        public bool SingleValueHasBeenMatched { get; set; }
 
         public bool Duplicate { get; set; }
 
@@ -19,10 +23,11 @@ namespace TestMVC4App.Models
 
         public bool MismatchDueToShiftedName { get; set; }
 
-        public StringDescriptor(string value)
+        public StringDescriptor(bool isOld, string value)
         {
+            this.IsOld = isOld;
             this.Value = value;
-            this.HasBeenMatched = false;
+            this.SingleValueHasBeenMatched = false;
             this.Duplicate = false;
             this.MismatchDueToCase = false;
             this.MismatchDueToTrailingSpaces = false;
@@ -35,17 +40,17 @@ namespace TestMVC4App.Models
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static HashSet<StringDescriptor> EmbedInDescriptors(HashSet<string> values)
+        public static HashSet<StringDescriptor> EmbedInDescriptors(bool isOld, HashSet<string> values)
         {
             var embeddedValues = new HashSet<StringDescriptor>();
             foreach(string value in values)
             {
-                embeddedValues.Add(new StringDescriptor(value));
+                embeddedValues.Add(new StringDescriptor(isOld, value));
             }
             return embeddedValues;
         }
 
-        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> EmbedInDescriptors(HashSet<Dictionary<EnumOldServiceFieldsAsKeys,string>> values)
+        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> EmbedInDescriptors(bool isOld, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> values)
         {
             var embeddedValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
             Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> dic;
@@ -55,28 +60,28 @@ namespace TestMVC4App.Models
                 dic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
                 foreach (var value in element)
                 {
-                    dic.Add(value.Key, new StringDescriptor(value.Value));
+                    dic.Add(value.Key, new StringDescriptor(isOld, value.Value));
                 }
                 embeddedValues.Add(dic);
             }
             return embeddedValues;
         }
 
-        public static HashSet<StringDescriptor> EmbedInDescriptors(string value)
+        public static HashSet<StringDescriptor> EmbedInDescriptors(bool isOld, string value)
         {
             var embeddedValues = new HashSet<StringDescriptor>();
-            embeddedValues.Add(new StringDescriptor(value));
+            embeddedValues.Add(new StringDescriptor(isOld, value));
             return embeddedValues;
         }
 
-        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> EmbedInDescriptors(Dictionary<EnumOldServiceFieldsAsKeys, string> values)
+        public static HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> EmbedInDescriptors(bool isOld, Dictionary<EnumOldServiceFieldsAsKeys, string> values)
         {
             var embeddedValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
             var embeddedDic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
 
             foreach (var value in values)
             {
-                embeddedDic.Add(value.Key, new StringDescriptor(value.Value));
+                embeddedDic.Add(value.Key, new StringDescriptor(isOld, value.Value));
             }
             embeddedValues.Add(embeddedDic);
             return embeddedValues;

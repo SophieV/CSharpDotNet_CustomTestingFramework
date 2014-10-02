@@ -7,37 +7,49 @@ namespace TestMVC4ConsoleApp.CompareTools
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
-            bool areEqual = true;
-            foreach (var key in x.Keys)
+            foreach (var pairX in x)
             {
-                if (x.ContainsKey(key) && y.ContainsKey(key) && !x[key].HasBeenMatched && !y[key].HasBeenMatched)
+                if (!pairX.Value.SingleValueHasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].SingleValueHasBeenMatched
+                    && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
+                    && pairX.Value.IsOld != y[pairX.Key].IsOld)
                 {
-                    if (!string.IsNullOrEmpty(x[key].Value) && x[key].Value.Length > 4 && !string.IsNullOrEmpty(y[key].Value) && x[key].Value.Trim().Contains(y[key].Value.Trim()))
+                    if (pairX.Value.Value.Length > 4 && pairX.Value.Value.Trim().Contains(y[pairX.Key].Value.Trim()))
                     {
-                        areEqual = true;
-                        x[key].HasBeenMatched = true;
-                        y[key].HasBeenMatched = true;
-                        y[key].MismatchDueToPartialName = true;
+                        pairX.Value.SingleValueHasBeenMatched = true;
+                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        y[pairX.Key].MismatchDueToPartialName = true;
                     }
-                    else if (!string.IsNullOrEmpty(y[key].Value) && y[key].Value.Length > 4 && !string.IsNullOrEmpty(x[key].Value) && y[key].Value.Trim().Contains(x[key].Value.Trim()))
+                    else if (y[pairX.Key].Value.Length > 4 && y[pairX.Key].Value.Trim().Contains(pairX.Value.Value.Trim()))
                     {
-                        areEqual = true;
-                        x[key].HasBeenMatched = true;
-                        y[key].HasBeenMatched = true;
-                        x[key].MismatchDueToPartialName = true;
+                        pairX.Value.SingleValueHasBeenMatched = true;
+                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        pairX.Value.MismatchDueToPartialName = true;
                     }
-                    else
-                    {
-                        areEqual &= false;
-                    }
-                }
-                else
-                {
-                    areEqual &= false;
                 }
             }
 
-            return areEqual;
+            foreach (var pairY in y)
+            {
+                if (!pairY.Value.SingleValueHasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].SingleValueHasBeenMatched
+                    && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value)
+                    && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                {
+                    if (pairY.Value.Value.Length > 4 && pairY.Value.Value.Trim().Contains(x[pairY.Key].Value.Trim()))
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        x[pairY.Key].MismatchDueToPartialName = true;
+                    }
+                    else if (x[pairY.Key].Value.Length > 4 && x[pairY.Key].Value.Trim().Contains(pairY.Value.Value.Trim()))
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.MismatchDueToPartialName = true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> obj)

@@ -15,8 +15,8 @@ namespace TestMVC4App.Models
                 if(potentialMatch.Count() == 1)
                 {
                     areEqual = true;
-                    potentialMatch.First().HasBeenMatched = true;
-                    element.HasBeenMatched = true;
+                    potentialMatch.First().SingleValueHasBeenMatched = true;
+                    element.SingleValueHasBeenMatched = true;
                 }
             }
 

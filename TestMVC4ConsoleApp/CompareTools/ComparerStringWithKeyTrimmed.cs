@@ -7,49 +7,63 @@ namespace TestMVC4App.Models
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
-            bool areEqual = true;
-
-            foreach (var key in x.Keys)
+            foreach (var pairX in x)
             {
-                if (x.ContainsKey(key) && y.ContainsKey(key) && !x[key].HasBeenMatched && !y[key].HasBeenMatched)
+                if (!pairX.Value.SingleValueHasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].SingleValueHasBeenMatched 
+                    && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
+                    && pairX.Value.IsOld != y[pairX.Key].IsOld)
                 {
-                    if (!string.IsNullOrEmpty(x[key].Value) && !string.IsNullOrEmpty(y[key].Value))
+                    if (pairX.Value.Value.Trim() == y[pairX.Key].Value)
                     {
-                        if (x[key].Value.Trim() == y[key].Value)
-                        {
-                            areEqual &= true;
-                            x[key].HasBeenMatched = true;
-                            x[key].MismatchDueToTrailingSpaces = true;
-                            y[key].HasBeenMatched = true;
-                        }
-                        else if (x[key].Value == y[key].Value.Trim())
-                        {
-                            areEqual &= true;
-                            x[key].HasBeenMatched = true;
-                            y[key].HasBeenMatched = true;
-                            y[key].MismatchDueToTrailingSpaces = true;
-                        }
-                        else if (x[key].Value.Trim() == y[key].Value.Trim())
-                        {
-                            areEqual &= true;
-                            x[key].HasBeenMatched = true;
-                            x[key].MismatchDueToTrailingSpaces = true;
-                            y[key].HasBeenMatched = true;
-                            y[key].MismatchDueToTrailingSpaces = true;
-                        }
+                        pairX.Value.SingleValueHasBeenMatched = true;
+                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        pairX.Value.MismatchDueToTrailingSpaces = true;
                     }
-                    else
+                    else if (pairX.Value.Value == y[pairX.Key].Value.Trim())
                     {
-                        areEqual &= false;
+                        pairX.Value.SingleValueHasBeenMatched = true;
+                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        y[pairX.Key].MismatchDueToTrailingSpaces = true;
                     }
-                }
-                else
-                {
-                    areEqual &= false;
+                    else if (pairX.Value.Value.Trim() == y[pairX.Key].Value.Trim())
+                    {
+                        pairX.Value.SingleValueHasBeenMatched = true;
+                        y[pairX.Key].SingleValueHasBeenMatched = true;
+                        pairX.Value.MismatchDueToTrailingSpaces = true;
+                        y[pairX.Key].MismatchDueToTrailingSpaces = true;
+                    }
                 }
             }
 
-            return areEqual;
+            foreach (var pairY in y)
+            {
+                if (!pairY.Value.SingleValueHasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].SingleValueHasBeenMatched
+                    && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value)
+                    && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                {
+                    if (pairY.Value.Value.ToLower() == x[pairY.Key].Value.Trim())
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.MismatchDueToTrailingSpaces = true;
+                    }
+                    else if (pairY.Value.Value == x[pairY.Key].Value.Trim())
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        x[pairY.Key].MismatchDueToTrailingSpaces = true;
+                    }
+                    else if (pairY.Value.Value.Trim() == x[pairY.Key].Value.Trim())
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                        pairY.Value.MismatchDueToTrailingSpaces = true;
+                        x[pairY.Key].MismatchDueToTrailingSpaces = true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> obj)

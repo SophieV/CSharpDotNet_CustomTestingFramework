@@ -19,7 +19,7 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(string oldValue, string newValue, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(oldValue), StringDescriptor.EmbedInDescriptors(newValue), resultReport));
+            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(true, oldValue), StringDescriptor.EmbedInDescriptors(false, newValue), resultReport));
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(HashSet<string> oldValues, HashSet<string> newValues, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(oldValues),StringDescriptor.EmbedInDescriptors(newValues),resultReport));
+            compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(true, oldValues),StringDescriptor.EmbedInDescriptors(false, newValues),resultReport));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategyContextSwitcher(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues, ResultReport resultReport)
         {
-            compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(oldValues), StringDescriptor.EmbedInDescriptors(newValues), resultReport));
+            compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(true, oldValues), StringDescriptor.EmbedInDescriptors(false, newValues), resultReport));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace TestMVC4App.Models
         {
             foreach(var slice in oldAndNewValues)
             {
-                compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value), resultReport));
+                compareStrategies.Add(new CompareStrategyStringDescriptors(StringDescriptor.EmbedInDescriptors(true, slice.Key), StringDescriptor.EmbedInDescriptors(false, slice.Value), resultReport));
             }
         }
 
@@ -68,7 +68,7 @@ namespace TestMVC4App.Models
         {
             foreach (var slice in oldAndNewValues)
             {
-                compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(slice.Key), StringDescriptor.EmbedInDescriptors(slice.Value),resultReport));
+                compareStrategies.Add(new CompareStrategyStringDescriptorsDictionary(StringDescriptor.EmbedInDescriptors(true, slice.Key), StringDescriptor.EmbedInDescriptors(false, slice.Value),resultReport));
             }
         }
 

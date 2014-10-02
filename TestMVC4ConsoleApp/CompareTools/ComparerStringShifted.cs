@@ -17,9 +17,9 @@ namespace TestMVC4ConsoleApp.CompareTools
 
                 if (potentialMatch.Count() == 1)
                 {
-                    potentialMatch.First().HasBeenMatched = true;
+                    potentialMatch.First().SingleValueHasBeenMatched = true;
                     potentialMatch.First().MismatchDueToPartialName = true;
-                    element.HasBeenMatched = true;
+                    element.SingleValueHasBeenMatched = true;
                     element.MismatchDueToPartialName = true;
                 }
             }

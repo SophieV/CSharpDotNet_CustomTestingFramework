@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TestMVC4App.Models
@@ -7,57 +8,41 @@ namespace TestMVC4App.Models
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
-            bool areEqual = true;
-
-            foreach( var pair in x)
+            foreach (var pairX in x)
             {
-                if (!pair.Value.HasBeenMatched)
-                {
-                    if (y.ContainsKey(pair.Key) && !y[pair.Key].HasBeenMatched)
+                if (!pairX.Value.SingleValueHasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].SingleValueHasBeenMatched && pairX.Value.IsOld != y[pairX.Key].IsOld)
                     {
-                        if (string.IsNullOrEmpty(pair.Value.Value) && string.IsNullOrEmpty(y[pair.Key].Value))
+                        if (string.IsNullOrEmpty(pairX.Value.Value) && string.IsNullOrEmpty(y[pairX.Key].Value))
                         {
-                            pair.Value.HasBeenMatched = true;
-                            y[pair.Key].HasBeenMatched = true;
+                            pairX.Value.SingleValueHasBeenMatched = true;
+                            y[pairX.Key].SingleValueHasBeenMatched = true;
                         }
-                        else if (pair.Value.Value == y[pair.Key].Value)
+                        else if (pairX.Value.Value == y[pairX.Key].Value)
                         {
-                            pair.Value.HasBeenMatched = true;
-                            y[pair.Key].HasBeenMatched = true;
+                            pairX.Value.SingleValueHasBeenMatched = true;
+                            y[pairX.Key].SingleValueHasBeenMatched = true;
                         }
-                        else
-                        {
-                            areEqual = false;
-                        }
+                    }
+            }
+
+            foreach (var pairY in y)
+            {
+                if (!pairY.Value.SingleValueHasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].SingleValueHasBeenMatched && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                {
+                    if (string.IsNullOrEmpty(pairY.Value.Value) && string.IsNullOrEmpty(x[pairY.Key].Value))
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
+                    }
+                    else if (pairY.Value.Value == x[pairY.Key].Value)
+                    {
+                        pairY.Value.SingleValueHasBeenMatched = true;
+                        x[pairY.Key].SingleValueHasBeenMatched = true;
                     }
                 }
             }
 
-            foreach (var pair in y)
-            {
-                if (!pair.Value.HasBeenMatched)
-                {
-                    if (x.ContainsKey(pair.Key) && !x[pair.Key].HasBeenMatched)
-                    {
-                        if (string.IsNullOrEmpty(pair.Value.Value) && string.IsNullOrEmpty(x[pair.Key].Value))
-                        {
-                            pair.Value.HasBeenMatched = true;
-                            x[pair.Key].HasBeenMatched = true;
-                        }
-                        else if (pair.Value.Value == y[pair.Key].Value)
-                        {
-                            pair.Value.HasBeenMatched = true;
-                            x[pair.Key].HasBeenMatched = true;
-                        }
-                        else
-                        {
-                            areEqual = false;
-                        }
-                    }
-                }
-            }
-
-            return areEqual;
+            return false;
         }
 
         int IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.GetHashCode(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> obj)
