@@ -49,8 +49,6 @@ namespace TestMVC4App.Models
                                                                                                                                         EnumOldServiceFieldsAsKeys.city,
                                                                                                                                         EnumOldServiceFieldsAsKeys.state,
                                                                                                                                         EnumOldServiceFieldsAsKeys.zipCode,
-                                                                                                                                        EnumOldServiceFieldsAsKeys.latitude,
-                                                                                                                                        EnumOldServiceFieldsAsKeys.longitude,
                                                                                                                                         EnumOldServiceFieldsAsKeys.type});
 
             // add mailing address manually
@@ -118,9 +116,6 @@ namespace TestMVC4App.Models
                     // make sure a value is present for each index
                     mailingAddress.Add(EnumOldServiceFieldsAsKeys.zipCode, string.Empty);
                 }
-
-                mailingAddress.Add(EnumOldServiceFieldsAsKeys.latitude, string.Empty);
-                mailingAddress.Add(EnumOldServiceFieldsAsKeys.longitude, string.Empty);
 
                 bool atLeastOneFieldPopulated = mailingAddress.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Count() > 0;
 
@@ -209,26 +204,6 @@ namespace TestMVC4App.Models
                     {
                         // make sure a value is present for each index
                         properties.Add(EnumOldServiceFieldsAsKeys.zipCode, string.Empty);
-                    }
-
-                    try
-                    {
-                        properties.Add(EnumOldServiceFieldsAsKeys.latitude, newValue.Address.BaseAddress.Location.GeoPoint.Latitude.ToString());
-                    }
-                    catch (Exception)
-                    {
-                        // make sure a value is present for each index
-                        properties.Add(EnumOldServiceFieldsAsKeys.latitude, string.Empty);
-                    }
-
-                    try
-                    {
-                        properties.Add(EnumOldServiceFieldsAsKeys.longitude, newValue.Address.BaseAddress.Location.GeoPoint.Longitude.ToString());
-                    }
-                    catch (Exception)
-                    {
-                        // make sure a value is present for each index
-                        properties.Add(EnumOldServiceFieldsAsKeys.longitude, string.Empty);
                     }
 
                     try
