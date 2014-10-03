@@ -550,7 +550,11 @@ namespace TestMVC4App.Models
         {
             var watch = new Stopwatch();
             watch.Start();
+            var watch2 = new Stopwatch();
+            watch2.Start();
             var missionsPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
+            var missionsOld = new List<string>();
+            var missionsNew = new List<string>();
             
             foreach (var entry in this.newServiceOrganizationDescriptors)
             {
@@ -559,35 +563,64 @@ namespace TestMVC4App.Models
                     // matched partner is old service data
                     missionsPerOrg.Add(entry.MatchedPartner.Missions, entry.Missions);
                 }
+
+                if (entry.Missions.Count() > 0)
+                {
+                    missionsNew.AddRange(entry.Missions);
+                }
+            }
+
+            foreach (var entry in this.oldServiceOrganizationDescriptors)
+            {
+                if (entry.Missions.Count() > 0)
+                {
+                    missionsOld.AddRange(entry.Missions);
+                }
             }
             
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions, "Comparing Organization Missions", missionsPerOrg);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions_MatchedOnly, "Comparing Missions of matched Organizations", missionsPerOrg,watch);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Missions_All, "Comparing Missions of all Organizations", new HashSet<string>(missionsOld),new HashSet<string>(missionsNew),watch2);
         }
 
         private void UserGeneralInfo_Organization_Type_Test()
         {
             var watch = new Stopwatch();
             watch.Start();
+            var watch2 = new Stopwatch();
+            watch2.Start();
             var valuesPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
+            var oldValues = new HashSet<string>();
+            var newValues = new HashSet<string>();
 
             foreach (var entry in this.newServiceOrganizationDescriptors)
             {
-                // TODO: implement no data on old or new side
                 if (entry.MatchedPartner != null)
                 {
                     // matched partner is old service data
                     valuesPerOrg.Add(new HashSet<string>(){entry.MatchedPartner.Type}, new HashSet<string>() {entry.Type});
                 }
+
+                newValues.Add(entry.Type);
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type, "Comparing Organization Types", valuesPerOrg);
+            foreach (var entry in this.oldServiceOrganizationDescriptors)
+            {
+                oldValues.Add(entry.Type);
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type_MatchedOnly, "Comparing Types of matched Organizations", valuesPerOrg,watch);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_Type_All, "Comparing All Organization Types", oldValues, newValues, watch2);
         }
 
         private void UserGeneralInfo_Organizations_YmgStatus_Test()
         {
             var watch = new Stopwatch();
             watch.Start();
+            var watch2 = new Stopwatch();
+            watch2.Start();
             var valuesPerOrg = new Dictionary<HashSet<string>, HashSet<string>>();
+            var oldValues = new HashSet<string>();
+            var newValues = new HashSet<string>();
 
             foreach (var entry in this.newServiceOrganizationDescriptors)
             {
@@ -596,9 +629,17 @@ namespace TestMVC4App.Models
                     // matched partner is old service data
                     valuesPerOrg.Add(new HashSet<string>() { entry.MatchedPartner.IsDisplayedOnYmg.ToString() }, new HashSet<string>() { entry.IsDisplayedOnYmg.ToString() });
                 }
+
+                newValues.Add(entry.IsDisplayedOnYmg.ToString());
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_YmgStatus, "Comparing Display On YMG Status", valuesPerOrg);
+            foreach(var entry in this.oldServiceOrganizationDescriptors)
+            {
+                oldValues.Add(entry.IsDisplayedOnYmg.ToString());
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_YmgStatus_MatchedOnly, "Comparing Display On YMG Status", valuesPerOrg,watch);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Organizations_YmgStatus_All, "Comparing Display On YMG Status", oldValues, newValues, watch2);
         }
     }
 

@@ -223,10 +223,8 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(testFullName, testDescription, oldValue, newValue);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues, Stopwatch watch)
         {
-            var watch = new Stopwatch();
-            watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
             var compareStrategy = new CompareStrategyFactory(newAndOldValues,resultReport);
             compareStrategy.Investigate();
