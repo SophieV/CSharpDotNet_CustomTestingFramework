@@ -42,6 +42,9 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_Addresses_Test()
         {
+            var watch = new Stopwatch();
+            watch.Start();
+
             var oldValues = ParsingHelper.ParseStructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.location.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.locationName,
                                                                                                                                         EnumOldServiceFieldsAsKeys.building,
                                                                                                                                         EnumOldServiceFieldsAsKeys.addressLine1,
@@ -220,7 +223,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses, "Comparing Address(es)", oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses, "Comparing Address(es)", oldValues, newValues, watch);
         }
 
         private void UserContactLocationInfo_Addresses_Geo(IEnumerable<XElement> oldServiceNodes, HashSet<GeoPoint> newValues)
@@ -253,18 +256,7 @@ namespace TestMVC4App.Models
                 }
             }
 
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_Geo, "Comparing Geo Location Data");
-            var compareStrategy = new CompareStrategyFactory(roundedOldValues, roundedNewValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_Geo, "Comparing Geo Location Data", roundedOldValues, roundedNewValues, watch);
         }
 
         private void UserContactLocationInfo_LabWebsites_Names_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
@@ -274,18 +266,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.titleName.ToString());
 
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)");
-            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Names, "Comparing LabWebsite Name(s)", oldValues, newValues, watch);
         }
 
         private void UserContactLocationInfo_LabWebsites_Links_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
@@ -295,18 +276,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.link.ToString());
 
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)");
-            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_LabWebsites_Links, "Comparing LabWebsite Link(s)", oldValues, newValues, watch);
         }
 
         private void UserContactLocationInfo_UserAddress_StreetAddress_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
@@ -326,18 +296,7 @@ namespace TestMVC4App.Models
                 oldValues.Add(mailingAddress.ToString());
             }
 
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)");
-            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_StreetAddress, "Comparing Address StreetInfo(s)", oldValues, newValues, watch);
         }
 
         private void UserContactLocationInfo_UserAddress_IsMailing_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
@@ -352,18 +311,7 @@ namespace TestMVC4App.Models
             var oldValues = new HashSet<string>();
             oldValues.Add(mailingAddress.ToString());
 
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address");
-            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_IsMailing, "Comparing Mailing Address", oldValues, newValues, watch);
         }
 
         private void UserContactLocationInfo_UserAddress_ZipCodes_Test(IEnumerable<XElement> oldServiceNodes, HashSet<string> newValues)
@@ -373,18 +321,7 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
 
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)");
-            var compareStrategy = new CompareStrategyFactory(new HashSet<string>(oldValues.Distinct()), new HashSet<string>(newValues.Distinct()), resultReport);
-            compareStrategy.Investigate();
-            watch.Stop();
-
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)", oldValues, newValues, watch);
         }
     }
 }

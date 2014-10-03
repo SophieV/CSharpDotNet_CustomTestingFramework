@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
@@ -90,22 +91,8 @@ namespace TestMVC4App.Models
 
         private void UserGeneralInfo_AltMiddleNameDisplayed_Test()
         {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed");
-
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-            var compareStrategy = new CompareStrategyFactory((!string.IsNullOrEmpty(oldValue)).ToString(), newData.IsAltMiddleNameDisplayed.ToString(), resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed", (!string.IsNullOrEmpty(oldValue)).ToString(), newData.IsAltMiddleNameDisplayed.ToString());
         }
 
         private void UserGeneralInfo_AltSuffixName_Test()
@@ -175,16 +162,20 @@ namespace TestMVC4App.Models
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.title.ToString(), EnumOldServiceFieldsAsKeys.titleName.ToString());
 
             HashSet<string> newValues = new HashSet<string>();
-            if(newData.Titles.Count() > 0)
+            try
             {
-                foreach(var title in newData.Titles)
+                if (newData.Titles.Count() > 0)
                 {
-                    if (!string.IsNullOrEmpty(title.Name))
+                    foreach (var title in newData.Titles)
                     {
-                        newValues.Add(title.Name);
+                        if (!string.IsNullOrEmpty(title.Name))
+                        {
+                            newValues.Add(title.Name);
+                        }
                     }
                 }
             }
+            catch (Exception) { }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Titles, "Comparing Title(s)", oldValues, newValues);
         }
@@ -194,7 +185,13 @@ namespace TestMVC4App.Models
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cv.ToString(), EnumOldServiceFieldsAsKeys.fileName.ToString());
             string oldValue = oldValues.Count().ToString();
 
-            string newValue = newData.CVs.Count().ToString();
+            string newValue = string.Empty;
+
+            try
+            {
+                newValue = newData.CVs.Count().ToString();
+            }
+            catch (Exception) { }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", oldValue, newValue);
         }
@@ -208,13 +205,17 @@ namespace TestMVC4App.Models
             oldValues = ParsingHelper.StringToList(oldValuePart2, ',', oldValues);
             
             HashSet<string> newValues = new HashSet<string>();
-            if (newData.Titles.Count() > 0)
+            try
             {
-                foreach (var suffix in newData.Suffixes)
+                if (newData.Titles.Count() > 0)
                 {
-                    newValues.Add(suffix.Name);
+                    foreach (var suffix in newData.Suffixes)
+                    {
+                        newValues.Add(suffix.Name);
+                    }
                 }
             }
+            catch (Exception) { }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_All_EduProfSuffixes, "Comparing list of Suffix(es)", oldValues, newValues);
         }
@@ -222,15 +223,19 @@ namespace TestMVC4App.Models
         private void UserGeneralInfo_LanguageUsers_Test()
         {
             var oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.language.ToString(), EnumOldServiceFieldsAsKeys.languageName.ToString());
-
             var newValues = new HashSet<string>();
-            if (newData.LanguageUsers.Count() > 0)
+
+            try
             {
-                foreach (var language in newData.LanguageUsers)
+                if (newData.LanguageUsers.Count() > 0)
                 {
-                    newValues.Add(language.LanguageName);
+                    foreach (var language in newData.LanguageUsers)
+                    {
+                        newValues.Add(language.LanguageName);
+                    }
                 }
             }
+            catch (Exception) { }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Languages, "Comparing LanguageUser(s)", oldValues, newValues);
         }

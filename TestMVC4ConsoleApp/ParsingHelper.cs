@@ -61,30 +61,34 @@ namespace TestMVC4App.Models
             var values = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
             Dictionary<EnumOldServiceFieldsAsKeys,string> properties;
 
-            var parentItems = elements.Where(x => x.Name == nodeName);
-
-            if (parentItems.Count() > 0)
+            try
             {
-                foreach (var parentItem in parentItems)
-                {
-                    properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
-                    foreach (var childNodeName in childNodeNames)
-                    {
-                        try
-                        {
-                            properties.Add(childNodeName,parentItem.Descendants(childNodeName.ToString()).Select(x => x.Value).First());
-                        }
-                        catch (Exception)
-                        {
-                            // there is no existing attribute to parse
-                            // we need to make sure that there are just as many values as expected
-                            properties.Add(childNodeName,string.Empty);
-                        }
-                    }
+                var parentItems = elements.Where(x => x.Name == nodeName);
 
-                    values.Add(properties);
+                if (parentItems.Count() > 0)
+                {
+                    foreach (var parentItem in parentItems)
+                    {
+                        properties = new Dictionary<EnumOldServiceFieldsAsKeys, string>();
+                        foreach (var childNodeName in childNodeNames)
+                        {
+                            try
+                            {
+                                properties.Add(childNodeName, parentItem.Descendants(childNodeName.ToString()).Select(x => x.Value).First());
+                            }
+                            catch (Exception)
+                            {
+                                // there is no existing attribute to parse
+                                // we need to make sure that there are just as many values as expected
+                                properties.Add(childNodeName, string.Empty);
+                            }
+                        }
+
+                        values.Add(properties);
+                    }
                 }
             }
+            catch (Exception) { }
 
             return values;
         }
@@ -98,7 +102,7 @@ namespace TestMVC4App.Models
         /// <returns></returns>
         public static HashSet<string> ParseUnstructuredListOfValues(IEnumerable<XElement> elements, string nodeName, string childNodeName)
         {
-            HashSet<string> values;
+            var values = new HashSet<string>();
 
             try
             {
@@ -112,7 +116,6 @@ namespace TestMVC4App.Models
             catch (Exception)
             {
                 // there is no existing attribute to parse
-                values = new HashSet<string>();
             }
 
             return values;
@@ -215,9 +218,7 @@ namespace TestMVC4App.Models
                 appendTo.AddRange(elements.Where(x => x.Descendants().Count() == 0));
 
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             return appendTo;
         }
@@ -238,7 +239,9 @@ namespace TestMVC4App.Models
             if (appendTo != null)
             {
                 values = appendTo;
-            } else {
+            } 
+            else 
+            {
                 values = new HashSet<string>();
             }
             
@@ -288,7 +291,7 @@ namespace TestMVC4App.Models
             {
                 value.Append(" x" + optionalPhoneExtension);
             }
-            return value.ToString();
+            return value.ToString().Trim();
         }
     }
 }

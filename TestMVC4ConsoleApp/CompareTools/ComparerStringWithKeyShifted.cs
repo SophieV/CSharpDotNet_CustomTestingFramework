@@ -11,63 +11,69 @@ namespace TestMVC4ConsoleApp.CompareTools
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
-            foreach (var pairX in x)
+            if (x != null)
             {
-                if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched 
-                    && !string.IsNullOrEmpty(y[pairX.Key].Value) && !string.IsNullOrEmpty(pairX.Value.Value) 
-                    && pairX.Value.IsOld != y[pairX.Key].IsOld)
+                foreach (var pairX in x)
                 {
-                    if (pairX.Value.Value.Contains(','))
+                    if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched
+                        && !string.IsNullOrEmpty(y[pairX.Key].Value) && !string.IsNullOrEmpty(pairX.Value.Value)
+                        && pairX.Value.IsOld != y[pairX.Key].IsOld)
                     {
-                        string shiftedValue = pairX.Value.Value.Split(',')[1].Trim() + " " + pairX.Value.Value.Split(',')[0].Trim();
-
-                        if (y[pairX.Key].Value == shiftedValue)
+                        if (pairX.Value.Value.Contains(','))
                         {
-                            pairX.Value.HasBeenMatched = true;
-                            y[pairX.Key].HasBeenMatched = true;
-                            pairX.Value.MatchedOnceShifted = true;
+                            string shiftedValue = pairX.Value.Value.Split(',')[1].Trim() + " " + pairX.Value.Value.Split(',')[0].Trim();
+
+                            if (y[pairX.Key].Value == shiftedValue)
+                            {
+                                pairX.Value.HasBeenMatched = true;
+                                y[pairX.Key].HasBeenMatched = true;
+                                pairX.Value.MatchedOnceShifted = true;
+                            }
                         }
-                    }
-                    else if (y[pairX.Key].Value.Contains(','))
-                    {
-                        string shiftedValue = y[pairX.Key].Value.Split(',')[1].Trim() + " " + y[pairX.Key].Value.Split(',')[0].Trim();
-
-                        if (pairX.Value.Value == shiftedValue)
+                        else if (y[pairX.Key].Value.Contains(','))
                         {
-                            pairX.Value.HasBeenMatched = true;
-                            y[pairX.Key].HasBeenMatched = true;
-                            y[pairX.Key].MatchedOnceShifted = true;
+                            string shiftedValue = y[pairX.Key].Value.Split(',')[1].Trim() + " " + y[pairX.Key].Value.Split(',')[0].Trim();
+
+                            if (pairX.Value.Value == shiftedValue)
+                            {
+                                pairX.Value.HasBeenMatched = true;
+                                y[pairX.Key].HasBeenMatched = true;
+                                y[pairX.Key].MatchedOnceShifted = true;
+                            }
                         }
                     }
                 }
             }
 
-            foreach (var pairY in y)
+            if (y != null)
             {
-                if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
-                    && !string.IsNullOrEmpty(x[pairY.Key].Value) && !string.IsNullOrEmpty(pairY.Value.Value)
-                    && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                foreach (var pairY in y)
                 {
-                    if (pairY.Value.Value.Contains(','))
+                    if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
+                        && !string.IsNullOrEmpty(x[pairY.Key].Value) && !string.IsNullOrEmpty(pairY.Value.Value)
+                        && pairY.Value.IsOld != y[pairY.Key].IsOld)
                     {
-                        string shiftedValue = pairY.Value.Value.Split(',')[1].Trim() + " " + pairY.Value.Value.Split(',')[0].Trim();
-
-                        if (x[pairY.Key].Value == shiftedValue)
+                        if (pairY.Value.Value.Contains(','))
                         {
-                            pairY.Value.HasBeenMatched = true;
-                            x[pairY.Key].HasBeenMatched = true;
-                            pairY.Value.MatchedOnceShifted = true;
+                            string shiftedValue = pairY.Value.Value.Split(',')[1].Trim() + " " + pairY.Value.Value.Split(',')[0].Trim();
+
+                            if (x[pairY.Key].Value == shiftedValue)
+                            {
+                                pairY.Value.HasBeenMatched = true;
+                                x[pairY.Key].HasBeenMatched = true;
+                                pairY.Value.MatchedOnceShifted = true;
+                            }
                         }
-                    }
-                    else if (x[pairY.Key].Value.Contains(','))
-                    {
-                        string shiftedValue = x[pairY.Key].Value.Split(',')[1].Trim() + " " + x[pairY.Key].Value.Split(',')[0].Trim();
-
-                        if (pairY.Value.Value == shiftedValue)
+                        else if (x[pairY.Key].Value.Contains(','))
                         {
-                            pairY.Value.HasBeenMatched = true;
-                            x[pairY.Key].HasBeenMatched = true;
-                            x[pairY.Key].MatchedOnceShifted = true;
+                            string shiftedValue = x[pairY.Key].Value.Split(',')[1].Trim() + " " + x[pairY.Key].Value.Split(',')[0].Trim();
+
+                            if (pairY.Value.Value == shiftedValue)
+                            {
+                                pairY.Value.HasBeenMatched = true;
+                                x[pairY.Key].HasBeenMatched = true;
+                                x[pairY.Key].MatchedOnceShifted = true;
+                            }
                         }
                     }
                 }

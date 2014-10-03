@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
 
@@ -41,16 +42,17 @@ namespace TestMVC4App.Models
 
         private void UserPublicationInfo_Citations()
         {
-            HashSet<string> newValues;
+            var newValues = new HashSet<string>();
 
-            if (this.newData != null)
+            try 
             {
-                newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => x.Citation));
+                if (this.newData != null)
+                {
+                    newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => x.Citation));
+                }
             }
-            else
-            {
-                newValues = new HashSet<string>();
-            }
+            catch (Exception) { }
+
             this.CompareAndLog_Test(
                         EnumTestUnitNames.UserPublicationInfo_Citations,
                         "Comparing Publication Citation(s)",

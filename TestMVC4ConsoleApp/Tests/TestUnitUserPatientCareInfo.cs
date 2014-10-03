@@ -26,7 +26,6 @@ namespace TestMVC4App.Models
             UserPatientCareInfo_IsSeeingPatientType();
             UserEducationTrainingInfo_BoardCertifications();
             UserEducationTrainingInfo_CancersTreated();
-
         }
 
         private void UserPatientCareInfo_PhysicianBio()
@@ -152,8 +151,6 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral))
             {
-                //value = this.newDataPatientCare.AcceptedReferral;
-
                 switch (this.newDataPatientCare.AcceptedReferral)
                 {
                     case "From patients or physicians":

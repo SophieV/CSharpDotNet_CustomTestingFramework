@@ -20,8 +20,23 @@ namespace TestMVC4App.Models
         public CompareStrategyStructuredLists(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues, ResultReport resultReport) 
             : base(oldValues,newValues,resultReport)
         {
-            this.oldValues = oldValues;
-            this.newValues = newValues;
+            if (oldValues != null)
+            {
+                this.oldValues = oldValues;
+            }
+            else
+            {
+                this.oldValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            }
+
+            if (newValues != null)
+            {
+                this.newValues = newValues;
+            }
+            else
+            {
+                this.newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
+            }
         }
 
         public override void Investigate()

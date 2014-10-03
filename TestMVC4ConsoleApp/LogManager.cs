@@ -545,7 +545,6 @@ namespace TestMVC4App.Models
                     htmlTestWriter.Close();
                 }
             }
-
             detailedReportsWriters = null;
 
             if (profileReportWriter != null)

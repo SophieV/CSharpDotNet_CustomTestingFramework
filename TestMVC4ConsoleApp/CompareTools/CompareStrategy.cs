@@ -19,8 +19,11 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategy(HashSet<StringDescriptor> oldValues,HashSet<StringDescriptor> newValues, ResultReport resultReport)
         {
-            this.resultReport = resultReport;
-            this.resultReport.AddDetailedValues(oldValues, newValues);
+            if (resultReport != null)
+            {
+                this.resultReport = resultReport;
+                this.resultReport.AddDetailedValues(oldValues, newValues);
+            }
         }
 
         /// <summary>
@@ -31,8 +34,11 @@ namespace TestMVC4App.Models
         /// <param name="resultReport"></param>
         public CompareStrategy(HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>> newValues, ResultReport resultReport)
         {
-            this.resultReport = resultReport;
-            this.resultReport.AddDetailedValues(oldValues,newValues);
+            if (resultReport != null)
+            {
+                this.resultReport = resultReport;
+                this.resultReport.AddDetailedValues(oldValues, newValues);
+            }
         }
 
         /// <summary>
@@ -47,8 +53,11 @@ namespace TestMVC4App.Models
                                HashSet<OrganizationTreeDescriptor> newValues, OrganizationTreeDescriptor newTreeRoot, 
                                ResultReport resultReport)
         {
-            this.resultReport = resultReport;
-            this.resultReport.AddDetailedValues(oldValues, oldTreeRoot, newValues, newTreeRoot);
+            if (resultReport != null)
+            {
+                this.resultReport = resultReport;
+                this.resultReport.AddDetailedValues(oldValues, oldTreeRoot, newValues, newTreeRoot);
+            }
         }
 
         public abstract void Investigate();

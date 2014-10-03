@@ -10,16 +10,19 @@ namespace TestMVC4ConsoleApp.CompareTools
     {
         bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
         {
-            if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
+            if (x != null && y != null)
             {
-                if (!string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(y.Value))
+                if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
                 {
-                     if (y.Value.ToLower() == x.Value.ToLower())
+                    if (!string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(y.Value))
                     {
-                        x.HasBeenMatched = true;
-                        y.HasBeenMatched = true;
-                        y.MatchedOnceCaseCorrected = true;
-                        x.MatchedOnceCaseCorrected = true;
+                        if (y.Value.ToLower() == x.Value.ToLower())
+                        {
+                            x.HasBeenMatched = true;
+                            y.HasBeenMatched = true;
+                            y.MatchedOnceCaseCorrected = true;
+                            x.MatchedOnceCaseCorrected = true;
+                        }
                     }
                 }
             }

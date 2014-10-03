@@ -14,8 +14,23 @@ namespace TestMVC4App.Models
                                            ResultReport resultReport)
             : base(listOldIdsAndNames, oldTreeRoot,listNewIdsAndNames, newTreeRoot,resultReport)
         {
-            this.oldList = listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.ID) || !string.IsNullOrEmpty(d.Name)).ToList();
-            this.newList = listNewIdsAndNames.Where(z => !string.IsNullOrEmpty(z.ID) || !string.IsNullOrEmpty(z.Name)).ToList();
+            if (listOldIdsAndNames != null)
+            {
+                this.oldList = listOldIdsAndNames.Where(d => !string.IsNullOrEmpty(d.ID) || !string.IsNullOrEmpty(d.Name)).ToList();
+            }
+            else
+            {
+                this.oldList = new List<OrganizationTreeDescriptor>();
+            }
+
+            if (listNewIdsAndNames != null)
+            {
+                this.newList = listNewIdsAndNames.Where(z => !string.IsNullOrEmpty(z.ID) || !string.IsNullOrEmpty(z.Name)).ToList();
+            }
+            else
+            {
+                this.newList = new List<OrganizationTreeDescriptor>();
+            }
         }
         public override void Investigate()
         {

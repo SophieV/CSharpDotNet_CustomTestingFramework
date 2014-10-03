@@ -10,34 +10,40 @@ namespace TestMVC4ConsoleApp.CompareTools
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
-            foreach (var pairX in x)
+            if (x != null)
             {
-                if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched
-                    && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
-                    && pairX.Value.IsOld != y[pairX.Key].IsOld)
+                foreach (var pairX in x)
                 {
-                    if (pairX.Value.Value.ToLower() == y[pairX.Key].Value.ToLower())
+                    if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched
+                        && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
+                        && pairX.Value.IsOld != y[pairX.Key].IsOld)
                     {
-                        pairX.Value.HasBeenMatched = true;
-                        y[pairX.Key].HasBeenMatched = true;
-                        pairX.Value.MatchedOnceCaseCorrected = true;
-                        y[pairX.Key].MatchedOnceCaseCorrected = true;
+                        if (pairX.Value.Value.ToLower() == y[pairX.Key].Value.ToLower())
+                        {
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
+                            pairX.Value.MatchedOnceCaseCorrected = true;
+                            y[pairX.Key].MatchedOnceCaseCorrected = true;
+                        }
                     }
                 }
             }
 
-            foreach (var pairY in y)
+            if (y != null)
             {
-                if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
-                    && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value) 
-                    && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                foreach (var pairY in y)
                 {
-                    if (pairY.Value.Value.ToLower() == x[pairY.Key].Value.ToLower())
+                    if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
+                        && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value)
+                        && pairY.Value.IsOld != y[pairY.Key].IsOld)
                     {
-                        pairY.Value.HasBeenMatched = true;
-                        x[pairY.Key].HasBeenMatched = true;
-                        pairY.Value.MatchedOnceCaseCorrected = true;
-                        x[pairY.Key].MatchedOnceCaseCorrected = true;
+                        if (pairY.Value.Value.ToLower() == x[pairY.Key].Value.ToLower())
+                        {
+                            pairY.Value.HasBeenMatched = true;
+                            x[pairY.Key].HasBeenMatched = true;
+                            pairY.Value.MatchedOnceCaseCorrected = true;
+                            x[pairY.Key].MatchedOnceCaseCorrected = true;
+                        }
                     }
                 }
             }

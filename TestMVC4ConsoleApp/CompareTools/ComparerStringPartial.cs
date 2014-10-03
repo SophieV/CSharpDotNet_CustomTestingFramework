@@ -10,21 +10,24 @@ namespace TestMVC4ConsoleApp.CompareTools
     {
         bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
         {
-            if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
+            if (x != null && y != null)
             {
-                if (!string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(y.Value))
+                if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
                 {
-                    if (x.Value.Length > 4 && y.Value.Contains(x.Value))
+                    if (!string.IsNullOrEmpty(x.Value) && !string.IsNullOrEmpty(y.Value))
                     {
-                        x.HasBeenMatched = true;
-                        y.HasBeenMatched = true;
-                        x.PartialMatchOnly = true;
-                    }
-                    else if (y.Value.Length > 4 && x.Value.Contains(y.Value))
-                    {
-                        x.HasBeenMatched = true;
-                        y.HasBeenMatched = true;
-                        y.PartialMatchOnly = true;
+                        if (x.Value.Length > 4 && y.Value.Contains(x.Value))
+                        {
+                            x.HasBeenMatched = true;
+                            y.HasBeenMatched = true;
+                            x.PartialMatchOnly = true;
+                        }
+                        else if (y.Value.Length > 4 && x.Value.Contains(y.Value))
+                        {
+                            x.HasBeenMatched = true;
+                            y.HasBeenMatched = true;
+                            y.PartialMatchOnly = true;
+                        }
                     }
                 }
             }

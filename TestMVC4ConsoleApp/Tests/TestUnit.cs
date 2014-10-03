@@ -164,6 +164,14 @@ namespace TestMVC4App.Models
             }
         }
 
+        /// <summary>
+        /// Scenario : the data is ready as is to be tested.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="testFullName"></param>
+        /// <param name="testDescription"></param>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
         public void CompareAndLog_Test<T>(EnumTestUnitNames testFullName, string testDescription, T oldValues, T newValues)
         {
             var watch = new Stopwatch();
@@ -180,6 +188,32 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
+        }
+
+        /// <summary>
+        /// Scenario : the data needs to be prepared before testing.
+        /// The clock was started prior to the call of this method.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="testFullName"></param>
+        /// <param name="testDescription"></param>
+        /// <param name="oldValues"></param>
+        /// <param name="newValues"></param>
+        /// <param name="watch"></param>
+        public void CompareAndLog_Test<T>(EnumTestUnitNames testFullName, string testDescription, T oldValues, T newValues, Stopwatch watch)
+        {
+            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
+            var compareStrategy = new CompareStrategyFactory((dynamic)oldValues, (dynamic)newValues, resultReport);
+            compareStrategy.Investigate();
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
+
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+                                                this.BuildNewServiceURL(this.PageName),
+                                                resultReport);
         }
 
         public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, IEnumerable<XElement> oldServiceData, string oldSingleStringPath, string newValue)

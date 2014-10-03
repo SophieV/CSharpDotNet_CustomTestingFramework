@@ -10,44 +10,50 @@ namespace TestMVC4ConsoleApp.CompareTools
     {
         bool IEqualityComparer<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>.Equals(Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> x, Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> y)
         {
-            foreach (var pairX in x)
+            if (x != null)
             {
-                if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched
-                    && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
-                    && pairX.Value.IsOld != y[pairX.Key].IsOld)
+                foreach (var pairX in x)
                 {
-                    if (pairX.Value.Value.Length > 4 && pairX.Value.Value.Trim().Contains(y[pairX.Key].Value.Trim()))
+                    if (!pairX.Value.HasBeenMatched && y.ContainsKey(pairX.Key) && !y[pairX.Key].HasBeenMatched
+                        && !string.IsNullOrEmpty(pairX.Value.Value) && !string.IsNullOrEmpty(y[pairX.Key].Value)
+                        && pairX.Value.IsOld != y[pairX.Key].IsOld)
                     {
-                        pairX.Value.HasBeenMatched = true;
-                        y[pairX.Key].HasBeenMatched = true;
-                        y[pairX.Key].PartialMatchOnly = true;
-                    }
-                    else if (y[pairX.Key].Value.Length > 4 && y[pairX.Key].Value.Trim().Contains(pairX.Value.Value.Trim()))
-                    {
-                        pairX.Value.HasBeenMatched = true;
-                        y[pairX.Key].HasBeenMatched = true;
-                        pairX.Value.PartialMatchOnly = true;
+                        if (pairX.Value.Value.Length > 4 && pairX.Value.Value.Trim().Contains(y[pairX.Key].Value.Trim()))
+                        {
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
+                            y[pairX.Key].PartialMatchOnly = true;
+                        }
+                        else if (y[pairX.Key].Value.Length > 4 && y[pairX.Key].Value.Trim().Contains(pairX.Value.Value.Trim()))
+                        {
+                            pairX.Value.HasBeenMatched = true;
+                            y[pairX.Key].HasBeenMatched = true;
+                            pairX.Value.PartialMatchOnly = true;
+                        }
                     }
                 }
             }
 
-            foreach (var pairY in y)
+            if (y != null)
             {
-                if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
-                    && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value)
-                    && pairY.Value.IsOld != y[pairY.Key].IsOld)
+                foreach (var pairY in y)
                 {
-                    if (pairY.Value.Value.Length > 4 && pairY.Value.Value.Trim().Contains(x[pairY.Key].Value.Trim()))
+                    if (!pairY.Value.HasBeenMatched && x.ContainsKey(pairY.Key) && !x[pairY.Key].HasBeenMatched
+                        && !string.IsNullOrEmpty(pairY.Value.Value) && !string.IsNullOrEmpty(x[pairY.Key].Value)
+                        && pairY.Value.IsOld != y[pairY.Key].IsOld)
                     {
-                        pairY.Value.HasBeenMatched = true;
-                        x[pairY.Key].HasBeenMatched = true;
-                        x[pairY.Key].PartialMatchOnly = true;
-                    }
-                    else if (x[pairY.Key].Value.Length > 4 && x[pairY.Key].Value.Trim().Contains(pairY.Value.Value.Trim()))
-                    {
-                        pairY.Value.HasBeenMatched = true;
-                        x[pairY.Key].HasBeenMatched = true;
-                        pairY.Value.PartialMatchOnly = true;
+                        if (pairY.Value.Value.Length > 4 && pairY.Value.Value.Trim().Contains(x[pairY.Key].Value.Trim()))
+                        {
+                            pairY.Value.HasBeenMatched = true;
+                            x[pairY.Key].HasBeenMatched = true;
+                            x[pairY.Key].PartialMatchOnly = true;
+                        }
+                        else if (x[pairY.Key].Value.Length > 4 && x[pairY.Key].Value.Trim().Contains(pairY.Value.Value.Trim()))
+                        {
+                            pairY.Value.HasBeenMatched = true;
+                            x[pairY.Key].HasBeenMatched = true;
+                            pairY.Value.PartialMatchOnly = true;
+                        }
                     }
                 }
             }

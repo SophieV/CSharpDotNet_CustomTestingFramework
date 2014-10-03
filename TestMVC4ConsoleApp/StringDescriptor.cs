@@ -66,6 +66,8 @@ namespace TestMVC4App.Models
             this.MatchedOnceShifted = false;
         }
 
+        #region Helpers
+
         /// <summary>
         /// Helper method that embeds a list of string values to a list of custom decorators <see cref="StringDecorator"/>.
         /// </summary>
@@ -74,9 +76,12 @@ namespace TestMVC4App.Models
         public static HashSet<StringDescriptor> EmbedInDescriptors(bool isOld, HashSet<string> values)
         {
             var embeddedValues = new HashSet<StringDescriptor>();
-            foreach(string value in values)
+            if (values != null)
             {
-                embeddedValues.Add(new StringDescriptor(isOld, value));
+                foreach (string value in values)
+                {
+                    embeddedValues.Add(new StringDescriptor(isOld, value));
+                }
             }
             return embeddedValues;
         }
@@ -92,14 +97,17 @@ namespace TestMVC4App.Models
             var embeddedValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
             Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor> dic;
 
-            foreach (var element in values)
+            if (values != null)
             {
-                dic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
-                foreach (var value in element)
+                foreach (var element in values)
                 {
-                    dic.Add(value.Key, new StringDescriptor(isOld, value.Value));
+                    dic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
+                    foreach (var value in element)
+                    {
+                        dic.Add(value.Key, new StringDescriptor(isOld, (!string.IsNullOrEmpty(value.Value) ? value.Value : string.Empty)));
+                    }
+                    embeddedValues.Add(dic);
                 }
-                embeddedValues.Add(dic);
             }
             return embeddedValues;
         }
@@ -113,7 +121,7 @@ namespace TestMVC4App.Models
         public static HashSet<StringDescriptor> EmbedInDescriptors(bool isOld, string value)
         {
             var embeddedValues = new HashSet<StringDescriptor>();
-            embeddedValues.Add(new StringDescriptor(isOld, value));
+            embeddedValues.Add(new StringDescriptor(isOld, (!string.IsNullOrEmpty(value)?value:string.Empty)));
             return embeddedValues;
         }
 
@@ -128,12 +136,18 @@ namespace TestMVC4App.Models
             var embeddedValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>>();
             var embeddedDic = new Dictionary<EnumOldServiceFieldsAsKeys, StringDescriptor>();
 
-            foreach (var value in values)
+            if (values != null)
             {
-                embeddedDic.Add(value.Key, new StringDescriptor(isOld, value.Value));
+                foreach (var value in values)
+                {
+                    embeddedDic.Add(value.Key, new StringDescriptor(isOld, (!string.IsNullOrEmpty(value.Value)?value.Value:string.Empty)));
+                }
+                embeddedValues.Add(embeddedDic);
             }
-            embeddedValues.Add(embeddedDic);
+
             return embeddedValues;
         }
+
+        #endregion
     }
 }

@@ -9,17 +9,20 @@ namespace TestMVC4App.Models
     {
         bool IEqualityComparer<StringDescriptor>.Equals(StringDescriptor x, StringDescriptor y)
         {
-            if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
+            if (x != null && y != null)
             {
-                if (string.IsNullOrEmpty(x.Value) && string.IsNullOrEmpty(y.Value))
+                if (!x.HasBeenMatched && !y.HasBeenMatched && x.IsOld != y.IsOld)
                 {
-                    x.HasBeenMatched = true;
-                    y.HasBeenMatched = true;
-                }
-                else if (x.Value == y.Value)
-                {
-                    x.HasBeenMatched = true;
-                    y.HasBeenMatched = true;
+                    if (string.IsNullOrEmpty(x.Value) && string.IsNullOrEmpty(y.Value))
+                    {
+                        x.HasBeenMatched = true;
+                        y.HasBeenMatched = true;
+                    }
+                    else if (x.Value == y.Value)
+                    {
+                        x.HasBeenMatched = true;
+                        y.HasBeenMatched = true;
+                    }
                 }
             }
 
