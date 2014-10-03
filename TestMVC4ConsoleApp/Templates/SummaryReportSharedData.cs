@@ -10,6 +10,7 @@ namespace TestMVC4App.Templates
     /// </summary>
     public class SummaryReportSharedData
     {
+        public DateTime StartTime { get; set; }
         public HashSet<EnumTestUnitNames> Not100PercentReturned { get; set; }
 
         public double CountProfilesTested { get; set; }

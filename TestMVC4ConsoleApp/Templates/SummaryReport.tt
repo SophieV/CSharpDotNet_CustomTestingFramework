@@ -34,7 +34,8 @@
 	<# } #>
 
 	<h2>Overview</h2>
-	<p>Total count of tests run : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsRun) #><br/>
+	<p>Start time : <#= SharedDataObject.StartTime #><br/>
+	Total count of tests run : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsRun) #><br/>
 	Count of tests per user profile : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsPerUser) #><br/>
 	Count of user profiles tested : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesTested) #><br/>
 	Count of user profiles ignored : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesIgnored) #><br/>

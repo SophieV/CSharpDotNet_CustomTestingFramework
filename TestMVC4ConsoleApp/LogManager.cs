@@ -316,6 +316,7 @@ namespace TestMVC4App.Models
 
             var summaryReportData = new SummaryReportSharedData
             {
+                StartTime = DateTime.Now,
                 Not100PercentReturned = missingResults,
                 CountProfilesTested = StatsCountTotalUpis,
                 CountProfilesWithoutWarnings = countTroubleFreeUpis,
