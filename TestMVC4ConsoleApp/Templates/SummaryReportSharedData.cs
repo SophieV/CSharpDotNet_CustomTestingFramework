@@ -10,6 +10,8 @@ namespace TestMVC4App.Templates
     /// </summary>
     public class SummaryReportSharedData
     {
+        public HashSet<EnumTestUnitNames> Not100PercentReturned { get; set; }
+
         public double CountProfilesTested { get; set; }
 
         public double CountProfilesIgnored { get; set; }

@@ -244,6 +244,7 @@ namespace TestMVC4App.Models
             var averageDuration_ByTestName = new Dictionary<EnumTestUnitNames, TimeSpan>();
             var frequencySuccess_ByTestName = new Dictionary<EnumTestUnitNames, double>();
             double countSuccessResults = 0;
+            var missingResults = new HashSet<EnumTestUnitNames>();
 
             var countSeverityResults = new Dictionary<EnumResultSeverityType, int>();
             foreach (var severity in (EnumResultSeverityType[])Enum.GetValues(typeof(EnumResultSeverityType)))
@@ -288,6 +289,11 @@ namespace TestMVC4App.Models
                         countSeverityResults[countSeverityResultsPair.Key] += countSeverityResultsPair.Value;
                     }
 
+                    if (countSeverityTypeOccurences[testName].Values.Sum() < this.StatsCountTotalUpis)
+                    {
+                        missingResults.Add(testName);
+                    }
+
                     frequencySuccess_ByTestName.Add(testName, countSuccessResults / this.StatsCountTotalUpis);
 
                     foreach (var countDataBehaviorPair in countDataBehaviorOccurences[testName])
@@ -310,6 +316,7 @@ namespace TestMVC4App.Models
 
             var summaryReportData = new SummaryReportSharedData
             {
+                Not100PercentReturned = missingResults,
                 CountProfilesTested = StatsCountTotalUpis,
                 CountProfilesWithoutWarnings = countTroubleFreeUpis,
                 CountBySeverity = countSeverityResults.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
@@ -318,7 +325,7 @@ namespace TestMVC4App.Models
                 CountSeverityByTestName = countSeverityTypeOccurences,
                 CountIdentifiedDataBehaviorByTestName = countDataBehaviorOccurences,
                 CountTestsRun = StatsCountTotalUpis * countSeverityResults.Keys.Count(),
-                CountTestsPerUser = countSeverityResults.Keys.Count(),
+                CountTestsPerUser = AllTestNames.Count(),
                 FrequencySuccessByTestName = frequencySuccess_ByTestName,
                 SampleDataByTestName = sampleDataByTestName,
                 Duration = duration,

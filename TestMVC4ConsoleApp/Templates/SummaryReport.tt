@@ -99,7 +99,11 @@
 	</tr>
 	<# foreach (var testName in SharedDataObject.AllTestNames) { #>
 	<tr>
+		<# if(SharedDataObject.Not100PercentReturned.Contains(testName)) { #>}
+		<td class="td_main error"><#= testName #></td>
+		<# } else { #>
 		<td class="td_main"><#= testName #></td>
+		<# } #>
 		<td class="th_main">
 			<#= SharedDataObject.FrequencySuccessByTestName[testName].ToString("P") #>
 		</td>
