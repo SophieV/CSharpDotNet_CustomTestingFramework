@@ -158,6 +158,11 @@ namespace TestMVC4App.Models
                 try
                 {
                     orgDesc.Name = element.Element(EnumOldServiceFieldsAsKeys.name.ToString()).Value.Trim();
+
+                    if (orgDesc.Name == "Molecular Biophysics and Biochemistry")
+                    {
+                        orgDesc.Name = "MB and B";
+                    }
                 }
                 catch (Exception)
                 {
