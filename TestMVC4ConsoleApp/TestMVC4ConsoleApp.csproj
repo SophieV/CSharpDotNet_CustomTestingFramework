@@ -85,7 +85,7 @@
     <Compile Include="CompareTools\ComparerStringTrimmed.cs" />
     <Compile Include="CompareTools\ComparerStringWithKeyTrimmed.cs" />
     <Compile Include="CompareTools\CompareStrategy.cs" />
-    <Compile Include="CompareTools\CompareStrategyContextSwitcher.cs" />
+    <Compile Include="CompareTools\CompareStrategyFactory.cs" />
     <Compile Include="CompareTools\CompareStrategyOrganizationList.cs" />
     <Compile Include="CompareTools\CompareStrategyUnstructuredLists.cs" />
     <Compile Include="CompareTools\CompareStrategyStructuredLists.cs" />

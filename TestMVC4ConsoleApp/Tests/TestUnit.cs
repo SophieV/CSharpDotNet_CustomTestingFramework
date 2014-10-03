@@ -164,66 +164,12 @@ namespace TestMVC4App.Models
             }
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, HashSet<string> oldValues, HashSet<string> newValues)
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId,this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
-
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> oldValues, HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>> newValues)
+        public void CompareAndLog_Test<T>(EnumTestUnitNames testFullName, string testDescription, T oldValues, T newValues)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyFactory(oldValues, newValues, resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
-
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<Dictionary<EnumOldServiceFieldsAsKeys, string>,Dictionary<EnumOldServiceFieldsAsKeys, string>> oldAndNewValues)
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyFactory(oldAndNewValues, resultReport);
-            compareStrategy.Investigate();
-
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
-
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
-
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
-
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues)
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyFactory(newAndOldValues,resultReport);
+            var compareStrategy = new CompareStrategyFactory((dynamic)oldValues, (dynamic)newValues, resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
@@ -243,12 +189,12 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(testFullName, testDescription, oldValue, newValue);
         }
 
-        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, string oldValue, string newValue)
+        public void CompareAndLog_Test(EnumTestUnitNames testFullName, string testDescription, Dictionary<HashSet<string>,HashSet<string>> newAndOldValues)
         {
             var watch = new Stopwatch();
             watch.Start();
             var resultReport = new ResultReport(this.UserId, this.Upi, testFullName, testDescription);
-            var compareStrategy = new CompareStrategyFactory(oldValue, newValue, resultReport);
+            var compareStrategy = new CompareStrategyFactory(newAndOldValues,resultReport);
             compareStrategy.Investigate();
 
             watch.Stop();
