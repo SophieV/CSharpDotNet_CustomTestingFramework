@@ -79,7 +79,7 @@ namespace TestMVC4ConsoleApp.Templates
             
             #line default
             #line hidden
-            this.Write("\r\n\t<h2>Overview</h2>\r\n\t<p>Start time : ");
+            this.Write("\r\n\t<h2>Overview</h2>\r\n\t<p>End time : ");
             
             #line 37 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SharedDataObject.StartTime));
@@ -267,7 +267,7 @@ namespace TestMVC4ConsoleApp.Templates
             
             #line default
             #line hidden
-            this.Write("}\r\n\t\t<td class=\"td_main error\">");
+            this.Write("\t\t<td class=\"td_main error\">");
             
             #line 104 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\SummaryReport.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));

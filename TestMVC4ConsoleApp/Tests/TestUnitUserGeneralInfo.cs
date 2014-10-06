@@ -18,7 +18,7 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.Bio)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode((!string.IsNullOrEmpty(this.newData.Bio)?this.newData.Bio:string.Empty))));
             UserGeneralInfo_Titles_Test();
             UserGeneralInfo_LanguageUsers_Test();
             UserGeneralInfo_AltLastName_Test();

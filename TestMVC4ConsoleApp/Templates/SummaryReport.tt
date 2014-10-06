@@ -34,7 +34,7 @@
 	<# } #>
 
 	<h2>Overview</h2>
-	<p>Start time : <#= SharedDataObject.StartTime #><br/>
+	<p>End time : <#= SharedDataObject.StartTime #><br/>
 	Total count of tests run : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsRun) #><br/>
 	Count of tests per user profile : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsPerUser) #><br/>
 	Count of user profiles tested : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesTested) #><br/>
@@ -100,7 +100,7 @@
 	</tr>
 	<# foreach (var testName in SharedDataObject.AllTestNames) { #>
 	<tr>
-		<# if(SharedDataObject.Not100PercentReturned.Contains(testName)) { #>}
+		<# if(SharedDataObject.Not100PercentReturned.Contains(testName)) { #>
 		<td class="td_main error"><#= testName #></td>
 		<# } else { #>
 		<td class="td_main"><#= testName #></td>
