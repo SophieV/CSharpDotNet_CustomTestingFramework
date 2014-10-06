@@ -21,6 +21,7 @@
 .error_color {color: red;}
 .no_underline{text-decoration: none;}
 </style>
+<meta charset="UTF-8">
 </head>
 <body>
 <table class="table_main">

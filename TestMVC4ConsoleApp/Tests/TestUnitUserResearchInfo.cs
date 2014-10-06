@@ -2,6 +2,7 @@
 using YSM.PMS.Service.Common.DataTransfer;
 using System.Linq;
 using System;
+using System.Web;
 
 namespace TestMVC4App.Models
 {
@@ -16,8 +17,8 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Summary, "Comparing Research Summary(ies)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchSummary.ToString(), this.newData.BriefSummary);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Overview, "Comparing Research Overview(s)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), this.newData.ExtensiveDescription);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Summary, "Comparing Research Summary(ies)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchSummary.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.BriefSummary)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Overview, "Comparing Research Overview(s)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.ExtensiveDescription)));
             UserResearchInfo_PublicHealthKeywords();
         }
 
@@ -29,7 +30,7 @@ namespace TestMVC4App.Models
             {
                 if (this.newData != null && this.newData.PublicHealths != null)
                 {
-                    newValues = new HashSet<string>(newData.PublicHealths.Where(x => x != null).Select(x => x.Keyword));
+                    newValues = new HashSet<string>(newData.PublicHealths.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Keyword))));
                 }
             }
             catch (Exception) { }

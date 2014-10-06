@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
@@ -62,14 +63,14 @@ namespace TestMVC4App.Models
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UPI, "Comparing UPI", this.OldDataNodes, EnumOldServiceFieldsAsKeys.UPI.ToString(), this.newData.Upi.ToString());
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LastName, "Comparing LastName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString(), this.newData.LastName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LastName, "Comparing LastName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.LastName)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.OldDataNodes, EnumOldServiceFieldsAsKeys.emailAddress.ToString(), this.newData.YaleEmail);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString(), this.newData.MiddleName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString(), this.newData.FirstName);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.MiddleName)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.FirstName)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Gender, "Comparing Gender", this.OldDataNodes, EnumOldServiceFieldsAsKeys.gender.ToString(), this.newData.Gender);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_NetId, "Comparing NetId", this.OldDataNodes, EnumOldServiceFieldsAsKeys.netID.ToString(), this.newData.NetId);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.pageName.ToString(), this.newData.PageName);
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_SuffixName, "Comparing SuffixName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString(), this.newData.Suffix);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.pageName.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.PageName)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_SuffixName, "Comparing SuffixName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.Suffix)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Idx, "Comparing Idx", this.OldDataNodes, EnumOldServiceFieldsAsKeys.Idx.ToString(), this.newData.Idx);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LicenseNumber, "Comparing License Number", this.OldDataNodes, EnumOldServiceFieldsAsKeys.LicenseNumber.ToString(), this.newData.LicenseNumber);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.OldDataNodes, EnumOldServiceFieldsAsKeys.Npi.ToString(), this.newData.Npi);

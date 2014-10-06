@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web;
 using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
@@ -17,7 +18,7 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), this.newData.Bio);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.Bio)));
             UserGeneralInfo_Titles_Test();
             UserGeneralInfo_LanguageUsers_Test();
             UserGeneralInfo_AltLastName_Test();
@@ -38,7 +39,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
-            var compareStrategy = new CompareStrategyFactory(oldValue, newData.LastName, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.LastName)), resultReport);
             compareStrategy.Investigate();
 
             if(resultReport.Severity != EnumResultSeverityType.SUCCESS)
@@ -46,7 +47,7 @@ namespace TestMVC4App.Models
                 resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltLastName, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltLastName)), resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -67,7 +68,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
-            var compareStrategy = new CompareStrategyFactory(oldValue, newData.FirstName, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.FirstName)), resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
@@ -75,7 +76,7 @@ namespace TestMVC4App.Models
                 resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltFirstName, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltFirstName)), resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -102,7 +103,7 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
-            var compareStrategy = new CompareStrategyFactory(oldValue, newData.Suffix, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.Suffix)), resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
@@ -110,7 +111,7 @@ namespace TestMVC4App.Models
                 resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltSuffix, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltSuffix)), resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -135,7 +136,7 @@ namespace TestMVC4App.Models
             {
                 oldValue = "False";
             }
-            var compareStrategy = new CompareStrategyFactory(oldValue, newData.MiddleName, resultReport);
+            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.MiddleName)), resultReport);
             compareStrategy.Investigate();
 
             if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
@@ -143,7 +144,7 @@ namespace TestMVC4App.Models
                 resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, newData.AltMiddleName, resultReport);
+                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltMiddleName)), resultReport);
                 compareStrategy.Investigate();
             }
 
@@ -170,7 +171,7 @@ namespace TestMVC4App.Models
                     {
                         if (!string.IsNullOrEmpty(title.Name))
                         {
-                            newValues.Add(title.Name);
+                            newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(title.Name)));
                         }
                     }
                 }
@@ -211,7 +212,7 @@ namespace TestMVC4App.Models
                 {
                     foreach (var suffix in newData.Suffixes)
                     {
-                        newValues.Add(suffix.Name);
+                        newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(suffix.Name)));
                     }
                 }
             }
@@ -231,7 +232,7 @@ namespace TestMVC4App.Models
                 {
                     foreach (var language in newData.LanguageUsers)
                     {
-                        newValues.Add(language.LanguageName);
+                        newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(language.LanguageName)));
                     }
                 }
             }

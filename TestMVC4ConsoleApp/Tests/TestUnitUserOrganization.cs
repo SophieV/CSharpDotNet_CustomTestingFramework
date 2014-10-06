@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
 using YSM.PMS.Web.Service.Clients;
@@ -47,8 +48,8 @@ namespace TestMVC4App.Models
             UserGeneralInfo_Organization_Id_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)),
                                                  new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.ID)).Select(a => a.ID)));
 
-            UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)),
-                                                   new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => a.Name)));
+            UserGeneralInfo_Organization_Name_Test(new HashSet<string>(this.oldServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(a.Name)))),
+                                                   new HashSet<string>(this.newServiceOrganizationDescriptors.Where(a => !string.IsNullOrEmpty(a.Name)).Select(a => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(a.Name)))));
 
             UserGeneralInfo_Organization_Type_Test();
 
@@ -86,15 +87,15 @@ namespace TestMVC4App.Models
             var organizationDescriptor = new OrganizationTreeDescriptor()
             {
                 ID = newData.OrganizationId.ToString(),
-                Name = newData.Name,
-                Type = newData.Type,
+                Name = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.Name)),
+                Type = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.Type)),
                 Depth = depth + 1,
                 IsDisplayedOnYmg = newData.IsDisplayedOnYmg
             };
 
             if (newData.Missions != null)
             {
-                organizationDescriptor.Missions = new HashSet<string>(newData.Missions.Select(x => x.Name));
+                organizationDescriptor.Missions = new HashSet<string>(newData.Missions.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Name))));
             }
 
             if (parent != null)
@@ -157,7 +158,7 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    orgDesc.Name = element.Element(EnumOldServiceFieldsAsKeys.name.ToString()).Value.Trim();
+                    orgDesc.Name = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(element.Element(EnumOldServiceFieldsAsKeys.name.ToString()).Value.Trim()));
 
                     if (orgDesc.Name == "Molecular Biophysics and Biochemistry")
                     {
@@ -172,7 +173,7 @@ namespace TestMVC4App.Models
 
                 try
                 {
-                    orgDesc.Type = element.Element(EnumOldServiceFieldsAsKeys.orgType.ToString()).Value.Trim();
+                    orgDesc.Type = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(element.Element(EnumOldServiceFieldsAsKeys.orgType.ToString()).Value.Trim()));
                 }
                 catch (Exception)
                 {
@@ -193,7 +194,7 @@ namespace TestMVC4App.Models
                 try
                 {
 
-                    tempValue = element.Element(EnumOldServiceFieldsAsKeys.mission.ToString()).Value;
+                    tempValue = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(element.Element(EnumOldServiceFieldsAsKeys.mission.ToString()).Value));
 
                     if (!string.IsNullOrEmpty(tempValue))
                     {

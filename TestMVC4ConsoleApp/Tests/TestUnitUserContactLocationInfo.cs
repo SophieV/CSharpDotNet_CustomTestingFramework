@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Xml.Linq;
 using YSM.PMS.Service.Common.DataTransfer;
 
@@ -24,8 +25,8 @@ namespace TestMVC4App.Models
         {
             var oldDataLabWebsites = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.labWebsite.ToString());
 
-            UserContactLocationInfo_LabWebsites_Names_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => x.LabName)));
-            UserContactLocationInfo_LabWebsites_Links_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => x.LabUrl)));
+            UserContactLocationInfo_LabWebsites_Names_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.LabName)))));
+            UserContactLocationInfo_LabWebsites_Links_Test(oldDataLabWebsites, new HashSet<string>(this.newDataLabWebsite.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.LabUrl)))));
 
             UserContactLocationInfo_Addresses_Test();
 
@@ -33,9 +34,9 @@ namespace TestMVC4App.Models
             var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(), oldAddressesWithoutMailing.ToList(), true);
 
             UserContactLocationInfo_Addresses_Geo(oldAddressesWithoutMailing, new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Location.GeoPoint)));
-            UserContactLocationInfo_UserAddress_StreetAddress_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.StreetAddress)));
+            UserContactLocationInfo_UserAddress_StreetAddress_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.BaseAddress.StreetAddress)))));
             UserContactLocationInfo_UserAddress_ZipCodes_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
-            UserContactLocationInfo_UserAddress_IsMailing_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => x.Address.BaseAddress.StreetAddress)));
+            UserContactLocationInfo_UserAddress_IsMailing_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.BaseAddress.StreetAddress)))));
 
             ComputeOverallSeverity();
         }
@@ -141,7 +142,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.locationName, newValue.Address.OfficeName);
+                        properties.Add(EnumOldServiceFieldsAsKeys.locationName, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.OfficeName)));
                     }
                     catch (Exception)
                     {
@@ -151,7 +152,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.building, newValue.Address.BaseAddress.Building.Name);
+                        properties.Add(EnumOldServiceFieldsAsKeys.building, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.BaseAddress.Building.Name)));
                     }
                     catch (Exception)
                     {
@@ -161,7 +162,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.addressLine1, newValue.Address.BaseAddress.StreetAddress);
+                        properties.Add(EnumOldServiceFieldsAsKeys.addressLine1, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.BaseAddress.StreetAddress)));
                     }
                     catch (Exception)
                     {
@@ -171,7 +172,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.suite, newValue.Address.Detail);
+                        properties.Add(EnumOldServiceFieldsAsKeys.suite, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.Detail)));
                     }
                     catch (Exception)
                     {
@@ -181,7 +182,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.city, newValue.Address.BaseAddress.Location.City);
+                        properties.Add(EnumOldServiceFieldsAsKeys.city, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.BaseAddress.Location.City)));
                     }
                     catch (Exception)
                     {
@@ -211,7 +212,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.type, newValue.Address.AddressType.Name);
+                        properties.Add(EnumOldServiceFieldsAsKeys.type, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.AddressType.Name)));
                     }
                     catch (Exception)
                     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
@@ -44,7 +45,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.degree, newValue.DegreeAwarded);
+                        properties.Add(EnumOldServiceFieldsAsKeys.degree, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.DegreeAwarded)));
                     }
                     catch (Exception)
                     {
@@ -54,7 +55,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.institution, newValue.Institution);
+                        properties.Add(EnumOldServiceFieldsAsKeys.institution, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Institution)));
                     }
                     catch (Exception)
                     {
@@ -102,7 +103,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.departmentName, newValue.Department);
+                        properties.Add(EnumOldServiceFieldsAsKeys.departmentName, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Department)));
                     }
                     catch (Exception)
                     {
@@ -132,7 +133,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.position, newValue.Position);
+                        properties.Add(EnumOldServiceFieldsAsKeys.position, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Position)));
                     }
                     catch (Exception)
                     {
@@ -142,7 +143,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.locationName, newValue.Institution);
+                        properties.Add(EnumOldServiceFieldsAsKeys.locationName, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Institution)));
                     }
                     catch (Exception)
                     {

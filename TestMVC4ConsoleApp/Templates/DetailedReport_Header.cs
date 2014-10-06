@@ -46,7 +46,7 @@ namespace TestMVC4ConsoleApp.Templates
 .error_color {color: red;}
 .tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
-<script type=""text/javascript"" src=""tablefilter.js""></script>
+<meta charset=""UTF-8"">
 </head>
 <body>
 <table id=""individual_test_results"" class=""table_main"">

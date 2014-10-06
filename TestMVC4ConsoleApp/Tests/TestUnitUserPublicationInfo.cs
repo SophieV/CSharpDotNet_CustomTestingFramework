@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
@@ -26,7 +27,7 @@ namespace TestMVC4App.Models
 
             if (this.newData != null)
             {
-                newValues = new HashSet<string>(newData.Where(x => x != null).Select(x => x.Title));
+                newValues = new HashSet<string>(newData.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Title))));
             }
             else
             {
@@ -48,7 +49,7 @@ namespace TestMVC4App.Models
             {
                 if (this.newData != null)
                 {
-                    newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => x.Citation));
+                    newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Citation))));
                 }
             }
             catch (Exception) { }

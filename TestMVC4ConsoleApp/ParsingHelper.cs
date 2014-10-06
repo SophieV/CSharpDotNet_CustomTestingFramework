@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Web;
 using System.Xml.Linq;
 
 namespace TestMVC4App.Models
@@ -39,8 +40,8 @@ namespace TestMVC4App.Models
 
             try
             {
-                value = elements.Where(x => x.Name == nodeName).Select(x => x.Value).First();
-            }
+                value = elements.Where(x => x.Name == nodeName).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Value))).First();
+           } 
             catch (Exception)
             {
                 // there is no existing attribute to parse
@@ -74,7 +75,7 @@ namespace TestMVC4App.Models
                         {
                             try
                             {
-                                properties.Add(childNodeName, parentItem.Descendants(childNodeName.ToString()).Select(x => x.Value).First());
+                                properties.Add(childNodeName, parentItem.Descendants(childNodeName.ToString()).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Value))).First());
                             }
                             catch (Exception)
                             {
@@ -106,11 +107,11 @@ namespace TestMVC4App.Models
 
             try
             {
-                values = new HashSet<string>(elements.Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => x.Value));
+                values = new HashSet<string>(elements.Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Value))));
 
                 if (values.Count() == 0)
                 {
-                    values = new HashSet<string>(elements.Descendants().Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => x.Value));
+                    values = new HashSet<string>(elements.Descendants().Where(x => x.Name == nodeName).Descendants(childNodeName).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Value))));
                 }
             }
             catch (Exception)
@@ -137,7 +138,7 @@ namespace TestMVC4App.Models
 
                 if (values.Count() == 0)
                 {
-                    values = new HashSet<string>(elements.Descendants().ToList().Where(x => x.Name == nodeName).Select(x => x.Value));
+                    values = new HashSet<string>(elements.Descendants().ToList().Where(x => x.Name == nodeName).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Value))));
                 }
             }
             catch (Exception)

@@ -34,7 +34,7 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null && this.newDataPatientCare.PhysicianBio != null)
             {
-                newValue = this.newDataPatientCare.PhysicianBio;
+                newValue = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newDataPatientCare.PhysicianBio));
             }
 
             this.CompareAndLog_Test(
@@ -195,7 +195,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.specialty, newValue.SpecialtyName);
+                        properties.Add(EnumOldServiceFieldsAsKeys.specialty, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.SpecialtyName)));
                     }
                     catch (Exception)
                     {
@@ -232,7 +232,7 @@ namespace TestMVC4App.Models
                 {
                     if (!string.IsNullOrEmpty(newValueEntry.Name))
                     {
-                        newValues.Add(newValueEntry.Name);
+                        newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValueEntry.Name)));
                     }
                 }
             }

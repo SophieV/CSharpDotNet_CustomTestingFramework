@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Web;
 using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
@@ -43,7 +44,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.award, newValue.AwardName);
+                        properties.Add(EnumOldServiceFieldsAsKeys.award, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.AwardName)));
                     }
                     catch (Exception)
                     {
@@ -53,7 +54,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.organization, newValue.AwardingOrganization);
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.AwardingOrganization)));
                     }
                     catch (Exception)
                     {
@@ -142,7 +143,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.role, newValue.ServiceType);
+                        properties.Add(EnumOldServiceFieldsAsKeys.role, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceType)));
                     }
                     catch (Exception)
                     {
@@ -152,7 +153,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.organization, newValue.ServiceOrganization);
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceOrganization)));
                     }
                     catch (Exception)
                     {
@@ -189,7 +190,7 @@ namespace TestMVC4App.Models
                         }
                         else
                         {
-                            properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.ServiceCategory);
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceCategory)));
                         }
                     }
                     catch (Exception)
@@ -200,7 +201,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.description, newValue.Description);
+                        properties.Add(EnumOldServiceFieldsAsKeys.description, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Description)));
                     }
                     catch (Exception)
                     {

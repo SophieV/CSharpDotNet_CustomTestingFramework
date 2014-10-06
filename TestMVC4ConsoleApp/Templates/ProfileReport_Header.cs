@@ -44,6 +44,7 @@ namespace TestMVC4ConsoleApp.Templates
 .error_color {color: red;}
 .no_underline{text-decoration: none;}
 </style>
+<meta charset=""UTF-8"">
 </head>
 <body>
 <table class=""table_main"">
@@ -52,21 +53,21 @@ namespace TestMVC4ConsoleApp.Templates
 <td class=""th_main"">UPI</td>
 ");
             
-            #line 30 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
+            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
  foreach(var testName in SharedDataObject.AllTestNames) { 
             
             #line default
             #line hidden
             this.Write("<td class=\"th_main\">");
             
-            #line 31 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
+            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(testName));
             
             #line default
             #line hidden
             this.Write("</td>\r\n");
             
-            #line 32 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
+            #line 33 "\\psf\Home\Desktop\TestMVC4App\Profile-System-Testing\TestMVC4ConsoleApp\Templates\ProfileReport_Header.tt"
  } 
             
             #line default
