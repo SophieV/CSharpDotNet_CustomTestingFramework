@@ -323,11 +323,14 @@ namespace TestMVC4App.Models
                         {
                             System.Console.WriteLine(e.StackTrace);
                             System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                            System.Console.WriteLine(e.InnerException);
+                            System.Diagnostics.Debug.WriteLine(e.InnerException);
                         }
                     }
                     else
                     {
                         System.Diagnostics.Debug.WriteLine("No data returned by old service for UPI " + upi);
+                        System.Console.Out.WriteLine("No data returned by old service for UPI " + upi);
                     }
 
                     singleProfileWatch.Stop();
