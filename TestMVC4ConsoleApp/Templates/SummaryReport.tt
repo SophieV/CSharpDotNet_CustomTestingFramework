@@ -88,6 +88,8 @@
 	<hr/>
 	<h2>Overview By Test Name</h2>
 	<br/>
+	<p>A red background to the test name means that some results are missing. Check the logs for more details.</p>
+	<br/>
 	<table class="table_main">
 	<tr>
 		<th class="th_main">Test Name</th>
@@ -98,7 +100,7 @@
 		<th class="th_main">Average Duration</th>
 		<th class="th_main">More Info</th>
 	</tr>
-	<# foreach (var testName in SharedDataObject.AllTestNames) { #>
+	<# foreach (var testName in SharedDataObject.FrequencySuccessByTestName.Keys) { #>
 	<tr>
 		<# if(SharedDataObject.Not100PercentReturned.Contains(testName)) { #>
 		<td class="td_main error"><#= testName #></td>

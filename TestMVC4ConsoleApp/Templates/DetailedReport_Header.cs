@@ -28,37 +28,29 @@ namespace TestMVC4ConsoleApp.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<html>
-<head>
-<style>
-.diffins, .diffmod { background-color: yellow; }
-.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
-.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
-.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
-.warning {background-color: bisque;color:black;font-weight:bold;}
-.warning_no_data {background-color: beige;color:black;font-weight:bold;}
-.false_positive {background-color: green;color:white;font-weight:bold;}
-.error {background-color: Red;color:white;font-weight:bold;}
-.success {color:black;font-weight:bold;}
-.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
-.missing {color: purple;}
-.duplicate {color: pink;}
-.error_color {color: red;}
-.tree_depth_mismatch {font-weight: bold;background-color: yellow;}
-</style>
-<meta charset=""UTF-8"">
-</head>
-<body>
-<table id=""individual_test_results"" class=""table_main"">
-<tr>
-<td class=""th_main"">Test Name</td>
-<td class=""th_main"">Status</td>
-<td class=""th_main"">User</td>
-<td class=""th_main"">Result</td>
-<td class=""th_main"">Additional Info</td>
-</tr>
-
-");
+            this.Write("<html>\r\n<head>\r\n<style>\r\n.diffins, .diffmod { background-color: yellow; }\r\n.table" +
+                    "_main {border:solid 2px darkgrey;border-collapse:collapse;}\r\n.th_main {padding: " +
+                    "10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:d" +
+                    "arkgrey;border-style:solid;background-color: lightgrey;}\r\n.td_main {padding: 10p" +
+                    "x;border-width:2px;border-color:darkgrey;border-style:solid;}\r\n.warning {backgro" +
+                    "und-color: bisque;color:black;font-weight:bold;}\r\n.warning_no_data {background-c" +
+                    "olor: beige;color:black;font-weight:bold;}\r\n.false_positive {background-color: g" +
+                    "reen;color:white;font-weight:bold;}\r\n.error {background-color: Red;color:white;f" +
+                    "ont-weight:bold;}\r\n.success {color:black;font-weight:bold;}\r\n.error_with_explana" +
+                    "tion {background-color: orange;color:white;font-weight:bold;}\r\n.missing {color: " +
+                    "purple;}\r\n.duplicate {color: pink;}\r\n.error_color {color: red;}\r\n.tree_depth_mis" +
+                    "match {font-weight: bold;background-color: yellow;}\r\n</style>\r\n<meta charset=\"UT" +
+                    "F-8\">\r\n</head>\r\n<body>\r\n<p>HOW TO READ THE RESULTS:<br/>\r\nThe text results are o" +
+                    "rnated with information in brackets.<br/>\r\n<ul>\r\n<li>[MISSING IN OLD/NEW SERVICE" +
+                    "]</li>\r\n<li>[PARTIAL MATCH] only appears on the side with <b>LESS</b> content</l" +
+                    "i>\r\n<li>[CASE]</li>\r\n<li>[TRAILING WHITE SPACES] only appears on the side having" +
+                    " the trailing white spaces</li>\r\n</ul>\r\nAlso, <b>yellow highlighting</b> may app" +
+                    "ear in the case of a single value comparison, indicating explicitely the changes" +
+                    " operated on the text field from the old to the new service.</p>\r\n<br/>\r\n<table " +
+                    "id=\"individual_test_results\" class=\"table_main\">\r\n<tr>\r\n<td class=\"th_main\">Test" +
+                    " Name</td>\r\n<td class=\"th_main\">Status</td>\r\n<td class=\"th_main\">User</td>\r\n<td " +
+                    "class=\"th_main\">Result</td>\r\n<td class=\"th_main\">Additional Info</td>\r\n</tr>\r\n\r\n" +
+                    "");
             return this.GenerationEnvironment.ToString();
         }
     }

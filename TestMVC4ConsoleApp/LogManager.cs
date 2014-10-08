@@ -327,7 +327,7 @@ namespace TestMVC4App.Models
                 CountIdentifiedDataBehaviorByTestName = countDataBehaviorOccurences,
                 CountTestsRun = StatsCountTotalUpis * countSeverityResults.Keys.Count(),
                 CountTestsPerUser = AllTestNames.Count(),
-                FrequencySuccessByTestName = frequencySuccess_ByTestName,
+                FrequencySuccessByTestName = frequencySuccess_ByTestName.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value),
                 SampleDataByTestName = sampleDataByTestName,
                 Duration = duration,
                 LinkEnd2TestNameFile = "_" + countFilesGenerated + HTM_EXTENSION,
