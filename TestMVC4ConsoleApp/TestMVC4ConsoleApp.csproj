@@ -215,7 +215,6 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DetailedReportOrganizationTree.cs</LastGenOutput>
     </Content>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

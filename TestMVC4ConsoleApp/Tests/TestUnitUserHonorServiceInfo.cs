@@ -74,14 +74,14 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        if (newValue.Category == "Unknown")
+                        if (newValue.HonorCategory.Name == "Unknown")
                         {
                             // keep coherent with old service for testing
                             properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
                         }
                         else
                         {
-                            properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.Category);
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, newValue.HonorCategory.Name);
                         }
                     }
                     catch (Exception)
@@ -143,7 +143,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.role, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceType)));
+                        properties.Add(EnumOldServiceFieldsAsKeys.role, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceType.Name)));
                     }
                     catch (Exception)
                     {
@@ -183,14 +183,14 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        if (newValue.ServiceCategory == "Unknown")
+                        if (newValue.ServiceCategory.Name == "Unknown")
                         {
                             // keep coherent with old service for testing
                             properties.Add(EnumOldServiceFieldsAsKeys.category, string.Empty);
                         }
                         else
                         {
-                            properties.Add(EnumOldServiceFieldsAsKeys.category, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceCategory)));
+                            properties.Add(EnumOldServiceFieldsAsKeys.category, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceCategory.Name)));
                         }
                     }
                     catch (Exception)

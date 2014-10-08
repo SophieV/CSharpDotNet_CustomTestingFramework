@@ -149,9 +149,9 @@ namespace TestMVC4App.Models
         {
             string value = string.Empty;
 
-            if (this.newDataPatientCare != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral))
+            if (this.newDataPatientCare != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral.Option))
             {
-                switch (this.newDataPatientCare.AcceptedReferral)
+                switch (this.newDataPatientCare.AcceptedReferral.Option)
                 {
                     case "From patients or physicians":
                         value = "Accepts referrals from patients";

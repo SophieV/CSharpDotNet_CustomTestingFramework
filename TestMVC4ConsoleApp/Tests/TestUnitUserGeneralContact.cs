@@ -20,11 +20,11 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_OfficePhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.officePhone.ToString(),ParsingHelper.FormatPhoneNumber(this.newData.AcademicPhone, this.newData.AcademicPhoneExtension));
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_ClinicPhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.clinicPhone.ToString(), ParsingHelper.FormatPhoneNumber(this.newData.ClinicPhone, this.newData.ClinicPhoneExtension));
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_LabPhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.labPhone.ToString(), ParsingHelper.FormatPhoneNumber(this.newData.LabPhone, this.newData.LabPhoneExtension)); 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_OfficeFax, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.officeFax.ToString(), ParsingHelper.FormatPhoneNumber(this.newData.OfficeFax));
-            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_ClinicFax, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.clinicFax.ToString(), ParsingHelper.FormatPhoneNumber(this.newData.ClinicFax));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_OfficePhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.officePhone.ToString(),ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.AcademicPhone:string.Empty), (this.newData != null?this.newData.AcademicPhoneExtension:string.Empty)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_ClinicPhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.clinicPhone.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.ClinicPhone:string.Empty), (this.newData != null?this.newData.ClinicPhoneExtension:string.Empty)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_LabPhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.labPhone.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.LabPhone:string.Empty), (this.newData != null?this.newData.LabPhoneExtension:string.Empty))); 
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_OfficeFax, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.officeFax.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.OfficeFax:string.Empty)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_ClinicFax, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.clinicFax.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.ClinicFax:string.Empty)));
 
             ComputeOverallSeverity();
         }

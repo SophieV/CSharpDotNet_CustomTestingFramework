@@ -190,7 +190,7 @@ namespace TestMVC4App.Models
 
             try
             {
-                newValue = newData.CVs.Count().ToString();
+                newValue = newData.CvUrl.Count().ToString();
             }
             catch (Exception) { }
 
@@ -232,7 +232,7 @@ namespace TestMVC4App.Models
                 {
                     foreach (var language in newData.LanguageUsers)
                     {
-                        newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(language.LanguageName)));
+                        newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(language.Language.Name)));
                     }
                 }
             }
