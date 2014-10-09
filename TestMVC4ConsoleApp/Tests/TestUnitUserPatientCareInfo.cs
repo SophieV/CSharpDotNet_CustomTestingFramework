@@ -179,7 +179,8 @@ namespace TestMVC4App.Models
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.boardCertification.ToString(), 
                 new EnumOldServiceFieldsAsKeys[] { 
-                    EnumOldServiceFieldsAsKeys.specialty, 
+                    EnumOldServiceFieldsAsKeys.specialty,
+                    EnumOldServiceFieldsAsKeys.organization,
                     EnumOldServiceFieldsAsKeys.certificationYear});
 
             // TODO: Location belongs in a dedicated test
@@ -201,6 +202,16 @@ namespace TestMVC4App.Models
                     {
                         // make sure a value is present for each index
                         properties.Add(EnumOldServiceFieldsAsKeys.specialty, string.Empty);
+                    }
+
+                    try
+                    {
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.CertificationOrganization)));
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.organization, string.Empty);
                     }
 
                     try
