@@ -16,9 +16,19 @@
 .error_color {color: red;}
 .tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
-<script type="text/javascript" src="tablefilter.js"></script>
+<meta charset="UTF-8">
 </head>
 <body>
+<p>HOW TO READ THE RESULTS:<br/>
+The text results are ornated with information in brackets.<br/>
+<ul>
+<li>[MISSING IN OLD/NEW SERVICE]</li>
+<li>[PARTIAL MATCH] only appears on the side with <b>LESS</b> content</li>
+<li>[CASE]</li>
+<li>[TRAILING WHITE SPACES] only appears on the side having the trailing white spaces</li>
+</ul>
+Also, <b>yellow highlighting</b> may appear in the case of a single value comparison, indicating explicitely the changes operated on the text field from the old to the new service.</p>
+<br/>
 <table id="individual_test_results" class="table_main">
 <tr>
 <td class="th_main">Test Name</td>
@@ -31,54 +41,13 @@
 
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="12445467">UserGeneralInfo_AltMiddleName</a>
+		<a id="10350302">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12445467">Profile data of UPI 12445467</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/mario_perez/Complete">User data of ID is 61648</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>F
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										F
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:000016</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10044421">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10044421">Profile data of UPI 10044421</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/EY4/Complete">User data of ID is 58782</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10350302">Profile data of UPI 10350302</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/MGV3/Complete">User data of ID is 59526</a>
 	</td>
 	<td class="td_main">
 		
@@ -96,14 +65,15 @@
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>										<ins class='diffins'>Dean</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000496</p>
+	<p>Duration : 00mn:00s:0000747</p>
 	<br/>
 	<ul>
 			</ul>
@@ -111,13 +81,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11842460">UserGeneralInfo_AltMiddleName</a>
+		<a id="10352869">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11842460">Profile data of UPI 11842460</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/alyson_zeitlin/Complete">User data of ID is 58811</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10352869">Profile data of UPI 10352869</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/lynn_wilson/Complete">User data of ID is 59693</a>
 	</td>
 	<td class="td_main">
 		
@@ -130,76 +100,36 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>E.
+										<li>D.
 																																			</li>
 									</ul>
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>										E.
-																																			</li>
+										<li>										D.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000098</p>
+	<p>Duration : 00mn:00s:000025</p>
 	<br/>
 	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
 			</ul>
 	</td>
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10273683">UserGeneralInfo_AltMiddleName</a>
+		<a id="10090610">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10273683">Profile data of UPI 10273683</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/carlos_grilo/Complete">User data of ID is 58648</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>M
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										M
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000229</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11228709">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11228709">Profile data of UPI 11228709</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/stephanie_halene/Complete">User data of ID is 58649</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10090610">Profile data of UPI 10090610</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/elizabeth_roessler/Complete">User data of ID is 59829</a>
 	</td>
 	<td class="td_main">
 		
@@ -217,14 +147,15 @@
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>										<ins class='diffins'>M</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:000009</p>
+	<p>Duration : 00mn:00s:0000726</p>
 	<br/>
 	<ul>
 			</ul>
@@ -232,13 +163,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="12528002">UserGeneralInfo_AltMiddleName</a>
+		<a id="11988065">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12528002">Profile data of UPI 12528002</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/rita_ohene-adjei/Complete">User data of ID is 58668</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11988065">Profile data of UPI 11988065</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/john_macmicking/Complete">User data of ID is 62153</a>
 	</td>
 	<td class="td_main">
 		
@@ -256,14 +187,55 @@
 			</td>
 			<td class="td_main">
 				<ul>
+										<li>										<ins class='diffins'>David</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0001248</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="10254864">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10254864">Profile data of UPI 10254864</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/JGN2/Complete">User data of ID is 62467</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
 										<li>NULL</li>
 									</ul>
 			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>Stern</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
+									</ul>
+			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000078</p>
+	<p>Duration : 00mn:00s:0000739</p>
 	<br/>
 	<ul>
 			</ul>
@@ -271,13 +243,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10410346">UserGeneralInfo_AltMiddleName</a>
+		<a id="11159434">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10410346">Profile data of UPI 10410346</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jeanmarie_giovanelli/Complete">User data of ID is 58647</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11159434">Profile data of UPI 11159434</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/frederick_rodriguez/Complete">User data of ID is 62645</a>
 	</td>
 	<td class="td_main">
 		
@@ -290,21 +262,20 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>M
-																																			</li>
+										<li>NULL</li>
 									</ul>
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>										M
-																																			</li>
+										<li>										<ins class='diffins'>Charles</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000336</p>
+	<p>Duration : 00mn:00s:0000722</p>
 	<br/>
 	<ul>
 			</ul>
@@ -312,136 +283,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10071485">UserGeneralInfo_AltMiddleName</a>
+		<a id="10454002">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10071485">Profile data of UPI 10071485</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/david_leffell/Complete">User data of ID is 65053</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>J.
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										J.
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000258</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10934133">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main success">
-			SUCCESS</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10934133">Profile data of UPI 10934133</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/anthony_koleske/Complete">User data of ID is 62889</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>J
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										J
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000098</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="12149599">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main success">
-			SUCCESS</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/stephen_thung/Complete">User data of ID is 58861</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>F
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										F
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000102</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="12641341">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main success">
-			SUCCESS</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/franklin_brown/Complete">User data of ID is 58634</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10454002">Profile data of UPI 10454002</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/katherine_mckenzie/Complete">User data of ID is 63040</a>
 	</td>
 	<td class="td_main">
 		
@@ -460,29 +308,240 @@
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>										C.
-																																			</li>
+										<li>										C.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000147</p>
+	<p>Duration : 00mn:00s:000027</p>
 	<br/>
 	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
 			</ul>
 	</td>
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10151776">UserGeneralInfo_AltMiddleName</a>
+		<a id="10468843">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/tian_xu/Complete">User data of ID is 58755</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10468843">Profile data of UPI 10468843</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/john_howe/Complete">User data of ID is 64602</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Greg
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										Greg<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000258</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="12772071">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12772071">Profile data of UPI 12772071</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/adam_hittelman/Complete">User data of ID is 65666</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>B.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										B.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000254</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="10446930">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10446930">Profile data of UPI 10446930</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/john_colberg/Complete">User data of ID is 66843</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>W.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										W.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000254</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="11892474">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11892474">Profile data of UPI 11892474</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/michelle_bell/Complete">User data of ID is 68381</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>L.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										L.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000833</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="10207043">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10207043">Profile data of UPI 10207043</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/michael_bracken/Complete">User data of ID is 68534</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>B.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										B.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000266</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="13594531">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13594531">Profile data of UPI 13594531</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/charles_sindelar/Complete">User data of ID is 73044</a>
 	</td>
 	<td class="td_main">
 		
@@ -496,6 +555,169 @@
 			<td class="td_main">
 				<ul>
 										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>Vaughn</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0001125</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="13715843">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13715843">Profile data of UPI 13715843</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/albert_arias/Complete">User data of ID is 77197</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>J.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'> </ins>J.
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000119</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="13988625">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13988625">Profile data of UPI 13988625</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/mitchel_stacy/Complete">User data of ID is 77798</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>R.</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000747</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="13998553">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13998553">Profile data of UPI 13998553</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/jay_pahade/Complete">User data of ID is 78579</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>Kumar</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:00011</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="11228556">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11228556">Profile data of UPI 11228556</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/amy_davis/Complete">User data of ID is 84070</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>L
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -515,95 +737,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10290564">UserGeneralInfo_AltMiddleName</a>
+		<a id="13438403">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/daniel_rosner/Complete">User data of ID is 60863</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>E
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										E
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000098</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11091604">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main success">
-			SUCCESS</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/caroline_zeiss/Complete">User data of ID is 58810</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>J
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										J
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000143</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11472557">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/yong_xiong/Complete">User data of ID is 58740</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13438403">Profile data of UPI 13438403</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/neil_sreshta/Complete">User data of ID is 87027</a>
 	</td>
 	<td class="td_main">
 		
@@ -621,14 +761,15 @@
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>										<ins class='diffins'>Noel</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000168</p>
+	<p>Duration : 00mn:00s:0000069</p>
 	<br/>
 	<ul>
 			</ul>
@@ -636,13 +777,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10646102">UserGeneralInfo_AltMiddleName</a>
+		<a id="13961714">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10646102">Profile data of UPI 10646102</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jay_winter/Complete">User data of ID is 59712</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=13961714">Profile data of UPI 13961714</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/sara_seidelmann/Complete">User data of ID is 87611</a>
 	</td>
 	<td class="td_main">
 		
@@ -655,76 +796,36 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>Murray
+										<li>Bretschger
 																																			</li>
 									</ul>
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>										Murray
-																																			</li>
+										<li>										Bretschger<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
 									</ul>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000102</p>
+	<p>Duration : 00mn:00s:0000127</p>
 	<br/>
 	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
 			</ul>
 	</td>
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10106216">UserGeneralInfo_AltMiddleName</a>
+		<a id="14261560">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main success">
-			SUCCESS</td>
+			<td class="td_main warning">
+			WARNING_ONLY_NEW</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10106216">Profile data of UPI 10106216</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/agnes_vignery/Complete">User data of ID is 58968</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>M C
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										M C
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:000011</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="12268225">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12268225">Profile data of UPI 12268225</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jian_xu/Complete">User data of ID is 58748</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14261560">Profile data of UPI 14261560</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/roberta_dougherty/Complete">User data of ID is 89093</a>
 	</td>
 	<td class="td_main">
 		
@@ -738,6 +839,215 @@
 			<td class="td_main">
 				<ul>
 										<li>NULL</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										<ins class='diffins'>Lynn</ins>
+					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000739</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="14474655">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14474655">Profile data of UPI 14474655</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/daniel_petrylak/Complete">User data of ID is 90222</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>P.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										P.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000127</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="14529582">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14529582">Profile data of UPI 14529582</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/preston_sprenkle/Complete">User data of ID is 91030</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>C.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										C.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000119</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="14698868">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14698868">Profile data of UPI 14698868</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/patrick_a_kenney/Complete">User data of ID is 92866</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>A.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										A.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000279</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="14820112">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main false_positive">
+			FALSE_POSITIVE</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=14820112">Profile data of UPI 14820112</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/leslie_rickey/Complete">User data of ID is 93416</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>M.
+																																			</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+										<li>										M.<ins class='diffins'> </ins>
+															<span class="missing">[TRAILING WHITE SPACES]</span>																				</li>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000266</p>
+	<br/>
+	<ul>
+				<li>Some mismatches are caused by trailing WHITE SPACES.</li><br/>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
+		<a id="11693149">UserGeneralInfo_AltMiddleName</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11693149">Profile data of UPI 11693149</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/jessica_stanek/Complete">User data of ID is 97212</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Pipitone
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -757,13 +1067,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11161032">UserGeneralInfo_AltMiddleName</a>
+		<a id="15353691">UserGeneralInfo_AltMiddleName</a>
 	</td>
-			<td class="td_main error">
-			ERROR</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11161032">Profile data of UPI 11161032</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/maria_rosario-campos/Complete">User data of ID is 60829</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=15353691">Profile data of UPI 15353691</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/raquel_harrison/Complete">User data of ID is 99721</a>
 	</td>
 	<td class="td_main">
 		
@@ -776,93 +1086,12 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>ConceiÃ§Ã£o
+										<li>Ferrer
 					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
 				<ul>
-										<li>										Concei<del class='diffmod'>Ã§Ã£o</del><ins class='diffmod'>ção</ins>
-					<span class="missing">[MISSING IN OLD SERVICE]</span>																														</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000353</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11832447">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main success">
-			SUCCESS</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11832447">Profile data of UPI 11832447</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/fattaneh_tavassoli/Complete">User data of ID is 60555</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>Abbas-Zadeh
-																																			</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>										Abbas-Zadeh
-																																			</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000102</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="11436806">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11436806">Profile data of UPI 11436806</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jose_obando/Complete">User data of ID is 63465</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
 										<li>NULL</li>
 									</ul>
 			</td>
@@ -870,46 +1099,7 @@
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000344</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing AltMiddleName (if needed)</b><br/>
-		<a id="10736848">UserGeneralInfo_AltMiddleName</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10736848">Profile data of UPI 10736848</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/ingrid_nembhard/Complete">User data of ID is 61503</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0154715</p>
+	<p>Duration : 00mn:00s:0000057</p>
 	<br/>
 	<ul>
 			</ul>

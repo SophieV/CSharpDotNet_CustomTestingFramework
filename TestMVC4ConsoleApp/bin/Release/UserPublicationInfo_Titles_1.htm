@@ -16,9 +16,19 @@
 .error_color {color: red;}
 .tree_depth_mismatch {font-weight: bold;background-color: yellow;}
 </style>
-<script type="text/javascript" src="tablefilter.js"></script>
+<meta charset="UTF-8">
 </head>
 <body>
+<p>HOW TO READ THE RESULTS:<br/>
+The text results are ornated with information in brackets.<br/>
+<ul>
+<li>[MISSING IN OLD/NEW SERVICE]</li>
+<li>[PARTIAL MATCH] only appears on the side with <b>LESS</b> content</li>
+<li>[CASE]</li>
+<li>[TRAILING WHITE SPACES] only appears on the side having the trailing white spaces</li>
+</ul>
+Also, <b>yellow highlighting</b> may appear in the case of a single value comparison, indicating explicitely the changes operated on the text field from the old to the new service.</p>
+<br/>
 <table id="individual_test_results" class="table_main">
 <tr>
 <td class="th_main">Test Name</td>
@@ -31,50 +41,13 @@
 
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="12445467">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12445467">Profile data of UPI 12445467</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/mario_perez/Complete">User data of ID is 61648</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000028</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
 		<a id="10044421">UserPublicationInfo_Titles</a>
 	</td>
 			<td class="td_main error_with_explanation">
 			ERROR_ONLY_OLD</td>
 	<td class="td_main">
 		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10044421">Profile data of UPI 10044421</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/EY4/Complete">User data of ID is 58782</a>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/EY4/Complete">User data of ID is 58782</a>
 	</td>
 	<td class="td_main">
 		
@@ -87,7 +60,7 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>Atlas of Rhinoscopy: Endoscopic Sinonasal Anatomy & Pathology
+										<li>Atlas of Rhinoscopy: Endoscopic Sinonasal Anatomy &amp; Pathology
 					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 										<li>Powered Instrumentation in Otolaryngology: Head and Neck Surgery
 					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
@@ -101,43 +74,6 @@
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000028</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11842460">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11842460">Profile data of UPI 11842460</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/alyson_zeitlin/Complete">User data of ID is 58811</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
 	<p>Duration : 00mn:00s:000002</p>
 	<br/>
 	<ul>
@@ -146,25 +82,34 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10273683">UserPublicationInfo_Titles</a>
+		<a id="10935085">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10273683">Profile data of UPI 10273683</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/carlos_grilo/Complete">User data of ID is 58648</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10935085">Profile data of UPI 10935085</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/jeffrey_stein/Complete">User data of ID is 59334</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
+										<li>Inhibition of human purine nucleoside phosphorylase by acyclic nucleosides and
+nucleotides
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Inhibition of protein kinase C by antineoplastic agents:
+implications for drug resistance
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Activity of cyclosporin A
+and a non-immunosuppressive cyclosporin against multidrug resistant leukemic cell lines.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -183,13 +128,13 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11228709">UserPublicationInfo_Titles</a>
+		<a id="11628719">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11228709">Profile data of UPI 11228709</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/stephanie_halene/Complete">User data of ID is 58649</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11628719">Profile data of UPI 11628719</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/scott_weiner/Complete">User data of ID is 59811</a>
 	</td>
 	<td class="td_main">
 		
@@ -202,7 +147,8 @@
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>Curcumin, a Major Constituent of Turmeric, Corrects Cystic Fibrosis Defects.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -221,176 +167,30 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="12528002">UserPublicationInfo_Titles</a>
+		<a id="10322150">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12528002">Profile data of UPI 12528002</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/rita_ohene-adjei/Complete">User data of ID is 58668</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000028</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10410346">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10410346">Profile data of UPI 10410346</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jeanmarie_giovanelli/Complete">User data of ID is 58647</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10322150">Profile data of UPI 10322150</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/pnina_weiss/Complete">User data of ID is 60165</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000024</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10071485">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10071485">Profile data of UPI 10071485</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/david_leffell/Complete">User data of ID is 65053</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
 										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:000002</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10934133">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10934133">Profile data of UPI 10934133</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/anthony_koleske/Complete">User data of ID is 62889</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000024</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="12149599">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12149599">Profile data of UPI 12149599</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/stephen_thung/Complete">User data of ID is 58861</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
+										<li>Relaxant responses of rabbit aorta: influence of cytochrome P450 inhibitors.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Gender-specific differences in expression of mRNAs for functional and structural proteins in rat ventricular myocardium.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -409,25 +209,27 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="12641341">UserPublicationInfo_Titles</a>
+		<a id="11117104">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12641341">Profile data of UPI 12641341</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/franklin_brown/Complete">User data of ID is 58634</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11117104">Profile data of UPI 11117104</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/susan_walsh/Complete">User data of ID is 60317</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 2]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
+										<li>“Dysuria and A Suprapubic Mass in a 5 year old”
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 										<li>NULL</li>
 									</ul>
 			</td>
@@ -439,7 +241,7 @@
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000028</p>
+	<p>Duration : 00mn:00s:0000036</p>
 	<br/>
 	<ul>
 			</ul>
@@ -447,26 +249,34 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10151776">UserPublicationInfo_Titles</a>
+		<a id="10311423">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10151776">Profile data of UPI 10151776</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/tian_xu/Complete">User data of ID is 58755</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10311423">Profile data of UPI 10311423</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/philip_rubin/Complete">User data of ID is 61995</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>Inverting mappings from smooth paths through Rn to paths through Rm: A technique applied to recovering articulation from acoustics
+
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Speech: Dances of the Vocal Tract
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Editorial – Empirical Research on IRBs and Methodologies Usually Associated with Minimal Risk
+
+
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -485,177 +295,31 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10290564">UserPublicationInfo_Titles</a>
+		<a id="10429131">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10290564">Profile data of UPI 10290564</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/daniel_rosner/Complete">User data of ID is 60863</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:000002</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11091604">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11091604">Profile data of UPI 11091604</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/caroline_zeiss/Complete">User data of ID is 58810</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10429131">Profile data of UPI 10429131</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/anders_lofqvist/Complete">User data of ID is 63106</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000041</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11472557">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11472557">Profile data of UPI 11472557</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/yong_xiong/Complete">User data of ID is 58740</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:000002</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10646102">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10646102">Profile data of UPI 10646102</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jay_winter/Complete">User data of ID is 59712</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000032</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10106216">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10106216">Profile data of UPI 10106216</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/agnes_vignery/Complete">User data of ID is 58968</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-										<li>NULL</li>
+										<li>Lip and jaw kinematics in bilabial stop consonant production
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Control of oral closure and release in bilabial stop consonants
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Accurate recovery of articulator positions from acoustics: New conclusions based on human data
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -674,62 +338,27 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="12268225">UserPublicationInfo_Titles</a>
+		<a id="10018054">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12268225">Profile data of UPI 12268225</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jian_xu/Complete">User data of ID is 58748</a>
-	</td>
-	<td class="td_main">
-		
-		<br/><br/>
-		<table class="table_main">
-		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
-		</tr>
-		<tr>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-			<td class="td_main">
-				<ul>
-									</ul>
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="td_main">
-	<p>Duration : 00mn:00s:0000028</p>
-	<br/>
-	<ul>
-			</ul>
-	</td>
-</tr>
-<tr>
-	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11161032">UserPublicationInfo_Titles</a>
-	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
-	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11161032">Profile data of UPI 11161032</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/maria_rosario-campos/Complete">User data of ID is 60829</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10018054">Profile data of UPI 10018054</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/KL5/Complete">User data of ID is 64068</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
+										<li>Essential otolaryngology: head &amp; neck surgery
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -748,25 +377,33 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11832447">UserPublicationInfo_Titles</a>
+		<a id="12598110">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11832447">Profile data of UPI 11832447</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/fattaneh_tavassoli/Complete">User data of ID is 60555</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12598110">Profile data of UPI 12598110</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/maryjane_hogan/Complete">User data of ID is 65794</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 4]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
+										<li>Modifications of the fiber in adenovirus
+vectors increase tropism for malignant glioma models.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Enhanced eradication of local and distant tumors by genetically produced Interleukin-12
+and radiation.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Radiation-inducible gene therapy
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 										<li>NULL</li>
 									</ul>
 			</td>
@@ -778,7 +415,7 @@
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:000002</p>
+	<p>Duration : 00mn:00s:0000028</p>
 	<br/>
 	<ul>
 			</ul>
@@ -786,26 +423,31 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="11436806">UserPublicationInfo_Titles</a>
+		<a id="10373864">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=11436806">Profile data of UPI 11436806</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/jose_obando/Complete">User data of ID is 63465</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10373864">Profile data of UPI 10373864</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/harris_jacobs/Complete">User data of ID is 66169</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 3]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
-										<li>NULL</li>
+										<li>Rest-activity patterns of premature infants are regulated by cycled lighting.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>Impaired B cell development and function in mice with a targeted disruption of the homeobox gene Hex.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+										<li>C.:Defining the specific physiologic requirements for c-Myc during T-cell development
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -816,7 +458,7 @@
 		</table>
 	</td>
 	<td class="td_main">
-	<p>Duration : 00mn:00s:0000032</p>
+	<p>Duration : 00mn:00s:0000028</p>
 	<br/>
 	<ul>
 			</ul>
@@ -824,26 +466,29 @@
 </tr>
 <tr>
 	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
-		<a id="10736848">UserPublicationInfo_Titles</a>
+		<a id="12011661">UserPublicationInfo_Titles</a>
 	</td>
-			<td class="td_main warning_no_data">
-			WARNING_NO_DATA</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
 	<td class="td_main">
-		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=10736848">Profile data of UPI 10736848</a><br/>
-		<a href="http://ypms-service-a10.azurewebsites.net/service/Users/PageName/ingrid_nembhard/Complete">User data of ID is 61503</a>
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12011661">Profile data of UPI 12011661</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/julie_goodwin/Complete">User data of ID is 66452</a>
 	</td>
 	<td class="td_main">
 		
 		<br/><br/>
 		<table class="table_main">
 		<tr>
-			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 2]</span></td>
 			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
 		</tr>
 		<tr>
 			<td class="td_main">
 				<ul>
 										<li>NULL</li>
+										<li>Monogenic Disorders of Blood Pressure Regulation in
+Handbook of Hypertension Eds.
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
 									</ul>
 			</td>
 			<td class="td_main">
@@ -855,6 +500,46 @@
 	</td>
 	<td class="td_main">
 	<p>Duration : 00mn:00s:0000024</p>
+	<br/>
+	<ul>
+			</ul>
+	</td>
+</tr>
+<tr>
+	<td class="td_main"><b>Comparing Publication Title(s)</b><br/>
+		<a id="12011049">UserPublicationInfo_Titles</a>
+	</td>
+			<td class="td_main error_with_explanation">
+			ERROR_ONLY_OLD</td>
+	<td class="td_main">
+		<a href="http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI=12011049">Profile data of UPI 12011049</a><br/>
+		<a href="http://ypms-service-a11.azurewebsites.net/service/Users/PageName/michael_canarie/Complete">User data of ID is 66692</a>
+	</td>
+	<td class="td_main">
+		
+		<br/><br/>
+		<table class="table_main">
+		<tr>
+			<td class="th_main">OLD SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 1]</span></td>
+			<td class="th_main">NEW SERVICE DATA <span class="error_color">[COUNT ELEMENTS: 0]</span></td>
+		</tr>
+		<tr>
+			<td class="td_main">
+				<ul>
+										<li>Disorders of
+Carbohydrate Metabolism
+					<span class="missing">[MISSING IN NEW SERVICE]</span>																														</li>
+									</ul>
+			</td>
+			<td class="td_main">
+				<ul>
+									</ul>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td class="td_main">
+	<p>Duration : 00mn:00s:0000016</p>
 	<br/>
 	<ul>
 			</ul>
