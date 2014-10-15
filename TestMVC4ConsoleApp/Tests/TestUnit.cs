@@ -153,11 +153,11 @@ namespace TestMVC4App.Models
             }
             catch(Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                System.Console.Out.WriteLine(e.StackTrace);
+
                 if (string.IsNullOrEmpty(ErrorMessage))
                 {
-                    System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                    System.Console.Out.WriteLine(e.StackTrace);
-
                     HttpErrorHappened = false;
                     ErrorMessage = e.StackTrace;
                 }

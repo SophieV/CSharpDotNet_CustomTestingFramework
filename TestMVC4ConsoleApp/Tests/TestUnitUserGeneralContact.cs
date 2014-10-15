@@ -25,7 +25,8 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_LabPhone, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.labPhone.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.LabPhone:string.Empty), (this.newData != null?this.newData.LabPhoneExtension:string.Empty))); 
             this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_OfficeFax, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.officeFax.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.OfficeFax:string.Empty)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_ClinicFax, "Comparing General Contact", this.OldDataNodes, EnumOldServiceFieldsAsKeys.clinicFax.ToString(), ParsingHelper.FormatPhoneNumber((this.newData != null?this.newData.ClinicFax:string.Empty)));
-
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_MobilePhone, "Comparing General Contact", "false", (this.newData != null ? this.newData.IsMobilePhoneDisplayed.ToString() : string.Empty));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_GeneralContact_Pager, "Comparing General Contact", "false", (this.newData != null ? this.newData.IsPagerDisplayed.ToString() : string.Empty));
             ComputeOverallSeverity();
         }
     }
