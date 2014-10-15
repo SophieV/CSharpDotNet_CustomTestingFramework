@@ -126,7 +126,15 @@ namespace TestMVC4App.Models
                 catch (Exception) { }
 
                 try {
-                    structure[EnumOldServiceFieldsAsKeys.endDate] = string.Format("{0:yyyy}", DateTime.Parse(structure[EnumOldServiceFieldsAsKeys.endDate], CultureInfo.CurrentCulture));
+                    if (structure[EnumOldServiceFieldsAsKeys.endDate].ToLower().Contains("now") || structure[EnumOldServiceFieldsAsKeys.endDate].ToLower().Contains("curr"))
+                    {
+                        // YMPS-506 : endDate ongoing <=> null
+                        structure[EnumOldServiceFieldsAsKeys.endDate] = null;
+                    }
+                    else
+                    {
+                        structure[EnumOldServiceFieldsAsKeys.endDate] = string.Format("{0:yyyy}", DateTime.Parse(structure[EnumOldServiceFieldsAsKeys.endDate], CultureInfo.CurrentCulture));
+                    }
                 }
                 catch (Exception) { }
             }
