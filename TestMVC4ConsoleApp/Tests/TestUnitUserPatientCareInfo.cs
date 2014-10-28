@@ -113,7 +113,7 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null)
             {
-                if (this.newDataPatientCare.IsSeeingChild)
+                if (this.newDataPatientCare.IsSeeingChildren)
                 {
                     newValues.Add("Child");
                 }
@@ -121,7 +121,7 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null)
             {
-                if (this.newDataPatientCare.IsSeeingAdolescent)
+                if (this.newDataPatientCare.IsSeeingAdolescents)
                 {
                     newValues.Add("Adolescent");
                 }
@@ -129,7 +129,7 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null)
             {
-                if (this.newDataPatientCare.IsSeeingGeriatric)
+                if (this.newDataPatientCare.IsSeeingGeriatrics)
                 {
                     newValues.Add("Geriatric");
                 }

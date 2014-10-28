@@ -25,7 +25,6 @@ namespace TestMVC4App.Models
             UserGeneralInfo_AltFirstName_Test();
             UserGeneralInfo_AltMiddleName_Test();
             UserGeneralInfo_AltSuffixName_Test();
-            UserGeneralInfo_AltMiddleNameDisplayed_Test();
             UserGeneralInfo_All_EduProfSuffixes();
             UserGeneralInfo_CountCVs_Test();
 
@@ -88,12 +87,6 @@ namespace TestMVC4App.Models
             LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
                                               this.BuildNewServiceURL(this.PageName),
                                               resultReport);
-        }
-
-        private void UserGeneralInfo_AltMiddleNameDisplayed_Test()
-        {
-            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_AltMiddleNameDisplayed, "Comparing AltMiddleNameDisplayed", (!string.IsNullOrEmpty(oldValue)).ToString(), newData.IsAltMiddleNameDisplayed.ToString());
         }
 
         private void UserGeneralInfo_AltSuffixName_Test()

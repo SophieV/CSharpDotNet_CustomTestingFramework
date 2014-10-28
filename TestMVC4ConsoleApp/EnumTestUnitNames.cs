@@ -22,7 +22,6 @@
             UserGeneralInfo_Languages,
             UserGeneralInfo_AltFirstName,
             UserGeneralInfo_AltMiddleName,
-            UserGeneralInfo_AltMiddleNameDisplayed,
             UserGeneralInfo_AltLastName,
             UserGeneralInfo_AltSuffixName,
             UserGeneralInfo_All_EduProfSuffixes,
@@ -66,6 +65,8 @@
             UserContactLocationInfo_GeneralContact_ClinicPhone,
             UserContactLocationInfo_GeneralContact_ClinicFax,
             UserContactLocationInfo_GeneralContact_OfficeFax,
-            UserContactLocationInfo_GeneralContact_LabPhone
+            UserContactLocationInfo_GeneralContact_LabPhone,
+            UserContactLocationInfo_GeneralContact_MobilePhone,
+            UserContactLocationInfo_GeneralContact_Pager
     }
 }
