@@ -27,6 +27,7 @@ namespace TestMVC4App.Models
             UserGeneralInfo_AltSuffixName_Test();
             UserGeneralInfo_All_EduProfSuffixes();
             UserGeneralInfo_CountCVs_Test();
+            UserGeneralInfo_JobClass_Test();
 
             ComputeOverallSeverity();
         }
@@ -49,6 +50,27 @@ namespace TestMVC4App.Models
                 compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltLastName)), resultReport);
                 compareStrategy.Investigate();
             }
+
+            watch.Stop();
+            resultReport.Duration = watch.Elapsed;
+
+            this.DetailedResults.Add(resultReport.TestName, resultReport);
+
+            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+                                              this.BuildNewServiceURL(this.PageName),
+                                              resultReport);
+        }
+
+        private void UserGeneralInfo_JobClass_Test()
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_JobClass, "Checking Job Class assigned");
+
+            //make sure test is okay if value assigned and fails if no value
+            string oldValue = (!string.IsNullOrEmpty(newData.JobClass) ? "1":string.Empty);
+            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode((!string.IsNullOrEmpty(newData.JobClass) ? "1" : "0"))), resultReport);
+            compareStrategy.Investigate();
 
             watch.Stop();
             resultReport.Duration = watch.Elapsed;

@@ -162,6 +162,13 @@ namespace TestMVC4App.Models
                     case "Not Applicable":
                         value = "NA";
                         break;
+                    case "MD to MD Consult":
+                        value = "MD";
+                        break;
+                    default:
+                        // make sure the value received is printed
+                        value = this.newDataPatientCare.AcceptedReferral.Option;
+                        break;
                 }
             }
 

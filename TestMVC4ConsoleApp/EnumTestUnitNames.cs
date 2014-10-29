@@ -67,6 +67,7 @@
             UserContactLocationInfo_GeneralContact_OfficeFax,
             UserContactLocationInfo_GeneralContact_LabPhone,
             UserContactLocationInfo_GeneralContact_MobilePhone,
-            UserContactLocationInfo_GeneralContact_Pager
+            UserContactLocationInfo_GeneralContact_Pager,
+            UserGeneralInfo_JobClass
     }
 }

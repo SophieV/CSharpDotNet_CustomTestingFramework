@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using YSM.PMS.Service.Common.DataTransfer;
 using System.Linq;
 using System;
 using System.Web;
+using YSM.PMS.Service.Common.DataTransfer;
 
 namespace TestMVC4App.Models
 {
@@ -17,8 +17,8 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
-            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Summary, "Comparing Research Summary(ies)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchSummary.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.BriefSummary)));
-            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Overview, "Comparing Research Overview(s)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.ExtensiveDescription)));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Summary, "Comparing Research Summary(ies)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchSummary.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode((this.newData != null && !string.IsNullOrEmpty(this.newData.BriefSummary)?this.newData.BriefSummary:string.Empty))));
+            this.CompareAndLog_Test(EnumTestUnitNames.UserResearchInfo_Overview, "Comparing Research Overview(s)", this.OldDataNodes, EnumOldServiceFieldsAsKeys.researchOverview.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode((this.newData != null&& !string.IsNullOrEmpty(this.newData.ExtensiveDescription)?this.newData.ExtensiveDescription:string.Empty))));
             UserResearchInfo_PublicHealthKeywords();
         }
 
