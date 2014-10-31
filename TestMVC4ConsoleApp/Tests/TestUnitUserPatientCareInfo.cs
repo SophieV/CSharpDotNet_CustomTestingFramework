@@ -75,6 +75,13 @@ namespace TestMVC4App.Models
 
         private void UserPatientCareInfo_IsSeeingNewPatients()
         {
+            var oldValue = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.newPatients.ToString()));
+            if (!string.IsNullOrEmpty(oldValue) && oldValue.ToUpper() == "NA")
+            {
+                // See ticket #568
+                oldValue = "No";
+            }
+
             string newValue = string.Empty;
 
             if (this.newDataPatientCare != null)
@@ -91,8 +98,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_IsSeeingNewPatients, 
                 "Comparing Seeing New Patients", 
-                this.OldDataNodes, 
-                EnumOldServiceFieldsAsKeys.newPatients.ToString(), 
+                oldValue,
                 newValue);
         }
 
