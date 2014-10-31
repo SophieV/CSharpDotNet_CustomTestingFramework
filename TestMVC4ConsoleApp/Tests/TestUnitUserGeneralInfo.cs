@@ -118,6 +118,15 @@ namespace TestMVC4App.Models
             var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
             string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
+
+            // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
+            var oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
+
+            if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
+            {
+                oldValue = oldValueToExpectedNewValue.First();
+            }
+
             var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.Suffix)), resultReport);
             compareStrategy.Investigate();
 
@@ -126,6 +135,15 @@ namespace TestMVC4App.Models
                 resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
                 oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
+
+                // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
+                oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
+
+                if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
+                {
+                    oldValue = oldValueToExpectedNewValue.First();
+                }
+
                 compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltSuffix)), resultReport);
                 compareStrategy.Investigate();
             }
@@ -219,6 +237,24 @@ namespace TestMVC4App.Models
 
             HashSet<string> oldValues = ParsingHelper.StringToList(oldValuePart1, ',');
             oldValues = ParsingHelper.StringToList(oldValuePart2, ',', oldValues);
+
+            HashSet<string> oldValuesToExpectedNewValues = new HashSet<string>();
+
+            foreach(var oldValue in oldValues)
+            {
+                // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
+                var oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
+
+                if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
+                {
+                    oldValuesToExpectedNewValues.Add(oldValueToExpectedNewValue.First());
+                }
+                else
+                {
+                    // value not mapped
+                    oldValuesToExpectedNewValues.Add(oldValue);
+                }
+            }
             
             HashSet<string> newValues = new HashSet<string>();
             try
@@ -233,7 +269,7 @@ namespace TestMVC4App.Models
             }
             catch (Exception) { }
 
-            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_All_EduProfSuffixes, "Comparing list of Suffix(es)", oldValues, newValues);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_All_EduProfSuffixes, "Comparing list of Suffix(es)", oldValuesToExpectedNewValues, newValues);
         }
 
         private void UserGeneralInfo_LanguageUsers_Test()
