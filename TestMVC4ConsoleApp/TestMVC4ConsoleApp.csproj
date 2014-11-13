@@ -58,10 +58,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YSM.PMS.Service.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>ServiceProxy\YSM.PMS.Service.Common.dll</HintPath>
-    </Reference>
     <Reference Include="YSM.PMS.Web.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.dll</HintPath>
@@ -69,6 +65,9 @@
     <Reference Include="YSM.PMS.Web.Service.Clients, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.Clients.dll</HintPath>
+    </Reference>
+    <Reference Include="YSM.PMS.Web.Service.DataTransfer">
+      <HintPath>ServiceProxy\YSM.PMS.Web.Service.DataTransfer.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

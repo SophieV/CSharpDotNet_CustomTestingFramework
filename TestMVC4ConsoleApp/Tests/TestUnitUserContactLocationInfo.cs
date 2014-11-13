@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml.Linq;
-using YSM.PMS.Service.Common.DataTransfer;
+using YSM.PMS.Web.Service.DataTransfer.Models;
 
 namespace TestMVC4App.Models
 {
@@ -323,6 +323,6 @@ namespace TestMVC4App.Models
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
 
             CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)", oldValues, newValues, watch);
-        }
+       } 
     }
 }

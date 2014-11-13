@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Web;
-using YSM.PMS.Service.Common.DataTransfer;
+using YSM.PMS.Web.Service.DataTransfer.Models;
 
 namespace TestMVC4App.Models
 {

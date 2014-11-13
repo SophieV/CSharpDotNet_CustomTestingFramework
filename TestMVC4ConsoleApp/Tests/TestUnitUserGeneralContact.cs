@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestMVC4App.Models;
-using YSM.PMS.Service.Common.DataTransfer;
+using YSM.PMS.Web.Service.DataTransfer.Models;
 
 namespace TestMVC4App.Models
 {
