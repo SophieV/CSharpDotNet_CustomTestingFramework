@@ -9,7 +9,7 @@ namespace TestMVC4App.Models
     /// </summary>
     public class DatabaseFacade : IDisposable
     {
-        private static string connectionString = @"Server=tcp:le9rmjfn5q.database.windows.net,1433;Database=yfmps-entities-a10;User ID=slamTHEdbNOince@le9rmjfn5q;Password=allQUIETallsWELL104;Encrypt=True;Connection Timeout=30;";
+        private static string connectionString = @"Server=tcp:le9rmjfn5q.database.windows.net,1433;Database=yfmps-entities-a13;User ID=slamTHEdbNOince@le9rmjfn5q;Password=allQUIETallsWELL104;Encrypt=True;Connection Timeout=30;";
         private static string selectStatement = "SELECT Upi FROM [User]";
         private static SqlConnection conn = new SqlConnection(connectionString);
         SqlCommand queryCommand = new SqlCommand(selectStatement, conn);
