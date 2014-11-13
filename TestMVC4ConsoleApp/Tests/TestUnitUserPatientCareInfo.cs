@@ -246,7 +246,7 @@ namespace TestMVC4App.Models
 
         private void UserEducationTrainingInfo_CancersTreated()
         {
-            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cancersTreated.ToString()));
+            var oldValuesMerged = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cancersTreated.ToString());
             var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
 
             var newValues = new HashSet<string>();
