@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using YSM.PMS.Web.Service.DataTransfer.Models;
 
@@ -67,7 +68,7 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.OldDataNodes, EnumOldServiceFieldsAsKeys.emailAddress.ToString(), this.newData.YaleEmail);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.MiddleName)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.FirstName)));
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Gender, "Comparing Gender", this.OldDataNodes, EnumOldServiceFieldsAsKeys.gender.ToString(), this.newData.Gender);
+            UserBasicInfo_Gender();
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_NetId, "Comparing NetId", this.OldDataNodes, EnumOldServiceFieldsAsKeys.netID.ToString(), this.newData.NetId);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_PageName, "Comparing PageName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.pageName.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.PageName)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_SuffixName, "Comparing SuffixName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.Suffix)));
@@ -76,6 +77,36 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Npi, "Comparing Npi", this.OldDataNodes, EnumOldServiceFieldsAsKeys.Npi.ToString(), this.newData.Npi);
 
             ComputeOverallSeverity();
+        }
+
+        private void UserBasicInfo_Gender()
+        {
+            var oldValuesMerged = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.gender.ToString()));
+            var oldValues = ParsingHelper.StringToList(oldValuesMerged, ',');
+
+            var newValues = new HashSet<string>();
+
+            if (this.newData.Gender != null)
+            {
+                switch(newData.Gender)
+                {
+                    case "Male":
+                        newValues.Add("M");
+                    break;
+                    case "Female":
+                        newValues.Add("F");
+                    break;
+                    default:
+                        newValues.Add("unknown");
+                    break;
+                }
+            }
+
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserBasicInfo_Gender,
+                "Comparing Gender",
+                oldValues,
+                newValues);
         }
     }
 }
