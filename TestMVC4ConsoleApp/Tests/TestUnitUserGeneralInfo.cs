@@ -21,10 +21,10 @@ namespace TestMVC4App.Models
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_Bio, "Comparing Bio", this.OldDataNodes, EnumOldServiceFieldsAsKeys.biography.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode((!string.IsNullOrEmpty(this.newData.Bio)?this.newData.Bio:string.Empty))));
             UserGeneralInfo_Titles_Test();
             UserGeneralInfo_LanguageUsers_Test();
-            UserGeneralInfo_AltLastName_Test();
-            UserGeneralInfo_AltFirstName_Test();
-            UserGeneralInfo_AltMiddleName_Test();
-            UserGeneralInfo_AltSuffixName_Test();
+            //UserGeneralInfo_AltLastName_Test();
+            //UserGeneralInfo_AltFirstName_Test();
+            //UserGeneralInfo_AltMiddleName_Test();
+            //UserGeneralInfo_AltSuffixName_Test();
             UserGeneralInfo_All_EduProfSuffixes();
             UserGeneralInfo_CountCVs_Test();
             UserGeneralInfo_JobClass_Test();
@@ -32,34 +32,34 @@ namespace TestMVC4App.Models
             ComputeOverallSeverity();
         }
 
-        private void UserGeneralInfo_AltLastName_Test()
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
+        //private void UserGeneralInfo_AltLastName_Test()
+        //{
+        //    var watch = new Stopwatch();
+        //    watch.Start();
+        //    var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
-            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.LastName)), resultReport);
-            compareStrategy.Investigate();
+        //    string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
+        //    var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.LastName)), resultReport);
+        //    compareStrategy.Investigate();
 
-            if(resultReport.Severity != EnumResultSeverityType.SUCCESS)
-            {
-                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
+        //    if(resultReport.Severity != EnumResultSeverityType.SUCCESS)
+        //    {
+        //        resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltLastName, "Comparing AltLastName (if needed)");
 
-                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltLastName)), resultReport);
-                compareStrategy.Investigate();
-            }
+        //        oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString());
+        //        compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltLastName)), resultReport);
+        //        compareStrategy.Investigate();
+        //    }
 
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
+        //    watch.Stop();
+        //    resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
+        //    this.DetailedResults.Add(resultReport.TestName, resultReport);
 
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
+        //    LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+        //                                      this.BuildNewServiceURL(this.PageName),
+        //                                      resultReport);
+        //}
 
         private void UserGeneralInfo_JobClass_Test()
         {
@@ -82,114 +82,114 @@ namespace TestMVC4App.Models
                                               resultReport);
         }
 
-        private void UserGeneralInfo_AltFirstName_Test()
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
+        //private void UserGeneralInfo_AltFirstName_Test()
+        //{
+        //    var watch = new Stopwatch();
+        //    watch.Start();
+        //    var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
-            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.FirstName)), resultReport);
-            compareStrategy.Investigate();
+        //    string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
+        //    var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.FirstName)), resultReport);
+        //    compareStrategy.Investigate();
 
-            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
-            {
-                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
+        //    if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
+        //    {
+        //        resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltFirstName, "Comparing AltFirstName (if needed)");
 
-                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltFirstName)), resultReport);
-                compareStrategy.Investigate();
-            }
+        //        oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString());
+        //        compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltFirstName)), resultReport);
+        //        compareStrategy.Investigate();
+        //    }
 
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
+        //    watch.Stop();
+        //    resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
+        //    this.DetailedResults.Add(resultReport.TestName, resultReport);
 
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
+        //    LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+        //                                      this.BuildNewServiceURL(this.PageName),
+        //                                      resultReport);
+        //}
 
-        private void UserGeneralInfo_AltSuffixName_Test()
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
+        //private void UserGeneralInfo_AltSuffixName_Test()
+        //{
+        //    var watch = new Stopwatch();
+        //    watch.Start();
+        //    var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
+        //    string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
 
-            // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
-            var oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
+        //    // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
+        //    var oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
 
-            if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
-            {
-                oldValue = oldValueToExpectedNewValue.First();
-            }
+        //    if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
+        //    {
+        //        oldValue = oldValueToExpectedNewValue.First();
+        //    }
 
-            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.Suffix)), resultReport);
-            compareStrategy.Investigate();
+        //    var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.Suffix)), resultReport);
+        //    compareStrategy.Investigate();
 
-            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
-            {
-                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
+        //    if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
+        //    {
+        //        resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltSuffixName, "Comparing Alt SuffixName (if needed)");
 
-                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
+        //        oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.suffix.ToString());
 
-                // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
-                oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
+        //        // present old value as the value expected to be returned by the new service in order to pass the test: ticket #467
+        //        oldValueToExpectedNewValue = this.suffixMapping.Where(n => n.Key.ToUpper() == oldValue.Trim().ToUpper()).Select(n => n.Value);
 
-                if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
-                {
-                    oldValue = oldValueToExpectedNewValue.First();
-                }
+        //        if (oldValueToExpectedNewValue != null && oldValueToExpectedNewValue.Count() > 0)
+        //        {
+        //            oldValue = oldValueToExpectedNewValue.First();
+        //        }
 
-                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltSuffix)), resultReport);
-                compareStrategy.Investigate();
-            }
+        //        compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltSuffix)), resultReport);
+        //        compareStrategy.Investigate();
+        //    }
 
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
+        //    watch.Stop();
+        //    resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
+        //    this.DetailedResults.Add(resultReport.TestName, resultReport);
 
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
+        //    LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+        //                                      this.BuildNewServiceURL(this.PageName),
+        //                                      resultReport);
+        //}
 
-        private void UserGeneralInfo_AltMiddleName_Test()
-        {
-            var watch = new Stopwatch();
-            watch.Start();
-            var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
+        //private void UserGeneralInfo_AltMiddleName_Test()
+        //{
+        //    var watch = new Stopwatch();
+        //    watch.Start();
+        //    var resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
-            string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-            if (string.IsNullOrEmpty(oldValue))
-            {
-                oldValue = "False";
-            }
-            var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.MiddleName)), resultReport);
-            compareStrategy.Investigate();
+        //    string oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
+        //    if (string.IsNullOrEmpty(oldValue))
+        //    {
+        //        oldValue = "False";
+        //    }
+        //    var compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.MiddleName)), resultReport);
+        //    compareStrategy.Investigate();
 
-            if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
-            {
-                resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
+        //    if (resultReport.Severity != EnumResultSeverityType.SUCCESS)
+        //    {
+        //        resultReport = new ResultReport(this.UserId, this.Upi, EnumTestUnitNames.UserGeneralInfo_AltMiddleName, "Comparing AltMiddleName (if needed)");
 
-                oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
-                compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltMiddleName)), resultReport);
-                compareStrategy.Investigate();
-            }
+        //        oldValue = ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString());
+        //        compareStrategy = new CompareStrategyFactory(oldValue, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newData.AltMiddleName)), resultReport);
+        //        compareStrategy.Investigate();
+        //    }
 
-            watch.Stop();
-            resultReport.Duration = watch.Elapsed;
+        //    watch.Stop();
+        //    resultReport.Duration = watch.Elapsed;
 
-            this.DetailedResults.Add(resultReport.TestName, resultReport);
+        //    this.DetailedResults.Add(resultReport.TestName, resultReport);
 
-            LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
-                                              this.BuildNewServiceURL(this.PageName),
-                                              resultReport);
-        }
+        //    LogManager.Instance.LogTestResult(this.Container.BuildOldServiceFullURL(this.Upi),
+        //                                      this.BuildNewServiceURL(this.PageName),
+        //                                      resultReport);
+        //}
 
         private void UserGeneralInfo_Titles_Test()
         {
