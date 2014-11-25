@@ -32,6 +32,7 @@ namespace TestMVC4App.Models
             UserGeneralInfo_JobClass_Test();
             UserGeneralInfo_CheckUserProfileImageLink_Test();
             UserGeneralInfo_CheckUserProfileImageVariantsCount_Test();
+            UserGeneralInfo_CheckNewCountInfoExists_Test();
 
             ComputeOverallSeverity();
         }
@@ -275,6 +276,25 @@ namespace TestMVC4App.Models
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Link, "Check File Exists at CV URL", oldValue, newValue);
+        }
+
+        private void UserGeneralInfo_CheckNewCountInfoExists_Test()
+        {
+            string oldValue;
+            string newValue;
+
+            if (!string.IsNullOrEmpty(newData.NewsCountAccepted.ToString()) && !string.IsNullOrEmpty(newData.NewsCountSuggested.ToString()))
+            {
+                oldValue = "Match";
+                newValue = "Match";
+            }
+            else
+            {
+                oldValue = "Exists";
+                newValue = "Mismatch";
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_NewsCount_Exist, "Check Each Profile Has NewsCount Accepted & Suggested", oldValue, newValue);
         }
 
         private void UserGeneralInfo_CheckUserProfileImageVariantsCount_Test()

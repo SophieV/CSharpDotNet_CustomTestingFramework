@@ -29,6 +29,7 @@
             UserGeneralInfo_CVs_Link,
             UserGeneralInfo_ProfileImage_Link,
             UserGeneralInfo_ProfileImage_VariantsCount,
+            UserGeneralInfo_NewsCount_Exist,
             UserGeneralInfo_Organizations_Id,
             UserGeneralInfo_Organizations_Name,
             UserGeneralInfo_Organizations_IdAndName,
