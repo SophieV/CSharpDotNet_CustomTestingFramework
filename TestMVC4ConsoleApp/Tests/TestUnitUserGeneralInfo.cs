@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Web;
 using YSM.PMS.Web.Service.DataTransfer.Models;
 
@@ -27,6 +28,7 @@ namespace TestMVC4App.Models
             //UserGeneralInfo_AltSuffixName_Test();
             UserGeneralInfo_All_EduProfSuffixes();
             UserGeneralInfo_CountCVs_Test();
+            UserGeneralInfo_CheckCVLink_Test();
             UserGeneralInfo_JobClass_Test();
 
             ComputeOverallSeverity();
@@ -223,11 +225,54 @@ namespace TestMVC4App.Models
 
             try
             {
-                newValue = newData.CvUrl.Count().ToString();
+                newValue = (!string.IsNullOrEmpty(newData.CvUrl)?"1":"0");
             }
             catch (Exception) { }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Count, "Count CVs listed", oldValue, newValue);
+        }
+
+        private void UserGeneralInfo_CheckCVLink_Test()
+        {
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cv.ToString(), EnumOldServiceFieldsAsKeys.fileName.ToString());
+            string oldValue = oldValues.Count().ToString();
+
+            string newValue = string.Empty;
+
+            if(!string.IsNullOrEmpty(newData.CvUrl))
+            {
+                HttpWebResponse response = null;
+                var request = (HttpWebRequest)WebRequest.Create(newData.CvUrl);
+                request.Method = "HEAD";
+
+                try
+                {
+                    response = (HttpWebResponse)request.GetResponse();
+                    oldValue = "Exists";
+                    newValue = "Exists";
+                }
+                catch (WebException ex)
+                {
+                    /* A WebException will be thrown if the status of the response is not `200 OK` */
+                    oldValue = "FailedRetrieve";
+                    newValue = "Exists";
+                }
+                finally
+                {
+                    // Don't forget to close your response.
+                    if (response != null)
+                    {
+                        response.Close();
+                    }
+                }
+            }
+            else 
+            {
+                oldValue = "None";
+                newValue = "None";
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Link, "Check File Exists at CV URL", oldValue, newValue);
         }
 
         private void UserGeneralInfo_All_EduProfSuffixes()

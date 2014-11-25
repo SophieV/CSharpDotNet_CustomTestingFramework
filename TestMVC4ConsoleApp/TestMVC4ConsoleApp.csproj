@@ -66,7 +66,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.Clients.dll</HintPath>
     </Reference>
-    <Reference Include="YSM.PMS.Web.Service.DataTransfer">
+    <Reference Include="YSM.PMS.Web.Service.DataTransfer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.DataTransfer.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -175,8 +176,8 @@
     <Content Include="ServiceProxy\Newtonsoft.Json.dll" />
     <Content Include="ServiceProxy\PagedList.dll" />
     <Content Include="ServiceProxy\System.Net.Http.Formatting.dll" />
-    <Content Include="ServiceProxy\YSM.PMS.Service.Common.dll" />
     <Content Include="ServiceProxy\YSM.PMS.Web.Service.Clients.dll" />
+    <Content Include="ServiceProxy\YSM.PMS.Web.Service.DataTransfer.dll" />
     <Content Include="ServiceProxy\YSM.PMS.Web.Service.dll" />
     <Content Include="Templates\ProfileReport.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

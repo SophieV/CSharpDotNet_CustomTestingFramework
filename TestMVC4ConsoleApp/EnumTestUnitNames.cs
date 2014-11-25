@@ -26,6 +26,7 @@
            //UserGeneralInfo_AltSuffixName,
             UserGeneralInfo_All_EduProfSuffixes,
             UserGeneralInfo_CVs_Count,
+            UserGeneralInfo_CVs_Link,
             UserGeneralInfo_Organizations_Id,
             UserGeneralInfo_Organizations_Name,
             UserGeneralInfo_Organizations_IdAndName,
