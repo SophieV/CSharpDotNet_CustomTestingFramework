@@ -101,6 +101,7 @@ namespace TestMVC4App.Models
         labPhone,
         facultyType,
         ymgStatus,
-        photoURL
+        photoURL,
+        clinicalInterests
     }
 }

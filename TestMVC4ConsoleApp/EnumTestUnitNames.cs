@@ -72,6 +72,7 @@
             UserContactLocationInfo_GeneralContact_LabPhone,
             UserContactLocationInfo_GeneralContact_MobilePhone,
             UserContactLocationInfo_GeneralContact_Pager,
-            UserGeneralInfo_JobClass
+            UserGeneralInfo_JobClass,
+            UserPatientCareInfo_StaywellsDeprecatedKeywords
     }
 }

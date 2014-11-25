@@ -26,6 +26,7 @@ namespace TestMVC4App.Models
             UserPatientCareInfo_IsSeeingPatientType();
             UserEducationTrainingInfo_BoardCertifications();
             UserEducationTrainingInfo_CancersTreated();
+            UserPatientCareInfo_StaywellsDepecatedKeywords();
         }
 
         private void UserPatientCareInfo_PhysicianBio()
@@ -42,6 +43,23 @@ namespace TestMVC4App.Models
                 "Comparing Physician Bio", 
                 this.OldDataNodes, 
                 EnumOldServiceFieldsAsKeys.physicianBio.ToString(), 
+                newValue);
+        }
+
+        private void UserPatientCareInfo_StaywellsDepecatedKeywords()
+        {
+            string newValue = string.Empty;
+
+            if (this.newDataPatientCare != null && this.newDataPatientCare.DeprecatedKeywordList != null)
+            {
+                newValue = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newDataPatientCare.DeprecatedKeywordList));
+            }
+
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_StaywellsDeprecatedKeywords,
+                "Comparing Staywells deprecated keywords",
+                this.OldDataNodes,
+                EnumOldServiceFieldsAsKeys.clinicalInterests.ToString(),
                 newValue);
         }
 
