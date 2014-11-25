@@ -30,6 +30,8 @@ namespace TestMVC4App.Models
             UserGeneralInfo_CountCVs_Test();
             UserGeneralInfo_CheckCVLink_Test();
             UserGeneralInfo_JobClass_Test();
+            UserGeneralInfo_CheckUserProfileImageLink_Test();
+            UserGeneralInfo_CheckUserProfileImageVariantsCount_Test();
 
             ComputeOverallSeverity();
         }
@@ -273,6 +275,69 @@ namespace TestMVC4App.Models
             }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_CVs_Link, "Check File Exists at CV URL", oldValue, newValue);
+        }
+
+        private void UserGeneralInfo_CheckUserProfileImageVariantsCount_Test()
+        {
+            // HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.photoURL.ToString());
+            // the new service should provide 3 URLs in total, including two variants (Rectangle, Square)
+            // assumption is made here that it applies to ALL the profiles without exception
+            string oldValue = "3";
+            // (oldValues.Count() > 0 ? "3" : "0");
+
+            int newValue = 0;
+
+            if (!string.IsNullOrEmpty(newData.UserProfileImage.Url))
+            {
+                newValue++;
+            }
+
+            newValue += newData.UserProfileImage.ImageVariants.Count();
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_ProfileImage_VariantsCount, "Check Count URLs provided for Profile Image & Variants", oldValue, newValue.ToString());
+        }
+
+        private void UserGeneralInfo_CheckUserProfileImageLink_Test()
+        {
+            HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.photoURL.ToString());
+            string oldValue = oldValues.Count().ToString();
+
+            string newValue = string.Empty;
+
+            if (!string.IsNullOrEmpty(newData.UserProfileImage.Url))
+            {
+                HttpWebResponse response = null;
+                var request = (HttpWebRequest)WebRequest.Create(newData.UserProfileImage.Url);
+                request.Method = "HEAD";
+
+                try
+                {
+                    response = (HttpWebResponse)request.GetResponse();
+                    oldValue = "Exists";
+                    newValue = "Exists";
+                }
+                catch (WebException ex)
+                {
+                    /* A WebException will be thrown if the status of the response is not `200 OK` */
+                    oldValue = "FailedRetrieve";
+                    newValue = "Exists";
+                }
+                finally
+                {
+                    // Don't forget to close your response.
+                    if (response != null)
+                    {
+                        response.Close();
+                    }
+                }
+            }
+            else
+            {
+                oldValue = "None";
+                newValue = "None";
+            }
+
+            this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_ProfileImage_Link, "Check File Exists at Profile Image URL", oldValue, newValue);
         }
 
         private void UserGeneralInfo_All_EduProfSuffixes()
