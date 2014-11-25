@@ -102,6 +102,8 @@ namespace TestMVC4App.Models
         facultyType,
         ymgStatus,
         photoURL,
-        clinicalInterests
+        clinicalInterests,
+        researchInterests,
+        mesh
     }
 }

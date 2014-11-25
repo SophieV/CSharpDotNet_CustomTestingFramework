@@ -73,6 +73,8 @@
             UserContactLocationInfo_GeneralContact_MobilePhone,
             UserContactLocationInfo_GeneralContact_Pager,
             UserGeneralInfo_JobClass,
-            UserPatientCareInfo_StaywellsDeprecatedKeywords
+            UserPatientCareInfo_StaywellsDeprecatedKeywords,
+            UserResearchInfo_ResearchInterestsDeprecatedKeywords,
+            UserResearchInfo_Meshes
     }
 }
