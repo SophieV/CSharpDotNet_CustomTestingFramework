@@ -22,7 +22,7 @@ namespace TestMVC4App.Models
             UserPatientCareInfo_PhysicianBio();
             UserPatientCareInfo_AcceptedReferral();
             UserPatientCareInfo_MyChart();
-            UserPatientCareInfo_IsSeeingNewPatients();
+            UserPatientCareInfo_IsAcceptingNewPatients();
             UserPatientCareInfo_IsSeeingPatientType();
             UserEducationTrainingInfo_BoardCertifications();
             UserEducationTrainingInfo_CancersTreated();
@@ -91,7 +91,7 @@ namespace TestMVC4App.Models
                 newValue);
         }
 
-        private void UserPatientCareInfo_IsSeeingNewPatients()
+        private void UserPatientCareInfo_IsAcceptingNewPatients()
         {
             var oldValue = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.newPatients.ToString()));
             if (!string.IsNullOrEmpty(oldValue) && oldValue.ToUpper() == "NA")
@@ -104,7 +104,7 @@ namespace TestMVC4App.Models
 
             if (this.newDataPatientCare != null)
             {
-                if (this.newDataPatientCare.IsSeeingPatients)
+                if (this.newDataPatientCare.IsAcceptingNewPatients)
                 {
                     newValue = "Yes";
                 }
@@ -114,8 +114,8 @@ namespace TestMVC4App.Models
                 }
             }
             this.CompareAndLog_Test(
-                EnumTestUnitNames.UserPatientCareInfo_IsSeeingNewPatients, 
-                "Comparing Seeing New Patients", 
+                EnumTestUnitNames.UserPatientCareInfo_IsAcceptingNewPatients, 
+                "Comparing Accepting New Patients", 
                 oldValue,
                 newValue);
         }

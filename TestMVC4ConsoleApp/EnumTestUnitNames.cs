@@ -61,7 +61,7 @@
             UserPatientCareInfo_BoardCertifications,
             UserPatientCareInfo_CancersTreated,
             UserPatientCareInfo_MyChart,
-            UserPatientCareInfo_IsSeeingNewPatients,
+            UserPatientCareInfo_IsAcceptingNewPatients,
             UserPatientCareInfo_IsSeeingPatientType,
             UserPatientCareInfo_PhysicianBio,
             UserResearchInfo_PublicHealthKeywords,
