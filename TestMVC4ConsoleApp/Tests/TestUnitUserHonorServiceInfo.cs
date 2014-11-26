@@ -112,7 +112,7 @@ namespace TestMVC4App.Models
             foreach (var structure in oldValues)
             {
                 // metadata is added for comparison with more complete new data
-                structure[EnumOldServiceFieldsAsKeys.role] = "Professional Organization";
+                //structure[EnumOldServiceFieldsAsKeys.role] = "Professional Organization";
 
                 try
                 {
@@ -148,7 +148,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.role, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.ServiceType.Name)));
+                        properties.Add(EnumOldServiceFieldsAsKeys.role, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Role)));
                     }
                     catch (Exception)
                     {
