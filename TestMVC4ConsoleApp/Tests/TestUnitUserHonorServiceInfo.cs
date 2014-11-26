@@ -114,29 +114,26 @@ namespace TestMVC4App.Models
                 // metadata is added for comparison with more complete new data
                 structure[EnumOldServiceFieldsAsKeys.role] = "Professional Organization";
 
-                if (structure[EnumOldServiceFieldsAsKeys.endDate] == "present")
-                {
-                    structure[EnumOldServiceFieldsAsKeys.endDate] = string.Empty;
-                }
-
                 try
                 {
                     structure[EnumOldServiceFieldsAsKeys.startDate] = string.Format("{0:yyyy}", DateTime.Parse(structure[EnumOldServiceFieldsAsKeys.startDate], CultureInfo.CurrentCulture));
                 }
-                catch (Exception) { }
-
-                try {
-                    if (structure[EnumOldServiceFieldsAsKeys.endDate].ToLower().Contains("now") || structure[EnumOldServiceFieldsAsKeys.endDate].ToLower().Contains("curr"))
-                    {
-                        // YMPS-506 : endDate ongoing <=> null
-                        structure[EnumOldServiceFieldsAsKeys.endDate] = null;
-                    }
-                    else
-                    {
-                        structure[EnumOldServiceFieldsAsKeys.endDate] = string.Format("{0:yyyy}", DateTime.Parse(structure[EnumOldServiceFieldsAsKeys.endDate], CultureInfo.CurrentCulture));
-                    }
+                catch (Exception) 
+                {
+                    structure[EnumOldServiceFieldsAsKeys.startDate] = string.Empty;
                 }
-                catch (Exception) { }
+
+                try 
+                {
+                    // not dates : present, now, curr, Present, on, psnt, 200, 0201, today, "04/??/19".
+                    // YMPS-506 : endDate ongoing <=> null
+                    structure[EnumOldServiceFieldsAsKeys.endDate] = string.Format("{0:yyyy}", DateTime.Parse(structure[EnumOldServiceFieldsAsKeys.endDate], CultureInfo.CurrentCulture));
+                }
+                catch (Exception) 
+                {
+                    structure[EnumOldServiceFieldsAsKeys.endDate] = string.Empty;
+                
+                }
             }
 
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();

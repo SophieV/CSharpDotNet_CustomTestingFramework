@@ -237,7 +237,14 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.organization, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.CertificationOrganization)));
+                        if (!newValue.CertificationOrganization.ToLower().Contains("none"))
+                        {
+                            properties.Add(EnumOldServiceFieldsAsKeys.organization, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.CertificationOrganization)));
+                        }
+                        else
+                        {
+                            properties.Add(EnumOldServiceFieldsAsKeys.organization, string.Empty);
+                        }
                     }
                     catch (Exception)
                     {
