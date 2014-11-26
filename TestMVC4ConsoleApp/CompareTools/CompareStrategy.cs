@@ -75,7 +75,8 @@ namespace TestMVC4App.Models
             {
                 foreach (var pair in list)
                 {
-                    count += pair.Values.Where(x => !x.HasBeenMatched).Count();
+                    // fix : NULL values may not be matched
+                    count += pair.Values.Where(x => !x.HasBeenMatched && !string.IsNullOrEmpty(x.Value)).Count();
                 }
             }
 

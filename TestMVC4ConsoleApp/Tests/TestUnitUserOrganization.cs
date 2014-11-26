@@ -160,10 +160,10 @@ namespace TestMVC4App.Models
                 {
                     orgDesc.Name = HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(element.Element(EnumOldServiceFieldsAsKeys.name.ToString()).Value.Trim()));
 
-                    if (orgDesc.Name == "Molecular Biophysics and Biochemistry")
-                    {
-                        orgDesc.Name = "MB and B";
-                    }
+                    //if (orgDesc.Name == "Molecular Biophysics and Biochemistry")
+                    //{
+                        //orgDesc.Name = "MB and B";
+                    //}
                 }
                 catch (Exception)
                 {
