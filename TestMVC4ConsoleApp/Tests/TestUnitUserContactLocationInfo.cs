@@ -36,6 +36,7 @@ namespace TestMVC4App.Models
             UserContactLocationInfo_Addresses_Geo(oldAddressesWithoutMailing, new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Location.GeoPoint)));
             UserContactLocationInfo_UserAddress_StreetAddress_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.BaseAddress.StreetAddress)))));
             UserContactLocationInfo_UserAddress_ZipCodes_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
+            UserContactLocationInfo_UserAddress_Phones_Test(oldAddresses, this.newDataUserAddress);
             UserContactLocationInfo_UserAddress_IsMailing_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.BaseAddress.StreetAddress)))));
 
             ComputeOverallSeverity();
@@ -323,6 +324,25 @@ namespace TestMVC4App.Models
             HashSet<string> oldValues = ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.zipCode.ToString());
 
             CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_ZipCodes, "Comparing Address Zip Code(s)", oldValues, newValues, watch);
-       } 
+       }
+
+        private void UserContactLocationInfo_UserAddress_Phones_Test(IEnumerable<XElement> oldServiceNodes, IEnumerable<UserAddress> newServiceNodes)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+
+            var oldValues = new List<string>();
+            oldValues.AddRange(ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.phoneNumber.ToString()));
+            oldValues.AddRange(ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.phone2Number.ToString()));
+
+            var newValues = new List<string>();
+            var allPhones = newServiceNodes.Select(x => x.Address.Phones);
+            foreach(var list in allPhones)
+            {
+                newValues.AddRange(list.Select(x=>x.Number));
+            }
+
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_Phones, "Comparing Address Phone Number(s)", new HashSet<string>(oldValues), new HashSet<string>(newValues), watch);
+        } 
     }
 }

@@ -75,6 +75,7 @@
             UserGeneralInfo_JobClass,
             UserPatientCareInfo_StaywellsDeprecatedKeywords,
             UserResearchInfo_ResearchInterestsDeprecatedKeywords,
-            UserResearchInfo_Meshes
+            UserResearchInfo_Meshes,
+            UserContactLocationInfo_Addresses_Phones
     }
 }

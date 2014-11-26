@@ -104,6 +104,8 @@ namespace TestMVC4App.Models
         photoURL,
         clinicalInterests,
         researchInterests,
-        mesh
+        mesh,
+        phoneNumber,
+        phone2Number
     }
 }
