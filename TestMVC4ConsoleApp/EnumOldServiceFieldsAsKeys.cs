@@ -106,6 +106,7 @@ namespace TestMVC4App.Models
         researchInterests,
         mesh,
         phoneNumber,
-        phone2Number
+        phone2Number,
+        displayOrder
     }
 }

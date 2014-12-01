@@ -94,10 +94,19 @@ namespace TestMVC4App.Models
         private void UserPatientCareInfo_IsAcceptingNewPatients()
         {
             var oldValue = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.newPatients.ToString()));
-            if (!string.IsNullOrEmpty(oldValue) && oldValue.ToUpper() == "NA")
+            if (!string.IsNullOrEmpty(oldValue))
             {
-                // See ticket #568
-                oldValue = "No";
+                if (oldValue.ToUpper() == "NA")
+                {
+                    // See ticket #568
+                    oldValue = "No";
+                }
+                else if (oldValue.ToUpper() == "ICO")
+                {
+                    // ticket #612 - InPatients Only - restricted yes
+                    oldValue = "Yes";
+                }
+
             }
 
             string newValue = string.Empty;

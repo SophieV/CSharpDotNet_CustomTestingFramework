@@ -54,7 +54,8 @@ namespace TestMVC4App.Models
                                                                                                                                         EnumOldServiceFieldsAsKeys.city,
                                                                                                                                         EnumOldServiceFieldsAsKeys.state,
                                                                                                                                         EnumOldServiceFieldsAsKeys.zipCode,
-                                                                                                                                        EnumOldServiceFieldsAsKeys.type});
+                                                                                                                                        EnumOldServiceFieldsAsKeys.type,
+                                                                                                                                        EnumOldServiceFieldsAsKeys.displayOrder});
 
             // add mailing address manually
             if (this.OldDataNodes != null)
@@ -220,6 +221,18 @@ namespace TestMVC4App.Models
                         // make sure a value is present for each index
                         properties.Add(EnumOldServiceFieldsAsKeys.type, string.Empty);
                     }
+
+                    try
+                    {
+                        // #615 - sort order for locations should be matched in new service
+                        properties.Add(EnumOldServiceFieldsAsKeys.displayOrder, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.SortOrder.ToString())));
+                    }
+                    catch (Exception)
+                    {
+                        // make sure a value is present for each index
+                        properties.Add(EnumOldServiceFieldsAsKeys.displayOrder, string.Empty);
+                    }
+
 
                     newValues.Add(properties);
                 }
