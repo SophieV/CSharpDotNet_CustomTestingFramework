@@ -174,7 +174,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.suite, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.Detail)));
+                        properties.Add(EnumOldServiceFieldsAsKeys.suite, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.Suite)));
                     }
                     catch (Exception)
                     {

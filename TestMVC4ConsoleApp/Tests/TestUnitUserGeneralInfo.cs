@@ -307,12 +307,12 @@ namespace TestMVC4App.Models
 
             int newValue = 0;
 
-            if (!string.IsNullOrEmpty(newData.UserProfileImage.Url))
+            if (!string.IsNullOrEmpty(newData.ProfileImage.Url))
             {
                 newValue++;
             }
 
-            newValue += newData.UserProfileImage.ImageVariants.Count();
+            newValue += newData.ProfileImage.ImageVariants.Count();
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_ProfileImage_VariantsCount, "Check Count URLs provided for Profile Image & Variants", oldValue, newValue.ToString());
         }
@@ -324,10 +324,10 @@ namespace TestMVC4App.Models
 
             string newValue = string.Empty;
 
-            if (!string.IsNullOrEmpty(newData.UserProfileImage.Url))
+            if (!string.IsNullOrEmpty(newData.ProfileImage.Url))
             {
                 HttpWebResponse response = null;
-                var request = (HttpWebRequest)WebRequest.Create(newData.UserProfileImage.Url);
+                var request = (HttpWebRequest)WebRequest.Create(newData.ProfileImage.Url);
                 request.Method = "HEAD";
 
                 try
@@ -409,9 +409,9 @@ namespace TestMVC4App.Models
 
             try
             {
-                if (newData.LanguageUsers.Count() > 0)
+                if (newData.UserLanguages.Count() > 0)
                 {
-                    foreach (var language in newData.LanguageUsers)
+                    foreach (var language in newData.UserLanguages)
                     {
                         newValues.Add(HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(language.Language.Name)));
                     }

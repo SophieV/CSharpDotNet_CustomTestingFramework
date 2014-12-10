@@ -48,7 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ServiceProxy\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -58,16 +58,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YSM.PMS.Web.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="YSM.PMS.Web.Service">
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.dll</HintPath>
     </Reference>
-    <Reference Include="YSM.PMS.Web.Service.Clients, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="YSM.PMS.Web.Service.Clients">
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.Clients.dll</HintPath>
     </Reference>
-    <Reference Include="YSM.PMS.Web.Service.DataTransfer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="YSM.PMS.Web.Service.DataTransfer">
       <HintPath>ServiceProxy\YSM.PMS.Web.Service.DataTransfer.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -171,14 +168,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <Content Include="ServiceProxy\HtmlDiff.dll" />
-    <Content Include="ServiceProxy\Newtonsoft.Json.dll" />
-    <Content Include="ServiceProxy\PagedList.dll" />
-    <Content Include="ServiceProxy\System.Net.Http.Formatting.dll" />
-    <Content Include="ServiceProxy\YSM.PMS.Web.Service.Clients.dll" />
-    <Content Include="ServiceProxy\YSM.PMS.Web.Service.DataTransfer.dll" />
-    <Content Include="ServiceProxy\YSM.PMS.Web.Service.dll" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Templates\ProfileReport.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ProfileReport.cs</LastGenOutput>
