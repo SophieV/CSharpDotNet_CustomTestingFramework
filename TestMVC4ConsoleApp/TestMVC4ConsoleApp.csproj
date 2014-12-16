@@ -87,6 +87,7 @@
     <Compile Include="CompareTools\CompareStrategyUnstructuredLists.cs" />
     <Compile Include="CompareTools\CompareStrategyStructuredLists.cs" />
     <Compile Include="CompareTools\ComparerStringWithKeyShifted.cs" />
+    <Compile Include="CompareTools\DatesRegExRewriter.cs" />
     <Compile Include="DatabaseFacade.cs" />
     <Compile Include="EnumIdentifiedDataBehavior.cs" />
     <Compile Include="EnumOldServiceFieldsAsKeys.cs" />

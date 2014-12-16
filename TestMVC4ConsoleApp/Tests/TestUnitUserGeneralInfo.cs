@@ -307,12 +307,15 @@ namespace TestMVC4App.Models
 
             int newValue = 0;
 
-            if (!string.IsNullOrEmpty(newData.ProfileImage.Url))
+            if (newData.ProfileImage != null)
             {
-                newValue++;
-            }
+                if (!string.IsNullOrEmpty(newData.ProfileImage.Url))
+                {
+                    newValue++;
+                }
 
-            newValue += newData.ProfileImage.ImageVariants.Count();
+                newValue += newData.ProfileImage.ImageVariants.Count();
+            }
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserGeneralInfo_ProfileImage_VariantsCount, "Check Count URLs provided for Profile Image & Variants", oldValue, newValue.ToString());
         }
@@ -324,7 +327,7 @@ namespace TestMVC4App.Models
 
             string newValue = string.Empty;
 
-            if (!string.IsNullOrEmpty(newData.ProfileImage.Url))
+            if (newData.ProfileImage != null && !string.IsNullOrEmpty(newData.ProfileImage.Url))
             {
                 HttpWebResponse response = null;
                 var request = (HttpWebRequest)WebRequest.Create(newData.ProfileImage.Url);

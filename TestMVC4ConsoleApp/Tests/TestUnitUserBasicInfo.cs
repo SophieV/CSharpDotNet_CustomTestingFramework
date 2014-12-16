@@ -65,7 +65,7 @@ namespace TestMVC4App.Models
 
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_UPI, "Comparing UPI", this.OldDataNodes, EnumOldServiceFieldsAsKeys.UPI.ToString(), this.newData.Upi.ToString());
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_LastName, "Comparing LastName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.lastname.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.LastName)));
-            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.OldDataNodes, EnumOldServiceFieldsAsKeys.emailAddress.ToString(), this.newData.YaleEmail);
+            this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_Email, "Comparing Email", this.OldDataNodes, EnumOldServiceFieldsAsKeys.emailAddress.ToString(), this.newData.Email);
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_MiddleName, "Comparing MiddleName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.middle.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.MiddleName)));
             this.CompareAndLog_Test(EnumTestUnitNames.UserBasicInfo_FirstName, "Comparing FirstName", this.OldDataNodes, EnumOldServiceFieldsAsKeys.firstname.ToString(), HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(this.newData.FirstName)));
             UserBasicInfo_Gender();

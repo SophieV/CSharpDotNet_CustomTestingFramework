@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using System.Web;
+using System.Linq;
 using YSM.PMS.Web.Service.DataTransfer.Models;
+using TestMVC4ConsoleApp.CompareTools;
 
 namespace TestMVC4App.Models
 {
@@ -22,15 +25,27 @@ namespace TestMVC4App.Models
         {
             UserEducationTrainingInfo_Honors();
             UserEducationTrainingInfo_Services();
-
         }
 
         private void UserEducationTrainingInfo_Honors()
         {
+            //EnumOldServiceFieldsAsKeys.presentationDate,
             var oldValues = ParsingHelper.ParseStructuredListOfValues(this.OldDataNodes, EnumOldServiceFieldsAsKeys.professionalHonor.ToString(), new EnumOldServiceFieldsAsKeys[] { EnumOldServiceFieldsAsKeys.award,
                                                                                                                                         EnumOldServiceFieldsAsKeys.organization,
                                                                                                                                         EnumOldServiceFieldsAsKeys.presentationDate,
                                                                                                                                         EnumOldServiceFieldsAsKeys.category});
+            DatesRegExRewriter rewriter = new DatesRegExRewriter();
+            List<string> temp = new List<string>();
+
+            foreach(var oldValue in oldValues)
+            {
+                temp.Clear();
+                if (oldValue[EnumOldServiceFieldsAsKeys.presentationDate] != null)
+                {
+                    temp.AddRange(rewriter.ConvertDate(oldValue[EnumOldServiceFieldsAsKeys.presentationDate]));
+                    oldValue[EnumOldServiceFieldsAsKeys.presentationDate] = String.Join(", ", temp.ToArray()); ;
+                }
+            }
 
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
@@ -63,8 +78,17 @@ namespace TestMVC4App.Models
                     }
 
                     try
-                    {
-                        properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Format("{0:yyyy}", newValue.AwardDate));
+                    { 
+                        StringBuilder builder = new StringBuilder();
+                        foreach(DateTime date in newValue.HonorDates)
+                        {
+                            builder.Append(string.Format("{0:MM/dd/yy}", DateTime.Parse(date.ToString(), CultureInfo.CurrentCulture)));
+                            builder.Append(',');
+                        }
+                        builder.Remove(builder.Length -1, 1);
+
+                        // list of honor dates has been turned into string for comparison
+                        properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Join(", ", newValue.HonorDates.Select(ss=>string.Format("{0:MM/dd/yy}", DateTime.Parse(ss.ToString(), CultureInfo.CurrentCulture))).ToArray()));
                     }
                     catch (Exception)
                     {

@@ -37,7 +37,7 @@ namespace TestMVC4App.Models
             string errorType = string.Empty;
             string errorMessage = string.Empty;
 
-            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs();
+            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs("a16");
 
             var singleProfileWatch = new Stopwatch();
             var testingDurationWatch = new Stopwatch();
@@ -214,7 +214,7 @@ namespace TestMVC4App.Models
                                 oldDataSubset = null;
 
                                 oldDataSubset = ParsingHelper.ParseListNodes(oldData, EnumOldServiceFieldsAsKeys.featuredPublication.ToString());
-                                testUnit = new TestUnitUserPublicationInfo(this, newData.Publications);
+                                testUnit = new TestUnitUserPublicationInfo(this, newData.UserPublications);
                                 allTheTests.Add(testUnit);
                                 testUnit.ProvideData(
                                     upi,

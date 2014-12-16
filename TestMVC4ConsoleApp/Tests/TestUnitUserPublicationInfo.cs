@@ -8,9 +8,9 @@ namespace TestMVC4App.Models
 {
     public class TestUnitUserPublicationInfo : TestUnit
     {
-        private IEnumerable<Publication> newData;
+        private IEnumerable<UserPublication> newData;
 
-        public TestUnitUserPublicationInfo(TestSuite parent, IEnumerable<Publication> newData) : base(parent)
+        public TestUnitUserPublicationInfo(TestSuite parent, IEnumerable<UserPublication> newData) : base(parent)
         {
             this.newData = newData;
         }
@@ -18,7 +18,7 @@ namespace TestMVC4App.Models
         protected override void RunAllSingleTests()
         {
             UserPublicationInfo_Titles();
-            UserPublicationInfo_Citations();
+            UserPublicationInfo_Description();
         }
 
         private HashSet<string> UserPublicationInfo_Titles()
@@ -27,7 +27,7 @@ namespace TestMVC4App.Models
 
             if (this.newData != null)
             {
-                newValues = new HashSet<string>(newData.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Title))));
+                newValues = new HashSet<string>(newData.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Publication.Title))));
             }
             else
             {
@@ -41,7 +41,7 @@ namespace TestMVC4App.Models
             return newValues;
         }
 
-        private void UserPublicationInfo_Citations()
+        private void UserPublicationInfo_Description()
         {
             var newValues = new HashSet<string>();
 
@@ -49,7 +49,7 @@ namespace TestMVC4App.Models
             {
                 if (this.newData != null)
                 {
-                    newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Citation))));
+                    newValues = new HashSet<string>(this.newData.Where(x => x != null).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Publication.Citation))));
                 }
             }
             catch (Exception) { }
