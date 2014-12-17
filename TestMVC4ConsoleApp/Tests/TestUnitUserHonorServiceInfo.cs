@@ -42,7 +42,7 @@ namespace TestMVC4App.Models
                 temp.Clear();
                 if (oldValue[EnumOldServiceFieldsAsKeys.presentationDate] != null)
                 {
-                    temp.AddRange(rewriter.ConvertDate(oldValue[EnumOldServiceFieldsAsKeys.presentationDate]));
+                    temp.AddRange(rewriter.ConvertDate(HttpUtility.HtmlDecode(oldValue[EnumOldServiceFieldsAsKeys.presentationDate])));
                     oldValue[EnumOldServiceFieldsAsKeys.presentationDate] = String.Join(", ", temp.ToArray()); ;
                 }
             }

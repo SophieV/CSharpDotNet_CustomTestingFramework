@@ -223,6 +223,14 @@ namespace TestMVC4App.Models
                     EnumOldServiceFieldsAsKeys.organization,
                     EnumOldServiceFieldsAsKeys.certificationYear});
 
+            foreach (var oldValue in oldValues)
+            {
+                if (oldValue[EnumOldServiceFieldsAsKeys.organization] != null && oldValue[EnumOldServiceFieldsAsKeys.organization].ToLower().Trim() == "none")
+                {
+                    oldValue[EnumOldServiceFieldsAsKeys.organization] = string.Empty;
+                }
+            }
+
             // TODO: Location belongs in a dedicated test
             var newValues = new HashSet<Dictionary<EnumOldServiceFieldsAsKeys, string>>();
 
