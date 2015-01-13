@@ -113,7 +113,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.startYear, newValue.StartYear.ToString());
+                        properties.Add(EnumOldServiceFieldsAsKeys.startYear, newValue.StartDate.ToString());
                     }
                     catch (Exception)
                     {
@@ -123,7 +123,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.endYear, newValue.EndYear.ToString());
+                        properties.Add(EnumOldServiceFieldsAsKeys.endYear, newValue.EndDate.ToString());
                     }
                     catch (Exception)
                     {

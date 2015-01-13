@@ -78,15 +78,7 @@ namespace TestMVC4App.Models
                     }
 
                     try
-                    { 
-                        StringBuilder builder = new StringBuilder();
-                        foreach(DateTime date in newValue.HonorDates)
-                        {
-                            builder.Append(string.Format("{0:MM/dd/yy}", DateTime.Parse(date.ToString(), CultureInfo.CurrentCulture)));
-                            builder.Append(',');
-                        }
-                        builder.Remove(builder.Length -1, 1);
-
+                    {
                         // list of honor dates has been turned into string for comparison
                         properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Join(", ", newValue.HonorDates.Select(ss=>string.Format("{0:MM/dd/yy}", DateTime.Parse(ss.ToString(), CultureInfo.CurrentCulture))).ToArray()));
                     }
@@ -192,7 +184,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.startDate, newValue.StartYear.ToString());
+                        properties.Add(EnumOldServiceFieldsAsKeys.startDate, newValue.StartDate.ToString());
                     }
                     catch (Exception)
                     {
@@ -202,7 +194,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.endDate, newValue.EndYear.ToString());
+                        properties.Add(EnumOldServiceFieldsAsKeys.endDate, newValue.EndDate.ToString());
                     }
                     catch (Exception)
                     {
