@@ -37,7 +37,7 @@ namespace TestMVC4App.Models
             string errorType = string.Empty;
             string errorMessage = string.Empty;
 
-            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs("a18");
+            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs("a19");
 
             var singleProfileWatch = new Stopwatch();
             var testingDurationWatch = new Stopwatch();
