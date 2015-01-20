@@ -79,8 +79,8 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        // list of honor dates has been turned into string for comparison
-                        properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Join(", ", newValue.HonorDates.Select(ss=>string.Format("{0:MM/dd/yy}", DateTime.Parse(ss.ToString(), CultureInfo.CurrentCulture))).ToArray()));
+                        // list of honor dates has been turned into string for comparison - "{0:MM/dd/yy}"
+                        properties.Add(EnumOldServiceFieldsAsKeys.presentationDate, String.Join(", ", newValue.HonorDates.Select(ss=>string.Format("{0:01/01/yy}", DateTime.Parse(ss.ToString(), CultureInfo.CurrentCulture))).ToArray()));
                     }
                     catch (Exception)
                     {
