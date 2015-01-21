@@ -16,19 +16,22 @@ namespace TestMVC4ConsoleApp.CompareTools
 
     public class DatesRegExRewriter
     {
-        public string[] ConvertDate(string input)
+        public string[] ConvertDate(string input, bool forceYearOnly)
         {
             bool done = false;
             List<string> converted = new List<string>();
 
-            converted.AddRange(SingleFullNumericDate(input));
+            if (!forceYearOnly)
+            {
+                converted.AddRange(SingleFullNumericDate(input));
+            }
 
             if (converted.Count() > 0)
             {
                 done = true;
             }
 
-            if (!done)
+            if (!done && !forceYearOnly)
             {
                 converted.AddRange(SingleMonthAndYearsNumericDate(input));
             }
@@ -38,7 +41,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                 done = true;
             }
 
-            if (!done)
+            if (!done && !forceYearOnly)
             {
                 converted.AddRange(SingleMonthAndYearNumericDate(input));
             }
@@ -48,7 +51,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                 done = true;
             }
 
-            if (!done)
+            if (!done && !forceYearOnly)
             {
                 converted.AddRange(WrittenMonthAndYear(input));
             }
@@ -58,7 +61,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                 done = true;
             }
 
-            if (!done)
+            if (!done && !forceYearOnly)
             {
                 converted.AddRange(YearNumericDashedDateRange(input));
             }
@@ -68,7 +71,7 @@ namespace TestMVC4ConsoleApp.CompareTools
                 done = true;
             }
 
-            if (!done)
+            if (!done && !forceYearOnly)
             {
                 converted.AddRange(YearNumericFullThenSingleDateRange(input));
             }
