@@ -19,6 +19,7 @@ namespace TestMVC4App.Models
 
         protected override void RunAllSingleTests()
         {
+            UserPatientCareInfo_ContainsData();
             UserPatientCareInfo_PhysicianBio();
             UserPatientCareInfo_AcceptedReferral();
             UserPatientCareInfo_MyChart();
@@ -91,9 +92,27 @@ namespace TestMVC4App.Models
                 newValue);
         }
 
+        private void UserPatientCareInfo_ContainsData()
+        {
+            var oldValuePopulated = !string.IsNullOrWhiteSpace(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.newPatients.ToString()));
+            var oldValuePopulated2 = !string.IsNullOrWhiteSpace(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.patientsGroups.ToString()));
+            var oldValuePopulated3 = !string.IsNullOrWhiteSpace(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.cancersTreated.ToString()));
+
+            var oldPatientCarePopulated = oldValuePopulated || oldValuePopulated2 || oldValuePopulated3;
+
+            var newPatientCarePopulated = (this.newDataPatientCare != null);
+
+            this.CompareAndLog_Test(
+                EnumTestUnitNames.UserPatientCareInfo_IsPopulated,
+                "Comparing PatientCare data populated",
+                oldPatientCarePopulated.ToString(),
+                newPatientCarePopulated.ToString());
+        }
+
         private void UserPatientCareInfo_IsAcceptingNewPatients()
         {
             var oldValue = HttpUtility.HtmlDecode(ParsingHelper.ParseSingleValue(this.OldDataNodes, EnumOldServiceFieldsAsKeys.newPatients.ToString()));
+
             if (!string.IsNullOrEmpty(oldValue))
             {
                 if (oldValue.ToUpper() == "NA")
@@ -109,19 +128,13 @@ namespace TestMVC4App.Models
 
             }
 
-            string newValue = string.Empty;
+            var newValue = string.Empty;
 
-            if (this.newDataPatientCare != null)
+            if (this.newDataPatientCare != null && this.newDataPatientCare.AcceptingNewPatientsStatus != null)
             {
-                if (this.newDataPatientCare.IsAcceptingNewPatients)
-                {
-                    newValue = "Yes";
-                }
-                else
-                {
-                    newValue = "No";
-                }
+                newValue = this.newDataPatientCare.AcceptingNewPatientsStatus.Name;
             }
+
             this.CompareAndLog_Test(
                 EnumTestUnitNames.UserPatientCareInfo_IsAcceptingNewPatients, 
                 "Comparing Accepting New Patients", 
@@ -182,7 +195,7 @@ namespace TestMVC4App.Models
         {
             string value = string.Empty;
 
-            if (this.newDataPatientCare != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral.Option))
+            if (this.newDataPatientCare != null && this.newDataPatientCare.AcceptedReferral != null && !string.IsNullOrEmpty(this.newDataPatientCare.AcceptedReferral.Option))
             {
                 switch (this.newDataPatientCare.AcceptedReferral.Option)
                 {

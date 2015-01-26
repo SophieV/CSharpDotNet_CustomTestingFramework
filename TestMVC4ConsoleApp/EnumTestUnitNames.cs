@@ -76,6 +76,7 @@
             UserPatientCareInfo_StaywellsDeprecatedKeywords,
             UserResearchInfo_ResearchInterestsDeprecatedKeywords,
             UserResearchInfo_Meshes,
-            UserContactLocationInfo_Addresses_Phones
+            UserContactLocationInfo_Addresses_Phones,
+            UserPatientCareInfo_IsPopulated
     }
 }

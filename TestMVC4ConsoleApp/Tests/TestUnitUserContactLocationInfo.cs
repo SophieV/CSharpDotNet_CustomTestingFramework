@@ -341,6 +341,8 @@ namespace TestMVC4App.Models
 
         private void UserContactLocationInfo_UserAddress_Phones_Test(IEnumerable<XElement> oldServiceNodes, IEnumerable<UserAddress> newServiceNodes)
         {
+            // phone numbers are specific to a UserAddress which is the equivalent of the Location in the old service
+            // the locationName became the OfficeName
             var watch = new Stopwatch();
             watch.Start();
 
@@ -355,7 +357,7 @@ namespace TestMVC4App.Models
                 newValues.AddRange(list.Select(x=>x.Number));
             }
 
-            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_Phones, "Comparing Address Phone Number(s)", new HashSet<string>(oldValues), new HashSet<string>(newValues), watch);
+            CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_Phones, "Comparing Address Phone Number(s)", new HashSet<string>(oldValues.Where(x =>!string.IsNullOrWhiteSpace(x))), new HashSet<string>(newValues), watch);
         } 
     }
 }
