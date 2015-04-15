@@ -33,11 +33,11 @@ namespace TestMVC4App.Models
             var oldAddressesWithoutMailing = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.location.ToString());
             var oldAddresses = ParsingHelper.ParseListNodes(this.OldDataNodes, EnumOldServiceFieldsAsKeys.mailing.ToString(), oldAddressesWithoutMailing.ToList(), true);
 
-            UserContactLocationInfo_Addresses_Geo(oldAddressesWithoutMailing, new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Location.GeoPoint)));
-            UserContactLocationInfo_UserAddress_StreetAddress_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.BaseAddress.StreetAddress)))));
-            UserContactLocationInfo_UserAddress_ZipCodes_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.BaseAddress.Zip)));
+            UserContactLocationInfo_Addresses_Geo(oldAddressesWithoutMailing, new HashSet<GeoPoint>(this.newDataUserAddress.Select(x => x.Address.Building.GeoPoint)));
+            UserContactLocationInfo_UserAddress_StreetAddress_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.Building.StreetAddress)))));
+            UserContactLocationInfo_UserAddress_ZipCodes_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => x.Address.Building.Locality.PostalCode)));
             UserContactLocationInfo_UserAddress_Phones_Test(oldAddresses, this.newDataUserAddress);
-            UserContactLocationInfo_UserAddress_IsMailing_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Where(x => x.IsMailingAddress == true).Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.BaseAddress.StreetAddress)))));
+            UserContactLocationInfo_UserAddress_IsMailing_Test(oldAddresses, new HashSet<string>(this.newDataUserAddress.Select(x => HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(x.Address.Building.StreetAddress)))));//.newDataUserAddress.Where(x => x.Address.AddressType == true)
 
             ComputeOverallSeverity();
         }
@@ -154,7 +154,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.building, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.BaseAddress.Building.Name)));
+                        properties.Add(EnumOldServiceFieldsAsKeys.building, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.Building.Name)));
                     }
                     catch (Exception)
                     {
@@ -164,7 +164,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.addressLine1, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.BaseAddress.StreetAddress)));
+                        properties.Add(EnumOldServiceFieldsAsKeys.addressLine1, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.Building.StreetAddress)));
                     }
                     catch (Exception)
                     {
@@ -184,7 +184,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.city, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.BaseAddress.Location.City)));
+                        properties.Add(EnumOldServiceFieldsAsKeys.city, HttpUtility.HtmlEncode(HttpUtility.HtmlDecode(newValue.Address.Building.Locality.City)));
                     }
                     catch (Exception)
                     {
@@ -194,7 +194,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.state, newValue.Address.BaseAddress.Location.StateRegionProvince);
+                        properties.Add(EnumOldServiceFieldsAsKeys.state, newValue.Address.Building.Locality.StateRegionProvince);
                     }
                     catch (Exception)
                     {
@@ -204,7 +204,7 @@ namespace TestMVC4App.Models
 
                     try
                     {
-                        properties.Add(EnumOldServiceFieldsAsKeys.zipCode, newValue.Address.BaseAddress.Zip);
+                        properties.Add(EnumOldServiceFieldsAsKeys.zipCode, newValue.Address.Building.Locality.PostalCode);
                     }
                     catch (Exception)
                     {
@@ -351,10 +351,10 @@ namespace TestMVC4App.Models
             oldValues.AddRange(ParsingHelper.ParseUnstructuredListOfValues(oldServiceNodes, EnumOldServiceFieldsAsKeys.location.ToString(), EnumOldServiceFieldsAsKeys.phone2Number.ToString()));
 
             var newValues = new List<string>();
-            var allPhones = newServiceNodes.Select(x => x.Address.Phones);
+            var allPhones = newServiceNodes.Select(x => x.Phones);
             foreach(var list in allPhones)
             {
-                newValues.AddRange(list.Select(x=>x.Number));
+                newValues.AddRange(list.Select(x=>ParsingHelper.FormatPhoneNumber(x.Number)));
             }
 
             CompareAndLog_Test(EnumTestUnitNames.UserContactLocationInfo_Addresses_Phones, "Comparing Address Phone Number(s)", new HashSet<string>(oldValues.Where(x =>!string.IsNullOrWhiteSpace(x))), new HashSet<string>(newValues), watch);

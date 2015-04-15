@@ -11,7 +11,7 @@
             UserBasicInfo_Email,
             UserBasicInfo_NetId,
             UserBasicInfo_PageName,
-            UserBasicInfo_SuffixName,
+            //UserBasicInfo_SuffixName,
             UserBasicInfo_Idx,
             UserBasicInfo_LicenseNumber,
             UserBasicInfo_Npi,

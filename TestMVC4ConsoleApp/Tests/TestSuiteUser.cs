@@ -22,7 +22,7 @@ namespace TestMVC4App.Models
             get { return "http://yale-faculty.photobooks.com/directory/XMLProfile.asp?UPI="; }
         }
 
-        public static bool IsDebugMode { get { return false;  } }
+        public static bool IsDebugMode { get { return  true;  } }
 
         private const int MaxProfilesForOneFile = 50000;
 
@@ -37,7 +37,7 @@ namespace TestMVC4App.Models
             string errorType = string.Empty;
             string errorMessage = string.Empty;
 
-            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs("a23");
+            upiList = new DatabaseFacade().ConnectToDataSourceAndRetrieveUPIs("a30");
 
             var singleProfileWatch = new Stopwatch();
             var testingDurationWatch = new Stopwatch();
@@ -50,7 +50,7 @@ namespace TestMVC4App.Models
 
             if (TestSuiteUser.IsDebugMode)
             {
-                upiList = new HashSet<int>() { 12789020, 10254830, 10345899, 10643722, 10356439, 13087115, 10098855, 10445859, 12445467, 10044421, 11842460, 10273683, 11228709, 12528002, 10410346, 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225, 11161032, 11832447, 11436806, 10736848 };
+                upiList = new HashSet<int>() { 12386392, 12789020, 10254830, 10345899, 10643722, 10356439, 13087115, 10098855, 10445859, 12445467, 10044421, 11842460, 10273683, 11228709, 12528002, 10410346, 10071485, 10934133, 12149599, 12641341, 10151776, 10290564, 11091604, 11472557, 12149599, 13132301, 10146455, 13157019, 10646102, 12192949, 10106216, 12268225, 11161032, 11832447, 11436806, 10736848 };
             }
 
             bool keepGoing = true;
