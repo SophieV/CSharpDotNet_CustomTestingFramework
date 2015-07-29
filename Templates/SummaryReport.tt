@@ -1,0 +1,184 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="TestMVC4App.Models" #>
+<#@ parameter 
+	name="SharedDataObject" 
+	type="TestMVC4App.Templates.SummaryReportSharedData" #>
+<html>
+<head>
+<style>
+.table_main {border:solid 2px darkgrey;border-collapse:collapse;}
+.title {text-align: center;}
+.th_main {padding: 10px;font-variant: small-caps;text-align: center;border-width:2px;border-color:darkgrey;border-style:solid;background-color: lightgrey;}
+.td_main {padding: 10px;border-width:2px;border-color:darkgrey;border-style:solid;}
+.warning {background-color: bisque;color:black;font-weight:bold;}
+.warning_no_data {background-color: beige;color:black;font-weight:bold;}
+.false_positive {background-color: green;color:white;font-weight:bold;}
+.error {background-color: Red;color:white;font-weight:bold;}
+.success {color:black;font-weight:bold;}
+.error_with_explanation {background-color: orange;color:white;font-weight:bold;}
+.error_data {color: white;font-weight: bold;background-color: red;font-size: 2em; text-align: center;}
+</style>
+</head>
+<body>
+	<h1 id="top" class="title">Summary Report</h1>
+	<hr/>
+
+	<# if(!string.IsNullOrEmpty(SharedDataObject.ErrorHappened)) { 
+	string message = "UNKNOWN ERROR(S) MAY MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !";
+	if (SharedDataObject.ErrorHappened == "HTTP") { message = "PROBLEMS CONNECTING TO DATA SERVICES MAKE THESE RESULTS INCONSISTENT/UNRELIABLE !"; } #>
+	 <p class="error_data"><#= message #><br/><#= SharedDataObject.ErrorMessage #></p>
+	 <hr/>
+	<# } #>
+
+	<h2>Overview</h2>
+	<p>End time : <#= SharedDataObject.StartTime #><br/>
+	Total count of tests run : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsRun) #><br/>
+	Count of tests per user profile : <#= String.Format("{0:0,0}",SharedDataObject.CountTestsPerUser) #><br/>
+	Count of user profiles tested : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesTested) #><br/>
+	Count of user profiles ignored : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesIgnored) #><br/>
+	Count of user profiles free from any kind of warning : <#= String.Format("{0:0,0}",SharedDataObject.CountProfilesWithoutWarnings) #><br/>
+	Profile Average Testing Duration : <#= SharedDataObject.Duration.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
+	<p>Average Duration by User Profile : <#= SharedDataObject.AverageDurationPerProfile.ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #></p>
+	<br/>
+	<table class="table_main">
+		<tr>
+		<th class="th_main">Result</th>
+		<th class="th_main">Count</th>
+		<th class="th_main">Description</th>
+		</tr>
+		<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SharedDataObject.CountBySeverity) { #>
+		<tr>
+			<# switch (countPerSeverity.Key) {
+			case EnumResultSeverityType.FALSE_POSITIVE : #>
+		<td class="false_positive td_main">
+			<# break;
+			case EnumResultSeverityType.WARNING:
+			case EnumResultSeverityType.WARNING_ONLY_NEW: #>
+		<td class="warning td_main">
+			<# break;
+			case EnumResultSeverityType.WARNING_NO_DATA: #>
+		<td class="warning_no_data td_main">
+			<# break;
+			case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+			case EnumResultSeverityType.ERROR_ONLY_OLD: #>
+		<td class="error_with_explanation td_main">
+			<# break;
+			case EnumResultSeverityType.ERROR: #>
+		<td class="error td_main">
+			<# break;
+			default: #>
+		<td class="success td_main">
+			<# break;
+		} #>
+		<#= countPerSeverity.Key #></td>
+		<td class="td_main"><#= String.Format("{0:0,0}",countPerSeverity.Value) #></td>
+		<td class="td_main" style="color:darkgrey;"><#= ParsingHelper.GetDescription(countPerSeverity.Key) #></td>
+	</tr>
+	<# } #>
+	</table>
+	<br/>
+	<br/>
+	<hr/>
+	<h2>Overview By Test Name Per User Profile</h2>
+	<a href="<#= SharedDataObject.Link2ProfileFile #>">Go to Overview of Results by OldId</a>
+	<br/>
+	<hr/>
+	<h2>Overview By Test Name</h2>
+	<br/>
+	<p>A red background to the test name means that some results are missing. Check the logs for more details.</p>
+	<br/>
+	<table class="table_main">
+	<tr>
+		<th class="th_main">Test Name</th>
+		<th class="th_main">Overall Success</th>
+		<th class="th_main">Result Severity</th>
+		<th class="th_main">Observations</th>
+		<th class="th_main">Sample Data</th>
+		<th class="th_main">Average Duration</th>
+		<th class="th_main">More Info</th>
+	</tr>
+	<# foreach (var testName in SharedDataObject.FrequencySuccessByTestName.Keys) { #>
+	<tr>
+		<# if(SharedDataObject.Not100PercentReturned.Contains(testName)) { #>
+		<td class="td_main error"><#= testName #></td>
+		<# } else { #>
+		<td class="td_main"><#= testName #></td>
+		<# } #>
+		<td class="th_main">
+			<#= SharedDataObject.FrequencySuccessByTestName[testName].ToString("P") #>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+			<# foreach (KeyValuePair<EnumResultSeverityType,int> countPerSeverity in SharedDataObject.CountSeverityByTestName[testName]) { #>
+			<tr>
+			<# switch (countPerSeverity.Key) {
+				case EnumResultSeverityType.FALSE_POSITIVE : #>
+				<td class="false_positive td_main">
+				<# break;
+				case EnumResultSeverityType.WARNING:
+				case EnumResultSeverityType.WARNING_ONLY_NEW: #>
+				<td class="warning td_main">
+				<# break;
+				case EnumResultSeverityType.WARNING_NO_DATA: #>
+				<td class="warning_no_data td_main">
+				<# break;
+				case EnumResultSeverityType.ERROR_WITH_EXPLANATION:
+				case EnumResultSeverityType.ERROR_ONLY_OLD: #>
+				<td class="error_with_explanation td_main">
+				<# break;
+				case EnumResultSeverityType.ERROR: #>
+				<td class="error td_main">
+				<# break;
+				default: #>
+				<td class="success td_main">
+				<# break;
+			} #>
+				<#= countPerSeverity.Key #></td>
+				<td class="td_main"><#= String.Format("{0:0,0}", countPerSeverity.Value) #></td>
+				<td class="td_main">
+					<# double frequency = (double)countPerSeverity.Value /(double) SharedDataObject.CountProfilesTested;
+					if (frequency > 0) { #>
+					<#= frequency.ToString("P") #>
+					<# } #>
+				</td>
+			</tr>
+			<# } #>
+			</table>
+		</td>
+		<td class="td_main">
+			<table class="table_main">
+				<tr>
+					<th class="th_main">Identified Data Behavior</th>
+					<th class="th_main">Count</th>
+				</tr>
+				<# if(SharedDataObject.CountIdentifiedDataBehaviorByTestName.ContainsKey(testName)) {
+				foreach (KeyValuePair<EnumIdentifiedDataBehavior,int> countPerIdentifiedDataBehavior in SharedDataObject.CountIdentifiedDataBehaviorByTestName[testName]) {
+					if(countPerIdentifiedDataBehavior.Value > 0) { #>
+				<tr>
+					<td class="td_main"><#= LogManager.IdentifiedBehaviorsDescriptions[countPerIdentifiedDataBehavior.Key] #></td>
+					<td class="td_main"><#= String.Format("{0:0,0}", countPerIdentifiedDataBehavior.Value) #></td>
+				</tr>
+				<# } } } #>
+			</table>
+		</td>
+		<td class="td_main">
+			<# if(SharedDataObject.SampleDataByTestName.ContainsKey(testName)) { #>
+			<#= SharedDataObject.SampleDataByTestName[testName] #>
+			<# } #>
+		</td>
+		<td class="td_main">
+		<# if(SharedDataObject.AverageDurationByTestName.ContainsKey(testName)) { #>
+			<#= SharedDataObject.AverageDurationByTestName[testName].ToString("hh'h: 'mm'mn:'ss's:'FFFFFFF") #>
+			<# } #>
+		</td>
+		<td class="td_main">
+			<a href="<#= testName #><#= SharedDataObject.LinkEnd2TestNameFile #>">Test Details</a>
+		</td>
+	</tr>
+	<# } #>
+	</table>
+</body>
+</html>
